@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bestiaire — recherche · Graphite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#2E2E33 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2E2E33;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8A8A93}
+button,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#6EA0FF}a:hover{color:#9CBEFF}
+input::placeholder{color:#8A8A93}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+mark{background:transparent;color:#6EA0FF;font-weight:500}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #111113; color: #EDEDEF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; flex-direction: column; gap: 6px; padding: 6px 16px 4px">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#6EA0FF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Battlewise</span>
+      <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0">Bestiaire</h1>
+      <a href="Graphite-Reglages.dc.html" aria-label="Réglages" style="width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center; color: #A1A1AA">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+      </a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <a href="Graphite-Profil.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" style="display: flex; align-items: center; gap: 8px; min-width: 0; height: 44px; padding: 0 10px; box-sizing: border-box; border: 1px solid #2E2E33; border-radius: 4px; color: #EDEDEF; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6EA0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.2">
+          <span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Argent N3</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A1A1AA">VD 81 · BLOCAGE 25</span>
+        </span>
+      </a>
+      <a href="Graphite-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" style="display: flex; align-items: center; gap: 8px; min-width: 0; height: 44px; padding: 0 10px; box-sizing: border-box; border: 1px solid #2E2E33; border-radius: 4px; color: #EDEDEF; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6EA0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.2">
+          <span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Normal</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A1A1AA">1 JOUEUR · ×1</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 12px; display: flex; flex-direction: column; gap: 12px; min-height: 0">
+    <label style="display: flex; align-items: center; gap: 8px; height: 44px; border: 1px solid #6EA0FF; border-radius: 4px; padding: 0 2px 0 12px">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8A8A93" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher dans tous les biomes</span>
+      <input type="search" value="tro" aria-controls="b-results" style="flex: 1; min-width: 0; height: 42px; background: transparent; border: 0; font-size: 15px">
+      <a href="Graphite-Bestiaire.dc.html" aria-label="Effacer la recherche" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    </label>
+
+    <div id="b-results" aria-live="polite" style="flex: 1; min-height: 0; overflow-y: auto; margin: 0 -16px; padding: 0 16px; display: flex; flex-direction: column; gap: 18px">
+      <section aria-labelledby="b-cre" style="flex: none; display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid #2E2E33">
+          <h2 id="b-cre" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #A1A1AA">CRÉATURES · {{ creCount }}</h2>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8A93">AVEC TON ÉQUIPEMENT</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="1">
+          <li style="border-bottom: 1px solid #222226">
+            <a href="Graphite-Monstre.dc.html" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #EDEDEF; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
+                  <span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}</span>
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">{{ r.stats }}</span>
+                </span>
+                <span style="display: flex; gap: 6px">
+                  <span role="img" aria-label="{{ r.bLabel }}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.bBorder }}; color: {{ r.bColor }}">
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+                  </span>
+                  <span role="img" aria-label="{{ r.pLabel }}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.pBorder }}; color: {{ r.pColor }}">
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg>
+                  </span>
+                  <span role="img" aria-label="{{ r.dLabel }}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.dBorder }}; color: {{ r.dColor }}">
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg>
+                  </span>
+                </span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {{ r.color }}">
+                <sc-if value="{{ r.isOk }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
+                <sc-if value="{{ r.isWarn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></sc-if>
+                <sc-if value="{{ r.isBad }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
+                <span>{{ r.advice }}</span>
+              </span>
+            </a>
+          </li>
+        </sc-for>
+        </ul>
+      </section>
+
+      <section aria-labelledby="b-att" style="flex: none; display: flex; flex-direction: column">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px 104px 16px; gap: 8px; align-items: center; padding-bottom: 6px; border-bottom: 1px solid #2E2E33; font-size: 11px; letter-spacing: 0.08em; color: #A1A1AA">
+          <h2 id="b-att" style="margin: 0; font-size: 11px; font-weight: 400">ATTAQUES · {{ attCount }}</h2>
+          <span style="text-align: right">DÉG.</span>
+          <span style="display: flex; gap: 6px"><span style="width: 30px; display: flex; justify-content: center" title="Blocage"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Blocage"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span style="width: 30px; display: flex; justify-content: center" title="Parade"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Parade"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span style="width: 30px; display: flex; justify-content: center" title="Esquive"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Esquive"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+          <span></span>
+        </div>
+        <sc-for list="{{ foundAtt }}" as="a" hint-placeholder-count="1">
+          <a href="Graphite-Monstre.dc.html" aria-label="{{ a.aria }}" style="display: grid; grid-template-columns: minmax(0, 1fr) 40px 104px 16px; gap: 8px; align-items: center; min-height: 56px; border-bottom: 1px solid #222226; color: #EDEDEF; text-decoration: none">
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+              <span style="font-size: 14px">{{ a.enemy }} · {{ a.pre }}<mark>{{ a.hit }}</mark>{{ a.post }}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A1A1AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if> · {{ a.tags }}</span>
+            </span>
+            <span style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">{{ a.dmg }}</span>
+            <span aria-hidden="true" style="display: flex; gap: 6px"><span style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ a.bBorder }}; color: {{ a.bColor }}"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ a.pBorder }}; color: {{ a.pColor }}"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #276B43; color: #5BBF7E"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8A8A93" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+          </a>
+        </sc-for>
+      </section>
+      <p style="flex: none; margin: 0 0 4px; font-size: 12px; color: #8A8A93; line-height: 1.45">Résultats sur tous les biomes. Une attaque ouvre la fiche de sa créature, d'où tu peux la simuler.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid #2E2E33">
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: #A1A1AA">
+        <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>blocage</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg>parade</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg>esquive</span>
+        <span><span style="color: #5BBF7E">tient</span> · <span style="color: #E5A84B">tu titubes</span> · <span style="color: #EF6461">ne passe pas</span></span>
+      </div>
+    </div>
+  </main>
+
+  <nav aria-label="Navigation" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #2E2E33; padding: 6px 0 14px">
+    <a href="Graphite-Bestiaire.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #6EA0FF; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire
+    </a>
+    <a href="Graphite-Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8A8A93; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation
+    </a>
+    <a href="Graphite-Arsenal.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8A8A93; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal
+    </a>
+    <a href="Graphite-Memo.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8A8A93; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const colors = { ok: '#5BBF7E', warn: '#E5A84B', bad: '#EF6461', none: '#A1A1AA' };
+    const borders = { ok: '#276B43', warn: '#9C6A12', bad: '#8A2A28', none: '#2E2E33' };
+    const words = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
+    const list = [
+      { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
+      { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
+      { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
+      { name: 'Squelette', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
+      { name: 'Troll', stats: '600 PV', s: 'bad', b: 'bad', p: 'warn', d: 'ok', advice: 'Esquive sa frappe au sol, pare le reste' },
+      { name: 'Fantôme', stats: 'PV À EXTRAIRE', s: 'none', b: 'none', p: 'none', d: 'none', advice: 'Attaques pas encore extraites' },
+      { name: "L'Aîné", stats: 'BOSS', s: 'none', b: 'none', p: 'none', d: 'none', advice: 'Attaques pas encore extraites' }
+    ];
+    const sDT = { blunt: { label: 'CONTONDANT', d: 'M13 3l8 8-4 4-8-8zM13 11l-9 9' }, slash: { label: 'COUPANT', d: 'M4 14L14 4M7 19L19 7M13 20l7-7' }, pierce: { label: 'PERFORANT', d: 'M20 4l-7 3 4 4zM15 9L4 20' }, fire: { label: 'FEU', d: 'M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z' }, frost: { label: 'GIVRE', d: 'M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9' }, lightning: { label: 'FOUDRE', d: 'M13 3L5 14h6l-1 7 8-11h-6l1-7z' }, poison: { label: 'POISON', d: 'M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z' }, spirit: { label: 'ESPRIT', d: 'M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01' } };
+    const stypeVals = (keys) => ({ t1: sDT[keys[0]].label, t1d: sDT[keys[0]].d, hasT2: keys.length > 1, t2: keys.length > 1 ? sDT[keys[1]].label : '', t2d: keys.length > 1 ? sDT[keys[1]].d : '' });
+    const stypeWords = (keys) => keys.map((k) => sDT[k].label.toLowerCase()).join(' et ');
+    const query = 'tro';
+    const split = (text) => {
+      const at = text.toLowerCase().indexOf(query);
+      return { pre: text.slice(0, at), hit: text.slice(at, at + query.length), post: text.slice(at + query.length) };
+    };
+    const sArmor = (dmg, ac) => (ac <= 0 || dmg <= 0) ? Math.max(0, dmg) : (ac < dmg / 2 ? dmg - ac : Math.min(1, dmg / (ac * 4)) * dmg);
+    const sBp = 72 * (1 + 25 / 200), sAc = 45, sT = 60;
+    const sVerdict = (hit, power) => {
+      const passes = sArmor(hit, power);
+      if (passes >= sT) return 'bad';
+      return passes + sArmor(passes, sAc) >= sT ? 'warn' : 'ok';
+    };
+    const sWords = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
+    const catalog = [
+      { enemy: 'Naingris', name: 'coup de griffe', dmg: 20, tags: 'MÊLÉE', types: ['slash'] },
+      { enemy: 'Naingris', name: 'jet de pierre', dmg: 15, tags: 'PROJECTILE', types: ['blunt'] },
+      { enemy: 'Chaman naingris', name: 'jet empoisonné', dmg: 30, tags: 'PROJECTILE · IMPARABLE', types: ['poison'], unblockable: true },
+      { enemy: 'Brute naingris', name: 'coup de poing', dmg: 135, tags: 'MÊLÉE', types: ['blunt'] },
+      { enemy: 'Troll', name: 'coup de poing', dmg: 70, tags: 'MÊLÉE', types: ['blunt'] },
+      { enemy: 'Troll', name: 'coup de tronc', dmg: 130, tags: 'MÊLÉE', types: ['blunt'] },
+      { enemy: 'Troll', name: 'frappe au sol', dmg: 160, tags: 'ZONE', types: ['blunt'] }
+    ];
+    const foundCreatures = list.filter((r) => r.name.toLowerCase().includes(query));
+    const foundAttacks = catalog.filter((a) => a.name.toLowerCase().includes(query)).map((a) => {
+      const b = a.unblockable ? 'bad' : sVerdict(a.dmg, sBp);
+      const p = a.unblockable ? 'bad' : sVerdict(a.dmg, sBp * 1.5);
+      return Object.assign(stypeVals(a.types), { enemy: a.enemy, tags: a.tags, dmg: String(a.dmg),
+        bColor: colors[b], bBorder: borders[b], pColor: colors[p], pBorder: borders[p],
+        aria: a.enemy + ', ' + a.name + ', ' + stypeWords(a.types) + ', ' + a.dmg + ' dégâts. Blocage : ' + sWords[b] + '. Parade : ' + sWords[p] + '. Esquivable. Ouvrir la fiche ' + a.enemy + '.'
+      }, split(a.name));
+    });
+    return {
+      creCount: String(foundCreatures.length),
+      attCount: String(foundAttacks.length),
+      foundAtt: foundAttacks,
+      rows: foundCreatures.map((r) => Object.assign(split(r.name), {
+        name: r.name,
+        stats: 'FORÊT NOIRE · ' + r.stats,
+        advice: r.advice,
+        color: colors[r.s],
+        isOk: r.s === 'ok',
+        isWarn: r.s === 'warn',
+        isBad: r.s === 'bad',
+        bColor: colors[r.b], bBorder: borders[r.b], bLabel: 'Blocage : ' + words[r.b],
+        pColor: colors[r.p], pBorder: borders[r.p], pLabel: 'Parade : ' + words[r.p],
+        dColor: colors[r.d], dBorder: borders[r.d], dLabel: 'Esquive : ' + words[r.d]
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

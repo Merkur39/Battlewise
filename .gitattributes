@@ -1,0 +1,4 @@
+# Git's core.autocrlf would store CRLF on Windows while Prettier writes LF, so a fresh clone
+# fails `format:check` on line endings rather than on style. Normalise on LF everywhere, in the
+# repository and in the working tree, regardless of each machine's git configuration.
+* text=auto eol=lf

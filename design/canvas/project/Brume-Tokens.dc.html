@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Système HUD — tokens et composants · Brume</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+a{color:#BBA6F7}a:hover{color:#D5C8FB}
+</style>
+</helmet>
+<div style="width: 880px; height: 960px; box-sizing: border-box; background: #110F18; color: #E9E5F3; font-family: 'IBM Plex Sans', system-ui, sans-serif; padding: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-content: start">
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">SURFACES ET TEXTE</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{ neutrals }}" as="c" hint-placeholder-count="8">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="height: 44px; border-radius: 4px; border: 1px solid #342D47; background: {{ c.hex }}"></span>
+          <span style="font-size: 12px">{{ c.name }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">{{ c.hex }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">ÉTATS DE VERDICT</h2>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; background: #1A1724; border-radius: 6px; padding: 10px 12px">
+        <span style="height: 22px; border-radius: 2px; background: #2F7A52"></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #6FC594"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>TIENT</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">#2F7A52 / #6FC594</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; background: #1A1724; border-radius: 6px; padding: 10px 12px">
+        <span style="height: 22px; border-radius: 2px; background: #A86F12"></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #E3AA4C"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>TU TITUBES</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">#A86F12 / #E3AA4C</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; background: #1A1724; border-radius: 6px; padding: 10px 12px">
+        <span style="height: 22px; border-radius: 2px; background: #812C28"></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #F0726A"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>BRISÉ</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">#812C28 / #F0726A</span>
+      </div>
+      <span style="font-size: 12px; color: #8D86A4">Remplissage de zone sombre, texte clair, icône : l'état ne repose jamais sur la seule teinte.</span>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">TYPOGRAPHIE</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px; background: #1A1724; border-radius: 6px; padding: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 20px; font-weight: 500">Titre d'écran</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">SANS 20 / 500</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 15px">Nom d'objet, ligne de liste</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">SANS 15 / 400</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">ÉTIQUETTE DE CHAMP</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">SANS 11 / CAPS +8 %</span></div>
+      <div style="height: 1px; background: #342D47"></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px">139</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">MONO 26 · VALEUR CLÉ</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #E3AA4C">BLOCAGE TIENT, TU TITUBES</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">MONO 13 / 500</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9A2BF">VD 81 · ARM 45 · PV 150</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">MONO 12 · STATS</span></div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">COMPOSANTS</h2>
+    <div style="display: flex; flex-direction: column; gap: 14px; background: #1A1724; border-radius: 6px; padding: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">JAUGE ZONÉE + CURSEUR</span>
+        <div style="position: relative; height: 22px; display: flex; border-radius: 2px">
+          <span style="width: 62%; background: #2F7A52"></span><span style="width: 7.5%; background: #A86F12"></span><span style="width: 30.5%; background: #812C28"></span>
+          <span style="position: absolute; top: -4px; bottom: -4px; left: 45%; width: 2px; background: #E9E5F3"></span>
+        </div>
+        <div style="position: relative; height: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500">
+          <span style="position: absolute; left: 62%; transform: translateX(-100%); padding-right: 4px; color: #6FC594">124</span>
+          <span style="position: absolute; left: 69.5%; padding-left: 4px; color: #E3AA4C">139</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <div style="flex: 1; display: flex; border: 1px solid #342D47; border-radius: 4px; overflow: hidden">
+          <span style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; background: #BBA6F7; color: #110F18; font-weight: 500">0 %</span>
+          <span style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9A2BF">25 %</span>
+          <span style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9A2BF">50 %</span>
+        </div>
+        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 9px; border: 1px solid #342D47; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #E9E5F3"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#BBA6F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>NORMAL · 1J</span>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 2px 6px; border-radius: 3px; border: 1px solid #812C28; color: #F0726A">IMPARABLE</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 2px 6px; border-radius: 3px; border: 1px solid #342D47; color: #A9A2BF">BOSS</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 2px 6px; border-radius: 3px; border: 1px solid #BBA6F7; color: #BBA6F7">ÉQUIPÉ</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 2px 6px; border-radius: 3px; border: 1px solid #342D47; color: #A9A2BF">ESQUIVABLE</span>
+        <span style="display: inline-flex; gap: 4px; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">B <span style="width: 10px; height: 10px; border-radius: 50%; background: #F0726A"></span> P <span style="width: 10px; height: 10px; border-radius: 50%; background: #E3AA4C"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <section style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">TYPES DE DÉGÂTS</h2>
+    <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; color: #E9E5F3">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M13 3l8 8-4 4-8-8zM13 11l-9 9"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">CONTONDANT</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">STAGGER</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M4 14L14 4M7 19L19 7M13 20l7-7"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">COUPANT</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">STAGGER</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">PERFORANT</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">STAGGER</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">FEU</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">—</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">GIVRE</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">—</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">FOUDRE</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">STAGGER</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">POISON</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">—</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; background: #1A1724; border-radius: 6px; padding: 10px 4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20" style=""><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">ESPRIT</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8D86A4">—</span></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 12px; color: #8D86A4">Gris neutre, jamais coloré : la couleur reste aux verdicts. Toujours l'icône et le mot. STAGGER : remplit ta barre.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="M4 14L14 4M7 19L19 7M13 20l7-7"></path></svg>COUPANT<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg>FEU · MÊLÉE · PLAINES</span>
+      <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px"><span style="padding: 2px 7px; border-radius: 3px; border: 1px solid #A9A2BF; color: #E9E5F3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">FAIBLE ×1,5</span></span><span style="padding: 2px 7px; border-radius: 3px; border: 1px solid #342D47; color: #A9A2BF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg>FEU · <span style="font-weight: 500">RÉSISTANT ×0,5</span></span><span style="padding: 2px 7px; border-radius: 3px; border: 1px dashed #342D47; color: #8D86A4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z"></path></svg>POISON · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #8D86A4">Tout le reste ×1</span></div>
+      <span style="font-size: 12px; color: #8D86A4">Faiblesses et résistances : mot d'état selon le multiplicateur du jeu (très faible ×2, faible ×1,5, résistant ×0,5, très résistant ×0,25, immunisé ×0), types neutres regroupés.</span>
+    </div>
+  </section>
+
+  <section style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px">
+    <h2 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; font-weight: 500">RÈGLES</h2>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; font-size: 13px; line-height: 1.45">
+      <div style="background: #1A1724; border-radius: 6px; padding: 10px 12px"><span style="font-family: 'IBM Plex Mono', monospace; color: #BBA6F7">44 PX</span><br>Cible tactile minimale, barre d'onglets 52 px.</div>
+      <div style="background: #1A1724; border-radius: 6px; padding: 10px 12px"><span style="font-family: 'IBM Plex Mono', monospace; color: #BBA6F7">4,5:1</span><br>Contraste mini du texte, gris #8D86A4 compris.</div>
+      <div style="background: #1A1724; border-radius: 6px; padding: 10px 12px"><span style="font-family: 'IBM Plex Mono', monospace; color: #BBA6F7">MONO</span><br>Tout chiffre en Plex Mono tabulaire, virgule décimale.</div>
+      <div style="background: #1A1724; border-radius: 6px; padding: 10px 12px"><span style="font-family: 'IBM Plex Mono', monospace; color: #BBA6F7">COULEURS</span><br>Bleu = sélection. Vert, ambre, rouge = verdicts, rien d'autre.</div>
+      <div style="background: #1A1724; border-radius: 6px; padding: 10px 12px; display: flex; gap: 10px"><span style="flex: 1"><span style="font-family: 'IBM Plex Mono', monospace; color: #BBA6F7">SCROLL</span><br>6 px, pouce = trait, survol = discret, piste transparente.</span><span aria-hidden="true" style="width: 6px; border-radius: 3px; background: #342D47; align-self: stretch; position: relative"><span style="position: absolute; left: 0; right: 0; top: 4px; height: 22px; border-radius: 3px; background: #8D86A4"></span></span></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":880,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      neutrals: [
+        { name: 'Fond', hex: '#110F18' },
+        { name: 'Surface', hex: '#1A1724' },
+        { name: 'Sélection', hex: '#2E2747' },
+        { name: 'Trait', hex: '#342D47' },
+        { name: 'Texte', hex: '#E9E5F3' },
+        { name: 'Secondaire', hex: '#A9A2BF' },
+        { name: 'Discret', hex: '#8D86A4' },
+        { name: 'Accent', hex: '#BBA6F7' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

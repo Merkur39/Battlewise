@@ -1,0 +1,2040 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire"
+    },
+    "Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche"
+    },
+    "Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "is_interactive": true
+    },
+    "Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque"
+    },
+    "Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche"
+    },
+    "Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "is_interactive": true
+    },
+    "Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "is_interactive": true
+    },
+    "Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement"
+    },
+    "Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde"
+    },
+    "Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "is_interactive": true
+    },
+    "Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système HUD"
+    },
+    "Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Sim-A.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 0,
+      "y": 0,
+      "title": "A · deux blocs",
+      "page": "sim",
+      "is_interactive": true
+    },
+    "Sim-B.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 470,
+      "y": 0,
+      "title": "B · l'attaque d'abord",
+      "page": "sim"
+    },
+    "Sim-C.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 940,
+      "y": 0,
+      "title": "C · comparateur",
+      "page": "sim"
+    },
+    "SimB-Simulation.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 0,
+      "y": 1264,
+      "title": "Simulation",
+      "page": "sim",
+      "is_interactive": true
+    },
+    "SimB-Attaque.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 470,
+      "y": 1264,
+      "title": "Choisir une attaque",
+      "page": "sim"
+    },
+    "SimB-Monstre.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 1410,
+      "y": 1264,
+      "title": "Fiche monstre (attaques)",
+      "page": "sim",
+      "is_interactive": true
+    },
+    "SimB-Equipement.dc.html": {
+      "h": 844,
+      "w": 390,
+      "x": 1880,
+      "y": 1264,
+      "title": "Ton équipement",
+      "page": "sim"
+    },
+    "SimB-Recherche.dc.html": {
+      "h": 844,
+      "w": 390,
+      "page": "sim",
+      "x": 940,
+      "y": 1264,
+      "title": "Choisir une attaque · recherche"
+    },
+    "Braise-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "braise"
+    },
+    "Braise-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "braise"
+    },
+    "Braise-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "braise"
+    },
+    "Braise-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "braise"
+    },
+    "Braise-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "braise"
+    },
+    "Braise-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "braise"
+    },
+    "Braise-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Braise",
+      "page": "braise"
+    },
+    "Braise-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Brume-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "brume"
+    },
+    "Brume-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "brume"
+    },
+    "Brume-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "brume"
+    },
+    "Brume-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "brume"
+    },
+    "Brume-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "brume"
+    },
+    "Brume-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "brume"
+    },
+    "Brume-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Brume",
+      "page": "brume"
+    },
+    "Brume-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Jour-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "jour"
+    },
+    "Jour-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "jour"
+    },
+    "Jour-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "jour"
+    },
+    "Jour-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "jour"
+    },
+    "Jour-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "jour"
+    },
+    "Jour-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "jour"
+    },
+    "Jour-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Plein jour",
+      "page": "jour"
+    },
+    "Jour-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Runes-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "runes"
+    },
+    "Runes-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "runes"
+    },
+    "Runes-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "runes"
+    },
+    "Runes-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "runes"
+    },
+    "Runes-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "runes"
+    },
+    "Runes-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "runes"
+    },
+    "Runes-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Runes",
+      "page": "runes"
+    },
+    "Runes-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Graphite-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "graphite"
+    },
+    "Graphite-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "graphite"
+    },
+    "Graphite-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "graphite"
+    },
+    "Graphite-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "graphite"
+    },
+    "Graphite-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "graphite"
+    },
+    "Graphite-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "graphite"
+    },
+    "Graphite-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Graphite",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Parchemin-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire",
+      "page": "parchemin"
+    },
+    "Parchemin-Bestiaire-Recherche.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Bestiaire · recherche",
+      "page": "parchemin"
+    },
+    "Parchemin-Monstre.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Fiche monstre",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Main.dc.html": {
+      "x": 0,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Simulation",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Attaque.dc.html": {
+      "x": 470,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque",
+      "page": "parchemin"
+    },
+    "Parchemin-Recherche.dc.html": {
+      "x": 940,
+      "y": 1264,
+      "w": 390,
+      "h": 844,
+      "title": "Choisir une attaque · recherche",
+      "page": "parchemin"
+    },
+    "Parchemin-Arsenal.dc.html": {
+      "x": 0,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Memo.dc.html": {
+      "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Mémo",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Profil.dc.html": {
+      "x": 0,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton équipement",
+      "page": "parchemin"
+    },
+    "Parchemin-Monde.dc.html": {
+      "x": 470,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton monde",
+      "page": "parchemin"
+    },
+    "Parchemin-Reglages.dc.html": {
+      "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Réglages",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Tokens.dc.html": {
+      "x": 1410,
+      "y": 3792,
+      "w": 880,
+      "h": 960,
+      "title": "Système Parchemin",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Bestiaire.dc.html": {
+      "x": 0,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Bestiaire-Recherche.dc.html": {
+      "x": 1520,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Bestiaire · recherche · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Combat.dc.html": {
+      "x": 3040,
+      "y": 5300,
+      "w": 1440,
+      "h": 900,
+      "title": "Simulation · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Arsenal.dc.html": {
+      "x": 0,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Memo.dc.html": {
+      "x": 1520,
+      "y": 6620,
+      "w": 1440,
+      "h": 900,
+      "title": "Mémo · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Attaque.dc.html": {
+      "x": 0,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Recherche.dc.html": {
+      "x": 1520,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Choisir une attaque · recherche · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Equipement.dc.html": {
+      "x": 3040,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton équipement · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Monde.dc.html": {
+      "x": 4560,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Ton monde · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Reglages.dc.html": {
+      "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-25T10:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "m-row1": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330
+    },
+    "m-row2": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330
+    },
+    "m-row3": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860
+    },
+    "m-row4": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290
+    },
+    "d-row1": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480
+    },
+    "d-row2": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960
+    },
+    "d-row3": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520
+    },
+    "sim-row1": {
+      "kind": "title1",
+      "text": "Écran Simulation : trois pistes",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "sim"
+    },
+    "sim-row2": {
+      "kind": "title1",
+      "text": "Piste B · itération 1",
+      "x": 0,
+      "y": 964,
+      "maxW": 2270,
+      "page": "sim"
+    },
+    "m-row1-braise": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "braise"
+    },
+    "m-row2-braise": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "braise"
+    },
+    "m-row3-braise": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "braise"
+    },
+    "m-row4-braise": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "braise"
+    },
+    "d-row1-braise": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "braise"
+    },
+    "d-row2-braise": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "braise"
+    },
+    "d-row3-braise": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "braise"
+    },
+    "m-row1-brume": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "brume"
+    },
+    "m-row2-brume": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "brume"
+    },
+    "m-row3-brume": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "brume"
+    },
+    "m-row4-brume": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "brume"
+    },
+    "d-row1-brume": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "brume"
+    },
+    "d-row2-brume": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "brume"
+    },
+    "d-row3-brume": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "brume"
+    },
+    "m-row1-jour": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "jour"
+    },
+    "m-row2-jour": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "jour"
+    },
+    "m-row3-jour": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "jour"
+    },
+    "m-row4-jour": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "jour"
+    },
+    "d-row1-jour": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "jour"
+    },
+    "d-row2-jour": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "jour"
+    },
+    "d-row3-jour": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "jour"
+    },
+    "m-row1-runes": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "runes"
+    },
+    "m-row2-runes": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "runes"
+    },
+    "m-row3-runes": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "runes"
+    },
+    "m-row4-runes": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "runes"
+    },
+    "d-row1-runes": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "runes"
+    },
+    "d-row2-runes": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "runes"
+    },
+    "d-row3-runes": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "runes"
+    },
+    "m-row1-graphite": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "graphite"
+    },
+    "m-row2-graphite": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "graphite"
+    },
+    "m-row3-graphite": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "graphite"
+    },
+    "m-row4-graphite": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "graphite"
+    },
+    "d-row1-graphite": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "graphite"
+    },
+    "d-row2-graphite": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "graphite"
+    },
+    "d-row3-graphite": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "graphite"
+    },
+    "m-row1-parchemin": {
+      "kind": "title1",
+      "text": "Bestiaire",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "parchemin"
+    },
+    "m-row2-parchemin": {
+      "kind": "title1",
+      "text": "Simulation",
+      "x": 0,
+      "y": 964,
+      "maxW": 1330,
+      "page": "parchemin"
+    },
+    "m-row3-parchemin": {
+      "kind": "title1",
+      "text": "Arsenal et mémo",
+      "x": 0,
+      "y": 2228,
+      "maxW": 860,
+      "page": "parchemin"
+    },
+    "m-row4-parchemin": {
+      "kind": "title1",
+      "text": "Fenêtres et système",
+      "x": 0,
+      "y": 3492,
+      "maxW": 2290,
+      "page": "parchemin"
+    },
+    "d-row1-parchemin": {
+      "kind": "title1",
+      "text": "Desktop · écrans principaux",
+      "x": 0,
+      "y": 5000,
+      "maxW": 4480,
+      "page": "parchemin"
+    },
+    "d-row2-parchemin": {
+      "kind": "title1",
+      "text": "Desktop · arsenal et mémo",
+      "x": 0,
+      "y": 6320,
+      "maxW": 2960,
+      "page": "parchemin"
+    },
+    "d-row3-parchemin": {
+      "kind": "title1",
+      "text": "Desktop · fenêtres",
+      "x": 0,
+      "y": 7640,
+      "maxW": 7520,
+      "page": "parchemin"
+    }
+  },
+  "order": [
+    "Bestiaire.dc.html",
+    "Bestiaire-Recherche.dc.html",
+    "Monstre.dc.html",
+    "Main.dc.html",
+    "Attaque.dc.html",
+    "Recherche.dc.html",
+    "Arsenal.dc.html",
+    "Memo.dc.html",
+    "Profil.dc.html",
+    "Monde.dc.html",
+    "Reglages.dc.html",
+    "Tokens.dc.html",
+    "Desktop-Bestiaire.dc.html",
+    "Desktop-Bestiaire-Recherche.dc.html",
+    "Desktop-Combat.dc.html",
+    "Desktop-Arsenal.dc.html",
+    "Desktop-Memo.dc.html",
+    "Desktop-Attaque.dc.html",
+    "Desktop-Recherche.dc.html",
+    "Desktop-Equipement.dc.html",
+    "Desktop-Monde.dc.html",
+    "Desktop-Reglages.dc.html",
+    "Sim-A.dc.html",
+    "Sim-B.dc.html",
+    "Sim-C.dc.html",
+    "SimB-Simulation.dc.html",
+    "SimB-Attaque.dc.html",
+    "SimB-Monstre.dc.html",
+    "SimB-Equipement.dc.html",
+    "SimB-Recherche.dc.html",
+    "Braise-Bestiaire.dc.html",
+    "Braise-Bestiaire-Recherche.dc.html",
+    "Braise-Monstre.dc.html",
+    "Braise-Main.dc.html",
+    "Braise-Attaque.dc.html",
+    "Braise-Recherche.dc.html",
+    "Braise-Arsenal.dc.html",
+    "Braise-Memo.dc.html",
+    "Braise-Profil.dc.html",
+    "Braise-Monde.dc.html",
+    "Braise-Reglages.dc.html",
+    "Braise-Tokens.dc.html",
+    "Braise-Desktop-Bestiaire.dc.html",
+    "Braise-Desktop-Bestiaire-Recherche.dc.html",
+    "Braise-Desktop-Combat.dc.html",
+    "Braise-Desktop-Arsenal.dc.html",
+    "Braise-Desktop-Memo.dc.html",
+    "Braise-Desktop-Attaque.dc.html",
+    "Braise-Desktop-Recherche.dc.html",
+    "Braise-Desktop-Equipement.dc.html",
+    "Braise-Desktop-Monde.dc.html",
+    "Braise-Desktop-Reglages.dc.html",
+    "Brume-Bestiaire.dc.html",
+    "Brume-Bestiaire-Recherche.dc.html",
+    "Brume-Monstre.dc.html",
+    "Brume-Main.dc.html",
+    "Brume-Attaque.dc.html",
+    "Brume-Recherche.dc.html",
+    "Brume-Arsenal.dc.html",
+    "Brume-Memo.dc.html",
+    "Brume-Profil.dc.html",
+    "Brume-Monde.dc.html",
+    "Brume-Reglages.dc.html",
+    "Brume-Tokens.dc.html",
+    "Brume-Desktop-Bestiaire.dc.html",
+    "Brume-Desktop-Bestiaire-Recherche.dc.html",
+    "Brume-Desktop-Combat.dc.html",
+    "Brume-Desktop-Arsenal.dc.html",
+    "Brume-Desktop-Memo.dc.html",
+    "Brume-Desktop-Attaque.dc.html",
+    "Brume-Desktop-Recherche.dc.html",
+    "Brume-Desktop-Equipement.dc.html",
+    "Brume-Desktop-Monde.dc.html",
+    "Brume-Desktop-Reglages.dc.html",
+    "Jour-Bestiaire.dc.html",
+    "Jour-Bestiaire-Recherche.dc.html",
+    "Jour-Monstre.dc.html",
+    "Jour-Main.dc.html",
+    "Jour-Attaque.dc.html",
+    "Jour-Recherche.dc.html",
+    "Jour-Arsenal.dc.html",
+    "Jour-Memo.dc.html",
+    "Jour-Profil.dc.html",
+    "Jour-Monde.dc.html",
+    "Jour-Reglages.dc.html",
+    "Jour-Tokens.dc.html",
+    "Jour-Desktop-Bestiaire.dc.html",
+    "Jour-Desktop-Bestiaire-Recherche.dc.html",
+    "Jour-Desktop-Combat.dc.html",
+    "Jour-Desktop-Arsenal.dc.html",
+    "Jour-Desktop-Memo.dc.html",
+    "Jour-Desktop-Attaque.dc.html",
+    "Jour-Desktop-Recherche.dc.html",
+    "Jour-Desktop-Equipement.dc.html",
+    "Jour-Desktop-Monde.dc.html",
+    "Jour-Desktop-Reglages.dc.html",
+    "Runes-Bestiaire.dc.html",
+    "Runes-Bestiaire-Recherche.dc.html",
+    "Runes-Monstre.dc.html",
+    "Runes-Main.dc.html",
+    "Runes-Attaque.dc.html",
+    "Runes-Recherche.dc.html",
+    "Runes-Arsenal.dc.html",
+    "Runes-Memo.dc.html",
+    "Runes-Profil.dc.html",
+    "Runes-Monde.dc.html",
+    "Runes-Reglages.dc.html",
+    "Runes-Tokens.dc.html",
+    "Runes-Desktop-Bestiaire.dc.html",
+    "Runes-Desktop-Bestiaire-Recherche.dc.html",
+    "Runes-Desktop-Combat.dc.html",
+    "Runes-Desktop-Arsenal.dc.html",
+    "Runes-Desktop-Memo.dc.html",
+    "Runes-Desktop-Attaque.dc.html",
+    "Runes-Desktop-Recherche.dc.html",
+    "Runes-Desktop-Equipement.dc.html",
+    "Runes-Desktop-Monde.dc.html",
+    "Runes-Desktop-Reglages.dc.html",
+    "Graphite-Bestiaire.dc.html",
+    "Graphite-Bestiaire-Recherche.dc.html",
+    "Graphite-Monstre.dc.html",
+    "Graphite-Main.dc.html",
+    "Graphite-Attaque.dc.html",
+    "Graphite-Recherche.dc.html",
+    "Graphite-Arsenal.dc.html",
+    "Graphite-Memo.dc.html",
+    "Graphite-Profil.dc.html",
+    "Graphite-Monde.dc.html",
+    "Graphite-Reglages.dc.html",
+    "Graphite-Tokens.dc.html",
+    "Graphite-Desktop-Bestiaire.dc.html",
+    "Graphite-Desktop-Bestiaire-Recherche.dc.html",
+    "Graphite-Desktop-Combat.dc.html",
+    "Graphite-Desktop-Arsenal.dc.html",
+    "Graphite-Desktop-Memo.dc.html",
+    "Graphite-Desktop-Attaque.dc.html",
+    "Graphite-Desktop-Recherche.dc.html",
+    "Graphite-Desktop-Equipement.dc.html",
+    "Graphite-Desktop-Monde.dc.html",
+    "Graphite-Desktop-Reglages.dc.html",
+    "Parchemin-Bestiaire.dc.html",
+    "Parchemin-Bestiaire-Recherche.dc.html",
+    "Parchemin-Monstre.dc.html",
+    "Parchemin-Main.dc.html",
+    "Parchemin-Attaque.dc.html",
+    "Parchemin-Recherche.dc.html",
+    "Parchemin-Arsenal.dc.html",
+    "Parchemin-Memo.dc.html",
+    "Parchemin-Profil.dc.html",
+    "Parchemin-Monde.dc.html",
+    "Parchemin-Reglages.dc.html",
+    "Parchemin-Tokens.dc.html",
+    "Parchemin-Desktop-Bestiaire.dc.html",
+    "Parchemin-Desktop-Bestiaire-Recherche.dc.html",
+    "Parchemin-Desktop-Combat.dc.html",
+    "Parchemin-Desktop-Arsenal.dc.html",
+    "Parchemin-Desktop-Memo.dc.html",
+    "Parchemin-Desktop-Attaque.dc.html",
+    "Parchemin-Desktop-Recherche.dc.html",
+    "Parchemin-Desktop-Equipement.dc.html",
+    "Parchemin-Desktop-Monde.dc.html",
+    "Parchemin-Desktop-Reglages.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "hud",
+      "name": "Origine"
+    },
+    {
+      "id": "sim",
+      "name": "Simulation · pistes"
+    },
+    {
+      "id": "braise",
+      "name": "Braise"
+    },
+    {
+      "id": "brume",
+      "name": "Brume"
+    },
+    {
+      "id": "jour",
+      "name": "Plein jour"
+    },
+    {
+      "id": "runes",
+      "name": "Runes"
+    },
+    {
+      "id": "graphite",
+      "name": "Graphite"
+    },
+    {
+      "id": "parchemin",
+      "name": "Parchemin"
+    }
+  ],
+  "title": "Battlewise — design"
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Choisir une attaque · Graphite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#2E2E33 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2E2E33;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8A8A93}
+button,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#6EA0FF}a:hover{color:#9CBEFF}
+input::placeholder{color:#8A8A93}
+</style>
+</helmet>
+<div role="dialog" aria-modal="true" aria-labelledby="k-title" style="width: 390px; height: 844px; box-sizing: border-box; background: #111113; color: #EDEDEF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #2E2E33">
+    <a href="Graphite-Main.dc.html" aria-label="Fermer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #A1A1AA">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </a>
+    <h2 id="k-title" style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Choisir une attaque</h2>
+  </header>
+
+  <div style="padding: 12px 16px 0">
+    <a href="Graphite-Recherche.dc.html" style="display: flex; align-items: center; gap: 8px; height: 44px; border: 1px solid #2E2E33; border-radius: 4px; padding: 0 12px; color: #8A8A93; text-decoration: none; font-size: 15px">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8A8A93" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      Ennemi ou attaque, tous biomes
+    </a>
+  </div>
+
+  <main style="flex: 1; min-height: 0; overflow-y: auto; padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 18px">
+    <section aria-labelledby="k-recent" style="flex: none; display: flex; flex-direction: column">
+      <h3 id="k-recent" style="margin: 0 0 4px; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #A1A1AA">RÉCENTES</h3>
+      <sc-for list="{{ recent }}" as="a" hint-placeholder-count="2">
+        <a href="Graphite-Main.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 52px; border-bottom: 1px solid #222226; color: #EDEDEF; text-decoration: none">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8A8A93" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+            <span style="font-size: 14px">{{ a.name }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A1A1AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if> · {{ a.tags }}</span>
+          </span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{ a.dmg }}</span>
+        </a>
+      </sc-for>
+    </section>
+
+    <section aria-labelledby="k-enn" style="flex: none; display: flex; flex-direction: column; gap: 8px">
+      <h3 id="k-enn" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #A1A1AA">ENNEMIS</h3>
+      <div role="group" aria-label="Biome" style="display: flex; align-items: center; background: #1A1A1D; border-radius: 6px">
+        <button type="button" aria-label="Biome précédent : Prairies" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px">
+          <span style="font-size: 15px; font-weight: 500">Forêt noire</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">BIOME 2 SUR 8</span>
+        </div>
+        <button type="button" aria-label="Biome suivant : Marais" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+        <sc-for list="{{ enemies }}" as="e" hint-placeholder-count="7">
+          <li style="border-bottom: 1px solid #222226">
+            <sc-if value="{{ e.known }}" hint-placeholder-val="{{ true }}">
+              <a href="Graphite-Monstre.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 52px; color: #EDEDEF; text-decoration: none">
+                <span style="flex: 1; font-size: 15px">{{ e.name }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">{{ e.count }}</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8A8A93" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+              </a>
+            </sc-if>
+            <sc-if value="{{ e.unknown }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 10px; min-height: 52px; color: #8A8A93">
+                <span style="flex: 1; font-size: 15px">{{ e.name }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">À EXTRAIRE</span>
+              </div>
+            </sc-if>
+          </li>
+        </sc-for>
+      </ul>
+      <span style="font-size: 12px; color: #8A8A93">Touche un ennemi pour voir ses attaques, puis l'attaque à simuler.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const enemies = [
+      ['Naingris', 2], ['Chaman naingris', 1], ['Brute naingris', 1], ['Squelette', 0],
+      ['Troll', 3], ['Fantôme', 0], ["L'Aîné", 0]
+    ];
+    const DT = { blunt: { label: 'CONTONDANT', d: 'M13 3l8 8-4 4-8-8zM13 11l-9 9' }, slash: { label: 'COUPANT', d: 'M4 14L14 4M7 19L19 7M13 20l7-7' }, pierce: { label: 'PERFORANT', d: 'M20 4l-7 3 4 4zM15 9L4 20' }, fire: { label: 'FEU', d: 'M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z' }, frost: { label: 'GIVRE', d: 'M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9' }, lightning: { label: 'FOUDRE', d: 'M13 3L5 14h6l-1 7 8-11h-6l1-7z' }, poison: { label: 'POISON', d: 'M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z' }, spirit: { label: 'ESPRIT', d: 'M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01' } };
+    const typeVals = (keys) => ({ t1: DT[keys[0]].label, t1d: DT[keys[0]].d, hasT2: keys.length > 1, t2: keys.length > 1 ? DT[keys[1]].label : '', t2d: keys.length > 1 ? DT[keys[1]].d : '' });
+    const typeWords = (keys) => keys.map((k) => DT[k].label.toLowerCase()).join(' et ');
+    return {
+      recent: [
+        { name: 'Troll · coup de tronc', tags: 'MÊLÉE · FORÊT NOIRE', dmg: '130', types: ['blunt'] },
+        { name: 'Brute naingris · coup de poing', tags: 'MÊLÉE · FORÊT NOIRE', dmg: '135', types: ['blunt'] }
+      ].map((a) => Object.assign(typeVals(a.types), a)),
+      enemies: enemies.map(([name, n]) => ({
+        name: name, known: n > 0, unknown: n === 0,
+        count: n + (n > 1 ? ' ATTAQUES' : ' ATTAQUE')
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

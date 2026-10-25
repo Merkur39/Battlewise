@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mémo — règles du combat · Plein jour</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:light}
+*{scrollbar-width:thin;scrollbar-color:#D3CDC1 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#D3CDC1;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#656C73}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+a{color:#1F5F94}a:hover{color:#174A73}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .chev{transform:rotate(90deg);color:#1F5F94}
+details[open] .ttl{color:#1F5F94;font-weight:500}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F1EA; color: #1B1F23; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; flex-direction: column; gap: 6px; padding: 6px 16px 4px">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1F5F94" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Battlewise</span>
+      <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0">Mémo</h1>
+      <a href="Jour-Reglages.dc.html" aria-label="Réglages" style="width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center; color: #50575F">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+      </a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <a href="Jour-Profil.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" style="display: flex; align-items: center; gap: 8px; min-width: 0; height: 44px; padding: 0 10px; box-sizing: border-box; border: 1px solid #D3CDC1; border-radius: 4px; color: #1B1F23; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1F5F94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.2">
+          <span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Argent N3</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #50575F">VD 81 · BLOCAGE 25</span>
+        </span>
+      </a>
+      <a href="Jour-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" style="display: flex; align-items: center; gap: 8px; min-width: 0; height: 44px; padding: 0 10px; box-sizing: border-box; border: 1px solid #D3CDC1; border-radius: 4px; color: #1B1F23; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1F5F94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.2">
+          <span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Normal</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #50575F">1 JOUEUR · ×1</span>
+        </span>
+      </a>
+    </div>
+  </header>
+  <div style="padding: 4px 16px 6px">
+    <label style="display: flex; align-items: center; gap: 8px; height: 44px; border: 1px solid #D3CDC1; border-radius: 4px; padding: 0 12px">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher dans le mémo</span>
+      <input type="search" placeholder="Rechercher une règle" style="flex: 1; min-width: 0; height: 42px; background: transparent; border: 0; font: inherit; font-size: 15px; color: #1B1F23">
+    </label>
+  </div>
+
+  <main aria-label="Règles" style="flex: 1; padding: 4px 16px 12px; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; border-top: 1px solid #D3CDC1">
+    <details open style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Parade</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">0,25 S · 0 END.</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.45">
+        <p style="margin: 0">Fenêtre de <span style="font-family: 'IBM Plex Mono', monospace">0,25 s</span> après avoir levé le bouclier. La compétence ne l'élargit pas.</p>
+        <p style="margin: 0">Coûte <span style="font-family: 'IBM Plex Mono', monospace">0</span> endurance. Torche et Bâton en rendent <span style="font-family: 'IBM Plex Mono', monospace">10</span>, Mandevide <span style="font-family: 'IBM Plex Mono', monospace">15</span>.</p>
+        <p style="margin: 0">L'attaquant titube, même un archer. Sauf les boss (hors Eikthyr) et le Gammeltroll.</p>
+        <p style="margin: 0">Le chrono repart après une attaque ou une roulade, sans lâcher le bouton.</p>
+        <p style="margin: 0; font-weight: 500">Les écus ne parent pas.</p>
+      </div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Blocage</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">≤ 10 END.</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">La VD, c'est la valeur défensive de l'info-bulle, compétence comprise. C'est l'objet en main gauche qui bloque : avec une torche, c'est elle. Coup ≥ 2 × VD : tu prends coup − VD.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Ta barre de stagger</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">40 % PV · 5 S</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Remplie par le physique et la foudre après armure. En bloquant, ce qui passe compte deux fois.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Faire tituber un monstre</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">×2 DÉGÂTS</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Seuil = PV × facteur du monstre. Atgeir secondaire et coup de pied : stagger ×6.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Imparables</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">17 ATTAQUES</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Souffles, novas et zones de boss. La plupart s'esquivent en roulade.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Combos et sournoise</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">DERNIER COUP ×2</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Combo perdu après 0,2 s d'attente. Sournoise ×3, ×6 au couteau.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Roulade</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">15 END.</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Esquive parfaite : 50 % de l'endurance rendue, une fois par roulade.</div>
+    </details>
+
+    <details style="border-bottom: 1px solid #E6E1D7">
+      <summary style="display: flex; align-items: center; gap: 10px; min-height: 48px">
+        <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#656C73" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="ttl" style="flex: 1; font-size: 15px">Effets qui changent les règles</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F">5</span>
+      </summary>
+      <div style="background: #FFFFFF; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.45">Pouvoir de Fader, de Masse-d'Os, hydromel des berserkir, voile d'ombre, cape des cendres.</div>
+    </details>
+  </main>
+
+  <nav aria-label="Navigation" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #D3CDC1; padding: 6px 0 14px">
+    <a href="Jour-Bestiaire.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #656C73; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire
+    </a>
+    <a href="Jour-Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #656C73; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation
+    </a>
+    <a href="Jour-Arsenal.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #656C73; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal
+    </a>
+    <a href="Jour-Memo.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #1F5F94; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

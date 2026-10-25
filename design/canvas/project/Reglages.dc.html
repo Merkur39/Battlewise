@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Réglages — langue et thème</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left}
+</style>
+</helmet>
+<div role="dialog" aria-modal="true" aria-labelledby="r-title" lang="{{ s.code }}" style="width: 390px; height: 844px; box-sizing: border-box; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; background: {{ t.bg }}; color: {{ t.ink }}">
+  <header style="display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid {{ t.line }}">
+    <a href="Bestiaire.dc.html" aria-label="{{ s.close }}" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {{ t.secondary }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </a>
+    <h2 id="r-title" style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">{{ s.title }}</h2>
+  </header>
+
+  <main style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 18px; min-height: 0; overflow-y: auto">
+    <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+      <span id="r-lang" style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.lang }}</span>
+      <div role="radiogroup" aria-labelledby="r-lang" style="display: flex; border-radius: 4px; overflow: hidden; border: 1px solid {{ t.line }}">
+        <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+          <button type="button" role="radio" aria-checked="{{ l.checked }}" onClick="{{ l.pick }}" lang="{{ l.code }}" style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 14px; {{ l.style }}">{{ l.label }}</button>
+        </sc-for>
+      </div>
+      <span style="font-size: 12px; color: {{ t.faint }}">{{ s.langNote }}</span>
+    </div>
+
+    <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+      <span id="r-theme" style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.theme }}</span>
+      <div role="radiogroup" aria-labelledby="r-theme" style="display: flex; flex-direction: column; border-radius: 4px; overflow: hidden; border: 1px solid {{ t.line }}">
+        <sc-for list="{{ themes }}" as="o" hint-placeholder-count="7">
+          <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 0 12px; border-bottom: 1px solid {{ t.lineSoft }}; {{ o.rowStyle }}">
+            <span aria-hidden="true" style="display: flex; align-items: center; gap: 3px; padding: 4px; border-radius: 4px; border: 1px solid {{ o.p.line }}; background: {{ o.p.bg }}">
+              <span style="width: 12px; height: 24px; border-radius: 2px; background: {{ o.p.surface }}"></span>
+              <span style="width: 12px; height: 24px; border-radius: 2px; background: {{ o.p.accent }}"></span>
+              <span style="display: flex; flex-direction: column; gap: 2px">
+                <span style="width: 8px; height: 6px; border-radius: 1px; background: {{ o.p.okFill }}"></span>
+                <span style="width: 8px; height: 6px; border-radius: 1px; background: {{ o.p.warnFill }}"></span>
+                <span style="width: 8px; height: 6px; border-radius: 1px; background: {{ o.p.badFill }}"></span>
+              </span>
+            </span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <span style="display: flex; align-items: center; gap: 8px">
+                <span style="font-size: 15px">{{ o.name }}</span>
+                <sc-if value="{{ o.isDefault }}" hint-placeholder-val="{{ false }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 5px; border-radius: 3px; border: 1px solid {{ t.line }}; color: {{ t.secondary }}">{{ s.byDefault }}</span></sc-if>
+              </span>
+              <span style="font-size: 12px; color: {{ t.secondary }}">{{ o.desc }}</span>
+            </span>
+            <sc-if value="{{ o.isChecked }}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="{{ t.accent }}" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <span style="font-size: 12px; color: {{ t.faint }}">{{ s.themeNote }}</span>
+    </div>
+
+    <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.data }}</span>
+      <span lang="en" style="font-size: 14px">Battlewise <span style="color: {{ t.secondary }}">· a combat companion for Valheim</span></span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.dataLine }}</span>
+    </div>
+  </main>
+
+  <footer style="padding: 12px 16px 24px; border-top: 1px solid {{ t.line }}">
+    <a href="Bestiaire.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; font-weight: 500; text-decoration: none; background: {{ t.accent }}; color: {{ t.bg }}">{{ s.save }}</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { theme: 'origine', lang: 'auto' };
+  }
+  renderVals() {
+    const P = {
+      origine: { name: 'Origine', en: 'Origin', desc: 'Noir froid, accent bleu glacier', descEn: 'Cold black, glacier blue accent', bg: '#0D1214', surface: '#151C1F', selection: '#1D3344', line: '#2C383D', lineSoft: '#1F2A2E', ink: '#E2E8E8', secondary: '#97A5AA', faint: '#7D8B91', accent: '#8EBDE3', okFill: '#2E7A4B', warnFill: '#B5760C', badFill: '#7A2A24' },
+      braise: { name: 'Braise', en: 'Ember', desc: 'Charbon chaud, accent os', descEn: 'Warm charcoal, bone accent', bg: '#15110E', surface: '#1F1915', selection: '#3A2D21', line: '#3D332A', lineSoft: '#2B241E', ink: '#EFE6D8', secondary: '#B8A994', faint: '#9A8B78', accent: '#EBD3A2', okFill: '#3D7C47', warnFill: '#B5601A', badFill: '#8B2E26' },
+      brume: { name: 'Brume', en: 'Mist', desc: 'Nuit violette, accent lilas', descEn: 'Violet night, lilac accent', bg: '#110F18', surface: '#1A1724', selection: '#2E2747', line: '#342D47', lineSoft: '#241F33', ink: '#E9E5F3', secondary: '#A9A2BF', faint: '#8D86A4', accent: '#BBA6F7', okFill: '#2F7A52', warnFill: '#A86F12', badFill: '#812C28' },
+      jour: { name: 'Plein jour', en: 'Daylight', desc: 'Clair, lisible en plein soleil', descEn: 'Light, readable in full sun', bg: '#F4F1EA', surface: '#FFFFFF', selection: '#DBE7F3', line: '#D3CDC1', lineSoft: '#E6E1D7', ink: '#1B1F23', secondary: '#50575F', faint: '#656C73', accent: '#1F5F94', okFill: '#79C291', warnFill: '#E6AE4A', badFill: '#E07A70' },
+      runes: { name: 'Runes', en: 'Runes', desc: 'Pierre sombre, rune turquoise', descEn: 'Dark stone, turquoise rune', bg: '#0F1113', surface: '#191C1F', selection: '#123A35', line: '#30363A', lineSoft: '#22272A', ink: '#ECE8DF', secondary: '#ABA79D', faint: '#8E8A80', accent: '#4FE0C8', okFill: '#2F8A3A', warnFill: '#C27A0A', badFill: '#9A241C' },
+      graphite: { name: 'Graphite', en: 'Graphite', desc: 'Gris neutres, sobre', descEn: 'Neutral greys, understated', bg: '#111113', surface: '#1A1A1D', selection: '#1E2A44', line: '#2E2E33', lineSoft: '#222226', ink: '#EDEDEF', secondary: '#A1A1AA', faint: '#8A8A93', accent: '#6EA0FF', okFill: '#276B43', warnFill: '#9C6A12', badFill: '#8A2A28' },
+      parchemin: { name: 'Parchemin', en: 'Parchment', desc: 'Clair chaud, encre bleue', descEn: 'Warm light, blue ink', bg: '#EFE7D6', surface: '#F9F4E8', selection: '#E3D3B0', line: '#CDBFA3', lineSoft: '#E2D7C1', ink: '#2B2219', secondary: '#5E5141', faint: '#685B4A', accent: '#24467A', okFill: '#8CC48A', warnFill: '#E7B456', badFill: '#DB8072' }
+    };
+    // The mockup's device reports French; "auto" resolves to it.
+    const detected = 'fr';
+    const S = {
+      fr: {
+        code: 'fr', title: 'Réglages', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
+        langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
+        theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'Gardés sur cet appareil. L\'aperçu change dès que tu touches un choix.',
+        data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', save: 'Valider'
+      },
+      en: {
+        code: 'en', title: 'Settings', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
+        langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
+        theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'Saved on this device. The preview changes as soon as you tap a choice.',
+        data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', save: 'Save'
+      }
+    };
+    const st = this.state;
+    const ui = st.lang === 'auto' ? detected : st.lang;
+    const s = S[ui];
+    const t = P[st.theme];
+    const seg = (on) => on ? 'background: ' + t.accent + '; color: ' + t.bg + '; font-weight: 500' : 'color: ' + t.secondary;
+    return {
+      t: t,
+      s: s,
+      langs: [['auto', s.auto, ui], ['fr', 'Français', 'fr'], ['en', 'English', 'en']].map(([id, label, code]) => ({
+        label: label, code: code, checked: String(id === st.lang), style: seg(id === st.lang),
+        pick: () => this.setState({ lang: id })
+      })),
+      themes: Object.keys(P).map((id) => ({
+        name: ui === 'en' ? P[id].en : P[id].name,
+        desc: ui === 'en' ? P[id].descEn : P[id].desc,
+        p: P[id],
+        isDefault: id === 'origine',
+        isChecked: id === st.theme,
+        checked: String(id === st.theme),
+        rowStyle: id === st.theme ? 'background: ' + t.selection : 'background: ' + t.surface,
+        pick: () => this.setState({ theme: id })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

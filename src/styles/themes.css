@@ -1,0 +1,144 @@
+/* The seven palettes of the validated design canvas (design/scripts/palettes.py), 16 tokens
+   each. Origine is the default; the others apply through data-theme on the root element.
+   The ok / warn / bad families carry verdicts and nothing else. */
+
+:root,
+:root[data-theme='origine'] {
+  color-scheme: dark;
+  --bg: #0d1214;
+  --surface: #151c1f;
+  --selection: #1d3344;
+  --line: #2c383d;
+  --line-soft: #1f2a2e;
+  --ink: #e2e8e8;
+  --secondary: #97a5aa;
+  --faint: #7d8b91;
+  --accent: #8ebde3;
+  --accent-hover: #b5d4f0;
+  --ok: #6cc08a;
+  --ok-fill: #2e7a4b;
+  --warn: #d9a043;
+  --warn-fill: #b5760c;
+  --bad: #e36b5e;
+  --bad-fill: #7a2a24;
+}
+
+:root[data-theme='braise'] {
+  color-scheme: dark;
+  --bg: #15110e;
+  --surface: #1f1915;
+  --selection: #3a2d21;
+  --line: #3d332a;
+  --line-soft: #2b241e;
+  --ink: #efe6d8;
+  --secondary: #b8a994;
+  --faint: #9a8b78;
+  --accent: #ebd3a2;
+  --accent-hover: #f5e4c3;
+  --ok: #86c68e;
+  --ok-fill: #3d7c47;
+  --warn: #f2963f;
+  --warn-fill: #b5601a;
+  --bad: #ec6a5e;
+  --bad-fill: #8b2e26;
+}
+
+:root[data-theme='brume'] {
+  color-scheme: dark;
+  --bg: #110f18;
+  --surface: #1a1724;
+  --selection: #2e2747;
+  --line: #342d47;
+  --line-soft: #241f33;
+  --ink: #e9e5f3;
+  --secondary: #a9a2bf;
+  --faint: #8d86a4;
+  --accent: #bba6f7;
+  --accent-hover: #d5c8fb;
+  --ok: #6fc594;
+  --ok-fill: #2f7a52;
+  --warn: #e3aa4c;
+  --warn-fill: #a86f12;
+  --bad: #f0726a;
+  --bad-fill: #812c28;
+}
+
+:root[data-theme='jour'] {
+  color-scheme: light;
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --selection: #dbe7f3;
+  --line: #d3cdc1;
+  --line-soft: #e6e1d7;
+  --ink: #1b1f23;
+  --secondary: #50575f;
+  --faint: #656c73;
+  --accent: #1f5f94;
+  --accent-hover: #174a73;
+  --ok: #22703e;
+  --ok-fill: #79c291;
+  --warn: #8c5800;
+  --warn-fill: #e6ae4a;
+  --bad: #b23a30;
+  --bad-fill: #e07a70;
+}
+
+:root[data-theme='runes'] {
+  color-scheme: dark;
+  --bg: #0f1113;
+  --surface: #191c1f;
+  --selection: #123a35;
+  --line: #30363a;
+  --line-soft: #22272a;
+  --ink: #ece8df;
+  --secondary: #aba79d;
+  --faint: #8e8a80;
+  --accent: #4fe0c8;
+  --accent-hover: #8ceedd;
+  --ok: #7ee07a;
+  --ok-fill: #2f8a3a;
+  --warn: #ffb43d;
+  --warn-fill: #c27a0a;
+  --bad: #ff5a4e;
+  --bad-fill: #9a241c;
+}
+
+:root[data-theme='graphite'] {
+  color-scheme: dark;
+  --bg: #111113;
+  --surface: #1a1a1d;
+  --selection: #1e2a44;
+  --line: #2e2e33;
+  --line-soft: #222226;
+  --ink: #ededef;
+  --secondary: #a1a1aa;
+  --faint: #8a8a93;
+  --accent: #6ea0ff;
+  --accent-hover: #9cbeff;
+  --ok: #5bbf7e;
+  --ok-fill: #276b43;
+  --warn: #e5a84b;
+  --warn-fill: #9c6a12;
+  --bad: #ef6461;
+  --bad-fill: #8a2a28;
+}
+
+:root[data-theme='parchemin'] {
+  color-scheme: light;
+  --bg: #efe7d6;
+  --surface: #f9f4e8;
+  --selection: #e3d3b0;
+  --line: #cdbfa3;
+  --line-soft: #e2d7c1;
+  --ink: #2b2219;
+  --secondary: #5e5141;
+  --faint: #685b4a;
+  --accent: #24467a;
+  --accent-hover: #1a3560;
+  --ok: #2f6b33;
+  --ok-fill: #8cc48a;
+  --warn: #8a5300;
+  --warn-fill: #e7b456;
+  --bad: #a3322a;
+  --bad-fill: #db8072;
+}
