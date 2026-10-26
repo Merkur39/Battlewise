@@ -252,6 +252,14 @@
       "title": "Icône de l'app · six pistes",
       "page": "icone"
     },
+    "Version.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1100,
+      "title": "Version de l'app — trois pistes",
+      "page": "version"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1517,6 +1525,14 @@
       "maxW": 1440,
       "page": "icone"
     },
+    "version-row1": {
+      "kind": "title1",
+      "text": "Version de l'app",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "version"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -1886,6 +1902,7 @@
     "SimB-Equipement.dc.html",
     "SimB-Recherche.dc.html",
     "Icone.dc.html",
+    "Version.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2031,6 +2048,10 @@
     {
       "id": "icone",
       "name": "Icône"
+    },
+    {
+      "id": "version",
+      "name": "Version"
     },
     {
       "id": "braise",

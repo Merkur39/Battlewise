@@ -3,6 +3,7 @@ import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
 import { parseRoute } from '@/app/routes'
+import { version } from '../../../package.json'
 import { deviceSpeaks, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
@@ -89,7 +90,10 @@ describe('Settings', () => {
 
     await settingsClosed()
     expect(store.getState().theme).toBe('origine')
-    expect(parseRoute(window.location.hash)).toMatchObject({ screen: 'bestiary', modal: null })
+    // A closed <dialog> leaves the accessibility tree at once; the address follows on history.back().
+    await waitFor(() => {
+      expect(parseRoute(window.location.hash)).toMatchObject({ screen: 'bestiary', modal: null })
+    })
   })
 
   it('closes without saving on Back', async () => {
@@ -135,6 +139,15 @@ describe('Settings', () => {
     const dialog = await openSettings(user)
 
     expect(dialog).toHaveTextContent('Lues dans Valheim 1.0.20 · sans mod')
+  })
+
+  it('shows the version of the build next to the name', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    const dialog = await openSettings(user)
+
+    expect(dialog).toHaveTextContent(`Battlewise ${version}`)
   })
 
   it('offers Cancel next to Save on a desktop', async () => {

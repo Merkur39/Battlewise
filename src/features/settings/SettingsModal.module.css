@@ -194,8 +194,20 @@
   gap: 6px;
 }
 
+.aboutTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
 .aboutName {
   font-size: 14px;
+}
+
+.version {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
 }
 
 .dataSource {

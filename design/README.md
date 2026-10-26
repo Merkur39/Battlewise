@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v60** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v64** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -14,13 +14,15 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 - Page **Simulation · pistes** (`Sim-*`, `SimB-*`): archive of the three Simulation tracks, never regenerated.
 - Page **Icône** (`Icone`): the app icon tracks; track A (the brand shield in trait) is the one shipped, as
   `public/icon.svg`. Like every page made by hand, `sync_themes.py` leaves it alone.
+- Page **Version** (`Version`): how the app version sits next to the name in Réglages › À propos; track A
+  (mono, secondary) is the one shipped, in the Réglages boards. Made by hand as well.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche` and `Desktop-Bestiaire-Recherche`.
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
   `this.state = { theme: 'origine', lang: 'auto' };` for the theme copies.
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v60: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v64: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),
