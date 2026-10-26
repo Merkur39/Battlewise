@@ -87,7 +87,8 @@ Each module states, in its docstring, the game code it reproduces (decompiled 1.
 - `spawns.py`: where each creature is met (open world, alt biomes, locations and dungeons by asset id,
   raids, events, summons, drops, bombs) and at which levels;
 - `arsenal.py`: the items that block, their stats and shield modifiers, and how each is obtained and
-  upgraded (Forge of Potential included);
+  upgraded (Forge of Potential included, and its name);
 - `build.py` also reads weak spots, tool weaknesses, boss phases, the player, the world presets of the
-  Combat slider, status effects and names; it merges identical attacks and reports what the curation
+  Combat slider (damage, star chance, and the start screen's world presets that pick each one under
+  another name), status effects and names; it merges identical attacks and reports what the curation
   misses.

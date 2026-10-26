@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
 import { placeOf } from '@/features/bestiary/place'
+import { GearModal } from '@/features/gear/GearModal'
 import { SettingsModal } from '@/features/settings/SettingsModal'
 import { AttackPicker } from '@/features/simulation/AttackPicker'
 import { SimulationScreen } from '@/features/simulation/SimulationScreen'
+import { WorldModal } from '@/features/world/WorldModal'
 import { useLanguage, useT } from '@/i18n/useT'
 import styles from './App.module.css'
 import { APP_NAME } from './brand'
@@ -83,6 +85,8 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
       {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
       {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
       {modal === 'attack' && <AttackPicker />}
+      {modal === 'gear' && <GearModal />}
+      {modal === 'world' && <WorldModal />}
     </div>
   )
 }

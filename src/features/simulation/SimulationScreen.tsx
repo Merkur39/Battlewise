@@ -60,6 +60,7 @@ export function SimulationScreen({ route }: { readonly route: Route }) {
 
 function Simulator({ found }: { readonly found: FoundAttack | null }) {
   const t = useT()
+  const route = useRoute()
   const isDesktop = useIsDesktop()
   const { defence, world } = useFight()
   const [mode, setMode] = useState<'attack' | 'value'>('attack')
@@ -232,6 +233,10 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
               {modeSwitch}
               {hitControls}
               {barControls}
+              <RouteLink to={{ ...route, modal: 'gear' }} className={styles.thresholds}>
+                {t.simulation.thresholds}
+                <ChevronRightIcon size={14} />
+              </RouteLink>
             </section>
             <section aria-labelledby={`${barId}-result`} className={styles.result}>
               <h2 id={`${barId}-result`} className="visually-hidden">

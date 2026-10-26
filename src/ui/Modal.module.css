@@ -121,6 +121,14 @@
     font-size: 14px;
   }
 
+  .narrow {
+    width: min(520px, 100% - 64px);
+  }
+
+  .medium {
+    width: min(600px, 100% - 64px);
+  }
+
   .wide {
     width: min(920px, 100% - 64px);
     height: min(640px, 100% - 64px);

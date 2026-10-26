@@ -40,6 +40,16 @@ describe('createStore', () => {
     expect(createStore(memoryStorage()).getState()).toEqual(DEFAULT_STATE)
   })
 
+  it('starts with the gear of a new character: a wooden shield, no skill, no armour, 25 HP', () => {
+    expect(createStore(memoryStorage()).getState().gear).toEqual({
+      blocker: 'ShieldWood',
+      level: 1,
+      skill: 0,
+      armor: 0,
+      maxHealth: 25,
+    })
+  })
+
   it('starts on the defaults without storage', () => {
     expect(createStore(null).getState()).toEqual(DEFAULT_STATE)
   })
@@ -81,6 +91,8 @@ describe('createStore', () => {
   it.each([
     ['a level that is not a number', { gear: { ...changed.gear, level: '2' } }, 'gear'],
     ['a skill out of 0 to 100', { gear: { ...changed.gear, skill: 120 } }, 'gear'],
+    ['a level past the forge', { gear: { ...changed.gear, level: 11 } }, 'gear'],
+    ['a level the item never reaches', { gear: { ...changed.gear, blocker: 'Lantern' } }, 'gear'],
     [
       'a difficulty the game does not have',
       { world: { difficulty: 'nightmare', players: 1 } },

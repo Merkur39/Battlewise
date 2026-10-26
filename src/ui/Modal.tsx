@@ -15,8 +15,8 @@ interface ModalProps {
     readonly save: string
     readonly onSave: () => void
   }
-  /** Wide: a desktop dialog for two columns, its body laid out by its content. */
-  readonly size?: 'default' | 'wide'
+  /** The width of the desktop dialog. Wide: two columns, its body laid out by its content. */
+  readonly size?: 'narrow' | 'medium' | 'default' | 'wide'
   /** Every way out ends here: Save, Cancel, the close button, Escape. */
   readonly onClose: () => void
   readonly children: ReactNode

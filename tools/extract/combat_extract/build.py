@@ -36,10 +36,15 @@ BIOME_KEYS = {
 NOT_HOSTILE = {0, 11, 12}  # Character.Faction: Players, PlayerSpawned, TrainingDummy
 COMBAT_SLIDER = 1  # WorldModifiers.Combat, the KeySlider of the start screen's « Combat » setting
 PRESETS = {"veryeasy": "veryEasy", "easy": "easy", "normal": "normal", "hard": "hard", "veryhard": "veryHard"}
+# The WorldPresets enum, as KeyButton.m_preset holds it, and the name WorldPresets.GetDisplayString gives.
+WORLD_PRESETS = {"Default": 0, "Custom": 1, "Normal": 2, "Casual": 3, "Easy": 4, "Hard": 5, "Hardcore": 6,
+                 "Immersive": 7, "Hammer": 8}
+WORLD_PRESET_NAMES = {value: "menu_modifier_" + name.lower() for name, value in WORLD_PRESETS.items()}
+WORLD_PRESET_NAMES[WORLD_PRESETS["Default"]] = "menu_default"
 CHAIN_WINDOW = 0.2  # Attack.Start: a chain goes on when the next swing starts this soon after the last
 CLASSES = sorted(
     set(attack_data.CLASSES) | set(spawns.CLASSES) | set(arsenal.CLASSES)
-    | {"Player", "Game", "WeakSpot", "KeySlider", "SE_Stats", "MonsterAI"}
+    | {"Player", "Game", "WeakSpot", "KeySlider", "KeyButton", "SE_Stats", "MonsterAI"}
 )
 TAG = re.compile(r"<[^>]+>")
 WEAK_SPOT = re.compile(r"^weak_?spot_?", re.I)
@@ -341,18 +346,45 @@ def _player(found):
 
 def _world(found, names):
     """Game's per-player scaling and the presets of the start screen's Combat slider, whose keys
-    Game.UpdateWorldRates reads as percentages."""
+    Game.UpdateWorldRates reads as percentages (enemyleveluprate multiplies the chance of a star,
+    SpawnSystem.GetLevelUpChance). Each also names the world presets of the start screen that pick it
+    under another name: a world preset sets its keys (KeyButton.SetKeys), and the slider shows its first
+    setting whose keys they all hold, else the one without keys (KeySlider.TryMatch); a world preset
+    without any key of the slider leaves the combat alone."""
     game = found.rows("Game")[0]["data"]
     sliders = [row for row in found.rows("KeySlider") if row["data"]["m_modifier"] == COMBAT_SLIDER]
     slider = next((row for row in sliders if row["active"]), sliders[0])["data"]
+    settings = slider["m_settings"]
+
+    def keys_of(values):
+        return dict(key.lower().split() for key in values)
+
+    def named(keys):  # « enemydamage 150 » -> « enemydamage »; flags have no value
+        return {key.split()[0] for key in keys}
+
+    slider_keys = named(key.lower() for setting in settings for key in setting["m_keys"])
+    picked = {}  # setting name -> names of the world presets that pick it under another name
+    buttons = {row["data"]["m_preset"]: row["data"] for row in found.rows("KeyButton") if row["active"]}
+    for preset, button in sorted(buttons.items()):
+        keys = {key.lower() for key in button["m_keys"]}
+        if preset == WORLD_PRESETS["Default"] or not slider_keys & named(keys):
+            continue
+        setting = next((s for s in settings if s["m_keys"] and {k.lower() for k in s["m_keys"]} <= keys),
+                       next(s for s in settings if not s["m_keys"]))
+        name = WORLD_PRESET_NAMES[preset]
+        if name != setting["m_name"].lstrip("$"):
+            picked.setdefault(setting["m_name"], []).append(names(name))
+
     presets = []
-    for setting in slider["m_settings"]:
-        keys = dict(key.split() for key in setting["m_keys"])
+    for setting in settings:
+        keys = keys_of(setting["m_keys"])
         presets.append({
             "id": PRESETS[setting["m_name"].lstrip("$").removeprefix("menu_modifier_")],
             "name": names(setting["m_name"]),
             "enemyDamage": _round(int(keys.get("enemydamage", 100)) / 100),
             "playerDamage": _round(int(keys.get("playerdamage", 100)) / 100),
+            "levelUpRate": _round(int(keys.get("enemyleveluprate", 100)) / 100),
+            "worldPresets": picked.get(setting["m_name"], []),
         })
     return {
         "damageScalePerPlayer": _round(game["m_damageScalePerPlayer"]),
@@ -412,5 +444,6 @@ def build(index, curation, workers=8):
         "statusEffects": _status_effects(found, creatures, names, report),
         "creatures": creatures,
         "blockers": arsenal.blockers(found, names, curation["ignoredItems"]),
+        "forge": arsenal.forge(found, names),
     }
     return data, report

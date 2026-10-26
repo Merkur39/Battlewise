@@ -485,3 +485,18 @@
 .desktop .dodge {
   font-size: 14px;
 }
+
+/* Under the hit settings of a desktop: the thresholds, which no simulation moves, live in Your gear. */
+.thresholds {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.thresholds:hover {
+  color: var(--ink);
+}

@@ -1,10 +1,9 @@
 import { act, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
-import { deviceSpeaks, renderWithStore } from '../../test/utils'
+import { deviceSpeaks, MOCKUP_GEAR, renderWithStore } from '../../test/utils'
 import { setViewportWidth } from '../../test/viewport'
 import { App } from './App'
-import { DEFAULT_STATE } from './store'
 
 const mainHeading = () => screen.getByRole('heading', { level: 1 })
 
@@ -47,48 +46,48 @@ describe('App', () => {
   })
 
   it('sums up your gear and your world under the app name', () => {
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
-    const gear = screen.getByRole('group', {
+    const gear = screen.getByRole('link', {
       name: 'Ton équipement : Bouclier en argent niveau 3, VD 81, compétence Blocage 25',
     })
     expect(gear).toHaveTextContent('Bouclier en argent')
     expect(gear).toHaveTextContent('N3 · VD 81')
-    const world = screen.getByRole('group', { name: 'Ton monde : combat normal, 1 joueur' })
+    const world = screen.getByRole('link', { name: 'Ton monde : combat normal, 1 joueur' })
     expect(world).toHaveTextContent('Normal')
     expect(world).toHaveTextContent('1 joueur · ×1')
   })
 
   it('follows your gear and your world as they change', () => {
-    const { store } = renderWithStore(<App />, { language: 'fr' })
+    const { store } = renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     act(() => {
       store.update({
-        gear: { ...DEFAULT_STATE.gear, blocker: 'ShieldWood', level: 1, skill: 0 },
+        gear: { ...MOCKUP_GEAR, blocker: 'ShieldWood', level: 1, skill: 0 },
         world: { difficulty: 'hard', players: 3 },
       })
     })
 
-    expect(screen.getByRole('group', { name: /^Ton équipement/ })).toHaveTextContent(
+    expect(screen.getByRole('link', { name: /^Ton équipement/ })).toHaveTextContent(
       'Bouclier en boisN1 · VD',
     )
     expect(
-      screen.getByRole('group', { name: 'Ton monde : combat difficile, 3 joueurs' }),
+      screen.getByRole('link', { name: 'Ton monde : combat difficile, 3 joueurs' }),
     ).toHaveTextContent('Difficile3 joueurs · ×1,62')
   })
 
   it('speaks English to an English-speaking device, game names included', () => {
     deviceSpeaks('en-GB')
 
-    renderWithStore(<App />)
+    renderWithStore(<App />, { gear: MOCKUP_GEAR })
 
     expect(mainHeading()).toHaveTextContent('Bestiary')
     expect(document.title).toBe('Bestiary — Battlewise')
-    expect(screen.getByRole('group', { name: /^Your gear/ })).toHaveTextContent(
+    expect(screen.getByRole('link', { name: /^Your gear/ })).toHaveTextContent(
       'Silver ShieldLv3 · Block 81',
     )
     expect(
-      screen.getByRole('group', { name: 'Your world: normal combat, 1 player' }),
+      screen.getByRole('link', { name: 'Your world: normal combat, 1 player' }),
     ).toBeInTheDocument()
   })
 
@@ -128,7 +127,7 @@ describe('App', () => {
         'aria-current',
         'page',
       )
-      expect(within(sidebar).getByRole('group', { name: /^Ton équipement/ })).toBeInTheDocument()
+      expect(within(sidebar).getByRole('link', { name: /^Ton équipement/ })).toBeInTheDocument()
       expect(within(sidebar).getByRole('link', { name: 'Réglages' })).toBeInTheDocument()
       expect(screen.queryByRole('banner')).not.toBeInTheDocument()
       expect(screen.getAllByRole('navigation')).toHaveLength(1)

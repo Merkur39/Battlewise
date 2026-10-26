@@ -118,6 +118,15 @@ def blockers(found, names, ignored):
     return sorted(result, key=lambda b: (b["group"], b["blockPower"], b["id"]))
 
 
+def forge(found, names):
+    """{"name"} of the station that upgrades past maxQuality (the Forge of Potential), None when no world
+    has one."""
+    placed = _placed(found)
+    station = next((row["data"] for row in found.rows("CraftingStation")
+                    if row["data"]["m_upgrader"] and placed(row)), None)
+    return {"name": names(station["m_name"])} if station else None
+
+
 # ---------------------------------------------------------------------- items
 def _items(found):
     """{ref: (id, m_shared)} of the ItemDrop prefabs ObjectDB registers, under the ref of their

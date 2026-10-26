@@ -2,8 +2,7 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { DEFAULT_STATE } from '@/app/store'
-import { renderWithStore } from '../../../test/utils'
+import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const slam = { fighter: 'Troll', attack: 'troll_groundslam' }
@@ -20,7 +19,7 @@ describe('Simulation', () => {
   it('simulates the attack of its address against your gear', () => {
     window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
 
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     expect(hitLink(/^Changer d'attaque : Troll, Frappe au sol, 70 dégâts$/)).toBeInTheDocument()
     expect(blocking()).toHaveTextContent('tient')
@@ -34,7 +33,7 @@ describe('Simulation', () => {
   it('weighs the bar already filled before the hit', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     await user.click(screen.getByRole('button', { name: '75 %' }))
 
@@ -47,7 +46,7 @@ describe('Simulation', () => {
   it('weighs the stars of the monster', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     await user.click(screen.getByRole('button', { name: '2★' }))
 
@@ -58,7 +57,7 @@ describe('Simulation', () => {
   it('takes a free value instead of an attack', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     await user.click(screen.getByRole('button', { name: 'Valeur libre' }))
 
@@ -77,7 +76,7 @@ describe('Simulation', () => {
 
     renderWithStore(<App />, {
       language: 'fr',
-      gear: { ...DEFAULT_STATE.gear, blocker: 'ShieldWoodTower', level: 1 },
+      gear: { ...MOCKUP_GEAR, blocker: 'ShieldWoodTower', level: 1 },
     })
 
     expect(parrying()).toHaveTextContent('Ton objet ne pare pas')
@@ -86,7 +85,7 @@ describe('Simulation', () => {
   it('keeps the attacks simulated among the recent ones', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
-    const { store } = renderWithStore(<App />, { language: 'fr' })
+    const { store } = renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     await waitFor(() => {
       expect(store.getState().recentAttacks).toEqual([slam])
@@ -101,7 +100,7 @@ describe('Simulation', () => {
   it('picks an attack among the enemies of a biome, through the sheet of the creature', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation')
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
     const picker = await openPicker(user)
 
     await user.click(within(picker).getByRole('button', { name: 'Biome suivant : Forêt noire' }))
@@ -117,7 +116,7 @@ describe('Simulation', () => {
   it('opens an attack found by the search straight in the Simulation', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation')
-    renderWithStore(<App />, { language: 'fr' })
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
     const picker = await openPicker(user)
 
     await user.type(
@@ -138,7 +137,7 @@ describe('Simulation', () => {
       const user = userEvent.setup()
       setViewportWidth('desktop')
       window.history.replaceState(null, '', '#/simulation')
-      renderWithStore(<App />, { language: 'fr' })
+      renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
       const picker = await openPicker(user)
 
       await user.click(within(picker).getByRole('button', { name: 'Biome suivant : Forêt noire' }))

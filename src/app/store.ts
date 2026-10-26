@@ -1,5 +1,6 @@
 import type { World } from '@/combat/world'
 import { game } from '@/data'
+import { maxLevel } from '@/features/gear/model'
 import { LANGUAGES } from '@/i18n/detect'
 
 /** The seven palettes of src/styles/themes.css, applied through data-theme on the root. */
@@ -43,9 +44,10 @@ export interface AppState {
   readonly recentAttacks: readonly AttackRef[]
 }
 
-/** The gear of the mockups: a silver shield, early in the Mountain. */
+/** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
+ * never too kind. */
 export const DEFAULT_STATE: AppState = {
-  gear: { blocker: 'ShieldSilver', level: 3, skill: 25, armor: 45, maxHealth: 150 },
+  gear: { blocker: 'ShieldWood', level: 1, skill: 0, armor: 0, maxHealth: 25 },
   world: { difficulty: 'normal', players: 1 },
   theme: 'origine',
   language: 'auto',
@@ -123,14 +125,18 @@ const isNumber = (value: unknown, min: number, max = Infinity): value is number 
 const oneOf = <T extends string>(values: readonly T[], value: unknown): T | undefined =>
   values.find((option) => option === value)
 
-const isGear = (value: unknown): value is Gear =>
-  isRecord(value) &&
-  game.blockers.some((blocker) => blocker.id === value.blocker) &&
-  Number.isInteger(value.level) &&
-  isNumber(value.level, 1) &&
-  isNumber(value.skill, 0, 100) &&
-  isNumber(value.armor, 0) &&
-  isNumber(value.maxHealth, 1)
+function isGear(value: unknown): value is Gear {
+  if (!isRecord(value)) return false
+  const blocker = game.blockers.find((candidate) => candidate.id === value.blocker)
+  return (
+    blocker !== undefined &&
+    Number.isInteger(value.level) &&
+    isNumber(value.level, 1, maxLevel(blocker)) &&
+    isNumber(value.skill, 0, 100) &&
+    isNumber(value.armor, 0) &&
+    isNumber(value.maxHealth, 1)
+  )
+}
 
 const isWorld = (value: unknown): value is World =>
   isRecord(value) &&

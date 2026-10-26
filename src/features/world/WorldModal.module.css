@@ -1,0 +1,181 @@
+.section {
+  flex: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+/* A legend sits apart from the flex column: it needs its own room below. */
+legend.label {
+  margin-bottom: 6px;
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* The Combat setting: one row per preset, its monster hit multiplier on the right. */
+.presets {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.preset {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.preset:last-child {
+  border-bottom: 0;
+}
+
+.preset:has(:checked) {
+  background: var(--selection);
+}
+
+.radio {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.presetName {
+  flex: 1;
+  min-width: 0;
+}
+
+.multiplier {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.preset:has(:checked) .presetName {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.preset:has(:checked) .multiplier {
+  color: var(--accent);
+}
+
+/* Players nearby: one segmented control. */
+.segments {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.segment {
+  flex: 1;
+  height: 44px;
+  font-family: var(--font-mono);
+  color: var(--secondary);
+}
+
+.segment + .segment {
+  border-left: 1px solid var(--line);
+}
+
+.segment[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.segment:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -4px;
+}
+
+/* What it does: a line each on a phone, three columns on a desktop. */
+.effects {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--secondary);
+}
+
+.effectLabel {
+  text-transform: uppercase;
+}
+
+.effectValue {
+  color: var(--ink);
+}
+
+@media (min-width: 1024px) {
+  .preset {
+    min-height: 44px;
+  }
+
+  .presets,
+  .effects {
+    background: var(--bg);
+  }
+
+  .radio {
+    width: 16px;
+    height: 16px;
+  }
+
+  .segment {
+    height: 40px;
+  }
+
+  .effects {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px 14px;
+    line-height: normal;
+  }
+
+  .effect {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .effectLabel {
+    font-size: 11px;
+  }
+
+  .effectValue {
+    font-size: 20px;
+  }
+}
