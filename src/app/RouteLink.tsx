@@ -1,12 +1,12 @@
 import type { MouseEvent, ReactNode } from 'react'
 import { routeHash, type Route } from './routes'
-import { openRoute, returnTo } from './useRoute'
+import { openRoute, replaceRoute, returnTo } from './useRoute'
 
 interface RouteLinkProps {
   readonly to: Route
   /** `open` makes a history entry Back returns from; `return` goes back to `to`, the route this one
-   * was opened from. */
-  readonly how?: 'open' | 'return'
+   * was opened from; `replace` takes the place of the current entry (a modal's choice). */
+  readonly how?: 'open' | 'return' | 'replace'
   readonly className?: string | undefined
   readonly 'aria-label'?: string
   readonly 'aria-current'?: 'true' | undefined
@@ -27,7 +27,8 @@ export function RouteLink({ to, how = 'open', children, ...props }: RouteLinkPro
         if (!plainClick(event)) return
         event.preventDefault()
         if (how === 'open') openRoute(to)
-        else returnTo(to)
+        else if (how === 'return') returnTo(to)
+        else replaceRoute(to)
       }}
       {...props}
     >

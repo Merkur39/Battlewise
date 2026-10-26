@@ -51,10 +51,13 @@ export function creatureAdvice(attacks: readonly GuardVerdicts[]): CreatureAdvic
 
 const SEVERITY: readonly Verdict[] = ['holds', 'staggered', 'broken', 'unblockable']
 
+/** How bad a verdict is, from 0 for one that holds. */
+export const verdictSeverity = (verdict: Verdict) => SEVERITY.indexOf(verdict)
+
 /** A creature's verdict for one guard in the Bestiaire: the worst of its attacks. */
 export function worstVerdict(verdicts: readonly Verdict[]): Verdict | null {
   if (verdicts.length === 0) return null
   return verdicts.reduce((worst, verdict) =>
-    SEVERITY.indexOf(verdict) > SEVERITY.indexOf(worst) ? verdict : worst,
+    verdictSeverity(verdict) > verdictSeverity(worst) ? verdict : worst,
   )
 }

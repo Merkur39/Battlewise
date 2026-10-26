@@ -6,6 +6,7 @@ const plurals = new Intl.PluralRules('en')
 const plural = (count: number, one: string, other: string) =>
   `${n(count)} ${plurals.select(count) === 'one' ? one : other}`
 const players = (count: number) => plural(count, 'player', 'players')
+const capitalised = (text: string) => `${text.charAt(0).toUpperCase()}${text.slice(1)}`
 const listOf = (words: readonly string[]) =>
   new Intl.ListFormat('en', { type: 'conjunction' }).format(
     words.map((word) => word.toLocaleLowerCase('en')),
@@ -110,6 +111,82 @@ export const en: Catalog = {
     tapToSimulate: 'Tap an attack to simulate it.',
     desktopNote:
       'Simulate opens the attack in the Simulation, with the stagger bar and the stamina.',
+  },
+  simulation: {
+    intro: 'Pick an attack: the page tells you how to take it with your gear.',
+    source: 'Source of the hit',
+    modes: { attack: 'Monster attack', value: 'Free value' },
+    hit: 'The hit',
+    change: 'Change',
+    changeLabel: (creature, attack, damage) =>
+      `Change the attack: ${creature}, ${attack}, ${n(damage)} damage`,
+    noAttack: 'No attack picked',
+    pick: 'Pick an attack',
+    stars: "Monster's stars",
+    starsShort: 'Stars',
+    value: 'Damage of the hit',
+    lower: 'Lower by 5',
+    raise: 'Raise by 5',
+    valueNote: 'Base damage of the hit, before difficulty and nearby players.',
+    bar: 'Stagger bar before the hit',
+    barOption: (percent) => `${n(percent)}%`,
+    result: 'Result',
+    blocking: 'Blocking',
+    parrying: 'Parrying',
+    taken: 'taken',
+    stamina: (stamina) =>
+      stamina > 0
+        ? `−${n(stamina)} stamina`
+        : stamina < 0
+          ? `+${n(-stamina)} stamina`
+          : '0 stamina',
+    barTotal: (total, limit) => `bar: ${n(total)} / ${n(limit)}`,
+    barOverflows: 'bar: overflows',
+    barLabel: (total, limit, overflows) =>
+      `Stagger bar: ${n(total)} of ${n(limit)}${overflows ? ', it overflows' : ''}`,
+    dodgeable: 'Dodgeable by rolling',
+    undodgeable: 'Not dodgeable by rolling',
+    hits: (count) => `This attack lands ${n(count)} hits: each card shows the hardest.`,
+    advice: {
+      block: 'Block it: you hold without staggering',
+      parry: (block) =>
+        `Parry it: ${block === 'broken' ? 'the block gives way' : 'blocking staggers you'}`,
+      dodge: (dodgeable, guard, setback) => {
+        if (setback === 'unblockable') {
+          if (dodgeable === null) return 'Unblockable: dodge if you can'
+          return dodgeable ? 'Unblockable: dodge it' : 'Unblockable: keep away'
+        }
+        const why =
+          guard === 'parry'
+            ? setback === 'broken'
+              ? 'even the parry gives way'
+              : 'even parried, you stagger'
+            : setback === 'broken'
+              ? 'the block gives way'
+              : 'blocking staggers you'
+        if (dodgeable === null) return `${capitalised(why)}: dodge if you can`
+        return `${dodgeable ? 'Dodge' : 'Avoid'} it: ${why}`
+      },
+    },
+  },
+  picker: {
+    title: 'Pick an attack',
+    close: 'Close',
+    search: 'Search an enemy or an attack',
+    searchPlaceholder: 'Enemy or attack, every biome',
+    recent: 'Recent',
+    enemies: 'Enemies',
+    biomeCount: (index, total) => `Biome ${n(index)} of ${n(total)}`,
+    attackCount: (count) => plural(count, 'attack', 'attacks'),
+    enemiesNote: 'Tap an enemy to see its attacks, then the attack to simulate.',
+    attacksNote:
+      'Click an attack to open it in the Simulation. Damage at the lowest stars: the stars are set there.',
+    foundAttacks: (count) => `Attacks · ${n(count)}`,
+    foundEnemies: (count) => `Enemies · ${n(count)}`,
+    noAttack: (query) => `No attack matches ${quoted(query)}.`,
+    noEnemy: (query) => `No enemy matches ${quoted(query)}.`,
+    openNote: 'Tapping an attack opens it straight in the Simulation.',
+    resultsNote: 'Results from every biome.',
   },
   modal: { close: 'Close without saving', cancel: 'Cancel', save: 'Save' },
   settings: {

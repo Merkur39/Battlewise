@@ -59,11 +59,15 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
     <Modal
       title={t.settings.title}
       lang={speaks}
-      labels={t.modal}
-      onClose={closeModal}
-      onSave={() => {
-        update(draft)
+      closeLabel={t.modal.close}
+      footer={{
+        cancel: t.modal.cancel,
+        save: t.modal.save,
+        onSave: () => {
+          update(draft)
+        },
       }}
+      onClose={closeModal}
     >
       <section className={styles.section}>
         <span id={languageId} className={styles.label}>

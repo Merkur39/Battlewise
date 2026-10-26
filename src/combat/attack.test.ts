@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { attackDamage, attackVerdicts, type AttackHit } from './attack'
+import { attackDamage, attackVerdicts, hardestHit, type AttackHit } from './attack'
 import type { Defence } from './block'
 import type { World } from './world'
 
@@ -54,6 +54,41 @@ describe('attackVerdicts', () => {
 
   it('has nothing to guard against in an attack that only summons', () => {
     expect(attackVerdicts(defence, [], world, 0)).toBeNull()
+  })
+})
+
+describe('hardestHit', () => {
+  const block = { guard: 'block', stars: 0, barBefore: 0 } as const
+
+  it('resolves the hit with the worst verdict', () => {
+    expect(hardestHit(defence, [blunt(10), blunt(200)], world, block)).toMatchObject({
+      verdict: 'broken',
+      received: 200,
+    })
+  })
+
+  it('between hits of one verdict, resolves the one that hurts most', () => {
+    expect(hardestHit(defence, [blunt(12), blunt(10)], world, block)).toMatchObject({
+      verdict: 'holds',
+      received: 12,
+    })
+  })
+
+  it('resolves every hit from the bar the options give', () => {
+    expect(hardestHit(defence, [blunt(70)], world, block)?.verdict).toBe('staggered')
+    expect(hardestHit(defence, [blunt(70)], world, { ...block, barBefore: 0.5 })?.verdict).toBe(
+      'broken',
+    )
+  })
+
+  it('has nothing to resolve when the item cannot parry, or the attack only summons', () => {
+    expect(
+      hardestHit({ ...defence, parryPower: null }, [blunt(10)], world, {
+        ...block,
+        guard: 'parry',
+      }),
+    ).toBeNull()
+    expect(hardestHit(defence, [], world, block)).toBeNull()
   })
 })
 

@@ -8,9 +8,10 @@ import { creatureHealth } from '@/combat/creature'
 import { game } from '@/data'
 import type { GameCreature } from '@/data/types'
 import { useLanguage, useT } from '@/i18n/useT'
-import { ChevronLeftIcon, ChevronRightIcon, CloseIcon, SearchIcon } from '@/ui/icons'
+import { ChevronRightIcon, CloseIcon, SearchIcon } from '@/ui/icons'
 import { AdviceLine, GuardIcon, VerdictLegend, VerdictPill } from '@/ui/verdicts'
 import styles from './BestiaryScreen.module.css'
+import { BiomeStepper } from './BiomeStepper'
 import { CreatureSheet } from './CreatureSheet'
 import { assess, creaturesOf, search, type FoundAttack } from './model'
 import { AttackPills, AttackTags, Highlighted } from './parts'
@@ -80,7 +81,15 @@ function Finder({ place, selected }: { readonly place: Place; readonly selected:
         <SearchResults place={place} selected={selected} />
       ) : (
         <>
-          <BiomePicker place={place} />
+          <BiomeStepper
+            biome={place.biome}
+            detail={(index, total) =>
+              t.bestiary.biomeCount(index, total, creaturesOf(place.biome).length)
+            }
+            onChange={(biome) => {
+              replaceRoute(bestiaryRoute(biome, null, ''))
+            }}
+          />
           <div className={styles.listHeader}>
             <span className={styles.label}>{t.bestiary.howToTake}</span>
             <span className={styles.meta}>{t.bestiary.withYourGear}</span>
@@ -139,49 +148,6 @@ function SearchField({ place }: { readonly place: Place }) {
         </button>
       )}
     </label>
-  )
-}
-
-/** Previous and next biome, in the game's order, round from the last to the first. */
-function BiomePicker({ place }: { readonly place: Place }) {
-  const t = useT()
-  const language = useLanguage()
-  const { biomes } = game
-  const index = biomes.findIndex((biome) => biome.id === place.biome)
-  const previous = biomes[(index - 1 + biomes.length) % biomes.length]!
-  const next = biomes[(index + 1) % biomes.length]!
-  const go = (biome: (typeof biomes)[number]) => {
-    replaceRoute(bestiaryRoute(biome.id, null, ''))
-  }
-  return (
-    <div role="group" aria-label={t.bestiary.biome} className={styles.biomes}>
-      <button
-        type="button"
-        aria-label={t.bestiary.previousBiome(previous.name[language])}
-        className={styles.biomeButton}
-        onClick={() => {
-          go(previous)
-        }}
-      >
-        <ChevronLeftIcon />
-      </button>
-      <div className={styles.biome}>
-        <span className={styles.biomeName}>{biomes[index]!.name[language]}</span>
-        <span className={styles.meta}>
-          {t.bestiary.biomeCount(index + 1, biomes.length, creaturesOf(place.biome).length)}
-        </span>
-      </div>
-      <button
-        type="button"
-        aria-label={t.bestiary.nextBiome(next.name[language])}
-        className={styles.biomeButton}
-        onClick={() => {
-          go(next)
-        }}
-      >
-        <ChevronRightIcon />
-      </button>
-    </div>
   )
 }
 
