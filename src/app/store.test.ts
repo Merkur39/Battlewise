@@ -1,0 +1,116 @@
+import { describe, expect, it, vi } from 'vitest'
+import {
+  createStore,
+  DEFAULT_STATE,
+  STORAGE_KEY,
+  type AppState,
+  type KeyValueStorage,
+} from './store'
+
+function memoryStorage(saved?: string): KeyValueStorage {
+  const items = new Map<string, string>(saved === undefined ? [] : [[STORAGE_KEY, saved]])
+  return {
+    getItem: (key) => items.get(key) ?? null,
+    setItem: (key, value) => {
+      items.set(key, value)
+    },
+  }
+}
+
+// Site data blocked: reading throws a SecurityError; storage full: writing throws a QuotaExceededError.
+const refusingStorage: KeyValueStorage = {
+  getItem: () => {
+    throw new DOMException('Blocked', 'SecurityError')
+  },
+  setItem: () => {
+    throw new DOMException('Full', 'QuotaExceededError')
+  },
+}
+
+const changed: AppState = {
+  gear: { blocker: 'ShieldBlackmetal', level: 2, skill: 40, armor: 60, maxHealth: 180 },
+  world: { difficulty: 'hard', players: 3 },
+  theme: 'jour',
+  language: 'fr',
+  recentAttacks: [{ fighter: 'Troll', attack: 'troll_groundslam' }],
+}
+
+describe('createStore', () => {
+  it('starts on the defaults on a first launch', () => {
+    expect(createStore(memoryStorage()).getState()).toEqual(DEFAULT_STATE)
+  })
+
+  it('starts on the defaults without storage', () => {
+    expect(createStore(null).getState()).toEqual(DEFAULT_STATE)
+  })
+
+  it('starts on the defaults when the storage cannot be read', () => {
+    expect(createStore(refusingStorage).getState()).toEqual(DEFAULT_STATE)
+  })
+
+  it('starts on the defaults when the saved state is unreadable', () => {
+    expect(createStore(memoryStorage('{"theme": "jour"')).getState()).toEqual(DEFAULT_STATE)
+    expect(createStore(memoryStorage('"jour"')).getState()).toEqual(DEFAULT_STATE)
+  })
+
+  it('keeps every change across a reload', () => {
+    const storage = memoryStorage()
+    createStore(storage).update(changed)
+
+    expect(createStore(storage).getState()).toEqual(changed)
+  })
+
+  it('keeps the saved settings it can use, and puts back the default of each other one', () => {
+    const saved = {
+      gear: { ...changed.gear, blocker: 'ShieldOfAnotherGame' },
+      world: changed.world,
+      theme: 'neon',
+      language: 'fr',
+      recentAttacks: [{ fighter: 'Troll' }],
+    }
+
+    expect(createStore(memoryStorage(JSON.stringify(saved))).getState()).toEqual({
+      gear: DEFAULT_STATE.gear,
+      world: changed.world,
+      theme: DEFAULT_STATE.theme,
+      language: 'fr',
+      recentAttacks: [],
+    })
+  })
+
+  it.each([
+    ['a level that is not a number', { gear: { ...changed.gear, level: '2' } }, 'gear'],
+    ['a skill out of 0 to 100', { gear: { ...changed.gear, skill: 120 } }, 'gear'],
+    [
+      'a difficulty the game does not have',
+      { world: { difficulty: 'nightmare', players: 1 } },
+      'world',
+    ],
+    ['no player at all', { world: { difficulty: 'hard', players: 0 } }, 'world'],
+    ['a language the app does not speak', { language: 'de' }, 'language'],
+  ] as const)('puts back the default instead of %s', (_, saved, setting) => {
+    const state = createStore(memoryStorage(JSON.stringify(saved))).getState()
+
+    expect(state[setting]).toEqual(DEFAULT_STATE[setting])
+  })
+
+  it('tells its subscribers of each change, until they unsubscribe', () => {
+    const store = createStore(null)
+    const listener = vi.fn()
+    const unsubscribe = store.subscribe(listener)
+
+    store.update({ theme: 'runes' })
+    unsubscribe()
+    store.update({ theme: 'brume' })
+
+    expect(listener).toHaveBeenCalledOnce()
+  })
+
+  it('keeps a change for the session when the storage refuses it', () => {
+    const store = createStore(refusingStorage)
+
+    store.update({ theme: 'jour' })
+
+    expect(store.getState().theme).toBe('jour')
+  })
+})
