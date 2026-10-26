@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
 import { placeOf } from '@/features/bestiary/place'
 import { SettingsModal } from '@/features/settings/SettingsModal'
+import { AttackPicker } from '@/features/simulation/AttackPicker'
+import { SimulationScreen } from '@/features/simulation/SimulationScreen'
 import { useLanguage, useT } from '@/i18n/useT'
 import styles from './App.module.css'
 import { APP_NAME } from './brand'
@@ -71,9 +73,16 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   return (
     <div className={isDesktop ? styles.desktop : styles.phone}>
       {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
-      {screen === 'bestiary' ? <BestiaryScreen route={route} /> : <ScreenView screen={screen} />}
+      {screen === 'bestiary' ? (
+        <BestiaryScreen route={route} />
+      ) : screen === 'simulation' ? (
+        <SimulationScreen route={route} />
+      ) : (
+        <ScreenView screen={screen} />
+      )}
       {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
       {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
+      {modal === 'attack' && <AttackPicker />}
     </div>
   )
 }

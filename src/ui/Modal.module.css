@@ -120,4 +120,13 @@
     padding: 0 20px;
     font-size: 14px;
   }
+
+  .wide {
+    width: min(920px, 100% - 64px);
+    height: min(640px, 100% - 64px);
+  }
+
+  .wide .body {
+    padding: 0;
+  }
 }

@@ -1,0 +1,68 @@
+.biomes {
+  flex: none;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.step {
+  width: 48px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.biome {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.detail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.compact .step {
+  height: 48px;
+}
+
+.compact .name {
+  font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  .step {
+    width: 44px;
+    height: 48px;
+  }
+
+  .name {
+    font-size: 15px;
+  }
+
+  .compact .step {
+    height: 44px;
+  }
+
+  .compact .name {
+    font-size: 14px;
+  }
+
+  .compact .detail {
+    font-size: 10px;
+  }
+}

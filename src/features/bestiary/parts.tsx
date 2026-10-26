@@ -23,13 +23,18 @@ export function Highlighted({ text, query }: { readonly text: string; readonly q
   )
 }
 
-/** An attack's tag line: its damage types, icon and word, then its kind and reach. */
+/** An attack's tag line: its damage types, icon and word, then its kind and reach, and whatever
+ * else the place it shows in adds (its biome, a call to change it). */
 export function AttackTags({
   attack,
   withRange = true,
+  extra = [],
+  className,
 }: {
   readonly attack: GameAttack
   readonly withRange?: boolean
+  readonly extra?: readonly string[]
+  readonly className?: string | undefined
 }) {
   const t = useT()
   const language = useLanguage()
@@ -37,8 +42,9 @@ export function AttackTags({
   if (withRange && attack.kind !== 'summon') {
     tags.push(t.creature.metres(attackRange(attack)))
   }
+  tags.push(...extra)
   return (
-    <span className={styles.tags}>
+    <span className={`${styles.tags ?? ''} ${className ?? ''}`}>
       {attackTypes(attack).map((type) => (
         <span key={type} className={styles.type}>
           <DamageTypeIcon type={type} />

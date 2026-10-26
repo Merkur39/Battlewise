@@ -7,6 +7,7 @@ const plurals = new Intl.PluralRules('fr')
 const plural = (count: number, one: string, other: string) =>
   `${n(count)} ${plurals.select(count) === 'one' ? one : other}`
 const players = (count: number) => plural(count, 'joueur', 'joueurs')
+const capitalised = (text: string) => `${text.charAt(0).toUpperCase()}${text.slice(1)}`
 const listOf = (words: readonly string[]) =>
   new Intl.ListFormat('fr', { type: 'conjunction' }).format(
     words.map((word) => word.toLocaleLowerCase('fr')),
@@ -138,6 +139,88 @@ export const fr = {
     tapToSimulate: 'Touche une attaque pour la simuler.',
     desktopNote:
       "Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance.",
+  },
+  simulation: {
+    intro: 'Choisis une attaque : la page te dit comment la prendre avec ton équipement.',
+    source: 'Source du coup',
+    modes: { attack: "Attaque d'un monstre", value: 'Valeur libre' },
+    hit: 'Le coup',
+    change: 'Changer',
+    changeLabel: (creature: string, attack: string, damage: number) =>
+      `Changer d'attaque : ${creature}, ${attack}, ${n(damage)} dégâts`,
+    noAttack: 'Aucune attaque choisie',
+    pick: 'Choisir une attaque',
+    stars: 'Étoiles du monstre',
+    starsShort: 'Étoiles',
+    value: 'Dégâts du coup',
+    lower: 'Baisser de 5',
+    raise: 'Monter de 5',
+    valueNote: 'Dégâts de base du coup, avant difficulté et joueurs proches.',
+    bar: 'Barre de stagger avant le coup',
+    barOption: (percent: number) => `${n(percent)} %`,
+    result: 'Résultat',
+    blocking: 'En bloquant',
+    parrying: 'En parant',
+    taken: 'subis',
+    stamina: (stamina: number) =>
+      stamina > 0
+        ? `−${n(stamina)} endurance`
+        : stamina < 0
+          ? `+${n(-stamina)} endurance`
+          : '0 endurance',
+    barTotal: (total: number, limit: number) => `barre : ${n(total)} / ${n(limit)}`,
+    barOverflows: 'barre : déborde',
+    barLabel: (total: number, limit: number, overflows: boolean) =>
+      `Barre de stagger : ${n(total)} sur ${n(limit)}${overflows ? ', elle déborde' : ''}`,
+    dodgeable: 'Esquivable en roulade',
+    undodgeable: 'Pas esquivable en roulade',
+    hits: (count: number) =>
+      `Cette attaque porte ${n(count)} coups : chaque carte montre le plus dur.`,
+    advice: {
+      block: 'Bloque-le : tu tiens sans tituber',
+      parry: (block: 'staggered' | 'broken') =>
+        `Pare-le : ${block === 'broken' ? 'le blocage cède' : 'en bloquant, tu titubes'}`,
+      /** `dodgeable` is null for a free value, which no roll is known to avoid. */
+      dodge: (
+        dodgeable: boolean | null,
+        guard: 'block' | 'parry',
+        setback: 'staggered' | 'broken' | 'unblockable',
+      ) => {
+        if (setback === 'unblockable') {
+          if (dodgeable === null) return 'Imparable : esquive si tu peux'
+          return dodgeable ? 'Imparable : esquive-le' : 'Imparable : éloigne-toi'
+        }
+        const why =
+          guard === 'parry'
+            ? setback === 'broken'
+              ? 'même la parade cède'
+              : 'même paré, tu titubes'
+            : setback === 'broken'
+              ? 'le blocage cède'
+              : 'en bloquant, tu titubes'
+        if (dodgeable === null) return `${capitalised(why)} : esquive si tu peux`
+        return `${dodgeable ? 'Esquive' : 'Évite'}-le : ${why}`
+      },
+    },
+  },
+  picker: {
+    title: 'Choisir une attaque',
+    close: 'Fermer',
+    search: 'Rechercher un ennemi ou une attaque',
+    searchPlaceholder: 'Ennemi ou attaque, tous biomes',
+    recent: 'Récentes',
+    enemies: 'Ennemis',
+    biomeCount: (index: number, total: number) => `Biome ${n(index)} sur ${n(total)}`,
+    attackCount: (count: number) => plural(count, 'attaque', 'attaques'),
+    enemiesNote: "Touche un ennemi pour voir ses attaques, puis l'attaque à simuler.",
+    attacksNote:
+      "Clique une attaque pour l'ouvrir dans la Simulation. Dégâts à l'étoile la plus basse : les étoiles se règlent là-bas.",
+    foundAttacks: (count: number) => `Attaques · ${n(count)}`,
+    foundEnemies: (count: number) => `Ennemis · ${n(count)}`,
+    noAttack: (query: string) => `Aucune attaque ne correspond à ${quoted(query)}.`,
+    noEnemy: (query: string) => `Aucun ennemi ne correspond à ${quoted(query)}.`,
+    openNote: "Toucher une attaque l'ouvre directement dans la Simulation.",
+    resultsNote: 'Résultats sur tous les biomes.',
   },
   modal: { close: 'Fermer sans enregistrer', cancel: 'Annuler', save: 'Valider' },
   settings: {

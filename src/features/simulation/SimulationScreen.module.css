@@ -1,0 +1,487 @@
+/* Phone: the source, the hit and its settings, then the result; the screen scrolls as a whole. */
+.phone {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
+}
+
+.phone > * {
+  flex: none;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.segments {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.segment {
+  flex: 1;
+  height: 40px;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.segment[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.hitPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.chip {
+  min-height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.chip:hover {
+  color: var(--ink);
+}
+
+.chipIcon {
+  flex: none;
+  color: var(--accent);
+}
+
+.chipText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chipName {
+  font-size: 15px;
+}
+
+.chipDamage {
+  font-family: var(--font-mono);
+  font-size: 22px;
+}
+
+.chevron {
+  flex: none;
+  color: var(--faint);
+}
+
+.change {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.labelled {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelled .segments {
+  flex: 1;
+}
+
+.empty {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+}
+
+.pick {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.valueRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.stepButton {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.value {
+  min-width: 80px;
+  font-family: var(--font-mono);
+  font-size: 34px;
+  text-align: center;
+}
+
+.barRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.advice {
+  font-size: 15px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* A result card: neutral when the guard holds, edged with the verdict colour otherwise. */
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.card.warn {
+  border-color: var(--warn-fill);
+}
+
+.card.bad {
+  border-color: var(--bad-fill);
+}
+
+.verdict {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.card.ok .verdict {
+  color: var(--ok);
+}
+
+.card.warn .verdict {
+  color: var(--warn);
+}
+
+.card.bad .verdict {
+  color: var(--bad);
+}
+
+.taken {
+  font-family: var(--font-mono);
+  font-size: 22px;
+}
+
+.unit {
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.stamina {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.cannot {
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.bar {
+  height: 8px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--bg);
+}
+
+.barBefore {
+  background: var(--line);
+}
+
+.card.ok .barShield {
+  background: var(--ok-fill);
+}
+
+.card.warn .barShield {
+  background: var(--warn-fill);
+}
+
+.card.bad .barShield {
+  background: var(--bad-fill);
+}
+
+.card.ok .barArmor {
+  background: var(--ok);
+}
+
+.card.warn .barArmor {
+  background: var(--warn);
+}
+
+.card.bad .barArmor {
+  background: var(--bad);
+}
+
+.barText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.card.warn .overflows {
+  color: var(--warn);
+}
+
+.card.bad .overflows {
+  color: var(--bad);
+}
+
+.dodge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.dodge.ok svg {
+  color: var(--ok);
+}
+
+.dodge.bad svg {
+  color: var(--bad);
+}
+
+/* Desktop: the hit on the left, the result on the right. */
+.desktop {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.desktopBody {
+  max-width: 1180px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 32px 32px;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.intro {
+  margin: 0;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  align-items: start;
+  gap: 24px;
+}
+
+.desktop .hitPanel {
+  gap: 18px;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.desktop .segment {
+  height: 36px;
+  font-size: 14px;
+}
+
+.desktop .mono {
+  font-size: 13px;
+}
+
+.desktop .labelled .segments {
+  flex: none;
+}
+
+.desktop .labelled .segment {
+  width: 64px;
+}
+
+.desktop .chip {
+  min-height: 64px;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+.desktop .chipName {
+  font-size: 16px;
+}
+
+.desktop .chipDamage {
+  font-size: 28px;
+}
+
+.desktop .valueRow {
+  flex-direction: row;
+  gap: 16px;
+  text-align: left;
+}
+
+.desktop .stepper {
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.desktop .stepButton {
+  width: 44px;
+  height: 44px;
+  border: 0;
+}
+
+.desktop .value {
+  font-size: 30px;
+}
+
+.desktop .valueRow .note {
+  font-size: 13px;
+}
+
+.desktop .barRow {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.desktop .barRow .segment {
+  flex: none;
+  width: 56px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.desktop .advice {
+  font-size: 18px;
+}
+
+.desktop .cards {
+  gap: 16px;
+}
+
+.desktop .card {
+  gap: 8px;
+  padding: 18px;
+  border-radius: 8px;
+}
+
+.desktop .verdict {
+  font-size: 16px;
+}
+
+.desktop .taken {
+  font-size: 30px;
+}
+
+.desktop .unit {
+  font-size: 12px;
+}
+
+.desktop .stamina {
+  font-size: 13px;
+}
+
+.desktop .bar {
+  height: 10px;
+  border-radius: 3px;
+}
+
+.desktop .barText {
+  font-size: 12px;
+}
+
+.desktop .dodge {
+  font-size: 14px;
+}

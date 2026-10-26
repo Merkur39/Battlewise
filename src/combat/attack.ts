@@ -1,6 +1,14 @@
-import { worstVerdict } from './advice'
+import { verdictSeverity, worstVerdict } from './advice'
 import type { Defence } from './block'
-import { listedDamage, resolveHit, type Guard, type Hit, type Verdict } from './hit'
+import {
+  listedDamage,
+  resolveHit,
+  type Guard,
+  type Hit,
+  type HitOptions,
+  type HitResult,
+  type Verdict,
+} from './hit'
 import type { World } from './world'
 
 /** One hit of a monster attack, and whether a roll avoids it. */
@@ -37,6 +45,27 @@ export function attackVerdicts(
   const block = verdictOf('block')
   if (block === null) return null
   return { block, parry: verdictOf('parry'), dodgeable: hits.every((hit) => hit.dodgeable) }
+}
+
+/** The hit of an attack a guard fares worst against: the worst verdict, then the most damage taken.
+ * Null when the item cannot parry, or the attack only summons. */
+export function hardestHit(
+  defence: Defence,
+  hits: readonly AttackHit[],
+  world: World,
+  options: HitOptions,
+): HitResult | null {
+  let hardest: HitResult | null = null
+  for (const hit of hits) {
+    const result = resolveHit(defence, hit, world, options)
+    if (result === null) return null
+    const worse =
+      hardest === null ||
+      verdictSeverity(result.verdict) > verdictSeverity(hardest.verdict) ||
+      (result.verdict === hardest.verdict && result.taken > hardest.taken)
+    if (worse) hardest = result
+  }
+  return hardest
 }
 
 /** The largest hit of an attack as the game lists it at these stars; null when it only summons. */

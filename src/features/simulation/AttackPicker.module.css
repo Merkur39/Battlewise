@@ -1,0 +1,297 @@
+.phone {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.search {
+  flex: none;
+  box-sizing: border-box;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--faint);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  appearance: none;
+}
+
+.searchInput::placeholder {
+  color: var(--faint);
+}
+
+.searchInput::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.clear {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.section,
+.enemies {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.enemies {
+  gap: 8px;
+}
+
+.heading {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.enemies .heading {
+  margin: 0;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.enemy {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.enemy:hover {
+  color: var(--ink);
+}
+
+.enemyName {
+  flex: 1;
+  font-size: 15px;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.chevron {
+  flex: none;
+  color: var(--faint);
+}
+
+.attack {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line-soft);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.attack:hover,
+.attackLine:hover {
+  color: var(--ink);
+}
+
+.attackIcon {
+  flex: none;
+  color: var(--secondary);
+}
+
+.attackText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.attackName {
+  font-size: 14px;
+}
+
+.damage {
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.none {
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.note {
+  padding-top: 8px;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* Desktop: the lists on the left, the attacks of the enemy picked on the right. */
+.columns {
+  height: 100%;
+  display: flex;
+}
+
+.side {
+  flex: 0 0 340px;
+  box-sizing: border-box;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.side .search {
+  height: 40px;
+}
+
+.side .searchInput {
+  height: 38px;
+  font-size: 14px;
+}
+
+.sideLists {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.side .enemy {
+  min-height: 46px;
+  padding: 0 4px;
+}
+
+.side .enemy[aria-current='true'] {
+  background: var(--selection);
+}
+
+.side .enemyName {
+  font-size: 14px;
+}
+
+.side .attack {
+  min-height: 48px;
+}
+
+.detail {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 24px;
+}
+
+.detailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.detailTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.attacks {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px 90px 16px;
+  align-items: center;
+  gap: 12px;
+}
+
+.attacksHead {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.right {
+  text-align: right;
+}
+
+.pillHeads {
+  display: flex;
+  gap: 4px;
+}
+
+.pillHeads > svg {
+  width: 26px;
+}
+
+.attackLine {
+  min-height: 56px;
+  border-bottom: 1px solid var(--line-soft);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.attackLine .attackName {
+  font-size: 15px;
+}

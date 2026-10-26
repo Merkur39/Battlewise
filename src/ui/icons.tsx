@@ -137,6 +137,18 @@ export const ChevronRightIcon = (props: IconProps) => (
   </Icon>
 )
 
+export const MinusIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5 12h14" />
+  </Icon>
+)
+
+export const PlusIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 5v14M5 12h14" />
+  </Icon>
+)
+
 export const BackIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M19 12H5M11 6l-6 6 6 6" />
