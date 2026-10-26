@@ -1,11 +1,16 @@
 /// <reference types="vitest/config" />
+import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { iconPreset, manifest } from './src/app/pwa.ts'
 
+const { version } = JSON.parse(readFileSync('package.json', 'utf8')) as { version: string }
+
 export default defineConfig({
+  // Shown in Settings › About; every pull request that changes the app moves it.
+  define: { __APP_VERSION__: JSON.stringify(version) },
   plugins: [
     react(),
     // Installable and offline: the whole build is cached, game data and fonts included, and a new

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Version de l'app — trois pistes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1100px; box-sizing: border-box; padding: 40px; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 26px; font-weight: 500">Version de l'app</h1>
+    <p style="margin: 0; font-size: 15px; color: #97A5AA">À côté du nom, dans Réglages › À propos. Le numéro vient de package.json au build : 0.1.0 pour commencer, 1.0.0 à la mise en ligne. Même rendu en français et en anglais. Piste retenue : A · Mono.</p>
+  </header>
+  <sc-for list="{{ tracks }}" as="v" hint-placeholder-count="3">
+    <section style="display: flex; gap: 24px; padding: 20px; border-radius: 10px; background: #151C1F">
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0; font-size: 18px; font-weight: 500">{{ v.title }}</h2>
+        <p style="margin: 0; font-size: 13px; color: #97A5AA">{{ v.description }}</p>
+      </div>
+      <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">MOBILE</span>
+        <div style="width: 390px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214">
+          <div style="padding: 16px; display: flex; flex-direction: column; gap: 18px">
+            <span style="font-size: 12px; color: #7D8B91">Gardés sur cet appareil. L'aperçu change dès que tu touches un choix.</span>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">À PROPOS</span>
+              <span style="display: flex; align-items: {{ v.align }}; gap: {{ v.gap }}">
+                <span style="font-size: 14px">Battlewise</span>
+                <span style="{{ v.style }}">{{ v.version }}</span>
+              </span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">LUES DANS VALHEIM 1.0.20 · SANS MOD</span>
+            </div>
+          </div>
+          <div style="padding: 12px 16px 16px; border-top: 1px solid #2C383D">
+            <span style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; font-weight: 500; background: #8EBDE3; color: #0D1214">Valider</span>
+          </div>
+        </div>
+      </div>
+      <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">DESKTOP</span>
+        <div style="width: 680px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; overflow: hidden; background: #151C1F">
+          <div style="padding: 24px">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 14px; border-top: 1px solid #2C383D">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">À PROPOS</span>
+              <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+                <span style="display: flex; align-items: {{ v.align }}; gap: {{ v.gap }}">
+                  <span style="font-size: 14px">Battlewise</span>
+                  <span style="{{ v.style }}">{{ v.version }}</span>
+                </span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">LUES DANS VALHEIM 1.0.20 · SANS MOD</span>
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px; padding: 16px 24px; border-top: 1px solid #2C383D">
+            <span style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 4px; font-size: 14px; border: 1px solid #2C383D">Annuler</span>
+            <span style="display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214">Valider</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      tracks: [
+        {
+          title: 'A · Mono',
+          description: 'Le numéro dans la fonte des chiffres, en gris : il se lit comme la ligne de données en dessous.',
+          align: 'baseline', gap: '8px', version: '0.1.0',
+          style: "font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA"
+        },
+        {
+          title: 'B · Étiquette',
+          description: 'Le numéro dans une étiquette, comme « par défaut » sur le thème Origine.',
+          align: 'center', gap: '8px', version: '0.1.0',
+          style: "font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 5px; border-radius: 3px; border: 1px solid #2C383D; color: #97A5AA"
+        },
+        {
+          title: 'C · « v »',
+          description: 'Le numéro précédé d\'un « v », dans la fonte du nom, plus pâle.',
+          align: 'baseline', gap: '6px', version: 'v0.1.0',
+          style: 'font-size: 14px; color: #7D8B91'
+        }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

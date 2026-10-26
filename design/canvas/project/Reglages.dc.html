@@ -65,7 +65,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
 
     <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
       <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.data }}</span>
-      <span style="font-size: 14px">Battlewise</span>
+      <span style="display: flex; align-items: baseline; gap: 8px">
+        <span style="font-size: 14px">Battlewise</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">0.1.0</span>
+      </span>
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.dataLine }}</span>
     </div>
   </main>

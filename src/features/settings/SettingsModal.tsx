@@ -147,7 +147,10 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
       <section className={styles.about}>
         <span className={styles.label}>{t.settings.about}</span>
         <span className={styles.aboutLines}>
-          <span className={styles.aboutName}>{APP_NAME}</span>
+          <span className={styles.aboutTitle}>
+            <span className={styles.aboutName}>{APP_NAME}</span>{' '}
+            <span className={styles.version}>{__APP_VERSION__}</span>
+          </span>
           <span className={styles.dataSource}>
             {t.settings.dataSource(game.game.version ?? String(game.game.build))}
           </span>
