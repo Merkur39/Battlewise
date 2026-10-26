@@ -4,8 +4,16 @@ import { formatNumber } from './format'
 
 const n = (value: number) => formatNumber(value, 'fr')
 const plurals = new Intl.PluralRules('fr')
-const players = (count: number) =>
-  `${n(count)} ${plurals.select(count) === 'one' ? 'joueur' : 'joueurs'}`
+const plural = (count: number, one: string, other: string) =>
+  `${n(count)} ${plurals.select(count) === 'one' ? one : other}`
+const players = (count: number) => plural(count, 'joueur', 'joueurs')
+const listOf = (words: readonly string[]) =>
+  new Intl.ListFormat('fr', { type: 'conjunction' }).format(
+    words.map((word) => word.toLocaleLowerCase('fr')),
+  )
+// French guillemets hold their words apart with a no-break space.
+const NO_BREAK_SPACE = String.fromCharCode(0xa0)
+const quoted = (name: string) => `«${NO_BREAK_SPACE}${name}${NO_BREAK_SPACE}»`
 
 const themes: Record<Theme, { readonly name: string; readonly description: string }> = {
   origine: { name: 'Origine', description: 'Noir froid, accent bleu glacier' },
@@ -15,6 +23,18 @@ const themes: Record<Theme, { readonly name: string; readonly description: strin
   runes: { name: 'Runes', description: 'Pierre sombre, rune turquoise' },
   graphite: { name: 'Graphite', description: 'Gris neutres, sobre' },
   parchemin: { name: 'Parchemin', description: 'Clair chaud, encre bleue' },
+}
+
+/** An attack in one sentence, for screen readers. */
+interface AttackWords {
+  readonly name: string
+  /** The game's names of its damage types, the largest first. */
+  readonly types: readonly string[]
+  /** Null for an attack that only summons. */
+  readonly damage: number | null
+  readonly block: string
+  readonly parry: string
+  readonly dodgeable: boolean
 }
 
 /** The French interface. Its shape is the catalogue's: every language has the same keys, which the
@@ -36,6 +56,88 @@ export const fr = {
     summary: (difficulty: string, count: number) =>
       `Ton monde : combat ${difficulty.toLocaleLowerCase('fr')}, ${players(count)}`,
     playersAndScale: (count: number, enemyScale: number) => `${players(count)} · ×${n(enemyScale)}`,
+  },
+  verdicts: {
+    block: 'Blocage',
+    parry: 'Parade',
+    dodge: 'Esquive',
+    holds: 'tient',
+    staggered: 'tu titubes',
+    broken: 'ne passe pas',
+    unblockable: 'imparable',
+    cannotParry: 'ne pare pas',
+    nothing: 'aucune attaque directe',
+    dodgeable: 'esquivable',
+    undodgeable: 'inesquivable',
+    pill: (guard: string, word: string) => `${guard} : ${word}`,
+  },
+  advice: {
+    unknown: 'Aucune attaque directe',
+    blockAll: 'Tu bloques tout sans tituber',
+    parryAll: 'Pare-le : en bloquant, tu titubes',
+    dodgeAll: (rolls: boolean, canParry: boolean) =>
+      `${rolls ? 'Esquive' : 'Évite'} tout : même ${canParry ? 'parées' : 'bloquées'}, ses attaques passent`,
+    dodgeSome: (rolls: boolean, attacks: readonly string[], rest: 'block' | 'parry') =>
+      `${rolls ? 'Esquive' : 'Évite'} ${attacks.length === 1 ? quoted(attacks[0]!) : `${n(attacks.length)} attaques`}, ${rest === 'block' ? 'bloque' : 'pare'} le reste`,
+  },
+  bestiary: {
+    intro: 'Comment prendre chaque créature avec ton équipement.',
+    search: 'Rechercher dans tous les biomes',
+    searchPlaceholder: 'Monstre ou attaque, tous biomes',
+    clearSearch: 'Effacer la recherche',
+    biome: 'Biome',
+    previousBiome: (name: string) => `Biome précédent : ${name}`,
+    nextBiome: (name: string) => `Biome suivant : ${name}`,
+    biomeCount: (index: number, total: number, count: number) =>
+      `Biome ${n(index)} sur ${n(total)} · ${plural(count, 'créature', 'créatures')}`,
+    howToTake: 'Comment le prendre',
+    withYourGear: 'Avec ton équipement',
+    creatures: 'Créatures du biome',
+    health: (health: number) => `${n(health)} PV`,
+    boss: 'Boss',
+    foundCreatures: (count: number) => `Créatures · ${n(count)}`,
+    foundAttacks: (count: number) => `Attaques · ${n(count)}`,
+    nothingFound: (query: string) => `Rien pour ${quoted(query)}`,
+    searchNote:
+      "Résultats sur tous les biomes. Une attaque ouvre la fiche de sa créature, d'où tu peux la simuler.",
+  },
+  creature: {
+    back: 'Retour',
+    stars: 'Étoiles',
+    star: (stars: number) => `${n(stars)}★`,
+    health: 'Points de vie',
+    healthShort: 'PV',
+    toInflict: 'À infliger',
+    neverStaggers: 'Ne titube jamais',
+    yourParry: 'Ta parade',
+    parryStaggers: 'Le fait tituber',
+    parryDoesNot: 'Ne le fait pas tituber',
+    cannotParry: 'Ton objet ne pare pas',
+    modifiers: 'Faiblesses et résistances',
+    modifier: (type: string, state: string, multiplier: number) =>
+      `${type} · ${state} ×${n(multiplier)}`,
+    everythingElse: 'Tout le reste ×1',
+    noModifier: 'Tout ×1',
+    attacks: 'Ses attaques',
+    attack: 'Attaque',
+    damage: 'Dégâts',
+    damageShort: 'Dég.',
+    range: 'Portée',
+    simulate: 'Simuler',
+    kinds: { melee: 'Mêlée', area: 'Zone', projectile: 'Projectile', summon: 'Invocation' },
+    metres: (metres: number) => `${n(metres)} m`,
+    phase: (index: number, health: number) => `Phase ${n(index)} · ${n(health)} PV`,
+    noAttack: 'Aucune attaque',
+    attackSummary: ({ name, types, damage, block, parry, dodgeable }: AttackWords) =>
+      damage === null
+        ? `${name}, invocation.`
+        : `${name}, ${listOf(types)}, ${n(damage)} dégâts. Blocage : ${block}. Parade : ${parry}. ${dodgeable ? 'Esquivable' : 'Inesquivable'}.`,
+    openSimulation: 'Ouvrir la simulation.',
+    openSheet: (creature: string) => `Ouvrir la fiche ${creature}.`,
+    simulateLabel: (name: string, damage: number) => `Simuler : ${name}, ${n(damage)} dégâts`,
+    tapToSimulate: 'Touche une attaque pour la simuler.',
+    desktopNote:
+      "Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance.",
   },
   modal: { close: 'Fermer sans enregistrer', cancel: 'Annuler', save: 'Valider' },
   settings: {

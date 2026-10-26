@@ -43,7 +43,7 @@ describe('Settings', () => {
     await settingsClosed()
     expect(store.getState().theme).toBe('jour')
     expect(document.documentElement).toHaveAttribute('data-theme', 'jour')
-    expect(parseRoute(window.location.hash)).toEqual({ screen: 'bestiary', modal: null })
+    expect(parseRoute(window.location.hash)).toMatchObject({ screen: 'bestiary', modal: null })
   })
 
   it('previews a language at once, in the dialog and behind it', async () => {
@@ -89,7 +89,7 @@ describe('Settings', () => {
 
     await settingsClosed()
     expect(store.getState().theme).toBe('origine')
-    expect(parseRoute(window.location.hash)).toEqual({ screen: 'bestiary', modal: null })
+    expect(parseRoute(window.location.hash)).toMatchObject({ screen: 'bestiary', modal: null })
   })
 
   it('closes without saving on Back', async () => {

@@ -1,0 +1,365 @@
+/* Phone: search, biome, then the list, which alone scrolls, and the legend at the bottom. */
+.phone {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
+}
+
+/* Desktop: the page title, then the list beside the sheet. */
+.desktop {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 28px 32px 16px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.intro {
+  margin: 0;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+.split {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  border-top: 1px solid var(--line);
+}
+
+.finder {
+  flex: 0 0 400px;
+  box-sizing: border-box;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+}
+
+.search {
+  flex: none;
+  box-sizing: border-box;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--faint);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  appearance: none;
+}
+
+.searchInput::placeholder {
+  color: var(--faint);
+}
+
+/* The field has its own clear button. */
+.searchInput::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.clear {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.biomes {
+  flex: none;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.biomeButton {
+  width: 48px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.biome {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.biomeName {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.listHeader {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.listHeader .meta {
+  color: var(--faint);
+}
+
+/* Only the list scrolls; it runs to the edges of the screen. */
+.list,
+.results {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+
+.list,
+.resultList {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.list {
+  margin-top: -12px;
+}
+
+.resultList {
+  padding: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.row {
+  min-height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 0;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.row:hover {
+  color: var(--ink);
+}
+
+.rowTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rowName {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+}
+
+.name {
+  font-size: 15px;
+}
+
+.pills {
+  display: flex;
+  gap: 6px;
+}
+
+.rowAdvice {
+  font-size: 13px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.resultSection {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.attackGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px 102px 16px;
+  align-items: center;
+  gap: 8px;
+}
+
+.damageHead {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--secondary);
+}
+
+.pillHeads {
+  display: flex;
+  gap: 6px;
+  color: var(--secondary);
+}
+
+.pillHeads > svg {
+  width: 30px;
+}
+
+.attackRow {
+  min-height: 56px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.attackRow:hover {
+  color: var(--ink);
+}
+
+.attackName {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attackTitle {
+  font-size: 14px;
+}
+
+.damage {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-align: right;
+}
+
+.chevron {
+  color: var(--faint);
+}
+
+.note {
+  flex: none;
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--faint);
+}
+
+.legend {
+  flex: none;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 1024px) {
+  .search {
+    height: 40px;
+  }
+
+  .searchInput {
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .biomeButton {
+    width: 44px;
+    height: 48px;
+  }
+
+  .biomeName {
+    font-size: 15px;
+  }
+
+  .row {
+    min-height: 0;
+    padding: 10px 16px;
+  }
+
+  .row[aria-current='true'] {
+    background: var(--selection);
+  }
+
+  .list {
+    padding: 0;
+  }
+
+  .pills {
+    gap: 4px;
+  }
+
+  .legend {
+    margin-top: -12px;
+    padding-top: 10px;
+  }
+}
