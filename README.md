@@ -4,12 +4,12 @@ A mobile-first web app that works offline (PWA) and tells you, in two seconds an
 how to take each creature with your gear: whether to block, parry or dodge each of its attacks, and
 what it costs you. In French and English.
 
-Work in progress, tracked on the [Battlewise board](https://github.com/users/Merkur39/projects/4).
+Open it at [battlewise.vercel.app](https://battlewise.vercel.app) and install it from the browser, on a
+phone or a desktop. Work is tracked on the [Battlewise board](https://github.com/users/Merkur39/projects/4).
 
 ## What it does
 
-Planned for v1. It starts from the creature, not from a number: in the game, you never see how much
-an attack deals.
+It starts from the creature, not from a number: in the game, you never see how much an attack deals.
 
 - **Bestiary**: the creatures of each biome, their weaknesses and resistances, and a block, parry and
   dodge verdict on every attack, with your gear.
@@ -35,6 +35,12 @@ npm run check     # typecheck, lint, format check and tests
 ```
 
 `npm run test:watch` and `npm run test:coverage` run the tests alone.
+
+## Releases
+
+Vercel builds this repository: every merge on `main` goes to production, every pull request gets a
+preview. Every pull request that changes the app bumps the version in `package.json` (`feat` → minor,
+`fix` → patch); Settings › About shows it, and an installed app takes the new version on its own.
 
 ## Layout
 
