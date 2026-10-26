@@ -237,6 +237,23 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual(presets["veryHard"], [{"fr": "Cauchemar", "en": "Hardcore"}])
         self.assertEqual((presets["easy"], presets["normal"], presets["hard"]), ([], [], []))
 
+    def test_rule_effects_are_the_powers_meads_trinkets_sets_and_capes_of_the_game(self):
+        effects = {e["name"]["en"]: {k: v for k, v in e.items() if k != "name"} for e in self.data["ruleEffects"]}
+        self.assertEqual(effects, {
+            "Fader": {"kind": "power", "stagger": 0.5},
+            "Bonemass": {"kind": "power", "blockStamina": 0, "blockStaminaFlat": -5},
+            "Berserkir Mead": {"kind": "consumable", "blockStamina": 0.2, "dodgeStamina": 0.2},
+            "Evasion Mantle": {"kind": "trinket", "blockStamina": 0.5, "parryPower": 1.5},
+            "Vanguard": {"kind": "set", "dodgeStamina": 0.8},
+            "Ashen Cape": {"kind": "equipment", "blockStamina": 0.8},
+            "Asksvin Cloak": {"kind": "equipment", "dodgeStamina": 0.85},
+            "Cape of the Caller": {"kind": "equipment", "dodgeStamina": 0.9},
+        })
+
+    def test_rule_effects_keep_the_names_of_the_game(self):
+        names = {e["name"]["en"]: e["name"]["fr"] for e in self.data["ruleEffects"]}
+        self.assertEqual((names["Fader"], names["Evasion Mantle"]), ("Pouvoir de Fader", "Voile d'ombre"))
+
     def test_the_forge_of_potential_is_named(self):
         self.assertEqual(self.data["forge"], {"name": {"fr": "Forge du potentiel", "en": "Forge of Potential"}})
 

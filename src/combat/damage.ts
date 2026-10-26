@@ -15,7 +15,7 @@ export type DamageType = (typeof DAMAGE_TYPES)[number]
 export type Damages = Partial<Record<DamageType, number>>
 
 // The only types that fill a stagger bar (HitData.DamageTypes.GetTotalStaggerDamage).
-const STAGGER_TYPES: readonly DamageType[] = ['blunt', 'slash', 'pierce', 'lightning']
+export const STAGGER_TYPES: readonly DamageType[] = ['blunt', 'slash', 'pierce', 'lightning']
 // Character.RPC_Damage takes these out of the hit and deals them over time (burning, poison, spirit).
 const OVER_TIME_TYPES: readonly DamageType[] = ['fire', 'poison', 'spirit']
 

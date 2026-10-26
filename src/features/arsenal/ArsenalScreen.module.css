@@ -1,0 +1,409 @@
+/* Phone: the tabs, the level, then the cards, which alone scroll. */
+.phone {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
+}
+
+.phone > * {
+  flex: none;
+}
+
+/* Desktop: the page title, the tools, then the table, which alone scrolls. */
+.desktop {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 32px 32px;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.intro {
+  margin: 0;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+.skill {
+  font-family: var(--font-mono);
+  color: var(--ink);
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.faint {
+  color: var(--faint);
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* The tabs: one segmented control. */
+.segments {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.segment {
+  flex: 1;
+  height: 44px;
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.segment + .segment {
+  border-left: 1px solid var(--line);
+}
+
+.segment[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.segment:focus-visible,
+.step:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -4px;
+}
+
+.phoneToolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phoneIntro {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--secondary);
+}
+
+.level {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.step {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step:disabled {
+  color: var(--line);
+  cursor: default;
+}
+
+.levelValue {
+  min-width: 36px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* Cards: the name and its tags, then four figures. */
+.cards {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0 -16px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.card:hover {
+  color: var(--ink);
+}
+
+.card.equipped,
+tr.equipped {
+  background: var(--selection);
+}
+
+.cardTop {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.tag,
+.equippedTag {
+  flex: none;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.equippedTag {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chevron {
+  flex: none;
+  color: var(--faint);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.statLabel {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.statStrong {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.statValue {
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+
+.statNote,
+.cellNote {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--faint);
+}
+
+/* Desktop tools. */
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.toolbar .segment {
+  flex: none;
+  width: 120px;
+  height: 36px;
+}
+
+.toolbar .step {
+  width: 36px;
+  height: 36px;
+}
+
+.toolbar .levelValue {
+  min-width: 40px;
+  font-size: 14px;
+}
+
+.sort {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 14px;
+}
+
+/* The table: its header stays put while the rows scroll. */
+.tableBox {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  padding: 0 8px;
+  text-align: left;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 20px;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 20px;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 40px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.nameColumn {
+  width: 30%;
+}
+
+.actionColumn {
+  width: 120px;
+}
+
+.table thead .number {
+  text-align: right;
+}
+
+.table tbody tr {
+  height: 52px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.nameCell {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nameCell .equippedTag {
+  margin-left: 10px;
+}
+
+.typeCell {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.table .powerCell,
+.table .numberCell {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.powerCell {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.cellNote {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.table .actionCell {
+  text-align: right;
+}
+
+.equippedAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.equip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.equip:hover {
+  border-color: var(--faint);
+  color: var(--ink);
+}

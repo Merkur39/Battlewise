@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
+import { ArsenalScreen } from '@/features/arsenal/ArsenalScreen'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
 import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
+import { GuideScreen } from '@/features/guide/GuideScreen'
 import { SettingsModal } from '@/features/settings/SettingsModal'
 import { AttackPicker } from '@/features/simulation/AttackPicker'
 import { SimulationScreen } from '@/features/simulation/SimulationScreen'
@@ -11,7 +13,6 @@ import styles from './App.module.css'
 import { APP_NAME } from './brand'
 import { PreviewContext, usePreview, type Preview } from './preview'
 import { routeHash, SCREENS, screenHash, type Route, type Screen } from './routes'
-import { ScreenView } from './ScreenView'
 import { Sidebar } from './Sidebar'
 import { TabBar } from './TabBar'
 import { TopBar } from './TopBar'
@@ -79,8 +80,10 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
         <BestiaryScreen route={route} />
       ) : screen === 'simulation' ? (
         <SimulationScreen route={route} />
+      ) : screen === 'arsenal' ? (
+        <ArsenalScreen route={route} />
       ) : (
-        <ScreenView screen={screen} />
+        <GuideScreen route={route} />
       )}
       {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
       {modal === 'settings' && <SettingsModal onPreview={onPreview} />}

@@ -3,7 +3,8 @@ import { blockerOf, gearDefence } from '@/app/context'
 import type { Gear } from '@/app/store'
 import { useAppState, useUpdate } from '@/app/useAppState'
 import { useIsDesktop } from '@/app/useMediaQuery'
-import { closeModal } from '@/app/useRoute'
+import type { Equip } from '@/app/routes'
+import { closeModal, useRoute } from '@/app/useRoute'
 import { game } from '@/data'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
@@ -17,6 +18,14 @@ import styles from './GearModal.module.css'
 const MAX_ARMOR = 999
 const MAX_HEALTH = 999
 
+/** The gear the dialog opens on: the saved one, with the item of the address when there is one (the
+ * Arsenal's « Équiper »), its level kept within the item's. */
+function startingGear(gear: Gear, equip: Equip | undefined): Gear {
+  const blocker = game.blockers.find((candidate) => candidate.id === equip?.item)
+  if (!equip || !blocker) return gear
+  return { ...gear, blocker: blocker.id, level: Math.min(equip.level, maxLevel(blocker)) }
+}
+
 /** « Ton équipement »: what every verdict is worked out with. What you can take follows the draft as it
  * changes; Valider saves it, any other way out leaves the gear as it was. */
 export function GearModal() {
@@ -25,7 +34,8 @@ export function GearModal() {
   const isDesktop = useIsDesktop()
   const saved = useAppState()
   const update = useUpdate()
-  const [draft, setDraft] = useState<Gear>(saved.gear)
+  const { equip } = useRoute()
+  const [draft, setDraft] = useState<Gear>(() => startingGear(saved.gear, equip))
   const withstandId = useId()
   const itemId = useId()
   const skillId = useId()

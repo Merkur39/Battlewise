@@ -37,6 +37,19 @@ describe('parseRoute', () => {
     expect(parseRoute('#/simulation?modal=world')).toEqual(route('simulation', { modal: 'world' }))
   })
 
+  it('reads the item Your gear opens with, from the Arsenal', () => {
+    expect(parseRoute('#/arsenal?modal=gear&item=ShieldWood&level=2')).toEqual(
+      route('arsenal', { modal: 'gear', equip: { item: 'ShieldWood', level: 2 } }),
+    )
+  })
+
+  it('reads an item only for Your gear, and with a whole level', () => {
+    expect(parseRoute('#/arsenal?item=ShieldWood&level=2')).toEqual(route('arsenal'))
+    expect(parseRoute('#/arsenal?modal=gear&item=ShieldWood&level=two')).toEqual(
+      route('arsenal', { modal: 'gear' }),
+    )
+  })
+
   it('falls back to the Bestiary for a screen it does not know, and drops a modal it does not know', () => {
     expect(parseRoute('#/nowhere')).toEqual(route('bestiary'))
     expect(parseRoute('#/arsenal?modal=nope')).toEqual(route('arsenal'))
@@ -54,10 +67,24 @@ describe('routeHash', () => {
     )
   })
 
+  it('writes the item Your gear opens with only while it is open', () => {
+    const equip = { item: 'ShieldWood', level: 2 }
+
+    expect(routeHash(route('arsenal', { modal: 'gear', equip }))).toBe(
+      '#/arsenal?modal=gear&item=ShieldWood&level=2',
+    )
+    expect(routeHash(route('arsenal', { modal: null, equip }))).toBe('#/arsenal')
+  })
+
   it('writes what parseRoute reads back, whatever the names hold', () => {
     const routes: Route[] = [
       ...SCREENS.flatMap((screen) => [null, ...MODALS].map((modal) => route(screen, { modal }))),
       route('bestiary', { path: ['a b/c', 'é&?#'], query: 'l’Aîné & co' }),
+      route('arsenal', {
+        path: ['shields'],
+        modal: 'gear',
+        equip: { item: 'ShieldWood', level: 3 },
+      }),
     ]
 
     for (const written of routes) expect(parseRoute(routeHash(written))).toEqual(written)

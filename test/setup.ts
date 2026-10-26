@@ -14,6 +14,11 @@ HTMLDialogElement.prototype.close = function (this: HTMLDialogElement) {
   this.dispatchEvent(new Event('close'))
 }
 
+// Nor scrollIntoView: where the page scrolls to is the browser's, checked there.
+Element.prototype.scrollIntoView = function () {
+  // Nothing to scroll in jsdom.
+}
+
 installMatchMedia()
 
 afterEach(() => {
