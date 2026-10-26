@@ -30,6 +30,10 @@ seconds and next to the game, how to take each creature with your gear. French a
 
 ## Rules
 
+- Everything in the repository and on GitHub is in English: code, docs, commit messages (Conventional
+  Commits), branch names, issues, pull requests and the board. This overrides any preference for French
+  commits or pull requests; pull request descriptions keep their usual sections, titled Context,
+  Diagnosis and Changes. The conversation stays in French.
 - The design canvas is the reference for tokens, components and copy.
 - Colours: ok / warn / bad are for verdicts only; accent is for selection and actions. Damage types and
   weaknesses stay neutral.
