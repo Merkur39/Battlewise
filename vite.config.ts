@@ -14,8 +14,8 @@ export default defineConfig({
     projects: [
       {
         extends: true,
-        // The combat engine is pure: no DOM, no React. Running it under node keeps that honest.
-        test: { name: 'core', environment: 'node', include: ['src/combat/**/*.test.ts'] },
+        // The combat engine and its data are pure: no DOM, no React. Running them under node keeps that honest.
+        test: { name: 'core', environment: 'node', include: ['src/{combat,data}/**/*.test.ts'] },
       },
       {
         extends: true,

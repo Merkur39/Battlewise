@@ -2,3 +2,5 @@ dist
 coverage
 package-lock.json
 design
+src/data/game.json
+tools/extract/curation.json
