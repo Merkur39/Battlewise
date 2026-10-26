@@ -5,6 +5,13 @@ export type Screen = (typeof SCREENS)[number]
 export const MODALS = ['settings', 'attack', 'gear', 'world'] as const
 export type Modal = (typeof MODALS)[number]
 
+/** The item Your gear opens with instead of the one saved: the Arsenal's « Équiper ». */
+export interface Equip {
+  /** An item id of the game data, checked by the dialog. */
+  readonly item: string
+  readonly level: number
+}
+
 export interface Route {
   readonly screen: Screen
   /** What the screen shows inside it: a biome and a creature of the Bestiary… */
@@ -12,6 +19,8 @@ export interface Route {
   /** A search typed on the screen; empty when there is none. */
   readonly query: string
   readonly modal: Modal | null
+  /** Read and written with the Your gear dialog only. */
+  readonly equip?: Equip
 }
 
 const oneOf = <T extends string>(values: readonly T[], value: string | null | undefined) =>
@@ -26,7 +35,8 @@ function decode(segment: string) {
   }
 }
 
-/** `#/bestiary/swamp/Troll?q=tro&modal=settings`; an unknown screen is the Bestiary. */
+/** `#/bestiary/swamp/Troll?q=tro&modal=settings`; an unknown screen is the Bestiary. Your gear may
+ * open with an item: `?modal=gear&item=ShieldWood&level=2`. */
 export function parseRoute(hash: string): Route {
   const [location = '', search = ''] = hash.replace(/^#\/?/, '').split('?')
   const [screen, ...path] = location
@@ -34,18 +44,27 @@ export function parseRoute(hash: string): Route {
     .filter((segment) => segment !== '')
     .map(decode)
   const params = new URLSearchParams(search)
+  const modal = oneOf(MODALS, params.get('modal')) ?? null
+  const item = params.get('item')
+  const level = Number(params.get('level'))
+  const equip = modal === 'gear' && item !== null && Number.isInteger(level) && level >= 1
   return {
     screen: oneOf(SCREENS, screen) ?? 'bestiary',
     path,
     query: params.get('q') ?? '',
-    modal: oneOf(MODALS, params.get('modal')) ?? null,
+    modal,
+    ...(equip ? { equip: { item, level } } : {}),
   }
 }
 
-export function routeHash({ screen, path, query, modal }: Route): string {
+export function routeHash({ screen, path, query, modal, equip }: Route): string {
   const params = new URLSearchParams()
   if (query !== '') params.set('q', query)
   if (modal !== null) params.set('modal', modal)
+  if (modal === 'gear' && equip) {
+    params.set('item', equip.item)
+    params.set('level', String(equip.level))
+  }
   const search = params.toString()
   const location = [screen, ...path].map(encodeURIComponent).join('/')
   return search === '' ? `#/${location}` : `#/${location}?${search}`

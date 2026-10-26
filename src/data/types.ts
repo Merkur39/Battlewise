@@ -219,6 +219,24 @@ export interface GameWorldPreset {
   readonly worldPresets: readonly Localized[]
 }
 
+/** Where the player gets an effect that changes the rules. */
+export type RuleEffectKind = 'power' | 'consumable' | 'trinket' | 'set' | 'equipment'
+
+/** A guardian power, a mead, a trinket, a set or a piece of gear that changes the rules: each
+ * multiplier is given only when it is not neutral. */
+export interface GameRuleEffect {
+  readonly name: Localized
+  readonly kind: RuleEffectKind
+  /** The stagger you take. */
+  readonly stagger?: number
+  /** The stamina a block costs, then added to it (Bonemass: none, then 5 given back). */
+  readonly blockStamina?: number
+  readonly blockStaminaFlat?: number
+  readonly dodgeStamina?: number
+  /** Your parry power. */
+  readonly parryPower?: number
+}
+
 export interface GameData {
   readonly game: { readonly version: string | null; readonly build: number }
   readonly world: {
@@ -247,4 +265,5 @@ export interface GameData {
   readonly blockers: readonly GameBlocker[]
   /** The station that upgrades an item past its maxQuality; null when no world has one. */
   readonly forge: { readonly name: Localized } | null
+  readonly ruleEffects: readonly GameRuleEffect[]
 }

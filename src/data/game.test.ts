@@ -30,6 +30,7 @@ const names = [
   ...summons.flatMap((s) => (s.name ? [s.name] : [])),
   ...game.blockers.map((b) => b.name),
   ...(game.forge ? [game.forge.name] : []),
+  ...game.ruleEffects.map((e) => e.name),
 ]
 const modifierSets = [
   game.player.modifiers,

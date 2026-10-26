@@ -118,6 +118,13 @@ def blockers(found, names, ignored):
     return sorted(result, key=lambda b: (b["group"], b["blockPower"], b["id"]))
 
 
+def obtainable(found):
+    """{item id: m_shared} of the items the player can get, as blockers() finds their sources."""
+    items = _items(found)
+    sources = _sources(found, items, _recipes(found, items), _placed(found))
+    return {item_id: shared for item_id, shared in items.values() if item_id in sources}
+
+
 def forge(found, names):
     """{"name"} of the station that upgrades past maxQuality (the Forge of Potential), None when no world
     has one."""

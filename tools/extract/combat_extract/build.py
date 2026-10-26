@@ -17,7 +17,7 @@ import json
 import math
 import re
 
-from . import animation, arsenal, components, source, spawns
+from . import animation, arsenal, components, rules, source, spawns
 from . import attacks as attack_data
 from .damage import DAMAGE_TYPES, MODIFIERS, TOOL_TYPES, modifiers, pair_modifiers
 
@@ -43,7 +43,7 @@ WORLD_PRESET_NAMES = {value: "menu_modifier_" + name.lower() for name, value in 
 WORLD_PRESET_NAMES[WORLD_PRESETS["Default"]] = "menu_default"
 CHAIN_WINDOW = 0.2  # Attack.Start: a chain goes on when the next swing starts this soon after the last
 CLASSES = sorted(
-    set(attack_data.CLASSES) | set(spawns.CLASSES) | set(arsenal.CLASSES)
+    set(attack_data.CLASSES) | set(spawns.CLASSES) | set(arsenal.CLASSES) | set(rules.CLASSES)
     | {"Player", "Game", "WeakSpot", "KeySlider", "KeyButton", "SE_Stats", "MonsterAI"}
 )
 TAG = re.compile(r"<[^>]+>")
@@ -445,5 +445,6 @@ def build(index, curation, workers=8):
         "creatures": creatures,
         "blockers": arsenal.blockers(found, names, curation["ignoredItems"]),
         "forge": arsenal.forge(found, names),
+        "ruleEffects": rules.effects(found, names),
     }
     return data, report

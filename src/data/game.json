@@ -15655,5 +15655,74 @@
       "fr": "Forge du potentiel",
       "en": "Forge of Potential"
     }
-  }
+  },
+  "ruleEffects": [
+    {
+      "name": {
+        "fr": "Masse-d'Os",
+        "en": "Bonemass"
+      },
+      "kind": "power",
+      "blockStamina": 0,
+      "blockStaminaFlat": -5
+    },
+    {
+      "name": {
+        "fr": "Pouvoir de Fader",
+        "en": "Fader"
+      },
+      "kind": "power",
+      "stagger": 0.5
+    },
+    {
+      "name": {
+        "fr": "Hydromel des berserkir",
+        "en": "Berserkir Mead"
+      },
+      "kind": "consumable",
+      "blockStamina": 0.2,
+      "dodgeStamina": 0.2
+    },
+    {
+      "name": {
+        "fr": "Voile d'ombre",
+        "en": "Evasion Mantle"
+      },
+      "kind": "trinket",
+      "blockStamina": 0.5,
+      "parryPower": 1.5
+    },
+    {
+      "name": {
+        "fr": "Avant-garde",
+        "en": "Vanguard"
+      },
+      "kind": "set",
+      "dodgeStamina": 0.8
+    },
+    {
+      "name": {
+        "fr": "Cape des cendres",
+        "en": "Ashen Cape"
+      },
+      "kind": "equipment",
+      "blockStamina": 0.8
+    },
+    {
+      "name": {
+        "fr": "Manteau en asksvin",
+        "en": "Asksvin Cloak"
+      },
+      "kind": "equipment",
+      "dodgeStamina": 0.85
+    },
+    {
+      "name": {
+        "fr": "Cape de l'orateur",
+        "en": "Cape of the Caller"
+      },
+      "kind": "equipment",
+      "dodgeStamina": 0.9
+    }
+  ]
 }

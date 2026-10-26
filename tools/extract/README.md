@@ -88,6 +88,8 @@ Each module states, in its docstring, the game code it reproduces (decompiled 1.
   raids, events, summons, drops, bombs) and at which levels;
 - `arsenal.py`: the items that block, their stats and shield modifiers, and how each is obtained and
   upgraded (Forge of Potential included, and its name);
+- `rules.py`: the guardian powers, meads, trinkets, sets and gear that change the stagger the player
+  takes, what a block or a dodge costs and the parry bonus, with their names;
 - `build.py` also reads weak spots, tool weaknesses, boss phases, the player, the world presets of the
   Combat slider (damage, star chance, and the start screen's world presets that pick each one under
   another name), status effects and names; it merges identical attacks and reports what the curation
