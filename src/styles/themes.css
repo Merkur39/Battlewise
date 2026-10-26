@@ -1,9 +1,10 @@
 /* The seven palettes of the validated design canvas (design/scripts/palettes.py), 16 tokens
-   each. Origine is the default; the others apply through data-theme on the root element.
+   each. Origine is the default; the others apply through data-theme on the root element, or on any
+   element whose subtree shows another palette (the theme swatches of the Settings).
    The ok / warn / bad families carry verdicts and nothing else. */
 
 :root,
-:root[data-theme='origine'] {
+[data-theme='origine'] {
   color-scheme: dark;
   --bg: #0d1214;
   --surface: #151c1f;
@@ -23,7 +24,7 @@
   --bad-fill: #7a2a24;
 }
 
-:root[data-theme='braise'] {
+[data-theme='braise'] {
   color-scheme: dark;
   --bg: #15110e;
   --surface: #1f1915;
@@ -43,7 +44,7 @@
   --bad-fill: #8b2e26;
 }
 
-:root[data-theme='brume'] {
+[data-theme='brume'] {
   color-scheme: dark;
   --bg: #110f18;
   --surface: #1a1724;
@@ -63,7 +64,7 @@
   --bad-fill: #812c28;
 }
 
-:root[data-theme='jour'] {
+[data-theme='jour'] {
   color-scheme: light;
   --bg: #f4f1ea;
   --surface: #ffffff;
@@ -83,7 +84,7 @@
   --bad-fill: #e07a70;
 }
 
-:root[data-theme='runes'] {
+[data-theme='runes'] {
   color-scheme: dark;
   --bg: #0f1113;
   --surface: #191c1f;
@@ -103,7 +104,7 @@
   --bad-fill: #9a241c;
 }
 
-:root[data-theme='graphite'] {
+[data-theme='graphite'] {
   color-scheme: dark;
   --bg: #111113;
   --surface: #1a1a1d;
@@ -123,7 +124,7 @@
   --bad-fill: #8a2a28;
 }
 
-:root[data-theme='parchemin'] {
+[data-theme='parchemin'] {
   color-scheme: light;
   --bg: #efe7d6;
   --surface: #f9f4e8;

@@ -1,0 +1,4 @@
+{
+  "//": "run_logic.js is CommonJS; the app's package.json above declares ES modules.",
+  "type": "commonjs"
+}

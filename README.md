@@ -1,7 +1,5 @@
 # Battlewise
 
-_A combat companion for Valheim._
-
 A mobile-first web app that works offline (PWA) and tells you, in two seconds and next to the game,
 how to take each creature with your gear: whether to block, parry or dodge each of its attacks, and
 what it costs you. In French and English.
