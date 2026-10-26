@@ -20,6 +20,20 @@ import { useAppState } from './useAppState'
 import { useIsDesktop } from './useMediaQuery'
 import { useRoute } from './useRoute'
 
+/** The browser bar of a phone, and the title bar of the installed app, take the background of the
+ * theme the root element now shows. */
+function paintBrowserBar() {
+  const background = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()
+  if (background === '') return
+  let meta = document.querySelector('meta[name="theme-color"]')
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('name', 'theme-color')
+    document.head.append(meta)
+  }
+  meta.setAttribute('content', background)
+}
+
 export function App() {
   const [preview, setPreview] = useState<Preview>({})
   return (
@@ -68,6 +82,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   }, [language])
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme
+    paintBrowserBar()
   }, [theme])
   useEffect(() => {
     document.title = `${title} — ${APP_NAME}`

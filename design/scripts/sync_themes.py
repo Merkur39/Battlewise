@@ -1,7 +1,8 @@
 """Rebuild every theme page from Origine and lay out the canvas index of all pages.
 
 Réglages screens draw their colours from their own palette table: they are copied, not recoloured,
-and open on the page's theme. The archived "sim" page is left untouched.
+and open on the page's theme. Pages made by hand (the archived "sim" page, the app icon) are left
+untouched.
 """
 import json
 import re
@@ -99,8 +100,9 @@ def main():
             (PROJECT / f"{v['prefix']}-{source}").write_text(derive(source, v, vid), encoding="utf-8", newline="\n")
             written += 1
 
-    archived = {k: b for k, b in index["boards"].items() if b.get("page") == "sim"}
-    archived_notes = {k: n for k, n in index["notes"].items() if n.get("page") == "sim"}
+    by_hand = lambda entry: "page" in entry and entry["page"] not in VARIANTS  # noqa: E731
+    archived = {k: b for k, b in index["boards"].items() if by_hand(b)}
+    archived_notes = {k: n for k, n in index["notes"].items() if by_hand(n)}
     boards, notes = layout(None, "", index["boards"]["Tokens.dc.html"]["title"])
     for vid, v in VARIANTS.items():
         b, n = layout(vid, v["prefix"] + "-", v["tokens"])

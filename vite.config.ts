@@ -2,9 +2,29 @@
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+import { iconPreset, manifest } from './src/app/pwa.ts'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Installable and offline: the whole build is cached, game data and fonts included, and a new
+    // version takes over on its own (the saved state lives in localStorage, untouched).
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest,
+      pwaAssets: {
+        image: 'public/icon.svg',
+        preset: iconPreset,
+        htmlPreset: '2023',
+        // index.html carries the theme colour, which the app then follows.
+        injectThemeColor: false,
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
