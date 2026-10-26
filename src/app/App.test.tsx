@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { deviceSpeaks, MOCKUP_GEAR, renderWithStore } from '../../test/utils'
 import { setViewportWidth } from '../../test/viewport'
+import { readFileSync } from 'node:fs'
 import { App } from './App'
 
 const mainHeading = () => screen.getByRole('heading', { level: 1 })
@@ -114,6 +115,26 @@ describe('App', () => {
     })
 
     expect(document.documentElement).toHaveAttribute('data-theme', 'runes')
+  })
+
+  it("colours a phone's browser bar with the theme's background", () => {
+    // The palettes as the browser reads them: jsdom loads no stylesheet of its own.
+    const palettes = document.createElement('style')
+    palettes.textContent = readFileSync('src/styles/themes.css', 'utf8')
+    document.head.append(palettes)
+    const bar = () => document.querySelector('meta[name="theme-color"]')
+
+    const { store } = renderWithStore(<App />, { theme: 'jour' })
+
+    expect(bar()).toHaveAttribute('content', '#f4f1ea')
+
+    act(() => {
+      store.update({ theme: 'origine' })
+    })
+
+    expect(bar()).toHaveAttribute('content', '#0d1214')
+    palettes.remove()
+    bar()?.remove()
   })
 
   describe('on a desktop', () => {

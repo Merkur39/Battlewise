@@ -244,6 +244,14 @@
       "y": 1264,
       "title": "Choisir une attaque · recherche"
     },
+    "Icone.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1560,
+      "title": "Icône de l'app · six pistes",
+      "page": "icone"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1501,6 +1509,14 @@
       "maxW": 2270,
       "page": "sim"
     },
+    "icone-row1": {
+      "kind": "title1",
+      "text": "Icône de l'app",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "icone"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -1869,6 +1885,7 @@
     "SimB-Monstre.dc.html",
     "SimB-Equipement.dc.html",
     "SimB-Recherche.dc.html",
+    "Icone.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2010,6 +2027,10 @@
     {
       "id": "sim",
       "name": "Simulation · pistes"
+    },
+    {
+      "id": "icone",
+      "name": "Icône"
     },
     {
       "id": "braise",
