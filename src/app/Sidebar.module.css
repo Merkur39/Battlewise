@@ -1,0 +1,71 @@
+.sidebar {
+  flex: 0 0 248px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 14px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
+
+.brand {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.shield {
+  flex: none;
+  color: var(--accent);
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.link {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+.link[aria-current='page'] {
+  background: var(--selection);
+  color: var(--accent);
+}
+
+/* Pushed to the bottom. */
+.context {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  padding: 0 4px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}

@@ -1,0 +1,350 @@
+.section {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* The radio buttons are the browser's: invisible over their label, focusable and arrow-driven. */
+.radio {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Language: one segmented control. */
+.languageRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.segments {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.segment {
+  position: relative;
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.segment:has(:checked) {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.segment:has(:focus-visible),
+.theme:has(:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: -4px;
+}
+
+/* Theme: a list of rows on a phone. */
+.themes {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.theme {
+  position: relative;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--surface);
+}
+
+.theme:has(:checked) {
+  background: var(--selection);
+}
+
+.themeLine {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.themeText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.themeName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.tag {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.themeDescription {
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.check {
+  flex: none;
+  color: var(--accent);
+}
+
+/* The swatches read the tokens of their own data-theme. */
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+}
+
+.swatchSurface,
+.swatchAccent {
+  width: 12px;
+  height: 24px;
+  border-radius: 2px;
+}
+
+.swatchSurface {
+  background: var(--surface);
+}
+
+.swatchAccent {
+  background: var(--accent);
+}
+
+.swatchVerdicts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.swatchVerdicts > span {
+  width: 8px;
+  height: 6px;
+  border-radius: 1px;
+}
+
+.ok {
+  background: var(--ok-fill);
+}
+
+.warn {
+  background: var(--warn-fill);
+}
+
+.bad {
+  background: var(--bad-fill);
+}
+
+.about {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aboutLines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aboutName {
+  font-size: 14px;
+}
+
+.dataSource {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+/* Desktop: sections ruled apart, the language note beside the control, theme cards in a grid. */
+@media (min-width: 1024px) {
+  .section {
+    gap: 10px;
+  }
+
+  .section + .section,
+  .about {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .languageRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .languageRow .note {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .segment {
+    flex: none;
+    width: 124px;
+    height: 40px;
+  }
+
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .theme {
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+  }
+
+  .theme:has(:checked) {
+    border-color: var(--accent);
+    background: var(--selection);
+  }
+
+  .themeName {
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .tag {
+    padding: 0 5px;
+  }
+
+  .about {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 14px;
+  }
+
+  .aboutLines {
+    align-items: flex-end;
+    gap: 4px;
+  }
+}
+
+/* Desktop swatch: a page in miniature. */
+.preview {
+  box-sizing: border-box;
+  height: 56px;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.previewSide {
+  flex: 0 0 18px;
+  border-radius: 3px;
+  background: var(--surface);
+}
+
+.previewBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.previewText {
+  width: 60%;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.previewGauge {
+  height: 8px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.previewGauge > .ok {
+  flex: 3;
+}
+
+.previewGauge > .warn {
+  flex: 1;
+}
+
+.previewGauge > .bad {
+  flex: 2;
+}
+
+.previewAction {
+  width: 36%;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--accent);
+}

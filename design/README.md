@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v53** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v56** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -18,7 +18,7 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v53: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v56: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),
