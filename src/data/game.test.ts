@@ -23,12 +23,13 @@ const names = [
   ...Object.values(game.damageTypes),
   ...Object.values(game.toolTypes),
   ...Object.values(game.modifiers),
-  ...game.world.presets.map((p) => p.name),
+  ...game.world.presets.flatMap((p) => [p.name, ...p.worldPresets]),
   ...statusEffects.map((s) => s.name),
   ...game.creatures.map((c) => c.name),
   ...attacks.map((a) => a.name),
   ...summons.flatMap((s) => (s.name ? [s.name] : [])),
   ...game.blockers.map((b) => b.name),
+  ...(game.forge ? [game.forge.name] : []),
 ]
 const modifierSets = [
   game.player.modifiers,

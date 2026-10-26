@@ -212,6 +212,11 @@ export interface GameWorldPreset {
   readonly name: Localized
   readonly enemyDamage: number
   readonly playerDamage: number
+  /** Multiplies the chance of a star (SpawnSystem.GetLevelUpChance). */
+  readonly levelUpRate: number
+  /** The world presets of the start screen that pick this setting under another name (Hardcore picks
+   * Very hard). */
+  readonly worldPresets: readonly Localized[]
 }
 
 export interface GameData {
@@ -240,4 +245,6 @@ export interface GameData {
   readonly statusEffects: Readonly<Record<string, GameStatusEffect>>
   readonly creatures: readonly GameCreature[]
   readonly blockers: readonly GameBlocker[]
+  /** The station that upgrades an item past its maxQuality; null when no world has one. */
+  readonly forge: { readonly name: Localized } | null
 }

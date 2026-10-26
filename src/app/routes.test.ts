@@ -33,6 +33,8 @@ describe('parseRoute', () => {
 
   it('reads a modal over its screen', () => {
     expect(parseRoute('#/guide?modal=settings')).toEqual(route('guide', { modal: 'settings' }))
+    expect(parseRoute('#/bestiary?modal=gear')).toEqual(route('bestiary', { modal: 'gear' }))
+    expect(parseRoute('#/simulation?modal=world')).toEqual(route('simulation', { modal: 'world' }))
   })
 
   it('falls back to the Bestiary for a screen it does not know, and drops a modal it does not know', () => {

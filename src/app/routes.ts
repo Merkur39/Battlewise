@@ -1,8 +1,8 @@
 export const SCREENS = ['bestiary', 'simulation', 'arsenal', 'guide'] as const
 export type Screen = (typeof SCREENS)[number]
 
-/** The modals an address can open over a screen; Your gear and Your world join them with part 5. */
-export const MODALS = ['settings', 'attack'] as const
+/** The modals an address can open over a screen. */
+export const MODALS = ['settings', 'attack', 'gear', 'world'] as const
 export type Modal = (typeof MODALS)[number]
 
 export interface Route {

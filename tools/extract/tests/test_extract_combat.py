@@ -227,6 +227,19 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual(presets["veryHard"]["name"]["fr"], "Très difficile")
         self.assertEqual(self.data["world"]["maxPlayers"], 5)
 
+    def test_world_presets_carry_the_star_chance(self):
+        rates = [p["levelUpRate"] for p in self.data["world"]["presets"]]
+        self.assertEqual(rates, [1, 1, 1, 1.2, 1.4])
+
+    def test_world_presets_name_the_start_presets_that_pick_them_under_another_name(self):
+        presets = {p["id"]: p["worldPresets"] for p in self.data["world"]["presets"]}
+        self.assertEqual(presets["veryEasy"], [{"fr": "Tranquille", "en": "Casual"}])
+        self.assertEqual(presets["veryHard"], [{"fr": "Cauchemar", "en": "Hardcore"}])
+        self.assertEqual((presets["easy"], presets["normal"], presets["hard"]), ([], [], []))
+
+    def test_the_forge_of_potential_is_named(self):
+        self.assertEqual(self.data["forge"], {"name": {"fr": "Forge du potentiel", "en": "Forge of Potential"}})
+
     # ------------------------------------------------------------------ names
     def test_names_come_from_the_game_localisation(self):
         self.assertEqual(self.creatures["Greydwarf_Elite"]["name"], {"fr": "Brute naingris", "en": "Greydwarf Brute"})

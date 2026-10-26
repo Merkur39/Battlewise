@@ -2,8 +2,7 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { DEFAULT_STATE } from '@/app/store'
-import { renderWithStore } from '../../../test/utils'
+import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const list = () => screen.getByRole('list', { name: 'Créatures du biome' })
@@ -102,7 +101,7 @@ describe('Bestiary', () => {
     window.history.replaceState(null, '', '#/bestiary/blackForest/Troll')
     renderWithStore(<App />, {
       language: 'fr',
-      gear: { ...DEFAULT_STATE.gear, blocker: 'ShieldWoodTower', level: 1 },
+      gear: { ...MOCKUP_GEAR, blocker: 'ShieldWoodTower', level: 1 },
     })
 
     expect(screen.getByRole('group', { name: 'Ta parade' })).toHaveTextContent(

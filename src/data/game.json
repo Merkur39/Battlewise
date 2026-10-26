@@ -16,7 +16,14 @@
           "en": "Very Easy"
         },
         "enemyDamage": 0.5,
-        "playerDamage": 1.25
+        "playerDamage": 1.25,
+        "levelUpRate": 1,
+        "worldPresets": [
+          {
+            "fr": "Tranquille",
+            "en": "Casual"
+          }
+        ]
       },
       {
         "id": "easy",
@@ -25,7 +32,9 @@
           "en": "Easy"
         },
         "enemyDamage": 0.75,
-        "playerDamage": 1.1
+        "playerDamage": 1.1,
+        "levelUpRate": 1,
+        "worldPresets": []
       },
       {
         "id": "normal",
@@ -34,7 +43,9 @@
           "en": "Normal"
         },
         "enemyDamage": 1,
-        "playerDamage": 1
+        "playerDamage": 1,
+        "levelUpRate": 1,
+        "worldPresets": []
       },
       {
         "id": "hard",
@@ -43,7 +54,9 @@
           "en": "Hard"
         },
         "enemyDamage": 1.5,
-        "playerDamage": 0.85
+        "playerDamage": 0.85,
+        "levelUpRate": 1.2,
+        "worldPresets": []
       },
       {
         "id": "veryHard",
@@ -52,7 +65,14 @@
           "en": "Very Hard"
         },
         "enemyDamage": 2,
-        "playerDamage": 0.7
+        "playerDamage": 0.7,
+        "levelUpRate": 1.4,
+        "worldPresets": [
+          {
+            "fr": "Cauchemar",
+            "en": "Hardcore"
+          }
+        ]
       }
     ]
   },
@@ -15629,5 +15649,11 @@
       "obtain": "craft",
       "consumable": false
     }
-  ]
+  ],
+  "forge": {
+    "name": {
+      "fr": "Forge du potentiel",
+      "en": "Forge of Potential"
+    }
+  }
 }

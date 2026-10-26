@@ -25,11 +25,73 @@ export const en: Catalog = {
     summary: (item, level, blockPower, skill) =>
       `Your gear: ${item} level ${n(level)}, block power ${n(blockPower)}, Blocking skill ${n(skill)}`,
     levelAndPower: (level, blockPower) => `Lv${n(level)} · Block ${n(blockPower)}`,
+    title: 'Your gear',
+    withstand: 'What you can take',
+    emptyBar: 'Empty bar',
+    block: 'Block',
+    parry: 'Parry',
+    power: (power) => `power ${n(power)}`,
+    unstaggered: 'no stagger',
+    unbroken: 'holds',
+    cannotParry: "your item can't parry",
+    staggersAt: (limit, share, health, armor) =>
+      `Staggers at ${n(limit)} (${n(share)}% of ${n(health)} HP) · armor ${n(armor)}`,
+    powerParts: (base, skill) => `power = ${n(base)} × ${n(skill)}`,
+    item: 'Blocking item',
+    groups: {
+      round: 'Round shields',
+      buckler: 'Bucklers',
+      tower: 'Tower shields',
+      weapon: 'Weapons',
+      other: 'Others',
+    },
+    groupTags: {
+      round: 'Round',
+      buckler: 'Buckler',
+      tower: 'Tower',
+      weapon: 'Weapon',
+      other: 'Other',
+    },
+    parryBonus: (bonus) => `×${n(bonus)}`,
+    noParry: "can't parry",
+    torch: 'With a torch in your left hand, the torch blocks.',
+    level: 'Level',
+    levelLong: 'Upgrade level',
+    lowerLevel: 'Lower level',
+    raiseLevel: 'Higher level',
+    levelNote: (perLevel, maxQuality, forge) => {
+      const gain =
+        perLevel > 0 ? `+${n(perLevel)} power per level` : 'The level leaves its power alone'
+      return forge
+        ? `${gain}; past level ${n(maxQuality)}: ${forge}.`
+        : `${gain}, up to the item's max level.`
+    },
+    notUpgradable: "This item can't be upgraded.",
+    skill: 'Blocking skill',
+    armor: 'Armor',
+    lowerArmor: 'Less armor',
+    raiseArmor: 'More armor',
+    health: 'Max HP',
+    lowerHealth: 'Less HP',
+    raiseHealth: 'More HP',
   },
   world: {
     summary: (difficulty, count) =>
       `Your world: ${difficulty.toLocaleLowerCase('en')} combat, ${players(count)}`,
     playersAndScale: (count, enemyScale) => `${players(count)} · ×${n(enemyScale)}`,
+    title: 'Your world',
+    difficulty: 'Combat difficulty',
+    multiplier: (value) => `×${n(value)}`,
+    difficultyNote: `The ${quoted('Combat')} setting of the world modifiers.`,
+    players: (range) => `Players within ${n(range)} m, you included`,
+    orMore: (count) => `${n(count)}+`,
+    orMoreLabel: (count) => `${n(count)} or more`,
+    effects: 'What it does',
+    enemyHits: 'Monster hits',
+    yourDamage: 'Your damage and stagger',
+    yourDamageShort: 'Your damage',
+    starChance: 'Star chance',
+    rulesNote: 'The rules (parry window, thresholds) stay the same.',
   },
   verdicts: {
     block: 'Block',
@@ -147,6 +209,7 @@ export const en: Catalog = {
     dodgeable: 'Dodgeable by rolling',
     undodgeable: 'Not dodgeable by rolling',
     hits: (count) => `This attack lands ${n(count)} hits: each card shows the hardest.`,
+    thresholds: 'Your thresholds are in Your gear',
     advice: {
       block: 'Block it: you hold without staggering',
       parry: (block) =>

@@ -52,11 +52,68 @@ export const fr = {
     summary: (item: string, level: number, blockPower: number, skill: number) =>
       `Ton équipement : ${item} niveau ${n(level)}, VD ${n(blockPower)}, compétence Blocage ${n(skill)}`,
     levelAndPower: (level: number, blockPower: number) => `N${n(level)} · VD ${n(blockPower)}`,
+    title: 'Ton équipement',
+    withstand: 'Ce que tu encaisses',
+    emptyBar: 'Barre vide',
+    block: 'Bloquer',
+    parry: 'Parer',
+    power: (power: number) => `VD ${n(power)}`,
+    unstaggered: 'sans tituber',
+    unbroken: 'tient',
+    cannotParry: 'ton objet ne pare pas',
+    staggersAt: (limit: number, share: number, health: number, armor: number) =>
+      `Titube à ${n(limit)} (${n(share)} % de ${n(health)} PV) · armure ${n(armor)}`,
+    powerParts: (base: number, skill: number) => `VD = ${n(base)} × ${n(skill)}`,
+    item: 'Objet qui bloque',
+    groups: {
+      round: 'Boucliers ronds',
+      buckler: 'Targes',
+      tower: 'Écus',
+      weapon: 'Armes',
+      other: 'Autres',
+    },
+    groupTags: { round: 'Rond', buckler: 'Targe', tower: 'Écu', weapon: 'Arme', other: 'Autre' },
+    parryBonus: (bonus: number) => `×${n(bonus)}`,
+    noParry: 'ne pare pas',
+    torch: "Avec une torche en main gauche, c'est elle qui bloque.",
+    level: 'Niveau',
+    levelLong: "Niveau d'amélioration",
+    lowerLevel: 'Niveau inférieur',
+    raiseLevel: 'Niveau supérieur',
+    /** `forge` names the station that takes the item past `maxQuality`, if any. */
+    levelNote: (perLevel: number, maxQuality: number, forge: string | null) => {
+      const gain =
+        perLevel > 0 ? `+${n(perLevel)} de VD par niveau` : 'Le niveau ne change pas sa VD'
+      return forge
+        ? `${gain} ; au-delà du niveau ${n(maxQuality)} : ${forge}.`
+        : `${gain}, jusqu'au niveau max de l'objet.`
+    },
+    notUpgradable: "Cet objet ne s'améliore pas.",
+    skill: 'Compétence Blocage',
+    armor: 'Armure',
+    lowerArmor: "Moins d'armure",
+    raiseArmor: "Plus d'armure",
+    health: 'PV max',
+    lowerHealth: 'Moins de PV',
+    raiseHealth: 'Plus de PV',
   },
   world: {
     summary: (difficulty: string, count: number) =>
       `Ton monde : combat ${difficulty.toLocaleLowerCase('fr')}, ${players(count)}`,
     playersAndScale: (count: number, enemyScale: number) => `${players(count)} · ×${n(enemyScale)}`,
+    title: 'Ton monde',
+    difficulty: 'Difficulté du combat',
+    multiplier: (value: number) => `×${n(value)}`,
+    difficultyNote: `Le réglage ${quoted('Combat')} des modificateurs du monde.`,
+    players: (range: number) => `Joueurs à moins de ${n(range)} m, toi compris`,
+    orMore: (count: number) => `${n(count)}+`,
+    orMoreLabel: (count: number) => `${n(count)} ou plus`,
+    effects: 'Ce que ça donne',
+    enemyHits: 'Coups des monstres',
+    yourDamage: 'Tes dégâts et ton stagger',
+    yourDamageShort: 'Tes dégâts',
+    starChance: "Chance d'étoiles",
+    rulesNote: 'Les règles (fenêtre de parade, seuils) ne changent pas.',
   },
   verdicts: {
     block: 'Blocage',
@@ -176,6 +233,7 @@ export const fr = {
     undodgeable: 'Pas esquivable en roulade',
     hits: (count: number) =>
       `Cette attaque porte ${n(count)} coups : chaque carte montre le plus dur.`,
+    thresholds: 'Tes seuils sont dans Ton équipement',
     advice: {
       block: 'Bloque-le : tu tiens sans tituber',
       parry: (block: 'staggered' | 'broken') =>

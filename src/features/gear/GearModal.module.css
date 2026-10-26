@@ -1,0 +1,248 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 12px;
+}
+
+.label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.note,
+.footnote {
+  margin: 0;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* What you can take: a gauge per guard on one scale. */
+.withstand {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.withstandHeader,
+.guardLine,
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.guard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Large values push the thresholds to a line of their own rather than out of the box. */
+.guardLine {
+  flex-wrap: wrap;
+  column-gap: 12px;
+}
+
+.guardName {
+  font-size: 12px;
+}
+
+.power {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  color: var(--faint);
+}
+
+.thresholds {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--secondary);
+}
+
+.ok,
+.warn {
+  font-size: 14px;
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.warn {
+  color: var(--warn);
+}
+
+.gauge {
+  height: 10px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--line-soft);
+}
+
+.okFill {
+  background: var(--ok-fill);
+}
+
+/* Never so thin that it disappears. */
+.warnFill {
+  min-width: 2px;
+  background: var(--warn-fill);
+}
+
+.badFill {
+  flex: 1;
+  background: var(--bad-fill);
+}
+
+/* The item that blocks: a native select, with its group and parry bonus beside it. */
+.item {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.select {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.selectInput {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  appearance: none;
+  cursor: pointer;
+}
+
+.selectInput:focus-visible {
+  outline: none;
+}
+
+.select:has(:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.selectInput option,
+.selectInput optgroup {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.tag {
+  flex: none;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--secondary);
+}
+
+.chevron {
+  flex: none;
+  color: var(--secondary);
+  pointer-events: none;
+}
+
+.level,
+.skill {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skillHeader {
+  align-items: center;
+  height: 15px;
+}
+
+.skillValue {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.range {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.footnote {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .form {
+    gap: 20px 16px;
+  }
+
+  .withstand {
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg);
+  }
+
+  .guard {
+    gap: 5px;
+  }
+
+  .guardName {
+    font-size: 13px;
+  }
+
+  .ok,
+  .warn {
+    font-size: 15px;
+  }
+
+  .select {
+    height: 44px;
+    background: var(--bg);
+  }
+
+  .selectInput {
+    height: 42px;
+  }
+
+  .range {
+    height: 40px;
+  }
+}
