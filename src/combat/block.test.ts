@@ -36,6 +36,34 @@ describe('defenceOf', () => {
   it('turns a profile into the values a hit is resolved against', () => {
     expect(
       defenceOf({ blocker: silverShield, level: 3, skill: 25, armor: 45, maxHealth: 150 }),
-    ).toEqual({ blockPower: 81, parryPower: 121.5, armor: 45, maxHealth: 150 })
+    ).toEqual({
+      blockPower: 81,
+      parryPower: 121.5,
+      armor: 45,
+      maxHealth: 150,
+      modifiers: {},
+      blockerModifiers: {},
+      parryStaminaRegen: 0,
+    })
+  })
+
+  it("carries the player's and the item's modifiers and the parry refund", () => {
+    const serpent: Blocker = {
+      ...silverShield,
+      modifiers: { pierce: 'resistant' },
+      perfectBlockStaminaRegen: 10,
+    }
+    const defence = defenceOf({
+      blocker: serpent,
+      level: 1,
+      skill: 0,
+      armor: 0,
+      maxHealth: 100,
+      modifiers: { spirit: 'immune' },
+    })
+
+    expect(defence.modifiers).toEqual({ spirit: 'immune' })
+    expect(defence.blockerModifiers).toEqual({ pierce: 'resistant' })
+    expect(defence.parryStaminaRegen).toBe(10)
   })
 })

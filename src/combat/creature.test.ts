@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import {
-  creatureHealth,
-  damageMultiplier,
-  staggerThreshold,
-  toInflict,
-  type DamageModifier,
-} from './creature'
+import { creatureHealth, staggerThreshold, toInflict } from './creature'
 
 describe('creatureHealth', () => {
   it('is the listed health without stars', () => {
@@ -18,16 +12,23 @@ describe('creatureHealth', () => {
 })
 
 describe('staggerThreshold', () => {
+  const troll = { health: 600, staggerFactor: 0.3, staggerable: true }
+
   it('is a share of the health: 180 for a troll', () => {
-    expect(staggerThreshold(600, 0.3, 0)).toBe(180)
+    expect(staggerThreshold(troll, 0)).toBe(180)
   })
 
   it('follows the health up with the stars', () => {
-    expect(staggerThreshold(1000, 0.3, 1)).toBe(600)
+    expect(staggerThreshold({ ...troll, health: 1000 }, 1)).toBe(600)
   })
 
-  it('is null for a creature that never staggers', () => {
-    expect(staggerThreshold(5000, 0, 0)).toBeNull()
+  it('is null for a creature whose bar never fills', () => {
+    expect(staggerThreshold({ health: 5000, staggerFactor: 0, staggerable: true }, 0)).toBeNull()
+  })
+
+  it('is null for a creature that cannot play a stagger, though its bar fills', () => {
+    // The Deathsquito: staggerFactor 0.5, but its animator has no stagger state.
+    expect(staggerThreshold({ health: 10, staggerFactor: 0.5, staggerable: false }, 0)).toBeNull()
   })
 })
 
@@ -42,21 +43,5 @@ describe('toInflict', () => {
 
   it('grows with the players around', () => {
     expect(toInflict(180, { difficulty: 'normal', players: 3 })).toBeCloseTo(288, 9)
-  })
-})
-
-describe('damageMultiplier', () => {
-  it.each<[DamageModifier, number]>([
-    ['normal', 1],
-    ['slightlyWeak', 1.25],
-    ['weak', 1.5],
-    ['veryWeak', 2],
-    ['slightlyResistant', 0.75],
-    ['resistant', 0.5],
-    ['veryResistant', 0.25],
-    ['immune', 0],
-    ['ignore', 0],
-  ])('multiplies %s damage by %s', (modifier, multiplier) => {
-    expect(damageMultiplier(modifier)).toBe(multiplier)
   })
 })

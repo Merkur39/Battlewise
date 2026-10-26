@@ -22,13 +22,15 @@ const DIFFICULTIES: Record<Difficulty, WorldScale> = {
   veryHard: { enemy: 2, you: 0.7 },
 }
 
-// Game.GetDifficultyDamageScalePlayer and GetDifficultyDamageScaleEnemy.
+// Game.GetDifficultyDamageScalePlayer and GetDifficultyDamageScaleEnemy, over at most
+// m_difficultyScaleMaxPlayers players (Game.GetPlayerDifficulty).
 const ENEMY_DAMAGE_PER_PLAYER = 0.04
 const ENEMY_HEALTH_PER_PLAYER = 0.3
+const MAX_PLAYERS = 5
 
 export function worldScale({ difficulty, players }: World): WorldScale {
   const preset = DIFFICULTIES[difficulty]
-  const others = players - 1
+  const others = Math.min(MAX_PLAYERS, Math.max(1, players)) - 1
   return {
     enemy: preset.enemy * (1 + others * ENEMY_DAMAGE_PER_PLAYER),
     you: preset.you / (1 + others * ENEMY_HEALTH_PER_PLAYER),

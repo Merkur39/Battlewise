@@ -1,7 +1,16 @@
 import { applyArmorTo } from './armor'
 import type { Defence } from './block'
-import { scaleDamages, staggerDamage, totalDamage, type Damages } from './damage'
+import { overTimeDamage, scaleDamages, staggerDamage, totalDamage, type Damages } from './damage'
+import { applyModifiers } from './modifiers'
 import { worldScale, type World } from './world'
+
+/**
+ * What scales a hit before it lands:
+ * - attack: the hit the attack builds, scaled by the world and the stars (Attack.ModifyDamage);
+ * - world: a projectile or area with its own damage and the creature as owner: the world only;
+ * - none: an area with no owner (spawned by an ability, a death): neither (Character.RPC_Damage).
+ */
+export type HitScaling = 'attack' | 'world' | 'none'
 
 /** A monster attack, as the game data lists it (before world and stars). */
 export interface Hit {
@@ -9,6 +18,10 @@ export interface Hit {
   /** Weighs on the stagger of what passes the armor (Attack.m_staggerMultiplier). */
   readonly staggerMultiplier: number
   readonly blockable: boolean
+  /** The attack's own hit when left out. */
+  readonly scaling?: HitScaling
+  /** Generic damage (DamageTypes.m_damage): no guard, resistance, armor or stagger; scaled by stars only. */
+  readonly trueDamage?: number
 }
 
 export type Guard = 'block' | 'parry'
@@ -43,6 +56,9 @@ export interface HitResult {
   /** The hit after world and stars, before shield and armor. */
   readonly received: number
   readonly taken: number
+  /** The part of `taken` dealt over time: burning, poison, spirit. */
+  readonly overTime: number
+  /** Stamina spent; negative when the parry gives some back. */
   readonly stamina: number
   readonly bar: StaggerBar
 }
@@ -51,7 +67,7 @@ export interface HitResult {
 const STAGGER_LIMIT = 0.4
 // Player.m_blockStaminaDrain, spent in proportion to the share of the block power used.
 const BLOCK_STAMINA = 10
-// Character.ApplyDamage drops what is left at 0.1 or less.
+// Character.ApplyDamage drops a direct hit of 0.1 or less, and its stagger with it.
 const MIN_DAMAGE = 0.1
 // Attack.GetLevelDamageFactor: each star adds half of the damage.
 const DAMAGE_PER_STAR = 0.5
@@ -60,6 +76,14 @@ function verdictOf(blockable: boolean, broken: boolean, staggered: boolean): Ver
   if (!blockable) return 'unblockable'
   if (broken) return 'broken'
   return staggered ? 'staggered' : 'holds'
+}
+
+/** [typed damage factor, true damage factor]: the world never scales true damage (HitData.ApplyModifier). */
+function scalingOf(scaling: HitScaling, world: World, stars: number): [number, number] {
+  const starFactor = 1 + stars * DAMAGE_PER_STAR
+  if (scaling === 'attack') return [worldScale(world).enemy * starFactor, starFactor]
+  if (scaling === 'world') return [worldScale(world).enemy, 1]
+  return [1, 1]
 }
 
 /** Resolves a hit against a block or a parry; null when the item cannot parry. */
@@ -72,35 +96,41 @@ export function resolveHit(
   const power = guard === 'parry' ? defence.parryPower : defence.blockPower
   if (power === null) return null
 
-  const damages = scaleDamages(hit.damages, worldScale(world).enemy * (1 + stars * DAMAGE_PER_STAR))
-  const received = totalDamage(damages)
+  const [typedFactor, trueFactor] = scalingOf(hit.scaling ?? 'attack', world, stars)
+  let damages = scaleDamages(hit.damages, typedFactor)
+  const trueDamage = (hit.trueDamage ?? 0) * trueFactor
+  const received = totalDamage(damages) + trueDamage
   const limit = STAGGER_LIMIT * defence.maxHealth
   const before = barBefore * limit
 
-  let pastGuard = damages
   let shield = 0
   let stamina = 0
   let broken = false
   if (hit.blockable) {
+    damages = applyModifiers(damages, defence.blockerModifiers ?? {})
     const pastShield = applyArmorTo(damages, power)
-    const blocked = received - totalDamage(pastShield)
+    const blocked = totalDamage(damages) - totalDamage(pastShield)
     shield = staggerDamage(pastShield)
-    stamina = guard === 'parry' ? 0 : BLOCK_STAMINA * Math.min(1, blocked / power)
     broken = before + shield >= limit
-    if (!broken) pastGuard = pastShield
+    const refund = defence.parryStaminaRegen ?? 0
+    if (guard === 'block') stamina = BLOCK_STAMINA * Math.min(1, blocked / power)
+    else if (!broken && refund > 0) stamina = -refund
+    if (!broken) damages = pastShield
   }
 
-  const pastArmor = applyArmorTo(pastGuard, defence.armor)
-  const left = totalDamage(pastArmor)
-  const taken = left > MIN_DAMAGE ? left : 0
-  const armor = taken > 0 ? staggerDamage(pastArmor) * hit.staggerMultiplier : 0
+  const pastArmor = applyArmorTo(applyModifiers(damages, defence.modifiers ?? {}), defence.armor)
+  const overTime = overTimeDamage(pastArmor)
+  const direct = totalDamage(pastArmor) - overTime + trueDamage
+  const landed = direct > MIN_DAMAGE
+  const armor = landed ? staggerDamage(pastArmor) * hit.staggerMultiplier : 0
   const staggered = before + shield + armor >= limit
 
   return {
     verdict: verdictOf(hit.blockable, broken, staggered),
     staggered,
     received,
-    taken,
+    taken: (landed ? direct : 0) + overTime,
+    overTime,
     stamina,
     bar: { before, shield, armor, limit },
   }

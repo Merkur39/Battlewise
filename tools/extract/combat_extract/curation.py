@@ -1,6 +1,8 @@
-"""Hand-kept choices the game data does not carry (curation.json): which creatures to list and in
-which biomes, which variants join them or are left out and why, and the names of the attacks, which
-the game does not have (taken from the Valheim wiki where it gives them)."""
+"""Hand-kept choices the game data does not carry (curation.json): the order of the biomes, which
+creatures to list and in which order, which variants join them, which later phases a boss has, which
+creatures are left out and why, item patterns left out of the Arsenal, and the names of the attacks
+whose item has no localised name in the game (taken from the Valheim wiki where it gives them). Where a
+creature lives, its levels and everything about its attacks come from the game data."""
 import json
 
 from . import source

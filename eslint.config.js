@@ -6,8 +6,9 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default defineConfig([
-  // design/ holds the mockup canvas and its Python/node tooling, outside the app's toolchain.
-  globalIgnores(['dist', 'coverage', 'design']),
+  // design/ holds the mockup canvas and its Python/node tooling, outside the app's toolchain, and the
+  // extraction's Python environment and output hold third-party and generated files.
+  globalIgnores(['dist', 'coverage', 'design', 'tools/extract/.venv', 'tools/extract/out']),
 
   {
     files: ['**/*.{ts,tsx,js}'],

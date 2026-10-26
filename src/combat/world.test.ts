@@ -20,6 +20,16 @@ describe('worldScale', () => {
     expect(worldScale({ difficulty: 'normal', players: 3 }).you).toBeCloseTo(1 / 1.6, 9)
   })
 
+  it('counts at most 5 players (Game.m_difficultyScaleMaxPlayers)', () => {
+    expect(worldScale({ difficulty: 'normal', players: 8 })).toEqual(
+      worldScale({ difficulty: 'normal', players: 5 }),
+    )
+  })
+
+  it('counts at least the player being hit', () => {
+    expect(worldScale({ difficulty: 'normal', players: 0 })).toEqual({ enemy: 1, you: 1 })
+  })
+
   it('stacks the difficulty and the players', () => {
     const scale = worldScale({ difficulty: 'hard', players: 2 })
 

@@ -1,16 +1,44 @@
 import { describe, expect, it } from 'vitest'
 import { defenceOf } from '@/combat/block'
-import { damageMultiplier, type DamageModifier } from '@/combat/creature'
+import { damageMultiplier, type DamageModifier } from '@/combat/modifiers'
 import { DAMAGE_TYPES } from '@/combat/damage'
 import { resolveHit } from '@/combat/hit'
+import { worldScale } from '@/combat/world'
 import { game } from '.'
 
 const biomeIds = new Set(game.biomes.map((biome) => biome.id))
-const hits = game.creatures.flatMap((c) => c.attacks.flatMap((a) => a.hits ?? []))
+const fighters = game.creatures.flatMap((c) => [c, ...(c.phases ?? [])])
+const attacks = fighters.flatMap((f) => f.attacks)
+const hits = [
+  ...attacks.flatMap((a) => a.hits),
+  ...fighters.flatMap((f) => [...(f.onDeath ?? []), ...(f.trample?.hits ?? [])]),
+]
+const summons = [
+  ...attacks.flatMap((a) => a.summons ?? []),
+  ...fighters.flatMap((f) => f.deathSummons ?? []),
+]
+const statusEffects = Object.values(game.statusEffects)
 const names = [
   ...game.biomes.map((b) => b.name),
-  ...game.creatures.flatMap((c) => [c.name, ...c.attacks.map((a) => a.name)]),
+  ...Object.values(game.damageTypes),
+  ...Object.values(game.toolTypes),
+  ...Object.values(game.modifiers),
+  ...game.world.presets.map((p) => p.name),
+  ...statusEffects.map((s) => s.name),
+  ...game.creatures.map((c) => c.name),
+  ...attacks.map((a) => a.name),
+  ...summons.flatMap((s) => (s.name ? [s.name] : [])),
   ...game.blockers.map((b) => b.name),
+]
+const modifierSets = [
+  game.player.modifiers,
+  ...statusEffects.map((s) => s.modifiers),
+  ...game.blockers.map((b) => b.modifiers),
+  ...fighters.flatMap((f) => [
+    f.modifiers,
+    f.toolModifiers ?? {},
+    ...(f.weakSpots ?? []).flatMap((spot) => [spot.modifiers, spot.toolModifiers ?? {}]),
+  ]),
 ]
 const blocker = (id: string) => {
   const found = game.blockers.find((b) => b.id === id)
@@ -21,7 +49,11 @@ const duplicates = (ids: string[]) => ids.filter((id, index) => ids.indexOf(id) 
 
 describe('game data', () => {
   it('places every creature in biomes the data lists', () => {
-    expect(game.creatures.filter((c) => !c.biomes.every((b) => biomeIds.has(b)))).toEqual([])
+    const biomes = game.creatures.flatMap((c) => [
+      ...c.biomes,
+      ...(c.conditional ?? []).flatMap((appearance) => appearance.biomes),
+    ])
+    expect(biomes.filter((b) => !biomeIds.has(b))).toEqual([])
   })
 
   it('deals only the damage types the engine knows', () => {
@@ -30,7 +62,7 @@ describe('game data', () => {
   })
 
   it('uses only damage modifiers the engine can apply', () => {
-    const states = game.creatures.flatMap<DamageModifier>((c) => Object.values(c.modifiers))
+    const states = modifierSets.flatMap<DamageModifier>((set) => Object.values(set))
     expect(states.filter((state) => typeof damageMultiplier(state) !== 'number')).toEqual([])
   })
 
@@ -41,6 +73,49 @@ describe('game data', () => {
   it('has unique creature and blocker ids', () => {
     expect(duplicates(game.creatures.map((c) => c.id))).toEqual([])
     expect(duplicates(game.blockers.map((b) => b.id))).toEqual([])
+  })
+
+  it('describes every status effect an attack carries', () => {
+    const carried = attacks.flatMap((a) => [
+      ...(a.statusEffect ? [a.statusEffect.id] : []),
+      ...(a.leaves ?? []).map((pool) => pool.statusEffect),
+    ])
+    expect(carried.filter((id) => !(id in game.statusEffects))).toEqual([])
+  })
+
+  it('names the attacks of one fighter apart', () => {
+    const clashes = fighters.flatMap((f) =>
+      (['fr', 'en'] as const).flatMap((lang) => {
+        const used = f.attacks.map((a) => a.name[lang])
+        return duplicates(used)
+      }),
+    )
+    expect(clashes).toEqual([])
+  })
+
+  it('gives every attack something to deal or to summon', () => {
+    expect(attacks.filter((a) => a.hits.length === 0 && !a.summons?.length)).toEqual([])
+  })
+
+  it('lets a parry stagger only a creature that can be staggered', () => {
+    expect(fighters.filter((f) => f.staggeredByParry && !f.staggerable)).toEqual([])
+  })
+
+  it('keeps star ranges in order', () => {
+    expect(game.creatures.filter((c) => c.stars.min > c.stars.max)).toEqual([])
+  })
+
+  it('scales the world the way the engine does', () => {
+    for (const preset of game.world.presets) {
+      expect(worldScale({ difficulty: preset.id, players: 1 })).toEqual({
+        enemy: preset.enemyDamage,
+        you: preset.playerDamage,
+      })
+    }
+    const { maxPlayers, damageScalePerPlayer, healthScalePerPlayer } = game.world
+    const crowded = worldScale({ difficulty: 'normal', players: maxPlayers + 3 })
+    expect(crowded.enemy).toBeCloseTo(1 + (maxPlayers - 1) * damageScalePerPlayer, 9)
+    expect(crowded.you).toBeCloseTo(1 / (1 + (maxPlayers - 1) * healthScalePerPlayer), 9)
   })
 
   it('charges the stamina and fills the bar the way the engine does', () => {
@@ -72,6 +147,6 @@ describe('game data', () => {
         armor: 45,
         maxHealth: 150,
       }),
-    ).toEqual({ blockPower: 81, parryPower: 121.5, armor: 45, maxHealth: 150 })
+    ).toMatchObject({ blockPower: 81, parryPower: 121.5 })
   })
 })

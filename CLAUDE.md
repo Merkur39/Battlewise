@@ -19,8 +19,10 @@ seconds and next to the game, how to take each creature with your gear. French a
   and `game` (`src/data/index.ts`); `game.test.ts` checks it against the engine.
 - `src/app/`, `src/features/*`, `src/ui/`, `src/i18n/`: interface, tested under jsdom (`ui` project,
   setup in `test/setup.ts`).
-- `tools/extract/`: read-only extraction of the game data (reuses Relooking's `valheim_assets`);
-  `curation.json` holds what the game does not carry: creatures per biome, ignored variants, attack names.
+- `tools/extract/`: read-only extraction of the game data (UnityPy for the assets, the decompiled game
+  code for the rules); `curation.json` holds only what the game does not carry: which creatures to list,
+  their variants, the ignored ones and why, the attack names the game lacks. Game data and code prevail
+  over the wiki.
 - `src/styles/themes.css`: the seven palettes of the design canvas (16 tokens each), Origine by default,
   others via `data-theme` on `:root`.
 - `design/`: the validated mockups (Claude Design canvas) and their tooling; see `design/README.md`. Not
@@ -33,6 +35,6 @@ seconds and next to the game, how to take each creature with your gear. French a
   weaknesses stay neutral.
 - French UI says « VD », never « défense ».
 - Game names (creatures, items, biomes, damage types, modifier states) come from the game's own
-  localisation, in both languages, never translated by hand. The game names no monster attack: their
-  names live in `curation.json`, from the Valheim wiki where it has them, otherwise written by hand, each
-  with its source. The app ships numbers and names only, no game art.
+  localisation, in both languages, never translated by hand. The game names no monster attack, except
+  those made with a player's weapon, which take its name: the others live in `curation.json`, from the
+  Valheim wiki where it has them, otherwise written by hand, each with its source. The app ships numbers and names only, no game art.

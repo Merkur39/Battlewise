@@ -16,6 +16,8 @@ export type Damages = Partial<Record<DamageType, number>>
 
 // The only types that fill a stagger bar (HitData.DamageTypes.GetTotalStaggerDamage).
 const STAGGER_TYPES: readonly DamageType[] = ['blunt', 'slash', 'pierce', 'lightning']
+// Character.RPC_Damage takes these out of the hit and deals them over time (burning, poison, spirit).
+const OVER_TIME_TYPES: readonly DamageType[] = ['fire', 'poison', 'spirit']
 
 const sumOf = (damages: Damages, types: readonly DamageType[]) =>
   types.reduce((sum, type) => sum + (damages[type] ?? 0), 0)
@@ -23,6 +25,8 @@ const sumOf = (damages: Damages, types: readonly DamageType[]) =>
 export const totalDamage = (damages: Damages) => sumOf(damages, DAMAGE_TYPES)
 
 export const staggerDamage = (damages: Damages) => sumOf(damages, STAGGER_TYPES)
+
+export const overTimeDamage = (damages: Damages) => sumOf(damages, OVER_TIME_TYPES)
 
 export function scaleDamages(damages: Damages, factor: number): Damages {
   const scaled: Damages = {}

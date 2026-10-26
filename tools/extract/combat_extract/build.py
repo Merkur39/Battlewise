@@ -1,40 +1,59 @@
-"""Assembles game.json from the scan, the attacks, the localisation and the curation, and reports what
-the curation misses."""
-import fnmatch
+"""Assembles game.json from the game data (components, animators, spawns, localisation, code) and the
+curation, which only chooses the creatures, groups their variants and phases and names the attacks the
+game leaves unnamed; it reports what the curation misses or no longer matches.
+
+How an attack plays decides what is kept of it (animation.attack_play):
+- nothing plays (no transition waits for its trigger) or no Hit event: it never strikes, and is left out,
+  unless it kills its user, which then dies within a second as the AI swaps weapons (Attack.Stop): only
+  its death hits are kept;
+- a random variant that plays nothing lowers the chance of each hit by its share (Attack.Start);
+- several Hit events: "strikes", each one dealing the hits;
+- a chain swing only follows if it starts within 0.2 s of the end of the previous one (Attack.Start),
+  but MonsterAI waits m_aiAttackInterval from the previous start and m_minAttackInterval from its end:
+  a chain whose last swing the AI cannot reach is no chain;
+- projectile bursts stop with the attack (Attack.Update stops it once its states are left).
+"""
 import json
+import math
 import re
 
+from . import animation, arsenal, components, source, spawns
 from . import attacks as attack_data
-from . import scan as scanning
-from . import source
+from .damage import DAMAGE_TYPES, MODIFIERS, TOOL_TYPES, modifiers, pair_modifiers
 
-# Heightmap.Biome bits and their localisation keys.
-BIOMES = {
-    "meadows": (1, "biome_meadows"),
-    "swamp": (2, "biome_swamp"),
-    "mountain": (4, "biome_mountain"),
-    "blackForest": (8, "biome_blackforest"),
-    "plains": (16, "biome_plains"),
-    "ashlands": (32, "biome_ashlands"),
-    "deepNorth": (64, "biome_deepnorth"),
-    "ocean": (256, "biome_ocean"),
-    "mistlands": (512, "biome_mistlands"),
+# Heightmap.Biome names (spawns.BIOMES) and their localisation keys.
+BIOME_KEYS = {
+    "meadows": "biome_meadows",
+    "swamp": "biome_swamp",
+    "mountain": "biome_mountain",
+    "blackForest": "biome_blackforest",
+    "plains": "biome_plains",
+    "ashlands": "biome_ashlands",
+    "deepNorth": "biome_deepnorth",
+    "ocean": "biome_ocean",
+    "mistlands": "biome_mistlands",
 }
-# HitData.DamageModifier, in enum order.
-MODIFIERS = [
-    "normal", "resistant", "weak", "immune", "ignore", "veryResistant", "veryWeak", "slightlyResistant", "slightlyWeak",
-]
-NOT_HOSTILE = {0, 11, 12}  # Players, PlayerSpawned, TrainingDummy
-BLOCKER_TYPES = {3: "weapon", 4: "weapon", 5: "shield", 14: "weapon", 15: "other", 22: "weapon"}
+NOT_HOSTILE = {0, 11, 12}  # Character.Faction: Players, PlayerSpawned, TrainingDummy
+COMBAT_SLIDER = 1  # WorldModifiers.Combat, the KeySlider of the start screen's « Combat » setting
+PRESETS = {"veryeasy": "veryEasy", "easy": "easy", "normal": "normal", "hard": "hard", "veryhard": "veryHard"}
+CHAIN_WINDOW = 0.2  # Attack.Start: a chain goes on when the next swing starts this soon after the last
+CLASSES = sorted(
+    set(attack_data.CLASSES) | set(spawns.CLASSES) | set(arsenal.CLASSES)
+    | {"Player", "Game", "WeakSpot", "KeySlider", "SE_Stats", "MonsterAI"}
+)
 TAG = re.compile(r"<[^>]+>")
+WEAK_SPOT = re.compile(r"^weak_?spot_?", re.I)
 
 
 class Report:
     def __init__(self):
-        self.uncurated = []  # hostile creatures with attacks, neither listed nor ignored
-        self.missing = []  # listed creatures the game does not have
-        self.biome_conflicts = []  # open-world spawns in a biome the curation does not give
-        self.unnamed = []  # attacks without a name in curation.json
+        self.uncurated = []  # hostile creatures met somewhere, with attacks, neither listed nor ignored
+        self.missing = []  # listed creatures, variants, phases or status effects the game does not have
+        self.unplaced = []  # listed creatures met nowhere
+        self.divergent = []  # variants whose stats differ from the creature they join
+        self.unnamed = []  # (creature, attack id) named neither by the game nor by curation.json
+        self.unused_names = []  # curation.json attack names no attack needs
+        self.stale_ignored = []  # ignored names that are no creature prefab of the game
 
 
 class Names:
@@ -47,118 +66,351 @@ class Names:
         fr = TAG.sub("", self.loc.get(key, "French") or "").strip()
         return {"fr": fr or en, "en": en}  # the game falls back to English as well
 
+    def text(self, value):
+        """A text field as Localization.Localize shows it: a $key looked up, any other text as it is."""
+        if (value or "").startswith("$"):
+            return self(value)
+        text = TAG.sub("", value or "").strip()
+        return {"fr": text, "en": text}
+
 
 def _round(value, digits=4):
     value = round(float(value), digits)
     return int(value) if value.is_integer() else value
 
 
-def _modifiers(raw):
-    states = {t: MODIFIERS[raw.get("m_" + t, 0)] for t in attack_data.DAMAGE_TYPES}
-    return {t: s for t, s in states.items() if s != "normal"}
+def _unique(values):
+    seen, result = set(), []
+    for value in values:
+        key = json.dumps(value, sort_keys=True)
+        if key not in seen:
+            seen.add(key)
+            result.append(value)
+    return result
 
 
-def _attacks(rows, curated_names, report, creature):
-    """Named attacks, identical ones (same name, kind and hits) merged."""
-    merged = {}
-    for row in rows:
-        name = curated_names.get(row["id"])
-        if name is None:
-            report.unnamed.append((creature, row["id"]))
-            name = {}
-        name = {k: name[k] for k in ("fr", "en") if k in name}
-        key = (name.get("en"), name.get("fr"), row["kind"], json.dumps(row["hits"], sort_keys=True))
-        if key in merged:
-            merged[key]["ids"].append(row["id"])
-        else:
-            merged[key] = {"ids": [row["id"]], "name": name, "kind": row["kind"], "hits": row["hits"]}
-    return list(merged.values())
+def _chain_reach(levels, cooldown, min_interval):
+    """How many chain levels the AI plays in a row (see the module notes): none past a level that plays
+    nothing; a level whose end is unknown lets the next one come."""
+    reach = 0
+    for level in levels:
+        if level is None:
+            break
+        reach += 1
+        if min_interval > CHAIN_WINDOW or (level["end"] is not None and cooldown > level["end"] + CHAIN_WINDOW):
+            break
+    return reach
 
 
-def _blocker(row, names):
-    group = BLOCKER_TYPES[row["itemType"]]
-    bonus = _round(row["timedBlockBonus"])
-    if group == "shield":
-        group = "buckler" if bonus > 2 else "tower" if bonus <= 1 else "round"
+def _cap_bursts(attack, play):
+    """Bursts fire every `every` s from the first Hit event on, until the attack ends."""
+    if not play or not play["hits"] or play["end"] is None:
+        return
+    for hit in attack["hits"]:
+        bursts = hit.get("bursts")
+        if not bursts:
+            continue
+        fit = math.floor((play["end"] - play["hits"][0]) / bursts["every"] - 1e-6) + 1
+        if fit < bursts["count"]:
+            for summon in attack.get("summons", []):
+                summon["min"] = summon["min"] // bursts["count"] * fit
+                summon["max"] = summon["max"] // bursts["count"] * fit
+            if fit > 1:
+                hit["bursts"] = dict(bursts, count=fit)
+            else:
+                del hit["bursts"]
+
+
+def _lowered(attack, share):
+    """Each hit and summon of an attack that only plays in `share` of its uses."""
+    for one in attack["hits"] + attack.get("summons", []):
+        one["chance"] = _round(one.get("chance", 1) * share, 2)
+
+
+class _Game:
+    """What the build reads from one components.collect, by prefab."""
+
+    def __init__(self, index, found, names, curation):
+        self.names, self.curation = names, curation
+        self.characters = {}  # prefab -> Humanoid or Character row of the prefab root
+        for cls in attack_data.CHARACTERS:
+            for row in found.rows(cls):
+                if row["go_ref"] and row["go_ref"] == row["root_ref"]:
+                    self.characters.setdefault(row["go"], dict(row, humanoid=cls == "Humanoid"))
+        self.attacks = attack_data.creature_attacks(index, self.characters.values(), found)
+        self.animations = animation.creature_animations(index, self.characters.values())
+        self.presence = spawns.resolve(index, found)
+        self.weak_spots = {"%s:%s" % (row["cab"], row["pid"]): row for row in found.rows("WeakSpot")}
+        self.min_attack_interval = {
+            row["go"]: row["data"]["m_minAttackInterval"] for row in found.rows("MonsterAI")
+            if row["go_ref"] == row["root_ref"]
+        }
+        self.item_names = {}
+        for row in found.rows("ItemDrop"):
+            if row["go_ref"] == row["root_ref"]:
+                self.item_names.setdefault(row["go"], row["data"]["m_itemData"]["m_shared"]["m_name"])
+
+    def data(self, prefab):
+        return self.characters[prefab]["data"]
+
+    # ------------------------------------------------------------------ attacks
+    def final_attacks(self, prefab):
+        """The creature's attacks that can hit, as they play, before naming and merging."""
+        played = self.animations.get(prefab) or {"controller": None, "triggers": {}}
+        result = []
+        for attack in self.attacks.get(prefab, {}).get("attacks", []):
+            attack = json.loads(json.dumps(attack))
+            how = attack.pop("animation")
+            if not how["name"]:
+                continue  # Attack.Start needs an animation
+            play = animation.attack_play(played, {
+                "m_attackAnimation": how["name"], "m_attackRandomAnimations": how["random"],
+                "m_attackChainLevels": how["chain"],
+            })
+            if play is not None and play["levels"]:
+                cooldown = attack.get("ai", {}).get("cooldown", attack_data.AI_DEFAULTS["cooldown"])
+                reach = _chain_reach(play["levels"], cooldown, self.min_attack_interval.get(prefab, 0))
+                if reach < len(play["levels"]):
+                    attack.pop("chain", None)
+                best = max(play["levels"][:reach], key=lambda level: len(level["hits"]), default=None)
+                play = dict(play, **best) if best else None  # None: its first swing plays nothing
+            if play is not None and play["hits"]:
+                _cap_bursts(attack, play)
+                if play["share"] < 1:
+                    _lowered(attack, play["share"])
+                if len(play["hits"]) > 1:
+                    attack["strikes"] = {"count": len(play["hits"]), "times": [_round(t, 2) for t in play["hits"]]}
+            elif play is not None or played["controller"]:
+                # Nothing plays or no Hit event: it never strikes. A user it kills still dies (Attack.Stop).
+                if not attack.get("killsSelf"):
+                    continue
+                attack["hits"] = [hit for hit in attack["hits"] if hit.get("onDeath")]
+                for strike_only in ("summons", "statusEffect", "leaves"):
+                    attack.pop(strike_only, None)
+                if not attack["hits"]:
+                    continue
+            if "summons" in attack:
+                attack["summons"] = [self.summon(s) for s in attack["summons"]]
+            result.append(attack)
+        return result
+
+    def summon(self, summon):
+        """The summon with the creature's name, as the game shows it."""
+        name = self.names.text(self.data(summon["id"])["m_name"]) if summon["id"] in self.characters else None
+        return dict({"id": summon["id"], "name": name}, **summon) if name and name["en"] else summon
+
+    def attack_name(self, attack_id):
+        """The name of the game item behind the attack when it has a localised one, else the curated one."""
+        key = self.item_names.get(attack_id) or ""
+        if key.startswith("$"):
+            name = self.names(key)
+            if name["en"]:
+                return name, "game"
+        name = self.curation["attacks"].get(attack_id)
+        return ({"fr": name["fr"], "en": name["en"]}, "curation") if name else (None, None)
+
+    def named_attacks(self, creature, prefabs, report, used):
+        """Named attacks of a creature and its variants, identical ones merged."""
+        merged = {}
+        for prefab in prefabs:
+            for attack in self.final_attacks(prefab):
+                name, origin = self.attack_name(attack["id"])
+                if origin == "curation":
+                    used.add(attack["id"])
+                if name is None:
+                    report.unnamed.append((creature, attack["id"]))
+                    name = {"fr": "", "en": ""}
+                found = dict({"ids": [attack["id"]], "name": name}, **{k: v for k, v in attack.items() if k != "id"})
+                key = json.dumps({k: v for k, v in found.items() if k != "ids"}, sort_keys=True)
+                if key not in merged:
+                    merged[key] = found
+                elif attack["id"] not in merged[key]["ids"]:
+                    merged[key]["ids"].append(attack["id"])
+        return list(merged.values())
+
+    # ------------------------------------------------------------------ creatures
+    def weak_spots_of(self, prefab):
+        """Character.m_weakSpots: modifiers a hit on that collider takes instead of the creature's own. A
+        WeakSpot under an inactive object never runs Awake, which sets the collider it is found by."""
+        spots = []
+        for pptr in self.data(prefab)["m_weakSpots"]:
+            row = self.weak_spots.get(pptr.get("_ref"))
+            if row is None or not row["active"]:
+                continue
+            raw = row["data"]["m_damageModifiers"]
+            spot = {"part": WEAK_SPOT.sub("", row["go"]).lower(), "modifiers": modifiers(raw)}
+            tools = modifiers(raw, TOOL_TYPES, left_out=("ignore",))
+            if tools:
+                spot["toolModifiers"] = tools
+            spots.append(spot)
+        return spots
+
+    def stats(self, prefab):
+        """What fighting the prefab takes, attacks aside."""
+        data = self.data(prefab)
+        staggerable = bool((self.animations.get(prefab) or {}).get("staggerable"))
+        stats = {
+            "health": _round(data["m_health"]),
+            "staggerFactor": _round(data["m_staggerDamageFactor"]),
+            "staggerable": staggerable,
+            "staggeredByParry": bool(data["m_staggerWhenBlocked"]) and staggerable,
+            "modifiers": modifiers(data["m_damageModifiers"]),
+        }
+        tools = modifiers(data["m_damageModifiers"], TOOL_TYPES, left_out=("ignore",))
+        if tools:
+            stats["toolModifiers"] = tools
+        spots = self.weak_spots_of(prefab)
+        if spots:
+            stats["weakSpots"] = spots
+        return stats
+
+    def fights(self, creature, prefabs, report, used):
+        """attacks, trample, onDeath and deathSummons of a creature and its variants."""
+        fight = {"attacks": self.named_attacks(creature, prefabs, report, used)}
+        trample = next((self.attacks[p]["trample"] for p in prefabs if "trample" in self.attacks.get(p, {})), None)
+        if trample:
+            fight["trample"] = trample
+        death = _unique(hit for p in prefabs for hit in self.attacks.get(p, {}).get("onDeath", []))
+        if death:
+            fight["onDeath"] = death
+        summons = _unique(self.summon(one) for p in prefabs for one in self.attacks.get(p, {}).get("deathSummons", []))
+        if summons:
+            fight["deathSummons"] = summons
+        return fight
+
+    def phase(self, creature, previous, prefab, report, used):
+        """A later phase: the creature its previous phase's death spawns (Character.OnDeath)."""
+        effects = self.data(previous)["m_deathEffects"]["m_effectPrefabs"]
+        if not any((e["m_prefab"] or {}).get("_ref") == self.characters[prefab]["go_ref"] for e in effects):
+            report.missing.append("phase %s, spawned by the death of %s" % (prefab, previous))
+        return dict({"id": prefab}, **self.stats(prefab), **self.fights(creature, [prefab], report, used))
+
+    def creature(self, prefab, entry, report, used):
+        data = self.data(prefab)
+        prefabs = [prefab] + entry.get("also", [])
+        main = self.stats(prefab)
+        report.divergent += [p for p in entry.get("also", []) if self.stats(p) != main]
+        found = [self.presence[p] for p in prefabs if p in self.presence]
+        order = self.curation["biomes"]
+        native = {b for f in found for b in f["native"]}
+        conditional = _unique(c for f in found for c in f["conditional"])
+        biomes = native or {b for c in conditional for b in c["biomes"]}
+
+        creature = dict({"id": prefab, "name": self.names.text(data["m_name"]), "boss": bool(data["m_boss"])}, **main)
+        creature["biomes"] = sorted(biomes, key=lambda b: order.index(b) if b in order else len(order))
+        if conditional:
+            creature["conditional"] = conditional
+        if found:
+            creature["stars"] = {"min": min(f["stars"]["min"] for f in found), "max": max(f["stars"]["max"] for f in found)}
+        levels = {f["level"] for f in found}
+        if len(found) == len(prefabs) and len(levels) == 1 and None not in levels:
+            creature["level"] = levels.pop()
+        creature.update(self.fights(prefab, prefabs, report, used))
+        phases, previous = [], prefab
+        for later in entry.get("phases", []):
+            phases.append(self.phase(prefab, previous, later, report, used))
+            previous = later
+        if phases:
+            creature["phases"] = phases
+        if not biomes:
+            report.unplaced.append(prefab)
+        return creature
+
+    def uncurated(self):
+        listed = set(self.curation["creatures"])
+        listed |= {p for e in self.curation["creatures"].values() for p in e.get("also", []) + e.get("phases", [])}
+        return sorted(
+            prefab for prefab, row in self.characters.items()
+            if prefab not in listed and prefab not in self.curation["ignored"] and prefab in self.presence
+            and row["data"]["m_faction"] not in NOT_HOSTILE and self.final_attacks(prefab)
+        )
+
+
+# ---------------------------------------------------------------------- player and world
+def _player(found):
+    data = next(row for row in found.rows("Player") if row["go_ref"] == row["root_ref"])["data"]
     return {
-        "id": row["go"],
-        "name": names(row["name"]),
-        "group": group,
-        "maxQuality": row["maxQuality"],
-        "blockPower": _round(row["blockPower"]),
-        "blockPowerPerLevel": _round(row["blockPowerPerLevel"]),
-        "timedBlockBonus": bonus,
-        "deflectionForce": _round(row["deflectionForce"]),
-        "deflectionForcePerLevel": _round(row["deflectionForcePerLevel"]),
-        "movementModifier": _round(row["movementModifier"]),
-        "perfectBlockStaminaRegen": _round(row["perfectBlockStaminaRegen"] or 0),
+        "modifiers": modifiers(data["m_damageModifiers"]),
+        "blockStaminaDrain": _round(data["m_blockStaminaDrain"]),
+        "perfectBlockStaminaDrain": _round(data["m_perfectBlockStaminaDrain"]),
+        "staggerFactor": _round(data["m_staggerDamageFactor"]),
+        "dodgeStamina": _round(data["m_dodgeStaminaUsage"]),
+        "perfectDodgeRefund": _round(data["m_perfectDodgeStaminaReturnMultiplier"]),
     }
+
+
+def _world(found, names):
+    """Game's per-player scaling and the presets of the start screen's Combat slider, whose keys
+    Game.UpdateWorldRates reads as percentages."""
+    game = found.rows("Game")[0]["data"]
+    sliders = [row for row in found.rows("KeySlider") if row["data"]["m_modifier"] == COMBAT_SLIDER]
+    slider = next((row for row in sliders if row["active"]), sliders[0])["data"]
+    presets = []
+    for setting in slider["m_settings"]:
+        keys = dict(key.split() for key in setting["m_keys"])
+        presets.append({
+            "id": PRESETS[setting["m_name"].lstrip("$").removeprefix("menu_modifier_")],
+            "name": names(setting["m_name"]),
+            "enemyDamage": _round(int(keys.get("enemydamage", 100)) / 100),
+            "playerDamage": _round(int(keys.get("playerdamage", 100)) / 100),
+        })
+    return {
+        "damageScalePerPlayer": _round(game["m_damageScalePerPlayer"]),
+        "healthScalePerPlayer": _round(game["m_healthScalePerPlayer"]),
+        "maxPlayers": game["m_difficultyScaleMaxPlayers"],
+        "range": _round(game["m_difficultyScaleRange"]),
+        "presets": presets,
+    }
+
+
+def _status_effects(found, creatures, names, report):
+    """The status effects the attacks carry or leave (SE_Stats, by asset name)."""
+    stats = {row["data"]["m_Name"]: row["data"] for row in found.rows("SE_Stats")}
+    attacks = [a for c in creatures for fight in [c] + c.get("phases", []) for a in fight["attacks"]]
+    carried = {a["statusEffect"]["id"] for a in attacks if "statusEffect" in a}
+    left = {pool["statusEffect"] for a in attacks for pool in a.get("leaves", [])}
+    result = {}
+    for se_id in sorted(carried | left):
+        se = stats.get(se_id)
+        if se is None:
+            report.missing.append("status effect " + se_id)
+            continue
+        result[se_id] = {
+            "name": names(se["m_name"]),
+            "ttl": _round(se["m_ttl"]),
+            "speedModifier": _round(se["m_speedModifier"]),
+            "modifiers": pair_modifiers(se["m_mods"]),
+        }
+    return result
 
 
 def build(index, curation, workers=8):
     """(game.json data, Report)."""
     report = Report()
-    found = scanning.scan(workers)
-    characters = {}
-    for row in found.characters:
-        characters.setdefault(row["go"], row)
-    attacks = attack_data.creature_attacks(index, characters.values())
+    found = components.collect(CLASSES, workers)
     names = Names(source.localization.load(index))
+    game = _Game(index, found, names, curation)
 
-    creatures = []
+    creatures, used = [], set()
     for prefab, entry in curation["creatures"].items():
-        row = characters.get(prefab)
-        if row is None:
-            report.missing.append(prefab)
-            continue
-        rows = [a for p in [prefab] + entry.get("also", []) for a in attacks.get(p, [])]
-        creatures.append({
-            "id": prefab,
-            "name": names(row["name"]),
-            "biomes": entry["biomes"],
-            "boss": bool(row["boss"]),
-            "health": _round(row["health"]),
-            "staggerFactor": _round(row["staggerDamageFactor"]),
-            "staggeredByParry": bool(row["staggerWhenBlocked"]),
-            "modifiers": _modifiers(row["damageModifiers"]),
-            "attacks": _attacks(rows, curation["attacks"], report, prefab),
-        })
-
-    listed = set(curation["creatures"]) | {p for e in curation["creatures"].values() for p in e.get("also", [])}
-    report.uncurated = sorted(
-        p for p, row in characters.items()
-        if attacks.get(p) and row["faction"] not in NOT_HOSTILE and p not in listed and p not in curation["ignored"]
-    )
-    bits = {bit: biome for biome, (bit, _) in BIOMES.items()}
-    report.biome_conflicts = sorted({
-        "%s spawns in %s" % (s["prefab"], bits[s["biome"]])
-        for s in found.spawns
-        if s["enabled"] and not s["globalKey"] and s["biome"] in bits and s["prefab"] in curation["creatures"]
-        and bits[s["biome"]] not in curation["creatures"][s["prefab"]]["biomes"]
-    })
-
-    player = next(r for r in found.characters if r["go"] == "Player" and r["staggerDamageFactor"] > 0)
-    blockers = {}
-    for row in found.items:
-        if row["itemType"] not in BLOCKER_TYPES or row["go"] in blockers or (row["blockPower"] or 0) <= 0:
-            continue
-        if any(fnmatch.fnmatchcase(row["go"], pattern) for pattern in curation["ignoredItems"]):
-            continue
-        blocker = _blocker(row, names)
-        if blocker["name"]["en"]:
-            blockers[row["go"]] = blocker
+        absent = [p for p in [prefab] + entry.get("also", []) + entry.get("phases", []) if p not in game.characters]
+        report.missing += absent
+        if not absent:
+            creatures.append(game.creature(prefab, entry, report, used))
+    report.uncurated = game.uncurated()
+    report.unused_names = sorted(set(curation["attacks"]) - used)
+    report.stale_ignored = sorted(p for p in curation["ignored"] if p not in game.characters)
 
     data = {
         "game": source.game_version(),
-        "player": {
-            "blockStaminaDrain": _round(player["blockStaminaDrain"]),
-            "perfectBlockStaminaDrain": _round(player["perfectBlockStaminaDrain"]),
-            "staggerFactor": _round(player["staggerDamageFactor"]),
-        },
-        "biomes": [{"id": b, "name": names(BIOMES[b][1])} for b in curation["biomes"]],
-        "damageTypes": {t: names("inventory_" + t) for t in attack_data.DAMAGE_TYPES},
+        "world": _world(found, names),
+        "player": _player(found),
+        "biomes": [{"id": b, "name": names(BIOME_KEYS[b])} for b in curation["biomes"]],
+        "damageTypes": {t: names("inventory_" + t) for t in DAMAGE_TYPES},
+        "toolTypes": {t: names("inventory_" + t) for t in TOOL_TYPES},
         "modifiers": {m: names("inventory_" + m.lower()) for m in MODIFIERS if m not in ("normal", "ignore")},
+        "statusEffects": _status_effects(found, creatures, names, report),
         "creatures": creatures,
-        "blockers": sorted(blockers.values(), key=lambda b: (b["group"], b["blockPower"], b["id"])),
+        "blockers": arsenal.blockers(found, names, curation["ignoredItems"]),
     }
     return data, report

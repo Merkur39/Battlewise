@@ -155,4 +155,97 @@ describe('resolveHit', () => {
   it('has no parry to resolve with an item that cannot parry', () => {
     expect(resolveHit(ironTower, hitOf({ blunt: 90 }), alone(), parry)).toBeNull()
   })
+
+  it('leaves the stars out of a hit with its own damage', () => {
+    const result = resolveHit(
+      silverShield,
+      hitOf({ blunt: 90 }, { scaling: 'world' }),
+      alone('hard'),
+      {
+        ...block,
+        stars: 1,
+      },
+    )
+
+    expect(result?.received).toBe(135)
+  })
+
+  it('leaves the world out of a hit with no owner', () => {
+    const result = resolveHit(
+      silverShield,
+      hitOf({ blunt: 90 }, { scaling: 'none' }),
+      alone('hard'),
+      {
+        ...block,
+        stars: 1,
+      },
+    )
+
+    expect(result?.received).toBe(90)
+  })
+
+  it('adds true damage past the guard and the armor, without stagger', () => {
+    const result = resolveHit(
+      silverShield,
+      hitOf({ blunt: 80, frost: 10 }, { trueDamage: 15 }),
+      alone(),
+      block,
+    )
+
+    expect(result?.received).toBe(105)
+    expect(result?.taken).toBeCloseTo(3.47 + 15, 2)
+    expect(result?.bar.armor).toBeCloseTo(3.47 * (80 / 90), 2)
+  })
+
+  it('scales true damage with the stars but not with the world', () => {
+    const result = resolveHit(
+      silverShield,
+      hitOf({ blunt: 90 }, { trueDamage: 15 }),
+      alone('hard'),
+      {
+        ...block,
+        stars: 1,
+      },
+    )
+
+    expect(result?.received).toBe(90 * 1.5 * 1.5 + 15 * 1.5)
+  })
+
+  it("applies the player's modifiers past the guard, before the armor", () => {
+    const immune: Defence = { ...silverShield, modifiers: { spirit: 'immune' } }
+    const result = resolveHit(immune, hitOf({ slash: 90, spirit: 30 }), alone(), block)
+
+    // 120 against 81 leaves 44.4, of which 11.1 spirit: only the 33.3 slash meets the armor.
+    expect(result?.taken).toBeCloseTo(33.33 ** 2 / 180, 2)
+  })
+
+  it("applies the shield's modifiers before the block, and keeps them when it breaks", () => {
+    const serpent: Defence = { ...silverShield, blockerModifiers: { pierce: 'resistant' } }
+    const result = resolveHit(serpent, hitOf({ pierce: 400 }), alone(), block)
+
+    expect(result?.received).toBe(400)
+    expect(result?.verdict).toBe('broken')
+    expect(result?.taken).toBe(200 - 45)
+  })
+
+  it('gives stamina back on a parry with an item that refunds it', () => {
+    const torch: Defence = { ...silverShield, parryStaminaRegen: 10 }
+
+    expect(resolveHit(torch, hitOf({ blunt: 90 }), alone(), parry)?.stamina).toBe(-10)
+  })
+
+  it('tells apart what burns over time', () => {
+    const result = resolveHit(silverShield, hitOf({ slash: 45, fire: 45 }), alone(), block)
+
+    expect(result?.overTime).toBeCloseTo(3.47 / 2, 2)
+  })
+
+  it('drops a direct remainder of 0.1 or less but still burns', () => {
+    const bare: Defence = { ...silverShield, armor: 0 }
+    const result = resolveHit(bare, hitOf({ blunt: 2, fire: 8 }), alone(), block)
+
+    // 10 against 81 leaves 0.31: 0.06 blunt, dropped, and 0.25 fire, burned.
+    expect(result?.taken).toBeCloseTo(0.247, 3)
+    expect(result?.bar.armor).toBe(0)
+  })
 })

@@ -3,9 +3,10 @@
 
     python extract_combat.py [--out PATH]
 
-Fails without writing when the curation has a gap: a hostile creature neither listed nor ignored, a
-listed creature the game lacks, an open-world spawn in a biome the curation does not give, or an
-attack without a name.
+Fails without writing when the curation has a gap: a hostile creature met somewhere with attacks,
+neither listed nor ignored; a listed creature the game lacks or never places; a variant whose stats
+differ from its creature; an ignored name the game lacks; an attack without a name. Curated names the
+game makes useless are only reported.
 """
 import argparse
 import json
@@ -29,9 +30,13 @@ def main(argv=None):
     gaps = {
         "hostile creatures neither listed nor ignored": report.uncurated,
         "listed creatures missing from the game": report.missing,
-        "open-world spawns outside the curated biomes": report.biome_conflicts,
+        "listed creatures met nowhere": report.unplaced,
+        "variants whose stats differ from their creature (make them phases or creatures)": report.divergent,
+        "ignored names that are no creature prefab": report.stale_ignored,
         "attacks without a name": ["%s: %s" % pair for pair in report.unnamed],
     }
+    if report.unused_names:
+        print("curated attack names no longer needed:\n  %s" % "\n  ".join(report.unused_names), file=sys.stderr)
     if any(gaps.values()):
         for title, items in gaps.items():
             if items:
@@ -41,7 +46,7 @@ def main(argv=None):
     with open(args.out, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    attacks = sum(len(c["attacks"]) for c in data["creatures"])
+    attacks = sum(len(f["attacks"]) for c in data["creatures"] for f in [c] + c.get("phases", []))
     print("%d creatures, %d attacks, %d blockers (Valheim %s) -> %s"
           % (len(data["creatures"]), attacks, len(data["blockers"]), data["game"]["version"], args.out))
     return 0

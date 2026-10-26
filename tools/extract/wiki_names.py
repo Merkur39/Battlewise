@@ -1,5 +1,5 @@
 """Proposes English attack names from the Valheim wiki (valheim.fandom.com), whose creature infoboxes
-list each attack with its damage; the game itself names none of them.
+list each attack with its damage; the game only names the attacks made with a player item.
 
 Each extracted attack is matched to a wiki line with the same damage by type (chop and pickaxe left
 out), ties broken by the words shared with the item id; pages without an infobox line fall back on
