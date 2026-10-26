@@ -95,3 +95,50 @@ export const CheckIcon = (props: IconProps) => (
     <path d="M5 12l5 5L20 7" />
   </Icon>
 )
+
+export const WarningIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 9v4M12 17h.01" />
+    <path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+  </Icon>
+)
+
+export const ParryIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" />
+    <path d="M13 7.5l-3 4.5h4l-3 4.5" />
+  </Icon>
+)
+
+export const DodgeIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 16a8 8 0 0 1 14.5-6.5" />
+    <path d="M19 4.5v5h-5" />
+    <path d="M3 20h8" />
+  </Icon>
+)
+
+export const SearchIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="M20 20l-4-4" />
+  </Icon>
+)
+
+export const ChevronLeftIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M15 6l-6 6 6 6" />
+  </Icon>
+)
+
+export const ChevronRightIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M9 6l6 6-6 6" />
+  </Icon>
+)
+
+export const BackIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M19 12H5M11 6l-6 6 6 6" />
+  </Icon>
+)

@@ -1,0 +1,473 @@
+/* Phone: a page of its own, under a back arrow; the body scrolls. */
+.page {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageHeader {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: calc(10px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 4px 4px;
+}
+
+.back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.pageTitle {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.biome {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.pageBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+}
+
+.stars {
+  flex: none;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.star {
+  flex: 1;
+  height: 44px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.star[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.stats {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--line);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  background: var(--surface);
+}
+
+.statLabel {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.statNumber {
+  font-family: var(--font-mono);
+  font-size: 18px;
+}
+
+.statText {
+  padding-top: 3px;
+  font-size: 13px;
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.warn {
+  color: var(--warn);
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.none {
+  color: var(--secondary);
+}
+
+.advice {
+  flex: none;
+  font-size: 14px;
+}
+
+.label {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.modifiers {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: inherit;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Weaknesses stand out, resistances recede, immunities fade: never a verdict colour. */
+.chip {
+  padding: 3px 8px;
+  border: 1px solid;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.weak {
+  border-color: var(--secondary);
+  color: var(--ink);
+}
+
+.resistant {
+  border-color: var(--line);
+  color: var(--secondary);
+}
+
+.immune {
+  border-style: dashed;
+  border-color: var(--line);
+  color: var(--faint);
+}
+
+.chipIcon {
+  margin-right: 5px;
+  vertical-align: -2px;
+}
+
+.rest {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.attacks {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.attacksHeader,
+.attackRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px 90px 16px;
+  align-items: center;
+  gap: 8px;
+}
+
+.attacksHeader {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.damageHead {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--secondary);
+}
+
+.pillHeads {
+  display: flex;
+  gap: 4px;
+  color: var(--secondary);
+}
+
+.pillHeads > svg {
+  width: 26px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.phase {
+  display: block;
+  padding: 12px 0 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.attackRow {
+  min-height: 56px;
+  border-bottom: 1px solid var(--line-soft);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.attackRow:hover {
+  color: var(--ink);
+}
+
+.attackName {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attackTitle {
+  font-size: 14px;
+}
+
+.damage {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-align: right;
+}
+
+.chevron {
+  color: var(--faint);
+}
+
+.note {
+  margin: 0;
+  padding-top: 10px;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* Desktop: a panel beside the list, its own scroll; positioned, so that what is hidden for screen
+   readers stays inside it. */
+.panel {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.panelBody {
+  max-width: 860px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 32px 32px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.panelTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.panel .biome {
+  font-size: 12px;
+}
+
+.panel .stars .star {
+  flex: none;
+  width: 60px;
+  height: 36px;
+}
+
+.panel .stats {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  overflow: visible;
+  border: 0;
+  background: none;
+}
+
+.panel .stat {
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 6px;
+}
+
+.panel .statLabel {
+  font-size: 11px;
+}
+
+.panel .statNumber {
+  font-size: 24px;
+}
+
+.panel .statText {
+  padding-top: 4px;
+  font-size: 15px;
+}
+
+.panel .label {
+  font-size: 11px;
+}
+
+.panel .modifiers {
+  gap: 8px;
+}
+
+.panel .chips {
+  gap: 8px 12px;
+}
+
+.panel .chip {
+  padding: 4px 10px;
+}
+
+/* A narrow desktop scrolls the table in its box rather than the page. */
+.tableBox {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 0 12px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.table thead th {
+  height: 38px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--surface);
+  color: var(--secondary);
+}
+
+.table tbody tr > * {
+  height: 52px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 16px;
+}
+
+.attackCell {
+  max-width: 280px;
+}
+
+.attackCell .attackTitle {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.range {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.table .numeric {
+  text-align: right;
+}
+
+.tableDamage {
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.verdict {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.phaseRow th {
+  height: 36px;
+  background: var(--bg);
+}
+
+.phaseRow .phase {
+  padding: 0;
+}
+
+.simulate {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.panel .note {
+  padding-top: 0;
+}

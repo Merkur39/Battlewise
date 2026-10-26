@@ -7,20 +7,50 @@ export type Modal = (typeof MODALS)[number]
 
 export interface Route {
   readonly screen: Screen
+  /** What the screen shows inside it: a biome and a creature of the Bestiary… */
+  readonly path: readonly string[]
+  /** A search typed on the screen; empty when there is none. */
+  readonly query: string
   readonly modal: Modal | null
 }
 
-const oneOf = <T extends string>(values: readonly T[], value: string | null): T | undefined =>
+const oneOf = <T extends string>(values: readonly T[], value: string | null | undefined) =>
   values.find((option) => option === value)
 
-/** `#/arsenal`, `#/arsenal?modal=settings`; any other address is the Bestiary. */
-export function parseRoute(hash: string): Route {
-  const [path = '', query = ''] = hash.replace(/^#\/?/, '').split('?')
-  return {
-    screen: oneOf(SCREENS, path) ?? 'bestiary',
-    modal: oneOf(MODALS, new URLSearchParams(query).get('modal')) ?? null,
+// An address typed by hand may hold a broken escape: keep it as it is.
+function decode(segment: string) {
+  try {
+    return decodeURIComponent(segment)
+  } catch {
+    return segment
   }
 }
 
-export const routeHash = ({ screen, modal }: Route) =>
-  modal ? `#/${screen}?modal=${modal}` : `#/${screen}`
+/** `#/bestiary/swamp/Troll?q=tro&modal=settings`; an unknown screen is the Bestiary. */
+export function parseRoute(hash: string): Route {
+  const [location = '', search = ''] = hash.replace(/^#\/?/, '').split('?')
+  const [screen, ...path] = location
+    .split('/')
+    .filter((segment) => segment !== '')
+    .map(decode)
+  const params = new URLSearchParams(search)
+  return {
+    screen: oneOf(SCREENS, screen) ?? 'bestiary',
+    path,
+    query: params.get('q') ?? '',
+    modal: oneOf(MODALS, params.get('modal')) ?? null,
+  }
+}
+
+export function routeHash({ screen, path, query, modal }: Route): string {
+  const params = new URLSearchParams()
+  if (query !== '') params.set('q', query)
+  if (modal !== null) params.set('modal', modal)
+  const search = params.toString()
+  const location = [screen, ...path].map(encodeURIComponent).join('/')
+  return search === '' ? `#/${location}` : `#/${location}?${search}`
+}
+
+/** A screen, as its tab opens it. */
+export const screenHash = (screen: Screen) =>
+  routeHash({ screen, path: [], query: '', modal: null })

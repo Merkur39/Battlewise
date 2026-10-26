@@ -1,4 +1,4 @@
-import { blockPower } from '@/combat/block'
+import { blockPower, defenceOf, type Defence } from '@/combat/block'
 import { worldScale } from '@/combat/world'
 import { game } from '@/data'
 import type { GameBlocker, GameWorldPreset } from '@/data/types'
@@ -20,6 +20,10 @@ export function presetOf(world: World): GameWorldPreset {
 
 export const gearBlockPower = (gear: Gear) =>
   blockPower(blockerOf(gear.blocker), gear.level, gear.skill)
+
+/** What a hit is resolved against with this gear, the player's own modifiers included. */
+export const gearDefence = (gear: Gear): Defence =>
+  defenceOf({ ...gear, blocker: blockerOf(gear.blocker), modifiers: game.player.modifiers })
 
 /** What the world multiplies the hits monsters land on you by. */
 export const enemyScale = (world: World) => worldScale(world).enemy

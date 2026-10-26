@@ -25,25 +25,40 @@ export function useRoute(): Route {
   return useMemo(() => parseRoute(hash), [hash])
 }
 
-// The history state of an entry the app pushed to open a modal.
-const OPENED_HERE = 'battlewise:modal'
+// The history state of an entry the app pushed to open something from where the user stood: a modal,
+// the sheet of a creature. Back, or the way out the app offers, returns there.
+const OPENED_HERE = 'battlewise:opened'
 
-/** Opens `modal` over the current screen, as a history entry of its own: Back closes it. */
-export function openModal(modal: Modal) {
-  const { screen } = parseRoute(window.location.hash)
-  window.history.pushState(OPENED_HERE, '', routeHash({ screen, modal }))
+/** Opens `route` from the current one, as a history entry of its own: Back returns. */
+export function openRoute(route: Route) {
+  window.history.pushState(OPENED_HERE, '', routeHash(route))
   emit()
 }
 
-/** Back to the screen under the modal: through the history when the app opened it from there, in
+/** Returns to `parent`: through the history when the app opened the current route from there, in
  * place when an address led straight to it. */
-export function closeModal() {
-  const { screen, modal } = parseRoute(window.location.hash)
-  if (modal === null) return
+export function returnTo(parent: Route) {
   if (window.history.state === OPENED_HERE) {
     window.history.back()
   } else {
-    window.history.replaceState(null, '', routeHash({ screen, modal: null }))
+    window.history.replaceState(null, '', routeHash(parent))
     emit()
   }
+}
+
+/** Opens `modal` over the current screen. */
+export function openModal(modal: Modal) {
+  openRoute({ ...parseRoute(window.location.hash), modal })
+}
+
+/** Back to the screen under the modal. */
+export function closeModal() {
+  const route = parseRoute(window.location.hash)
+  if (route.modal !== null) returnTo({ ...route, modal: null })
+}
+
+/** Changes the address in place, without a history entry: a search as it is typed. */
+export function replaceRoute(route: Route) {
+  window.history.replaceState(window.history.state, '', routeHash(route))
+  emit()
 }

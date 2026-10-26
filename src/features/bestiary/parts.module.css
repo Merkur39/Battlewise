@@ -1,0 +1,32 @@
+.mark {
+  border-radius: 2px;
+  background: var(--selection);
+  color: var(--accent);
+}
+
+/* Damage types stay neutral: the text colour, never a verdict's. */
+.tags {
+  display: block;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--secondary);
+}
+
+/* Inline, so that the icon sits on the line of the words around it, as in the canvas. */
+.type svg {
+  margin-right: 3px;
+  vertical-align: -2px;
+}
+
+.type + .type {
+  margin-left: 6px;
+}
+
+.pills {
+  display: flex;
+  gap: 4px;
+}

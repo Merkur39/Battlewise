@@ -3,8 +3,14 @@ import type { Catalog } from './fr'
 
 const n = (value: number) => formatNumber(value, 'en')
 const plurals = new Intl.PluralRules('en')
-const players = (count: number) =>
-  `${n(count)} ${plurals.select(count) === 'one' ? 'player' : 'players'}`
+const plural = (count: number, one: string, other: string) =>
+  `${n(count)} ${plurals.select(count) === 'one' ? one : other}`
+const players = (count: number) => plural(count, 'player', 'players')
+const listOf = (words: readonly string[]) =>
+  new Intl.ListFormat('en', { type: 'conjunction' }).format(
+    words.map((word) => word.toLocaleLowerCase('en')),
+  )
+const quoted = (name: string) => `“${name}”`
 
 export const en: Catalog = {
   screens: { bestiary: 'Bestiary', simulation: 'Simulation', arsenal: 'Arsenal', guide: 'Guide' },
@@ -23,6 +29,87 @@ export const en: Catalog = {
     summary: (difficulty, count) =>
       `Your world: ${difficulty.toLocaleLowerCase('en')} combat, ${players(count)}`,
     playersAndScale: (count, enemyScale) => `${players(count)} · ×${n(enemyScale)}`,
+  },
+  verdicts: {
+    block: 'Block',
+    parry: 'Parry',
+    dodge: 'Dodge',
+    holds: 'holds',
+    staggered: 'you stagger',
+    broken: 'breaks',
+    unblockable: 'unblockable',
+    cannotParry: "can't parry",
+    nothing: 'no direct attack',
+    dodgeable: 'dodgeable',
+    undodgeable: 'undodgeable',
+    pill: (guard, word) => `${guard}: ${word}`,
+  },
+  advice: {
+    unknown: 'No direct attack',
+    blockAll: 'You block everything without staggering',
+    parryAll: 'Parry it: blocking staggers you',
+    dodgeAll: (rolls, canParry) =>
+      `${rolls ? 'Dodge' : 'Avoid'} everything: even ${canParry ? 'parried' : 'blocked'}, its attacks get through`,
+    dodgeSome: (rolls, attacks, rest) =>
+      `${rolls ? 'Dodge' : 'Avoid'} ${attacks.length === 1 ? quoted(attacks[0]!) : `${n(attacks.length)} attacks`}, ${rest} the rest`,
+  },
+  bestiary: {
+    intro: 'How to take each creature with your gear.',
+    search: 'Search every biome',
+    searchPlaceholder: 'Creature or attack, every biome',
+    clearSearch: 'Clear the search',
+    biome: 'Biome',
+    previousBiome: (name) => `Previous biome: ${name}`,
+    nextBiome: (name) => `Next biome: ${name}`,
+    biomeCount: (index, total, count) =>
+      `Biome ${n(index)} of ${n(total)} · ${plural(count, 'creature', 'creatures')}`,
+    howToTake: 'How to take it',
+    withYourGear: 'With your gear',
+    creatures: 'Creatures of the biome',
+    health: (health) => `${n(health)} HP`,
+    boss: 'Boss',
+    foundCreatures: (count) => `Creatures · ${n(count)}`,
+    foundAttacks: (count) => `Attacks · ${n(count)}`,
+    nothingFound: (query) => `Nothing for ${quoted(query)}`,
+    searchNote:
+      "Results from every biome. An attack opens its creature's sheet, where you can simulate it.",
+  },
+  creature: {
+    back: 'Back',
+    stars: 'Stars',
+    star: (stars) => `${n(stars)}★`,
+    health: 'Health',
+    healthShort: 'HP',
+    toInflict: 'To stagger',
+    neverStaggers: 'Never staggers',
+    yourParry: 'Your parry',
+    parryStaggers: 'Staggers it',
+    parryDoesNot: "Doesn't stagger it",
+    cannotParry: "Your item can't parry",
+    modifiers: 'Weaknesses and resistances',
+    modifier: (type, state, multiplier) => `${type} · ${state} ×${n(multiplier)}`,
+    everythingElse: 'Everything else ×1',
+    noModifier: 'Everything ×1',
+    attacks: 'Its attacks',
+    attack: 'Attack',
+    damage: 'Damage',
+    damageShort: 'Dmg',
+    range: 'Range',
+    simulate: 'Simulate',
+    kinds: { melee: 'Melee', area: 'Area', projectile: 'Projectile', summon: 'Summon' },
+    metres: (metres) => `${n(metres)} m`,
+    phase: (index, health) => `Phase ${n(index)} · ${n(health)} HP`,
+    noAttack: 'No attack',
+    attackSummary: ({ name, types, damage, block, parry, dodgeable }) =>
+      damage === null
+        ? `${name}, summon.`
+        : `${name}, ${listOf(types)}, ${n(damage)} damage. Block: ${block}. Parry: ${parry}. ${dodgeable ? 'Dodgeable' : 'Undodgeable'}.`,
+    openSimulation: 'Open the simulation.',
+    openSheet: (creature) => `Open the ${creature} sheet.`,
+    simulateLabel: (name, damage) => `Simulate: ${name}, ${n(damage)} damage`,
+    tapToSimulate: 'Tap an attack to simulate it.',
+    desktopNote:
+      'Simulate opens the attack in the Simulation, with the stagger bar and the stamina.',
   },
   modal: { close: 'Close without saving', cancel: 'Cancel', save: 'Save' },
   settings: {

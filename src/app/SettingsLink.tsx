@@ -1,23 +1,22 @@
 import { useT } from '@/i18n/useT'
 import { SettingsIcon } from '@/ui/icons'
-import { routeHash, type Screen } from './routes'
-import { openModal } from './useRoute'
+import { routeHash } from './routes'
+import { openModal, useRoute } from './useRoute'
 
 /** Opens the Settings over the current screen: an icon in the top bar, a labelled link in the
  * sidebar. */
 export function SettingsLink({
-  screen,
   variant,
   className,
 }: {
-  readonly screen: Screen
   readonly variant: 'icon' | 'labelled'
   readonly className: string | undefined
 }) {
   const t = useT()
+  const route = useRoute()
   return (
     <a
-      href={routeHash({ screen, modal: 'settings' })}
+      href={routeHash({ ...route, modal: 'settings' })}
       aria-label={variant === 'icon' ? t.shell.settings : undefined}
       className={className}
       onClick={(event) => {

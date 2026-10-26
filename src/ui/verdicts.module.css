@@ -1,0 +1,79 @@
+.pill {
+  flex: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.row {
+  width: 30px;
+  height: 30px;
+}
+
+.compact {
+  width: 26px;
+  height: 26px;
+}
+
+.ok {
+  border-color: var(--ok-fill);
+  color: var(--ok);
+}
+
+.warn {
+  border-color: var(--warn-fill);
+  color: var(--warn);
+}
+
+.bad {
+  border-color: var(--bad-fill);
+  color: var(--bad);
+}
+
+.none {
+  border-color: var(--line);
+  color: var(--secondary);
+}
+
+.advice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.advice svg {
+  flex: none;
+}
+
+.okText {
+  color: var(--ok);
+}
+
+.warnText {
+  color: var(--warn);
+}
+
+.badText {
+  color: var(--bad);
+}
+
+.noneText {
+  color: var(--secondary);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

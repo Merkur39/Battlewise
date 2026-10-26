@@ -86,6 +86,12 @@ function scalingOf(scaling: HitScaling, world: World, stars: number): [number, n
   return [1, 1]
 }
 
+/** The hit as the game lists it at these stars, before the world: what the interface shows. */
+export function listedDamage(hit: Hit, stars: number): number {
+  const starFactor = (hit.scaling ?? 'attack') === 'attack' ? 1 + stars * DAMAGE_PER_STAR : 1
+  return (totalDamage(hit.damages) + (hit.trueDamage ?? 0)) * starFactor
+}
+
 /** Resolves a hit against a block or a parry; null when the item cannot parry. */
 export function resolveHit(
   defence: Defence,
