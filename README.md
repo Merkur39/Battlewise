@@ -4,8 +4,9 @@ A mobile-first web app that works offline (PWA) and tells you, in two seconds an
 how to take each creature with your gear: whether to block, parry or dodge each of its attacks, and
 what it costs you. In French and English.
 
-Open it at [battlewise.vercel.app](https://battlewise.vercel.app) and install it from the browser, on a
-phone or a desktop. Work is tracked on the [Battlewise board](https://github.com/users/Merkur39/projects/4).
+Open it at [battlewise-valheim.vercel.app](https://battlewise-valheim.vercel.app) and install it from
+the browser, on a phone or a desktop. Work is tracked on the
+[Battlewise board](https://github.com/users/Merkur39/projects/4).
 
 ## What it does
 
