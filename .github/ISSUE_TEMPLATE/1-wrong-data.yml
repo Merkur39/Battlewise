@@ -7,6 +7,8 @@ body:
       value: |
         Battlewise reads its numbers and names from the game's own files. The game names no monster attack, so attack names come from the Valheim wiki or were written by hand: they are the likeliest to be wrong. Thank you for checking.
 
+        **Reporting from the app is better**: under a creature's attacks or under a verdict, « Wrong number or name? Report it » sends what the app shows, its version and your gear and world along with your words, so the report can be handled without going back and forth.
+
         You can write in French: *le français est bienvenu.*
   - type: input
     id: subject

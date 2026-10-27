@@ -5,6 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
+        **Reporting from the app is better**: Settings › About › « Report a problem or an idea » sends the app's version, your language and your screen along with your words, so the report can be handled without going back and forth.
+
         You can write in French: *le français est bienvenu.*
   - type: textarea
     id: what

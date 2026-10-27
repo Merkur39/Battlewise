@@ -44,9 +44,9 @@ export default defineConfig([
     rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
   },
 
-  // Config and test-harness files run in Node, not in the browser.
+  // Config and test-harness files, and the Vercel functions, run in Node, not in the browser.
   {
-    files: ['vite.config.ts', 'eslint.config.js', 'test/**/*.ts'],
+    files: ['vite.config.ts', 'eslint.config.js', 'test/**/*.ts', 'api/**/*.ts'],
     languageOptions: { globals: globals.node },
   },
 ])
