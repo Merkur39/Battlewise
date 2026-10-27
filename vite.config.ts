@@ -44,6 +44,11 @@ export default defineConfig({
       },
       {
         extends: true,
+        // The Vercel functions run in Node, beside the app: no DOM either.
+        test: { name: 'api', environment: 'node', include: ['api/**/*.test.ts'] },
+      },
+      {
+        extends: true,
         test: {
           name: 'ui',
           environment: 'jsdom',
