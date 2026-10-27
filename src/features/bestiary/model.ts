@@ -87,6 +87,17 @@ export interface Assessment {
 export const creaturesOf = (biome: BiomeId) =>
   game.creatures.filter((creature) => creature.biomes.includes(biome))
 
+/** What sets a creature apart from another a biome lists under its name: the biome it comes from, in the
+ * game's words; null for a creature the game names alone. */
+export const qualifierOf = (creature: GameCreature, language: Language): string | null =>
+  game.biomes.find((biome) => biome.id === creature.origin)?.name[language] ?? null
+
+/** A creature's name as the app writes it: the game's own, then its qualifier. */
+export function creatureName(creature: GameCreature, language: Language): string {
+  const qualifier = qualifierOf(creature, language)
+  return qualifier === null ? creature.name[language] : `${creature.name[language]} · ${qualifier}`
+}
+
 export const fightersOf = (creature: GameCreature): readonly Fighter[] => [
   creature,
   ...(creature.phases ?? []),

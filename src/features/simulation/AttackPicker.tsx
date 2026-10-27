@@ -7,8 +7,14 @@ import { attackDamage, attackVerdicts } from '@/combat/attack'
 import { game } from '@/data'
 import type { BiomeId, GameCreature } from '@/data/types'
 import { BiomeStepper } from '@/features/bestiary/BiomeStepper'
-import { creaturesOf, fightersOf, search, type FoundAttack } from '@/features/bestiary/model'
-import { AttackPills, AttackTags, Highlighted } from '@/features/bestiary/parts'
+import {
+  creatureName,
+  creaturesOf,
+  fightersOf,
+  search,
+  type FoundAttack,
+} from '@/features/bestiary/model'
+import { AttackPills, AttackTags, CreatureName, Highlighted } from '@/features/bestiary/parts'
 import { bestiaryRoute } from '@/features/bestiary/place'
 import { damageText, useAttackSummary, useFight } from '@/features/bestiary/wording'
 import { useLanguage, useT } from '@/i18n/useT'
@@ -127,12 +133,11 @@ function Enemy({
   readonly query?: string
 }) {
   const t = useT()
-  const language = useLanguage()
   const isDesktop = useIsDesktop()
   const content = (
     <>
       <span className={styles.enemyName}>
-        <Highlighted text={creature.name[language]} query={query} />
+        <CreatureName creature={creature} query={query} />
       </span>
       <span className={styles.count}>{t.picker.attackCount(simulableCount(creature))}</span>
       <ChevronRightIcon size={16} className={styles.chevron} />
@@ -172,7 +177,8 @@ function AttackRow({
       <BestiaryIcon size={18} className={styles.attackIcon} />
       <span className={styles.attackText}>
         <span className={styles.attackName}>
-          {creature.name[language]} · <Highlighted text={attack.name[language]} query={query} />
+          {creatureName(creature, language)} ·{' '}
+          <Highlighted text={attack.name[language]} query={query} />
         </span>
         <AttackTags attack={attack} withRange={false} extra={biome ? [biome.name[language]] : []} />
       </span>
@@ -285,7 +291,7 @@ function EnemyAttacks({ creature }: { readonly creature: GameCreature }) {
     <section aria-labelledby={headingId} className={styles.detail}>
       <div className={styles.detailHeader}>
         <h3 id={headingId} className={styles.detailTitle}>
-          {creature.name[language]}
+          <CreatureName creature={creature} />
         </h3>
         <span className={styles.count}>
           {[biome?.name[language], t.picker.attackCount(attacks.length)]

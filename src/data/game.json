@@ -442,6 +442,7 @@
         "fr": "Squelette",
         "en": "Skeleton"
       },
+      "origin": "meadows",
       "boss": false,
       "health": 30,
       "staggerFactor": 0.5,
@@ -1901,6 +1902,7 @@
         "fr": "Squelette",
         "en": "Skeleton"
       },
+      "origin": "swamp",
       "boss": false,
       "health": 60,
       "staggerFactor": 0.5,
@@ -3373,6 +3375,7 @@
         "fr": "Squelette",
         "en": "Skeleton"
       },
+      "origin": "mountain",
       "boss": false,
       "health": 75,
       "staggerFactor": 0.5,

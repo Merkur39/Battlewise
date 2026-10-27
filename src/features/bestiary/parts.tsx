@@ -1,11 +1,11 @@
 import type { AttackVerdicts } from '@/combat/attack'
 import type { DamageType } from '@/combat/damage'
 import { game } from '@/data'
-import type { GameAttack } from '@/data/types'
+import type { GameAttack, GameCreature } from '@/data/types'
 import { useLanguage, useT } from '@/i18n/useT'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
 import { VerdictPill } from '@/ui/verdicts'
-import { attackRange, attackTypes, matchRange } from './model'
+import { attackRange, attackTypes, matchRange, qualifierOf } from './model'
 import styles from './parts.module.css'
 import { blockShown, dodgeShown, parryShown } from './wording'
 
@@ -20,6 +20,31 @@ export function Highlighted({ text, query }: { readonly text: string; readonly q
       {chars.slice(0, start).join('')}
       <mark className={styles.mark}>{chars.slice(start, end).join('')}</mark>
       {chars.slice(end).join('')}
+    </>
+  )
+}
+
+/** A creature's name, the part the search found in it marked, then the biome it comes from when a biome
+ * lists another under its name, receding. */
+export function CreatureName({
+  creature,
+  query = '',
+}: {
+  readonly creature: GameCreature
+  readonly query?: string
+}) {
+  const language = useLanguage()
+  const qualifier = qualifierOf(creature, language)
+  return (
+    <>
+      <Highlighted text={creature.name[language]} query={query} />
+      {/* The space stays out of the span: an accessible name trims each element's text. */}
+      {qualifier !== null && (
+        <>
+          {' '}
+          <span className={styles.qualifier}>· {qualifier}</span>
+        </>
+      )}
     </>
   )
 }

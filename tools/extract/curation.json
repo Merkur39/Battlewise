@@ -4,7 +4,7 @@
     "Boar": {},
     "Neck": {},
     "Greyling": {},
-    "Skeleton_Meadows_noarcher": {},
+    "Skeleton_Meadows_noarcher": { "origin": "meadows" },
     "Eikthyr": {},
 
     "Greydwarf": {},
@@ -21,7 +21,7 @@
 
     "Draugr": {},
     "Draugr_Elite": {},
-    "Skeleton_Swamps": {},
+    "Skeleton_Swamps": { "origin": "swamp" },
     "Blob": {},
     "BlobElite": {},
     "Leech": {},
@@ -39,7 +39,7 @@
     "Bat": { "also": ["Bat_Swamp"] },
     "Hatchling": {},
     "StoneGolem": {},
-    "Skeleton_Mountains": {},
+    "Skeleton_Mountains": { "origin": "mountain" },
     "Fenring_Cultist_Hildir": {},
     "Dragon": {},
 

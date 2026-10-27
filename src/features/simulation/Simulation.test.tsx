@@ -97,6 +97,16 @@ describe('Simulation', () => {
     expect(within(recent).getByRole('link', { name: /^Troll · Frappe au sol/ })).toBeInTheDocument()
   })
 
+  it('names the enemy after the biome it comes from when another bears its name', () => {
+    window.history.replaceState(null, '', '#/simulation/Skeleton_Swamps/skeleton_sword_swamps')
+
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+
+    expect(
+      hitLink(/^Changer d'attaque : Squelette · Marécages, Épée, 48 dégâts$/),
+    ).toHaveTextContent('Squelette · Marécages · Épée')
+  })
+
   it('picks an attack among the enemies of a biome, through the sheet of the creature', async () => {
     const user = userEvent.setup()
     window.history.replaceState(null, '', '#/simulation')
@@ -130,6 +140,23 @@ describe('Simulation', () => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     })
     expect(hitLink(/^Changer d'attaque : Troll, Frappe au sol/)).toBeInTheDocument()
+  })
+
+  it('sets apart, in the search, the attacks of enemies of one name', async () => {
+    const user = userEvent.setup()
+    window.history.replaceState(null, '', '#/simulation')
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+    const picker = await openPicker(user)
+
+    await user.type(
+      within(picker).getByRole('searchbox', { name: 'Rechercher un ennemi ou une attaque' }),
+      'épée',
+    )
+
+    const attacks = await within(picker).findByRole('region', { name: /^Attaques · \d+$/ })
+    expect(
+      within(attacks).getByRole('link', { name: /^Squelette · Montagne · Épée/ }),
+    ).toBeInTheDocument()
   })
 
   describe('on a desktop', () => {

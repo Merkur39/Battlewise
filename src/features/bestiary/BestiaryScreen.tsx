@@ -13,8 +13,8 @@ import { AdviceLine, GuardIcon, VerdictLegend, VerdictPill } from '@/ui/verdicts
 import styles from './BestiaryScreen.module.css'
 import { BiomeStepper } from './BiomeStepper'
 import { CreatureSheet } from './CreatureSheet'
-import { assess, creaturesOf, search, type FoundAttack } from './model'
-import { AttackPills, AttackTags, Highlighted } from './parts'
+import { assess, creatureName, creaturesOf, search, type FoundAttack } from './model'
+import { AttackPills, AttackTags, CreatureName, Highlighted } from './parts'
 import { bestiaryRoute, placeOf, type Place } from './place'
 import {
   adviceShown,
@@ -189,7 +189,7 @@ function CreatureRow({
       <span className={styles.rowTop}>
         <span className={styles.rowName}>
           <span className={styles.name}>
-            <Highlighted text={creature.name[language]} query={query} />
+            <CreatureName creature={creature} query={query} />
           </span>
           <span className={styles.meta}>{stats}</span>
         </span>
@@ -309,7 +309,7 @@ function FoundAttackRow({ found, place }: { readonly found: FoundAttack; readonl
   const stars = creature.stars.min
   const damage = attackDamage(attack.hits, stars)
   const verdicts = attackVerdicts(defence, attack.hits, world, stars)
-  const name = creature.name[language]
+  const name = creatureName(creature, language)
   return (
     <RouteLink
       to={bestiaryRoute(creature.biomes[0] ?? place.biome, creature.id, place.query)}

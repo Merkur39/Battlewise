@@ -60,6 +60,7 @@ class Report:
         self.unused_names = []  # curation.json attack names no attack needs
         self.unnamed_parts = []  # "creature: part" of weak spots curation.json does not name
         self.unused_parts = []  # curation.json part names no weak spot needs
+        self.namesakes = []  # "biome, language: name" a biome lists twice with no origin telling them apart
         self.stale_ignored = []  # ignored names that are no creature prefab of the game
 
 
@@ -312,7 +313,10 @@ class _Game:
         conditional = _unique(c for f in found for c in f["conditional"])
         biomes = native or {b for c in conditional for b in c["biomes"]}
 
-        creature = dict({"id": prefab, "name": self.names.text(data["m_name"]), "boss": bool(data["m_boss"])}, **main)
+        creature = {"id": prefab, "name": self.names.text(data["m_name"])}
+        if "origin" in entry:
+            creature["origin"] = entry["origin"]
+        creature = dict(creature, boss=bool(data["m_boss"]), **main)
         creature["biomes"] = sorted(biomes, key=lambda b: order.index(b) if b in order else len(order))
         if conditional:
             creature["conditional"] = conditional
@@ -427,6 +431,17 @@ def _status_effects(found, creatures, names, report):
     return result
 
 
+def _namesakes(creatures, biomes):
+    """Names a biome lists twice, in either language: the game names every skeleton alike, and the app sets
+    them apart by their origin, the biome curation.json says they come from."""
+    clashes = []
+    for biome in biomes:
+        for lang in ("fr", "en"):
+            seen = [(c["name"][lang], c.get("origin")) for c in creatures if biome in c["biomes"]]
+            clashes += sorted({"%s, %s: %s" % (biome, lang, name) for name, origin in seen if seen.count((name, origin)) > 1})
+    return clashes
+
+
 def build(index, curation, workers=8):
     """(game.json data, Report)."""
     report = Report()
@@ -443,6 +458,7 @@ def build(index, curation, workers=8):
     report.uncurated = game.uncurated()
     report.unused_names = sorted(set(curation["attacks"]) - used)
     report.unnamed_parts = sorted(game.parts_unnamed)
+    report.namesakes = _namesakes(creatures, curation["biomes"])
     report.unused_parts = sorted(set(curation["parts"]) - game.parts_used)
     report.stale_ignored = sorted(p for p in curation["ignored"] if p not in game.characters)
 

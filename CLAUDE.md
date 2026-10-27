@@ -22,7 +22,7 @@ game, how to take each creature with your gear. French and English.
 - `tools/extract/`: read-only extraction of the game data (UnityPy for the assets, the decompiled game
   code for the rules); `curation.json` holds only what the game does not carry: which creatures to list,
   their variants, the ignored ones and why, the attack names the game lacks, the body parts its weak spots
-  sit on. Game data and code prevail
+  sit on, the biome a creature comes from when a biome lists it beside another of the same name. Game data and code prevail
   over the wiki.
 - `src/styles/themes.css`: the seven palettes of the design canvas (16 tokens each), Origine by default,
   others via `data-theme` on `:root`.

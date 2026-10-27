@@ -8,6 +8,7 @@ import type { GameAttack, GameCreature, GameHit } from '@/data/types'
 import {
   assess,
   attackTypes,
+  creatureName,
   creaturesOf,
   matchRange,
   modifierRows,
@@ -252,6 +253,23 @@ describe('modifiersOf', () => {
       { type: 'chop', modifier: null, multiplier: 1 },
       { type: 'blunt', modifier: 'resistant', multiplier: 0.5 },
     ])
+  })
+})
+
+describe('creatureName', () => {
+  const named = (id: string, language: 'fr' | 'en') =>
+    creatureName(
+      game.creatures.find((c) => c.id === id)!,
+      language,
+    )
+
+  it("sets a creature apart by the biome it comes from, in the game's words", () => {
+    expect(named('Skeleton_Swamps', 'fr')).toBe('Squelette · Marécages')
+    expect(named('Skeleton_Mountains', 'en')).toBe('Skeleton · Mountain')
+  })
+
+  it("keeps the game's name alone for a creature without origin", () => {
+    expect(named('Skeleton', 'fr')).toBe('Squelette')
   })
 })
 
