@@ -1,5 +1,6 @@
 """Build the Bestiaire search-results screens (mobile and desktop) from the Origine Bestiaire boards,
-then turn both Bestiaire search fields into links to them. Safe to rerun on boards already linked."""
+then turn both Bestiaire search fields into links to them, and the « Ton contexte » board: the phone
+Bestiaire with its context sheet open. Safe to rerun on boards already linked."""
 import re
 import sys
 from pathlib import Path
@@ -221,6 +222,17 @@ def link_field(name, start, end, html):
     path.write_text(text[:i] + html + text[j + len(end):], encoding="utf-8", newline="\n")
 
 
+def build_context():
+    """The phone Bestiaire with its context sheet open, so that the canvas shows the sheet."""
+    text = (P / "Bestiaire.dc.html").read_text(encoding="utf-8")
+    text = re.sub(r"<title>.*?</title>", "<title>Ton contexte — feuille du bas</title>", text, count=1)
+    opening = "class Component extends DCLogic {\n"
+    assert text.count(opening) == 1
+    constructor = "  constructor(props) {\n    super(props);\n    this.state = { menu: true };\n  }\n"
+    text = text.replace(opening, opening + constructor, 1)
+    (P / "Contexte.dc.html").write_text(text, encoding="utf-8", newline="\n")
+
+
 def main():
     build_mobile()
     build_desktop()
@@ -236,6 +248,7 @@ def main():
           Monstre ou attaque, tous biomes
         </a>
 ''')
+    build_context()
     print("ok")
 
 

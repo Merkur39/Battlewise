@@ -20,6 +20,11 @@ export const en: Catalog = {
     mainNavigation: 'Main navigation',
     settings: 'Settings',
     context: 'Your setup',
+    contextSummary: (blockPower, enemyScale) =>
+      `Your setup: Block ${n(blockPower)} ×${n(enemyScale)}`,
+    contextPower: (blockPower) => `Block ${n(blockPower)}`,
+    contextScale: (enemyScale) => `×${n(enemyScale)}`,
+    contextNote: 'Every verdict hangs on it',
   },
   gear: {
     summary: (item, level, blockPower, skill) =>

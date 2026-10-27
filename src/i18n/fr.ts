@@ -47,6 +47,11 @@ export const fr = {
     mainNavigation: 'Navigation principale',
     settings: 'Réglages',
     context: 'Ton contexte',
+    contextSummary: (blockPower: number, enemyScale: number) =>
+      `Ton contexte : VD ${n(blockPower)} ×${n(enemyScale)}`,
+    contextPower: (blockPower: number) => `VD ${n(blockPower)}`,
+    contextScale: (enemyScale: number) => `×${n(enemyScale)}`,
+    contextNote: 'Chaque verdict en dépend',
   },
   gear: {
     summary: (item: string, level: number, blockPower: number, skill: number) =>

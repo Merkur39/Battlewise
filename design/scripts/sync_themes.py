@@ -25,13 +25,13 @@ NOTE_ABOVE = 300
 
 # (row title, [(file, board title, interactive)]) — one canvas row each.
 MOBILE = [
-    ("Bestiaire", [("Bestiaire", "Bestiaire", False), ("Bestiaire-Recherche", "Bestiaire · recherche", False),
+    ("Bestiaire", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),
                    ("Monstre", "Fiche monstre", True)]),
     ("Simulation", [("Main", "Simulation", True), ("Attaque", "Choisir une attaque", False),
                     ("Recherche", "Choisir une attaque · recherche", False)]),
     ("Arsenal et mémo", [("Arsenal", "Arsenal", True), ("Memo", "Mémo", True)]),
     ("Fenêtres et système", [("Profil", "Ton équipement", False), ("Monde", "Ton monde", False),
-                             ("Reglages", "Réglages", True), ("Tokens", None, False)]),
+                             ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True), ("Tokens", None, False)]),
 ]
 DESKTOP = [
     ("Desktop · écrans principaux", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),

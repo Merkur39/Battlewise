@@ -7,14 +7,16 @@
       "y": 0,
       "w": 390,
       "h": 844,
-      "title": "Bestiaire"
+      "title": "Bestiaire",
+      "is_interactive": true
     },
     "Bestiaire-Recherche.dc.html": {
       "x": 470,
       "y": 0,
       "w": 390,
       "h": 844,
-      "title": "Bestiaire · recherche"
+      "title": "Bestiaire · recherche",
+      "is_interactive": true
     },
     "Monstre.dc.html": {
       "x": 940,
@@ -76,8 +78,16 @@
       "h": 844,
       "title": "Ton monde"
     },
-    "Reglages.dc.html": {
+    "Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "is_interactive": true
+    },
+    "Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -85,7 +95,7 @@
       "is_interactive": true
     },
     "Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -260,13 +270,41 @@
       "title": "Version de l'app — trois pistes",
       "page": "version"
     },
+    "Menu-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "A · Menu déroulant",
+      "is_interactive": true,
+      "page": "menu"
+    },
+    "Menu-B.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "B · Feuille du bas",
+      "is_interactive": true,
+      "page": "menu"
+    },
+    "Menu-C.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "C · Résumé dans la barre",
+      "is_interactive": true,
+      "page": "menu"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "braise"
+      "page": "braise",
+      "is_interactive": true
     },
     "Braise-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -274,7 +312,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "braise"
+      "page": "braise",
+      "is_interactive": true
     },
     "Braise-Monstre.dc.html": {
       "x": 940,
@@ -344,8 +383,17 @@
       "title": "Ton monde",
       "page": "braise"
     },
-    "Braise-Reglages.dc.html": {
+    "Braise-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -354,7 +402,7 @@
       "is_interactive": true
     },
     "Braise-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -463,7 +511,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "brume"
+      "page": "brume",
+      "is_interactive": true
     },
     "Brume-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -471,7 +520,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "brume"
+      "page": "brume",
+      "is_interactive": true
     },
     "Brume-Monstre.dc.html": {
       "x": 940,
@@ -541,8 +591,17 @@
       "title": "Ton monde",
       "page": "brume"
     },
-    "Brume-Reglages.dc.html": {
+    "Brume-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -551,7 +610,7 @@
       "is_interactive": true
     },
     "Brume-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -660,7 +719,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "jour"
+      "page": "jour",
+      "is_interactive": true
     },
     "Jour-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -668,7 +728,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "jour"
+      "page": "jour",
+      "is_interactive": true
     },
     "Jour-Monstre.dc.html": {
       "x": 940,
@@ -738,8 +799,17 @@
       "title": "Ton monde",
       "page": "jour"
     },
-    "Jour-Reglages.dc.html": {
+    "Jour-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -748,7 +818,7 @@
       "is_interactive": true
     },
     "Jour-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -857,7 +927,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "runes"
+      "page": "runes",
+      "is_interactive": true
     },
     "Runes-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -865,7 +936,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "runes"
+      "page": "runes",
+      "is_interactive": true
     },
     "Runes-Monstre.dc.html": {
       "x": 940,
@@ -935,8 +1007,17 @@
       "title": "Ton monde",
       "page": "runes"
     },
-    "Runes-Reglages.dc.html": {
+    "Runes-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -945,7 +1026,7 @@
       "is_interactive": true
     },
     "Runes-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1054,7 +1135,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "graphite"
+      "page": "graphite",
+      "is_interactive": true
     },
     "Graphite-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -1062,7 +1144,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "graphite"
+      "page": "graphite",
+      "is_interactive": true
     },
     "Graphite-Monstre.dc.html": {
       "x": 940,
@@ -1132,8 +1215,17 @@
       "title": "Ton monde",
       "page": "graphite"
     },
-    "Graphite-Reglages.dc.html": {
+    "Graphite-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1142,7 +1234,7 @@
       "is_interactive": true
     },
     "Graphite-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1251,7 +1343,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire",
-      "page": "parchemin"
+      "page": "parchemin",
+      "is_interactive": true
     },
     "Parchemin-Bestiaire-Recherche.dc.html": {
       "x": 470,
@@ -1259,7 +1352,8 @@
       "w": 390,
       "h": 844,
       "title": "Bestiaire · recherche",
-      "page": "parchemin"
+      "page": "parchemin",
+      "is_interactive": true
     },
     "Parchemin-Monstre.dc.html": {
       "x": 940,
@@ -1329,8 +1423,17 @@
       "title": "Ton monde",
       "page": "parchemin"
     },
-    "Parchemin-Reglages.dc.html": {
+    "Parchemin-Contexte.dc.html": {
       "x": 940,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Ton contexte",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Reglages.dc.html": {
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1339,7 +1442,7 @@
       "is_interactive": true
     },
     "Parchemin-Tokens.dc.html": {
-      "x": 1410,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1478,7 +1581,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290
+      "maxW": 2760
     },
     "d-row1": {
       "kind": "title1",
@@ -1533,6 +1636,14 @@
       "maxW": 1440,
       "page": "version"
     },
+    "menu-row1": {
+      "kind": "title1",
+      "text": "Ton contexte sur téléphone · retenu : bouton C, feuille B (Origine › Ton contexte)",
+      "x": 0,
+      "y": -300,
+      "maxW": 1330,
+      "page": "menu"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -1562,7 +1673,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "braise"
     },
     "d-row1-braise": {
@@ -1618,7 +1729,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "brume"
     },
     "d-row1-brume": {
@@ -1674,7 +1785,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "jour"
     },
     "d-row1-jour": {
@@ -1730,7 +1841,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "runes"
     },
     "d-row1-runes": {
@@ -1786,7 +1897,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "graphite"
     },
     "d-row1-graphite": {
@@ -1842,7 +1953,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2290,
+      "maxW": 2760,
       "page": "parchemin"
     },
     "d-row1-parchemin": {
@@ -1881,6 +1992,7 @@
     "Memo.dc.html",
     "Profil.dc.html",
     "Monde.dc.html",
+    "Contexte.dc.html",
     "Reglages.dc.html",
     "Tokens.dc.html",
     "Desktop-Bestiaire.dc.html",
@@ -1903,6 +2015,9 @@
     "SimB-Recherche.dc.html",
     "Icone.dc.html",
     "Version.dc.html",
+    "Menu-A.dc.html",
+    "Menu-B.dc.html",
+    "Menu-C.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -1913,6 +2028,7 @@
     "Braise-Memo.dc.html",
     "Braise-Profil.dc.html",
     "Braise-Monde.dc.html",
+    "Braise-Contexte.dc.html",
     "Braise-Reglages.dc.html",
     "Braise-Tokens.dc.html",
     "Braise-Desktop-Bestiaire.dc.html",
@@ -1935,6 +2051,7 @@
     "Brume-Memo.dc.html",
     "Brume-Profil.dc.html",
     "Brume-Monde.dc.html",
+    "Brume-Contexte.dc.html",
     "Brume-Reglages.dc.html",
     "Brume-Tokens.dc.html",
     "Brume-Desktop-Bestiaire.dc.html",
@@ -1957,6 +2074,7 @@
     "Jour-Memo.dc.html",
     "Jour-Profil.dc.html",
     "Jour-Monde.dc.html",
+    "Jour-Contexte.dc.html",
     "Jour-Reglages.dc.html",
     "Jour-Tokens.dc.html",
     "Jour-Desktop-Bestiaire.dc.html",
@@ -1979,6 +2097,7 @@
     "Runes-Memo.dc.html",
     "Runes-Profil.dc.html",
     "Runes-Monde.dc.html",
+    "Runes-Contexte.dc.html",
     "Runes-Reglages.dc.html",
     "Runes-Tokens.dc.html",
     "Runes-Desktop-Bestiaire.dc.html",
@@ -2001,6 +2120,7 @@
     "Graphite-Memo.dc.html",
     "Graphite-Profil.dc.html",
     "Graphite-Monde.dc.html",
+    "Graphite-Contexte.dc.html",
     "Graphite-Reglages.dc.html",
     "Graphite-Tokens.dc.html",
     "Graphite-Desktop-Bestiaire.dc.html",
@@ -2023,6 +2143,7 @@
     "Parchemin-Memo.dc.html",
     "Parchemin-Profil.dc.html",
     "Parchemin-Monde.dc.html",
+    "Parchemin-Contexte.dc.html",
     "Parchemin-Reglages.dc.html",
     "Parchemin-Tokens.dc.html",
     "Parchemin-Desktop-Bestiaire.dc.html",
@@ -2052,6 +2173,10 @@
     {
       "id": "version",
       "name": "Version"
+    },
+    {
+      "id": "menu",
+      "name": "Menu · pistes"
     },
     {
       "id": "braise",

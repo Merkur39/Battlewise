@@ -2,13 +2,14 @@ import { screen, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
+import { MOCKUP_GEAR, openContext, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const fr = { language: 'fr', gear: MOCKUP_GEAR } as const
 const chip = () => screen.getByRole('link', { name: /^Ton équipement :/ })
 
 async function openGear(user: UserEvent) {
+  await openContext(user)
   await user.click(chip())
   return screen.findByRole('dialog', { name: 'Ton équipement' })
 }
@@ -58,6 +59,7 @@ describe('Your gear', () => {
 
     expect(dialog).not.toBeInTheDocument()
     expect(store.getState().gear).toEqual({ ...MOCKUP_GEAR, level: 2 })
+    await openContext(user)
     expect(chip()).toHaveTextContent('N2 · VD 74,25')
   })
 

@@ -46,20 +46,47 @@ describe('App', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'Bestiaire' })).toBeInTheDocument()
   })
 
-  it('sums up your gear and your world under the app name', () => {
+  it('sums up your gear and your world in the top bar, and opens them in a sheet', async () => {
+    const user = userEvent.setup()
     renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+    expect(screen.queryByRole('link', { name: /^Ton équipement/ })).not.toBeInTheDocument()
 
-    const gear = screen.getByRole('link', {
+    await user.click(screen.getByRole('button', { name: 'Ton contexte : VD 81 ×1' }))
+
+    const sheet = screen.getByRole('dialog', { name: 'Ton contexte' })
+    expect(sheet).toHaveTextContent('Chaque verdict en dépend')
+    const gear = within(sheet).getByRole('link', {
       name: 'Ton équipement : Bouclier en argent niveau 3, VD 81, compétence Blocage 25',
     })
-    expect(gear).toHaveTextContent('Bouclier en argent')
-    expect(gear).toHaveTextContent('N3 · VD 81')
-    const world = screen.getByRole('link', { name: 'Ton monde : combat normal, 1 joueur' })
-    expect(world).toHaveTextContent('Normal')
-    expect(world).toHaveTextContent('1 joueur · ×1')
+    expect(gear).toHaveTextContent('Ton équipementBouclier en argentN3 · VD 81')
+    const world = within(sheet).getByRole('link', { name: 'Ton monde : combat normal, 1 joueur' })
+    expect(world).toHaveTextContent('Ton mondeNormal1 joueur · ×1')
   })
 
-  it('follows your gear and your world as they change', () => {
+  it('closes the sheet once it opens your gear', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+    await user.click(screen.getByRole('button', { name: /^Ton contexte/ }))
+
+    await user.click(screen.getByRole('link', { name: /^Ton équipement :/ }))
+
+    expect(await screen.findByRole('dialog', { name: 'Ton équipement' })).toBeInTheDocument()
+    expect(screen.queryByRole('dialog', { name: 'Ton contexte' })).not.toBeInTheDocument()
+  })
+
+  it('closes the sheet when the shade around it is tapped', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+    await user.click(screen.getByRole('button', { name: /^Ton contexte/ }))
+
+    await user.click(screen.getByRole('dialog', { name: 'Ton contexte' }))
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(window.location.hash).toBe('')
+  })
+
+  it('follows your gear and your world as they change', async () => {
+    const user = userEvent.setup()
     const { store } = renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
 
     act(() => {
@@ -68,6 +95,7 @@ describe('App', () => {
         world: { difficulty: 'hard', players: 3 },
       })
     })
+    await user.click(screen.getByRole('button', { name: /^Ton contexte : VD [\d,]+ ×1,62$/ }))
 
     expect(screen.getByRole('link', { name: /^Ton équipement/ })).toHaveTextContent(
       'Bouclier en boisN1 · VD',
@@ -77,15 +105,17 @@ describe('App', () => {
     ).toHaveTextContent('Difficile3 joueurs · ×1,62')
   })
 
-  it('speaks English to an English-speaking device, game names included', () => {
+  it('speaks English to an English-speaking device, game names included', async () => {
+    const user = userEvent.setup()
     deviceSpeaks('en-GB')
 
     renderWithStore(<App />, { gear: MOCKUP_GEAR })
+    await user.click(screen.getByRole('button', { name: 'Your setup: Block 81 ×1' }))
 
     expect(mainHeading()).toHaveTextContent('Bestiary')
     expect(document.title).toBe('Bestiary — Battlewise')
     expect(screen.getByRole('link', { name: /^Your gear/ })).toHaveTextContent(
-      'Silver ShieldLv3 · Block 81',
+      'Your gearSilver ShieldLv3 · Block 81',
     )
     expect(
       screen.getByRole('link', { name: 'Your world: normal combat, 1 player' }),

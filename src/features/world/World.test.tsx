@@ -2,12 +2,13 @@ import { screen, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { renderWithStore } from '../../../test/utils'
+import { openContext, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const chip = () => screen.getByRole('link', { name: /^Ton monde :/ })
 
 async function openWorld(user: UserEvent) {
+  await openContext(user)
   await user.click(chip())
   return screen.findByRole('dialog', { name: 'Ton monde' })
 }
