@@ -70,6 +70,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">0.1.0</span>
       </span>
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.dataLine }}</span>
+      <a href="https://github.com/Merkur39/Battlewise" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; margin-top: 4px; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.accent }}; text-decoration: none">
+        <span style="flex: 1; font-size: 14px">{{ s.source }}</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">GitHub</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+      </a>
+      <span style="font-size: 12px; color: {{ t.faint }}">{{ s.licence }}</span>
     </div>
   </main>
 
@@ -101,13 +107,15 @@ class Component extends DCLogic {
         code: 'fr', title: 'Réglages', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
         langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
         theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'Gardés sur cet appareil. L\'aperçu change dès que tu touches un choix.',
-        data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', save: 'Valider'
+        data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', save: 'Valider',
+        source: 'Code source et licence', licence: '© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.'
       },
       en: {
         code: 'en', title: 'Settings', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
         langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
         theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'Saved on this device. The preview changes as soon as you tap a choice.',
-        data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', save: 'Save'
+        data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', save: 'Save',
+        source: 'Source code and licence', licence: '© 2026 Merkur39 · free software under the GPLv3, no warranty.'
       }
     };
     const st = this.state;

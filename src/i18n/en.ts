@@ -314,6 +314,8 @@ export const en: Catalog = {
     themeNoteDesktop: 'The preview changes as soon as you choose.',
     about: 'About',
     dataSource: (version) => `Read from Valheim ${version} · no mods`,
+    source: 'Source code and licence',
+    licence: (copyright) => `${copyright} · free software under the GPLv3, no warranty.`,
     themes: {
       origine: { name: 'Origin', description: 'Cold black, glacier blue accent' },
       braise: { name: 'Ember', description: 'Warm charcoal, bone accent' },

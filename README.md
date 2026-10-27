@@ -64,3 +64,17 @@ game names no monster attack, except those made with a player's weapon: the othe
 art, and the decompiled game code used to check the rules is never committed.
 
 Battlewise is a fan project, not affiliated with Iron Gate or Coffee Stain.
+
+## Licence
+
+Copyright © 2026 Merkur39.
+
+Battlewise is free software: you can redistribute it and/or modify it under the terms of the
+[GNU General Public License](LICENSE) as published by the Free Software Foundation, either version 3
+of the License, or (at your option) any later version. It is distributed in the hope that it will be
+useful, but without any warranty.
+
+The licence covers the project's own work: the code, the extraction tooling and the design canvas.
+It does not cover what belongs to the game: Valheim and the names and data read from it, in
+`src/data/game.json`, are Iron Gate's, and the attack names taken from the Valheim wiki keep the
+wiki's licence, CC BY-SA 3.0.

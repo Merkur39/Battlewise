@@ -417,6 +417,14 @@
       "is_interactive": true,
       "page": "etroit"
     },
+    "Licence.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1360,
+      "title": "Licence · trois pistes",
+      "page": "licence"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1840,6 +1848,14 @@
       "text": "La liste passe à 320 px ; quand la fiche n'a pas la place de la table, ses attaques prennent la forme du téléphone : nom, types et portée, dégâts, trois pastilles, le verdict en toutes lettres pour les lecteurs d'écran. La barre ne bouge pas.",
       "page": "etroit"
     },
+    "licence-row1": {
+      "kind": "title1",
+      "text": "Licence du logiciel",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "licence"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -2227,6 +2243,7 @@
     "Etroit-B-1280.dc.html",
     "Etroit-C-1024.dc.html",
     "Etroit-C-1280.dc.html",
+    "Licence.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2406,6 +2423,10 @@
     {
       "id": "etroit",
       "name": "Étroit · pistes"
+    },
+    {
+      "id": "licence",
+      "name": "Licence · pistes"
     },
     {
       "id": "braise",

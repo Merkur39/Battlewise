@@ -1,5 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useState } from 'react'
-import { APP_NAME } from '@/app/brand'
+import { APP_NAME, COPYRIGHT, SOURCE_URL } from '@/app/brand'
 import type { Preview } from '@/app/preview'
 import { THEMES, type LanguageSetting, type Theme } from '@/app/store'
 import { useAppState, useUpdate } from '@/app/useAppState'
@@ -8,7 +8,7 @@ import { closeModal } from '@/app/useRoute'
 import { game } from '@/data'
 import { detectLanguage } from '@/i18n/detect'
 import { catalogOf } from '@/i18n/useT'
-import { CheckIcon } from '@/ui/icons'
+import { CheckIcon, ExternalIcon } from '@/ui/icons'
 import { Modal } from '@/ui/Modal'
 import styles from './SettingsModal.module.css'
 
@@ -154,6 +154,12 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
           <span className={styles.dataSource}>
             {t.settings.dataSource(game.game.version ?? String(game.game.build))}
           </span>
+          <a className={styles.source} href={SOURCE_URL} target="_blank" rel="noopener">
+            <span className={styles.sourceLabel}>{t.settings.source}</span>{' '}
+            {!isDesktop && <span className={styles.sourceHost}>GitHub</span>}
+            <ExternalIcon size={isDesktop ? 12 : 14} strokeWidth={2} />
+          </a>
+          <span className={styles.note}>{t.settings.licence(COPYRIGHT)}</span>
         </span>
       </section>
     </Modal>

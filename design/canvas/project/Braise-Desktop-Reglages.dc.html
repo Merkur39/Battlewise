@@ -89,6 +89,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
               <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">0.1.0</span>
             </span>
             <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.dataLine }}</span>
+            <a href="https://github.com/Merkur39/Battlewise" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; margin-top: 4px; border-radius: 4px; border: 1px solid {{ t.line }}; font-size: 13px; color: {{ t.accent }}; text-decoration: none">{{ s.source }}<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+            <span style="font-size: 12px; color: {{ t.faint }}">{{ s.licence }}</span>
           </span>
         </div>
       </div>
@@ -125,6 +127,7 @@ class Component extends DCLogic {
         langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
         theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'L\'aperçu change dès que tu choisis.',
         data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', cancel: 'Annuler', save: 'Valider',
+        source: 'Code source et licence', licence: '© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.',
         nav0: 'Bestiaire', nav1: 'Simulation', nav2: 'Arsenal', nav3: 'Mémo'
       },
       en: {
@@ -132,6 +135,7 @@ class Component extends DCLogic {
         langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
         theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'The preview changes as soon as you choose.',
         data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', cancel: 'Cancel', save: 'Save',
+        source: 'Source code and licence', licence: '© 2026 Merkur39 · free software under the GPLv3, no warranty.',
         nav0: 'Bestiary', nav1: 'Simulation', nav2: 'Arsenal', nav3: 'Notes'
       }
     };

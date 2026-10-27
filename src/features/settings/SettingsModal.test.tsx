@@ -150,6 +150,40 @@ describe('Settings', () => {
     expect(dialog).toHaveTextContent(`Battlewise ${version}`)
   })
 
+  it('links to its source code and licence, in a new tab', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    const dialog = await openSettings(user)
+
+    const source = within(dialog).getByRole('link', { name: 'Code source et licence GitHub' })
+    expect(source).toHaveAttribute('href', 'https://github.com/Merkur39/Battlewise')
+    expect(source).toHaveAttribute('target', '_blank')
+    expect(source).toHaveAttribute('rel', 'noopener')
+  })
+
+  it('states its copyright, its licence and the lack of warranty', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    const dialog = await openSettings(user)
+
+    expect(dialog).toHaveTextContent('© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.')
+  })
+
+  it('states its licence in English', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'en' })
+
+    await user.click(screen.getByRole('link', { name: 'Settings' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Settings' })
+
+    expect(within(dialog).getByRole('link', { name: /^Source code and licence/ })).toBeVisible()
+    expect(dialog).toHaveTextContent(
+      '© 2026 Merkur39 · free software under the GPLv3, no warranty.',
+    )
+  })
+
   it('offers Cancel next to Save on a desktop', async () => {
     const user = userEvent.setup()
     setViewportWidth('desktop')
