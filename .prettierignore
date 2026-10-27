@@ -4,3 +4,5 @@ package-lock.json
 design
 src/data/game.json
 tools/extract/curation.json
+# Claude Code's own folder and the worktrees of its sessions, which git ignores on this machine only.
+.claude/
