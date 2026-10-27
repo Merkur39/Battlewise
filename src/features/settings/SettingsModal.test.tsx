@@ -17,6 +17,17 @@ const settingsClosed = () =>
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
+/** The theme on the root as the dialog leaves the page, before anything else can run. */
+const themeAsItLeaves = (dialog: HTMLElement) =>
+  new Promise<string | undefined>((resolve) => {
+    const observer = new MutationObserver(() => {
+      if (dialog.isConnected) return
+      observer.disconnect()
+      resolve(document.documentElement.dataset.theme)
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+  })
+
 describe('Settings', () => {
   it('opens over the screen, on the saved choices', async () => {
     const user = userEvent.setup()
@@ -101,12 +112,12 @@ describe('Settings', () => {
     const { store } = renderWithStore(<App />, { language: 'fr' })
     const dialog = await openSettings(user)
     await user.click(within(dialog).getByRole('radio', { name: /^Runes/ }))
+    const theme = themeAsItLeaves(dialog)
 
     window.history.back()
 
-    await settingsClosed()
+    expect(await theme).toBe('origine')
     expect(store.getState().theme).toBe('origine')
-    expect(document.documentElement).toHaveAttribute('data-theme', 'origine')
   })
 
   it('closes onto its screen when it was reached by its address', async () => {

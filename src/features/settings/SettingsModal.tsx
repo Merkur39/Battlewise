@@ -1,4 +1,4 @@
-import { useEffect, useId, useLayoutEffect, useState } from 'react'
+import { useId, useLayoutEffect, useState } from 'react'
 import { APP_NAME, COPYRIGHT, SOURCE_URL } from '@/app/brand'
 import { RELEASES } from '@/app/releases'
 import { RouteLink } from '@/app/RouteLink'
@@ -43,7 +43,9 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
   useLayoutEffect(() => {
     onPreview(draft)
   }, [draft, onPreview])
-  useEffect(
+  // The saved choices come back in the commit that takes the dialog away, before the next paint,
+  // however it closes: Back closes it in a render whose passive effects may wait for a frame.
+  useLayoutEffect(
     () => () => {
       onPreview({})
     },

@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.7.1',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: 'Fermer les Réglages avec Retour remet aussitôt le thème et la langue enregistrés, sans laisser voir un instant ceux que tu essayais.',
+          en: 'Closing Settings with Back brings the saved theme and language back at once, without a glimpse of the ones you were trying.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.7.0',
     date: '2026-10-27',
     notes: [
