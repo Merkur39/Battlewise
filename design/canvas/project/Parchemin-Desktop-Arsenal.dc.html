@@ -82,6 +82,14 @@ a{color:#24467A}a:hover{color:#1A3560}
       </div>
       <div style="flex: 1; min-height: 0; overflow-y: auto">
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+          <sc-if value="{{ r.broken }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; align-items: center; gap: 10px; min-height: 52px; box-sizing: border-box; padding: 0 20px; border-bottom: 1px solid #E2D7C1">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#5E5141" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+              <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 10px"><span style="font-size: 15px">{{ r.name }}</span><span style="font-size: 12px; color: #685B4A">Cette ligne a planté</span></span>
+              <button type="button" style="flex: none; min-height: 36px; font-size: 13px; color: #24467A">Signaler</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ r.fine }}" hint-placeholder-val="{{ true }}">
           <div role="row" style="display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr) repeat(4, minmax(0, 1fr)) 120px; gap: 16px; align-items: center; min-height: 52px; padding: 0 20px; border-bottom: 1px solid #E2D7C1; font-size: 15px; {{ r.rowStyle }}">
             <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0">{{ r.name }}
               <sc-if value="{{ r.equipped }}" hint-placeholder-val="{{ false }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 6px; border-radius: 3px; border: 1px solid #24467A; color: #24467A">ÉQUIPÉ</span></sc-if>
@@ -96,6 +104,7 @@ a{color:#24467A}a:hover{color:#1A3560}
               <sc-if value="{{ r.notEquipped }}" hint-placeholder-val="{{ true }}"><a href="Parchemin-Desktop-Equipement.dc.html" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Équiper</a></sc-if>
             </span>
           </div>
+          </sc-if>
         </sc-for>
       </div>
     </div>
@@ -106,7 +115,7 @@ a{color:#24467A}a:hover{color:#1A3560}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { level: 3 };
+    this.state = { level: 3, broken: null };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -138,6 +147,8 @@ class Component extends DCLogic {
         const vd = (s[1] + 6 * (level - 1)) * skill;
         const eq = s[0] === 'Bouclier en argent';
         return {
+          broken: s[0] === this.state.broken,
+          fine: s[0] !== this.state.broken,
           sortKey: vd,
           name: s[0],
           equipped: eq,

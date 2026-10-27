@@ -31,6 +31,17 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
   </header>
 
   <main style="flex: 1; padding: 4px 16px 12px; display: flex; flex-direction: column; gap: 14px; min-height: 0; overflow-y: auto">
+    <sc-if value="{{ crashed }}" hint-placeholder-val="{{ false }}">
+      <div role="alert" style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; border: 1px solid #342D47; border-radius: 6px; background: #1A1724">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+        <h2 style="margin: 0; font-size: 18px; font-weight: 500">Cette fiche a planté</h2>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9A2BF">Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.</p>
+        <button type="button" onClick="{{ retry }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 4px; font-weight: 500; background: #BBA6F7; color: #110F18"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
+        <button type="button" onClick="{{ rep.openCrash }}" style="min-height: 44px; font-size: 14px; color: #BBA6F7">Envoyer le rapport</button>
+      </div>
+      <span style="flex: none; font-size: 12px; line-height: 1.45; color: #8D86A4">Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.</span>
+    </sc-if>
+    <sc-if value="{{ fine }}" hint-placeholder-val="{{ true }}">
     <div role="group" aria-label="Étoiles" style="flex: none; display: flex; border: 1px solid #342D47; border-radius: 4px; overflow: hidden">
       <sc-for list="{{ starOpts }}" as="s" hint-placeholder-count="3">
         <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; {{ s.style }}">{{ s.label }}</button>
@@ -93,6 +104,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Un chiffre ou un nom faux ? Signale-le
       </button>
     </section>
+    </sc-if>
   </main>
   <sc-if value="{{ rep.open }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ rep.close }}" style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72)"></div>
@@ -119,7 +131,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
           </sc-if>
         </div>
         <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
-          <span style="font-size: 13px; color: #A9A2BF">{{ rep.textLabel }}</span>
+          <span style="font-size: 13px; color: #A9A2BF">{{ rep.textLabel }}<sc-if value="{{ rep.optional }}" hint-placeholder-val="{{ false }}"> <span style="color: #8D86A4">· facultatif</span></sc-if></span>
           <textarea rows="3" placeholder="{{ rep.textHint }}" style="box-sizing: border-box; width: 100%; min-height: 92px; padding: 10px 12px; border: 1px solid #342D47; border-radius: 4px; background: #110F18; color: #E9E5F3; font-size: 15px; resize: none"></textarea>
         </label>
         <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
@@ -134,7 +146,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
         </label>
         <div style="flex: none; display: flex; flex-direction: column; border: 1px solid #342D47; border-radius: 6px">
           <button type="button" onClick="{{ rep.toggleCtx }}" aria-expanded="{{ rep.ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; text-align: left">
-            <span style="flex: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 13px">Joint au signalement</span><span style="font-size: 12px; color: #8D86A4">Version, données, ce que l'écran affiche, ton contexte</span></span>
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 13px">Joint au signalement</span><span style="font-size: 12px; color: #8D86A4">{{ rep.ctxSummary }}</span></span>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#A9A2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ rep.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{ rep.ctxOpen }}" hint-placeholder-val="{{ false }}">
@@ -164,7 +176,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: false, sent: false };
+    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: false, sent: false, crashed: false, crash: false };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -208,6 +220,9 @@ class Component extends DCLogic {
         pick: () => this.setState({ stars: s })
       })),
       rep: this.reportVals(),
+      crashed: this.state.crashed,
+      fine: !this.state.crashed,
+      retry: () => this.setState({ crashed: false }),
       hpTxt: fmt(600 * (stars + 1), 0),
       stagTxt: fmt(180 * (stars + 1), 0),
       advice: { text: advice.text, color: colors[advice.s], isOk: advice.s === 'ok', isWarn: advice.s === 'warn', isBad: advice.s === 'bad' },
@@ -240,7 +255,8 @@ class Component extends DCLogic {
     const picked = isData ? LINES.find((l) => l.id === st.line) : null;
     return {
       open: st.report, form: !st.sent, sent: st.sent,
-      openReport: () => this.setState({ report: true, sent: false }),
+      openReport: () => this.setState({ report: true, sent: false, crash: false }),
+      openCrash: () => this.setState({ report: true, sent: false, crash: true, kind: 'bug', ctxOpen: true }),
       close: () => this.setState({ report: false, sent: false }),
       send: () => this.setState({ sent: true }),
       subject: 'Sur la fiche du Troll · ' + stars + '★',
@@ -258,13 +274,24 @@ class Component extends DCLogic {
       })),
       isData: isData,
       fieldCols: isData ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
-      textLabel: current.text,
-      textHint: current.hint,
+      textLabel: st.crash ? 'Ce que tu faisais' : current.text,
+      textHint: st.crash ? "J'ai passé le Troll à " + stars + '★.' : current.hint,
+      optional: st.crash,
+      ctxSummary: st.crash ? "Version, écran, l'erreur et sa pile" : "Version, données, ce que l'écran affiche, ton contexte",
       ctxOpen: st.ctxOpen,
       ctxExpanded: String(st.ctxOpen),
       chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
       toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
-      context: [
+      context: st.crash ? [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
+        'TROLL · ' + stars + '★',
+        "TypeError: Cannot read properties of undefined (reading 'hits')",
+        '\u00a0\u00a0at attackDamage (index-Cq3RNw5M.js:1:48211)',
+        '\u00a0\u00a0at AttackRow (index-Cq3RNw5M.js:1:51877)',
+        '\u00a0\u00a0at CreatureSheet (index-Cq3RNw5M.js:1:53102)',
+        '\u00a0\u00a0… 11 lignes de plus'
+      ] : [
         'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
         'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
         'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),

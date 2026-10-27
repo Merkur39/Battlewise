@@ -20,7 +20,7 @@ LIGHT_THEMES = {"jour", "parchemin"}
 DARK_SCHEME = ":root{color-scheme:dark}"
 
 M_W, M_H, M_GAP, M_ROW = 390, 844, 80, 1264
-D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 6560
+D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 7824
 NOTE_ABOVE = 300
 
 # (row title, [(file, board title, interactive)]) — one canvas row each.
@@ -34,6 +34,9 @@ MOBILE = [
                              ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True), ("Tokens", None, False)]),
     ("Tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
                      ("Nouveautes", "Nouveautés", False), ("Merci", "Corrigé grâce à toi", True)]),
+    ("Plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
+                   ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
+                   ("Simulation-Plantee", "Simulation plantée", True), ("Secours", "Battlewise a planté", True)]),
 ]
 DESKTOP = [
     ("Desktop · écrans principaux", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),
@@ -44,6 +47,10 @@ DESKTOP = [
                             ("Monde", "Ton monde", False), ("Reglages", "Réglages", True)]),
     ("Desktop · tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
                                ("Nouveautes", "Nouveautés", False), ("Merci", "Corrigé grâce à toi", True)]),
+    ("Desktop · plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
+                             ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
+                             ("Simulation-Plantee", "Simulation plantée", True),
+                             ("Secours", "Battlewise a planté", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960
 

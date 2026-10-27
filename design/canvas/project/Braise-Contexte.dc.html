@@ -66,6 +66,14 @@ input::placeholder{color:#9A8B78}
       <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
           <li style="border-bottom: 1px solid #2B241E">
+            <sc-if value="{{ r.broken }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 6px 0;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#B8A994" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">{{ r.name }}</span><span style="font-size: 12px; color: #9A8B78">Cette ligne a planté</span></span>
+                <button type="button" style="flex: none; min-height: 44px; font-size: 14px; color: #EBD3A2">Signaler</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ r.fine }}" hint-placeholder-val="{{ true }}">
             <a href="Braise-Monstre.dc.html" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #EFE6D8; text-decoration: none">
               <span style="display: flex; align-items: center; gap: 12px">
                 <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
@@ -91,6 +99,7 @@ input::placeholder{color:#9A8B78}
                 <span>{{ r.advice }}</span>
               </span>
             </a>
+            </sc-if>
           </li>
         </sc-for>
       </ul>
@@ -198,6 +207,8 @@ class Component extends DCLogic {
     });
   }
   screenVals() {
+    // A row that failed while drawing, by name.
+    const broken = (this.state || {}).broken;
     const colors = { ok: '#86C68E', warn: '#F2963F', bad: '#EC6A5E', none: '#B8A994' };
     const borders = { ok: '#3D7C47', warn: '#B5601A', bad: '#8B2E26', none: '#3D332A' };
     const words = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
@@ -214,6 +225,8 @@ class Component extends DCLogic {
     return {
       rows: list.map((r) => ({
         name: r.name,
+        broken: r.name === broken,
+        fine: r.name !== broken,
         qualifier: r.qualifier || '',
         hasQualifier: Boolean(r.qualifier),
         stats: r.stats,

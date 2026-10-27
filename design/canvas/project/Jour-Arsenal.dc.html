@@ -58,6 +58,14 @@ a{color:#1F5F94}a:hover{color:#174A73}
 
     <div aria-label="Boucliers" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; margin: 0 -16px; padding: 0 16px; border-top: 1px solid #D3CDC1">
       <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+        <sc-if value="{{ r.broken }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 6px 0; margin: 0 -16px; padding: 6px 16px; border-bottom: 1px solid #E6E1D7">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#50575F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">{{ r.name }}</span><span style="font-size: 12px; color: #656C73">Cette ligne a planté</span></span>
+            <button type="button" style="flex: none; min-height: 44px; font-size: 14px; color: #1F5F94">Signaler</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ r.fine }}" hint-placeholder-val="{{ true }}">
         <a href="Jour-Profil.dc.html" style="display: flex; flex-direction: column; gap: 8px; padding: 10px 16px; margin: 0 -16px; border-bottom: 1px solid #E6E1D7; color: #1B1F23; text-decoration: none; {{ r.rowStyle }}">
           <span style="display: flex; align-items: center; gap: 8px; min-width: 0">
             <span style="font-size: 15px">{{ r.name }}</span>
@@ -86,6 +94,7 @@ a{color:#1F5F94}a:hover{color:#174A73}
             </span>
           </span>
         </a>
+        </sc-if>
       </sc-for>
     </div>
   </main>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
   }
   constructor(props) {
     super(props);
-    this.state = { level: 3 };
+    this.state = { level: 3, broken: null };
   }
   screenVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -190,6 +199,8 @@ class Component extends DCLogic {
         const vd = (s[1] + 6 * (level - 1)) * skill;
         const eq = s[0] === 'Bouclier en argent';
         return {
+          broken: s[0] === this.state.broken,
+          fine: s[0] !== this.state.broken,
           sortKey: vd,
           name: s[0],
           equipped: eq,

@@ -265,6 +265,40 @@ def build_thanks():
                                               newline="\n")
 
 
+def build_crash():
+    """What fails while drawing, by its net (issue #33): the creature sheet and the desktop Bestiaire with the
+    sheet crashed; a row of the Bestiary's list and of the Arsenal's that crashed; the Simulation crashed."""
+    for source, target, title, fine, failed in (
+        ("Monstre.dc.html", "Plantee.dc.html", "Fiche plantée — carte",
+         "crashed: false, crash: false", "crashed: true, crash: false"),
+        ("Desktop-Bestiaire.dc.html", "Desktop-Plantee.dc.html", "Fiche plantée — panneau",
+         "crashed: false, crash: false, broken: null", "crashed: true, crash: false, broken: null"),
+        # The Troll's row fails, and so does its sheet, chosen beside it.
+        ("Desktop-Bestiaire.dc.html", "Desktop-Ligne-Plantee.dc.html", "Ligne plantée — Bestiaire",
+         "crashed: false, crash: false, broken: null", "crashed: true, crash: false, broken: 'Troll'"),
+        ("Arsenal.dc.html", "Arsenal-Ligne-Plantee.dc.html", "Ligne plantée — Arsenal",
+         "level: 3, broken: null", "level: 3, broken: 'Grand bouclier nordique'"),
+        ("Desktop-Arsenal.dc.html", "Desktop-Arsenal-Ligne-Plantee.dc.html", "Ligne plantée — Arsenal",
+         "level: 3, broken: null", "level: 3, broken: 'Grand bouclier nordique'"),
+        ("Main.dc.html", "Simulation-Plantee.dc.html", "Simulation plantée — carte",
+         "value: 90, crashed: false", "value: 90, crashed: true"),
+        ("Desktop-Combat.dc.html", "Desktop-Simulation-Plantee.dc.html", "Simulation plantée — carte",
+         "value: 90, crashed: false", "value: 90, crashed: true"),
+    ):
+        text = (P / source).read_text(encoding="utf-8")
+        text = re.sub(r"<title>.*?</title>", f"<title>{title}</title>", text, count=1)
+        assert text.count(fine) == 1
+        (P / target).write_text(text.replace(fine, failed, 1), encoding="utf-8", newline="\n")
+    # The phone Bestiaire keeps no state of its own: the board starts with the Troll's row failed.
+    text = (P / "Bestiaire.dc.html").read_text(encoding="utf-8")
+    text = re.sub(r"<title>.*?</title>", "<title>Ligne plantée — Bestiaire</title>", text, count=1)
+    opening = "class Component extends DCLogic {\n"
+    assert text.count(opening) == 1
+    constructor = "  constructor(props) {\n    super(props);\n    this.state = { broken: 'Troll' };\n  }\n"
+    (P / "Ligne-Plantee.dc.html").write_text(text.replace(opening, opening + constructor, 1), encoding="utf-8",
+                                              newline="\n")
+
+
 def main():
     build_mobile()
     build_desktop()
@@ -283,6 +317,7 @@ def main():
     build_context()
     build_report()
     build_thanks()
+    build_crash()
     print("ok")
 
 
