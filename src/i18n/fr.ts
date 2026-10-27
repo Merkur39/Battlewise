@@ -345,6 +345,8 @@ export const fr = {
     themeNoteDesktop: "L'aperçu change dès que tu choisis.",
     about: 'À propos',
     dataSource: (version: string) => `Lues dans Valheim ${version} · sans mod`,
+    source: 'Code source et licence',
+    licence: (copyright: string) => `${copyright} · logiciel libre sous GPLv3, sans garantie.`,
     themes,
   },
 }

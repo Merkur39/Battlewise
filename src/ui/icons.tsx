@@ -155,6 +155,12 @@ export const PlusIcon = (props: IconProps) => (
   </Icon>
 )
 
+export const ExternalIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M7 17L17 7M9 7h8v8" />
+  </Icon>
+)
+
 export const BackIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M19 12H5M11 6l-6 6 6 6" />

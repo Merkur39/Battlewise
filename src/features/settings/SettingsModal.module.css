@@ -217,6 +217,33 @@
   color: var(--secondary);
 }
 
+/* The source and its licence: a row on a phone, a small secondary button on a desktop. */
+.source {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 12px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.sourceLabel {
+  flex: 1;
+  font-size: 14px;
+}
+
+.sourceHost {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
+}
+
 /* Desktop: sections ruled apart, the language note beside the control, theme cards in a grid. */
 @media (min-width: 1024px) {
   .section {
@@ -299,6 +326,17 @@
   .aboutLines {
     align-items: flex-end;
     gap: 4px;
+  }
+
+  .source {
+    gap: 6px;
+    height: 32px;
+    background: none;
+  }
+
+  .sourceLabel {
+    flex: none;
+    font-size: 13px;
   }
 }
 
