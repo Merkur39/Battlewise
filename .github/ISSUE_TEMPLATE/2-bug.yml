@@ -1,0 +1,47 @@
+name: Bug
+description: Something does not work, or looks wrong.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You can write in French: *le français est bienvenu.*
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to get there
+      description: The screen, the creature, what you tapped or clicked…
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options:
+        - Phone
+        - Tablet
+        - Computer
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: Chrome on Android, Safari on iPhone…
+  - type: input
+    id: version
+    attributes:
+      label: Battlewise version
+      description: Settings › About shows it.
+      placeholder: 1.3.0
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: A screenshot helps.

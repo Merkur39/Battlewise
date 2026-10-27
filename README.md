@@ -19,6 +19,17 @@ It starts from the creature, not from a number: in the game, you never see how m
 - **Arsenal**: shields and weapons compared at your skill level.
 - **Guide**: the combat rules, in short.
 
+## Reporting
+
+A number or a name that does not match the game, a bug, an idea:
+[open an issue](https://github.com/Merkur39/Battlewise/issues/new/choose) and pick its form. French
+is welcome.
+
+Every report lands in the Inbox of the [board](https://github.com/users/Merkur39/projects/4),
+whichever way it comes in; one heard elsewhere is copied there by hand, labelled `from:community`.
+The Inbox is emptied every week: each report is planned, answered, or closed as a duplicate or as
+won't fix, with a word saying why.
+
 ## Requirements
 
 - Node.js ≥ 22.12.
