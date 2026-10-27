@@ -1,0 +1,31 @@
+# Dependency updates once a month. Minor and patch updates come grouped, a major comes alone. npm
+# releases wait a week: a compromised package is usually pulled within days.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    commit-message:
+      # What ships in the app is a fix and bumps the patch version before it merges; tooling is a chore.
+      prefix: fix
+      prefix-development: chore
+      include: scope
+    groups:
+      runtime:
+        dependency-type: production
+        update-types: [minor, patch]
+      tooling:
+        dependency-type: development
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns: ['*']

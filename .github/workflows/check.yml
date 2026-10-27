@@ -1,0 +1,28 @@
+# Runs the project's own gate on every pull request and on main: typecheck, lint, format check and
+# tests. Vercel's preview only proves the build.
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          # The oldest Node that package.json's engines accepts.
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
