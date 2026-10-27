@@ -198,6 +198,22 @@
   color: var(--faint);
 }
 
+/* The body and each weak spot, their names in one column as wide as the longest. */
+.parts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+  gap: 6px 8px;
+}
+
+.partName {
+  padding-top: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
 .attacks {
   flex: none;
   display: flex;
@@ -373,6 +389,15 @@
 
 .panel .chips {
   gap: 8px 12px;
+}
+
+.panel .parts {
+  gap: 8px 12px;
+}
+
+.panel .partName {
+  padding-top: 6px;
+  font-size: 11px;
 }
 
 .panel .chip {

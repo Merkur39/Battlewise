@@ -44,7 +44,8 @@ class ExtractCombatTests(unittest.TestCase):
     def test_weak_spots_replace_the_creature_modifiers(self):
         self.assertEqual(
             self.creatures["Troll"]["weakSpots"],
-            [{"part": "head", "modifiers": {"pierce": "veryWeak", "spirit": "immune"}}],
+            [{"part": "head", "name": {"fr": "Tête", "en": "Head"},
+              "modifiers": {"pierce": "veryWeak", "spirit": "immune"}}],
         )
 
     def test_a_weak_spot_under_an_inactive_object_never_applies(self):
@@ -285,6 +286,14 @@ class ExtractCombatTests(unittest.TestCase):
                    if not (a["name"].get("fr") and a["name"].get("en"))]
         self.assertEqual(unnamed, [])
 
+    def test_every_weak_spot_has_a_name_in_both_languages(self):
+        # The game names no body part: curation.json does.
+        spots = [(f.get("id"), s["part"], s.get("name", {})) for c in self.data["creatures"]
+                 for f in [c] + c.get("phases", []) for s in f.get("weakSpots", [])]
+        self.assertEqual([(f, part) for f, part, name in spots if not (name.get("fr") and name.get("en"))], [])
+        self.assertEqual({part for _, part, _ in spots}, {"head", "ass", "eggs"})
+        self.assertEqual(self.report.unnamed_parts, [])
+
     # ------------------------------------------------------------------ curation
     def test_every_included_creature_has_a_biome_and_an_attack(self):
         self.assertEqual([c["id"] for c in self.data["creatures"] if not c["biomes"] or not c["attacks"]], [])
@@ -297,6 +306,7 @@ class ExtractCombatTests(unittest.TestCase):
 
     def test_curated_names_are_only_those_the_game_lacks(self):
         self.assertEqual(self.report.unused_names, [])
+        self.assertEqual(self.report.unused_parts, [])
 
     def test_ignored_creatures_are_prefabs_of_the_game(self):
         self.assertEqual(self.report.stale_ignored, [])

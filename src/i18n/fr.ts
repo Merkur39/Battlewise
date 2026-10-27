@@ -177,8 +177,11 @@ export const fr = {
     parryDoesNot: 'Ne le fait pas tituber',
     cannotParry: 'Ton objet ne pare pas',
     modifiers: 'Faiblesses et résistances',
-    modifier: (type: string, state: string, multiplier: number) =>
-      `${type} · ${state} ×${n(multiplier)}`,
+    modifiersOn: (part: string) => `Faiblesses et résistances · ${part}`,
+    body: 'Corps',
+    /** `state` is null for a tool taken normally: the game has no word for it. */
+    modifier: (type: string, state: string | null, multiplier: number) =>
+      state === null ? `${type} ×${n(multiplier)}` : `${type} · ${state} ×${n(multiplier)}`,
     everythingElse: 'Tout le reste ×1',
     noModifier: 'Tout ×1',
     attacks: 'Ses attaques',
@@ -191,6 +194,13 @@ export const fr = {
     metres: (metres: number) => `${n(metres)} m`,
     phase: (index: number, health: number) => `Phase ${n(index)} · ${n(health)} PV`,
     noAttack: 'Aucune attaque',
+    trample: 'Écrasement',
+    whenRunning: 'En course',
+    deathBlast: 'Explosion',
+    onDeath: (phase: boolean): string => (phase ? 'Fin de la phase' : 'À sa mort'),
+    count: (min: number, max: number) => (min === max ? `×${n(min)}` : `×${n(min)}–${n(max)}`),
+    seeSheet: 'Voir sa fiche',
+    sheet: 'Sa fiche',
     attackSummary: ({ name, types, damage, block, parry, dodgeable }: AttackWords) =>
       damage === null
         ? `${name}, invocation.`

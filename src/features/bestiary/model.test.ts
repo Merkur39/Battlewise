@@ -5,7 +5,15 @@ import type { Defence } from '@/combat/block'
 import type { World } from '@/combat/world'
 import { game } from '@/data'
 import type { GameAttack, GameCreature, GameHit } from '@/data/types'
-import { assess, attackTypes, creaturesOf, matchRange, modifiersOf, search } from './model'
+import {
+  assess,
+  attackTypes,
+  creaturesOf,
+  matchRange,
+  modifierRows,
+  modifiersOf,
+  search,
+} from './model'
 
 // Stagger limit 40: blunt 10 holds; 70 staggers a block but a parry holds it; 200 breaks both.
 const defence: Defence = { blockPower: 50, parryPower: 75, armor: 0, maxHealth: 100 }
@@ -126,6 +134,62 @@ describe('assess', () => {
     ).toMatchObject({ parry: null, canParry: false })
   })
 
+  it('assesses what hits apart from the attacks: trampling and what a death deals', () => {
+    const lox = creature([attack('bite', [hit(10)])], {
+      trample: { minSpeed: 5, hits: [hit(70, { scaling: 'world', ticks: { every: 4 } })] },
+      onDeath: [hit(200, { blockable: false, scaling: 'none', source: 'aoe', radius: 6 })],
+    })
+
+    const [hazards] = assess(lox, defence, world, 2).hazards
+
+    expect(hazards?.fighter).toBe(lox)
+    expect(hazards?.trample).toMatchObject({
+      damage: 70,
+      verdicts: { block: 'staggered', parry: 'holds', dodgeable: true },
+    })
+    expect(hazards?.death).toMatchObject({
+      damage: 200,
+      verdicts: { block: 'unblockable', dodgeable: true },
+    })
+  })
+
+  it('leaves trampling and death out of the advice', () => {
+    const lox = creature([attack('bite', [hit(10)])], {
+      trample: { minSpeed: 5, hits: [hit(200)] },
+      onDeath: [hit(200, { blockable: false })],
+    })
+
+    expect(assess(lox, defence, world, 0)).toMatchObject({
+      block: 'holds',
+      advice: { kind: 'blockAll' },
+    })
+  })
+
+  it('counts the creatures a death brings at the stars, and finds their sheet', () => {
+    const oozer = creature([attack('zone', [hit(10)])], {
+      deathSummons: [
+        { id: 'Blob', name: { fr: 'Blob', en: 'Blob' }, min: 2, max: 2, doublesPerStar: true },
+        { id: 'Nowhere', min: 1, max: 3 },
+      ],
+    })
+
+    const summons = assess(oozer, defence, world, 1).hazards[0]?.summons
+
+    expect(summons?.map(({ name, count, creature }) => [name.en, count, creature?.id])).toEqual([
+      ['Blob', [4, 4], 'Blob'],
+      ['Nowhere', [1, 3], undefined],
+    ])
+  })
+
+  it('keeps the hazards of each phase with its phase, and none for a fighter without any', () => {
+    const boss = creature([attack('a', [hit(10)])], {
+      deathSummons: [{ id: 'Blob', min: 1, max: 1 }],
+      phases: [{ ...creature([attack('b', [hit(10)])]), id: 'Phase2' }],
+    })
+
+    expect(assess(boss, defence, world, 0).hazards.map((h) => h.fighter.id)).toEqual(['Test'])
+  })
+
   it('assesses every creature of the game, at every star it can have, with the default gear', () => {
     const gear = gearDefence(DEFAULT_STATE.gear)
     const assessed = game.creatures.flatMap((c) =>
@@ -176,6 +240,49 @@ describe('modifiersOf', () => {
       { type: 'pierce', modifier: 'weak', multiplier: 1.5 },
       { type: 'blunt', modifier: 'resistant', multiplier: 0.5 },
       { type: 'spirit', modifier: 'immune', multiplier: 0 },
+    ])
+  })
+
+  it('shows the tools a creature takes among the types, a tool taken normally without a word', () => {
+    expect(
+      modifiersOf({ fire: 'weak', blunt: 'resistant' }, { chop: 'normal', pickaxe: 'veryWeak' }),
+    ).toEqual([
+      { type: 'pickaxe', modifier: 'veryWeak', multiplier: 2 },
+      { type: 'fire', modifier: 'weak', multiplier: 1.5 },
+      { type: 'chop', modifier: null, multiplier: 1 },
+      { type: 'blunt', modifier: 'resistant', multiplier: 0.5 },
+    ])
+  })
+})
+
+describe('modifierRows', () => {
+  it('gives the body its row, then each weak spot its own, by the name of the part', () => {
+    const troll = game.creatures.find((c) => c.id === 'Troll')!
+
+    expect(modifierRows(troll).map(({ part, modifiers }) => [part?.fr ?? null, modifiers])).toEqual(
+      [
+        [
+          null,
+          [
+            { type: 'pierce', modifier: 'weak', multiplier: 1.5 },
+            { type: 'blunt', modifier: 'resistant', multiplier: 0.5 },
+            { type: 'spirit', modifier: 'immune', multiplier: 0 },
+          ],
+        ],
+        [
+          'Tête',
+          [
+            { type: 'pierce', modifier: 'veryWeak', multiplier: 2 },
+            { type: 'spirit', modifier: 'immune', multiplier: 0 },
+          ],
+        ],
+      ],
+    )
+  })
+
+  it('has the body alone for a creature without weak spot', () => {
+    expect(modifierRows(creature([], { modifiers: { fire: 'weak' } }))).toEqual([
+      { part: null, modifiers: [{ type: 'fire', modifier: 'weak', multiplier: 1.5 }] },
     ])
   })
 })

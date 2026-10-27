@@ -4,13 +4,13 @@ import { useAppState } from '@/app/useAppState'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { Verdict } from '@/combat/hit'
 import { game } from '@/data'
-import type { GameAttack } from '@/data/types'
+import type { GameAttack, GameHit } from '@/data/types'
 import type { Language } from '@/i18n/detect'
 import type { Catalog } from '@/i18n/fr'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { dodgeTone, verdictTone, type Tone } from '@/ui/tones'
-import { attackTypes, type Assessment } from './model'
+import { hitTypes, type Assessment } from './model'
 
 export interface Shown {
   readonly tone: Tone
@@ -73,12 +73,25 @@ export function useFight() {
 
 /** An attack in one sentence, for the label of the row that shows it. */
 export function useAttackSummary() {
+  const language = useLanguage()
+  const summary = useHitsSummary()
+  return (attack: GameAttack, damage: number | null, verdicts: AttackVerdicts | null) =>
+    summary(attack.name[language], attack.hits, damage, verdicts)
+}
+
+/** Named hits in one sentence: an attack, trampling, a death blast. */
+export function useHitsSummary() {
   const t = useT()
   const language = useLanguage()
-  return (attack: GameAttack, damage: number | null, verdicts: AttackVerdicts | null) =>
+  return (
+    name: string,
+    hits: readonly GameHit[],
+    damage: number | null,
+    verdicts: AttackVerdicts | null,
+  ) =>
     t.creature.attackSummary({
-      name: attack.name[language],
-      types: attackTypes(attack).map((type) => game.damageTypes[type][language]),
+      name,
+      types: hitTypes(hits).map((type) => game.damageTypes[type][language]),
       damage: damage === null ? null : Math.round(damage),
       block: verdicts === null ? '' : blockShown(verdicts.block, t).text,
       parry: verdicts === null ? '' : parryShown(verdicts.parry, verdicts.parry !== null, t).text,

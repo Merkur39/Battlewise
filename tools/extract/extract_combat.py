@@ -5,8 +5,8 @@
 
 Fails without writing when the curation has a gap: a hostile creature met somewhere with attacks,
 neither listed nor ignored; a listed creature the game lacks or never places; a variant whose stats
-differ from its creature; an ignored name the game lacks; an attack without a name. Curated names the
-game makes useless are only reported.
+differ from its creature; an ignored name the game lacks; an attack or a weak spot without a name.
+Curated names the game makes useless are only reported.
 """
 import argparse
 import json
@@ -34,9 +34,12 @@ def main(argv=None):
         "variants whose stats differ from their creature (make them phases or creatures)": report.divergent,
         "ignored names that are no creature prefab": report.stale_ignored,
         "attacks without a name": ["%s: %s" % pair for pair in report.unnamed],
+        "weak spots without a name (curation.json parts)": report.unnamed_parts,
     }
     if report.unused_names:
         print("curated attack names no longer needed:\n  %s" % "\n  ".join(report.unused_names), file=sys.stderr)
+    if report.unused_parts:
+        print("curated part names no longer needed:\n  %s" % "\n  ".join(report.unused_parts), file=sys.stderr)
     if any(gaps.values()):
         for title, items in gaps.items():
             if items:

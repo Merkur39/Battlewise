@@ -112,9 +112,11 @@ export interface GameAttack {
   readonly strikes?: { readonly count: number; readonly times: readonly number[] }
 }
 
-/** A collider whose modifiers replace the creature's own. `part` is its name in the game. */
+/** A collider whose modifiers replace the creature's own. `part` is its name in the game, `name` the
+ * body part's, from curation.json: the game names none. */
 export interface GameWeakSpot {
   readonly part: string
+  readonly name: Localized
   readonly modifiers: DamageModifiers
   readonly toolModifiers?: ToolModifiers
 }

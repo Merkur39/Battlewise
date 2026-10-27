@@ -313,6 +313,22 @@
       "title": "Ce que tu encaisses — deux pistes",
       "page": "encaisses"
     },
+    "Fiche.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1760,
+      "title": "Fiche monstre — trois pistes",
+      "page": "fiche"
+    },
+    "Fiche-Desktop.dc.html": {
+      "x": 0,
+      "y": 1880,
+      "w": 1028,
+      "h": 1460,
+      "title": "Piste A · desktop",
+      "page": "fiche"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -2052,6 +2068,8 @@
     "Menu-C.dc.html",
     "Competence.dc.html",
     "Encaisses.dc.html",
+    "Fiche.dc.html",
+    "Fiche-Desktop.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2219,6 +2237,10 @@
     {
       "id": "encaisses",
       "name": "Encaisses"
+    },
+    {
+      "id": "fiche",
+      "name": "Fiche · pistes"
     },
     {
       "id": "braise",

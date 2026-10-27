@@ -405,5 +405,10 @@
     "aspect_Fader_Spin": { "en": "Spin", "fr": "Tournoiement", "from": "hand" },
     "aspect_Fader_Flamebreath": { "en": "Flamebreath", "fr": "Souffle de flammes", "from": "hand" },
     "Serpent_attack": { "en": "Bite", "fr": "Morsure", "from": "wiki" }
+  },
+  "parts": {
+    "head": { "en": "Head", "fr": "Tête", "from": "hand" },
+    "ass": { "en": "Rear", "fr": "Arrière-train", "from": "hand" },
+    "eggs": { "en": "Eggs", "fr": "Œufs", "from": "hand" }
   }
 }

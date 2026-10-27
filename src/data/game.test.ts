@@ -28,6 +28,7 @@ const names = [
   ...game.creatures.map((c) => c.name),
   ...attacks.map((a) => a.name),
   ...summons.flatMap((s) => (s.name ? [s.name] : [])),
+  ...fighters.flatMap((f) => (f.weakSpots ?? []).map((spot) => spot.name)),
   ...game.blockers.map((b) => b.name),
   ...(game.forge ? [game.forge.name] : []),
   ...game.ruleEffects.map((e) => e.name),
