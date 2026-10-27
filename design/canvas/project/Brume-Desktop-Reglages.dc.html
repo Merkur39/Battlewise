@@ -81,6 +81,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
             </sc-for>
           </div>
         </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-top: 14px; border-top: 1px solid {{ t.line }}">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}; padding-top: 10px">{{ s.feedback }}</span>
+          <span style="width: 380px; display: flex; flex-direction: column; gap: 8px">
+            <a href="Brume-Desktop-Signalements.dc.html" style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ t.line }}; color: {{ t.ink }}; text-decoration: none"><span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{ s.reports }}</span><span style="font-size: 12px; color: {{ t.secondary }}">{{ s.reportsMeta }}</span></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+            <a href="Brume-Desktop-Nouveautes.dc.html" style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ t.line }}; color: {{ t.ink }}; text-decoration: none"><span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{ s.news }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.newsMeta }}</span></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+          </span>
+        </div>
         <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 14px; border-top: 1px solid {{ t.line }}">
           <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.data }}</span>
           <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
@@ -123,7 +130,7 @@ class Component extends DCLogic {
     const detected = 'fr';
     const S = {
       fr: {
-        code: 'fr', title: 'Réglages', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
+        code: 'fr', title: 'Réglages', feedback: 'TES RETOURS', reports: 'Mes signalements', reportsMeta: '5 envoyés · 2 corrigés', news: 'Nouveautés', newsMeta: '1.5.0 · 2 NOV.', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
         langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
         theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'L\'aperçu change dès que tu choisis.',
         data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', cancel: 'Annuler', save: 'Valider',
@@ -131,7 +138,7 @@ class Component extends DCLogic {
         nav0: 'Bestiaire', nav1: 'Simulation', nav2: 'Arsenal', nav3: 'Mémo'
       },
       en: {
-        code: 'en', title: 'Settings', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
+        code: 'en', title: 'Settings', feedback: 'YOUR FEEDBACK', reports: 'My reports', reportsMeta: '5 sent · 2 fixed', news: "What's new", newsMeta: '1.5.0 · NOV 2', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
         langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
         theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'The preview changes as soon as you choose.',
         data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', cancel: 'Cancel', save: 'Save',

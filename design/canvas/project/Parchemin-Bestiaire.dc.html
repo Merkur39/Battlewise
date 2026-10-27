@@ -150,6 +150,24 @@ input::placeholder{color:#685B4A}
       </a>
     </div>
   </sc-if>
+  <sc-if value="{{ thanksOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeThanks }}" style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72)"></div>
+    <div role="dialog" aria-modal="true" aria-labelledby="t-title" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 24px; border-top: 1px solid #CDBFA3; border-radius: 14px 14px 0 0; background: #F9F4E8; animation: sheet-in 0.25s cubic-bezier(0.2, 0, 0, 1)">
+      <span aria-hidden="true" style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #CDBFA3"></span>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin: -6px -10px -6px 0">
+        <h2 id="t-title" style="margin: 0; font-size: 17px; font-weight: 500">Corrigé grâce à toi</h2>
+        <button type="button" onClick="{{ closeThanks }}" aria-label="Fermer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #5E5141"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #CDBFA3; border-radius: 6px; background: #EFE7D6">
+          <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 15px">Troll › Frappe au sol</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5141">#48</span></span>
+          <span style="font-size: 13px; color: #5E5141">60 dégâts, plus 70.</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5">Ton signalement est corrigé dans <span style="font-family: 'IBM Plex Mono', monospace">1.5.0</span>. Merci, Ragnar : chaque correction sert à tous les joueurs.</p>
+      </div>
+      <a href="Parchemin-Nouveautes.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; font-weight: 500; background: #24467A; color: #EFE7D6; text-decoration: none">Voir les nouveautés</a>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
@@ -164,6 +182,8 @@ class Component extends DCLogic {
     };
     return Object.assign(this.screenVals(), {
       menuOpen: open,
+      thanksOpen: !!st.thanks,
+      closeThanks: () => this.setState({ thanks: false }),
       menuExpanded: String(open),
       toggleMenu: () => (open ? close() : this.setState({ menu: true })),
       closeMenu: close,

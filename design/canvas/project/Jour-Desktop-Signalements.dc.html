@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes signalements — fenêtre desktop · Plein jour</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:light}
+a{color:#1F5F94}a:hover{color:#174A73}
+</style>
+</helmet>
+<div style="position: relative; height: 100vh; min-height: 680px; box-sizing: border-box; display: flex; flex-wrap: wrap; font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F4F1EA; color: #1B1F23">
+  <div aria-hidden="true" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #D3CDC1">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px; font-size: 16px; font-weight: 500">Battlewise</div>
+    <div style="display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border-radius: 6px; background: #DBE7F3; color: #1F5F94">Bestiaire</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #50575F">Simulation</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #50575F">Arsenal</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #50575F">Mémo</span>
+    </div>
+  </div>
+  <div aria-hidden="true" style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px; display: flex; flex-direction: column; gap: 24px">
+    <span style="font-size: 26px; font-weight: 500">Bestiaire</span>
+    <div style="display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 24px">
+      <div style="height: 560px; border-radius: 8px; background: #FFFFFF"></div>
+      <div style="height: 420px; border-radius: 8px; background: #FFFFFF"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72); display: flex; align-items: center; justify-content: center; padding: 32px; box-sizing: border-box">
+    <div role="dialog" aria-modal="true" aria-labelledby="p-title" style="width: min(680px, 100%); max-height: 100%; display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: #FFFFFF; border: 1px solid #D3CDC1">
+      <header style="display: flex; align-items: center; gap: 4px; padding: 12px; border-bottom: 1px solid #D3CDC1">
+        <a href="Jour-Desktop-Reglages.dc.html" aria-label="Retour aux réglages" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #50575F"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+        <h2 id="p-title" style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Mes signalements</h2>
+        <a href="Jour-Desktop-Bestiaire.dc.html" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #50575F"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+      </header>
+      <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 16px 24px 20px; display: flex; flex-direction: column">
+        <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr) 52px 70px 200px; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid #D3CDC1; font-size: 11px; letter-spacing: 0.08em; color: #50575F"><span></span><span>SUJET</span><span>N°</span><span>DATE</span><span>ÉTAT</span></div>
+        <sc-for list="{{ reports }}" as="r" hint-placeholder-count="5">
+          <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: grid; grid-template-columns: 20px minmax(0, 1fr) 52px 70px 200px; gap: 12px; align-items: center; min-height: 48px; border-bottom: 1px solid #E6E1D7; color: #1B1F23; text-decoration: none">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#50575F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ r.kindIcon }}"></path></svg>
+            <span style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ r.subject }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #50575F">{{ r.number }}</span>
+            <span style="font-size: 12px; color: #656C73">{{ r.date }}</span>
+            <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: {{ r.stateColor }}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="{{ r.stateIcon }}"></path></svg>{{ r.state }}</span>
+          </a>
+        </sc-for>
+        <p style="margin: 0; padding-top: 12px; font-size: 12px; line-height: 1.45; color: #656C73">Envoyés depuis cet appareil. Leur état vient de GitHub quand tu es en ligne ; clique sur un signalement pour l'ouvrir.</p>
+      </div>
+      <footer style="display: flex; justify-content: flex-end; padding: 16px 24px; border-top: 1px solid #D3CDC1">
+        <a href="Jour-Desktop-Bestiaire.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; text-decoration: none; border: 1px solid #D3CDC1; color: #1B1F23">Fermer</a>
+      </footer>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const I = {
+      data: 'M5 21V4M5 4h11l-2 4 2 4H5',
+      bug: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01',
+      idea: 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z',
+      fixed: 'M5 12l5 5L20 7',
+      waiting: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2',
+      open: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z',
+      closed: 'M6 6l12 12M18 6L6 18'
+    };
+    const row = (kind, subject, number, date, state, look) => ({
+      kindIcon: I[kind], subject: subject, number: number, date: date, state: state,
+      stateIcon: I[look], stateColor: look === 'fixed' ? '#1B1F23' : '#50575F'
+    });
+    return {
+      reports: [
+        row('idea', 'Les boss phase par phase', '—', "aujourd'hui", "En attente d'envoi", 'waiting'),
+        row('bug', "La fiche reste vide quand je change d'étoiles", '#52', '2 nov.', 'Ouvert', 'open'),
+        row('data', 'Draugr › Coup de hache', '#50', '30 oct.', 'Corrigé, prochaine version', 'fixed'),
+        row('data', 'Troll › Frappe au sol', '#48', '27 oct.', 'Corrigé dans 1.5.0', 'fixed'),
+        row('data', "Squelette › Coup d'épée", '#47', '26 oct.', 'Fermé · déjà signalé (#45)', 'closed')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
