@@ -54,7 +54,8 @@ export function ReportsModal() {
   const [, refreshed] = useReducer((count: number) => count + 1, 0)
   const waiting = outbox.waiting().toReversed()
   const receipts = outbox.receipts().toReversed()
-  const numbers = receipts.slice(0, READ_AT_MOST).map((receipt) => receipt.number)
+  // Reports that joined an issue as a +1 share its number.
+  const numbers = [...new Set(receipts.map((receipt) => receipt.number))].slice(0, READ_AT_MOST)
   const key = numbers.join(',')
 
   useEffect(() => {
@@ -105,8 +106,8 @@ export function ReportsModal() {
               {row(report.kind, report.title, { kind: 'waiting' }, '', report.at)}
             </li>
           ))}
-          {receipts.map((receipt) => (
-            <li key={receipt.number}>
+          {receipts.map((receipt, index) => (
+            <li key={`sent-${String(index)}`}>
               <a
                 href={`${SOURCE_URL}/issues/${String(receipt.number)}`}
                 target="_blank"

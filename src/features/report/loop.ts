@@ -51,7 +51,8 @@ export interface Fix {
 }
 
 /** The player's reports that the versions after `lastSeen`, up to the one the device runs, fix: none on
- * the first launch, which has no version before it. */
+ * the first launch, which has no version before it. An issue is told of once, by the first of the
+ * reports on it; the others joined it as a +1. */
 export function fixedSince(
   receipts: readonly Receipt[],
   releases: readonly Release[],
@@ -59,11 +60,14 @@ export function fixedSince(
   current: string,
 ): readonly Fix[] {
   if (lastSeen === null) return []
+  const firsts = receipts.filter(
+    (receipt, index) => receipts.findIndex((other) => other.number === receipt.number) === index,
+  )
   return shipped(releases, current)
     .filter((release) => compareVersions(release.version, lastSeen) > 0)
     .flatMap((release) =>
       release.notes.flatMap((note) =>
-        receipts
+        firsts
           .filter((receipt) => note.fixes?.includes(receipt.number))
           .map((receipt) => ({ receipt, version: release.version, note })),
       ),

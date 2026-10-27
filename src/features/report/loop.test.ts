@@ -77,6 +77,13 @@ describe('fixedSince', () => {
     )
   })
 
+  it('tells of an issue once, however many of the player’s reports joined it', () => {
+    const plusOne = { ...receipt(48), at: '2026-10-29T09:00:00.000Z' }
+    expect(fixedSince([receipt(48), plusOne], releases, '1.4.0', '1.6.0')).toEqual([
+      { receipt: receipt(48), version: '1.5.0', note: releases[1]?.notes[0] },
+    ])
+  })
+
   it('finds nothing on the first launch, nor when the version has not changed', () => {
     expect(fixedSince([receipt(48)], releases, null, '1.6.0')).toEqual([])
     expect(fixedSince([receipt(48)], releases, '1.5.0', '1.5.0')).toEqual([])

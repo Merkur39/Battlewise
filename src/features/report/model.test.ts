@@ -81,10 +81,14 @@ describe('buildReport', () => {
     expect(report).not.toHaveProperty('nickname')
   })
 
-  it('names the picked line in the subject and attaches what it shows', () => {
+  it('names the picked line in the subject and attaches it, with what it shows', () => {
     const report = buildReport(sheet, { ...draft, line: 'Troll/attack_log' }, device)
     expect(report.subject).toBe('Troll › Log swing')
-    expect(report.line).toEqual({ label: 'Coup de tronc', shows: 'COUP DE TRONC 130' })
+    expect(report.line).toEqual({
+      id: 'Troll/attack_log',
+      label: 'Coup de tronc',
+      shows: 'COUP DE TRONC 130',
+    })
   })
 
   it('keeps what the game shows for wrong data only', () => {
