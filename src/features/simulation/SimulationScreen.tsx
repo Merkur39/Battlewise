@@ -11,6 +11,8 @@ import { game } from '@/data'
 import { creatureName, type FoundAttack } from '@/features/bestiary/model'
 import { AttackTags } from '@/features/bestiary/parts'
 import { useFight } from '@/features/bestiary/wording'
+import { useSimulationOrigin } from '@/features/report/origins'
+import { ReportLink } from '@/features/report/ReportLink'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { BestiaryIcon, ChevronRightIcon, DodgeIcon, MinusIcon, PlusIcon } from '@/ui/icons'
@@ -75,6 +77,15 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
   const block = hits && hardestHit(defence, hits, world, { guard: 'block', ...options })
   const parry = hits && hardestHit(defence, hits, world, { guard: 'parry', ...options })
   const dodgeable = attackMode && found ? found.attack.hits.every((hit) => hit.dodgeable) : null
+  const report = useSimulationOrigin({
+    found: attackMode ? found : null,
+    stars,
+    value,
+    bar,
+    block,
+    parry,
+    dodgeable,
+  })
 
   const modeSwitch = (
     <div role="group" aria-label={t.simulation.source} className={styles.segments}>
@@ -214,6 +225,7 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
       {attackMode && found && found.attack.hits.length > 1 && (
         <span className={styles.note}>{t.simulation.hits(found.attack.hits.length)}</span>
       )}
+      <ReportLink origin={report} label={t.report.fromVerdict} />
     </>
   )
 

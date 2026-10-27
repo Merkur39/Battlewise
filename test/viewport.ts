@@ -34,8 +34,15 @@ export function installMatchMedia() {
   }
 }
 
+// And the window takes that width, as read by what reports it.
+const resizeWindow = () => {
+  Object.defineProperty(window, 'innerWidth', { configurable: true, value: width })
+}
+resizeWindow()
+
 export function setViewportWidth(viewport: keyof typeof WIDTHS) {
   width = WIDTHS[viewport]
+  resizeWindow()
   act(() => {
     for (const list of lists) list.update()
   })
