@@ -323,3 +323,10 @@
     padding-top: 10px;
   }
 }
+
+/* Below 1400 px the list narrows to leave the sheet room for its table (issue #25). */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .finder {
+    flex-basis: 320px;
+  }
+}

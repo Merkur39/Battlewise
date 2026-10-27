@@ -18,34 +18,47 @@ button,input{font:inherit;color:inherit;margin:0}
 button{background:none;border:0;padding:0;cursor:pointer}
 a{color:#4FE0C8}a:hover{color:#8CEEDD}
 input::placeholder{color:#8E8A80}
+/* Below 1400 px the sheet would lack room for its table (issue #25, track B). */
+.bw-range-tag{display:none}
+@media (max-width: 1399px){
+.bw-nav{flex-basis:64px !important;padding:20px 10px !important}
+.bw-nav .bw-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.bw-brand,.bw-link{justify-content:center;padding:0 !important}
+.bw-chip{justify-content:center;padding:12px 0 !important}
+.bw-list{flex-basis:320px !important}
+.bw-grid{grid-template-columns:minmax(0, 2fr) 72px repeat(3, minmax(0, 1.2fr)) 32px !important}
+.bw-range{display:none}
+.bw-range-tag{display:inline}
+.bw-sim{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
 </style>
 </helmet>
 <div style="height: 100vh; min-height: 680px; box-sizing: border-box; display: flex; flex-wrap: wrap; background: #0F1113; color: #ECE8DF; font-family: 'IBM Plex Sans', system-ui, sans-serif">
-  <nav aria-label="Navigation principale" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #30363A">
-    <div style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px">
+  <nav aria-label="Navigation principale" class="bw-nav" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #30363A">
+    <div class="bw-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4FE0C8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
-      <span style="font-size: 16px; font-weight: 500">Battlewise</span>
+      <span class="bw-label" style="font-size: 16px; font-weight: 500">Battlewise</span>
     </div>
     <div style="display: flex; flex-direction: column; gap: 2px">
-      <a href="Runes-Desktop-Bestiaire.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; background: #123A35; color: #4FE0C8"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire</a>
-      <a href="Runes-Desktop-Combat.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation</a>
-      <a href="Runes-Desktop-Arsenal.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal</a>
-      <a href="Runes-Desktop-Memo.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo</a>
+      <a href="Runes-Desktop-Bestiaire.dc.html" aria-current="page" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; background: #123A35; color: #4FE0C8"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg><span class="bw-label">Bestiaire</span></a>
+      <a href="Runes-Desktop-Combat.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg><span class="bw-label">Simulation</span></a>
+      <a href="Runes-Desktop-Arsenal.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg><span class="bw-label">Arsenal</span></a>
+      <a href="Runes-Desktop-Memo.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg><span class="bw-label">Mémo</span></a>
     </div>
     <div style="flex: 1"></div>
     <div style="display: flex; flex-direction: column; gap: 8px">
-      <span style="padding: 0 4px; font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">TON CONTEXTE</span>
-      <a href="Runes-Desktop-Equipement.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #30363A; border-radius: 6px; color: #ECE8DF; text-decoration: none">
+      <span class="bw-label" style="padding: 0 4px; font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">TON CONTEXTE</span>
+      <a href="Runes-Desktop-Equipement.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" class="bw-chip" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #30363A; border-radius: 6px; color: #ECE8DF; text-decoration: none">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
-        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Argent N3</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">VD 81 · BLOCAGE 25</span></span>
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="bw-label" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Argent N3</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">VD 81 · BLOCAGE 25</span></span>
+        <svg class="bw-label" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
       </a>
-      <a href="Runes-Desktop-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #30363A; border-radius: 6px; color: #ECE8DF; text-decoration: none">
+      <a href="Runes-Desktop-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" class="bw-chip" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #30363A; border-radius: 6px; color: #ECE8DF; text-decoration: none">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
-        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Normal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">1 JOUEUR · ×1</span></span>
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        <span class="bw-label" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Normal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">1 JOUEUR · ×1</span></span>
+        <svg class="bw-label" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
       </a>
-      <a href="Runes-Desktop-Reglages.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; color: #ABA79D; text-decoration: none"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+      <a href="Runes-Desktop-Reglages.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; color: #ABA79D; text-decoration: none"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg><span class="bw-label">Réglages</span></a>
     </div>
   </nav>
 
@@ -56,7 +69,7 @@ input::placeholder{color:#8E8A80}
     </header>
 
     <div style="flex: 1; min-height: 0; display: flex; border-top: 1px solid #30363A">
-      <section aria-label="Créatures" style="flex: 0 0 400px; box-sizing: border-box; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 16px; border-right: 1px solid #30363A">
+      <section aria-label="Créatures" class="bw-list" style="flex: 0 0 400px; box-sizing: border-box; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 16px; border-right: 1px solid #30363A">
         <a href="Runes-Desktop-Bestiaire-Recherche.dc.html" aria-label="Rechercher dans tous les biomes" style="display: flex; align-items: center; gap: 8px; height: 40px; box-sizing: border-box; border: 1px solid #30363A; border-radius: 4px; padding: 0 12px; font-size: 14px; color: #8E8A80; text-decoration: none">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
           Monstre ou attaque, tous biomes
@@ -147,18 +160,18 @@ input::placeholder{color:#8E8A80}
           </div>
 
           <div role="table" aria-label="Attaques du Troll" style="display: flex; flex-direction: column; border: 1px solid #30363A; border-radius: 6px; overflow: hidden">
-            <div role="row" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; padding: 10px 16px; background: #191C1F; font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">
-              <span role="columnheader">ATTAQUE</span><span role="columnheader">PORTÉE</span><span role="columnheader" style="text-align: right">DÉGÂTS</span><span role="columnheader">BLOCAGE</span><span role="columnheader">PARADE</span><span role="columnheader">ESQUIVE</span><span role="columnheader"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Simuler</span></span>
+            <div role="row" class="bw-grid" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; padding: 10px 16px; background: #191C1F; font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">
+              <span role="columnheader">ATTAQUE</span><span role="columnheader" class="bw-range">PORTÉE</span><span role="columnheader" style="text-align: right">DÉGÂTS</span><span role="columnheader">BLOCAGE</span><span role="columnheader">PARADE</span><span role="columnheader">ESQUIVE</span><span role="columnheader"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Simuler</span></span>
             </div>
             <sc-for list="{{ attacks }}" as="a" hint-placeholder-count="3">
-              <div role="row" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; min-height: 52px; padding: 0 16px; border-top: 1px solid #22272A; font-size: 14px">
-                <span role="cell" style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span>{{ a.name }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #ABA79D; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if></span></span>
-                <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ABA79D">{{ a.range }}</span>
+              <div role="row" class="bw-grid" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; min-height: 52px; padding: 0 16px; border-top: 1px solid #22272A; font-size: 14px">
+                <span role="cell" style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span>{{ a.name }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #ABA79D; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if><span class="bw-range-tag"> · {{ a.range }}</span></span></span>
+                <span role="cell" class="bw-range" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ABA79D">{{ a.range }}</span>
                 <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{ a.dmg }}</span>
                 <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{ a.bColor }}">{{ a.bTxt }}</span>
                 <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{ a.pColor }}">{{ a.pTxt }}</span>
                 <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #7EE07A">ESQUIVABLE</span>
-                <span role="cell"><a href="Runes-Desktop-Combat.dc.html" aria-label="{{ a.simLabel }}" style="display: inline-flex; align-items: center; gap: 4px; min-height: 40px; font-size: 13px; color: #4FE0C8; text-decoration: none">Simuler<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a></span>
+                <span role="cell"><a href="Runes-Desktop-Combat.dc.html" aria-label="{{ a.simLabel }}" style="display: inline-flex; align-items: center; gap: 4px; min-height: 40px; font-size: 13px; color: #4FE0C8; text-decoration: none"><span class="bw-sim">Simuler</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a></span>
               </div>
             </sc-for>
           </div>

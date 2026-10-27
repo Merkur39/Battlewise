@@ -8,9 +8,11 @@ import { openModal, useRoute } from './useRoute'
 export function SettingsLink({
   variant,
   className,
+  labelClassName,
 }: {
   readonly variant: 'icon' | 'labelled'
   readonly className: string | undefined
+  readonly labelClassName?: string | undefined
 }) {
   const t = useT()
   const route = useRoute()
@@ -25,7 +27,7 @@ export function SettingsLink({
       }}
     >
       <SettingsIcon size={variant === 'icon' ? 22 : 20} />
-      {variant === 'labelled' && t.shell.settings}
+      {variant === 'labelled' && <span className={labelClassName}>{t.shell.settings}</span>}
     </a>
   )
 }
