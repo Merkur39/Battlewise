@@ -1202,7 +1202,6 @@
         "poison": "immune"
       },
       "biomes": [
-        "meadows",
         "blackForest",
         "swamp",
         "plains",
@@ -1769,7 +1768,6 @@
           "source": "afterBoss:defeated_gdking",
           "biomes": [
             "meadows",
-            "mountain",
             "blackForest",
             "plains"
           ]
@@ -6859,7 +6857,7 @@
             "fr": "Crachat",
             "en": "Spit"
           },
-          "kind": "area",
+          "kind": "projectile",
           "hits": [
             {
               "damages": {

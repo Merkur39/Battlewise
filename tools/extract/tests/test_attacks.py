@@ -109,13 +109,17 @@ class AttacksTests(unittest.TestCase):
 
     def test_impact_area_of_an_empty_projectile_is_the_whole_attack(self):
         spit = self.attack("FallenValkyrie", "fallenvalkyrie_spit")
-        self.assertEqual(spit["kind"], "area")
         self.assertEqual(
             spit["hits"],
             [{"damages": {"fire": 80, "poison": 18}, "staggerMultiplier": 1, "blockable": False, "dodgeable": True,
               "scaling": "world", "source": "aoe", "radius": 2, "bursts": {"count": 3, "every": 0.92},
               "ticks": {"every": 1.02, "max": 10}}],
         )
+
+    def test_a_projectile_that_only_carries_its_impact_area_is_still_a_projectile(self):
+        # fallenvalkyrie_spit fires fallenvalkyrie_spit_projectile at 14 m/s; its own hit is empty and the
+        # fire pool it spawns on impact deals the damage, as DvergerStaffFire_fireball's field does.
+        self.assertEqual(self.attack("FallenValkyrie", "fallenvalkyrie_spit")["kind"], "projectile")
 
     def test_projectiles_per_burst_and_bursts_carry_down_to_impact_areas(self):
         cluster = self.attack("DvergerMage", "DvergerStaffFire_clusterbomb")

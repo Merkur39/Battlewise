@@ -167,6 +167,35 @@ class SpawnTests(unittest.TestCase):
             with self.subTest(prefab=prefab):
                 self.assertNotIn(prefab, self.result)
 
+    # -------------------------------------------------------------- what the spawn system checks
+    def test_an_alt_biome_spawns_in_its_own_biomes_only(self):
+        # GenerateAltBiomes gives Bones (m_biome 530) swamp, plains and mistlands sectors, and
+        # SpawnSystem.UpdateSpawning runs its m_spawn there: its Skeleton_poison entry (m_biome 539) makes
+        # no meadows Rancid Remains.
+        found = self.creature("Skeleton_Poison")
+
+        self.assertNotIn("meadows", found["native"])
+        self.assertIn('alt biome "Bones" [swamp, plains, mistlands], stars 0-2', found["sources"])
+
+    def test_an_alt_biome_entry_outside_its_biomes_never_spawns(self):
+        # Dark Meadows (m_biome 1) holds a "Draugr Elite" entry for the swamp (m_biome 2).
+        self.assertFalse([s for s in self.creature("Draugr_Elite")["sources"] if "Dark Meadows" in s])
+
+    def test_a_spawn_waiting_for_a_weather_counts_where_the_biome_can_bring_it(self):
+        # SpawnSystem.UpdateSpawnList waits for EnvMan.IsEnvironment: the "Draugr" entry (m_biome 29) wants
+        # Misty, which the Mountain setup (Snow, SnowStorm) never gives.
+        self.assertEqual(self.conditional("Draugr")["afterBoss:defeated_gdking"], ["meadows", "blackForest", "plains"])
+
+    def test_a_spawn_waiting_for_a_weather_its_biome_brings_stays(self):
+        # "Neck IN RAIN" wants Rain, ThunderStorm or LightRain, all in the Meadows setup; Serpent wants
+        # ThunderStorm or Rain, both in the Ocean one.
+        self.assertIn('world "Neck IN RAIN" [meadows], stars 0-2', self.creature("Neck")["sources"])
+        self.assertEqual(self.creature("Serpent")["native"], ["ocean"])
+
+    def test_a_spawn_without_a_biome_area_never_spawns(self):
+        # Hut Swamp's Wraith entry has m_biomeArea 0, which SpawnSystem.IsSpawnPointGood never passes.
+        self.assertFalse([s for s in self.creature("Wraith")["sources"] if "Hut Swamp" in s])
+
     # -------------------------------------------------------------- stars and fixed levels
     def test_troll_meets_up_to_two_stars(self):
         found = self.creature("Troll")

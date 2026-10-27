@@ -46,6 +46,9 @@ the 1.0.20 code does.
   m_maxSpawned of it are around (m_maxExtraPerPlayer adds some with more players).
 - MovementDamage switches its m_runDamageObject on while the creature runs faster than m_speedTreshold:
   an Aoe it set up as owner, with its own damage ("trample").
+- Kind: "melee" for a horizontal or vertical swing; "projectile" when another attack than an area one
+  sends a Projectile (fired, or spawned by a SpawnAbility), even one whose own hit is empty and only carries
+  what it spawns on impact (fallenvalkyrie_spit); "area" for any other damage; "summon" without damage.
 
 Damage is listed at its maximum. The game multiplies an attack's hit by Character.GetRandomSkillFactor,
 sqrt(Random.Range(0.75, 1)) for a creature (0.866 to 1); a melee swing with m_multiHit and
@@ -418,12 +421,13 @@ def _chain(attack, kills_self):
     return None
 
 
-def _kind(attack_type, hits):
+def _kind(attack_type, hits, delivered):
+    """`delivered` keeps the hits without damage: a projectile that only carries what it spawns still flies."""
     if not hits:
         return "summon"
     if attack_type in (HORIZONTAL, VERTICAL):
         return "melee"
-    if attack_type != AREA and any(h["source"] == "projectile" for h in hits):
+    if attack_type != AREA and any(h["source"] == "projectile" for h in delivered):
         return "projectile"
     return "area"
 
@@ -468,11 +472,12 @@ def _attack(game, item, health, death):
     kills_self = bool(attack["m_attackKillsSelf"]) or attack["m_selfDamage"] >= health  # Attack.Stop, OnAttackTrigger
     if kills_self:
         hits += [dict(hit, onDeath=True) for hit in death]
+    delivered = hits
     hits, summons = [hit for hit in hits if _deals_damage(hit)], _capped(summons)
     if not hits and not summons:
         return None
 
-    found = {"id": item["go"], "kind": _kind(attack["m_attackType"], hits), "hits": hits}
+    found = {"id": item["go"], "kind": _kind(attack["m_attackType"], hits, delivered), "hits": hits}
     if summons:
         found["summons"] = summons
     if kills_self:
