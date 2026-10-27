@@ -40,7 +40,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   margin: 0;
   font: inherit;
   color: inherit;

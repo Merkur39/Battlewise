@@ -5,6 +5,8 @@ import { creatureHealth, staggerThreshold, toInflict } from '@/combat/creature'
 import { game } from '@/data'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { GameCreature, GameHit } from '@/data/types'
+import { useCreatureOrigin } from '@/features/report/origins'
+import { ReportLink } from '@/features/report/ReportLink'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
@@ -73,6 +75,13 @@ export function CreatureSheet({
   const name = creatureName(creature, language)
   const Title = layout === 'page' ? 'h1' : 'h2'
 
+  const health = formatNumber(creatureHealth(creature.health, stars), language)
+  const inflict =
+    threshold === null
+      ? t.creature.neverStaggers
+      : formatNumber(Math.round(toInflict(threshold, world)), language)
+  const report = useCreatureOrigin({ creature, stars, assessment, health, toInflict: inflict })
+
   const parry: { tone: Tone; text: string } = !assessment.canParry
     ? { tone: 'none', text: t.creature.cannotParry }
     : creature.staggeredByParry
@@ -87,21 +96,8 @@ export function CreatureSheet({
   const body = (
     <>
       <div className={styles.stats}>
-        <Stat
-          label={t.creature.health}
-          short={t.creature.healthShort}
-          value={formatNumber(creatureHealth(creature.health, stars), language)}
-          numeric
-        />
-        <Stat
-          label={t.creature.toInflict}
-          value={
-            threshold === null
-              ? t.creature.neverStaggers
-              : formatNumber(Math.round(toInflict(threshold, world)), language)
-          }
-          numeric={threshold !== null}
-        />
+        <Stat label={t.creature.health} short={t.creature.healthShort} value={health} numeric />
+        <Stat label={t.creature.toInflict} value={inflict} numeric={threshold !== null} />
         <Stat label={t.creature.yourParry} value={parry.text} tone={parry.tone} />
         {layout === 'panel' && (
           <Stat label={t.bestiary.howToTake} value={advice.text} tone={advice.tone} />
@@ -116,6 +112,7 @@ export function CreatureSheet({
       ) : (
         <AttackTable creature={creature} assessment={assessment} place={place} />
       )}
+      <ReportLink origin={report} label={t.report.fromCreature} />
     </>
   )
 

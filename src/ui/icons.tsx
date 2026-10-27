@@ -161,6 +161,19 @@ export const ExternalIcon = (props: IconProps) => (
   </Icon>
 )
 
+export const FlagIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5 21V4M5 4h11l-2 4 2 4H5" />
+  </Icon>
+)
+
+export const ClockIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </Icon>
+)
+
 export const BackIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M19 12H5M11 6l-6 6 6 6" />

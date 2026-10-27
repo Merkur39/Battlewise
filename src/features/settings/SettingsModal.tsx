@@ -8,7 +8,9 @@ import { closeModal } from '@/app/useRoute'
 import { game } from '@/data'
 import { detectLanguage } from '@/i18n/detect'
 import { catalogOf } from '@/i18n/useT'
-import { CheckIcon, ExternalIcon } from '@/ui/icons'
+import { SETTINGS_ORIGIN } from '@/features/report/origins'
+import { useOpenReport } from '@/features/report/useReport'
+import { CheckIcon, ChevronRightIcon, ExternalIcon, FlagIcon } from '@/ui/icons'
 import { Modal } from '@/ui/Modal'
 import styles from './SettingsModal.module.css'
 
@@ -24,6 +26,7 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
   const saved = useAppState()
   const update = useUpdate()
   const isDesktop = useIsDesktop()
+  const openReport = useOpenReport()
   const [draft, setDraft] = useState<Draft>({ language: saved.language, theme: saved.theme })
   const detected = detectLanguage(navigator.languages)
   const speaks = draft.language === 'auto' ? detected : draft.language
@@ -154,11 +157,26 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
           <span className={styles.dataSource}>
             {t.settings.dataSource(game.game.version ?? String(game.game.build))}
           </span>
-          <a className={styles.source} href={SOURCE_URL} target="_blank" rel="noopener">
-            <span className={styles.sourceLabel}>{t.settings.source}</span>{' '}
-            {!isDesktop && <span className={styles.sourceHost}>GitHub</span>}
-            <ExternalIcon size={isDesktop ? 12 : 14} strokeWidth={2} />
-          </a>
+          <span className={styles.aboutLinks}>
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              className={styles.source}
+              onClick={() => {
+                openReport(SETTINGS_ORIGIN)
+                closeModal()
+              }}
+            >
+              <FlagIcon size={isDesktop ? 13 : 16} strokeWidth={2} />
+              <span className={styles.sourceLabel}>{t.report.fromSettings}</span>
+              {!isDesktop && <ChevronRightIcon size={14} className={styles.go} />}
+            </button>
+            <a className={styles.source} href={SOURCE_URL} target="_blank" rel="noopener">
+              <span className={styles.sourceLabel}>{t.settings.source}</span>{' '}
+              {!isDesktop && <span className={styles.sourceHost}>GitHub</span>}
+              <ExternalIcon size={isDesktop ? 12 : 14} strokeWidth={2} />
+            </a>
+          </span>
           <span className={styles.note}>{t.settings.licence(COPYRIGHT)}</span>
         </span>
       </section>

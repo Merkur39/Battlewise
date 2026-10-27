@@ -5,6 +5,9 @@ import { creatureName } from '@/features/bestiary/model'
 import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
+import type { ReportOrigin } from '@/features/report/model'
+import { ReportSheet } from '@/features/report/ReportSheet'
+import { OpenReportContext, useSendWaitingReports } from '@/features/report/useReport'
 import { SettingsModal } from '@/features/settings/SettingsModal'
 import { AttackPicker } from '@/features/simulation/AttackPicker'
 import { SimulationScreen } from '@/features/simulation/SimulationScreen'
@@ -71,6 +74,8 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   const saved = useAppState()
   const theme = preview.theme ?? saved.theme
   const links = useScreenLinks(route)
+  const [report, setReport] = useState<ReportOrigin | null>(null)
+  useSendWaitingReports()
   const creature = screen === 'bestiary' ? placeOf(route).creature : null
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
@@ -90,22 +95,32 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   }, [title])
 
   return (
-    <div className={isDesktop ? styles.desktop : styles.phone}>
-      {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
-      {screen === 'bestiary' ? (
-        <BestiaryScreen route={route} />
-      ) : screen === 'simulation' ? (
-        <SimulationScreen route={route} />
-      ) : screen === 'arsenal' ? (
-        <ArsenalScreen route={route} />
-      ) : (
-        <GuideScreen route={route} />
-      )}
-      {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
-      {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
-      {modal === 'attack' && <AttackPicker />}
-      {modal === 'gear' && <GearModal />}
-      {modal === 'world' && <WorldModal />}
-    </div>
+    <OpenReportContext value={setReport}>
+      <div className={isDesktop ? styles.desktop : styles.phone}>
+        {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
+        {screen === 'bestiary' ? (
+          <BestiaryScreen route={route} />
+        ) : screen === 'simulation' ? (
+          <SimulationScreen route={route} />
+        ) : screen === 'arsenal' ? (
+          <ArsenalScreen route={route} />
+        ) : (
+          <GuideScreen route={route} />
+        )}
+        {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
+        {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
+        {modal === 'attack' && <AttackPicker />}
+        {modal === 'gear' && <GearModal />}
+        {modal === 'world' && <WorldModal />}
+        {report && (
+          <ReportSheet
+            origin={report}
+            onClose={() => {
+              setReport(null)
+            }}
+          />
+        )}
+      </div>
+    </OpenReportContext>
   )
 }

@@ -1,0 +1,24 @@
+.link {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 13px;
+  text-align: left;
+  color: var(--accent);
+}
+
+.link:hover {
+  color: var(--accent-hover);
+}
+
+.icon {
+  flex: none;
+}
+
+@media (min-width: 1024px) {
+  .link {
+    min-height: 36px;
+  }
+}

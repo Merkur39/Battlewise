@@ -1,0 +1,465 @@
+/* Phone: a sheet across the bottom of the screen, like Ton contexte; the shade above it closes it. */
+.sheet {
+  box-sizing: border-box;
+  inset: auto 0 0;
+  width: 100%;
+  max-width: none;
+  max-height: 94%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 14px 14px 0 0;
+  background: var(--surface);
+  color: var(--ink);
+  translate: 0 100%;
+  transition:
+    translate 0.2s ease-in,
+    overlay 0.2s ease-in allow-discrete,
+    display 0.2s ease-in allow-discrete;
+}
+
+.sheet[open] {
+  translate: 0 0;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sheet::backdrop {
+  background: rgb(4 6 7 / 0.72);
+}
+
+@starting-style {
+  .sheet[open] {
+    translate: 0 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    transition: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+}
+
+.handle {
+  align-self: center;
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -6px -10px -6px 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.close {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.form,
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kinds {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.kind {
+  flex: 1;
+  height: 44px;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.kind[aria-pressed='true'],
+.line[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.subject {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heading {
+  margin: 0;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.headingName {
+  color: var(--ink);
+}
+
+.optional {
+  color: var(--faint);
+}
+
+.lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.line {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.line[aria-pressed='true'] {
+  border-color: var(--accent);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.text,
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+  font-size: 15px;
+}
+
+.text {
+  min-height: 92px;
+  padding: 10px 12px;
+  resize: none;
+}
+
+.input {
+  height: 44px;
+  padding: 0 12px;
+}
+
+.text::placeholder,
+.input::placeholder {
+  color: var(--faint);
+}
+
+.pair {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Out of sight and out of reach, for people; a bot reading the form fills it in. */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.attached {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 13px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summaryText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.summaryNote {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.chevron {
+  flex: none;
+  color: var(--secondary);
+  transition: rotate 0.15s ease-out;
+}
+
+.attached[open] .chevron {
+  rotate: 180deg;
+}
+
+.attachedLines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 2px 12px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.nothingElse {
+  padding-top: 4px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  text-transform: none;
+  color: var(--faint);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.public {
+  order: 1;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--faint);
+}
+
+.send {
+  height: 48px;
+  border-radius: 4px;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.send:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+.outcomeTitle {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.number {
+  font-family: var(--font-mono);
+}
+
+.outcomeNote {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.view {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.done {
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* Desktop: a dialog in the middle of the page, 600 px wide, Cancel and Send at its foot. */
+@media (min-width: 1024px) {
+  .sheet {
+    width: min(600px, 100% - 64px);
+    height: fit-content;
+    max-height: calc(100% - 64px);
+    margin: auto;
+    inset: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    translate: none;
+    transition: none;
+  }
+
+  .content {
+    gap: 0;
+    padding: 0;
+  }
+
+  .handle {
+    display: none;
+  }
+
+  .header {
+    margin: 0;
+    padding: 14px 14px 6px 24px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .close {
+    width: 40px;
+    height: 40px;
+  }
+
+  .body {
+    gap: 16px;
+    padding: 6px 24px 22px;
+  }
+
+  .kind {
+    height: 40px;
+  }
+
+  .line {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 16px;
+  }
+
+  .text,
+  .input {
+    font-size: 14px;
+  }
+
+  .text {
+    min-height: 104px;
+    resize: vertical;
+  }
+
+  .input {
+    height: 40px;
+  }
+
+  /* What the game shows and the name side by side; the name alone takes the width. */
+  .pair {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .summary {
+    min-height: 40px;
+  }
+
+  .summaryNote {
+    display: none;
+  }
+
+  .attachedLines {
+    padding-top: 0;
+  }
+
+  .footer {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .public {
+    order: 0;
+    flex: 1;
+  }
+
+  .cancel {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .send {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  .outcome {
+    padding: 8px 24px 22px;
+  }
+
+  .view,
+  .done {
+    min-height: 40px;
+  }
+
+  .done {
+    align-self: flex-end;
+    height: 40px;
+    padding: 0 20px;
+    border: 0;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--accent);
+    color: var(--bg);
+  }
+}

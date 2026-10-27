@@ -217,14 +217,20 @@
   color: var(--secondary);
 }
 
-/* The source and its licence: a row on a phone, a small secondary button on a desktop. */
+/* Reporting, then the source and its licence: rows on a phone, small secondary buttons on a desktop. */
+.aboutLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
 .source {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 44px;
   padding: 0 12px;
-  margin-top: 4px;
   box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid var(--line);
@@ -242,6 +248,11 @@
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--secondary);
+}
+
+.go {
+  flex: none;
+  color: var(--faint);
 }
 
 /* Desktop: sections ruled apart, the language note beside the control, theme cards in a grid. */
@@ -326,6 +337,11 @@
   .aboutLines {
     align-items: flex-end;
     gap: 4px;
+  }
+
+  .aboutLinks {
+    flex-direction: row;
+    gap: 8px;
   }
 
   .source {
