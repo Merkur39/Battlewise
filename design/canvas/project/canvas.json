@@ -86,16 +86,8 @@
       "title": "Ton contexte",
       "is_interactive": true
     },
-    "Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "is_interactive": true
-    },
     "Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -103,15 +95,45 @@
       "is_interactive": true
     },
     "Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système HUD"
     },
+    "Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "is_interactive": true
+    },
+    "Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements"
+    },
+    "Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés"
+    },
+    "Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "is_interactive": true
+    },
     "Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -120,7 +142,7 @@
     },
     "Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -129,7 +151,7 @@
     },
     "Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -138,7 +160,7 @@
     },
     "Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -147,7 +169,7 @@
     },
     "Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -155,7 +177,7 @@
     },
     "Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -164,7 +186,7 @@
     },
     "Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -172,7 +194,7 @@
     },
     "Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -180,27 +202,52 @@
     },
     "Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill"
     },
-    "Desktop-Signaler.dc.html": {
+    "Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
       "expand": "fill",
       "is_interactive": true
     },
-    "Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill"
+    },
+    "Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "is_interactive": true
     },
@@ -474,6 +521,38 @@
       "title": "Piste C · Un bouton partout, le type d'abord",
       "page": "signaler"
     },
+    "Retours-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 880,
+      "title": "Piste A · Tout dans Réglages",
+      "page": "retours"
+    },
+    "Retours-B.dc.html": {
+      "x": 0,
+      "y": 1000,
+      "w": 1440,
+      "h": 960,
+      "title": "Piste B · Des pages à part, et un merci qui se voit — retenue",
+      "page": "retours"
+    },
+    "Retours-Desktop.dc.html": {
+      "x": 1520,
+      "y": 1000,
+      "w": 1440,
+      "h": 1250,
+      "title": "Piste B · desktop",
+      "page": "retours"
+    },
+    "Retours-C.dc.html": {
+      "x": 0,
+      "y": 2080,
+      "w": 1440,
+      "h": 860,
+      "title": "Piste C · Un point, sans interrompre",
+      "page": "retours"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -569,17 +648,8 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "braise",
-      "is_interactive": true
-    },
     "Braise-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -588,16 +658,50 @@
       "is_interactive": true
     },
     "Braise-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Braise",
       "page": "braise"
     },
+    "Braise-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "braise"
+    },
+    "Braise-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "braise"
+    },
+    "Braise-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "braise",
+      "is_interactive": true
+    },
     "Braise-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -607,7 +711,7 @@
     },
     "Braise-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -617,7 +721,7 @@
     },
     "Braise-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -627,7 +731,7 @@
     },
     "Braise-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -637,7 +741,7 @@
     },
     "Braise-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -646,7 +750,7 @@
     },
     "Braise-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -656,7 +760,7 @@
     },
     "Braise-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -665,7 +769,7 @@
     },
     "Braise-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -674,16 +778,26 @@
     },
     "Braise-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "braise"
     },
-    "Braise-Desktop-Signaler.dc.html": {
+    "Braise-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -691,12 +805,30 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Braise-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
+    "Braise-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "braise",
       "is_interactive": true
@@ -796,17 +928,8 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "brume",
-      "is_interactive": true
-    },
     "Brume-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -815,16 +938,50 @@
       "is_interactive": true
     },
     "Brume-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Brume",
       "page": "brume"
     },
+    "Brume-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "brume"
+    },
+    "Brume-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "brume"
+    },
+    "Brume-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "brume",
+      "is_interactive": true
+    },
     "Brume-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -834,7 +991,7 @@
     },
     "Brume-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -844,7 +1001,7 @@
     },
     "Brume-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -854,7 +1011,7 @@
     },
     "Brume-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -864,7 +1021,7 @@
     },
     "Brume-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -873,7 +1030,7 @@
     },
     "Brume-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -883,7 +1040,7 @@
     },
     "Brume-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -892,7 +1049,7 @@
     },
     "Brume-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -901,16 +1058,26 @@
     },
     "Brume-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "brume"
     },
-    "Brume-Desktop-Signaler.dc.html": {
+    "Brume-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -918,12 +1085,30 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Brume-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
+    "Brume-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "brume",
       "is_interactive": true
@@ -1023,17 +1208,8 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "jour",
-      "is_interactive": true
-    },
     "Jour-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1042,16 +1218,50 @@
       "is_interactive": true
     },
     "Jour-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Plein jour",
       "page": "jour"
     },
+    "Jour-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "jour"
+    },
+    "Jour-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "jour"
+    },
+    "Jour-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "jour",
+      "is_interactive": true
+    },
     "Jour-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1061,7 +1271,7 @@
     },
     "Jour-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1071,7 +1281,7 @@
     },
     "Jour-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1081,7 +1291,7 @@
     },
     "Jour-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1091,7 +1301,7 @@
     },
     "Jour-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1100,7 +1310,7 @@
     },
     "Jour-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1110,7 +1320,7 @@
     },
     "Jour-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1119,7 +1329,7 @@
     },
     "Jour-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1128,16 +1338,26 @@
     },
     "Jour-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "jour"
     },
-    "Jour-Desktop-Signaler.dc.html": {
+    "Jour-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1145,12 +1365,30 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Jour-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
+    "Jour-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "jour",
       "is_interactive": true
@@ -1250,17 +1488,8 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "runes",
-      "is_interactive": true
-    },
     "Runes-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1269,16 +1498,50 @@
       "is_interactive": true
     },
     "Runes-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Runes",
       "page": "runes"
     },
+    "Runes-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "runes"
+    },
+    "Runes-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "runes"
+    },
+    "Runes-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "runes",
+      "is_interactive": true
+    },
     "Runes-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1288,7 +1551,7 @@
     },
     "Runes-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1298,7 +1561,7 @@
     },
     "Runes-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1308,7 +1571,7 @@
     },
     "Runes-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1318,7 +1581,7 @@
     },
     "Runes-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1327,7 +1590,7 @@
     },
     "Runes-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1337,7 +1600,7 @@
     },
     "Runes-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1346,7 +1609,7 @@
     },
     "Runes-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1355,16 +1618,26 @@
     },
     "Runes-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "runes"
     },
-    "Runes-Desktop-Signaler.dc.html": {
+    "Runes-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1372,12 +1645,30 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Runes-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
+    "Runes-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "runes",
       "is_interactive": true
@@ -1477,17 +1768,8 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "graphite",
-      "is_interactive": true
-    },
     "Graphite-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1496,16 +1778,50 @@
       "is_interactive": true
     },
     "Graphite-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Graphite",
       "page": "graphite"
     },
+    "Graphite-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "graphite"
+    },
+    "Graphite-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "graphite"
+    },
+    "Graphite-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "graphite",
+      "is_interactive": true
+    },
     "Graphite-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1515,7 +1831,7 @@
     },
     "Graphite-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1525,7 +1841,7 @@
     },
     "Graphite-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1535,7 +1851,7 @@
     },
     "Graphite-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1545,7 +1861,7 @@
     },
     "Graphite-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1554,7 +1870,7 @@
     },
     "Graphite-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1564,7 +1880,7 @@
     },
     "Graphite-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1573,7 +1889,7 @@
     },
     "Graphite-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1582,16 +1898,26 @@
     },
     "Graphite-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "graphite"
     },
-    "Graphite-Desktop-Signaler.dc.html": {
+    "Graphite-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1599,12 +1925,30 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Graphite-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
+    "Graphite-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "graphite",
       "is_interactive": true
@@ -1704,17 +2048,8 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Signaler.dc.html": {
-      "x": 1410,
-      "y": 3792,
-      "w": 390,
-      "h": 844,
-      "title": "Signaler",
-      "page": "parchemin",
-      "is_interactive": true
-    },
     "Parchemin-Reglages.dc.html": {
-      "x": 1880,
+      "x": 1410,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1723,16 +2058,50 @@
       "is_interactive": true
     },
     "Parchemin-Tokens.dc.html": {
-      "x": 2350,
+      "x": 1880,
       "y": 3792,
       "w": 880,
       "h": 960,
       "title": "Système Parchemin",
       "page": "parchemin"
     },
+    "Parchemin-Signaler.dc.html": {
+      "x": 0,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Signalements.dc.html": {
+      "x": 470,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Mes signalements",
+      "page": "parchemin"
+    },
+    "Parchemin-Nouveautes.dc.html": {
+      "x": 940,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Nouveautés",
+      "page": "parchemin"
+    },
+    "Parchemin-Merci.dc.html": {
+      "x": 1410,
+      "y": 5056,
+      "w": 390,
+      "h": 844,
+      "title": "Corrigé grâce à toi",
+      "page": "parchemin",
+      "is_interactive": true
+    },
     "Parchemin-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1742,7 +2111,7 @@
     },
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1752,7 +2121,7 @@
     },
     "Parchemin-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 5300,
+      "y": 6560,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1762,7 +2131,7 @@
     },
     "Parchemin-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1772,7 +2141,7 @@
     },
     "Parchemin-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 6620,
+      "y": 7880,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1781,7 +2150,7 @@
     },
     "Parchemin-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1791,7 +2160,7 @@
     },
     "Parchemin-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1800,7 +2169,7 @@
     },
     "Parchemin-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1809,16 +2178,26 @@
     },
     "Parchemin-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 7940,
+      "y": 9200,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
       "expand": "fill",
       "page": "parchemin"
     },
-    "Parchemin-Desktop-Signaler.dc.html": {
+    "Parchemin-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 7940,
+      "y": 9200,
+      "w": 1440,
+      "h": 900,
+      "title": "Réglages · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Signaler.dc.html": {
+      "x": 0,
+      "y": 10520,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1826,12 +2205,30 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Desktop-Reglages.dc.html": {
-      "x": 7600,
-      "y": 7940,
+    "Parchemin-Desktop-Signalements.dc.html": {
+      "x": 1520,
+      "y": 10520,
       "w": 1440,
       "h": 900,
-      "title": "Réglages · desktop",
+      "title": "Mes signalements · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Nouveautes.dc.html": {
+      "x": 3040,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Nouveautés · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
+    "Parchemin-Desktop-Merci.dc.html": {
+      "x": 4560,
+      "y": 10520,
+      "w": 1440,
+      "h": 900,
+      "title": "Corrigé grâce à toi · desktop",
       "expand": "fill",
       "page": "parchemin",
       "is_interactive": true
@@ -1872,28 +2269,42 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230
+      "maxW": 2760
+    },
+    "m-row5": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800
     },
     "d-row1": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480
     },
     "d-row2": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960
     },
     "d-row3": {
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040
+      "y": 8900,
+      "maxW": 7520
+    },
+    "d-row4": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000
     },
     "sim-row1": {
       "kind": "title1",
@@ -2027,6 +2438,14 @@
       "maxW": 2960,
       "page": "signaler"
     },
+    "retours-row1": {
+      "kind": "title1",
+      "text": "Mes signalements, corrigé, nouveautés",
+      "x": 0,
+      "y": -300,
+      "maxW": 2960,
+      "page": "retours"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -2056,14 +2475,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "braise"
+    },
+    "m-row5-braise": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "braise"
     },
     "d-row1-braise": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "braise"
     },
@@ -2071,7 +2498,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "braise"
     },
@@ -2079,8 +2506,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "braise"
+    },
+    "d-row4-braise": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "braise"
     },
     "m-row1-brume": {
@@ -2112,14 +2547,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "brume"
+    },
+    "m-row5-brume": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "brume"
     },
     "d-row1-brume": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "brume"
     },
@@ -2127,7 +2570,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "brume"
     },
@@ -2135,8 +2578,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "brume"
+    },
+    "d-row4-brume": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "brume"
     },
     "m-row1-jour": {
@@ -2168,14 +2619,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "jour"
+    },
+    "m-row5-jour": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "jour"
     },
     "d-row1-jour": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "jour"
     },
@@ -2183,7 +2642,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "jour"
     },
@@ -2191,8 +2650,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "jour"
+    },
+    "d-row4-jour": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "jour"
     },
     "m-row1-runes": {
@@ -2224,14 +2691,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "runes"
+    },
+    "m-row5-runes": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "runes"
     },
     "d-row1-runes": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "runes"
     },
@@ -2239,7 +2714,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "runes"
     },
@@ -2247,8 +2722,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "runes"
+    },
+    "d-row4-runes": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "runes"
     },
     "m-row1-graphite": {
@@ -2280,14 +2763,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "graphite"
+    },
+    "m-row5-graphite": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "graphite"
     },
     "d-row1-graphite": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "graphite"
     },
@@ -2295,7 +2786,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "graphite"
     },
@@ -2303,8 +2794,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "graphite"
+    },
+    "d-row4-graphite": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "graphite"
     },
     "m-row1-parchemin": {
@@ -2336,14 +2835,22 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230,
+      "maxW": 2760,
+      "page": "parchemin"
+    },
+    "m-row5-parchemin": {
+      "kind": "title1",
+      "text": "Tes retours",
+      "x": 0,
+      "y": 4756,
+      "maxW": 1800,
       "page": "parchemin"
     },
     "d-row1-parchemin": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 5000,
+      "y": 6260,
       "maxW": 4480,
       "page": "parchemin"
     },
@@ -2351,7 +2858,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 6320,
+      "y": 7580,
       "maxW": 2960,
       "page": "parchemin"
     },
@@ -2359,8 +2866,16 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 7640,
-      "maxW": 9040,
+      "y": 8900,
+      "maxW": 7520,
+      "page": "parchemin"
+    },
+    "d-row4-parchemin": {
+      "kind": "title1",
+      "text": "Desktop · tes retours",
+      "x": 0,
+      "y": 10220,
+      "maxW": 6000,
       "page": "parchemin"
     }
   },
@@ -2376,9 +2891,12 @@
     "Profil.dc.html",
     "Monde.dc.html",
     "Contexte.dc.html",
-    "Signaler.dc.html",
     "Reglages.dc.html",
     "Tokens.dc.html",
+    "Signaler.dc.html",
+    "Signalements.dc.html",
+    "Nouveautes.dc.html",
+    "Merci.dc.html",
     "Desktop-Bestiaire.dc.html",
     "Desktop-Bestiaire-Recherche.dc.html",
     "Desktop-Combat.dc.html",
@@ -2388,8 +2906,11 @@
     "Desktop-Recherche.dc.html",
     "Desktop-Equipement.dc.html",
     "Desktop-Monde.dc.html",
-    "Desktop-Signaler.dc.html",
     "Desktop-Reglages.dc.html",
+    "Desktop-Signaler.dc.html",
+    "Desktop-Signalements.dc.html",
+    "Desktop-Nouveautes.dc.html",
+    "Desktop-Merci.dc.html",
     "Sim-A.dc.html",
     "Sim-B.dc.html",
     "Sim-C.dc.html",
@@ -2421,6 +2942,10 @@
     "Signaler-Desktop.dc.html",
     "Signaler-B.dc.html",
     "Signaler-C.dc.html",
+    "Retours-A.dc.html",
+    "Retours-B.dc.html",
+    "Retours-Desktop.dc.html",
+    "Retours-C.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2432,9 +2957,12 @@
     "Braise-Profil.dc.html",
     "Braise-Monde.dc.html",
     "Braise-Contexte.dc.html",
-    "Braise-Signaler.dc.html",
     "Braise-Reglages.dc.html",
     "Braise-Tokens.dc.html",
+    "Braise-Signaler.dc.html",
+    "Braise-Signalements.dc.html",
+    "Braise-Nouveautes.dc.html",
+    "Braise-Merci.dc.html",
     "Braise-Desktop-Bestiaire.dc.html",
     "Braise-Desktop-Bestiaire-Recherche.dc.html",
     "Braise-Desktop-Combat.dc.html",
@@ -2444,8 +2972,11 @@
     "Braise-Desktop-Recherche.dc.html",
     "Braise-Desktop-Equipement.dc.html",
     "Braise-Desktop-Monde.dc.html",
-    "Braise-Desktop-Signaler.dc.html",
     "Braise-Desktop-Reglages.dc.html",
+    "Braise-Desktop-Signaler.dc.html",
+    "Braise-Desktop-Signalements.dc.html",
+    "Braise-Desktop-Nouveautes.dc.html",
+    "Braise-Desktop-Merci.dc.html",
     "Brume-Bestiaire.dc.html",
     "Brume-Bestiaire-Recherche.dc.html",
     "Brume-Monstre.dc.html",
@@ -2457,9 +2988,12 @@
     "Brume-Profil.dc.html",
     "Brume-Monde.dc.html",
     "Brume-Contexte.dc.html",
-    "Brume-Signaler.dc.html",
     "Brume-Reglages.dc.html",
     "Brume-Tokens.dc.html",
+    "Brume-Signaler.dc.html",
+    "Brume-Signalements.dc.html",
+    "Brume-Nouveautes.dc.html",
+    "Brume-Merci.dc.html",
     "Brume-Desktop-Bestiaire.dc.html",
     "Brume-Desktop-Bestiaire-Recherche.dc.html",
     "Brume-Desktop-Combat.dc.html",
@@ -2469,8 +3003,11 @@
     "Brume-Desktop-Recherche.dc.html",
     "Brume-Desktop-Equipement.dc.html",
     "Brume-Desktop-Monde.dc.html",
-    "Brume-Desktop-Signaler.dc.html",
     "Brume-Desktop-Reglages.dc.html",
+    "Brume-Desktop-Signaler.dc.html",
+    "Brume-Desktop-Signalements.dc.html",
+    "Brume-Desktop-Nouveautes.dc.html",
+    "Brume-Desktop-Merci.dc.html",
     "Jour-Bestiaire.dc.html",
     "Jour-Bestiaire-Recherche.dc.html",
     "Jour-Monstre.dc.html",
@@ -2482,9 +3019,12 @@
     "Jour-Profil.dc.html",
     "Jour-Monde.dc.html",
     "Jour-Contexte.dc.html",
-    "Jour-Signaler.dc.html",
     "Jour-Reglages.dc.html",
     "Jour-Tokens.dc.html",
+    "Jour-Signaler.dc.html",
+    "Jour-Signalements.dc.html",
+    "Jour-Nouveautes.dc.html",
+    "Jour-Merci.dc.html",
     "Jour-Desktop-Bestiaire.dc.html",
     "Jour-Desktop-Bestiaire-Recherche.dc.html",
     "Jour-Desktop-Combat.dc.html",
@@ -2494,8 +3034,11 @@
     "Jour-Desktop-Recherche.dc.html",
     "Jour-Desktop-Equipement.dc.html",
     "Jour-Desktop-Monde.dc.html",
-    "Jour-Desktop-Signaler.dc.html",
     "Jour-Desktop-Reglages.dc.html",
+    "Jour-Desktop-Signaler.dc.html",
+    "Jour-Desktop-Signalements.dc.html",
+    "Jour-Desktop-Nouveautes.dc.html",
+    "Jour-Desktop-Merci.dc.html",
     "Runes-Bestiaire.dc.html",
     "Runes-Bestiaire-Recherche.dc.html",
     "Runes-Monstre.dc.html",
@@ -2507,9 +3050,12 @@
     "Runes-Profil.dc.html",
     "Runes-Monde.dc.html",
     "Runes-Contexte.dc.html",
-    "Runes-Signaler.dc.html",
     "Runes-Reglages.dc.html",
     "Runes-Tokens.dc.html",
+    "Runes-Signaler.dc.html",
+    "Runes-Signalements.dc.html",
+    "Runes-Nouveautes.dc.html",
+    "Runes-Merci.dc.html",
     "Runes-Desktop-Bestiaire.dc.html",
     "Runes-Desktop-Bestiaire-Recherche.dc.html",
     "Runes-Desktop-Combat.dc.html",
@@ -2519,8 +3065,11 @@
     "Runes-Desktop-Recherche.dc.html",
     "Runes-Desktop-Equipement.dc.html",
     "Runes-Desktop-Monde.dc.html",
-    "Runes-Desktop-Signaler.dc.html",
     "Runes-Desktop-Reglages.dc.html",
+    "Runes-Desktop-Signaler.dc.html",
+    "Runes-Desktop-Signalements.dc.html",
+    "Runes-Desktop-Nouveautes.dc.html",
+    "Runes-Desktop-Merci.dc.html",
     "Graphite-Bestiaire.dc.html",
     "Graphite-Bestiaire-Recherche.dc.html",
     "Graphite-Monstre.dc.html",
@@ -2532,9 +3081,12 @@
     "Graphite-Profil.dc.html",
     "Graphite-Monde.dc.html",
     "Graphite-Contexte.dc.html",
-    "Graphite-Signaler.dc.html",
     "Graphite-Reglages.dc.html",
     "Graphite-Tokens.dc.html",
+    "Graphite-Signaler.dc.html",
+    "Graphite-Signalements.dc.html",
+    "Graphite-Nouveautes.dc.html",
+    "Graphite-Merci.dc.html",
     "Graphite-Desktop-Bestiaire.dc.html",
     "Graphite-Desktop-Bestiaire-Recherche.dc.html",
     "Graphite-Desktop-Combat.dc.html",
@@ -2544,8 +3096,11 @@
     "Graphite-Desktop-Recherche.dc.html",
     "Graphite-Desktop-Equipement.dc.html",
     "Graphite-Desktop-Monde.dc.html",
-    "Graphite-Desktop-Signaler.dc.html",
     "Graphite-Desktop-Reglages.dc.html",
+    "Graphite-Desktop-Signaler.dc.html",
+    "Graphite-Desktop-Signalements.dc.html",
+    "Graphite-Desktop-Nouveautes.dc.html",
+    "Graphite-Desktop-Merci.dc.html",
     "Parchemin-Bestiaire.dc.html",
     "Parchemin-Bestiaire-Recherche.dc.html",
     "Parchemin-Monstre.dc.html",
@@ -2557,9 +3112,12 @@
     "Parchemin-Profil.dc.html",
     "Parchemin-Monde.dc.html",
     "Parchemin-Contexte.dc.html",
-    "Parchemin-Signaler.dc.html",
     "Parchemin-Reglages.dc.html",
     "Parchemin-Tokens.dc.html",
+    "Parchemin-Signaler.dc.html",
+    "Parchemin-Signalements.dc.html",
+    "Parchemin-Nouveautes.dc.html",
+    "Parchemin-Merci.dc.html",
     "Parchemin-Desktop-Bestiaire.dc.html",
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html",
     "Parchemin-Desktop-Combat.dc.html",
@@ -2569,8 +3127,11 @@
     "Parchemin-Desktop-Recherche.dc.html",
     "Parchemin-Desktop-Equipement.dc.html",
     "Parchemin-Desktop-Monde.dc.html",
+    "Parchemin-Desktop-Reglages.dc.html",
     "Parchemin-Desktop-Signaler.dc.html",
-    "Parchemin-Desktop-Reglages.dc.html"
+    "Parchemin-Desktop-Signalements.dc.html",
+    "Parchemin-Desktop-Nouveautes.dc.html",
+    "Parchemin-Desktop-Merci.dc.html"
   ],
   "pages": [
     {
@@ -2620,6 +3181,10 @@
     {
       "id": "signaler",
       "name": "Signaler · pistes"
+    },
+    {
+      "id": "retours",
+      "name": "Retours · pistes"
     },
     {
       "id": "braise",

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Retours — piste C</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+a{color:#8EBDE3}a:hover{color:#B5D4F0}
+</style>
+</helmet>
+<div style="width: 1440px; height: 860px; box-sizing: border-box; padding: 40px; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 26px; font-weight: 500">C · Un point, sans interrompre</h1>
+    <p style="margin: 0; max-width: 1180px; font-size: 15px; line-height: 1.5; color: #97A5AA">Rien ne s'ouvre seul. Quand un signalement du joueur est corrigé, un point se pose sur l'icône de Réglages (et sur Réglages dans la barre latérale du desktop). Réglages s'ouvre alors sur la nouvelle, en tête, au-dessus de Mes signalements où la ligne corrigée porte « nouveau » ; le point s'efface une fois vu. À propos montre la dernière version en clair, les précédentes derrière un lien.</p>
+    <p style="margin: 0; max-width: 1180px; font-size: 13px; line-height: 1.5; color: #7D8B91">Pour : ne coupe jamais une partie, le joueur vient quand il veut. Contre : un point se rate, et le merci, moins visible, porte moins. EN : « New: your report #48 is fixed in 1.5.0. Thank you! », « new », « All versions ».</p>
+  </header>
+
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+    <div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">APRÈS LA MISE À JOUR · UN POINT SUR RÉGLAGES</span>
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214; height: 400px">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 16px">
+          <span style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Battlewise</span>
+          <span style="height: 36px; display: flex; align-items: center; padding: 0 10px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 12px">VD 81 · ×1</span>
+          <button type="button" aria-label="Réglages : du nouveau" style="position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg><span aria-hidden="true" style="position: absolute; top: 9px; right: 8px; width: 8px; height: 8px; border-radius: 4px; background: #8EBDE3; box-shadow: 0 0 0 2px #0D1214"></span></button>
+        </div>
+        <div style="padding: 0 16px; display: flex; flex-direction: column">
+          <sc-for list="{{ creatures }}" as="c" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; min-height: 56px; border-bottom: 1px solid #1F2A2E; padding-top: 10px; box-sizing: border-box"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 15px">{{ c.name }}</span><span style="font-size: 12px; color: #7D8B91">{{ c.advice }}</span></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">{{ c.hp }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">RÉGLAGES · LA NOUVELLE EN TÊTE</span>
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214">
+        <div style="display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #2C383D">
+          <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>
+          <span style="flex: 1; font-size: 18px; font-weight: 500">Réglages</span>
+        </div>
+        <div style="padding: 16px; display: flex; flex-direction: column; gap: 18px">
+          <p role="status" style="margin: 0; display: flex; gap: 10px; padding: 12px; border: 1px solid #2C383D; border-radius: 6px; background: #151C1F; font-size: 14px; line-height: 1.45"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E2E8E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M5 12l5 5L20 7"></path></svg><span>Du nouveau : ton signalement <span style="font-family: 'IBM Plex Mono', monospace">#48</span> est corrigé dans <span style="font-family: 'IBM Plex Mono', monospace">1.5.0</span>. Merci !</span></p>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">MES SIGNALEMENTS</span>
+            <div style="display: flex; flex-direction: column; border: 1px solid #2C383D; border-radius: 4px; overflow: hidden">
+              <sc-for list="{{ reports }}" as="r" hint-placeholder-count="5">
+                <a href="#" style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 4px 10px; padding: 10px 12px; border-bottom: 1px solid #1F2A2E; background: #151C1F; color: #E2E8E8; text-decoration: none">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-top: 2px"><path d="{{ r.kindIcon }}"></path></svg>
+                  <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><span style="min-width: 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ r.subject }}</span><sc-if value="{{ r.isNew }}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 5px; border-radius: 3px; border: 1px solid #8EBDE3; color: #8EBDE3">NOUVEAU</span></sc-if></span>
+                  <span></span>
+                  <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 12px"><span style="font-family: 'IBM Plex Mono', monospace; color: #97A5AA">{{ r.meta }}</span><span style="display: inline-flex; align-items: center; gap: 4px; color: {{ r.stateColor }}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ r.stateIcon }}"></path></svg>{{ r.state }}</span></span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+          <span style="font-size: 12px; color: #7D8B91">… Langue et Thème, inchangés, puis À propos</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">RÉGLAGES · À PROPOS, LA DERNIÈRE VERSION EN CLAIR</span>
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">À PROPOS</span>
+        <span style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 14px">Battlewise</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">1.5.0</span></span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">LUES DANS VALHEIM 1.0.20 · SANS MOD</span>
+        <div style="margin: 6px 0 4px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #97A5AA">Nouveau dans <span style="font-family: 'IBM Plex Mono', monospace">1.5.0</span> · 2 nov. 2026</span>
+          <span style="display: flex; gap: 8px; font-size: 13px; line-height: 1.45"><span aria-hidden="true" style="color: #7D8B91">·</span><span>Troll › Frappe au sol : 60 dégâts, plus 70. <span style="color: #97A5AA">Merci Ragnar</span></span></span>
+          <span style="display: flex; gap: 8px; font-size: 13px; line-height: 1.45"><span aria-hidden="true" style="color: #7D8B91">·</span><span>Mes signalements, dans Réglages.</span></span>
+          <a href="#" style="align-self: flex-start; min-height: 32px; display: inline-flex; align-items: center; font-size: 13px; text-decoration: none">Toutes les versions</a>
+        </div>
+        <span style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; background: #151C1F; color: #8EBDE3"><span style="flex: 1; font-size: 14px">Signaler un problème ou une idée</span></span>
+        <span style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; background: #151C1F; color: #8EBDE3"><span style="flex: 1; font-size: 14px">Code source et licence</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">GitHub</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":860}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const I = {
+      data: 'M5 21V4M5 4h11l-2 4 2 4H5',
+      bug: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01',
+      idea: 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z',
+      fixed: 'M5 12l5 5L20 7',
+      waiting: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2',
+      open: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z',
+      closed: 'M6 6l12 12M18 6L6 18'
+    };
+    const row = (kind, subject, meta, state, look, isNew) => ({
+      kindIcon: I[kind], subject: subject, meta: meta, state: state, isNew: isNew,
+      stateIcon: I[look], stateColor: look === 'fixed' ? '#E2E8E8' : '#97A5AA'
+    });
+    return {
+      creatures: [
+        { name: 'Troll', advice: 'Esquive tout : même parées, ses attaques passent', hp: '600 PV' },
+        { name: 'Squelette', advice: 'Tu bloques tout sans tituber', hp: '40 PV' },
+        { name: 'Brute nain gris', advice: 'Pare-le : en bloquant, tu titubes', hp: '100 PV' },
+        { name: 'Draugr', advice: 'Pare-le : en bloquant, tu titubes', hp: '200 PV' }
+      ],
+      reports: [
+        row('data', 'Troll › Frappe au sol', '#48 · 27 oct.', 'Corrigé dans 1.5.0', 'fixed', true),
+        row('idea', 'Les boss phase par phase', "aujourd'hui", "En attente d'envoi", 'waiting', false),
+        row('bug', "La fiche reste vide quand je change d'étoiles", '#52 · 2 nov.', 'Ouvert', 'open', false),
+        row('data', 'Draugr › Coup de hache', '#50 · 30 oct.', 'Corrigé, prochaine version', 'fixed', false),
+        row('data', "Squelette › Coup d'épée", '#47 · 26 oct.', 'Fermé · déjà signalé', 'closed', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

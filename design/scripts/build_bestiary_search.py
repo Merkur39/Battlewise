@@ -248,6 +248,23 @@ def build_report():
         (P / target).write_text(text, encoding="utf-8", newline="\n")
 
 
+def build_thanks():
+    """The Bestiaire, phone and desktop, as it opens after an update that fixed one of the player's reports
+    (issue #33)."""
+    text = (P / "Bestiaire.dc.html").read_text(encoding="utf-8")
+    text = re.sub(r"<title>.*?</title>", "<title>Corrigé grâce à toi — feuille du bas</title>", text, count=1)
+    opening = "class Component extends DCLogic {\n"
+    assert text.count(opening) == 1
+    constructor = "  constructor(props) {\n    super(props);\n    this.state = { thanks: true };\n  }\n"
+    (P / "Merci.dc.html").write_text(text.replace(opening, opening + constructor, 1), encoding="utf-8", newline="\n")
+    text = (P / "Desktop-Bestiaire.dc.html").read_text(encoding="utf-8")
+    text = re.sub(r"<title>.*?</title>", "<title>Corrigé grâce à toi — boîte de dialogue</title>", text, count=1)
+    closed = "sent: false, thanks: false"
+    assert text.count(closed) == 1
+    (P / "Desktop-Merci.dc.html").write_text(text.replace(closed, "sent: false, thanks: true", 1), encoding="utf-8",
+                                              newline="\n")
+
+
 def main():
     build_mobile()
     build_desktop()
@@ -265,6 +282,7 @@ def main():
 ''')
     build_context()
     build_report()
+    build_thanks()
     print("ok")
 
 

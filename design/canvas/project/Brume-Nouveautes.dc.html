@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nouveautés · Brume</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+a{color:#BBA6F7}a:hover{color:#D5C8FB}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #110F18; color: #E9E5F3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #342D47">
+    <a href="Brume-Reglages.dc.html" aria-label="Retour aux réglages" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+    <h2 style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Nouveautés</h2>
+  </header>
+  <main style="flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 18px">
+    <sc-for list="{{ versions }}" as="v" hint-placeholder-count="3">
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <h3 style="margin: 0; display: flex; align-items: baseline; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid #342D47; font-weight: 400"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500">{{ v.version }}</span><span style="font-size: 12px; color: #8D86A4">{{ v.date }}</span></h3>
+        <sc-for list="{{ v.items }}" as="i" hint-placeholder-count="2">
+          <p style="margin: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.45"><span>{{ i.text }}</span><sc-if value="{{ i.hasThanks }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: #A9A2BF">Merci {{ i.thanks }}<sc-if value="{{ i.isYours }}" hint-placeholder-val="{{ false }}"> · ton signalement {{ i.number }}</sc-if></span></sc-if></p>
+        </sc-for>
+      </section>
+    </sc-for>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const item = (text, thanks, number) => ({ text: text, hasThanks: Boolean(thanks), thanks: thanks || '', isYours: Boolean(number), number: number || '' });
+    return {
+      versions: [
+        { version: '1.5.0', date: '2 nov. 2026', items: [
+          item('Troll › Frappe au sol : 60 dégâts, plus 70.', 'Ragnar', '#48'),
+          item('Mes signalements et Nouveautés, dans Réglages.')
+        ] },
+        { version: '1.4.1', date: '27 oct. 2026', items: [
+          item("Les invocations que le jeu ne lance jamais n'apparaissent plus.")
+        ] },
+        { version: '1.4.0', date: '27 oct. 2026', items: [
+          item("Signaler un chiffre, un bug ou une idée depuis l'app.")
+        ] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

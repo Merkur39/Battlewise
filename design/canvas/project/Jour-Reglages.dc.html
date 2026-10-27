@@ -63,6 +63,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
       <span style="font-size: 12px; color: {{ t.faint }}">{{ s.themeNote }}</span>
     </div>
 
+    <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.feedback }}</span>
+      <a href="Jour-Signalements.dc.html" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.ink }}; text-decoration: none"><span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{ s.reports }}</span><span style="font-size: 12px; color: {{ t.secondary }}">{{ s.reportsMeta }}</span></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+      <a href="Jour-Nouveautes.dc.html" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.ink }}; text-decoration: none"><span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{ s.news }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.newsMeta }}</span></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+    </div>
+
     <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
       <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.data }}</span>
       <span style="display: flex; align-items: baseline; gap: 8px">
@@ -109,14 +115,14 @@ class Component extends DCLogic {
     const detected = 'fr';
     const S = {
       fr: {
-        code: 'fr', title: 'Réglages', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
+        code: 'fr', title: 'Réglages', feedback: 'TES RETOURS', reports: 'Mes signalements', reportsMeta: '5 envoyés · 2 corrigés', news: 'Nouveautés', newsMeta: '1.5.0 · 2 NOV.', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
         langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
         theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'Gardés sur cet appareil. L\'aperçu change dès que tu touches un choix.',
         data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', save: 'Valider',
         report: 'Signaler un problème ou une idée', source: 'Code source et licence', licence: '© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.'
       },
       en: {
-        code: 'en', title: 'Settings', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
+        code: 'en', title: 'Settings', feedback: 'YOUR FEEDBACK', reports: 'My reports', reportsMeta: '5 sent · 2 fixed', news: "What's new", newsMeta: '1.5.0 · NOV 2', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
         langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
         theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'Saved on this device. The preview changes as soon as you tap a choice.',
         data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', save: 'Save',

@@ -261,13 +261,34 @@ textarea::placeholder{color:#8D86A4}
       </div>
     </div>
   </sc-if>
+  <sc-if value="{{ thanksOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(4, 6, 7, 0.72)">
+      <div role="dialog" aria-modal="true" aria-labelledby="t-title" style="width: 480px; max-width: 100%; box-sizing: border-box; border: 1px solid #342D47; border-radius: 10px; overflow: hidden; background: #1A1724">
+        <div style="display: flex; align-items: center; padding: 12px 12px 6px 24px">
+          <h2 id="t-title" style="flex: 1; margin: 0; font-size: 18px; font-weight: 500">Corrigé grâce à toi</h2>
+          <button type="button" onClick="{{ closeThanks }}" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="padding: 6px 24px 22px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #342D47; border-radius: 6px; background: #110F18">
+          <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 15px">Troll › Frappe au sol</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9A2BF">#48</span></span>
+          <span style="font-size: 13px; color: #A9A2BF">60 dégâts, plus 70.</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5">Ton signalement est corrigé dans <span style="font-family: 'IBM Plex Mono', monospace">1.5.0</span>. Merci, Ragnar : chaque correction sert à tous les joueurs.</p>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 24px; border-top: 1px solid #342D47">
+          <button type="button" onClick="{{ closeThanks }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #342D47; font-size: 14px">Fermer</button>
+          <a href="Brume-Desktop-Nouveautes.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18; text-decoration: none">Voir les nouveautés</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: true, sent: false };
+    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: true, sent: false, thanks: false };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -326,6 +347,8 @@ class Component extends DCLogic {
         pick: () => this.setState({ stars: s })
       })),
       rep: this.reportVals(),
+      thanksOpen: this.state.thanks,
+      closeThanks: () => this.setState({ thanks: false }),
       hpTxt: fmt(600 * (stars + 1), 0),
       stagTxt: fmt(180 * (stars + 1), 0),
       advice: advice,

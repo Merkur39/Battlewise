@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes signalements · Brume</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+a{color:#BBA6F7}a:hover{color:#D5C8FB}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #110F18; color: #E9E5F3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #342D47">
+    <a href="Brume-Reglages.dc.html" aria-label="Retour aux réglages" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+    <h2 style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Mes signalements</h2>
+  </header>
+  <main style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column">
+    <sc-for list="{{ reports }}" as="r" hint-placeholder-count="5">
+      <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 4px; padding: 12px 16px; border-bottom: 1px solid #241F33; color: #E9E5F3; text-decoration: none">
+        <span style="display: flex; align-items: center; gap: 10px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#A9A2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="{{ r.kindIcon }}"></path></svg><span style="flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ r.subject }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9A2BF">{{ r.number }}</span></span>
+        <span style="display: flex; justify-content: space-between; padding-left: 26px; font-size: 12px"><span style="display: inline-flex; align-items: center; gap: 4px; color: {{ r.stateColor }}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ r.stateIcon }}"></path></svg>{{ r.state }}</span><span style="color: #8D86A4">{{ r.date }}</span></span>
+      </a>
+    </sc-for>
+    <p style="margin: 0; padding: 12px 16px 24px; font-size: 12px; line-height: 1.45; color: #8D86A4">Envoyés depuis cet appareil. Leur état vient de GitHub quand tu es en ligne ; touche-en un pour l'ouvrir.</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const I = {
+      data: 'M5 21V4M5 4h11l-2 4 2 4H5',
+      bug: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01',
+      idea: 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z',
+      fixed: 'M5 12l5 5L20 7',
+      waiting: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2',
+      open: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z',
+      closed: 'M6 6l12 12M18 6L6 18'
+    };
+    const row = (kind, subject, number, date, state, look) => ({
+      kindIcon: I[kind], subject: subject, number: number, date: date, state: state,
+      stateIcon: I[look], stateColor: look === 'fixed' ? '#E9E5F3' : '#A9A2BF'
+    });
+    return {
+      reports: [
+        row('idea', 'Les boss phase par phase', '', "aujourd'hui", "En attente d'envoi", 'waiting'),
+        row('bug', "La fiche reste vide quand je change d'étoiles", '#52', '2 nov.', 'Ouvert', 'open'),
+        row('data', 'Draugr › Coup de hache', '#50', '30 oct.', 'Corrigé, dans la prochaine version', 'fixed'),
+        row('data', 'Troll › Frappe au sol', '#48', '27 oct.', 'Corrigé dans 1.5.0', 'fixed'),
+        row('data', "Squelette › Coup d'épée", '#47', '26 oct.', 'Fermé · déjà signalé (#45)', 'closed')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
