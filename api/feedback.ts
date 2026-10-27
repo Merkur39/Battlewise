@@ -1,5 +1,5 @@
 import { createPrivateKey, sign } from 'node:crypto'
-import type { Report } from '../src/features/report/model'
+import type { Crash, Report } from '../src/features/report/model'
 
 /**
  * POST /api/feedback: a report sent from the app becomes a public issue on the repository, written
@@ -19,13 +19,23 @@ export const LIMITS = {
   shows: 600,
   /** Lines the screen showed. */
   lines: 60,
+  crashMessage: 500,
+  crashStack: 4000,
   /** The whole request, in characters. */
   body: 32_000,
 } as const
 
 const REPOSITORY = 'Merkur39/Battlewise'
 const GITHUB = 'https://api.github.com'
-const SCREENS = ['creature', 'simulation', 'settings'] as const
+const SCREENS = [
+  'creature',
+  'simulation',
+  'settings',
+  'app',
+  'bestiary',
+  'arsenal',
+  'guide',
+] as const
 const LANGUAGES = ['fr', 'en'] as const
 const ID = /^[A-Za-z0-9_]{1,100}$/
 /** A line of the sheet: `health`, or a fighter and its attack, `Troll/troll_groundslam`. */
@@ -86,6 +96,16 @@ export function validate(input: unknown): Validation {
         shows: string(value.shows, LIMITS.shows, 'line.shows'),
       }
     })
+    const crash = optional(input.crash, (value) =>
+      isRecord(value)
+        ? {
+            message: string(value.message, LIMITS.crashMessage, 'crash.message', {
+              required: true,
+            }),
+            stack: string(value.stack, LIMITS.crashStack, 'crash.stack'),
+          }
+        : fail('crash'),
+    )
     const creature = optional(context.creature, (value) => matching(value, ID, 'context.creature'))
     const stars = optional(context.stars, (value) => integer(value, 0, 10, 'context.stars'))
     const attack = optional(context.attack, (value) => matching(value, ID, 'context.attack'))
@@ -93,12 +113,14 @@ export function validate(input: unknown): Validation {
       ok: true,
       value: {
         kind: oneOf(KINDS, input.kind, 'kind'),
-        text: string(input.text, LIMITS.text, 'text', { required: true }),
+        // A crash tells what happened: the player's words are then optional.
+        text: string(input.text, LIMITS.text, 'text', { required: crash === undefined }),
         ...(game !== undefined ? { game } : {}),
         ...(nickname !== undefined ? { nickname } : {}),
         website: string(input.website, LIMITS.website, 'website'),
         ...(subject !== undefined ? { subject } : {}),
         ...(line !== undefined ? { line } : {}),
+        ...(crash !== undefined ? { crash } : {}),
         context: {
           version: matching(context.version, VERSION, 'context.version'),
           gameVersion: matching(context.gameVersion, VERSION, 'context.gameVersion'),
@@ -151,13 +173,24 @@ function markOf({ kind, line, context }: Report): string | null {
     : null
 }
 
+/** The error and its stack as code, which GitHub shows as it is: in a fence longer than any run of
+ * backticks in it, so that nothing in it closes the block. */
+function crashBlock({ message, stack }: Crash): string[] {
+  const code = (stack.startsWith(message) ? stack : [message, stack].filter(Boolean).join('\n'))
+    .replace(/\r\n?/g, '\n')
+    .replace(CONTROL, '')
+  const longest = Math.max(0, ...Array.from(code.matchAll(/`+/g), (run) => run[0].length))
+  const fence = '`'.repeat(Math.max(3, longest + 1))
+  return ['**Crash:**', '', fence, code, fence, '']
+}
+
 /** The player's words first, then what the app attached, folded. */
 function told(report: Report): string[] {
-  const { kind, text, game, nickname, line, context } = report
+  const { kind, text, game, nickname, line, crash, context } = report
   const { version, gameVersion, language, screen, width, creature, stars, attack, shows } = context
   return [
-    neutralise(text),
-    '',
+    ...(text.trim() === '' ? [] : [neutralise(text), '']),
+    ...(crash ? crashBlock(crash) : []),
     ...(kind === 'data' && game ? [`**What the game shows:** ${neutralise(game)}`, ''] : []),
     ...(line ? [`**Line:** ${neutralise(line.label)} · ${neutralise(line.shows)}`, ''] : []),
     nickname ? `Reported from the app by **${neutralise(nickname)}**.` : 'Reported from the app.',
@@ -186,8 +219,11 @@ function told(report: Report): string[] {
 /** The issue a report opens: its kind and subject in the title, what it tells in the body, marked
  * with its line. Labelled for the Inbox of the board. */
 export function issueOf(report: Report): Issue {
-  const { kind, text, subject } = report
-  const title = `[${kind}] ${subject ? `${subject.replace(CONTROL, ' ')} — ` : ''}« ${excerpt(text)} »`
+  const { kind, text, subject, crash } = report
+  const about = subject ? `${subject.replace(CONTROL, ' ')} — ` : ''
+  const title = crash
+    ? `[${kind}] ${about}Crash « ${excerpt(crash.message)} »`
+    : `[${kind}] ${about}« ${excerpt(text)} »`
   const mark = markOf(report)
   const body = [...told(report), ...(mark === null ? [] : ['', mark])].join('\n')
   return { title: title.slice(0, 256), body, labels: ['from:app', kind] }

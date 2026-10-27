@@ -328,7 +328,33 @@ export const en: Catalog = {
     attachedSummary: 'Version, data, what the screen shows, your setup',
     device: (version, gameVersion) => `Battlewise ${version} · read from Valheim ${gameVersion}`,
     screen: (language, screen, width) =>
-      `${{ fr: 'French', en: 'English' }[language]} · ${{ creature: 'creature sheet', simulation: 'Simulation', settings: 'Settings' }[screen]} · ${n(width)} px screen`,
+      [
+        { fr: 'French', en: 'English' }[language],
+        ...(screen === 'app'
+          ? []
+          : [
+              {
+                creature: 'creature sheet',
+                simulation: 'Simulation',
+                settings: 'Settings',
+                bestiary: 'Bestiary',
+                arsenal: 'Arsenal',
+                guide: 'Guide',
+              }[screen],
+            ]),
+        `${n(width)} px screen`,
+      ].join(' · '),
+    crashText: 'What you were doing',
+    crashHint: {
+      creature: 'I set the Troll to 2★.',
+      bestiary: 'I switched biome.',
+      simulation: 'I picked an attack.',
+      arsenal: 'I changed the level.',
+      guide: 'I opened a rule.',
+      app: 'I opened Battlewise.',
+    },
+    crashSummary: 'Version, screen, the error and its stack',
+    moreLines: (count) => `… ${plural(count, 'more line', 'more lines')}`,
     nothingElse: 'Nothing else: no IP address, no identifier.',
     public: 'Your report becomes public on GitHub, with your name if you give one.',
     send: 'Send',
@@ -345,6 +371,36 @@ export const en: Catalog = {
       "It won't go through as it is. Write it on GitHub instead, where each form guides you.",
     onGitHub: 'Open an issue on GitHub',
     done: 'Close',
+  },
+  crash: {
+    sheetTitle: 'This sheet crashed',
+    sheetNote: 'The rest of Battlewise works: pick another creature, or go to the Simulation.',
+    retry: 'Try again',
+    appTitle: 'Battlewise crashed',
+    appNote: 'Your settings, your gear and your world stay on this device: reload to carry on.',
+    reload: 'Reload',
+    send: 'Send the report',
+    trust: 'Nothing leaves without you: the report is sent only if you ask.',
+    screens: {
+      bestiary: {
+        title: 'The Bestiary crashed',
+        note: 'The rest of Battlewise works: go to the Simulation, the Arsenal or the Guide.',
+      },
+      simulation: {
+        title: 'The Simulation crashed',
+        note: 'The rest of Battlewise works: go to the Bestiary, the Arsenal or the Guide.',
+      },
+      arsenal: {
+        title: 'The Arsenal crashed',
+        note: 'The rest of Battlewise works: go to the Bestiary, the Simulation or the Guide.',
+      },
+      guide: {
+        title: 'The Guide crashed',
+        note: 'The rest of Battlewise works: go to the Bestiary, the Simulation or the Arsenal.',
+      },
+    },
+    row: 'This row crashed',
+    report: 'Report',
   },
   loop: {
     feedback: 'Your feedback',

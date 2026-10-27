@@ -1,10 +1,15 @@
 import { useId, useState } from 'react'
+import { CrashBoundary } from '@/app/CrashBoundary'
 import type { Route } from '@/app/routes'
 import { RouteLink } from '@/app/RouteLink'
 import { useAppState } from '@/app/useAppState'
 import { useIsDesktop } from '@/app/useMediaQuery'
 import { replaceRoute } from '@/app/useRoute'
+import type { GameBlocker } from '@/data/types'
 import { FORGE_MAX_LEVEL } from '@/features/gear/model'
+import { BrokenRow } from '@/features/report/Crash'
+import { orElse, type Crash } from '@/features/report/model'
+import { useOpenReport } from '@/features/report/useReport'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { CheckIcon, ChevronRightIcon, MinusIcon, PlusIcon } from '@/ui/icons'
@@ -100,11 +105,55 @@ export function ArsenalScreen({ route }: { readonly route: Route }) {
       <ul aria-label={t.arsenal.categories[category]} className={styles.cards}>
         {rows.map((row) => (
           <li key={row.blocker.id}>
-            <ArsenalCard category={category} row={row} level={level} to={equip(row)} />
+            <CrashBoundary
+              fallback={(crash) => (
+                <BrokenBlockerRow
+                  blocker={row.blocker}
+                  crash={crash}
+                  className={styles.brokenCard}
+                />
+              )}
+            >
+              <ArsenalCard category={category} row={row} level={level} to={equip(row)} />
+            </CrashBoundary>
           </li>
         ))}
       </ul>
     </main>
+  )
+}
+
+/** A row of the Arsenal that failed while drawing: its item, and a way to report it; the others stay. */
+function BrokenBlockerRow({
+  blocker,
+  crash,
+  className,
+}: {
+  readonly blocker: GameBlocker
+  readonly crash: Crash
+  readonly className: string | undefined
+}) {
+  const language = useLanguage()
+  const openReport = useOpenReport()
+  const name = orElse(() => blocker.name[language], blocker.id)
+  return (
+    <BrokenRow
+      name={name}
+      className={className}
+      onReport={() => {
+        openReport({
+          screen: 'arsenal',
+          kind: 'bug',
+          heading: name,
+          title: name,
+          subject: orElse(() => blocker.name.en, blocker.id),
+          ids: {},
+          shows: [],
+          lines: [],
+          crash,
+        })
+      }}
+    />
   )
 }
 
@@ -310,13 +359,22 @@ function ArsenalTable({
         </thead>
         <tbody>
           {rows.map((row) => (
-            <TableRow
+            <CrashBoundary
               key={row.blocker.id}
-              category={category}
-              row={row}
-              level={level}
-              to={equip(row)}
-            />
+              fallback={(crash) => (
+                <tr>
+                  <td colSpan={(shields ? 2 : 1) + SORTS.length + 1}>
+                    <BrokenBlockerRow
+                      blocker={row.blocker}
+                      crash={crash}
+                      className={styles.brokenRow}
+                    />
+                  </td>
+                </tr>
+              )}
+            >
+              <TableRow category={category} row={row} level={level} to={equip(row)} />
+            </CrashBoundary>
           ))}
         </tbody>
       </table>

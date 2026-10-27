@@ -41,6 +41,24 @@ const earlier: Report = {
   line: { label: report.line?.label ?? '', shows: report.line?.shows ?? '' },
 }
 
+/** A crash on the Troll's sheet, reported without a word. Its stack holds what could close a code block,
+ * call someone or link elsewhere. */
+const crash: Report = {
+  kind: 'bug',
+  text: '',
+  website: '',
+  subject: 'Troll',
+  crash: {
+    message: "TypeError: Cannot read properties of undefined (reading 'hits')",
+    stack: [
+      "TypeError: Cannot read properties of undefined (reading 'hits')",
+      '    at attackDamage (https://battlewise.test/assets/index.js:1:48211)',
+      '    at ```Sheet``` @octocat (index.js:1:2)',
+    ].join('\n'),
+  },
+  context: { ...report.context, stars: 2, shows: [] },
+}
+
 /** Open issues the app opened on another line of the Troll, and on the same line of another creature. */
 const elsewhere = [
   {
@@ -69,6 +87,22 @@ describe('validate', () => {
     expect(validate(earlier)).toEqual({ ok: true, value: earlier })
   })
 
+  it('takes a crash without a word', () => {
+    expect(validate(crash)).toEqual({ ok: true, value: crash })
+  })
+
+  it('takes a crash on the page of last resort, which shows no screen', () => {
+    const anywhere = { ...crash, context: { ...crash.context, screen: 'app' } }
+    expect(validate(anywhere).ok).toBe(true)
+  })
+
+  it.each(['bestiary', 'arsenal', 'guide'])(
+    'takes a crash on the %s, its list or its screen',
+    (screen) => {
+      expect(validate({ ...crash, context: { ...crash.context, screen } }).ok).toBe(true)
+    },
+  )
+
   it('keeps only the fields it knows', () => {
     const result = validate({
       ...report,
@@ -81,6 +115,12 @@ describe('validate', () => {
   it.each<[string, unknown]>([
     ['an unknown kind', { ...report, kind: 'spam' }],
     ['no text', { ...report, text: '   ' }],
+    ['no text and no crash', { ...report, text: '' }],
+    ['a crash without its stack', { ...crash, crash: { message: 'TypeError' } }],
+    [
+      'a stack too long',
+      { ...crash, crash: { message: 'TypeError', stack: 'a'.repeat(LIMITS.crashStack + 1) } },
+    ],
     ['a text too long', { ...report, text: 'a'.repeat(LIMITS.text + 1) }],
     ['a name too long', { ...report, nickname: 'a'.repeat(LIMITS.nickname + 1) }],
     ['another language', { ...report, context: { ...report.context, language: 'de' } }],
@@ -165,6 +205,25 @@ describe('issueOf', () => {
 
   it('marks nothing when the report names no line', () => {
     expect(issueOf(earlier).body).not.toContain('battlewise-line')
+  })
+})
+
+describe('issueOf, for a crash', () => {
+  it('titles it with its subject and its error', () => {
+    expect(issueOf(crash).title).toMatch(
+      /^\[bug\] Troll — Crash « TypeError: Cannot read properties of undefined/,
+    )
+  })
+
+  it('writes the error and its stack as code, in a fence nothing in it can close', () => {
+    const { body } = issueOf(crash)
+    expect(body.startsWith('**Crash:**\n\n````\n')).toBe(true)
+    expect(body).toContain(['', crash.crash?.stack ?? '', '````', ''].join('\n'))
+  })
+
+  it('puts the player’s words first, when they gave some', () => {
+    const { body } = issueOf({ ...crash, text: 'Je passais le Troll à 2★.' })
+    expect(body.startsWith('Je passais le Troll à 2★.\n\n**Crash:**\n')).toBe(true)
   })
 })
 

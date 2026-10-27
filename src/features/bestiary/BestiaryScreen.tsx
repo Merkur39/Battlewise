@@ -1,4 +1,5 @@
-import { useId, useMemo } from 'react'
+import { useId, useMemo, type ReactNode } from 'react'
+import { CrashBoundary } from '@/app/CrashBoundary'
 import type { Route } from '@/app/routes'
 import { RouteLink } from '@/app/RouteLink'
 import { useIsDesktop } from '@/app/useMediaQuery'
@@ -6,13 +7,17 @@ import { replaceRoute } from '@/app/useRoute'
 import { attackDamage, attackVerdicts } from '@/combat/attack'
 import { creatureHealth } from '@/combat/creature'
 import { game } from '@/data'
-import type { GameCreature } from '@/data/types'
+import type { GameAttack, GameCreature } from '@/data/types'
+import { BrokenRow } from '@/features/report/Crash'
+import { orElse, type Crash } from '@/features/report/model'
+import { useOpenReport } from '@/features/report/useReport'
+import type { Language } from '@/i18n/detect'
 import { useLanguage, useT } from '@/i18n/useT'
 import { ChevronRightIcon, CloseIcon, SearchIcon } from '@/ui/icons'
 import { AdviceLine, GuardIcon, VerdictLegend, VerdictPill } from '@/ui/verdicts'
 import styles from './BestiaryScreen.module.css'
 import { BiomeStepper } from './BiomeStepper'
-import { CreatureSheet } from './CreatureSheet'
+import { CreatureSheet, CreatureSheetCrash } from './CreatureSheet'
 import { assess, creatureName, creaturesOf, search, type FoundAttack } from './model'
 import { AttackPills, AttackTags, CreatureName, Highlighted } from './parts'
 import { bestiaryRoute, placeOf, type Place } from './place'
@@ -46,7 +51,20 @@ export function BestiaryScreen({ route }: { readonly route: Route }) {
             <Finder place={place} selected={selected?.id ?? null} />
           </div>
           {selected && (
-            <CreatureSheet key={selected.id} creature={selected} place={place} layout="panel" />
+            <CrashBoundary
+              key={selected.id}
+              fallback={(crash, retry) => (
+                <CreatureSheetCrash
+                  creature={selected}
+                  place={place}
+                  layout="panel"
+                  crash={crash}
+                  onRetry={retry}
+                />
+              )}
+            >
+              <CreatureSheet creature={selected} place={place} layout="panel" />
+            </CrashBoundary>
           )}
         </div>
       </main>
@@ -54,13 +72,22 @@ export function BestiaryScreen({ route }: { readonly route: Route }) {
   }
 
   if (place.creature) {
+    const { creature } = place
     return (
-      <CreatureSheet
-        key={place.creature.id}
-        creature={place.creature}
-        place={place}
-        layout="page"
-      />
+      <CrashBoundary
+        key={creature.id}
+        fallback={(crash, retry) => (
+          <CreatureSheetCrash
+            creature={creature}
+            place={place}
+            layout="page"
+            crash={crash}
+            onRetry={retry}
+          />
+        )}
+      >
+        <CreatureSheet creature={creature} place={place} layout="page" />
+      </CrashBoundary>
     )
   }
   return (
@@ -97,13 +124,15 @@ function Finder({ place, selected }: { readonly place: Place; readonly selected:
           <ul aria-label={t.bestiary.creatures} className={styles.list}>
             {creaturesOf(place.biome).map((creature) => (
               <li key={creature.id} className={styles.item}>
-                <CreatureRow
-                  creature={creature}
-                  to={bestiaryRoute(place.biome, creature.id, '')}
-                  current={creature.id === selected}
-                  query=""
-                  biome={null}
-                />
+                <RowNet creature={creature}>
+                  <CreatureRow
+                    creature={creature}
+                    to={bestiaryRoute(place.biome, creature.id, '')}
+                    current={creature.id === selected}
+                    query=""
+                    biome={null}
+                  />
+                </RowNet>
               </li>
             ))}
           </ul>
@@ -148,6 +177,64 @@ function SearchField({ place }: { readonly place: Place }) {
         </button>
       )}
     </label>
+  )
+}
+
+/** A row of a creature, or of one of its attacks, under its own net: if it fails while drawing, a short
+ * row reports it, and the rest of the list stays. */
+function RowNet({
+  creature,
+  attack = null,
+  children,
+}: {
+  readonly creature: GameCreature
+  readonly attack?: GameAttack | null
+  readonly children: ReactNode
+}) {
+  return (
+    <CrashBoundary
+      fallback={(crash) => <BrokenCreatureRow creature={creature} attack={attack} crash={crash} />}
+    >
+      {children}
+    </CrashBoundary>
+  )
+}
+
+function BrokenCreatureRow({
+  creature,
+  attack,
+  crash,
+}: {
+  readonly creature: GameCreature
+  readonly attack: GameAttack | null
+  readonly crash: Crash
+}) {
+  const language = useLanguage()
+  const openReport = useOpenReport()
+  const attackId = attack?.ids[0]
+  const named = (shown: Language) => {
+    const name = orElse(() => creatureName(creature, shown), creature.id)
+    return attack ? `${name} · ${orElse(() => attack.name[shown], attackId ?? '')}` : name
+  }
+  const name = named(language)
+  return (
+    <BrokenRow
+      name={name}
+      className={styles.brokenRow}
+      onReport={() => {
+        openReport({
+          screen: 'bestiary',
+          kind: 'bug',
+          heading: name,
+          title: name,
+          subject: named('en'),
+          ids: { creature: creature.id, ...(attackId ? { attack: attackId } : {}) },
+          shows: [],
+          lines: [],
+          crash,
+        })
+      }}
+    />
   )
 }
 
@@ -255,13 +342,15 @@ function SearchResults({
           <ul className={styles.resultList}>
             {found.creatures.map((creature) => (
               <li key={creature.id} className={styles.item}>
-                <CreatureRow
-                  creature={creature}
-                  to={bestiaryRoute(creature.biomes[0] ?? place.biome, creature.id, place.query)}
-                  current={creature.id === selected}
-                  query={place.query}
-                  biome={biomeName(creature)}
-                />
+                <RowNet creature={creature}>
+                  <CreatureRow
+                    creature={creature}
+                    to={bestiaryRoute(creature.biomes[0] ?? place.biome, creature.id, place.query)}
+                    current={creature.id === selected}
+                    query={place.query}
+                    biome={biomeName(creature)}
+                  />
+                </RowNet>
               </li>
             ))}
           </ul>
@@ -288,7 +377,9 @@ function SearchResults({
                 key={`${attack.fighter.id}/${attack.attack.ids[0] ?? ''}`}
                 className={styles.item}
               >
-                <FoundAttackRow found={attack} place={place} />
+                <RowNet creature={attack.creature} attack={attack.attack}>
+                  <FoundAttackRow found={attack} place={place} />
+                </RowNet>
               </li>
             ))}
           </ul>

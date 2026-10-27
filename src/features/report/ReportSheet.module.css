@@ -252,6 +252,17 @@
   color: var(--secondary);
 }
 
+/* An error and its stack keep their case: they are read as they were thrown. */
+.crashLine,
+.stackLine {
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.stackLine {
+  padding-left: 2ch;
+}
+
 .nothingElse {
   padding-top: 4px;
   font-family: var(--font-ui);
