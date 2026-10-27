@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v79** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v83** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -34,6 +34,12 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
   game name (the skeletons): the home biome as a qualifier, the health brought forward, one merged row.
   Track A (« Squelette · Marécages ») is the one chosen: the Bestiaire boards list the meadows skeleton as
   « Squelette · Prairies ». Made by hand as well.
+- Page **Étroit · pistes** (`Etroit-*-1024`, `Etroit-*-1280`): the desktop Bestiaire between 1024 and 1400 px,
+  where the sheet lacked room for its attack table, as it was and in three tracks, each at 1024 and 1280 px.
+  Track B (the sidebar folded to its icons, a 320 px list, the range in the tag line, Simuler as a chevron) is
+  the one chosen. Made by hand as well, derived once from the board below and frozen.
+- The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
+  media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
   (« Ton contexte », the phone Bestiaire with its context sheet open).
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
@@ -41,7 +47,7 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v79: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v83: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),

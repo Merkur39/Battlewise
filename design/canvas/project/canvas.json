@@ -337,6 +337,86 @@
       "title": "Créatures du même nom — trois pistes",
       "page": "squelette"
     },
+    "Etroit-Auj-1024.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "Aujourd'hui · 1024 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-Auj-1280.dc.html": {
+      "x": 1104,
+      "y": 0,
+      "w": 1280,
+      "h": 800,
+      "title": "Aujourd'hui · 1280 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-A-1024.dc.html": {
+      "x": 0,
+      "y": 1220,
+      "w": 1024,
+      "h": 768,
+      "title": "A · La fiche par-dessus la liste · 1024 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-A-1280.dc.html": {
+      "x": 1104,
+      "y": 1220,
+      "w": 1280,
+      "h": 800,
+      "title": "A · La fiche par-dessus la liste · 1280 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-B-1024.dc.html": {
+      "x": 0,
+      "y": 2440,
+      "w": 1024,
+      "h": 768,
+      "title": "B · La barre en icônes, la liste resserrée · 1024 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-B-1280.dc.html": {
+      "x": 1104,
+      "y": 2440,
+      "w": 1280,
+      "h": 800,
+      "title": "B · La barre en icônes, la liste resserrée · 1280 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-C-1024.dc.html": {
+      "x": 0,
+      "y": 3660,
+      "w": 1024,
+      "h": 768,
+      "title": "C · Les attaques en lignes de téléphone · 1024 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
+    "Etroit-C-1280.dc.html": {
+      "x": 1104,
+      "y": 3660,
+      "w": 1280,
+      "h": 800,
+      "title": "C · Les attaques en lignes de téléphone · 1280 px",
+      "expand": "fill",
+      "is_interactive": true,
+      "page": "etroit"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1700,6 +1780,66 @@
       "maxW": 1440,
       "page": "encaisses"
     },
+    "etroit-row1": {
+      "kind": "title1",
+      "text": "Aujourd'hui",
+      "x": 0,
+      "y": -300,
+      "maxW": 2384,
+      "page": "etroit"
+    },
+    "etroit-note1": {
+      "x": 2464,
+      "y": 0,
+      "w": 420,
+      "text": "La barre (248 px), la liste (400) et la fiche côte à côte. À 1024 px la fiche n'a que 376 px : les tuiles s'empilent et la table des attaques (652 px) défile de côté jusque vers 1376 px.",
+      "page": "etroit"
+    },
+    "etroit-row2": {
+      "kind": "title1",
+      "text": "A · La fiche par-dessus la liste",
+      "x": 0,
+      "y": 920,
+      "maxW": 2384,
+      "page": "etroit"
+    },
+    "etroit-note2": {
+      "x": 2464,
+      "y": 1220,
+      "w": 420,
+      "text": "Sous 1376 px, comme sur téléphone : la liste seule, puis la fiche à sa place, un retour au-dessus du titre. La fiche a 776 px à 1024 : la table tient. On perd la liste à côté, il faut revenir pour passer d'une créature à l'autre.",
+      "page": "etroit"
+    },
+    "etroit-row3": {
+      "kind": "title1",
+      "text": "B · La barre en icônes, la liste resserrée — retenue",
+      "x": 0,
+      "y": 2140,
+      "maxW": 2384,
+      "page": "etroit"
+    },
+    "etroit-note3": {
+      "x": 2464,
+      "y": 2440,
+      "w": 420,
+      "text": "Sous 1376 px, la barre se replie à ses icônes (64 px, noms gardés pour les lecteurs d'écran), la liste passe à 320 px, la portée rejoint la ligne des types et « Simuler » devient un chevron. La fiche a 640 px à 1024 : la table resserrée tient. Retenue : reportée dans les planches Bestiaire desktop, qui passent en B sous 1400 px (le pire tableau, celui de Fader, demande 658 px même ses types repliés : 1376 ne suffisait pas).",
+      "page": "etroit"
+    },
+    "etroit-row4": {
+      "kind": "title1",
+      "text": "C · Les attaques en lignes de téléphone",
+      "x": 0,
+      "y": 3360,
+      "maxW": 2384,
+      "page": "etroit"
+    },
+    "etroit-note4": {
+      "x": 2464,
+      "y": 3660,
+      "w": 420,
+      "text": "La liste passe à 320 px ; quand la fiche n'a pas la place de la table, ses attaques prennent la forme du téléphone : nom, types et portée, dégâts, trois pastilles, le verdict en toutes lettres pour les lecteurs d'écran. La barre ne bouge pas.",
+      "page": "etroit"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -2079,6 +2219,14 @@
     "Fiche.dc.html",
     "Fiche-Desktop.dc.html",
     "Squelette.dc.html",
+    "Etroit-Auj-1024.dc.html",
+    "Etroit-Auj-1280.dc.html",
+    "Etroit-A-1024.dc.html",
+    "Etroit-A-1280.dc.html",
+    "Etroit-B-1024.dc.html",
+    "Etroit-B-1280.dc.html",
+    "Etroit-C-1024.dc.html",
+    "Etroit-C-1280.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2254,6 +2402,10 @@
     {
       "id": "squelette",
       "name": "Squelette · pistes"
+    },
+    {
+      "id": "etroit",
+      "name": "Étroit · pistes"
     },
     {
       "id": "braise",

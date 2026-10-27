@@ -103,3 +103,15 @@
   flex: none;
   color: var(--faint);
 }
+
+/* The folded sidebar keeps the icons alone; each chip says it all in its label. */
+@media (max-width: 1399px) {
+  .sidebar .chip {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .sidebar .lines {
+    display: none;
+  }
+}

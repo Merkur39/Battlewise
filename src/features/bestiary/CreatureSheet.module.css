@@ -448,6 +448,11 @@
   max-width: 280px;
 }
 
+/* In the table, the tag line wraps rather than widen its column or lose its end. */
+.attackCell .cellTags {
+  white-space: normal;
+}
+
 .attackCell .attackTitle {
   display: block;
   margin-bottom: 3px;
@@ -495,4 +500,43 @@
 
 .panel .note {
   padding-top: 0;
+}
+
+/* Below 1400 px the table lacks room for all its columns (issue #25): the panel and the cells tighten,
+   the range leaves its column for each attack's tag line, and the links keep their chevron, their name in
+   their label. */
+.rangeInCell {
+  display: none;
+}
+
+@media (max-width: 1399px) {
+  .panelBody {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .table th,
+  .table td {
+    padding: 0 10px;
+  }
+
+  .rangeColumn {
+    display: none;
+  }
+
+  .rangeInCell {
+    display: inline;
+  }
+
+  .linkText {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
 }

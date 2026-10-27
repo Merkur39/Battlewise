@@ -414,7 +414,9 @@ function AttackTable({
           <thead>
             <tr>
               <th scope="col">{t.creature.attack}</th>
-              <th scope="col">{t.creature.range}</th>
+              <th scope="col" className={styles.rangeColumn}>
+                {t.creature.range}
+              </th>
               <th scope="col" className={styles.numeric}>
                 {t.creature.damage}
               </th>
@@ -443,9 +445,14 @@ function AttackTable({
                   <tr key={`${fighter.id}/${attack.ids[0] ?? ''}`}>
                     <th scope="row" className={styles.attackCell}>
                       <span className={styles.attackTitle}>{attack.name[language]}</span>
-                      <AttackTags attack={attack} withRange={false} />
+                      <AttackTags
+                        attack={attack}
+                        withRange={false}
+                        rangeClassName={styles.rangeInCell}
+                        className={styles.cellTags}
+                      />
                     </th>
-                    <td className={styles.range}>
+                    <td className={`${styles.range ?? ''} ${styles.rangeColumn ?? ''}`}>
                       {attack.kind === 'summon'
                         ? t.creature.kinds.summon
                         : t.creature.metres(attackRange(attack))}
@@ -464,7 +471,7 @@ function AttackTable({
                           )}
                           className={styles.simulate}
                         >
-                          {t.creature.simulate}
+                          <span className={styles.linkText}>{t.creature.simulate}</span>
                           <ChevronRightIcon size={14} />
                         </RouteLink>
                       )}
@@ -624,9 +631,11 @@ function HazardTableRows({
     <tr>
       <th scope="row" className={styles.attackCell}>
         <span className={styles.attackTitle}>{name}</span>
-        <TypeTags types={hitTypes(assessed.hits)} tags={tags} />
+        <TypeTags types={hitTypes(assessed.hits)} tags={tags} className={styles.cellTags}>
+          {range !== '—' && <span className={styles.rangeInCell}> · {range}</span>}
+        </TypeTags>
       </th>
-      <td className={styles.range}>{range}</td>
+      <td className={`${styles.range ?? ''} ${styles.rangeColumn ?? ''}`}>{range}</td>
       <td className={`${styles.numeric ?? ''} ${styles.tableDamage ?? ''}`}>
         {damageText(assessed.damage, language)}
       </td>
@@ -661,7 +670,7 @@ function HazardTableRows({
             <th scope="row" className={styles.attackCell}>
               <span className={styles.attackTitle}>{`${name} ${count}`}</span>
             </th>
-            <td className={styles.range}>—</td>
+            <td className={`${styles.range ?? ''} ${styles.rangeColumn ?? ''}`}>—</td>
             <td className={`${styles.numeric ?? ''} ${styles.tableDamage ?? ''}`}>—</td>
             <VerdictCells verdicts={null} />
             <td>
@@ -671,7 +680,7 @@ function HazardTableRows({
                   aria-label={`${name} ${count}. ${t.creature.openSheet(name)}`}
                   className={styles.simulate}
                 >
-                  {t.creature.sheet}
+                  <span className={styles.linkText}>{t.creature.sheet}</span>
                   <ChevronRightIcon size={14} />
                 </RouteLink>
               )}

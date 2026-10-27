@@ -323,6 +323,22 @@ describe('Bestiary', () => {
       ).toHaveTextContent('Sa fiche')
     })
 
+    it('keeps the range of an attack in its cell too, for a desktop narrower than the table', () => {
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/blackForest/Troll')
+      renderWithStore(<App />, { language: 'fr' })
+
+      expect(screen.getByRole('rowheader', { name: /^Coup de poing/ })).toHaveTextContent('4 m')
+    })
+
+    it('keeps the range of trampling in its cell too', () => {
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr' })
+
+      expect(screen.getByRole('rowheader', { name: /^Écrasement/ })).toHaveTextContent('En course')
+    })
+
     it('gives trampling its range, when running', () => {
       setViewportWidth('desktop')
       window.history.replaceState(null, '', '#/bestiary/plains/Lox')

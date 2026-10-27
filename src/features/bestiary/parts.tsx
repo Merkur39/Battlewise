@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { DamageType } from '@/combat/damage'
 import { game } from '@/data'
@@ -54,21 +55,30 @@ export function CreatureName({
 export function AttackTags({
   attack,
   withRange = true,
+  rangeClassName,
   extra = [],
   className,
 }: {
   readonly attack: GameAttack
   readonly withRange?: boolean
+  /** Without the range among the tags, it still ends the line in a span of this class, which a table
+   * shows only when it drops its range column. */
+  readonly rangeClassName?: string | undefined
   readonly extra?: readonly string[]
   readonly className?: string | undefined
 }) {
   const t = useT()
   const tags = [t.creature.kinds[attack.kind]]
-  if (withRange && attack.kind !== 'summon') {
-    tags.push(t.creature.metres(attackRange(attack)))
-  }
+  const range = attack.kind === 'summon' ? null : t.creature.metres(attackRange(attack))
+  if (withRange && range !== null) tags.push(range)
   tags.push(...extra)
-  return <TypeTags types={attackTypes(attack)} tags={tags} className={className} />
+  return (
+    <TypeTags types={attackTypes(attack)} tags={tags} className={className}>
+      {!withRange && range !== null && rangeClassName && (
+        <span className={rangeClassName}> · {range}</span>
+      )}
+    </TypeTags>
+  )
 }
 
 /** A tag line: damage types, icon and word, then the other tags. */
@@ -76,10 +86,13 @@ export function TypeTags({
   types,
   tags,
   className,
+  children,
 }: {
   readonly types: readonly DamageType[]
   readonly tags: readonly string[]
   readonly className?: string | undefined
+  /** Whatever ends the line. */
+  readonly children?: ReactNode
 }) {
   const language = useLanguage()
   return (
@@ -92,6 +105,7 @@ export function TypeTags({
       ))}
       {types.length > 0 && tags.length > 0 && ' · '}
       {tags.join(' · ')}
+      {children}
     </span>
   )
 }

@@ -7,7 +7,8 @@ import { ScreenIcon } from './ScreenIcon'
 import { SettingsLink } from './SettingsLink'
 import styles from './Sidebar.module.css'
 
-/** Desktop: the name, the four screens, then Your gear, Your world and the Settings at the bottom. */
+/** Desktop: the name, the four screens, then Your gear, Your world and the Settings at the bottom; below
+ * 1400 px, their icons alone. */
 export function Sidebar({
   screen,
   links,
@@ -31,14 +32,14 @@ export function Sidebar({
             className={styles.link}
           >
             <ScreenIcon screen={target} size={20} />
-            {t.screens[target]}
+            <span className={styles.linkName}>{t.screens[target]}</span>
           </a>
         ))}
       </div>
       <div className={styles.context}>
         <span className={styles.label}>{t.shell.context}</span>
         <ContextChips variant="sidebar" />
-        <SettingsLink variant="labelled" className={styles.link} />
+        <SettingsLink variant="labelled" className={styles.link} labelClassName={styles.linkName} />
       </div>
     </nav>
   )
