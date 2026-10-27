@@ -54,6 +54,21 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
         <p style="margin: 0; font-size: 15px; color: #A9A2BF">Choisis une attaque : la page te dit comment la prendre avec ton équipement.</p>
       </header>
 
+      <sc-if value="{{ crashed }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div role="alert" style="max-width: 520px; display: flex; flex-direction: column; gap: 12px; padding: 24px; box-sizing: border-box; border: 1px solid #342D47; border-radius: 6px; background: #1A1724">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 500">La Simulation a planté</h2>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9A2BF">Le reste de Battlewise marche : passe au Bestiaire, à l'Arsenal ou au Mémo.</p>
+            <div style="display: flex; gap: 10px; padding-top: 4px">
+              <button type="button" onClick="{{ retry }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
+              <button type="button" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #342D47; font-size: 14px">Envoyer le rapport</button>
+            </div>
+          </div>
+          <span style="font-size: 12px; line-height: 1.45; color: #8D86A4">Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ fine }}" hint-placeholder-val="{{ true }}">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px; align-items: start">
         <section aria-labelledby="d-coup" style="background: #1A1724; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
           <h2 id="d-coup" style="margin: 0; font-size: 16px; font-weight: 500">Le coup</h2>
@@ -138,6 +153,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
           <span style="font-size: 12px; color: #8D86A4">Dégâts d'attaque d'exemple, en attendant l'extraction du jeu.</span>
         </section>
       </div>
+      </sc-if>
     </div>
   </main>
 </div>
@@ -146,7 +162,7 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { mode: 'attack', stars: 0, barPct: 0, value: 90 };
+    this.state = { mode: 'attack', stars: 0, barPct: 0, value: 90, crashed: false };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -196,6 +212,9 @@ class Component extends DCLogic {
 
     const seg = (v, cur) => v === cur ? 'background: #BBA6F7; color: #110F18; font-weight: 500' : 'color: #A9A2BF';
     return {
+      crashed: st.crashed,
+      fine: !st.crashed,
+      retry: () => this.setState({ crashed: false }),
       isAttack: isAttack,
       isValue: !isAttack,
       modeOpts: [['attack', "Attaque d'un monstre"], ['value', 'Valeur libre']].map(([id, label]) => ({

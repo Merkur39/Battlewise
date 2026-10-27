@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Dernier recours — Battlewise a planté · Graphite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#2E2E33 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2E2E33;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8A8A93}
+button,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#6EA0FF}a:hover{color:#9CBEFF}
+input::placeholder{color:#8A8A93}
+textarea{font:inherit;color:inherit;margin:0}
+textarea::placeholder{color:#8A8A93}
+</style>
+</helmet>
+<div style="height: 100vh; min-height: 680px; box-sizing: border-box; background: #111113; color: #EDEDEF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+  <div style="flex: 1; display: flex; flex-direction: column; padding: 20px 24px">
+    <span style="display: flex; align-items: center; gap: 10px; height: 40px"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6EA0FF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg><span style="font-size: 16px; font-weight: 500">Battlewise</span></span>
+    <div style="align-self: center; width: 440px; display: flex; flex-direction: column; gap: 14px; padding-top: 140px">
+      <span style="color: #A1A1AA"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg></span>
+      <h1 style="margin: 0; font-size: 24px; font-weight: 500">Battlewise a planté</h1>
+      <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #A1A1AA">Tes réglages, ton équipement et ton monde restent sur cet appareil : recharge pour reprendre.</p>
+      <div style="display: flex; gap: 10px; padding-top: 6px">
+        <a href="Graphite-Desktop-Bestiaire.dc.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #6EA0FF; color: #111113; text-decoration: none"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Recharger</a>
+        <button type="button" onClick="{{ openReport }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #2E2E33; font-size: 14px">Envoyer le rapport</button>
+      </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #8A8A93">Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.</span>
+    </div>
+  </div>
+  <sc-if value="{{ rep.open }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(4, 6, 7, 0.72)">
+      <div role="dialog" aria-modal="true" aria-label="Signaler" style="width: 600px; max-width: 100%; max-height: 100%; overflow-y: auto; box-sizing: border-box; border: 1px solid #2E2E33; border-radius: 10px; background: #1A1A1D; display: flex; flex-direction: column">
+        <sc-if value="{{ rep.form }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 6px 24px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 500">Signaler</h2>
+            <button type="button" onClick="{{ rep.close }}" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div style="padding: 6px 24px 22px; display: flex; flex-direction: column; gap: 16px">
+            <div role="group" aria-label="Ce que tu signales" style="flex: none; display: flex; border: 1px solid #2E2E33; border-radius: 4px; overflow: hidden">
+              <sc-for list="{{ rep.kinds }}" as="k" hint-placeholder-count="3">
+                <button type="button" onClick="{{ k.pick }}" aria-pressed="{{ k.pressed }}" style="flex: 1; height: 40px; font-size: 13px; {{ k.style }}">{{ k.label }}</button>
+              </sc-for>
+            </div>
+            <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 13px; color: #A1A1AA">{{ rep.textLabel }}<sc-if value="{{ rep.optional }}" hint-placeholder-val="{{ false }}"> <span style="color: #8A8A93">· facultatif</span></sc-if></span>
+              <textarea rows="4" placeholder="{{ rep.textHint }}" style="box-sizing: border-box; width: 100%; min-height: 104px; padding: 10px 12px; border: 1px solid #2E2E33; border-radius: 4px; background: #111113; color: #EDEDEF; font-size: 14px; resize: vertical"></textarea>
+            </label>
+            <div style="display: grid; grid-template-columns: {{ rep.fieldCols }}; gap: 12px">
+              <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+                <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                  <span style="font-size: 13px; color: #A1A1AA">Ce que montre le jeu <span style="color: #8A8A93">· facultatif</span></span>
+                  <input type="text" placeholder="110, ou « Coup de massue »" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2E2E33; border-radius: 4px; background: #111113; color: #EDEDEF; font-size: 14px">
+                </label>
+              </sc-if>
+              <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 13px; color: #A1A1AA">Ton pseudo, pour te remercier <span style="color: #8A8A93">· facultatif</span></span>
+                <input type="text" placeholder="Ton pseudo" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2E2E33; border-radius: 4px; background: #111113; color: #EDEDEF; font-size: 14px">
+              </label>
+            </div>
+            <div style="flex: none; display: flex; flex-direction: column; border: 1px solid #2E2E33; border-radius: 6px">
+              <button type="button" onClick="{{ rep.toggleCtx }}" aria-expanded="{{ rep.ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; text-align: left">
+                <span style="flex: 1; font-size: 13px">Joint au signalement</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#A1A1AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ rep.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ rep.ctxOpen }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 12px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.45; color: #A1A1AA">
+                  <sc-for list="{{ rep.context }}" as="c" hint-placeholder-count="6"><span>{{ c }}</span></sc-for>
+                  <span style="padding-top: 4px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; color: #8A8A93">Rien d'autre : ni adresse IP, ni identifiant.</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #2E2E33">
+            <span style="flex: 1; font-size: 12px; line-height: 1.45; color: #8A8A93">Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.</span>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #2E2E33; font-size: 14px">Annuler</button>
+            <button type="button" onClick="{{ rep.send }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #6EA0FF; color: #111113">Envoyer</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ rep.sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#EDEDEF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+              <span style="font-size: 18px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
+            </div>
+            <span style="font-size: 14px; line-height: 1.5; color: #A1A1AA">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
+          </div>
+          <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #2E2E33">
+            <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2E2E33; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #6EA0FF; color: #111113">Fermer</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { report: false, kind: 'bug', ctxOpen: true, sent: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const KINDS = [
+      { id: 'data', label: 'Donnée fausse' },
+      { id: 'bug', label: 'Bug' },
+      { id: 'idea', label: 'Idée' }
+    ];
+    return {
+      openReport: () => this.setState({ report: true, sent: false }),
+      rep: {
+        open: st.report, form: !st.sent, sent: st.sent,
+        close: () => this.setState({ report: false, sent: false }),
+        send: () => this.setState({ sent: true }),
+        kinds: KINDS.map((k) => ({
+          label: k.label,
+          pressed: String(k.id === st.kind),
+          style: k.id === st.kind ? 'background: #6EA0FF; color: #111113; font-weight: 500' : 'color: #A1A1AA',
+          pick: () => this.setState({ kind: k.id })
+        })),
+        lines: [],
+        isData: false,
+        fieldCols: 'minmax(0, 1fr)',
+        textLabel: 'Ce que tu faisais',
+        textHint: "J'ai ouvert Battlewise.",
+        optional: true,
+        ctxSummary: "Version, écran, l'erreur et sa pile",
+        ctxOpen: st.ctxOpen,
+        ctxExpanded: String(st.ctxOpen),
+        chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
+        toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
+        context: [
+          'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+          'FRANÇAIS · FENÊTRE 1440 PX',
+          "TypeError: Cannot read properties of null (reading 'blocker')",
+          '\u00a0\u00a0at ContextSummary (index-Cq3RNw5M.js:1:40118)',
+          '\u00a0\u00a0at Layout (index-Cq3RNw5M.js:1:61520)',
+          '\u00a0\u00a0… 9 lignes de plus'
+        ]
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

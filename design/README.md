@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v94** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v107** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -53,18 +53,40 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
   with a thank-you sheet, a dot without interrupting. Track B is the one chosen: Réglages gains a « Tes retours »
   section whose two rows open `Signalements` and `Nouveautes` (and their desktop boards), and the Bestiaire opens a
   « Corrigé grâce à toi » sheet once after an update that fixed one of the player's reports. Made by hand as well.
+- Page **Plantage · pistes** (`Plantage-A` to `Plantage-C`, `Plantage-Desktop`): the crash report (#33), when the
+  app fails while drawing, in three tracks on a phone: one page that takes the whole app, the report written on it;
+  only the screen that failed, the rest of the app usable and the report in the usual sheet, Bug picked; the app
+  restarting by itself, then a banner offering the report. Nothing is sent without the player. Track B is the one
+  chosen, drawn on desktop beside it (the card in place of the sheet panel, the 600 px report dialog, the page of
+  last resort when the frame of the app fails). Made by hand as well. Carried into Origine: Monstre and
+  Desktop-Bestiaire gain a `crashed` state (the card in place of the sheet, Réessayer, « Envoyer le rapport »
+  opening their report sheet with Bug picked, an optional « Ce que tu faisais » and the error attached), and
+  `Secours` / `Desktop-Secours` are the page of last resort, made by hand, its report in the same sheet.
+- Page **Filets · pistes** (`Filets-A` to `Filets-C`): crash nets around the other screens (Simulation, Arsenal,
+  Mémo, the Bestiary's list), in three tracks on a phone: a card per screen that names it; nets on each row of a
+  list first, a row that fails becoming a short row with « Signaler », then the card of the screen; one card for
+  every screen. Track B is the one chosen, drawn on desktop beside it (`Filets-Desktop`: a row of the Bestiary's
+  list and of the Arsenal's table, the card of the Simulation). Made by hand as well. Carried into Origine: the
+  Bestiaire and Arsenal boards gain a `broken` state (the row of that name fails: the short row with « Signaler »,
+  which on the desktop Bestiaire opens its report dialog), Main and Desktop-Combat a `crashed` state (the card of
+  the screen).
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
   (« Ton contexte », the phone Bestiaire with its context sheet open). Generated the same way, `Signaler` (Monstre
   with its report sheet open) and `Desktop-Signaler` (the desktop Bestiaire with its report dialog open), a line
-  picked; `Merci` and `Desktop-Merci`, the Bestiaire with its thank-you sheet or dialog open.
+  picked; `Merci` and `Desktop-Merci`, the Bestiaire with its thank-you sheet or dialog open; `Plantee` and
+  `Desktop-Plantee`, the creature sheet and the desktop Bestiaire with the sheet crashed; `Ligne-Plantee` and
+  `Desktop-Ligne-Plantee`, the Troll's row failed (on desktop, its sheet beside it too); `Arsenal-Ligne-Plantee`
+  and `Desktop-Arsenal-Ligne-Plantee`, a shield's row failed; `Simulation-Plantee` and
+  `Desktop-Simulation-Plantee`, the Simulation crashed. With `Secours`, they make the « Plantages » rows of
+  Origine, phone and desktop.
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
   `this.state = { theme: 'origine', lang: 'auto' };` for the theme copies.
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v94: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v107: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),

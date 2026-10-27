@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fiche plantée — carte · Parchemin</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:light}
+*{scrollbar-width:thin;scrollbar-color:#CDBFA3 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#CDBFA3;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#685B4A}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+input,textarea{font:inherit}
+::placeholder{color:#685B4A}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+a{color:#24467A}a:hover{color:#1A3560}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #EFE7D6; color: #2B2219; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+  <header style="display: flex; align-items: center; gap: 4px; padding: 10px 16px 4px 4px">
+    <a href="Parchemin-Bestiaire.dc.html" aria-label="Retour" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #5E5141">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+    </a>
+    <h1 style="margin: 0; flex: 1; font-size: 20px; font-weight: 500">Troll</h1>
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">FORÊT NOIRE</span>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 12px; display: flex; flex-direction: column; gap: 14px; min-height: 0; overflow-y: auto">
+    <sc-if value="{{ crashed }}" hint-placeholder-val="{{ false }}">
+      <div role="alert" style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; border: 1px solid #CDBFA3; border-radius: 6px; background: #F9F4E8">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#5E5141" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+        <h2 style="margin: 0; font-size: 18px; font-weight: 500">Cette fiche a planté</h2>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #5E5141">Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.</p>
+        <button type="button" onClick="{{ retry }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 4px; font-weight: 500; background: #24467A; color: #EFE7D6"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
+        <button type="button" onClick="{{ rep.openCrash }}" style="min-height: 44px; font-size: 14px; color: #24467A">Envoyer le rapport</button>
+      </div>
+      <span style="flex: none; font-size: 12px; line-height: 1.45; color: #685B4A">Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.</span>
+    </sc-if>
+    <sc-if value="{{ fine }}" hint-placeholder-val="{{ true }}">
+    <div role="group" aria-label="Étoiles" style="flex: none; display: flex; border: 1px solid #CDBFA3; border-radius: 4px; overflow: hidden">
+      <sc-for list="{{ starOpts }}" as="s" hint-placeholder-count="3">
+        <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; {{ s.style }}">{{ s.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="flex: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #CDBFA3; border: 1px solid #CDBFA3; border-radius: 6px; overflow: hidden">
+      <div style="background: #F9F4E8; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; letter-spacing: 0.08em; color: #5E5141">PV</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px">{{ hpTxt }}</span></div>
+      <div style="background: #F9F4E8; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; letter-spacing: 0.08em; color: #5E5141">À INFLIGER</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px">{{ stagTxt }}</span></div>
+      <div style="background: #F9F4E8; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; letter-spacing: 0.08em; color: #5E5141">TA PARADE</span><span style="font-size: 13px; color: #2F6B33; padding-top: 3px">Le fait tituber</span></div>
+    </div>
+
+    <div style="flex: none; display: flex; align-items: center; gap: 8px; font-size: 14px; color: {{ advice.color }}">
+      <sc-if value="{{ advice.isOk }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
+      <sc-if value="{{ advice.isWarn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></sc-if>
+      <sc-if value="{{ advice.isBad }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
+      <span>{{ advice.text }}</span>
+    </div>
+
+    <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 10px; letter-spacing: 0.08em; color: #5E5141">FAIBLESSES ET RÉSISTANCES</span>
+      <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: start">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #5E5141; padding-top: 5px">CORPS</span>
+        <div style="display: flex; gap: 6px 8px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 3px 8px; border-radius: 3px; border: 1px solid #5E5141; color: #2B2219"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">FAIBLE ×1,5</span></span><span style="padding: 3px 8px; border-radius: 3px; border: 1px solid #CDBFA3; color: #5E5141"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M13 3l8 8-4 4-8-8zM13 11l-9 9"></path></svg>CONTONDANT · <span style="font-weight: 500">RÉSISTANT ×0,5</span></span><span style="padding: 3px 8px; border-radius: 3px; border: 1px dashed #CDBFA3; color: #685B4A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #685B4A">Tout le reste ×1</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: start">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #5E5141; padding-top: 5px">TÊTE</span>
+        <div style="display: flex; gap: 6px 8px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 3px 8px; border-radius: 3px; border: 1px solid #5E5141; color: #2B2219"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">TRÈS FAIBLE ×2</span></span><span style="padding: 3px 8px; border-radius: 3px; border: 1px dashed #CDBFA3; color: #685B4A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #685B4A">Tout le reste ×1</span></div>
+      </div>
+    </div>
+
+    <section aria-labelledby="f-att" style="flex: none; display: flex; flex-direction: column">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px 96px 16px; gap: 8px; align-items: center; padding-bottom: 6px; border-bottom: 1px solid #CDBFA3; font-size: 10px; letter-spacing: 0.08em; color: #5E5141">
+        <h2 id="f-att" style="margin: 0; font-size: 10px; font-weight: 400">SES ATTAQUES</h2>
+        <span style="text-align: right">DÉG.</span>
+        <span style="display: flex; gap: 4px; justify-content: flex-start">
+          <span style="width: 28px; display: flex; justify-content: center" title="Blocage"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Blocage"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span>
+          <span style="width: 28px; display: flex; justify-content: center" title="Parade"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Parade"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span>
+          <span style="width: 28px; display: flex; justify-content: center" title="Esquive"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Esquive"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span>
+        </span>
+        <span></span>
+      </div>
+      <sc-for list="{{ attacks }}" as="a" hint-placeholder-count="3">
+        <a href="Parchemin-Main.dc.html" aria-label="{{ a.aria }}" style="display: grid; grid-template-columns: minmax(0, 1fr) 40px 96px 16px; gap: 8px; align-items: center; min-height: 56px; border-bottom: 1px solid #E2D7C1; color: #2B2219; text-decoration: none">
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+            <span style="font-size: 14px">{{ a.name }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #5E5141; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if> · {{ a.tags }}</span>
+          </span>
+          <span style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">{{ a.dmg }}</span>
+          <span aria-hidden="true" style="display: flex; gap: 4px">
+            <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ a.bBorder }}; color: {{ a.bColor }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span>
+            <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ a.pBorder }}; color: {{ a.pColor }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span>
+            <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #8CC48A; color: #2F6B33"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span>
+          </span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#685B4A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </a>
+      </sc-for>
+      <span style="padding-top: 10px; font-size: 12px; color: #685B4A">Touche une attaque pour la simuler. Attaques d'exemple ; résistances et tête du jeu.</span>
+      <button type="button" onClick="{{ rep.openReport }}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 4px; font-size: 13px; color: #24467A; text-align: left">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Un chiffre ou un nom faux ? Signale-le
+      </button>
+    </section>
+    </sc-if>
+  </main>
+  <sc-if value="{{ rep.open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ rep.close }}" style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72)"></div>
+    <div role="dialog" aria-modal="true" aria-label="Signaler" style="position: absolute; left: 0; right: 0; bottom: 0; max-height: 94%; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; padding: 8px 16px 20px; border-top: 1px solid #CDBFA3; border-radius: 14px 14px 0 0; background: #F9F4E8; animation: sheet-in 0.25s cubic-bezier(0.2, 0, 0, 1)">
+      <span aria-hidden="true" style="flex: none; align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #CDBFA3"></span>
+      <sc-if value="{{ rep.form }}" hint-placeholder-val="{{ true }}">
+        <div style="flex: none; display: flex; align-items: center; justify-content: space-between; margin: -6px -10px -6px 0">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 500">Signaler</h2>
+          <button type="button" onClick="{{ rep.close }}" aria-label="Fermer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #5E5141"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div role="group" aria-label="Ce que tu signales" style="flex: none; display: flex; border: 1px solid #CDBFA3; border-radius: 4px; overflow: hidden">
+          <sc-for list="{{ rep.kinds }}" as="k" hint-placeholder-count="3">
+            <button type="button" onClick="{{ k.pick }}" aria-pressed="{{ k.pressed }}" style="flex: 1; height: 44px; font-size: 13px; {{ k.style }}">{{ k.label }}</button>
+          </sc-for>
+        </div>
+        <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 13px; color: #5E5141">{{ rep.subject }}<sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}"> : quelle ligne ? <span style="color: #685B4A">· facultatif</span></sc-if></span>
+          <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+            <div role="group" aria-label="Quelle ligne" style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{ rep.lines }}" as="l" hint-placeholder-count="6">
+                <button type="button" onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="height: 40px; padding: 0 14px; box-sizing: border-box; border-radius: 20px; font-size: 13px; {{ l.style }}">{{ l.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #5E5141">{{ rep.textLabel }}<sc-if value="{{ rep.optional }}" hint-placeholder-val="{{ false }}"> <span style="color: #685B4A">· facultatif</span></sc-if></span>
+          <textarea rows="3" placeholder="{{ rep.textHint }}" style="box-sizing: border-box; width: 100%; min-height: 92px; padding: 10px 12px; border: 1px solid #CDBFA3; border-radius: 4px; background: #EFE7D6; color: #2B2219; font-size: 15px; resize: none"></textarea>
+        </label>
+        <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+          <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 13px; color: #5E5141">Ce que montre le jeu <span style="color: #685B4A">· facultatif</span></span>
+            <input type="text" placeholder="110, ou « Coup de massue »" style="box-sizing: border-box; width: 100%; height: 44px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; background: #EFE7D6; color: #2B2219; font-size: 15px">
+          </label>
+        </sc-if>
+        <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #5E5141">Ton pseudo, pour te remercier <span style="color: #685B4A">· facultatif</span></span>
+          <input type="text" placeholder="Ton pseudo" style="box-sizing: border-box; width: 100%; height: 44px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; background: #EFE7D6; color: #2B2219; font-size: 15px">
+        </label>
+        <div style="flex: none; display: flex; flex-direction: column; border: 1px solid #CDBFA3; border-radius: 6px">
+          <button type="button" onClick="{{ rep.toggleCtx }}" aria-expanded="{{ rep.ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; text-align: left">
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 13px">Joint au signalement</span><span style="font-size: 12px; color: #685B4A">{{ rep.ctxSummary }}</span></span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#5E5141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ rep.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{ rep.ctxOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 2px 12px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.45; color: #5E5141">
+              <sc-for list="{{ rep.context }}" as="c" hint-placeholder-count="6"><span>{{ c }}</span></sc-for>
+              <span style="padding-top: 4px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; color: #685B4A">Rien d'autre : ni adresse IP, ni identifiant.</span>
+            </div>
+          </sc-if>
+        </div>
+        <button type="button" onClick="{{ rep.send }}" style="flex: none; height: 48px; border-radius: 4px; font-weight: 500; background: #24467A; color: #EFE7D6">Envoyer</button>
+        <span style="flex: none; font-size: 12px; line-height: 1.45; color: #685B4A">Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.</span>
+      </sc-if>
+      <sc-if value="{{ rep.sent }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: none; display: flex; align-items: center; gap: 10px; padding-top: 6px">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2B2219" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+          <span style="font-size: 17px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
+        </div>
+        <span style="flex: none; font-size: 14px; line-height: 1.5; color: #5E5141">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
+        <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="flex: none; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+        <button type="button" onClick="{{ rep.close }}" style="flex: none; height: 48px; border-radius: 4px; border: 1px solid #CDBFA3; font-size: 15px">Fermer</button>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: false, sent: false, crashed: true, crash: false };
+  }
+  renderVals() {
+    const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
+    const armor = (dmg, ac) => (ac <= 0 || dmg <= 0) ? Math.max(0, dmg) : (ac < dmg / 2 ? dmg - ac : Math.min(1, dmg / (ac * 4)) * dmg);
+    const bp = 72 * (1 + 25 / 200), ac = 45, T = 60, pb = 1.5;
+    const verdict = (hit, power) => {
+      const passes = armor(hit, power);
+      if (passes >= T) return 'bad';
+      return passes + armor(passes, ac) >= T ? 'warn' : 'ok';
+    };
+    const colors = { ok: '#2F6B33', warn: '#8A5300', bad: '#A3322A' };
+    const borders = { ok: '#8CC48A', warn: '#E7B456', bad: '#DB8072' };
+    const words = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas' };
+    const stars = this.state.stars;
+    const mult = [1, 1.5, 2][stars];
+    const base = [
+      { name: 'Coup de poing', short: 'son coup de poing', dmg: 70, tags: 'MÊLÉE', types: ['blunt'] },
+      { name: 'Coup de tronc', short: 'son coup de tronc', dmg: 130, tags: 'MÊLÉE', types: ['blunt'] },
+      { name: 'Frappe au sol', short: 'sa frappe au sol', dmg: 160, tags: 'ZONE', types: ['blunt'] }
+    ];
+    const DT = { blunt: { label: 'CONTONDANT', d: 'M13 3l8 8-4 4-8-8zM13 11l-9 9' }, slash: { label: 'COUPANT', d: 'M4 14L14 4M7 19L19 7M13 20l7-7' }, pierce: { label: 'PERFORANT', d: 'M20 4l-7 3 4 4zM15 9L4 20' }, fire: { label: 'FEU', d: 'M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z' }, frost: { label: 'GIVRE', d: 'M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9' }, lightning: { label: 'FOUDRE', d: 'M13 3L5 14h6l-1 7 8-11h-6l1-7z' }, poison: { label: 'POISON', d: 'M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z' }, spirit: { label: 'ESPRIT', d: 'M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01' } };
+    const typeVals = (keys) => ({ t1: DT[keys[0]].label, t1d: DT[keys[0]].d, hasT2: keys.length > 1, t2: keys.length > 1 ? DT[keys[1]].label : '', t2d: keys.length > 1 ? DT[keys[1]].d : '' });
+    const typeWords = (keys) => keys.map((k) => DT[k].label.toLowerCase()).join(' et ');
+    const attacks = base.map((a) => {
+      const hit = a.dmg * mult;
+      return { a: a, hit: hit, b: verdict(hit, bp), p: verdict(hit, bp * pb) };
+    });
+    const failing = attacks.filter((x) => x.p !== 'ok');
+    let advice;
+    if (attacks.every((x) => x.b === 'ok')) advice = { s: 'ok', text: 'Tu bloques tout sans tituber' };
+    else if (failing.length === 0) advice = { s: 'warn', text: 'Pare-le : en bloquant, tu titubes' };
+    else if (failing.length === attacks.length) advice = { s: 'bad', text: 'Esquive tout : même parées, ses attaques passent' };
+    else {
+      const rest = attacks.filter((x) => x.p === 'ok');
+      advice = { s: 'bad', text: 'Esquive ' + failing.map((x) => x.a.short).join(' et ') + (rest.every((x) => x.b === 'ok') ? ', bloque le reste' : ', pare le reste') };
+    }
+    return {
+      starOpts: [0, 1, 2].map((s) => ({
+        label: s + '★', pressed: String(s === stars),
+        style: s === stars ? 'background: #24467A; color: #EFE7D6; font-weight: 500' : 'color: #5E5141',
+        pick: () => this.setState({ stars: s })
+      })),
+      rep: this.reportVals(),
+      crashed: this.state.crashed,
+      fine: !this.state.crashed,
+      retry: () => this.setState({ crashed: false }),
+      hpTxt: fmt(600 * (stars + 1), 0),
+      stagTxt: fmt(180 * (stars + 1), 0),
+      advice: { text: advice.text, color: colors[advice.s], isOk: advice.s === 'ok', isWarn: advice.s === 'warn', isBad: advice.s === 'bad' },
+      attacks: attacks.map((x) => Object.assign(typeVals(x.a.types), {
+        name: x.a.name, tags: x.a.tags, dmg: fmt(x.hit, 0),
+        bColor: colors[x.b], bBorder: borders[x.b], pColor: colors[x.p], pBorder: borders[x.p],
+        aria: x.a.name + ', ' + typeWords(x.a.types) + ', ' + fmt(x.hit, 0) + ' dégâts. Blocage : ' + words[x.b] + '. Parade : ' + words[x.p] + '. Esquivable. Ouvrir la simulation.'
+      }))
+    };
+  }
+  reportVals() {
+    const st = this.state;
+    const stars = st.stars;
+    const mult = [1, 1.5, 2][stars];
+    const KINDS = [
+      { id: 'data', label: 'Donnée fausse', text: "Qu'est-ce qui est faux ?", hint: 'Le coup de tronc fait 110 dans le jeu, pas 130.' },
+      { id: 'bug', label: 'Bug', text: "Qu'est-ce qui s'est passé ?", hint: "La fiche reste vide quand je change d'étoiles." },
+      { id: 'idea', label: 'Idée', text: 'Ton idée', hint: 'Voir les attaques des boss phase par phase.' }
+    ];
+    const LINES = [
+      { id: 'hp', label: 'PV', values: 'PV ' + 600 * (stars + 1) },
+      { id: 'stagger', label: 'À infliger', values: 'À INFLIGER ' + 180 * (stars + 1) },
+      { id: 'weak', label: 'Faiblesses', values: 'CORPS : PERFORANT ×1,5, CONTONDANT ×0,5, ESPRIT ×0 · TÊTE : PERFORANT ×2, ESPRIT ×0' },
+      { id: 'punch', label: 'Coup de poing', values: 'COUP DE POING ' + 70 * mult },
+      { id: 'trunk', label: 'Coup de tronc', values: 'COUP DE TRONC ' + 130 * mult },
+      { id: 'slam', label: 'Frappe au sol', values: 'FRAPPE AU SOL ' + 160 * mult }
+    ];
+    const current = KINDS.find((k) => k.id === st.kind);
+    const isData = st.kind === 'data';
+    const picked = isData ? LINES.find((l) => l.id === st.line) : null;
+    return {
+      open: st.report, form: !st.sent, sent: st.sent,
+      openReport: () => this.setState({ report: true, sent: false, crash: false }),
+      openCrash: () => this.setState({ report: true, sent: false, crash: true, kind: 'bug', ctxOpen: true }),
+      close: () => this.setState({ report: false, sent: false }),
+      send: () => this.setState({ sent: true }),
+      subject: 'Sur la fiche du Troll · ' + stars + '★',
+      kinds: KINDS.map((k) => ({
+        label: k.label,
+        pressed: String(k.id === st.kind),
+        style: k.id === st.kind ? 'background: #24467A; color: #EFE7D6; font-weight: 500' : 'color: #5E5141',
+        pick: () => this.setState({ kind: k.id })
+      })),
+      lines: LINES.map((l) => ({
+        label: l.label,
+        pressed: String(l.id === st.line),
+        style: l.id === st.line ? 'background: #24467A; color: #EFE7D6; font-weight: 500; border: 1px solid #24467A' : 'color: #2B2219; border: 1px solid #CDBFA3',
+        pick: () => this.setState({ line: l.id === st.line ? null : l.id })
+      })),
+      isData: isData,
+      fieldCols: isData ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      textLabel: st.crash ? 'Ce que tu faisais' : current.text,
+      textHint: st.crash ? "J'ai passé le Troll à " + stars + '★.' : current.hint,
+      optional: st.crash,
+      ctxSummary: st.crash ? "Version, écran, l'erreur et sa pile" : "Version, données, ce que l'écran affiche, ton contexte",
+      ctxOpen: st.ctxOpen,
+      ctxExpanded: String(st.ctxOpen),
+      chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
+      toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
+      context: st.crash ? [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
+        'TROLL · ' + stars + '★',
+        "TypeError: Cannot read properties of undefined (reading 'hits')",
+        '\u00a0\u00a0at attackDamage (index-Cq3RNw5M.js:1:48211)',
+        '\u00a0\u00a0at AttackRow (index-Cq3RNw5M.js:1:51877)',
+        '\u00a0\u00a0at CreatureSheet (index-Cq3RNw5M.js:1:53102)',
+        '\u00a0\u00a0… 11 lignes de plus'
+      ] : [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
+        'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),
+        'COUP DE POING ' + 70 * mult + ' · COUP DE TRONC ' + 130 * mult + ' · FRAPPE AU SOL ' + 160 * mult + ', AVEC LEURS VERDICTS',
+        'TON ÉQUIPEMENT : BOUCLIER EN ARGENT N3 · VD 81',
+        'TON MONDE : NORMAL · 1 JOUEUR'
+      ].concat(picked ? ['LIGNE DÉSIGNÉE : ' + picked.values] : [])
+    };
+  }
+}
+</script>
+</body>
+</html>

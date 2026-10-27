@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Simulation plantée — carte · Runes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes sheet-out{to{transform:translateY(100%)}}
+@keyframes shade-in{from{opacity:0}}
+@keyframes shade-out{to{opacity:0}}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#30363A transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#30363A;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8E8A80}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+a{color:#4FE0C8}a:hover{color:#8CEEDD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0F1113; color: #ECE8DF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 6px 16px 4px">
+      <span style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4FE0C8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Battlewise</span>
+      <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0">Simulation</h1>
+      <button type="button" onClick="{{ toggleMenu }}" aria-haspopup="true" aria-expanded="{{ menuExpanded }}" aria-label="Ton contexte : VD 81 ×1" style="height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 8px 0 10px; box-sizing: border-box; border: 1px solid {{ menuBorder }}; border-radius: 4px; background: {{ menuBackground }}; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ECE8DF">
+        <span style="display: flex; align-items: center; gap: 4px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#4FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>VD 81</span>
+        <span style="display: flex; align-items: center; gap: 4px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#4FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>×1</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#ABA79D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+      <a href="Runes-Reglages.dc.html" aria-label="Réglages" style="width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center; color: #ABA79D">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+      </a>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 12px; display: flex; flex-direction: column; gap: 12px; min-height: 0; overflow-y: auto">
+    <sc-if value="{{ crashed }}" hint-placeholder-val="{{ false }}">
+      <div role="alert" style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; border: 1px solid #30363A; border-radius: 6px; background: #191C1F">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#ABA79D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
+        <h2 style="margin: 0; font-size: 18px; font-weight: 500">La Simulation a planté</h2>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #ABA79D">Le reste de Battlewise marche : passe au Bestiaire, à l'Arsenal ou au Mémo.</p>
+        <button type="button" onClick="{{ retry }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 4px; font-weight: 500; background: #4FE0C8; color: #0F1113"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
+        <button type="button" style="min-height: 44px; font-size: 14px; color: #4FE0C8">Envoyer le rapport</button>
+      </div>
+      <span style="flex: none; font-size: 12px; line-height: 1.45; color: #8E8A80">Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.</span>
+    </sc-if>
+    <sc-if value="{{ fine }}" hint-placeholder-val="{{ true }}">
+    <div role="group" aria-label="Source du coup" style="flex: none; display: flex; border: 1px solid #30363A; border-radius: 4px; overflow: hidden">
+      <sc-for list="{{ modeOpts }}" as="o" hint-placeholder-count="2">
+        <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" style="flex: 1; height: 40px; font-size: 13px; {{ o.style }}">{{ o.label }}</button>
+      </sc-for>
+    </div>
+
+    <section aria-label="Le coup" style="flex: none; background: #191C1F; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+      <sc-if value="{{ isAttack }}" hint-placeholder-val="{{ true }}">
+        <a href="Runes-Attaque.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 12px; box-sizing: border-box; border: 1px solid #30363A; border-radius: 6px; background: #0F1113; color: #ECE8DF; text-decoration: none">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4FE0C8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px">Troll · coup de tronc</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="M13 3l8 8-4 4-8-8zM13 11l-9 9"></path></svg>CONTONDANT · MÊLÉE · CHANGER</span>
+          </span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px">{{ hitTxt }}</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </a>
+        <div role="group" aria-label="Étoiles du monstre" style="display: flex; border: 1px solid #30363A; border-radius: 4px; overflow: hidden">
+          <sc-for list="{{ starOpts }}" as="s" hint-placeholder-count="3">
+            <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="flex: 1; height: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; {{ s.style }}">{{ s.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isValue }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px">
+          <button type="button" onClick="{{ dec }}" aria-label="Baisser de 5" style="width: 48px; height: 48px; border: 1px solid #30363A; border-radius: 4px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+          <span style="min-width: 80px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 34px">{{ hitTxt }}</span>
+          <button type="button" onClick="{{ inc }}" aria-label="Monter de 5" style="width: 48px; height: 48px; border: 1px solid #30363A; border-radius: 4px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+        </div>
+        <span style="text-align: center; font-size: 12px; color: #8E8A80">Dégâts de base du coup, avant difficulté et joueurs proches.</span>
+      </sc-if>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span id="s-bar" style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">BARRE DE STAGGER AVANT LE COUP</span>
+        <div role="group" aria-labelledby="s-bar" style="display: flex; border: 1px solid #30363A; border-radius: 4px; overflow: hidden">
+          <sc-for list="{{ barOpts }}" as="o" hint-placeholder-count="4">
+            <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" style="flex: 1; height: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; {{ o.style }}">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <div style="flex: none; display: flex; align-items: center; gap: 8px; font-size: 15px; color: {{ advice.color }}">
+      <sc-if value="{{ advice.isOk }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></sc-if>
+      <sc-if value="{{ advice.isWarn }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></sc-if>
+      <sc-if value="{{ advice.isBad }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></sc-if>
+      <span>{{ advice.text }}</span>
+    </div>
+
+    <div style="flex: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{ results }}" as="r" hint-placeholder-count="2">
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 6px; background: #191C1F; border: 1px solid {{ r.border }}">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">{{ r.mode }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: {{ r.color }}">{{ r.word }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px">{{ r.taken }} <span style="font-size: 11px; color: #8E8A80">subis</span></span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ABA79D">{{ r.cost }}</span>
+          <div role="img" aria-label="{{ r.aria }}" style="height: 8px; display: flex; overflow: hidden; border-radius: 2px; background: #0F1113">
+            <span style="width: {{ r.s0 }}%; background: #30363A"></span>
+            <span style="width: {{ r.s1 }}%; background: {{ r.fill }}"></span>
+            <span style="width: {{ r.s2 }}%; background: {{ r.color }}"></span>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{ r.barColor }}">{{ r.barTxt }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ isAttack }}" hint-placeholder-val="{{ true }}">
+      <div style="flex: none; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #ABA79D">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7EE07A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg>
+        <span>Esquivable en roulade</span>
+      </div>
+    </sc-if>
+    <button type="button" style="flex: none; align-self: flex-start; display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; color: #4FE0C8; text-align: left">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Ce verdict te paraît faux ? Signale-le
+    </button>
+    <span style="flex: none; font-size: 12px; color: #8E8A80">Dégâts d'attaque d'exemple, en attendant l'extraction du jeu.</span>
+    </sc-if>
+  </main>
+
+  <nav aria-label="Navigation" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #30363A; padding: 6px 0 14px">
+    <a href="Runes-Bestiaire.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8E8A80; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire
+    </a>
+    <a href="Runes-Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #4FE0C8; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation
+    </a>
+    <a href="Runes-Arsenal.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8E8A80; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal
+    </a>
+    <a href="Runes-Memo.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; color: #8E8A80; text-decoration: none">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo
+    </a>
+  </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenu }}" style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72); animation: {{ shadeAnimation }}"></div>
+    <div role="dialog" aria-modal="true" aria-label="Ton contexte" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; padding: 8px 4px 24px; border-top: 1px solid #30363A; border-radius: 14px 14px 0 0; background: #191C1F; animation: {{ sheetAnimation }}">
+      <span aria-hidden="true" style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #30363A"></span>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 6px">
+        <span style="font-size: 17px; font-weight: 500">Ton contexte</span>
+        <span style="font-size: 12px; color: #8E8A80">Chaque verdict en dépend</span>
+      </div>
+      <a href="Runes-Profil.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; color: #ECE8DF; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4FE0C8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">TON ÉQUIPEMENT</span>
+          <span style="font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Bouclier en argent</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">N3 · VD 81</span>
+        </span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <div style="height: 1px; background: #22272A"></div>
+      <a href="Runes-Monde.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; color: #ECE8DF; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4FE0C8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">TON MONDE</span>
+          <span style="font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Normal</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">1 JOUEUR · ×1</span>
+        </span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8E8A80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const open = !!st.menu;
+    // The sheet slides back down before it goes.
+    const close = () => {
+      this.setState({ closing: true });
+      setTimeout(() => this.setState({ menu: false, closing: false }), 200);
+    };
+    return Object.assign(this.screenVals(), {
+      menuOpen: open,
+      menuExpanded: String(open),
+      toggleMenu: () => (open ? close() : this.setState({ menu: true })),
+      closeMenu: close,
+      sheetAnimation: st.closing ? 'sheet-out 0.2s ease-in forwards' : 'sheet-in 0.25s cubic-bezier(0.2, 0, 0, 1)',
+      shadeAnimation: st.closing ? 'shade-out 0.2s ease-in forwards' : 'shade-in 0.25s ease-out',
+      menuBorder: open ? '#4FE0C8' : '#30363A',
+      menuBackground: open ? '#123A35' : 'transparent'
+    });
+  }
+  constructor(props) {
+    super(props);
+    this.state = { mode: 'attack', stars: 0, barPct: 0, value: 90, crashed: true };
+  }
+  screenVals() {
+    const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
+    const armor = (dmg, ac) => (ac <= 0 || dmg <= 0) ? Math.max(0, dmg) : (ac < dmg / 2 ? dmg - ac : Math.min(1, dmg / (ac * 4)) * dmg);
+    const bp = 72 * (1 + 25 / 200), ac = 45, T = 60, pb = 1.5;
+    const st = this.state;
+    const isAttack = st.mode === 'attack';
+    const hit = isAttack ? 130 * [1, 1.5, 2][st.stars] : st.value;
+
+    const colors = { ok: '#7EE07A', warn: '#FFB43D', bad: '#FF5A4E' };
+    const fills = { ok: '#2F8A3A', warn: '#C27A0A', bad: '#9A241C' };
+    const words = { ok: 'TIENT', warn: 'TU TITUBES', bad: 'BRISÉ' };
+    const resolve = (mode, parry) => {
+      const power = parry ? bp * pb : bp;
+      const passes = armor(hit, power);
+      const cost = parry ? 0 : 10 * Math.min(1, (hit - passes) / power);
+      const bar0 = T * st.barPct / 100;
+      const broke = bar0 + passes >= T;
+      const taken = broke ? armor(hit, ac) : armor(passes, ac);
+      const shown = taken > 0.1 ? taken : 0;
+      const staggered = broke || bar0 + passes + shown >= T;
+      const state = broke ? 'bad' : (staggered ? 'warn' : 'ok');
+      const segs = [bar0, passes, shown].reduce((acc, v) => {
+        const used = acc.reduce((s, x) => s + x, 0);
+        acc.push(Math.min(100 - used, (Math.max(0, v) / T) * 100));
+        return acc;
+      }, []);
+      const total = Math.min(T, bar0 + passes + shown);
+      return {
+        state: state, mode: mode, word: words[state], color: colors[state], fill: fills[state],
+        border: state === 'ok' ? '#30363A' : fills[state],
+        taken: shown > 0 ? fmt(shown) : '0',
+        cost: parry ? '0 endurance' : '−' + fmt(cost, 0) + ' endurance',
+        s0: segs[0].toFixed(2), s1: segs[1].toFixed(2), s2: segs[2].toFixed(2),
+        barTxt: staggered ? 'barre : déborde' : 'barre : ' + fmt(total) + ' / ' + fmt(T),
+        barColor: staggered ? colors[state] : '#8E8A80',
+        aria: 'Barre de stagger : ' + fmt(total) + ' sur ' + fmt(T) + (staggered ? ', elle déborde' : '')
+      };
+    };
+    const b = resolve('EN BLOQUANT', false);
+    const p = resolve('EN PARANT', true);
+    let advice;
+    if (b.state === 'ok') advice = { s: 'ok', text: 'Bloque-le : tu tiens sans tituber' };
+    else if (p.state === 'ok') advice = { s: 'warn', text: b.state === 'bad' ? 'Pare-le : le blocage cède' : 'Pare-le : en bloquant, tu titubes' };
+    else if (isAttack) advice = { s: 'bad', text: p.state === 'bad' ? 'Esquive-le : même la parade cède' : 'Esquive-le : même paré, tu titubes' };
+    else advice = { s: 'bad', text: p.state === 'bad' ? 'Même la parade cède : esquive si tu peux' : 'Même paré, tu titubes : esquive si tu peux' };
+
+    const seg = (v, cur) => v === cur ? 'background: #4FE0C8; color: #0F1113; font-weight: 500' : 'color: #ABA79D';
+    return {
+      crashed: st.crashed,
+      fine: !st.crashed,
+      retry: () => this.setState({ crashed: false }),
+      isAttack: isAttack,
+      isValue: !isAttack,
+      modeOpts: [['attack', "Attaque d'un monstre"], ['value', 'Valeur libre']].map(([id, label]) => ({
+        label: label, pressed: String(id === st.mode), style: seg(id, st.mode), pick: () => this.setState({ mode: id })
+      })),
+      starOpts: [0, 1, 2].map((s) => ({ label: s + '★', pressed: String(s === st.stars), style: seg(s, st.stars), pick: () => this.setState({ stars: s }) })),
+      barOpts: [0, 25, 50, 75].map((v) => ({ label: v + ' %', pressed: String(v === st.barPct), style: seg(v, st.barPct), pick: () => this.setState({ barPct: v }) })),
+      hitTxt: fmt(hit, 0),
+      dec: () => this.setState({ value: Math.max(0, this.state.value - 5) }),
+      inc: () => this.setState({ value: this.state.value + 5 }),
+      advice: { text: advice.text, color: colors[advice.s], isOk: advice.s === 'ok', isWarn: advice.s === 'warn', isBad: advice.s === 'bad' },
+      results: [b, p]
+    };
+  }
+}
+</script>
+</body>
+</html>
