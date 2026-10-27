@@ -1,0 +1,51 @@
+name: Wrong number or name
+description: A number, a name or a verdict in Battlewise does not match the game.
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Battlewise reads its numbers and names from the game's own files. The game names no monster attack, so attack names come from the Valheim wiki or were written by hand: they are the likeliest to be wrong. Thank you for checking.
+
+        You can write in French: *le français est bienvenu.*
+  - type: input
+    id: subject
+    attributes:
+      label: Creature, item or screen
+      placeholder: Troll, its swing
+    validations:
+      required: true
+  - type: textarea
+    id: app
+    attributes:
+      label: What Battlewise shows
+    validations:
+      required: true
+  - type: textarea
+    id: game
+    attributes:
+      label: What the game shows
+      description: Or what it should be.
+    validations:
+      required: true
+  - type: dropdown
+    id: checked
+    attributes:
+      label: How you checked
+      options:
+        - In game
+        - On the wiki
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Battlewise version
+      description: Settings › About shows it.
+      placeholder: 1.3.0
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: Your world settings, the creature's stars, a screenshot…
