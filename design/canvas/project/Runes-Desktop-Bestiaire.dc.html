@@ -18,6 +18,8 @@ button,input{font:inherit;color:inherit;margin:0}
 button{background:none;border:0;padding:0;cursor:pointer}
 a{color:#4FE0C8}a:hover{color:#8CEEDD}
 input::placeholder{color:#8E8A80}
+textarea{font:inherit;color:inherit;margin:0}
+textarea::placeholder{color:#8E8A80}
 /* Below 1400 px the sheet would lack room for its table (issue #25, track B). */
 .bw-range-tag{display:none}
 @media (max-width: 1399px){
@@ -177,17 +179,95 @@ input::placeholder{color:#8E8A80}
           </div>
 
           <span style="font-size: 12px; color: #8E8A80">Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance. PV, seuil, résistances et tête réels ; attaques d'exemple.</span>
+          <button type="button" onClick="{{ rep.openReport }}" style="align-self: flex-start; display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 13px; color: #4FE0C8">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Un chiffre ou un nom faux ? Signale-le
+          </button>
         </div>
       </section>
     </div>
   </main>
+  <sc-if value="{{ rep.open }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(4, 6, 7, 0.72)">
+      <div role="dialog" aria-modal="true" aria-label="Signaler" style="width: 600px; max-width: 100%; max-height: 100%; overflow-y: auto; box-sizing: border-box; border: 1px solid #30363A; border-radius: 10px; background: #191C1F; display: flex; flex-direction: column">
+        <sc-if value="{{ rep.form }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 6px 24px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 500">Signaler</h2>
+            <button type="button" onClick="{{ rep.close }}" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div style="padding: 6px 24px 22px; display: flex; flex-direction: column; gap: 16px">
+            <div role="group" aria-label="Ce que tu signales" style="flex: none; display: flex; border: 1px solid #30363A; border-radius: 4px; overflow: hidden">
+              <sc-for list="{{ rep.kinds }}" as="k" hint-placeholder-count="3">
+                <button type="button" onClick="{{ k.pick }}" aria-pressed="{{ k.pressed }}" style="flex: 1; height: 40px; font-size: 13px; {{ k.style }}">{{ k.label }}</button>
+              </sc-for>
+            </div>
+            <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 13px; color: #ABA79D">{{ rep.subject }}<sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}"> : quelle ligne ? <span style="color: #8E8A80">· facultatif</span></sc-if></span>
+              <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+                <div role="group" aria-label="Quelle ligne" style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{ rep.lines }}" as="l" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="height: 32px; padding: 0 12px; box-sizing: border-box; border-radius: 16px; font-size: 13px; {{ l.style }}">{{ l.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 13px; color: #ABA79D">{{ rep.textLabel }}</span>
+              <textarea rows="4" placeholder="{{ rep.textHint }}" style="box-sizing: border-box; width: 100%; min-height: 104px; padding: 10px 12px; border: 1px solid #30363A; border-radius: 4px; background: #0F1113; color: #ECE8DF; font-size: 14px; resize: vertical"></textarea>
+            </label>
+            <div style="display: grid; grid-template-columns: {{ rep.fieldCols }}; gap: 12px">
+              <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+                <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                  <span style="font-size: 13px; color: #ABA79D">Ce que montre le jeu <span style="color: #8E8A80">· facultatif</span></span>
+                  <input type="text" placeholder="110, ou « Coup de massue »" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #30363A; border-radius: 4px; background: #0F1113; color: #ECE8DF; font-size: 14px">
+                </label>
+              </sc-if>
+              <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 13px; color: #ABA79D">Ton pseudo, pour te remercier <span style="color: #8E8A80">· facultatif</span></span>
+                <input type="text" placeholder="Ton pseudo" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #30363A; border-radius: 4px; background: #0F1113; color: #ECE8DF; font-size: 14px">
+              </label>
+            </div>
+            <div style="flex: none; display: flex; flex-direction: column; border: 1px solid #30363A; border-radius: 6px">
+              <button type="button" onClick="{{ rep.toggleCtx }}" aria-expanded="{{ rep.ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; text-align: left">
+                <span style="flex: 1; font-size: 13px">Joint au signalement</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#ABA79D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ rep.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ rep.ctxOpen }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 12px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.45; color: #ABA79D">
+                  <sc-for list="{{ rep.context }}" as="c" hint-placeholder-count="6"><span>{{ c }}</span></sc-for>
+                  <span style="padding-top: 4px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; color: #8E8A80">Rien d'autre : ni adresse IP, ni identifiant.</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #30363A">
+            <span style="flex: 1; font-size: 12px; line-height: 1.45; color: #8E8A80">Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.</span>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #30363A; font-size: 14px">Annuler</button>
+            <button type="button" onClick="{{ rep.send }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #4FE0C8; color: #0F1113">Envoyer</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ rep.sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ECE8DF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+              <span style="font-size: 18px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
+            </div>
+            <span style="font-size: 14px; line-height: 1.5; color: #ABA79D">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
+          </div>
+          <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #30363A">
+            <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #30363A; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #4FE0C8; color: #0F1113">Fermer</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { stars: 0 };
+    this.state = { stars: 0, report: false, kind: 'data', line: null, ctxOpen: true, sent: false };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -245,6 +325,7 @@ class Component extends DCLogic {
         style: s === stars ? 'background: #4FE0C8; color: #0F1113; font-weight: 500' : 'color: #ABA79D',
         pick: () => this.setState({ stars: s })
       })),
+      rep: this.reportVals(),
       hpTxt: fmt(600 * (stars + 1), 0),
       stagTxt: fmt(180 * (stars + 1), 0),
       advice: advice,
@@ -263,6 +344,62 @@ class Component extends DCLogic {
         pColor: colors[r.p], pBorder: borders[r.p], pLabel: 'Parade : ' + vw[r.p],
         dColor: colors[r.d], dBorder: borders[r.d], dLabel: 'Esquive : ' + vw[r.d]
       }))
+    };
+  }
+  reportVals() {
+    const st = this.state;
+    const stars = st.stars;
+    const mult = [1, 1.5, 2][stars];
+    const KINDS = [
+      { id: 'data', label: 'Donnée fausse', text: "Qu'est-ce qui est faux ?", hint: 'Le coup de tronc fait 110 dans le jeu, pas 130.' },
+      { id: 'bug', label: 'Bug', text: "Qu'est-ce qui s'est passé ?", hint: "La fiche reste vide quand je change d'étoiles." },
+      { id: 'idea', label: 'Idée', text: 'Ton idée', hint: 'Voir les attaques des boss phase par phase.' }
+    ];
+    const LINES = [
+      { id: 'hp', label: 'PV', values: 'PV ' + 600 * (stars + 1) },
+      { id: 'stagger', label: 'À infliger', values: 'À INFLIGER ' + 180 * (stars + 1) },
+      { id: 'weak', label: 'Faiblesses', values: 'CORPS : PERFORANT ×1,5, CONTONDANT ×0,5, ESPRIT ×0 · TÊTE : PERFORANT ×2, ESPRIT ×0' },
+      { id: 'punch', label: 'Coup de poing', values: 'COUP DE POING ' + 70 * mult },
+      { id: 'trunk', label: 'Coup de tronc', values: 'COUP DE TRONC ' + 130 * mult },
+      { id: 'slam', label: 'Frappe au sol', values: 'FRAPPE AU SOL ' + 160 * mult }
+    ];
+    const current = KINDS.find((k) => k.id === st.kind);
+    const isData = st.kind === 'data';
+    const picked = isData ? LINES.find((l) => l.id === st.line) : null;
+    return {
+      open: st.report, form: !st.sent, sent: st.sent,
+      openReport: () => this.setState({ report: true, sent: false }),
+      close: () => this.setState({ report: false, sent: false }),
+      send: () => this.setState({ sent: true }),
+      subject: 'Sur la fiche du Troll · ' + stars + '★',
+      kinds: KINDS.map((k) => ({
+        label: k.label,
+        pressed: String(k.id === st.kind),
+        style: k.id === st.kind ? 'background: #4FE0C8; color: #0F1113; font-weight: 500' : 'color: #ABA79D',
+        pick: () => this.setState({ kind: k.id })
+      })),
+      lines: LINES.map((l) => ({
+        label: l.label,
+        pressed: String(l.id === st.line),
+        style: l.id === st.line ? 'background: #4FE0C8; color: #0F1113; font-weight: 500; border: 1px solid #4FE0C8' : 'color: #ECE8DF; border: 1px solid #30363A',
+        pick: () => this.setState({ line: l.id === st.line ? null : l.id })
+      })),
+      isData: isData,
+      fieldCols: isData ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      textLabel: current.text,
+      textHint: current.hint,
+      ctxOpen: st.ctxOpen,
+      ctxExpanded: String(st.ctxOpen),
+      chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
+      toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
+      context: [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · BESTIAIRE, FICHE DU TROLL · FENÊTRE 1440 PX',
+        'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),
+        'COUP DE POING ' + 70 * mult + ' · COUP DE TRONC ' + 130 * mult + ' · FRAPPE AU SOL ' + 160 * mult + ', AVEC LEURS VERDICTS',
+        'TON ÉQUIPEMENT : BOUCLIER EN ARGENT N3 · VD 81',
+        'TON MONDE : NORMAL · 1 JOUEUR'
+      ].concat(picked ? ['LIGNE DÉSIGNÉE : ' + picked.values] : [])
     };
   }
 }

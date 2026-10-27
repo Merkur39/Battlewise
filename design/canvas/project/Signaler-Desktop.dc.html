@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Signaler — piste A sur desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+input,textarea{font:inherit}
+::placeholder{color:#7D8B91}
+a{color:#8EBDE3}a:hover{color:#B5D4F0}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1320px; box-sizing: border-box; padding: 40px; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 26px; font-weight: 500">Piste A sur desktop</h1>
+    <p style="margin: 0; max-width: 1180px; font-size: 15px; line-height: 1.5; color: #97A5AA">Les mêmes phrases-liens, sous le tableau des attaques du panneau de la fiche et sous le verdict de la Simulation ; dans Réglages › À propos, un petit bouton secondaire à côté de « Code source et licence », qui ferme Réglages et ouvre le signalement. La feuille devient une boîte de dialogue de 600 px : le pseudo et ce que montre le jeu côte à côte, ce qui sera joint déplié d'office (la place ne manque pas), Annuler et Envoyer en pied comme les autres dialogues. L'accusé remplace son contenu.</p>
+  </header>
+
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+    <div style="flex: none; width: 600px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">ENTRÉES</span>
+
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F; padding: 20px 24px 12px; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: baseline; gap: 12px; padding-bottom: 14px">
+          <span style="font-size: 22px; font-weight: 500">Troll</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">FORÊT NOIRE</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 56px 104px; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid #2C383D; font-size: 10px; letter-spacing: 0.08em; color: #97A5AA">
+          <span>SES ATTAQUES</span><span>TYPE</span><span style="text-align: right">DÉG.</span><span>BLOC · PAR. · ESQ.</span>
+        </div>
+        <sc-for list="{{ attacks }}" as="a" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 56px 104px; gap: 12px; align-items: center; min-height: 44px; border-bottom: 1px solid #1F2A2E">
+            <span style="font-size: 14px">{{ a.name }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">CONTONDANT · {{ a.tag }}</span>
+            <span style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">{{ a.dmg }}</span>
+            <span aria-hidden="true" style="display: flex; gap: 6px">
+              <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ a.b }}"></span>
+              <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ a.p }}"></span>
+              <span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2E7A4B"></span>
+            </span>
+          </div>
+        </sc-for>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 6px">
+          <span style="font-size: 12px; color: #7D8B91">Clique une attaque pour la simuler.</span>
+          <button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 13px; color: #8EBDE3">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Un chiffre ou un nom faux ? Signale-le
+          </button>
+        </div>
+      </div>
+
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F; padding: 18px 24px 10px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 16px; color: #D9A043">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+          <span>Pare-le : en bloquant, tu titubes</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 12px 14px; border-radius: 6px; background: #0D1214; border: 1px solid #B5760C">
+            <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">BLOCAGE</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #D9A043">tu titubes · 58</span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 12px 14px; border-radius: 6px; background: #0D1214; border: 1px solid #2E7A4B">
+            <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">PARADE</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #6CC08A">tient · 0</span>
+          </div>
+        </div>
+        <button type="button" style="align-self: flex-end; display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 13px; color: #8EBDE3">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Ce verdict te paraît faux ? Signale-le
+        </button>
+      </div>
+
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F; padding: 20px 24px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">À PROPOS</span>
+          <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+            <span style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 14px">Battlewise</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">1.3.0</span></span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #97A5AA">LUES DANS VALHEIM 1.0.20 · SANS MOD</span>
+            <span style="display: flex; gap: 8px; margin-top: 4px">
+              <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; font-size: 13px; color: #8EBDE3"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Signaler un problème ou une idée</button>
+              <span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; font-size: 13px; color: #8EBDE3">Code source et licence</span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <span style="padding-top: 14px; font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">ACCUSÉ · À LA PLACE DU CONTENU</span>
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F">
+        <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E2E8E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+            <span style="font-size: 18px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
+          </div>
+          <span style="font-size: 14px; line-height: 1.5; color: #97A5AA">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
+        </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #2C383D">
+          <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+          <button type="button" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214">Fermer</button>
+        </div>
+      </div>
+      <span style="padding-top: 14px; font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">HORS LIGNE, OU L'ENVOI A ÉCHOUÉ</span>
+      <div style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F">
+        <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E2E8E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            <span style="font-size: 18px; font-weight: 500">Gardé sur ton appareil</span>
+          </div>
+          <span style="font-size: 14px; line-height: 1.5; color: #97A5AA">Pas de réseau pour l'instant. Il partira tout seul dès que le réseau revient, ou à la prochaine ouverture de Battlewise.</span>
+        </div>
+        <div style="display: flex; justify-content: flex-end; padding: 14px 24px; border-top: 1px solid #2C383D">
+          <button type="button" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214">Fermer</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: none; width: 600px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">BOÎTE DE DIALOGUE · OUVERTE DEPUIS LA FICHE (LE TYPE ET LA LIGNE SE CHANGENT)</span>
+      <div role="dialog" aria-modal="true" aria-labelledby="d-title" style="box-sizing: border-box; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 6px 24px">
+          <h2 id="d-title" style="margin: 0; font-size: 18px; font-weight: 500">Signaler</h2>
+          <button type="button" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="padding: 6px 24px 22px; display: flex; flex-direction: column; gap: 16px">
+          <div role="group" aria-label="Ce que tu signales" style="display: flex; border: 1px solid #2C383D; border-radius: 4px; overflow: hidden">
+            <sc-for list="{{ kinds }}" as="k" hint-placeholder-count="3">
+              <button type="button" onClick="{{ k.pick }}" aria-pressed="{{ k.pressed }}" style="flex: 1; height: 40px; font-size: 13px; {{ k.style }}">{{ k.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 13px; color: #97A5AA">Sur la fiche du Troll · 0★<sc-if value="{{ isData }}" hint-placeholder-val="{{ true }}"> : quelle ligne ? <span style="color: #7D8B91">· facultatif</span></sc-if></span>
+            <sc-if value="{{ isData }}" hint-placeholder-val="{{ true }}">
+              <div role="group" aria-label="Quelle ligne" style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{ lines }}" as="l" hint-placeholder-count="6">
+                  <button type="button" onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="height: 32px; padding: 0 12px; box-sizing: border-box; border-radius: 16px; font-size: 13px; {{ l.style }}">{{ l.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 13px; color: #97A5AA">{{ textLabel }}</span>
+            <textarea rows="4" placeholder="{{ textHint }}" style="box-sizing: border-box; width: 100%; min-height: 104px; padding: 10px 12px; border: 1px solid #2C383D; border-radius: 4px; background: #0D1214; color: #E2E8E8; font-size: 14px; resize: vertical"></textarea>
+          </label>
+          <div style="display: grid; grid-template-columns: {{ fieldCols }}; gap: 12px">
+            <sc-if value="{{ isData }}" hint-placeholder-val="{{ true }}">
+              <label style="display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 13px; color: #97A5AA">Ce que montre le jeu <span style="color: #7D8B91">· facultatif</span></span>
+                <input type="text" placeholder="110, ou « Coup de massue »" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; background: #0D1214; color: #E2E8E8; font-size: 14px">
+              </label>
+            </sc-if>
+            <label style="display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 13px; color: #97A5AA">Ton pseudo, pour te remercier <span style="color: #7D8B91">· facultatif</span></span>
+              <input type="text" placeholder="Ton pseudo" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; background: #0D1214; color: #E2E8E8; font-size: 14px">
+            </label>
+          </div>
+          <div style="display: flex; flex-direction: column; border: 1px solid #2C383D; border-radius: 6px">
+            <button type="button" onClick="{{ toggleCtx }}" aria-expanded="{{ ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; text-align: left">
+              <span style="flex: 1; font-size: 13px">Joint au signalement</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{ ctxOpen }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 12px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.45; color: #97A5AA">
+                <sc-for list="{{ context }}" as="c" hint-placeholder-count="6"><span>{{ c }}</span></sc-for>
+                <span style="padding-top: 4px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; color: #7D8B91">Rien d'autre : ni adresse IP, ni identifiant.</span>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #2C383D">
+          <span style="flex: 1; font-size: 12px; line-height: 1.45; color: #7D8B91">Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.</span>
+          <button type="button" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #2C383D; font-size: 14px">Annuler</button>
+          <button type="button" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1320}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { kind: 'data', ctxOpen: true, line: 'trunk' };
+  }
+  renderVals() {
+    const kind = this.state.kind;
+    const line = this.state.line;
+    const KINDS = [
+      { id: 'data', label: 'Donnée fausse', text: "Qu'est-ce qui est faux ?", hint: 'Le coup de tronc fait 110 dans le jeu, pas 130.' },
+      { id: 'bug', label: 'Bug', text: "Qu'est-ce qui s'est passé ?", hint: "La fiche reste vide quand je change d'étoiles." },
+      { id: 'idea', label: 'Idée', text: 'Ton idée', hint: 'Voir les attaques des boss phase par phase.' }
+    ];
+    const LINES = [
+      { id: 'hp', label: 'PV', values: 'PV 600' },
+      { id: 'stagger', label: 'À infliger', values: 'À INFLIGER 180' },
+      { id: 'weak', label: 'Faiblesses', values: 'CORPS : PERFORANT ×1,5, CONTONDANT ×0,5, ESPRIT ×0 · TÊTE : PERFORANT ×2' },
+      { id: 'punch', label: 'Coup de poing', values: 'COUP DE POING 70 · BLOCAGE : TIENT · PARADE : TIENT' },
+      { id: 'trunk', label: 'Coup de tronc', values: 'COUP DE TRONC 130 · BLOCAGE : TU TITUBES · PARADE : TIENT' },
+      { id: 'slam', label: 'Frappe au sol', values: 'FRAPPE AU SOL 160 · BLOCAGE : TU TITUBES · PARADE : TIENT' }
+    ];
+    const current = KINDS.find((k) => k.id === kind);
+    const isData = kind === 'data';
+    const picked = isData ? LINES.find((l) => l.id === line) : null;
+    return {
+      attacks: [
+        { name: 'Coup de poing', tag: 'MÊLÉE', dmg: '70', b: '#2E7A4B', p: '#2E7A4B' },
+        { name: 'Coup de tronc', tag: 'MÊLÉE', dmg: '130', b: '#B5760C', p: '#2E7A4B' },
+        { name: 'Frappe au sol', tag: 'ZONE', dmg: '160', b: '#B5760C', p: '#2E7A4B' }
+      ],
+      kinds: KINDS.map((k) => ({
+        label: k.label,
+        pressed: String(k.id === kind),
+        style: k.id === kind ? 'background: #8EBDE3; color: #0D1214; font-weight: 500' : 'color: #97A5AA',
+        pick: () => this.setState({ kind: k.id })
+      })),
+      lines: LINES.map((l) => ({
+        label: l.label,
+        pressed: String(l.id === line),
+        style: l.id === line ? 'background: #8EBDE3; color: #0D1214; font-weight: 500; border: 1px solid #8EBDE3' : 'color: #E2E8E8; border: 1px solid #2C383D',
+        pick: () => this.setState({ line: l.id === line ? null : l.id })
+      })),
+      isData: isData,
+      fieldCols: isData ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      textLabel: current.text,
+      textHint: current.hint,
+      ctxOpen: this.state.ctxOpen,
+      ctxExpanded: String(this.state.ctxOpen),
+      chevron: this.state.ctxOpen ? 'rotate(180deg)' : 'none',
+      toggleCtx: () => this.setState({ ctxOpen: !this.state.ctxOpen }),
+      context: [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · BESTIAIRE, FICHE DU TROLL · FENÊTRE 1440 PX',
+        'TROLL · 0★ · PV 600 · À INFLIGER 180',
+        'COUP DE POING 70 · COUP DE TRONC 130 · FRAPPE AU SOL 160, AVEC LEURS VERDICTS',
+        'TON ÉQUIPEMENT : BOUCLIER EN ARGENT N3 · VD 81',
+        'TON MONDE : NORMAL · 1 JOUEUR'
+      ].concat(picked ? ['LIGNE DÉSIGNÉE : ' + picked.values] : [])
+    };
+  }
+}
+</script>
+</body>
+</html>

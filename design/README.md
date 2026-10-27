@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v86** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v91** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -42,16 +42,24 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
   warranty, a link to the source), in three tracks: data lines, a sentence, a row. Track C (a 44 px row « Code
   source et licence · GitHub », the short notice under it; a small secondary button on desktop) is the one
   carried into the Réglages boards. Made by hand as well.
+- Page **Signaler · pistes** (`Signaler-A` to `Signaler-C`, `Signaler-Desktop`): reporting from the app (#32), in
+  three tracks, each with its entry points (creature sheet, Simulation, Réglages › À propos), its report sheet and
+  its receipt, online and offline: a link under what one reads, a flag that lets the player tap the wrong line, one
+  header button on every screen. Track A (the link) is the one chosen, with the wrong line picked in the sheet as
+  optional chips, and drawn on desktop as a 600 px dialog. It is carried into Monstre, Main, Réglages and their
+  desktop boards; the sheet itself lives in Monstre and Desktop-Bestiaire. Made by hand as well.
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
-  (« Ton contexte », the phone Bestiaire with its context sheet open).
+  (« Ton contexte », the phone Bestiaire with its context sheet open). Generated the same way, `Signaler` (Monstre
+  with its report sheet open) and `Desktop-Signaler` (the desktop Bestiaire with its report dialog open), a line
+  picked.
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
   `this.state = { theme: 'origine', lang: 'auto' };` for the theme copies.
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v86: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v91: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),
