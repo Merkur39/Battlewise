@@ -42,6 +42,9 @@ export interface AppState {
   readonly language: LanguageSetting
   /** Most recent first. */
   readonly recentAttacks: readonly AttackRef[]
+  /** The version the app ran last on this device: after an update, what it fixed is told once. Null
+   * before the first launch. */
+  readonly seenVersion: string | null
 }
 
 /** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
@@ -52,6 +55,7 @@ export const DEFAULT_STATE: AppState = {
   theme: 'origine',
   language: 'auto',
   recentAttacks: [],
+  seenVersion: null,
 }
 
 export const STORAGE_KEY = 'battlewise'
@@ -113,6 +117,10 @@ function load(storage: KeyValueStorage | null): AppState {
     theme: oneOf(THEMES, saved.theme) ?? DEFAULT_STATE.theme,
     language: oneOf(LANGUAGE_SETTINGS, saved.language) ?? DEFAULT_STATE.language,
     recentAttacks: isAttackRefs(saved.recentAttacks) ? saved.recentAttacks : [],
+    seenVersion:
+      typeof saved.seenVersion === 'string' && /^\d+\.\d+\.\d+$/.test(saved.seenVersion)
+        ? saved.seenVersion
+        : null,
   }
 }
 

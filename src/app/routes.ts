@@ -2,7 +2,7 @@ export const SCREENS = ['bestiary', 'simulation', 'arsenal', 'guide'] as const
 export type Screen = (typeof SCREENS)[number]
 
 /** The modals an address can open over a screen. */
-export const MODALS = ['settings', 'attack', 'gear', 'world'] as const
+export const MODALS = ['settings', 'attack', 'gear', 'world', 'reports', 'news'] as const
 export type Modal = (typeof MODALS)[number]
 
 /** The item Your gear opens with instead of the one saved: the Arsenal's « Équiper ». */

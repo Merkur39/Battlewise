@@ -382,6 +382,37 @@ export const fr = {
     onGitHub: 'Ouvrir un ticket sur GitHub',
     done: 'Fermer',
   },
+  loop: {
+    feedback: 'Tes retours',
+    reports: 'Mes signalements',
+    reportsSummary: (sent: number, fixed: number) =>
+      `${plural(sent, 'envoyé', 'envoyés')} · ${plural(fixed, 'corrigé', 'corrigés')}`,
+    noReports: 'Aucun signalement envoyé depuis cet appareil.',
+    reportsNote:
+      'Envoyés depuis cet appareil. Leur état vient de GitHub quand tu es en ligne ; ouvre-en un pour le voir.',
+    columns: { subject: 'Sujet', number: 'N°', date: 'Date', state: 'État' },
+    states: {
+      waiting: "En attente d'envoi",
+      sent: 'Envoyé',
+      open: 'Ouvert',
+      fixedIn: (version: string) => `Corrigé dans ${version}`,
+      fixedNext: 'Corrigé, dans la prochaine version',
+      duplicate: 'Fermé · déjà signalé',
+      declined: 'Fermé · non retenu',
+    },
+    news: 'Nouveautés',
+    newsSummary: (version: string, date: string) => `${version} · ${date}`,
+    thanks: (names: readonly string[]) =>
+      `Merci ${new Intl.ListFormat('fr', { type: 'conjunction' }).format(names)}`,
+    yours: (numbers: readonly number[]) =>
+      `${numbers.length > 1 ? 'tes signalements' : 'ton signalement'} ${numbers.map((number) => `#${String(number)}`).join(', ')}`,
+    back: 'Retour aux réglages',
+    close: 'Fermer',
+    thanksTitle: 'Corrigé grâce à toi',
+    thanksBody: (count: number, version: string, nickname: string | undefined) =>
+      `${count > 1 ? 'Tes signalements sont corrigés' : 'Ton signalement est corrigé'} dans ${version}. Merci${nickname ? `, ${nickname}` : ''} : chaque correction sert à tous les joueurs.`,
+    seeNews: 'Voir les nouveautés',
+  },
   settings: {
     title: 'Réglages',
     language: 'Langue',

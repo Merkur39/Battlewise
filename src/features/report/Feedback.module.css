@@ -1,0 +1,169 @@
+/* My reports: one report a row, its state under its subject on a phone; a table on a desktop. */
+.reports {
+  list-style: none;
+  margin: -16px -16px 0;
+  padding: 0;
+}
+
+.report {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  grid-template-areas:
+    'kind subject number'
+    '. state date';
+  gap: 4px 10px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.report:hover {
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.kind {
+  grid-area: kind;
+  color: var(--secondary);
+}
+
+.subject {
+  grid-area: subject;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.number {
+  grid-area: number;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.state {
+  grid-area: state;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+/* Fixed reads in the ink of the text: a verdict colour would mean the wrong thing here. */
+.fixed {
+  color: var(--ink);
+}
+
+.date {
+  grid-area: date;
+  justify-self: end;
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--faint);
+}
+
+/* What's new: each version, its day, its notes and who they thank. */
+.release {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.version {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 400;
+}
+
+.versionNumber {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.version .date {
+  justify-self: auto;
+}
+
+.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.noteText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.credit {
+  margin: 0;
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+@media (min-width: 1024px) {
+  .reports {
+    margin: -24px -24px 0;
+  }
+
+  .report {
+    grid-template-columns: 16px minmax(0, 1fr) 52px 200px 70px;
+    grid-template-areas: 'kind subject number state date';
+    gap: 12px;
+    min-height: 48px;
+    padding: 0 24px;
+  }
+
+  .subject {
+    font-size: 14px;
+  }
+
+  .state {
+    font-size: 13px;
+  }
+
+  .date {
+    justify-self: start;
+  }
+
+  .release {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .version {
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}

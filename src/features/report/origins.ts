@@ -20,6 +20,7 @@ export const SETTINGS_ORIGIN: ReportOrigin = {
   screen: 'settings',
   kind: null,
   heading: null,
+  title: null,
   subject: null,
   ids: {},
   shows: [],
@@ -99,6 +100,7 @@ export function useCreatureOrigin({
     screen: 'creature',
     kind: 'data',
     heading: name,
+    title: creatureName(creature, language),
     subject: creatureName(creature, 'en'),
     ids: { creature: creature.id, stars },
     shows: [name, ...lines.map((line) => line.shows), ...setup],
@@ -141,6 +143,9 @@ export function useSimulationOrigin({
     screen: 'simulation',
     kind: 'data',
     heading,
+    title: found
+      ? `${creatureName(found.creature, language)} › ${found.attack.name[language]}`
+      : null,
     subject: found ? `${creatureName(found.creature, 'en')} › ${found.attack.name.en}` : null,
     ids: found ? { creature: found.creature.id, stars, attack: found.attack.ids[0] ?? '' } : {},
     shows: [

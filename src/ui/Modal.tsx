@@ -1,6 +1,6 @@
 import { useId, useLayoutEffect, useRef, type ReactNode } from 'react'
 import { useIsDesktop } from '@/app/useMediaQuery'
-import { CloseIcon } from './icons'
+import { BackIcon, CloseIcon } from './icons'
 import styles from './Modal.module.css'
 
 interface ModalProps {
@@ -15,6 +15,11 @@ interface ModalProps {
     readonly save: string
     readonly onSave: () => void
   }
+  /** A page reached from another dialog: its back button replaces the close button on a phone, and
+   * comes before the title on a desktop. */
+  readonly back?: { readonly label: string; readonly onBack: () => void }
+  /** A dialog that only shows: on a desktop, one button at its foot closes it. */
+  readonly done?: string
   /** The width of the desktop dialog. Wide: two columns, its body laid out by its content. */
   readonly size?: 'narrow' | 'medium' | 'default' | 'wide'
   /** Every way out ends here: Save, Cancel, the close button, Escape. */
@@ -29,6 +34,8 @@ export function Modal({
   lang,
   closeLabel,
   footer,
+  back,
+  done,
   size = 'default',
   onClose,
   children,
@@ -52,14 +59,33 @@ export function Modal({
       onClose={onClose}
     >
       <header className={styles.header}>
+        {back && (
+          <button
+            type="button"
+            className={styles.back}
+            aria-label={back.label}
+            onClick={back.onBack}
+          >
+            <BackIcon size={isDesktop ? 20 : 22} />
+          </button>
+        )}
         <h2 id={titleId} className={styles.title}>
           {title}
         </h2>
-        <button type="button" className={styles.close} aria-label={closeLabel} onClick={close}>
-          <CloseIcon size={isDesktop ? 20 : 22} />
-        </button>
+        {(!back || isDesktop) && (
+          <button type="button" className={styles.close} aria-label={closeLabel} onClick={close}>
+            <CloseIcon size={isDesktop ? 20 : 22} />
+          </button>
+        )}
       </header>
       <div className={styles.body}>{children}</div>
+      {done && isDesktop && (
+        <footer className={styles.footer}>
+          <button type="button" className={styles.cancel} onClick={close}>
+            {done}
+          </button>
+        </footer>
+      )}
       {footer && (
         <footer className={styles.footer}>
           {isDesktop && (

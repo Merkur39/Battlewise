@@ -54,7 +54,9 @@ npm run check     # typecheck, lint, format check and tests
 
 Vercel builds this repository: every merge on `main` goes to production, every pull request gets a
 preview. Every pull request that changes the app bumps the version in `package.json` (`feat` → minor,
-`fix` → patch); Settings › About shows it, and an installed app takes the new version on its own.
+`fix` → patch) and adds its notes to `src/app/releases.ts`, which Settings › What's new shows, with the
+reports it fixes and the players who sent them; Settings › About shows the version, and an installed
+app takes the new version on its own.
 
 GitHub Actions runs `npm run check` on every pull request and on `main`. Dependabot opens its
 updates once a month, grouped, and npm releases only once they are a week old: `fix(deps)` for what

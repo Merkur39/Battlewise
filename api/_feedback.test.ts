@@ -11,6 +11,7 @@ const report: Report = buildReport(
     screen: 'creature',
     kind: 'data',
     heading: 'Troll · 0★',
+    title: 'Troll',
     subject: 'Troll',
     ids: { creature: 'Troll', stars: 0 },
     shows: ['Troll · 0★', 'Frappe au sol, contondant, 70 dégâts'],

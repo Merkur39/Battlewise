@@ -1,10 +1,18 @@
 import { describe, expect, it } from 'vitest'
-import { buildReport, canSend, MAX_LENGTH, type ReadyDraft, type ReportOrigin } from './model'
+import {
+  buildReport,
+  canSend,
+  MAX_LENGTH,
+  titleOf,
+  type ReadyDraft,
+  type ReportOrigin,
+} from './model'
 
 const sheet: ReportOrigin = {
   screen: 'creature',
   kind: 'data',
   heading: 'Sur la fiche du Troll · 0★',
+  title: 'Troll',
   subject: 'Troll',
   ids: { creature: 'Troll', stars: 0 },
   shows: ['TROLL · 0★ · PV 600', 'TON MONDE : NORMAL · 1 JOUEUR'],
@@ -88,5 +96,19 @@ describe('buildReport', () => {
     expect(report).not.toHaveProperty('game')
     expect(report).not.toHaveProperty('line')
     expect(report.subject).toBe('Troll')
+  })
+})
+
+describe('titleOf', () => {
+  it('names the creature, and the line picked', () => {
+    expect(titleOf(sheet, draft)).toBe('Troll')
+    expect(titleOf(sheet, { ...draft, line: 'Troll/attack_log' })).toBe('Troll › Coup de tronc')
+  })
+
+  it('starts with the words of a report from nowhere in particular', () => {
+    const settings: ReportOrigin = { ...sheet, title: null, lines: [] }
+    const idea = { ...draft, kind: 'idea', text: '  Les boss\nphase par phase  ' } as const
+    expect(titleOf(settings, idea)).toBe('Les boss phase par phase')
+    expect(titleOf(settings, { ...draft, text: 'mot '.repeat(30) })).toMatch(/^mot mot .{40,}…$/)
   })
 })

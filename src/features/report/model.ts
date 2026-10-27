@@ -25,6 +25,9 @@ export interface ReportOrigin {
   readonly kind: ReportKind | null
   /** Above the lines to pick from, in the player's language. */
   readonly heading: string | null
+  /** What My reports calls a report from here, in the player's language: the creature, or the creature
+   * and its attack; none from Settings. */
+  readonly title: string | null
   /** In English, for the issue's title: the creature, or the creature and its attack. */
   readonly subject: string | null
   readonly ids: { readonly creature?: string; readonly stars?: number; readonly attack?: string }
@@ -94,4 +97,17 @@ export function buildReport(origin: ReportOrigin, draft: ReadyDraft, device: Dev
     ...(line ? { line: { label: line.label, shows: line.shows } } : {}),
     context: { ...device, screen: origin.screen, ...origin.ids, shows: origin.shows },
   }
+}
+
+const TITLE = 60
+
+/** What My reports calls the report: where it points, else the start of its words. */
+export function titleOf(origin: ReportOrigin, draft: ReportDraft): string {
+  const line =
+    draft.kind === 'data'
+      ? origin.lines.find((candidate) => candidate.id === draft.line)
+      : undefined
+  if (origin.title !== null) return line ? `${origin.title} › ${line.label}` : origin.title
+  const words = draft.text.replace(/\s+/g, ' ').trim()
+  return words.length <= TITLE ? words : `${words.slice(0, TITLE).trimEnd()}…`
 }

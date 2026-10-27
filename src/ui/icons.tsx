@@ -167,6 +167,25 @@ export const FlagIcon = (props: IconProps) => (
   </Icon>
 )
 
+export const BugIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 8v5M12 16h.01" />
+  </Icon>
+)
+
+export const IdeaIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z" />
+  </Icon>
+)
+
+export const OpenIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="9" />
+  </Icon>
+)
+
 export const ClockIcon = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="12" cy="12" r="9" />
