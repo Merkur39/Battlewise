@@ -1,3 +1,8 @@
+/* What sets apart two creatures of one name recedes behind the game's own. */
+.qualifier {
+  color: var(--secondary);
+}
+
 .mark {
   border-radius: 2px;
   background: var(--selection);

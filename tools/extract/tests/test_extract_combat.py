@@ -294,6 +294,17 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual({part for _, part, _ in spots}, {"head", "ass", "eggs"})
         self.assertEqual(self.report.unnamed_parts, [])
 
+    def test_creatures_a_biome_lists_beside_a_namesake_carry_their_home_biome(self):
+        # The game names every skeleton « Skeleton »: curation.json gives the biome-bound ones met beside the
+        # common one their biome; the Deep North's, alone there, needs none.
+        skeletons = {c["id"]: c.get("origin") for c in self.data["creatures"] if c["name"]["en"] == "Skeleton"}
+        self.assertEqual(skeletons, {"Skeleton_Meadows_noarcher": "meadows", "Skeleton": None,
+                                     "Skeleton_Swamps": "swamp", "Skeleton_Mountains": "mountain",
+                                     "Skeleton_DeepNorth": None})
+
+    def test_no_biome_lists_two_creatures_that_read_alike(self):
+        self.assertEqual(self.report.namesakes, [])
+
     # ------------------------------------------------------------------ curation
     def test_every_included_creature_has_a_biome_and_an_attack(self):
         self.assertEqual([c["id"] for c in self.data["creatures"] if not c["biomes"] or not c["attacks"]], [])

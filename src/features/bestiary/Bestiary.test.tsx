@@ -218,6 +218,40 @@ describe('Bestiary', () => {
     )
   })
 
+  it('sets apart, by the biome they come from, the creatures a biome lists under one name', () => {
+    window.history.replaceState(null, '', '#/bestiary/meadows')
+    renderWithStore(<App />, { language: 'fr' })
+
+    const skeletons = within(list()).getAllByRole('link', { name: /^Squelette/ })
+    expect(skeletons).toHaveLength(2)
+    expect(skeletons[0]).toHaveTextContent(/^Squelette · Prairies\s?30 PV/)
+    expect(skeletons[1]).toHaveTextContent(/^Squelette\s?40 PV/)
+  })
+
+  it('names the sheet after the biome the creature comes from', async () => {
+    window.history.replaceState(null, '', '#/bestiary/swamp/Skeleton_Swamps')
+    renderWithStore(<App />, { language: 'fr' })
+
+    expect(await sheetHeading('Squelette · Marécages')).toBeInTheDocument()
+    expect(document.title).toBe('Squelette · Marécages — Battlewise')
+  })
+
+  it('finds the creatures of one name apart', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    await user.type(
+      screen.getByRole('searchbox', { name: 'Rechercher dans tous les biomes' }),
+      'squelette',
+    )
+
+    const creatures = await screen.findByRole('region', { name: /^Créatures · \d+$/ })
+    expect(within(creatures).getByRole('link', { name: /^Squelette · Montagne/ })).toHaveAttribute(
+      'href',
+      '#/bestiary/mountain/Skeleton_Mountains?q=squelette',
+    )
+  })
+
   it('speaks English, the names of the game included', () => {
     window.history.replaceState(null, '', '#/bestiary/blackForest/Troll')
     renderWithStore(<App />, { language: 'en' })
@@ -227,6 +261,13 @@ describe('Bestiary', () => {
     expect(screen.getByRole('link', { name: /^Ground slam,/ })).toHaveTextContent('Blunt')
     expect(chips('Weaknesses and resistances · Body')[0]).toBe('Pierce · Weak ×1.5')
     expect(chips('Weaknesses and resistances · Head')[0]).toBe('Pierce · Very weak ×2')
+  })
+
+  it('sets namesakes apart in English too', () => {
+    window.history.replaceState(null, '', '#/bestiary/swamp/Skeleton_Swamps')
+    renderWithStore(<App />, { language: 'en' })
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Skeleton · Swamp' })).toBeInTheDocument()
   })
 
   it('names trampling and death in English too', () => {
@@ -259,7 +300,9 @@ describe('Bestiary', () => {
       renderWithStore(<App />, { language: 'fr' })
 
       expect(screen.getByRole('heading', { level: 1, name: 'Bestiaire' })).toBeInTheDocument()
-      expect(screen.getByRole('heading', { level: 2, name: 'Squelette' })).toBeInTheDocument()
+      expect(
+        screen.getByRole('heading', { level: 2, name: 'Squelette · Prairies' }),
+      ).toBeInTheDocument()
 
       await user.click(row('Troll'))
 

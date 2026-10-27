@@ -60,7 +60,7 @@ mark{background:transparent;color:#EBD3A2;font-weight:500}
             <a href="Braise-Monstre.dc.html" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #EFE6D8; text-decoration: none">
               <span style="display: flex; align-items: center; gap: 12px">
                 <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
-                  <span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}</span>
+                  <span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}<sc-if value="{{ r.hasQualifier }}" hint-placeholder-val="{{ false }}"><span style="color: #B8A994"> · {{ r.qualifier }}</span></sc-if></span>
                   <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B8A994">{{ r.stats }}</span>
                 </span>
                 <span style="display: flex; gap: 6px">
@@ -189,6 +189,7 @@ class Component extends DCLogic {
     const borders = { ok: '#3D7C47', warn: '#B5601A', bad: '#8B2E26', none: '#3D332A' };
     const words = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
     const list = [
+      { name: 'Squelette', qualifier: 'Prairies', stats: '30 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
       { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
@@ -237,6 +238,8 @@ class Component extends DCLogic {
       foundAtt: foundAttacks,
       rows: foundCreatures.map((r) => Object.assign(split(r.name), {
         name: r.name,
+        qualifier: r.qualifier || '',
+        hasQualifier: Boolean(r.qualifier),
         stats: 'FORÊT NOIRE · ' + r.stats,
         advice: r.advice,
         color: colors[r.s],

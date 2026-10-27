@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { ArsenalScreen } from '@/features/arsenal/ArsenalScreen'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
+import { creatureName } from '@/features/bestiary/model'
 import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
@@ -73,7 +74,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   const creature = screen === 'bestiary' ? placeOf(route).creature : null
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
-  const title = creature ? creature.name[language] : t.screens[screen]
+  const title = creature ? creatureName(creature, language) : t.screens[screen]
 
   // On the root element, before the first paint: <html lang> for screen readers and hyphenation, the
   // theme for the palette of src/styles/themes.css.

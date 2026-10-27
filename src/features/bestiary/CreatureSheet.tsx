@@ -15,6 +15,7 @@ import styles from './CreatureSheet.module.css'
 import {
   assess,
   attackRange,
+  creatureName,
   fightersOf,
   hitTypes,
   isTool,
@@ -27,7 +28,7 @@ import {
   type Hazards,
   type ShownModifier,
 } from './model'
-import { AttackPills, AttackTags, TypeTags } from './parts'
+import { AttackPills, AttackTags, CreatureName, TypeTags } from './parts'
 import { bestiaryRoute, type Place } from './place'
 import {
   adviceShown,
@@ -69,7 +70,7 @@ export function CreatureSheet({
   const advice = adviceShown(assessment, t, language)
   const threshold = staggerThreshold(creature, stars)
   const biome = game.biomes.find((candidate) => candidate.id === place.biome)?.name[language]
-  const name = creature.name[language]
+  const name = creatureName(creature, language)
   const Title = layout === 'page' ? 'h1' : 'h2'
 
   const parry: { tone: Tone; text: string } = !assessment.canParry
@@ -148,7 +149,9 @@ export function CreatureSheet({
           >
             <BackIcon size={22} />
           </RouteLink>
-          <Title className={styles.pageTitle}>{name}</Title>
+          <Title className={styles.pageTitle}>
+            <CreatureName creature={creature} />
+          </Title>
           {biome && <span className={styles.biome}>{biome}</span>}
         </div>
         <div className={styles.pageBody}>
@@ -164,7 +167,9 @@ export function CreatureSheet({
       <div className={styles.panelBody}>
         <div className={styles.panelHeader}>
           <div className={styles.panelTitles}>
-            <Title className={styles.panelTitle}>{name}</Title>
+            <Title className={styles.panelTitle}>
+              <CreatureName creature={creature} />
+            </Title>
             {biome && <span className={styles.biome}>{biome}</span>}
           </div>
           {starPicker}

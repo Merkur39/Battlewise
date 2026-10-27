@@ -102,8 +102,9 @@ def build_mobile():
     i, j = section(text, ('    <label style="display: flex; align-items: center; gap: 8px; height: 44px;', '    <a href="Bestiaire-Recherche.dc.html"'),
                    '    <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid #2C383D">')
     row = text[text.index('          <li style="border-bottom: 1px solid #1F2A2E">'):text.index("          </li>") + len("          </li>")]
-    row = row.replace('<span style="font-size: 15px">{{ r.name }}</span>',
-                      '<span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}</span>')
+    # The name is marked where the search hits it; what follows it (a creature's qualifier) stays.
+    row = row.replace('<span style="font-size: 15px">{{ r.name }}',
+                      '<span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}')
     grid = "display: grid; grid-template-columns: minmax(0, 1fr) 40px 104px 16px; gap: 8px; align-items: center"
     block = f'''    <label style="display: flex; align-items: center; gap: 8px; height: 44px; border: 1px solid #8EBDE3; border-radius: 4px; padding: 0 2px 0 12px">
       {SEARCH_ICON}
@@ -148,8 +149,9 @@ def build_mobile():
     </div>
 '''
     text = text[:i] + block + text[j:]
-    text = text.replace("    return {\n      rows: list.map((r) => ({\n        name: r.name,\n        stats: r.stats,",
-                        SEARCH_JS + "    return {\n" + SEARCH_RETURN + "      rows: foundCreatures.map((r) => Object.assign(split(r.name), {\n        name: r.name,\n        stats: 'FORÊT NOIRE · ' + r.stats,", 1)
+    text = text.replace("    return {\n      rows: list.map((r) => ({\n        name: r.name,",
+                        SEARCH_JS + "    return {\n" + SEARCH_RETURN + "      rows: foundCreatures.map((r) => Object.assign(split(r.name), {\n        name: r.name,", 1)
+    text = text.replace("        stats: r.stats,", "        stats: 'FORÊT NOIRE · ' + r.stats,", 1)
     assert "foundCreatures.map" in text
     (P / "Bestiaire-Recherche.dc.html").write_text(text, encoding="utf-8", newline="\n")
 
@@ -162,8 +164,8 @@ def build_desktop():
                    '        <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: #97A5AA; padding-top: 10px;')
     li_start = text.index('            <li style="border-bottom: 1px solid #1F2A2E">')
     row = text[li_start:text.index("            </li>", li_start) + len("            </li>")]
-    row = row.replace('<span style="font-size: 15px">{{ r.name }}</span>',
-                      '<span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}</span>')
+    row = row.replace('<span style="font-size: 15px">{{ r.name }}',
+                      '<span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}')
     grid = "display: grid; grid-template-columns: minmax(0, 1fr) 40px 86px 16px; gap: 8px; align-items: center"
     block = f'''        <label style="display: flex; align-items: center; gap: 8px; height: 40px; border: 1px solid #8EBDE3; border-radius: 4px; padding: 0 2px 0 12px">
           {SEARCH_ICON}
@@ -207,8 +209,9 @@ def build_desktop():
 '''
     text = text[:i] + block + text[j:]
     text = text.replace("    return {\n      starOpts:", SEARCH_JS + "    return {\n" + SEARCH_RETURN + "      starOpts:", 1)
-    text = text.replace("      rows: list.map((r) => ({\n        name: r.name, stats: r.stats,",
-                        "      rows: foundCreatures.map((r) => Object.assign(split(r.name), {\n        name: r.name, stats: 'FORÊT NOIRE · ' + r.stats,", 1)
+    text = text.replace("      rows: list.map((r) => ({\n        name: r.name,",
+                        "      rows: foundCreatures.map((r) => Object.assign(split(r.name), {\n        name: r.name,", 1)
+    text = text.replace("        stats: r.stats, advice:", "        stats: 'FORÊT NOIRE · ' + r.stats, advice:", 1)
     assert "foundCreatures.map" in text
     (P / "Desktop-Bestiaire-Recherche.dc.html").write_text(text, encoding="utf-8", newline="\n")
 

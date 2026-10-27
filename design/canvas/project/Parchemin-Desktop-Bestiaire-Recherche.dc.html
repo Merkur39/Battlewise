@@ -77,7 +77,7 @@ mark{background:transparent;color:#24467A;font-weight:500}
               <a href="Parchemin-Desktop-Bestiaire.dc.html" aria-current="{{ r.current }}" style="display: flex; flex-direction: column; gap: 4px; padding: 10px 16px; color: #2B2219; text-decoration: none; {{ r.rowStyle }}">
                 <span style="display: flex; align-items: center; gap: 10px">
                   <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
-                    <span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}</span>
+                    <span style="font-size: 15px">{{ r.pre }}<mark>{{ r.hit }}</mark>{{ r.post }}<sc-if value="{{ r.hasQualifier }}" hint-placeholder-val="{{ false }}"><span style="color: #5E5141"> · {{ r.qualifier }}</span></sc-if></span>
                     <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">{{ r.stats }}</span>
                   </span>
                   <span style="display: flex; gap: 4px">
@@ -234,6 +234,7 @@ class Component extends DCLogic {
     }
 
     const list = [
+      { name: 'Squelette', qualifier: 'Prairies', stats: '30 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
       { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
@@ -298,7 +299,8 @@ class Component extends DCLogic {
         simLabel: 'Simuler : ' + x.a.name + ', ' + fmt(x.hit, 0) + ' dégâts'
       })),
       rows: foundCreatures.map((r) => Object.assign(split(r.name), {
-        name: r.name, stats: 'FORÊT NOIRE · ' + r.stats, advice: r.advice, color: colors[r.s],
+        name: r.name, qualifier: r.qualifier || '', hasQualifier: Boolean(r.qualifier),
+        stats: 'FORÊT NOIRE · ' + r.stats, advice: r.advice, color: colors[r.s],
         current: r.current ? 'true' : 'false',
         rowStyle: r.current ? 'background: #E3D3B0' : '',
         bColor: colors[r.b], bBorder: borders[r.b], bLabel: 'Blocage : ' + vw[r.b],

@@ -163,6 +163,8 @@ export interface GamePhase extends GameFighter {
 export interface GameCreature extends GameFighter {
   readonly id: string
   readonly name: Localized
+  /** The biome it comes from, when a biome lists it beside another the game names alike (curation). */
+  readonly origin?: BiomeId
   readonly boss: boolean
   /** Where it lives; where it appears only under a condition when it lives nowhere. */
   readonly biomes: readonly BiomeId[]

@@ -8,7 +8,7 @@ import { attackAdvice } from '@/combat/advice'
 import { attackDamage, hardestHit, type AttackHit } from '@/combat/attack'
 import type { HitResult } from '@/combat/hit'
 import { game } from '@/data'
-import type { FoundAttack } from '@/features/bestiary/model'
+import { creatureName, type FoundAttack } from '@/features/bestiary/model'
 import { AttackTags } from '@/features/bestiary/parts'
 import { useFight } from '@/features/bestiary/wording'
 import { formatNumber } from '@/i18n/format'
@@ -276,13 +276,17 @@ function AttackChip({ found, stars }: { readonly found: FoundAttack; readonly st
   return (
     <RouteLink
       to={{ ...route, modal: 'attack' }}
-      aria-label={t.simulation.changeLabel(creature.name[language], attack.name[language], damage)}
+      aria-label={t.simulation.changeLabel(
+        creatureName(creature, language),
+        attack.name[language],
+        damage,
+      )}
       className={styles.chip}
     >
       <BestiaryIcon size={22} className={styles.chipIcon} />
       <span className={styles.chipText}>
         <span className={styles.chipName}>
-          {creature.name[language]} · {attack.name[language]}
+          {creatureName(creature, language)} · {attack.name[language]}
         </span>
         <AttackTags attack={attack} withRange={false} extra={extra} />
       </span>

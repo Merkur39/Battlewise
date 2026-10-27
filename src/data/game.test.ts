@@ -73,6 +73,25 @@ describe('game data', () => {
     expect(names.filter((name) => !name.fr || !name.en)).toEqual([])
   })
 
+  it('lists no two creatures of a biome that read alike, in French or in English', () => {
+    const shown = (c: (typeof game.creatures)[number], language: 'fr' | 'en') =>
+      `${c.name[language]}|${c.origin ?? ''}`
+    const clashes = game.biomes.flatMap((biome) =>
+      (['fr', 'en'] as const).flatMap((language) => {
+        const names = game.creatures
+          .filter((c) => c.biomes.includes(biome.id))
+          .map((c) => shown(c, language))
+        return duplicates(names).map((name) => `${biome.id}, ${language}: ${name}`)
+      }),
+    )
+    expect(clashes).toEqual([])
+  })
+
+  it('takes the origin of a creature among the biomes', () => {
+    const origins = game.creatures.flatMap((c) => (c.origin ? [c.origin] : []))
+    expect(origins.filter((origin) => !biomeIds.has(origin))).toEqual([])
+  })
+
   it('has unique creature and blocker ids', () => {
     expect(duplicates(game.creatures.map((c) => c.id))).toEqual([])
     expect(duplicates(game.blockers.map((b) => b.id))).toEqual([])

@@ -65,7 +65,7 @@ input::placeholder{color:#8A8A93}
           <button type="button" aria-label="Biome précédent : Prairies" style="width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
           <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px">
             <span style="font-size: 15px; font-weight: 500">Forêt noire</span>
-            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">BIOME 2 SUR 8 · 7 CRÉATURES</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">BIOME 2 SUR 8 · 8 CRÉATURES</span>
           </div>
           <button type="button" aria-label="Biome suivant : Marais" style="width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A1A1AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
         </div>
@@ -79,7 +79,7 @@ input::placeholder{color:#8A8A93}
               <a href="Graphite-Desktop-Bestiaire.dc.html" aria-current="{{ r.current }}" style="display: flex; flex-direction: column; gap: 4px; padding: 10px 16px; color: #EDEDEF; text-decoration: none; {{ r.rowStyle }}">
                 <span style="display: flex; align-items: center; gap: 10px">
                   <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
-                    <span style="font-size: 15px">{{ r.name }}</span>
+                    <span style="font-size: 15px">{{ r.name }}<sc-if value="{{ r.hasQualifier }}" hint-placeholder-val="{{ false }}"><span style="color: #A1A1AA"> · {{ r.qualifier }}</span></sc-if></span>
                     <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A1A1AA">{{ r.stats }}</span>
                   </span>
                   <span style="display: flex; gap: 4px">
@@ -214,6 +214,7 @@ class Component extends DCLogic {
     }
 
     const list = [
+      { name: 'Squelette', qualifier: 'Prairies', stats: '30 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
       { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
@@ -241,7 +242,8 @@ class Component extends DCLogic {
         simLabel: 'Simuler : ' + x.a.name + ', ' + fmt(x.hit, 0) + ' dégâts'
       })),
       rows: list.map((r) => ({
-        name: r.name, stats: r.stats, advice: r.advice, color: colors[r.s],
+        name: r.name, qualifier: r.qualifier || '', hasQualifier: Boolean(r.qualifier),
+        stats: r.stats, advice: r.advice, color: colors[r.s],
         current: r.current ? 'true' : 'false',
         rowStyle: r.current ? 'background: #1E2A44' : '',
         bColor: colors[r.b], bBorder: borders[r.b], bLabel: 'Blocage : ' + vw[r.b],

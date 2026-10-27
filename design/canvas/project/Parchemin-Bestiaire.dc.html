@@ -50,7 +50,7 @@ input::placeholder{color:#685B4A}
       </button>
       <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px">
         <span style="font-size: 16px; font-weight: 500">Forêt noire</span>
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">BIOME 2 SUR 8 · 7 CRÉATURES</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">BIOME 2 SUR 8 · 8 CRÉATURES</span>
       </div>
       <button type="button" aria-label="Biome suivant : Marais" style="width: 48px; height: 52px; display: flex; align-items: center; justify-content: center; color: #5E5141">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
@@ -69,7 +69,7 @@ input::placeholder{color:#685B4A}
             <a href="Parchemin-Monstre.dc.html" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #2B2219; text-decoration: none">
               <span style="display: flex; align-items: center; gap: 12px">
                 <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
-                  <span style="font-size: 15px">{{ r.name }}</span>
+                  <span style="font-size: 15px">{{ r.name }}<sc-if value="{{ r.hasQualifier }}" hint-placeholder-val="{{ false }}"><span style="color: #5E5141"> · {{ r.qualifier }}</span></sc-if></span>
                   <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">{{ r.stats }}</span>
                 </span>
                 <span style="display: flex; gap: 6px">
@@ -178,6 +178,7 @@ class Component extends DCLogic {
     const borders = { ok: '#8CC48A', warn: '#E7B456', bad: '#DB8072', none: '#CDBFA3' };
     const words = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
     const list = [
+      { name: 'Squelette', qualifier: 'Prairies', stats: '30 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
       { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
       { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
@@ -189,6 +190,8 @@ class Component extends DCLogic {
     return {
       rows: list.map((r) => ({
         name: r.name,
+        qualifier: r.qualifier || '',
+        hasQualifier: Boolean(r.qualifier),
         stats: r.stats,
         advice: r.advice,
         color: colors[r.s],
