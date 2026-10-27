@@ -346,6 +346,35 @@ export const en: Catalog = {
     onGitHub: 'Open an issue on GitHub',
     done: 'Close',
   },
+  loop: {
+    feedback: 'Your feedback',
+    reports: 'My reports',
+    reportsSummary: (sent, fixed) => `${n(sent)} sent · ${n(fixed)} fixed`,
+    noReports: 'No report sent from this device yet.',
+    reportsNote:
+      'Sent from this device. Their state comes from GitHub when you are online; open one to see it.',
+    columns: { subject: 'Subject', number: 'No.', date: 'Date', state: 'State' },
+    states: {
+      waiting: 'Waiting to be sent',
+      sent: 'Sent',
+      open: 'Open',
+      fixedIn: (version) => `Fixed in ${version}`,
+      fixedNext: 'Fixed, in the next version',
+      duplicate: 'Closed · already reported',
+      declined: 'Closed · not planned',
+    },
+    news: "What's new",
+    newsSummary: (version, date) => `${version} · ${date}`,
+    thanks: (names) => `Thanks ${new Intl.ListFormat('en', { type: 'conjunction' }).format(names)}`,
+    yours: (numbers) =>
+      `${numbers.length > 1 ? 'your reports' : 'your report'} ${numbers.map((number) => `#${String(number)}`).join(', ')}`,
+    back: 'Back to Settings',
+    close: 'Close',
+    thanksTitle: 'Fixed thanks to you',
+    thanksBody: (count, version, nickname) =>
+      `${count > 1 ? 'Your reports are fixed' : 'Your report is fixed'} in ${version}. Thank you${nickname ? `, ${nickname}` : ''}: every fix helps every player.`,
+    seeNews: "See what's new",
+  },
   settings: {
     title: 'Settings',
     language: 'Language',

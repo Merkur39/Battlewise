@@ -7,6 +7,10 @@ export interface Receipt {
   readonly kind: ReportKind
   /** When it left, ISO 8601. */
   readonly at: string
+  /** What My reports calls it, in the language it was written in. */
+  readonly title: string
+  /** The name the player gave for the thanks, if any. */
+  readonly nickname?: string
 }
 
 /** A send that failed: `status` is the server's answer, null when no answer came (offline). */
@@ -30,12 +34,22 @@ export type Outcome =
   /** The server will never take it as it is: it is dropped. */
   | { readonly status: 'refused' }
 
+/** A report waiting to leave, as My reports lists it. */
+export interface Waiting {
+  readonly kind: ReportKind
+  /** Empty for a report an older version kept. */
+  readonly title: string
+  /** When it was written, ISO 8601; empty for a report an older version kept. */
+  readonly at: string
+}
+
 export interface Outbox {
   /** The reports waiting to leave, oldest first. */
   readonly pending: () => readonly Report[]
+  readonly waiting: () => readonly Waiting[]
   readonly receipts: () => readonly Receipt[]
-  /** Queues the report and sends everything waiting. */
-  readonly submit: (report: Report) => Promise<Outcome>
+  /** Queues the report, under the title My reports gives it, and sends everything waiting. */
+  readonly submit: (report: Report, title: string) => Promise<Outcome>
   /** Sends what waits, oldest first, until one fails: the network is down, or the server busy. */
   readonly flush: () => Promise<void>
 }
@@ -46,6 +60,8 @@ export const RECEIPTS_KEY = 'battlewise-reports'
 interface Entry {
   readonly id: string
   readonly report: Report
+  readonly title: string
+  readonly at: string
 }
 
 // The answers to a report the server cannot read or will not take: sending it again would only fail
@@ -59,8 +75,16 @@ export function createOutbox(
   send: Sender,
   now: () => Date = () => new Date(),
 ): Outbox {
-  let entries = read(storage, OUTBOX_KEY, isEntry)
-  let receipts = read(storage, RECEIPTS_KEY, isReceipt)
+  // What an older version kept has no title nor date: they read as empty.
+  let entries: readonly Entry[] = read(storage, OUTBOX_KEY, isEntry).map((entry) => ({
+    title: '',
+    at: '',
+    ...entry,
+  }))
+  let receipts: readonly Receipt[] = read(storage, RECEIPTS_KEY, isReceipt).map((receipt) => ({
+    title: '',
+    ...receipt,
+  }))
   const outcomes = new Map<string, Outcome>()
   let running: Promise<void> | null = null
 
@@ -73,7 +97,14 @@ export function createOutbox(
     for (let entry = entries[0]; entry; entry = entries[0]) {
       try {
         const { number } = await send(entry.report)
-        const receipt = { number, kind: entry.report.kind, at: now().toISOString() }
+        const { kind, nickname } = entry.report
+        const receipt: Receipt = {
+          number,
+          kind,
+          at: now().toISOString(),
+          title: entry.title,
+          ...(nickname !== undefined ? { nickname } : {}),
+        }
         outcomes.set(entry.id, { status: 'sent', receipt })
         receipts = [...receipts, receipt]
       } catch (error) {
@@ -90,9 +121,10 @@ export function createOutbox(
 
   return {
     pending: () => entries.map((entry) => entry.report),
+    waiting: () => entries.map(({ report, title, at }) => ({ kind: report.kind, title, at })),
     receipts: () => receipts,
-    submit: async (report) => {
-      const entry = { id: crypto.randomUUID(), report }
+    submit: async (report, title) => {
+      const entry = { id: crypto.randomUUID(), report, title, at: now().toISOString() }
       entries = [...entries, entry]
       save()
       await flush()
@@ -124,16 +156,20 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const isKind = (value: unknown): value is ReportKind => REPORT_KINDS.some((kind) => kind === value)
 
-const isEntry = (value: unknown): value is Entry =>
+const isEntry = (value: unknown): value is Omit<Entry, 'title' | 'at'> & Partial<Entry> =>
   isRecord(value) &&
   typeof value.id === 'string' &&
   isRecord(value.report) &&
   isKind(value.report.kind) &&
   typeof value.report.text === 'string' &&
-  isRecord(value.report.context)
+  isRecord(value.report.context) &&
+  (value.title === undefined || typeof value.title === 'string') &&
+  (value.at === undefined || typeof value.at === 'string')
 
-const isReceipt = (value: unknown): value is Receipt =>
+const isReceipt = (value: unknown): value is Omit<Receipt, 'title'> & Partial<Receipt> =>
   isRecord(value) &&
   Number.isInteger(value.number) &&
   isKind(value.kind) &&
-  typeof value.at === 'string'
+  typeof value.at === 'string' &&
+  (value.title === undefined || typeof value.title === 'string') &&
+  (value.nickname === undefined || typeof value.nickname === 'string')

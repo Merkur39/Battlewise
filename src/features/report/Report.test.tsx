@@ -186,7 +186,7 @@ describe('Reporting', () => {
         shows: [],
       },
     }
-    await outbox.submit(waiting)
+    await outbox.submit(waiting, 'Rien ne se passe.')
     sender.mockResolvedValueOnce({ number: 51 })
 
     renderWithStore(<App />, { language: 'fr' }, { outbox })
@@ -195,7 +195,7 @@ describe('Reporting', () => {
     })
 
     sender.mockRejectedValueOnce(new SendError(null))
-    await outbox.submit(waiting)
+    await outbox.submit(waiting, 'Rien ne se passe.')
     sender.mockResolvedValueOnce({ number: 52 })
     window.dispatchEvent(new Event('online'))
     await waitFor(() => {

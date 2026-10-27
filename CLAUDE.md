@@ -39,7 +39,10 @@ game, how to take each creature with your gear. French and English.
   commits or pull requests; pull request descriptions keep their usual sections, titled Context,
   Diagnosis and Changes. The conversation stays in French.
 - Every pull request that changes the app bumps `version` in `package.json` (`feat` → minor, `fix` →
-  patch): Vercel deploys `main` to production on every merge.
+  patch): Vercel deploys `main` to production on every merge. It adds the version's notes, in French and
+  English, at the head of `src/app/releases.ts` (Settings › What's new), and lists under `fixes` the
+  reports it closes, with the names their authors gave under `thanks`: a player whose report it fixes is
+  told so after the update.
 - The design canvas is the reference for tokens, components and copy.
 - Colours: ok / warn / bad are for verdicts only; accent is for selection and actions. Damage types and
   weaknesses stay neutral.

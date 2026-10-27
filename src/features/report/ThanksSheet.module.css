@@ -1,0 +1,120 @@
+/* The sheet and its head are the report sheet's; what it shows is its own. */
+.sheet {
+  composes: sheet from './ReportSheet.module.css';
+}
+
+.content {
+  composes: content from './ReportSheet.module.css';
+}
+
+.handle {
+  composes: handle from './ReportSheet.module.css';
+}
+
+.header {
+  composes: header from './ReportSheet.module.css';
+}
+
+.title {
+  composes: title from './ReportSheet.module.css';
+}
+
+.close {
+  composes: close from './ReportSheet.module.css';
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.change {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--secondary);
+}
+
+.thanks {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.news {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.news:hover {
+  color: var(--bg);
+}
+
+/* Desktop: a dialog of 480 px, Close and What's new at its foot. */
+@media (min-width: 1024px) {
+  .sheet {
+    width: min(480px, 100% - 64px);
+  }
+
+  .body {
+    padding: 6px 24px 22px;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .dismiss {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .news {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+}

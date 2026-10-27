@@ -1,15 +1,19 @@
 import { useEffect, useId, useLayoutEffect, useState } from 'react'
 import { APP_NAME, COPYRIGHT, SOURCE_URL } from '@/app/brand'
+import { RELEASES } from '@/app/releases'
+import { RouteLink } from '@/app/RouteLink'
 import type { Preview } from '@/app/preview'
 import { THEMES, type LanguageSetting, type Theme } from '@/app/store'
 import { useAppState, useUpdate } from '@/app/useAppState'
 import { useIsDesktop } from '@/app/useMediaQuery'
-import { closeModal } from '@/app/useRoute'
+import { closeModal, useRoute } from '@/app/useRoute'
 import { game } from '@/data'
 import { detectLanguage } from '@/i18n/detect'
 import { catalogOf } from '@/i18n/useT'
+import { reportState } from '@/features/report/loop'
+import { dateOf } from '@/features/report/wording'
 import { SETTINGS_ORIGIN } from '@/features/report/origins'
-import { useOpenReport } from '@/features/report/useReport'
+import { useIssueStates, useOpenReport, useOutbox } from '@/features/report/useReport'
 import { CheckIcon, ChevronRightIcon, ExternalIcon, FlagIcon } from '@/ui/icons'
 import { Modal } from '@/ui/Modal'
 import styles from './SettingsModal.module.css'
@@ -27,6 +31,8 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
   const update = useUpdate()
   const isDesktop = useIsDesktop()
   const openReport = useOpenReport()
+  const route = useRoute()
+  const feedback = useFeedbackSummary()
   const [draft, setDraft] = useState<Draft>({ language: saved.language, theme: saved.theme })
   const detected = detectLanguage(navigator.languages)
   const speaks = draft.language === 'auto' ? detected : draft.language
@@ -148,6 +154,43 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
       </section>
 
       <section className={styles.about}>
+        <span className={styles.label}>{t.loop.feedback}</span>
+        <span className={styles.feedbackRows}>
+          <RouteLink
+            to={{ ...route, modal: 'reports' }}
+            how="replace"
+            className={styles.feedbackRow}
+          >
+            <span className={styles.feedbackText}>
+              <span className={styles.feedbackName}>{t.loop.reports}</span>
+              <span className={styles.feedbackMeta}>
+                {t.loop.reportsSummary(feedback.sent, feedback.fixed)}
+              </span>
+            </span>
+            <ChevronRightIcon size={16} className={styles.go} />
+          </RouteLink>
+          {feedback.latest && (
+            <RouteLink
+              to={{ ...route, modal: 'news' }}
+              how="replace"
+              className={styles.feedbackRow}
+            >
+              <span className={styles.feedbackText}>
+                <span className={styles.feedbackName}>{t.loop.news}</span>
+                <span className={`${styles.feedbackMeta ?? ''} ${styles.mono ?? ''}`}>
+                  {t.loop.newsSummary(
+                    feedback.latest.version,
+                    dateOf(feedback.latest.date, speaks),
+                  )}
+                </span>
+              </span>
+              <ChevronRightIcon size={16} className={styles.go} />
+            </RouteLink>
+          )}
+        </span>
+      </section>
+
+      <section className={styles.about}>
         <span className={styles.label}>{t.settings.about}</span>
         <span className={styles.aboutLines}>
           <span className={styles.aboutTitle}>
@@ -182,6 +225,23 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
       </section>
     </Modal>
   )
+}
+
+/** How many reports this device sent, how many are fixed (from the versions it runs, and from what
+ * GitHub last said), and the latest version. */
+function useFeedbackSummary() {
+  const outbox = useOutbox()
+  const issues = useIssueStates()
+  const receipts = outbox.receipts()
+  const fixed = receipts.filter((receipt) =>
+    reportState(
+      receipt.number,
+      issues.get(receipt.number),
+      RELEASES,
+      __APP_VERSION__,
+    ).kind.startsWith('fixed'),
+  ).length
+  return { sent: receipts.length + outbox.waiting().length, fixed, latest: RELEASES[0] }
 }
 
 /** A theme in miniature, drawn with its own tokens: data-theme scopes the palette to the swatch. */

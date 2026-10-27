@@ -4,8 +4,9 @@ import type { ReactNode } from 'react'
 import { vi } from 'vitest'
 import { createStore, type AppState, type Gear } from '@/app/store'
 import { StoreContext } from '@/app/useAppState'
+import { createIssueStates } from '@/features/report/issues'
 import { createOutbox, SendError, type Outbox } from '@/features/report/outbox'
-import { OutboxContext } from '@/features/report/useReport'
+import { IssueStatesContext, OutboxContext } from '@/features/report/useReport'
 
 /** The gear of the mockups, whose numbers the journeys check: a silver shield early in the Mountain. */
 export const MOCKUP_GEAR: Gear = {
@@ -19,8 +20,8 @@ export const MOCKUP_GEAR: Gear = {
 /** An outbox kept in memory, offline: what is reported waits in it. */
 export const offlineOutbox = () => createOutbox(null, () => Promise.reject(new SendError(null)))
 
-/** Renders `ui` with a store of its own, unsaved, on the defaults with `state` over them, and an outbox
- * of its own, offline unless one is given. */
+/** Renders `ui` with a store of its own, unsaved, on the defaults with `state` over them, an outbox of
+ * its own, offline unless one is given, and issue states kept nowhere (GitHub is what fetch answers). */
 export function renderWithStore(
   ui: ReactNode,
   state: Partial<AppState> = {},
@@ -32,7 +33,9 @@ export function renderWithStore(
     store,
     ...render(
       <StoreContext value={store}>
-        <OutboxContext value={outbox}>{ui}</OutboxContext>
+        <OutboxContext value={outbox}>
+          <IssueStatesContext value={createIssueStates(null)}>{ui}</IssueStatesContext>
+        </OutboxContext>
       </StoreContext>,
     ),
   }

@@ -33,6 +33,7 @@ const changed: AppState = {
   theme: 'jour',
   language: 'fr',
   recentAttacks: [{ fighter: 'Troll', attack: 'troll_groundslam' }],
+  seenVersion: '1.4.0',
 }
 
 describe('createStore', () => {
@@ -77,6 +78,7 @@ describe('createStore', () => {
       theme: 'neon',
       language: 'fr',
       recentAttacks: [{ fighter: 'Troll' }],
+      seenVersion: 140,
     }
 
     expect(createStore(memoryStorage(JSON.stringify(saved))).getState()).toEqual({
@@ -85,6 +87,7 @@ describe('createStore', () => {
       theme: DEFAULT_STATE.theme,
       language: 'fr',
       recentAttacks: [],
+      seenVersion: null,
     })
   })
 
@@ -100,6 +103,7 @@ describe('createStore', () => {
     ],
     ['no player at all', { world: { difficulty: 'hard', players: 0 } }, 'world'],
     ['a language the app does not speak', { language: 'de' }, 'language'],
+    ['a version that is no version', { seenVersion: 'latest' }, 'seenVersion'],
   ] as const)('puts back the default instead of %s', (_, saved, setting) => {
     const state = createStore(memoryStorage(JSON.stringify(saved))).getState()
 

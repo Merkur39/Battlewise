@@ -10,9 +10,10 @@ import './styles/base.css'
 import { App } from './app/App'
 import { browserStorage, createStore } from './app/store'
 import { StoreContext } from './app/useAppState'
+import { createIssueStates } from './features/report/issues'
 import { createOutbox } from './features/report/outbox'
 import { postReport } from './features/report/send'
-import { OutboxContext } from './features/report/useReport'
+import { IssueStatesContext, OutboxContext } from './features/report/useReport'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) {
@@ -23,7 +24,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <StoreContext value={createStore(browserStorage())}>
       <OutboxContext value={createOutbox(browserStorage(), postReport)}>
-        <App />
+        <IssueStatesContext value={createIssueStates(browserStorage())}>
+          <App />
+        </IssueStatesContext>
       </OutboxContext>
     </StoreContext>
   </StrictMode>,

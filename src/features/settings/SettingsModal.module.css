@@ -218,6 +218,50 @@
 }
 
 /* Reporting, then the source and its licence: rows on a phone, small secondary buttons on a desktop. */
+.feedbackRows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedbackRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.feedbackRow:hover {
+  color: var(--ink);
+}
+
+.feedbackText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feedbackName {
+  font-size: 14px;
+}
+
+.feedbackMeta {
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
 .aboutLinks {
   display: flex;
   flex-direction: column;
@@ -229,6 +273,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  text-align: left;
   height: 44px;
   padding: 0 12px;
   box-sizing: border-box;
@@ -337,6 +382,15 @@
   .aboutLines {
     align-items: flex-end;
     gap: 4px;
+  }
+
+  .feedbackRows {
+    width: 380px;
+  }
+
+  .feedbackRow {
+    min-height: 48px;
+    background: none;
   }
 
   .aboutLinks {

@@ -36,7 +36,8 @@
   font-weight: 500;
 }
 
-.close {
+.close,
+.back {
   order: -1;
   width: 44px;
   height: 44px;
@@ -95,6 +96,12 @@
     order: 0;
     width: 40px;
     height: 40px;
+  }
+
+  .back {
+    width: 40px;
+    height: 40px;
+    margin-left: -12px;
   }
 
   .body {

@@ -16,6 +16,7 @@ import {
   canSend,
   MAX_LENGTH,
   REPORT_KINDS,
+  titleOf,
   type ReportDraft,
   type ReportOrigin,
 } from './model'
@@ -75,7 +76,7 @@ export function ReportSheet({
   const send = async () => {
     if (!canSend(draft)) return
     setStep({ step: 'sending' })
-    const outcome = await outbox.submit(buildReport(origin, draft, device))
+    const outcome = await outbox.submit(buildReport(origin, draft, device), titleOf(origin, draft))
     setStep(
       outcome.status === 'sent'
         ? { step: 'sent', receipt: outcome.receipt }

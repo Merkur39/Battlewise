@@ -6,8 +6,15 @@ import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
 import type { ReportOrigin } from '@/features/report/model'
+import { NewsModal } from '@/features/report/NewsModal'
 import { ReportSheet } from '@/features/report/ReportSheet'
-import { OpenReportContext, useSendWaitingReports } from '@/features/report/useReport'
+import { ReportsModal } from '@/features/report/ReportsModal'
+import { ThanksSheet } from '@/features/report/ThanksSheet'
+import {
+  OpenReportContext,
+  useFixesSinceUpdate,
+  useSendWaitingReports,
+} from '@/features/report/useReport'
 import { SettingsModal } from '@/features/settings/SettingsModal'
 import { AttackPicker } from '@/features/simulation/AttackPicker'
 import { SimulationScreen } from '@/features/simulation/SimulationScreen'
@@ -76,6 +83,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   const links = useScreenLinks(route)
   const [report, setReport] = useState<ReportOrigin | null>(null)
   useSendWaitingReports()
+  const [fixes, dismissFixes] = useFixesSinceUpdate()
   const creature = screen === 'bestiary' ? placeOf(route).creature : null
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
@@ -112,6 +120,9 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
         {modal === 'attack' && <AttackPicker />}
         {modal === 'gear' && <GearModal />}
         {modal === 'world' && <WorldModal />}
+        {modal === 'reports' && <ReportsModal />}
+        {modal === 'news' && <NewsModal />}
+        {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
         {report && (
           <ReportSheet
             origin={report}

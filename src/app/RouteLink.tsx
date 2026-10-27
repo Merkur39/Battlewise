@@ -10,6 +10,8 @@ interface RouteLinkProps {
   readonly className?: string | undefined
   readonly 'aria-label'?: string
   readonly 'aria-current'?: 'true' | undefined
+  /** Called as the link is followed, before the route changes: a sheet that closes as it leads away. */
+  readonly onFollow?: () => void
   readonly children: ReactNode
 }
 
@@ -19,13 +21,14 @@ const plainClick = (event: MouseEvent) =>
 
 /** A link inside the app: a real address to share or open elsewhere, followed through the app's
  * history. */
-export function RouteLink({ to, how = 'open', children, ...props }: RouteLinkProps) {
+export function RouteLink({ to, how = 'open', onFollow, children, ...props }: RouteLinkProps) {
   return (
     <a
       href={routeHash(to)}
       onClick={(event) => {
         if (!plainClick(event)) return
         event.preventDefault()
+        onFollow?.()
         if (how === 'open') openRoute(to)
         else if (how === 'return') returnTo(to)
         else replaceRoute(to)
