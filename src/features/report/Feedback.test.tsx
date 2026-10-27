@@ -121,6 +121,23 @@ describe('Closing the loop', () => {
     )
   })
 
+  it('lists each report that joined an issue as a +1, and reads that issue once', async () => {
+    const errors = vi.spyOn(console, 'error')
+    const fetch = githubSays()
+    window.history.replaceState(null, '', '#/bestiary?modal=reports')
+    const outbox = createOutbox(null, vi.fn<Sender>().mockResolvedValue({ number: 52 }))
+    await outbox.submit(report('data', 'Elle fait 60.'), 'Troll › Frappe au sol')
+    await outbox.submit(report('data', 'Elle fait 55.'), 'Troll › Frappe au sol')
+
+    renderWithStore(<App />, { language: 'fr', seenVersion: __APP_VERSION__ }, { outbox })
+
+    const reports = within(dialog('Mes signalements'))
+    expect(await reports.findAllByText('Ouvert')).toHaveLength(2)
+    expect(reports.getAllByRole('link', { name: /#52/ })).toHaveLength(2)
+    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(errors).not.toHaveBeenCalled()
+  })
+
   it('goes back to Settings from My reports', async () => {
     const user = userEvent.setup()
     githubSays()

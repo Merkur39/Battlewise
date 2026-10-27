@@ -1,7 +1,7 @@
 import { generateKeyPairSync, verify } from 'node:crypto'
 import { describe, expect, it, vi } from 'vitest'
 import { buildReport, MAX_LENGTH, REPORT_KINDS, type Report } from '@/features/report/model'
-import { handle, issueOf, KINDS, LIMITS, neutralise, validate } from './feedback'
+import { commentOf, handle, issueOf, KINDS, LIMITS, neutralise, validate } from './feedback'
 
 const ZWSP = '​'
 
@@ -35,6 +35,24 @@ const report: Report = buildReport(
   { version: '1.4.0', gameVersion: '0.221.4', language: 'fr', width: 390 },
 )
 
+/** The same report as 1.5 built it: its line has no id. */
+const earlier: Report = {
+  ...report,
+  line: { label: report.line?.label ?? '', shows: report.line?.shows ?? '' },
+}
+
+/** Open issues the app opened on another line of the Troll, and on the same line of another creature. */
+const elsewhere = [
+  {
+    number: 45,
+    body: issueOf({ ...report, line: { id: 'health', label: 'PV', shows: 'PV 600' } }).body,
+  },
+  {
+    number: 46,
+    body: issueOf({ ...report, context: { ...report.context, creature: 'Fenring' } }).body,
+  },
+]
+
 describe('the limits', () => {
   it('are the app’s', () => {
     expect(KINDS).toEqual(REPORT_KINDS)
@@ -45,6 +63,10 @@ describe('the limits', () => {
 describe('validate', () => {
   it('takes a report as the app builds it', () => {
     expect(validate(report)).toEqual({ ok: true, value: report })
+  })
+
+  it('takes a line without its id, as 1.5 sent it', () => {
+    expect(validate(earlier)).toEqual({ ok: true, value: earlier })
   })
 
   it('keeps only the fields it knows', () => {
@@ -64,6 +86,7 @@ describe('validate', () => {
     ['another language', { ...report, context: { ...report.context, language: 'de' } }],
     ['a width that is no number', { ...report, context: { ...report.context, width: '390' } }],
     ['a creature id with spaces', { ...report, context: { ...report.context, creature: 'a b' } }],
+    ['a line id that closes a comment', { ...report, line: { ...report.line, id: 'a -->' } }],
     [
       'too many lines shown',
       { ...report, context: { ...report.context, shows: Array(61).fill('x') } },
@@ -133,6 +156,27 @@ describe('issueOf', () => {
     expect(body).toContain('| Creature | `Troll` · 0★ |')
     expect(body).toContain('- Troll · 0★')
   })
+
+  it('marks the creature and the line, last, for the next report on them to find', () => {
+    expect(issueOf(report).body).toMatch(
+      /<\/details>\n\n<!-- battlewise-line: Troll\/Troll\/troll_groundslam -->$/,
+    )
+  })
+
+  it('marks nothing when the report names no line', () => {
+    expect(issueOf(earlier).body).not.toContain('battlewise-line')
+  })
+})
+
+describe('commentOf', () => {
+  it('adds a +1, then says what the issue would have said, without its mark', () => {
+    const { body } = commentOf(report)
+    expect(body.startsWith('**+1**\n\nElle fait 60 dans le jeu.\n')).toBe(true)
+    expect(body).toContain('**What the game shows:** 60')
+    expect(body).toContain('Reported from the app by **Ragnar**.')
+    expect(body).toContain('| Creature | `Troll` · 0★ |')
+    expect(body).not.toContain('battlewise-line')
+  })
 })
 
 const { privateKey, publicKey } = generateKeyPairSync('rsa', {
@@ -147,16 +191,35 @@ const env = {
   GITHUB_APP_PRIVATE_KEY: privateKey,
 }
 
-/** GitHub as seen by the function: an installation token, then the issue. */
-function github({ token = 201, issue = 201 } = {}) {
-  return vi.fn<typeof fetch>((input) =>
-    Promise.resolve(
-      (input instanceof Request ? input.url : input.toString()).endsWith('/access_tokens')
-        ? Response.json({ token: 'ghs_installation' }, { status: token })
-        : Response.json({ number: 48 }, { status: issue }),
-    ),
-  )
+const urlOf = (input: RequestInfo | URL) =>
+  new URL(input instanceof Request ? input.url : input.toString())
+
+/** GitHub as seen by the function: an installation token, the open issues, then a new issue or a
+ * +1 on one of them. */
+function github({
+  token = 201,
+  list = 200,
+  open = [] as readonly unknown[],
+  issue = 201,
+  comment = 201,
+} = {}) {
+  return vi.fn<typeof fetch>((input, init) => {
+    const { pathname } = urlOf(input)
+    const answer = (body: unknown, status: number) =>
+      Promise.resolve(Response.json(body, { status }))
+    if (pathname.endsWith('/access_tokens')) return answer({ token: 'ghs_installation' }, token)
+    if (pathname.endsWith('/comments')) return answer({ id: 9001 }, comment)
+    return init?.method === 'POST' ? answer({ number: 48 }, issue) : answer(open, list)
+  })
 }
+
+/** What the function asked GitHub with this method on this path. */
+const calls = (fetch: ReturnType<typeof github>, method: string, path: string) =>
+  fetch.mock.calls
+    .map(([input, init]) => ({ url: urlOf(input), init }))
+    .filter(({ url, init }) => (init?.method ?? 'GET') === method && url.pathname === path)
+
+const ISSUES = '/repos/Merkur39/Battlewise/issues'
 
 const post = (body: string, type = 'application/json') =>
   new Request('https://battlewise.test/api/feedback', {
@@ -192,12 +255,58 @@ describe('handle', () => {
       iss: '123456',
     })
 
-    const [issueUrl, issueInit] = fetch.mock.calls[1] ?? []
-    expect(issueUrl).toBe('https://api.github.com/repos/Merkur39/Battlewise/issues')
-    expect(new Headers(issueInit?.headers).get('Authorization')).toBe('Bearer ghs_installation')
-    expect(typeof issueInit?.body === 'string' && JSON.parse(issueInit.body)).toEqual(
+    const [created, ...more] = calls(fetch, 'POST', ISSUES)
+    expect(more).toEqual([])
+    expect(created?.url.origin).toBe('https://api.github.com')
+    expect(new Headers(created?.init?.headers).get('Authorization')).toBe('Bearer ghs_installation')
+    expect(typeof created?.init?.body === 'string' && JSON.parse(created.init.body)).toEqual(
       issueOf(report),
     )
+  })
+
+  it('looks for the line among the open wrong-data issues the app opened', async () => {
+    const fetch = github()
+    await handle(post(JSON.stringify(report)), { env, fetch, now })
+    const [listed] = calls(fetch, 'GET', ISSUES)
+    expect(listed?.url.searchParams.get('labels')).toBe('from:app,data')
+    expect(listed?.url.searchParams.get('state')).toBe('open')
+    expect(new Headers(listed?.init?.headers).get('Authorization')).toBe('Bearer ghs_installation')
+  })
+
+  it('adds a +1 to the open issue on the same line, and answers its number', async () => {
+    const fetch = github({ open: [...elsewhere, { number: 47, body: issueOf(report).body }] })
+
+    const response = await handle(post(JSON.stringify(report)), { env, fetch, now })
+
+    expect(response.status).toBe(201)
+    expect(await response.json()).toEqual({ number: 47 })
+    const [comment] = calls(fetch, 'POST', `${ISSUES}/47/comments`)
+    expect(new Headers(comment?.init?.headers).get('Authorization')).toBe('Bearer ghs_installation')
+    expect(typeof comment?.init?.body === 'string' && JSON.parse(comment.init.body)).toEqual(
+      commentOf(report),
+    )
+    expect(calls(fetch, 'POST', ISSUES)).toEqual([])
+  })
+
+  it('opens a new issue when the open ones are on other lines or other creatures', async () => {
+    const fetch = github({ open: elsewhere })
+    const response = await handle(post(JSON.stringify(report)), { env, fetch, now })
+    expect(await response.json()).toEqual({ number: 48 })
+    expect(calls(fetch, 'POST', ISSUES)).toHaveLength(1)
+  })
+
+  it('takes no pull request for an issue', async () => {
+    const pull = { number: 47, body: issueOf(report).body, pull_request: { url: 'x' } }
+    const fetch = github({ open: [pull] })
+    const response = await handle(post(JSON.stringify(report)), { env, fetch, now })
+    expect(await response.json()).toEqual({ number: 48 })
+  })
+
+  it('looks for nothing when the report names no line', async () => {
+    const fetch = github({ open: [{ number: 47, body: issueOf(report).body }] })
+    const response = await handle(post(JSON.stringify(earlier)), { env, fetch, now })
+    expect(await response.json()).toEqual({ number: 48 })
+    expect(calls(fetch, 'GET', ISSUES)).toEqual([])
   })
 
   it('reads a key whose line breaks were pasted as \\n', async () => {
@@ -251,7 +360,9 @@ describe('handle', () => {
 
   it.each([
     ['the token', { token: 401 }],
+    ['the open issues', { list: 500 }],
     ['the issue', { issue: 500 }],
+    ['the +1', { comment: 500, open: [{ number: 47, body: issueOf(report).body }] }],
   ])('answers 502 when GitHub refuses %s, so that the app keeps the report', async (_, answers) => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined)
     const response = await handle(post(JSON.stringify(report)), {

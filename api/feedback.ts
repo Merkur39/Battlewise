@@ -3,9 +3,9 @@ import type { Report } from '../src/features/report/model'
 
 /**
  * POST /api/feedback: a report sent from the app becomes a public issue on the repository, written
- * as the GitHub App installed on it (see api/README.md). Self-contained: Vercel builds this file on
- * its own, so it imports nothing from the app but a type, and repeats its limits (a test holds them
- * equal).
+ * as the GitHub App installed on it (see api/README.md), or a +1 on the open issue already about the
+ * same line of the same creature. Self-contained: Vercel builds this file on its own, so it imports
+ * nothing from the app but a type, and repeats its limits (a test holds them equal).
  */
 
 export const KINDS = ['data', 'bug', 'idea'] as const
@@ -28,6 +28,8 @@ const GITHUB = 'https://api.github.com'
 const SCREENS = ['creature', 'simulation', 'settings'] as const
 const LANGUAGES = ['fr', 'en'] as const
 const ID = /^[A-Za-z0-9_]{1,100}$/
+/** A line of the sheet: `health`, or a fighter and its attack, `Troll/troll_groundslam`. */
+const LINE = /^[A-Za-z0-9_/]{1,200}$/
 const VERSION = /^[\w.+-]{1,20}$/
 const ZWSP = '​'
 // eslint-disable-next-line no-control-regex -- control characters are what it removes
@@ -75,14 +77,15 @@ export function validate(input: unknown): Validation {
     const game = optional(input.game, (value) => string(value, LIMITS.game, 'game'))
     const nickname = optional(input.nickname, (value) => string(value, LIMITS.nickname, 'nickname'))
     const subject = optional(input.subject, (value) => string(value, LIMITS.subject, 'subject'))
-    const line = optional(input.line, (value) =>
-      isRecord(value)
-        ? {
-            label: string(value.label, LIMITS.label, 'line.label'),
-            shows: string(value.shows, LIMITS.shows, 'line.shows'),
-          }
-        : fail('line'),
-    )
+    const line = optional(input.line, (value) => {
+      if (!isRecord(value)) return fail('line')
+      const id = optional(value.id, (id) => matching(id, LINE, 'line.id'))
+      return {
+        ...(id !== undefined ? { id } : {}),
+        label: string(value.label, LIMITS.label, 'line.label'),
+        shows: string(value.shows, LIMITS.shows, 'line.shows'),
+      }
+    })
     const creature = optional(context.creature, (value) => matching(value, ID, 'context.creature'))
     const stars = optional(context.stars, (value) => integer(value, 0, 10, 'context.stars'))
     const attack = optional(context.attack, (value) => matching(value, ID, 'context.attack'))
@@ -140,13 +143,19 @@ export interface Issue {
   readonly labels: readonly string[]
 }
 
-/** The issue a report opens: its kind and subject in the title, the player's words first, then what
- * the app attached, folded. Labelled for the Inbox of the board. */
-export function issueOf(report: Report): Issue {
-  const { kind, text, game, nickname, subject, line, context } = report
+/** Where the next report on the same line of the same creature finds the issue, hidden in its body;
+ * none for a report that names no line. Its ids are the validated ones: nothing in them closes it. */
+function markOf({ kind, line, context }: Report): string | null {
+  return kind === 'data' && line?.id !== undefined && context.creature !== undefined
+    ? `<!-- battlewise-line: ${context.creature}/${line.id} -->`
+    : null
+}
+
+/** The player's words first, then what the app attached, folded. */
+function told(report: Report): string[] {
+  const { kind, text, game, nickname, line, context } = report
   const { version, gameVersion, language, screen, width, creature, stars, attack, shows } = context
-  const title = `[${kind}] ${subject ? `${subject.replace(CONTROL, ' ')} — ` : ''}« ${excerpt(text)} »`
-  const body = [
+  return [
     neutralise(text),
     '',
     ...(kind === 'data' && game ? [`**What the game shows:** ${neutralise(game)}`, ''] : []),
@@ -171,9 +180,23 @@ export function issueOf(report: Report): Issue {
       ? ['What the screen showed:', '', ...shows.map((shown) => `- ${neutralise(shown)}`), '']
       : []),
     '</details>',
-  ].join('\n')
+  ]
+}
+
+/** The issue a report opens: its kind and subject in the title, what it tells in the body, marked
+ * with its line. Labelled for the Inbox of the board. */
+export function issueOf(report: Report): Issue {
+  const { kind, text, subject } = report
+  const title = `[${kind}] ${subject ? `${subject.replace(CONTROL, ' ')} — ` : ''}« ${excerpt(text)} »`
+  const mark = markOf(report)
+  const body = [...told(report), ...(mark === null ? [] : ['', mark])].join('\n')
   return { title: title.slice(0, 256), body, labels: ['from:app', kind] }
 }
+
+/** The +1 a report on a line already reported adds to its issue: all it would have told. */
+export const commentOf = (report: Report): { readonly body: string } => ({
+  body: ['**+1**', '', ...told(report)].join('\n'),
+})
 
 class GitHubError extends Error {
   readonly status: number
@@ -217,11 +240,36 @@ export interface Deps {
   readonly now: () => number
 }
 
+/** The open wrong-data issue from the app that bears the mark, if any. GitHub lists the most recent
+ * hundred: an older one on the same line gets a new issue, which triage closes as its duplicate. */
+async function issueMarked(
+  mark: string,
+  token: string,
+  fetch: Deps['fetch'],
+): Promise<number | undefined> {
+  const query = new URLSearchParams({ labels: 'from:app,data', state: 'open', per_page: '100' })
+  const response = await fetch(`${GITHUB}/repos/${REPOSITORY}/issues?${query.toString()}`, {
+    headers: headers(token),
+  })
+  const issues: unknown = response.ok ? await response.json().catch(() => null) : null
+  if (!Array.isArray(issues)) throw new GitHubError('the open issues', response.status)
+  const marked = issues.find(
+    (issue: unknown): issue is Record<string, unknown> =>
+      isRecord(issue) &&
+      // The list holds pull requests too.
+      issue.pull_request === undefined &&
+      typeof issue.body === 'string' &&
+      issue.body.includes(mark),
+  )
+  return typeof marked?.number === 'number' ? marked.number : undefined
+}
+
 const reply = (body: unknown, status: number, headers?: Record<string, string>) =>
   Response.json(body, { status, ...(headers ? { headers } : {}) })
 
-/** From the request to the issue. What fails on the way is answered so that the app keeps the report
- * when sending it again may work (503, 502), and drops it when it never will (400, 413, 415, 422). */
+/** From the request to the issue, or to the +1 on the open issue about the same line, whose number
+ * the app keeps. What fails on the way is answered so that the app keeps the report when sending it
+ * again may work (503, 502), and drops it when it never will (400, 413, 415, 422). */
 export async function handle(request: Request, { env, fetch, now }: Deps): Promise<Response> {
   if (request.method !== 'POST') return reply({ error: 'POST only' }, 405, { Allow: 'POST' })
   if (!(request.headers.get('Content-Type') ?? '').startsWith('application/json')) {
@@ -253,10 +301,20 @@ export async function handle(request: Request, { env, fetch, now }: Deps): Promi
       method: 'POST',
       headers: headers(appToken(appId, privateKey, now())),
     })
-    const token = await answer(tokenResponse, 'the installation token', 'token')
+    const token = String(await answer(tokenResponse, 'the installation token', 'token'))
+    const mark = markOf(report)
+    const open = mark === null ? undefined : await issueMarked(mark, token, fetch)
+    if (open !== undefined) {
+      const commentResponse = await fetch(
+        `${GITHUB}/repos/${REPOSITORY}/issues/${String(open)}/comments`,
+        { method: 'POST', headers: headers(token), body: JSON.stringify(commentOf(report)) },
+      )
+      await answer(commentResponse, 'the +1', 'id')
+      return reply({ number: open }, 201)
+    }
     const issueResponse = await fetch(`${GITHUB}/repos/${REPOSITORY}/issues`, {
       method: 'POST',
-      headers: headers(String(token)),
+      headers: headers(token),
       body: JSON.stringify(issueOf(report)),
     })
     const number = await answer(issueResponse, 'the issue', 'number')

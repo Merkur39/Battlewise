@@ -2,9 +2,10 @@
 
 `POST /api/feedback` turns a report sent from Battlewise into a public issue on this repository,
 labelled `from:app` and with its kind (`data`, `bug` or `idea`), so that it lands in the Inbox of the
-board. It writes as a GitHub App installed on this repository only, with Issues in read and write
-and nothing else: a personal token would expire one day and every report would then fail without a
-word.
+board. A wrong-data report on a line of a creature that an open issue from the app is already about
+becomes a +1 comment on that issue instead. It writes as a GitHub App installed on this repository
+only, with Issues in read and write and nothing else: a personal token would expire one day and
+every report would then fail without a word.
 
 ## Setting it up
 

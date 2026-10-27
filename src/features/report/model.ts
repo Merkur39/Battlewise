@@ -65,7 +65,8 @@ export interface Report {
   readonly nickname?: string
   readonly website: string
   readonly subject?: string
-  readonly line?: { readonly label: string; readonly shows: string }
+  /** The line picked; its id is missing from the reports 1.5 built and left waiting on the device. */
+  readonly line?: { readonly id?: string; readonly label: string; readonly shows: string }
   readonly context: Device &
     ReportOrigin['ids'] & {
       readonly screen: ReportOrigin['screen']
@@ -94,7 +95,7 @@ export function buildReport(origin: ReportOrigin, draft: ReadyDraft, device: Dev
     ...(nickname !== '' ? { nickname } : {}),
     website: draft.website,
     ...(subject ? { subject } : {}),
-    ...(line ? { line: { label: line.label, shows: line.shows } } : {}),
+    ...(line ? { line: { id: line.id, label: line.label, shows: line.shows } } : {}),
     context: { ...device, screen: origin.screen, ...origin.ids, shows: origin.shows },
   }
 }

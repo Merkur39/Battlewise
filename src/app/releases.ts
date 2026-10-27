@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.6.0',
+    date: '2026-10-27',
+    notes: [
+      {
+        text: {
+          fr: "Signaler une ligne déjà signalée, et pas encore corrigée, ajoute un +1 à son ticket au lieu d'en ouvrir un autre.",
+          en: 'Reporting a line already reported, and not fixed yet, adds a +1 to its issue instead of opening another.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.5.0',
     date: '2026-10-27',
     notes: [

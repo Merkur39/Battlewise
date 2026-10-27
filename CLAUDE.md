@@ -19,9 +19,10 @@ game, how to take each creature with your gear. French and English.
   and `game` (`src/data/index.ts`); `game.test.ts` checks it against the engine.
 - `src/app/`, `src/features/*`, `src/ui/`, `src/i18n/`: interface, tested under jsdom (`ui` project,
   setup in `test/setup.ts`).
-- `api/feedback.ts`: the Vercel function that turns a report from the app into an issue, as a GitHub
-  App; self-contained (Vercel builds it alone), tested under node (`api` project). Its setup, done once
-  by the repository's owner, is in `api/README.md`.
+- `api/feedback.ts`: the Vercel function that turns a report from the app into an issue, or into a +1
+  on the open issue about the same line, as a GitHub App; self-contained (Vercel builds it alone),
+  tested under node (`api` project). Its setup, done once by the repository's owner, is in
+  `api/README.md`.
 - `tools/extract/`: read-only extraction of the game data (UnityPy for the assets, the decompiled game
   code for the rules); `curation.json` holds only what the game does not carry: which creatures to list,
   their variants, the ignored ones and why, the attack names the game lacks, the body parts its weak spots
