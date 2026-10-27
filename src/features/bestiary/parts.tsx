@@ -1,4 +1,5 @@
 import type { AttackVerdicts } from '@/combat/attack'
+import type { DamageType } from '@/combat/damage'
 import { game } from '@/data'
 import type { GameAttack } from '@/data/types'
 import { useLanguage, useT } from '@/i18n/useT'
@@ -37,21 +38,34 @@ export function AttackTags({
   readonly className?: string | undefined
 }) {
   const t = useT()
-  const language = useLanguage()
   const tags = [t.creature.kinds[attack.kind]]
   if (withRange && attack.kind !== 'summon') {
     tags.push(t.creature.metres(attackRange(attack)))
   }
   tags.push(...extra)
+  return <TypeTags types={attackTypes(attack)} tags={tags} className={className} />
+}
+
+/** A tag line: damage types, icon and word, then the other tags. */
+export function TypeTags({
+  types,
+  tags,
+  className,
+}: {
+  readonly types: readonly DamageType[]
+  readonly tags: readonly string[]
+  readonly className?: string | undefined
+}) {
+  const language = useLanguage()
   return (
     <span className={`${styles.tags ?? ''} ${className ?? ''}`}>
-      {attackTypes(attack).map((type) => (
+      {types.map((type) => (
         <span key={type} className={styles.type}>
           <DamageTypeIcon type={type} />
           {game.damageTypes[type][language]}
         </span>
       ))}
-      {attackTypes(attack).length > 0 && ' · '}
+      {types.length > 0 && tags.length > 0 && ' · '}
       {tags.join(' · ')}
     </span>
   )

@@ -8,6 +8,10 @@ import { setViewportWidth } from '../../../test/viewport'
 const list = () => screen.getByRole('list', { name: 'Créatures du biome' })
 const row = (name: string) => within(list()).getByRole('link', { name: new RegExp(`^${name}`) })
 const sheetHeading = (name: string) => screen.findByRole('heading', { level: 1, name })
+const chips = (name: string) =>
+  within(screen.getByRole('list', { name }))
+    .getAllByRole('listitem')
+    .map((item) => item.textContent)
 
 describe('Bestiary', () => {
   it('lists the creatures of the Meadows first, with their health and how to take them', () => {
@@ -72,17 +76,90 @@ describe('Bestiary', () => {
     expect(punch()).toHaveTextContent('90')
   })
 
-  it('sums up the weaknesses and resistances, in the words of the game', () => {
+  it('sums up the weaknesses and resistances, tools included, in the words of the game', () => {
+    window.history.replaceState(null, '', '#/bestiary/mountain/StoneGolem')
+    renderWithStore(<App />, { language: 'fr' })
+
+    expect(chips('Faiblesses et résistances')).toEqual([
+      'Pioche · Très faible ×2',
+      'Coupant · Résistant ×0,5',
+      'Perforant · Résistant ×0,5',
+      'Feu · Immunisé ×0',
+      'Glace · Immunisé ×0',
+      'Poison · Immunisé ×0',
+      'Esprit · Immunisé ×0',
+    ])
+    expect(screen.getByText('Tout le reste ×1')).toBeInTheDocument()
+  })
+
+  it('gives a weak spot its own row beside the body, by the name of the part', () => {
     window.history.replaceState(null, '', '#/bestiary/blackForest/Troll')
     renderWithStore(<App />, { language: 'fr' })
 
-    const modifiers = screen.getByRole('list', { name: 'Faiblesses et résistances' })
+    expect(chips('Faiblesses et résistances · Corps')).toEqual([
+      'Perforant · Faible ×1,5',
+      'Contondant · Résistant ×0,5',
+      'Esprit · Immunisé ×0',
+    ])
+    expect(chips('Faiblesses et résistances · Tête')).toEqual([
+      'Perforant · Très faible ×2',
+      'Esprit · Immunisé ×0',
+    ])
+    expect(screen.getAllByText('Tout le reste ×1')).toHaveLength(2)
+  })
+
+  it('shows a tool taken normally without a word, the game having none', () => {
+    window.history.replaceState(null, '', '#/bestiary/deepNorth/Barka')
+    renderWithStore(<App />, { language: 'fr' })
+
+    expect(chips('Faiblesses et résistances')).toContain('Couper ×1')
+  })
+
+  it('adds the trampling of a creature that runs into you, without a way to the Simulation', () => {
+    window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+    renderWithStore(<App />, { language: 'fr' })
+
     expect(
-      within(modifiers)
-        .getAllByRole('listitem')
-        .map((item) => item.textContent),
-    ).toEqual(['Perforant · Faible ×1,5', 'Contondant · Résistant ×0,5', 'Esprit · Immunisé ×0'])
-    expect(screen.getByText('Tout le reste ×1')).toBeInTheDocument()
+      screen.getByText(/^Écrasement, contondant, 20 dégâts\. Blocage : \S.*\. Esquivable\.$/),
+    ).toBeInTheDocument()
+    expect(screen.getByText('En course', { exact: false })).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /^Écrasement/ })).not.toBeInTheDocument()
+  })
+
+  it('tells what the death of a creature deals, under its own heading', () => {
+    window.history.replaceState(null, '', '#/bestiary/swamp/Writhan')
+    renderWithStore(<App />, { language: 'fr' })
+
+    expect(screen.getByText('À sa mort')).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Explosion, contondant et poison, 100 dégâts. Blocage : imparable. Parade : imparable. Esquivable.',
+      ),
+    ).toBeInTheDocument()
+  })
+
+  it('opens the sheet of a creature a death brings, as many as the stars make', async () => {
+    const user = userEvent.setup()
+    window.history.replaceState(null, '', '#/bestiary/swamp/BlobElite')
+    renderWithStore(<App />, { language: 'fr' })
+
+    const blobs = screen.getByRole('link', { name: 'Blob ×2. Ouvrir la fiche Blob.' })
+    expect(blobs).toHaveAttribute('href', '#/bestiary/swamp/Blob')
+
+    await user.click(blobs)
+
+    expect(await sheetHeading('Blob')).toBeInTheDocument()
+  })
+
+  it('puts what the end of a phase brings under that phase', () => {
+    window.history.replaceState(null, '', '#/bestiary/deepNorth/FrozenKing')
+    renderWithStore(<App />, { language: 'fr' })
+
+    expect(screen.getByText('Fin de la phase')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /^Aspect du Cerf de l'orage ×1\./ })).toHaveAttribute(
+      'href',
+      '#/bestiary/deepNorth/Aspect_Eikthyr',
+    )
   })
 
   it('gives each attack its damage types, its verdicts and a way to the Simulation', () => {
@@ -148,11 +225,16 @@ describe('Bestiary', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Troll' })).toBeInTheDocument()
     expect(screen.getByText('Black Forest')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /^Ground slam,/ })).toHaveTextContent('Blunt')
-    expect(
-      within(screen.getByRole('list', { name: 'Weaknesses and resistances' })).getAllByRole(
-        'listitem',
-      )[0],
-    ).toHaveTextContent('Pierce · Weak ×1.5')
+    expect(chips('Weaknesses and resistances · Body')[0]).toBe('Pierce · Weak ×1.5')
+    expect(chips('Weaknesses and resistances · Head')[0]).toBe('Pierce · Very weak ×2')
+  })
+
+  it('names trampling and death in English too', () => {
+    window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+    renderWithStore(<App />, { language: 'en' })
+
+    expect(screen.getByText(/^Trample, blunt, 20 damage\./)).toBeInTheDocument()
+    expect(screen.getByText('When running', { exact: false })).toBeInTheDocument()
   })
 
   it('brings the tab back to the biome it was left on', async () => {
@@ -184,6 +266,39 @@ describe('Bestiary', () => {
       expect(await screen.findByRole('heading', { level: 2, name: 'Troll' })).toBeInTheDocument()
       expect(row('Troll')).toHaveAttribute('aria-current', 'true')
       expect(screen.getByRole('list', { name: 'Créatures du biome' })).toBeInTheDocument()
+    })
+
+    it('puts what a death brings in the table, with a way to its sheet', () => {
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/swamp/BlobElite')
+      renderWithStore(<App />, { language: 'fr' })
+
+      const table = screen.getByRole('table', { name: 'Ses attaques' })
+      expect(within(table).getByRole('columnheader', { name: 'À sa mort' })).toBeInTheDocument()
+      expect(
+        within(table).getByRole('link', { name: 'Blob ×2. Ouvrir la fiche Blob.' }),
+      ).toHaveTextContent('Sa fiche')
+    })
+
+    it('gives trampling its range, when running', () => {
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr' })
+
+      const trample = screen.getByRole('row', { name: /^Écrasement/ })
+      expect(trample).toHaveTextContent('En course')
+      expect(within(trample).queryByRole('link')).not.toBeInTheDocument()
+    })
+
+    it('gives the death blast its radius', () => {
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/swamp/Writhan')
+      renderWithStore(<App />, { language: 'fr' })
+
+      const rows = screen.getAllByRole('row', { name: /^Explosion/ })
+      expect(rows).toHaveLength(2)
+      expect(rows[1]).toHaveTextContent('6 m')
+      expect(within(rows[1]!).queryByRole('link')).not.toBeInTheDocument()
     })
   })
 })

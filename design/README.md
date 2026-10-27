@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v74** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v76** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -25,6 +25,11 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 - Page **Encaisses** (`Encaisses`): the « Ce que tu encaisses » card on a 360 px phone, as it jumped, and two
   steady layouts; track B (the legend under the title, numbers alone on each guard's line) is the one
   carried into the phone Ton équipement board. Made by hand as well.
+- Page **Fiche · pistes** (`Fiche`, `Fiche-Desktop`): what the creature sheet showed of the game data and
+  now shows too (weak spots, tools, trample, death effects), as 360 px phone fragments in three tracks, then
+  track A on the desktop panel for the cases the Troll cannot show; track A (everything in the existing
+  sections) is the one chosen, its weak spot carried into the Monstre and Bestiaire desktop boards. Made by
+  hand as well, numbers from `src/data/game.json` at the time.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
   (« Ton contexte », the phone Bestiaire with its context sheet open).
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
@@ -32,7 +37,7 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v74: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v76: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),

@@ -871,6 +871,10 @@
       "weakSpots": [
         {
           "part": "head",
+          "name": {
+            "fr": "Tête",
+            "en": "Head"
+          },
           "modifiers": {
             "pierce": "veryWeak",
             "spirit": "immune"
@@ -5017,6 +5021,10 @@
       "weakSpots": [
         {
           "part": "ass",
+          "name": {
+            "fr": "Arrière-train",
+            "en": "Rear"
+          },
           "modifiers": {
             "blunt": "weak",
             "slash": "weak",
@@ -5230,6 +5238,10 @@
       "weakSpots": [
         {
           "part": "eggs",
+          "name": {
+            "fr": "Œufs",
+            "en": "Eggs"
+          },
           "modifiers": {
             "pierce": "veryWeak",
             "spirit": "immune"

@@ -58,6 +58,8 @@ class Report:
         self.divergent = []  # variants whose stats differ from the creature they join
         self.unnamed = []  # (creature, attack id) named neither by the game nor by curation.json
         self.unused_names = []  # curation.json attack names no attack needs
+        self.unnamed_parts = []  # "creature: part" of weak spots curation.json does not name
+        self.unused_parts = []  # curation.json part names no weak spot needs
         self.stale_ignored = []  # ignored names that are no creature prefab of the game
 
 
@@ -146,6 +148,7 @@ class _Game:
         self.animations = animation.creature_animations(index, self.characters.values())
         self.presence = spawns.resolve(index, found)
         self.weak_spots = {"%s:%s" % (row["cab"], row["pid"]): row for row in found.rows("WeakSpot")}
+        self.parts_used, self.parts_unnamed = set(), set()
         self.min_attack_interval = {
             row["go"]: row["data"]["m_minAttackInterval"] for row in found.rows("MonsterAI")
             if row["go_ref"] == row["root_ref"]
@@ -236,14 +239,22 @@ class _Game:
     # ------------------------------------------------------------------ creatures
     def weak_spots_of(self, prefab):
         """Character.m_weakSpots: modifiers a hit on that collider takes instead of the creature's own. A
-        WeakSpot under an inactive object never runs Awake, which sets the collider it is found by."""
+        WeakSpot under an inactive object never runs Awake, which sets the collider it is found by. The
+        game names no body part: the name comes from curation.json."""
         spots = []
         for pptr in self.data(prefab)["m_weakSpots"]:
             row = self.weak_spots.get(pptr.get("_ref"))
             if row is None or not row["active"]:
                 continue
             raw = row["data"]["m_damageModifiers"]
-            spot = {"part": WEAK_SPOT.sub("", row["go"]).lower(), "modifiers": modifiers(raw)}
+            part = WEAK_SPOT.sub("", row["go"]).lower()
+            name = self.curation["parts"].get(part)
+            if name is None:
+                self.parts_unnamed.add("%s: %s" % (prefab, part))
+            else:
+                self.parts_used.add(part)
+            spot = {"part": part, "name": {"fr": name["fr"], "en": name["en"]} if name else {"fr": "", "en": ""},
+                    "modifiers": modifiers(raw)}
             tools = modifiers(raw, TOOL_TYPES, left_out=("ignore",))
             if tools:
                 spot["toolModifiers"] = tools
@@ -431,6 +442,8 @@ def build(index, curation, workers=8):
             creatures.append(game.creature(prefab, entry, report, used))
     report.uncurated = game.uncurated()
     report.unused_names = sorted(set(curation["attacks"]) - used)
+    report.unnamed_parts = sorted(game.parts_unnamed)
+    report.unused_parts = sorted(set(curation["parts"]) - game.parts_used)
     report.stale_ignored = sorted(p for p in curation["ignored"] if p not in game.characters)
 
     data = {

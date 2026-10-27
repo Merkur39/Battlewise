@@ -136,9 +136,13 @@ input::placeholder{color:#656C73}
 
           <div style="display: flex; flex-direction: column; gap: 8px">
             <span style="font-size: 11px; letter-spacing: 0.08em; color: #50575F">FAIBLESSES ET RÉSISTANCES</span>
-            <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px">
-              <span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #50575F; color: #1B1F23"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">FAIBLE ×1,5</span></span>
-              <span style="font-size: 11px; color: #656C73">Tout le reste ×1</span>
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; align-items: start">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F; padding-top: 6px">CORPS</span>
+              <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #50575F; color: #1B1F23"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">FAIBLE ×1,5</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #D3CDC1; color: #50575F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M13 3l8 8-4 4-8-8zM13 11l-9 9"></path></svg>CONTONDANT · <span style="font-weight: 500">RÉSISTANT ×0,5</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px dashed #D3CDC1; color: #656C73"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #656C73">Tout le reste ×1</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; align-items: start">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #50575F; padding-top: 6px">TÊTE</span>
+              <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #50575F; color: #1B1F23"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">TRÈS FAIBLE ×2</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px dashed #D3CDC1; color: #656C73"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #656C73">Tout le reste ×1</span></div>
             </div>
           </div>
 
@@ -159,7 +163,7 @@ input::placeholder{color:#656C73}
             </sc-for>
           </div>
 
-          <span style="font-size: 12px; color: #656C73">Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance. PV et seuil réels ; attaques et résistances d'exemple, en attendant l'extraction du jeu.</span>
+          <span style="font-size: 12px; color: #656C73">Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance. PV, seuil, résistances et tête réels ; attaques d'exemple.</span>
         </div>
       </section>
     </div>

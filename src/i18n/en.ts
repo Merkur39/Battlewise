@@ -155,7 +155,10 @@ export const en: Catalog = {
     parryDoesNot: "Doesn't stagger it",
     cannotParry: "Your item can't parry",
     modifiers: 'Weaknesses and resistances',
-    modifier: (type, state, multiplier) => `${type} · ${state} ×${n(multiplier)}`,
+    modifiersOn: (part) => `Weaknesses and resistances · ${part}`,
+    body: 'Body',
+    modifier: (type, state, multiplier) =>
+      state === null ? `${type} ×${n(multiplier)}` : `${type} · ${state} ×${n(multiplier)}`,
     everythingElse: 'Everything else ×1',
     noModifier: 'Everything ×1',
     attacks: 'Its attacks',
@@ -168,6 +171,13 @@ export const en: Catalog = {
     metres: (metres) => `${n(metres)} m`,
     phase: (index, health) => `Phase ${n(index)} · ${n(health)} HP`,
     noAttack: 'No attack',
+    trample: 'Trample',
+    whenRunning: 'When running',
+    deathBlast: 'Explosion',
+    onDeath: (phase) => (phase ? 'End of the phase' : 'On its death'),
+    count: (min, max) => (min === max ? `×${n(min)}` : `×${n(min)}–${n(max)}`),
+    seeSheet: 'See its sheet',
+    sheet: 'Its sheet',
     attackSummary: ({ name, types, damage, block, parry, dodgeable }) =>
       damage === null
         ? `${name}, summon.`
