@@ -1,0 +1,131 @@
+.contextMenu {
+  flex: none;
+}
+
+.summary {
+  box-sizing: border-box;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.contextMenu:has(dialog[open]) .summary {
+  border-color: var(--accent);
+  background: var(--selection);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.icon {
+  flex: none;
+  color: var(--accent);
+}
+
+.chevron {
+  flex: none;
+  color: var(--secondary);
+}
+
+/* A sheet across the bottom of the screen; the shade above it closes it. It slides up as the shade
+ * darkens, and back down before it leaves the top layer (overlay and display wait for it). */
+.sheet {
+  box-sizing: border-box;
+  inset: auto 0 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 14px 14px 0 0;
+  background: var(--surface);
+  color: var(--ink);
+  translate: 0 100%;
+  transition:
+    translate 0.2s ease-in,
+    overlay 0.2s ease-in allow-discrete,
+    display 0.2s ease-in allow-discrete;
+}
+
+.sheet[open] {
+  translate: 0 0;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sheet::backdrop {
+  background: rgb(4 6 7 / 0);
+  transition:
+    background-color 0.2s ease-in,
+    overlay 0.2s ease-in allow-discrete,
+    display 0.2s ease-in allow-discrete;
+}
+
+.sheet[open]::backdrop {
+  background: rgb(4 6 7 / 0.72);
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+@starting-style {
+  .sheet[open] {
+    translate: 0 100%;
+  }
+
+  .sheet[open]::backdrop {
+    background: rgb(4 6 7 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet::backdrop {
+    transition: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 8px max(4px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom))
+    max(4px, env(safe-area-inset-left));
+}
+
+.handle {
+  align-self: center;
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--faint);
+}

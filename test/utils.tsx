@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import type { UserEvent } from '@testing-library/user-event'
 import type { ReactNode } from 'react'
 import { vi } from 'vitest'
 import { createStore, type AppState, type Gear } from '@/app/store'
@@ -23,3 +24,10 @@ export function renderWithStore(ui: ReactNode, state: Partial<AppState> = {}) {
 /** The device's preferred languages (navigator.languages), restored after each test. */
 export const deviceSpeaks = (...languages: string[]) =>
   vi.spyOn(navigator, 'languages', 'get').mockReturnValue(languages)
+
+/** Shows Ton équipement and Ton monde: on a phone they wait in the top bar's context menu, on a desktop
+ * the sidebar shows them. */
+export async function openContext(user: UserEvent) {
+  const summary = screen.queryByRole('button', { name: /^(Ton contexte|Your setup)/ })
+  if (summary) await user.click(summary)
+}

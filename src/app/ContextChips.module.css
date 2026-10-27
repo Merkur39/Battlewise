@@ -1,13 +1,12 @@
-.bar {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.sheet {
+  display: flex;
+  flex-direction: column;
 }
 
 .chip {
@@ -27,9 +26,16 @@
   color: var(--ink);
 }
 
-.bar .chip {
-  height: 44px;
-  padding: 0 10px;
+.sheet .chip {
+  gap: 12px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 0;
+}
+
+.sheet .chip + .chip,
+.sheet .chip + .chip:hover {
+  border-top: 1px solid var(--line-soft);
 }
 
 .sidebar .chip {
@@ -51,8 +57,16 @@
   line-height: 1.2;
 }
 
-.sidebar .lines {
+.sidebar .lines,
+.sheet .lines {
   gap: 2px;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
 }
 
 .name {
@@ -66,6 +80,10 @@
   font-size: 14px;
 }
 
+.sheet .name {
+  font-size: 16px;
+}
+
 .meta {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -76,6 +94,12 @@
   color: var(--secondary);
 }
 
-.sidebar .meta {
+.sidebar .meta,
+.sheet .meta {
   font-size: 11px;
+}
+
+.go {
+  flex: none;
+  color: var(--faint);
 }
