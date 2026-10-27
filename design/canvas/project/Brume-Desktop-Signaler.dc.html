@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Signaler — boîte de dialogue · Brume</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#342D47 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#342D47;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8D86A4}
+button,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#BBA6F7}a:hover{color:#D5C8FB}
+input::placeholder{color:#8D86A4}
+textarea{font:inherit;color:inherit;margin:0}
+textarea::placeholder{color:#8D86A4}
+/* Below 1400 px the sheet would lack room for its table (issue #25, track B). */
+.bw-range-tag{display:none}
+@media (max-width: 1399px){
+.bw-nav{flex-basis:64px !important;padding:20px 10px !important}
+.bw-nav .bw-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.bw-brand,.bw-link{justify-content:center;padding:0 !important}
+.bw-chip{justify-content:center;padding:12px 0 !important}
+.bw-list{flex-basis:320px !important}
+.bw-grid{grid-template-columns:minmax(0, 2fr) 72px repeat(3, minmax(0, 1.2fr)) 32px !important}
+.bw-range{display:none}
+.bw-range-tag{display:inline}
+.bw-sim{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+</style>
+</helmet>
+<div style="height: 100vh; min-height: 680px; box-sizing: border-box; display: flex; flex-wrap: wrap; background: #110F18; color: #E9E5F3; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <nav aria-label="Navigation principale" class="bw-nav" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #342D47">
+    <div class="bw-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#BBA6F7" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+      <span class="bw-label" style="font-size: 16px; font-weight: 500">Battlewise</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="Brume-Desktop-Bestiaire.dc.html" aria-current="page" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; background: #2E2747; color: #BBA6F7"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg><span class="bw-label">Bestiaire</span></a>
+      <a href="Brume-Desktop-Combat.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg><span class="bw-label">Simulation</span></a>
+      <a href="Brume-Desktop-Arsenal.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg><span class="bw-label">Arsenal</span></a>
+      <a href="Brume-Desktop-Memo.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg><span class="bw-label">Mémo</span></a>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span class="bw-label" style="padding: 0 4px; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">TON CONTEXTE</span>
+      <a href="Brume-Desktop-Equipement.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" class="bw-chip" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #342D47; border-radius: 6px; color: #E9E5F3; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#BBA6F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+        <span class="bw-label" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Argent N3</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">VD 81 · BLOCAGE 25</span></span>
+        <svg class="bw-label" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8D86A4" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="Brume-Desktop-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" class="bw-chip" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #342D47; border-radius: 6px; color: #E9E5F3; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#BBA6F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
+        <span class="bw-label" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Normal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">1 JOUEUR · ×1</span></span>
+        <svg class="bw-label" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8D86A4" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="Brume-Desktop-Reglages.dc.html" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; color: #A9A2BF; text-decoration: none"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg><span class="bw-label">Réglages</span></a>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; height: 100%; display: flex; flex-direction: column; box-sizing: border-box">
+    <header style="padding: 28px 32px 16px; display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 26px; font-weight: 500">Bestiaire</h1>
+      <p style="margin: 0; font-size: 15px; color: #A9A2BF">Comment prendre chaque créature avec ton équipement.</p>
+    </header>
+
+    <div style="flex: 1; min-height: 0; display: flex; border-top: 1px solid #342D47">
+      <section aria-label="Créatures" class="bw-list" style="flex: 0 0 400px; box-sizing: border-box; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 16px; border-right: 1px solid #342D47">
+        <a href="Brume-Desktop-Bestiaire-Recherche.dc.html" aria-label="Rechercher dans tous les biomes" style="display: flex; align-items: center; gap: 8px; height: 40px; box-sizing: border-box; border: 1px solid #342D47; border-radius: 4px; padding: 0 12px; font-size: 14px; color: #8D86A4; text-decoration: none">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8D86A4" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+          Monstre ou attaque, tous biomes
+        </a>
+        <div role="group" aria-label="Biome" style="display: flex; align-items: center; background: #1A1724; border-radius: 6px">
+          <button type="button" aria-label="Biome précédent : Prairies" style="width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px">
+            <span style="font-size: 15px; font-weight: 500">Forêt noire</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">BIOME 2 SUR 8 · 8 CRÉATURES</span>
+          </div>
+          <button type="button" aria-label="Biome suivant : Marais" style="width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 1px solid #342D47">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">COMMENT LE PRENDRE</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8D86A4">AVEC TON ÉQUIPEMENT</span>
+        </div>
+        <ul style="flex: 1; min-height: 0; overflow-y: auto; list-style: none; margin: -12px -16px 0; padding: 0; display: flex; flex-direction: column">
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+            <li style="border-bottom: 1px solid #241F33">
+              <a href="Brume-Desktop-Bestiaire.dc.html" aria-current="{{ r.current }}" style="display: flex; flex-direction: column; gap: 4px; padding: 10px 16px; color: #E9E5F3; text-decoration: none; {{ r.rowStyle }}">
+                <span style="display: flex; align-items: center; gap: 10px">
+                  <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px">
+                    <span style="font-size: 15px">{{ r.name }}<sc-if value="{{ r.hasQualifier }}" hint-placeholder-val="{{ false }}"><span style="color: #A9A2BF"> · {{ r.qualifier }}</span></sc-if></span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF">{{ r.stats }}</span>
+                  </span>
+                  <span style="display: flex; gap: 4px">
+                    <span role="img" aria-label="{{ r.bLabel }}" style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.bBorder }}; color: {{ r.bColor }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span>
+                    <span role="img" aria-label="{{ r.pLabel }}" style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.pBorder }}; color: {{ r.pColor }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span>
+                    <span role="img" aria-label="{{ r.dLabel }}" style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid {{ r.dBorder }}; color: {{ r.dColor }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span>
+                  </span>
+                </span>
+                <span style="font-size: 13px; color: {{ r.color }}">{{ r.advice }}</span>
+              </a>
+            </li>
+          </sc-for>
+        </ul>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: #A9A2BF; padding-top: 10px; border-top: 1px solid #342D47; margin-top: -12px">
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>blocage</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg>parade</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg>esquive</span>
+          <span><span style="color: #6FC594">tient</span> · <span style="color: #E3AA4C">tu titubes</span> · <span style="color: #F0726A">ne passe pas</span></span>
+        </div>
+      </section>
+
+      <section aria-labelledby="m-name" style="flex: 1; min-width: 0; overflow-y: auto; box-sizing: border-box; padding: 24px 32px 32px">
+        <div style="max-width: 860px; display: flex; flex-direction: column; gap: 24px">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <h2 id="m-name" style="margin: 0; font-size: 28px; font-weight: 500">Troll</h2>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9A2BF">FORÊT NOIRE</span>
+            </div>
+            <div role="group" aria-label="Étoiles" style="display: flex; border: 1px solid #342D47; border-radius: 4px; overflow: hidden">
+              <sc-for list="{{ starOpts }}" as="s" hint-placeholder-count="3">
+                <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="width: 60px; height: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; {{ s.style }}">{{ s.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px">
+            <div style="background: #1A1724; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">PV</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px">{{ hpTxt }}</span>
+            </div>
+            <div style="background: #1A1724; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">À INFLIGER</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px">{{ stagTxt }}</span>
+            </div>
+            <div style="background: #1A1724; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">TA PARADE</span>
+              <span style="font-size: 15px; color: #6FC594; padding-top: 4px">Le fait tituber</span>
+            </div>
+            <div style="background: #1A1724; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">COMMENT LE PRENDRE</span>
+              <span style="font-size: 15px; padding-top: 4px; color: {{ adviceColor }}">{{ advice }}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">FAIBLESSES ET RÉSISTANCES</span>
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; align-items: start">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF; padding-top: 6px">CORPS</span>
+              <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #A9A2BF; color: #E9E5F3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">FAIBLE ×1,5</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #342D47; color: #A9A2BF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M13 3l8 8-4 4-8-8zM13 11l-9 9"></path></svg>CONTONDANT · <span style="font-weight: 500">RÉSISTANT ×0,5</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px dashed #342D47; color: #8D86A4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #8D86A4">Tout le reste ×1</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; align-items: start">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF; padding-top: 6px">TÊTE</span>
+              <div style="display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px"><span style="padding: 4px 10px; border-radius: 3px; border: 1px solid #A9A2BF; color: #E9E5F3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>PERFORANT · <span style="font-weight: 500">TRÈS FAIBLE ×2</span></span><span style="padding: 4px 10px; border-radius: 3px; border: 1px dashed #342D47; color: #8D86A4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01"></path></svg>ESPRIT · <span style="font-weight: 500">IMMUNISÉ ×0</span></span><span style="font-size: 11px; color: #8D86A4">Tout le reste ×1</span></div>
+            </div>
+          </div>
+
+          <div role="table" aria-label="Attaques du Troll" style="display: flex; flex-direction: column; border: 1px solid #342D47; border-radius: 6px; overflow: hidden">
+            <div role="row" class="bw-grid" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; padding: 10px 16px; background: #1A1724; font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">
+              <span role="columnheader">ATTAQUE</span><span role="columnheader" class="bw-range">PORTÉE</span><span role="columnheader" style="text-align: right">DÉGÂTS</span><span role="columnheader">BLOCAGE</span><span role="columnheader">PARADE</span><span role="columnheader">ESQUIVE</span><span role="columnheader"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Simuler</span></span>
+            </div>
+            <sc-for list="{{ attacks }}" as="a" hint-placeholder-count="3">
+              <div role="row" class="bw-grid" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 80px repeat(3, minmax(0, 1.2fr)) 96px; gap: 12px; align-items: center; min-height: 52px; padding: 0 16px; border-top: 1px solid #241F33; font-size: 14px">
+                <span role="cell" style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span>{{ a.name }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A9A2BF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 3px"><path d="{{ a.t1d }}"></path></svg>{{ a.t1 }}<sc-if value="{{ a.hasT2 }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin: 0 3px 0 6px"><path d="{{ a.t2d }}"></path></svg>{{ a.t2 }}</sc-if><span class="bw-range-tag"> · {{ a.range }}</span></span></span>
+                <span role="cell" class="bw-range" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9A2BF">{{ a.range }}</span>
+                <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{ a.dmg }}</span>
+                <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{ a.bColor }}">{{ a.bTxt }}</span>
+                <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{ a.pColor }}">{{ a.pTxt }}</span>
+                <span role="cell" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #6FC594">ESQUIVABLE</span>
+                <span role="cell"><a href="Brume-Desktop-Combat.dc.html" aria-label="{{ a.simLabel }}" style="display: inline-flex; align-items: center; gap: 4px; min-height: 40px; font-size: 13px; color: #BBA6F7; text-decoration: none"><span class="bw-sim">Simuler</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a></span>
+              </div>
+            </sc-for>
+          </div>
+
+          <span style="font-size: 12px; color: #8D86A4">Simuler ouvre l'attaque dans la Simulation, avec la barre de stagger et l'endurance. PV, seuil, résistances et tête réels ; attaques d'exemple.</span>
+          <button type="button" onClick="{{ rep.openReport }}" style="align-self: flex-start; display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 13px; color: #BBA6F7">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>Un chiffre ou un nom faux ? Signale-le
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <sc-if value="{{ rep.open }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(4, 6, 7, 0.72)">
+      <div role="dialog" aria-modal="true" aria-label="Signaler" style="width: 600px; max-width: 100%; max-height: 100%; overflow-y: auto; box-sizing: border-box; border: 1px solid #342D47; border-radius: 10px; background: #1A1724; display: flex; flex-direction: column">
+        <sc-if value="{{ rep.form }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 6px 24px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 500">Signaler</h2>
+            <button type="button" onClick="{{ rep.close }}" aria-label="Fermer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #A9A2BF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div style="padding: 6px 24px 22px; display: flex; flex-direction: column; gap: 16px">
+            <div role="group" aria-label="Ce que tu signales" style="flex: none; display: flex; border: 1px solid #342D47; border-radius: 4px; overflow: hidden">
+              <sc-for list="{{ rep.kinds }}" as="k" hint-placeholder-count="3">
+                <button type="button" onClick="{{ k.pick }}" aria-pressed="{{ k.pressed }}" style="flex: 1; height: 40px; font-size: 13px; {{ k.style }}">{{ k.label }}</button>
+              </sc-for>
+            </div>
+            <div style="flex: none; display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 13px; color: #A9A2BF">{{ rep.subject }}<sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}"> : quelle ligne ? <span style="color: #8D86A4">· facultatif</span></sc-if></span>
+              <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+                <div role="group" aria-label="Quelle ligne" style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{ rep.lines }}" as="l" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ l.pick }}" aria-pressed="{{ l.pressed }}" style="height: 32px; padding: 0 12px; box-sizing: border-box; border-radius: 16px; font-size: 13px; {{ l.style }}">{{ l.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+              <span style="font-size: 13px; color: #A9A2BF">{{ rep.textLabel }}</span>
+              <textarea rows="4" placeholder="{{ rep.textHint }}" style="box-sizing: border-box; width: 100%; min-height: 104px; padding: 10px 12px; border: 1px solid #342D47; border-radius: 4px; background: #110F18; color: #E9E5F3; font-size: 14px; resize: vertical"></textarea>
+            </label>
+            <div style="display: grid; grid-template-columns: {{ rep.fieldCols }}; gap: 12px">
+              <sc-if value="{{ rep.isData }}" hint-placeholder-val="{{ true }}">
+                <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                  <span style="font-size: 13px; color: #A9A2BF">Ce que montre le jeu <span style="color: #8D86A4">· facultatif</span></span>
+                  <input type="text" placeholder="110, ou « Coup de massue »" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #342D47; border-radius: 4px; background: #110F18; color: #E9E5F3; font-size: 14px">
+                </label>
+              </sc-if>
+              <label style="flex: none; display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 13px; color: #A9A2BF">Ton pseudo, pour te remercier <span style="color: #8D86A4">· facultatif</span></span>
+                <input type="text" placeholder="Ton pseudo" style="box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #342D47; border-radius: 4px; background: #110F18; color: #E9E5F3; font-size: 14px">
+              </label>
+            </div>
+            <div style="flex: none; display: flex; flex-direction: column; border: 1px solid #342D47; border-radius: 6px">
+              <button type="button" onClick="{{ rep.toggleCtx }}" aria-expanded="{{ rep.ctxExpanded }}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; text-align: left">
+                <span style="flex: 1; font-size: 13px">Joint au signalement</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#A9A2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ rep.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ rep.ctxOpen }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 12px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.45; color: #A9A2BF">
+                  <sc-for list="{{ rep.context }}" as="c" hint-placeholder-count="6"><span>{{ c }}</span></sc-for>
+                  <span style="padding-top: 4px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; color: #8D86A4">Rien d'autre : ni adresse IP, ni identifiant.</span>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #342D47">
+            <span style="flex: 1; font-size: 12px; line-height: 1.45; color: #8D86A4">Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.</span>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #342D47; font-size: 14px">Annuler</button>
+            <button type="button" onClick="{{ rep.send }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18">Envoyer</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ rep.sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E9E5F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+              <span style="font-size: 18px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
+            </div>
+            <span style="font-size: 14px; line-height: 1.5; color: #A9A2BF">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
+          </div>
+          <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #342D47">
+            <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #342D47; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+            <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18">Fermer</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { stars: 0, report: true, kind: 'data', line: 'trunk', ctxOpen: true, sent: false };
+  }
+  renderVals() {
+    const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
+    const armor = (dmg, ac) => (ac <= 0 || dmg <= 0) ? Math.max(0, dmg) : (ac < dmg / 2 ? dmg - ac : Math.min(1, dmg / (ac * 4)) * dmg);
+    const bp = 72 * (1 + 25 / 200), ac = 45, T = 60, pb = 1.5;
+    const verdict = (hit, power) => {
+      const passes = armor(hit, power);
+      if (passes >= T) return 'bad';
+      return passes + armor(passes, ac) >= T ? 'warn' : 'ok';
+    };
+    const colors = { ok: '#6FC594', warn: '#E3AA4C', bad: '#F0726A', none: '#A9A2BF' };
+    const borders = { ok: '#2F7A52', warn: '#A86F12', bad: '#812C28', none: '#342D47' };
+    const words = { ok: 'TIENT', warn: 'TU TITUBES', bad: 'BRISÉ' };
+    const stars = this.state.stars;
+    const mult = [1, 1.5, 2][stars];
+    const base = [
+      { name: 'Coup de poing', short: 'son coup de poing', dmg: 70, range: 'MÊLÉE', types: ['blunt'] },
+      { name: 'Coup de tronc', short: 'son coup de tronc', dmg: 130, range: 'MÊLÉE', types: ['blunt'] },
+      { name: 'Frappe au sol', short: 'sa frappe au sol', dmg: 160, range: 'ZONE', types: ['blunt'] }
+    ];
+    const DT = { blunt: { label: 'CONTONDANT', d: 'M13 3l8 8-4 4-8-8zM13 11l-9 9' }, slash: { label: 'COUPANT', d: 'M4 14L14 4M7 19L19 7M13 20l7-7' }, pierce: { label: 'PERFORANT', d: 'M20 4l-7 3 4 4zM15 9L4 20' }, fire: { label: 'FEU', d: 'M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z' }, frost: { label: 'GIVRE', d: 'M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9' }, lightning: { label: 'FOUDRE', d: 'M13 3L5 14h6l-1 7 8-11h-6l1-7z' }, poison: { label: 'POISON', d: 'M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z' }, spirit: { label: 'ESPRIT', d: 'M6 20V11a6 6 0 0 1 12 0v9l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5zM10 11h.01M14 11h.01' } };
+    const typeVals = (keys) => ({ t1: DT[keys[0]].label, t1d: DT[keys[0]].d, hasT2: keys.length > 1, t2: keys.length > 1 ? DT[keys[1]].label : '', t2d: keys.length > 1 ? DT[keys[1]].d : '' });
+    const typeWords = (keys) => keys.map((k) => DT[k].label.toLowerCase()).join(' et ');
+    const attacks = base.map((a) => {
+      const hit = a.dmg * mult;
+      return { a: a, hit: hit, b: verdict(hit, bp), p: verdict(hit, bp * pb) };
+    });
+    const failing = attacks.filter((x) => x.p !== 'ok');
+    let advice, adviceState;
+    if (attacks.every((x) => x.b === 'ok')) { advice = 'Tu bloques tout sans tituber'; adviceState = 'ok'; }
+    else if (failing.length === 0) { advice = 'Pare-le : en bloquant, tu titubes'; adviceState = 'warn'; }
+    else if (failing.length === attacks.length) { advice = 'Esquive tout : même parées, ses attaques passent'; adviceState = 'bad'; }
+    else {
+      const rest = attacks.filter((x) => x.p === 'ok');
+      advice = 'Esquive ' + failing.map((x) => x.a.short).join(' et ') + (rest.every((x) => x.b === 'ok') ? ', bloque le reste' : ', pare le reste');
+      adviceState = 'bad';
+    }
+
+    const list = [
+      { name: 'Squelette', qualifier: 'Prairies', stats: '30 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
+      { name: 'Naingris', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
+      { name: 'Chaman naingris', stats: 'PV À EXTRAIRE', s: 'bad', b: 'bad', p: 'bad', d: 'ok', advice: 'Esquive son jet empoisonné, imparable' },
+      { name: 'Brute naingris', stats: '150 PV', s: 'warn', b: 'warn', p: 'ok', d: 'ok', advice: 'Pare-le : en bloquant, tu titubes' },
+      { name: 'Squelette', stats: '40 PV', s: 'ok', b: 'ok', p: 'ok', d: 'ok', advice: 'Tu bloques tout sans tituber' },
+      { name: 'Troll', stats: '600 PV', s: 'bad', b: 'bad', p: 'warn', d: 'ok', advice: 'Esquive sa frappe au sol, pare le reste', current: true },
+      { name: 'Fantôme', stats: 'PV À EXTRAIRE', s: 'none', b: 'none', p: 'none', d: 'none', advice: 'Attaques pas encore extraites' },
+      { name: "L'Aîné", stats: 'BOSS', s: 'none', b: 'none', p: 'none', d: 'none', advice: 'Attaques pas encore extraites' }
+    ];
+    const vw = { ok: 'tient', warn: 'tu titubes', bad: 'ne passe pas', none: 'pas encore calculé' };
+
+    return {
+      starOpts: [0, 1, 2].map((s) => ({
+        label: s + '★',
+        pressed: String(s === stars),
+        style: s === stars ? 'background: #BBA6F7; color: #110F18; font-weight: 500' : 'color: #A9A2BF',
+        pick: () => this.setState({ stars: s })
+      })),
+      rep: this.reportVals(),
+      hpTxt: fmt(600 * (stars + 1), 0),
+      stagTxt: fmt(180 * (stars + 1), 0),
+      advice: advice,
+      adviceColor: colors[adviceState],
+      attacks: attacks.map((x) => Object.assign(typeVals(x.a.types), {
+        name: x.a.name, range: x.a.range, dmg: fmt(x.hit, 0),
+        bTxt: words[x.b], bColor: colors[x.b], pTxt: words[x.p], pColor: colors[x.p],
+        simLabel: 'Simuler : ' + x.a.name + ', ' + fmt(x.hit, 0) + ' dégâts'
+      })),
+      rows: list.map((r) => ({
+        name: r.name, qualifier: r.qualifier || '', hasQualifier: Boolean(r.qualifier),
+        stats: r.stats, advice: r.advice, color: colors[r.s],
+        current: r.current ? 'true' : 'false',
+        rowStyle: r.current ? 'background: #2E2747' : '',
+        bColor: colors[r.b], bBorder: borders[r.b], bLabel: 'Blocage : ' + vw[r.b],
+        pColor: colors[r.p], pBorder: borders[r.p], pLabel: 'Parade : ' + vw[r.p],
+        dColor: colors[r.d], dBorder: borders[r.d], dLabel: 'Esquive : ' + vw[r.d]
+      }))
+    };
+  }
+  reportVals() {
+    const st = this.state;
+    const stars = st.stars;
+    const mult = [1, 1.5, 2][stars];
+    const KINDS = [
+      { id: 'data', label: 'Donnée fausse', text: "Qu'est-ce qui est faux ?", hint: 'Le coup de tronc fait 110 dans le jeu, pas 130.' },
+      { id: 'bug', label: 'Bug', text: "Qu'est-ce qui s'est passé ?", hint: "La fiche reste vide quand je change d'étoiles." },
+      { id: 'idea', label: 'Idée', text: 'Ton idée', hint: 'Voir les attaques des boss phase par phase.' }
+    ];
+    const LINES = [
+      { id: 'hp', label: 'PV', values: 'PV ' + 600 * (stars + 1) },
+      { id: 'stagger', label: 'À infliger', values: 'À INFLIGER ' + 180 * (stars + 1) },
+      { id: 'weak', label: 'Faiblesses', values: 'CORPS : PERFORANT ×1,5, CONTONDANT ×0,5, ESPRIT ×0 · TÊTE : PERFORANT ×2, ESPRIT ×0' },
+      { id: 'punch', label: 'Coup de poing', values: 'COUP DE POING ' + 70 * mult },
+      { id: 'trunk', label: 'Coup de tronc', values: 'COUP DE TRONC ' + 130 * mult },
+      { id: 'slam', label: 'Frappe au sol', values: 'FRAPPE AU SOL ' + 160 * mult }
+    ];
+    const current = KINDS.find((k) => k.id === st.kind);
+    const isData = st.kind === 'data';
+    const picked = isData ? LINES.find((l) => l.id === st.line) : null;
+    return {
+      open: st.report, form: !st.sent, sent: st.sent,
+      openReport: () => this.setState({ report: true, sent: false }),
+      close: () => this.setState({ report: false, sent: false }),
+      send: () => this.setState({ sent: true }),
+      subject: 'Sur la fiche du Troll · ' + stars + '★',
+      kinds: KINDS.map((k) => ({
+        label: k.label,
+        pressed: String(k.id === st.kind),
+        style: k.id === st.kind ? 'background: #BBA6F7; color: #110F18; font-weight: 500' : 'color: #A9A2BF',
+        pick: () => this.setState({ kind: k.id })
+      })),
+      lines: LINES.map((l) => ({
+        label: l.label,
+        pressed: String(l.id === st.line),
+        style: l.id === st.line ? 'background: #BBA6F7; color: #110F18; font-weight: 500; border: 1px solid #BBA6F7' : 'color: #E9E5F3; border: 1px solid #342D47',
+        pick: () => this.setState({ line: l.id === st.line ? null : l.id })
+      })),
+      isData: isData,
+      fieldCols: isData ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      textLabel: current.text,
+      textHint: current.hint,
+      ctxOpen: st.ctxOpen,
+      ctxExpanded: String(st.ctxOpen),
+      chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
+      toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
+      context: [
+        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FRANÇAIS · BESTIAIRE, FICHE DU TROLL · FENÊTRE 1440 PX',
+        'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),
+        'COUP DE POING ' + 70 * mult + ' · COUP DE TRONC ' + 130 * mult + ' · FRAPPE AU SOL ' + 160 * mult + ', AVEC LEURS VERDICTS',
+        'TON ÉQUIPEMENT : BOUCLIER EN ARGENT N3 · VD 81',
+        'TON MONDE : NORMAL · 1 JOUEUR'
+      ].concat(picked ? ['LIGNE DÉSIGNÉE : ' + picked.values] : [])
+    };
+  }
+}
+</script>
+</body>
+</html>

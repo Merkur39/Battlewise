@@ -31,7 +31,8 @@ MOBILE = [
                     ("Recherche", "Choisir une attaque · recherche", False)]),
     ("Arsenal et mémo", [("Arsenal", "Arsenal", True), ("Memo", "Mémo", True)]),
     ("Fenêtres et système", [("Profil", "Ton équipement", False), ("Monde", "Ton monde", False),
-                             ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True), ("Tokens", None, False)]),
+                             ("Contexte", "Ton contexte", True), ("Signaler", "Signaler", True), ("Reglages", "Réglages", True),
+                             ("Tokens", None, False)]),
 ]
 DESKTOP = [
     ("Desktop · écrans principaux", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),
@@ -39,7 +40,7 @@ DESKTOP = [
     ("Desktop · arsenal et mémo", [("Arsenal", "Arsenal", True), ("Memo", "Mémo", False)]),
     ("Desktop · fenêtres", [("Attaque", "Choisir une attaque", True), ("Recherche", "Choisir une attaque · recherche", False),
                             ("Equipement", "Ton équipement", False),
-                            ("Monde", "Ton monde", False), ("Reglages", "Réglages", True)]),
+                            ("Monde", "Ton monde", False), ("Signaler", "Signaler", True), ("Reglages", "Réglages", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960
 

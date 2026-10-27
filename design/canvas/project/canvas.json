@@ -86,8 +86,16 @@
       "title": "Ton contexte",
       "is_interactive": true
     },
-    "Reglages.dc.html": {
+    "Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "is_interactive": true
+    },
+    "Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -95,7 +103,7 @@
       "is_interactive": true
     },
     "Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -178,8 +186,17 @@
       "title": "Ton monde · desktop",
       "expand": "fill"
     },
-    "Desktop-Reglages.dc.html": {
+    "Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -425,6 +442,38 @@
       "title": "Licence · trois pistes",
       "page": "licence"
     },
+    "Signaler-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1140,
+      "title": "Piste A · Un lien au bout — retenue",
+      "page": "signaler"
+    },
+    "Signaler-Desktop.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1440,
+      "h": 1320,
+      "title": "Piste A · desktop",
+      "page": "signaler"
+    },
+    "Signaler-B.dc.html": {
+      "x": 0,
+      "y": 1260,
+      "w": 1440,
+      "h": 1140,
+      "title": "Piste B · Montre la ligne",
+      "page": "signaler"
+    },
+    "Signaler-C.dc.html": {
+      "x": 0,
+      "y": 2520,
+      "w": 1440,
+      "h": 1220,
+      "title": "Piste C · Un bouton partout, le type d'abord",
+      "page": "signaler"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -520,8 +569,17 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Reglages.dc.html": {
+    "Braise-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -530,7 +588,7 @@
       "is_interactive": true
     },
     "Braise-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -623,8 +681,18 @@
       "expand": "fill",
       "page": "braise"
     },
-    "Braise-Desktop-Reglages.dc.html": {
+    "Braise-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -728,8 +796,17 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Reglages.dc.html": {
+    "Brume-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -738,7 +815,7 @@
       "is_interactive": true
     },
     "Brume-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -831,8 +908,18 @@
       "expand": "fill",
       "page": "brume"
     },
-    "Brume-Desktop-Reglages.dc.html": {
+    "Brume-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -936,8 +1023,17 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Reglages.dc.html": {
+    "Jour-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -946,7 +1042,7 @@
       "is_interactive": true
     },
     "Jour-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1039,8 +1135,18 @@
       "expand": "fill",
       "page": "jour"
     },
-    "Jour-Desktop-Reglages.dc.html": {
+    "Jour-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -1144,8 +1250,17 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Reglages.dc.html": {
+    "Runes-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1154,7 +1269,7 @@
       "is_interactive": true
     },
     "Runes-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1247,8 +1362,18 @@
       "expand": "fill",
       "page": "runes"
     },
-    "Runes-Desktop-Reglages.dc.html": {
+    "Runes-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -1352,8 +1477,17 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Reglages.dc.html": {
+    "Graphite-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1362,7 +1496,7 @@
       "is_interactive": true
     },
     "Graphite-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1455,8 +1589,18 @@
       "expand": "fill",
       "page": "graphite"
     },
-    "Graphite-Desktop-Reglages.dc.html": {
+    "Graphite-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -1560,8 +1704,17 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Reglages.dc.html": {
+    "Parchemin-Signaler.dc.html": {
       "x": 1410,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Signaler",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Reglages.dc.html": {
+      "x": 1880,
       "y": 3792,
       "w": 390,
       "h": 844,
@@ -1570,7 +1723,7 @@
       "is_interactive": true
     },
     "Parchemin-Tokens.dc.html": {
-      "x": 1880,
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1663,8 +1816,18 @@
       "expand": "fill",
       "page": "parchemin"
     },
-    "Parchemin-Desktop-Reglages.dc.html": {
+    "Parchemin-Desktop-Signaler.dc.html": {
       "x": 6080,
+      "y": 7940,
+      "w": 1440,
+      "h": 900,
+      "title": "Signaler · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Reglages.dc.html": {
+      "x": 7600,
       "y": 7940,
       "w": 1440,
       "h": 900,
@@ -1709,7 +1872,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760
+      "maxW": 3230
     },
     "d-row1": {
       "kind": "title1",
@@ -1730,7 +1893,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520
+      "maxW": 9040
     },
     "sim-row1": {
       "kind": "title1",
@@ -1856,6 +2019,14 @@
       "maxW": 1440,
       "page": "licence"
     },
+    "signaler-row1": {
+      "kind": "title1",
+      "text": "Signaler depuis l'app",
+      "x": 0,
+      "y": -300,
+      "maxW": 2960,
+      "page": "signaler"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -1885,7 +2056,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "braise"
     },
     "d-row1-braise": {
@@ -1909,7 +2080,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "braise"
     },
     "m-row1-brume": {
@@ -1941,7 +2112,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "brume"
     },
     "d-row1-brume": {
@@ -1965,7 +2136,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "brume"
     },
     "m-row1-jour": {
@@ -1997,7 +2168,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "jour"
     },
     "d-row1-jour": {
@@ -2021,7 +2192,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "jour"
     },
     "m-row1-runes": {
@@ -2053,7 +2224,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "runes"
     },
     "d-row1-runes": {
@@ -2077,7 +2248,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "runes"
     },
     "m-row1-graphite": {
@@ -2109,7 +2280,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "graphite"
     },
     "d-row1-graphite": {
@@ -2133,7 +2304,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "graphite"
     },
     "m-row1-parchemin": {
@@ -2165,7 +2336,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "parchemin"
     },
     "d-row1-parchemin": {
@@ -2189,7 +2360,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 7640,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "parchemin"
     }
   },
@@ -2205,6 +2376,7 @@
     "Profil.dc.html",
     "Monde.dc.html",
     "Contexte.dc.html",
+    "Signaler.dc.html",
     "Reglages.dc.html",
     "Tokens.dc.html",
     "Desktop-Bestiaire.dc.html",
@@ -2216,6 +2388,7 @@
     "Desktop-Recherche.dc.html",
     "Desktop-Equipement.dc.html",
     "Desktop-Monde.dc.html",
+    "Desktop-Signaler.dc.html",
     "Desktop-Reglages.dc.html",
     "Sim-A.dc.html",
     "Sim-B.dc.html",
@@ -2244,6 +2417,10 @@
     "Etroit-C-1024.dc.html",
     "Etroit-C-1280.dc.html",
     "Licence.dc.html",
+    "Signaler-A.dc.html",
+    "Signaler-Desktop.dc.html",
+    "Signaler-B.dc.html",
+    "Signaler-C.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2255,6 +2432,7 @@
     "Braise-Profil.dc.html",
     "Braise-Monde.dc.html",
     "Braise-Contexte.dc.html",
+    "Braise-Signaler.dc.html",
     "Braise-Reglages.dc.html",
     "Braise-Tokens.dc.html",
     "Braise-Desktop-Bestiaire.dc.html",
@@ -2266,6 +2444,7 @@
     "Braise-Desktop-Recherche.dc.html",
     "Braise-Desktop-Equipement.dc.html",
     "Braise-Desktop-Monde.dc.html",
+    "Braise-Desktop-Signaler.dc.html",
     "Braise-Desktop-Reglages.dc.html",
     "Brume-Bestiaire.dc.html",
     "Brume-Bestiaire-Recherche.dc.html",
@@ -2278,6 +2457,7 @@
     "Brume-Profil.dc.html",
     "Brume-Monde.dc.html",
     "Brume-Contexte.dc.html",
+    "Brume-Signaler.dc.html",
     "Brume-Reglages.dc.html",
     "Brume-Tokens.dc.html",
     "Brume-Desktop-Bestiaire.dc.html",
@@ -2289,6 +2469,7 @@
     "Brume-Desktop-Recherche.dc.html",
     "Brume-Desktop-Equipement.dc.html",
     "Brume-Desktop-Monde.dc.html",
+    "Brume-Desktop-Signaler.dc.html",
     "Brume-Desktop-Reglages.dc.html",
     "Jour-Bestiaire.dc.html",
     "Jour-Bestiaire-Recherche.dc.html",
@@ -2301,6 +2482,7 @@
     "Jour-Profil.dc.html",
     "Jour-Monde.dc.html",
     "Jour-Contexte.dc.html",
+    "Jour-Signaler.dc.html",
     "Jour-Reglages.dc.html",
     "Jour-Tokens.dc.html",
     "Jour-Desktop-Bestiaire.dc.html",
@@ -2312,6 +2494,7 @@
     "Jour-Desktop-Recherche.dc.html",
     "Jour-Desktop-Equipement.dc.html",
     "Jour-Desktop-Monde.dc.html",
+    "Jour-Desktop-Signaler.dc.html",
     "Jour-Desktop-Reglages.dc.html",
     "Runes-Bestiaire.dc.html",
     "Runes-Bestiaire-Recherche.dc.html",
@@ -2324,6 +2507,7 @@
     "Runes-Profil.dc.html",
     "Runes-Monde.dc.html",
     "Runes-Contexte.dc.html",
+    "Runes-Signaler.dc.html",
     "Runes-Reglages.dc.html",
     "Runes-Tokens.dc.html",
     "Runes-Desktop-Bestiaire.dc.html",
@@ -2335,6 +2519,7 @@
     "Runes-Desktop-Recherche.dc.html",
     "Runes-Desktop-Equipement.dc.html",
     "Runes-Desktop-Monde.dc.html",
+    "Runes-Desktop-Signaler.dc.html",
     "Runes-Desktop-Reglages.dc.html",
     "Graphite-Bestiaire.dc.html",
     "Graphite-Bestiaire-Recherche.dc.html",
@@ -2347,6 +2532,7 @@
     "Graphite-Profil.dc.html",
     "Graphite-Monde.dc.html",
     "Graphite-Contexte.dc.html",
+    "Graphite-Signaler.dc.html",
     "Graphite-Reglages.dc.html",
     "Graphite-Tokens.dc.html",
     "Graphite-Desktop-Bestiaire.dc.html",
@@ -2358,6 +2544,7 @@
     "Graphite-Desktop-Recherche.dc.html",
     "Graphite-Desktop-Equipement.dc.html",
     "Graphite-Desktop-Monde.dc.html",
+    "Graphite-Desktop-Signaler.dc.html",
     "Graphite-Desktop-Reglages.dc.html",
     "Parchemin-Bestiaire.dc.html",
     "Parchemin-Bestiaire-Recherche.dc.html",
@@ -2370,6 +2557,7 @@
     "Parchemin-Profil.dc.html",
     "Parchemin-Monde.dc.html",
     "Parchemin-Contexte.dc.html",
+    "Parchemin-Signaler.dc.html",
     "Parchemin-Reglages.dc.html",
     "Parchemin-Tokens.dc.html",
     "Parchemin-Desktop-Bestiaire.dc.html",
@@ -2381,6 +2569,7 @@
     "Parchemin-Desktop-Recherche.dc.html",
     "Parchemin-Desktop-Equipement.dc.html",
     "Parchemin-Desktop-Monde.dc.html",
+    "Parchemin-Desktop-Signaler.dc.html",
     "Parchemin-Desktop-Reglages.dc.html"
   ],
   "pages": [
@@ -2427,6 +2616,10 @@
     {
       "id": "licence",
       "name": "Licence · pistes"
+    },
+    {
+      "id": "signaler",
+      "name": "Signaler · pistes"
     },
     {
       "id": "braise",

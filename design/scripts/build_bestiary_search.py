@@ -236,6 +236,18 @@ def build_context():
     (P / "Contexte.dc.html").write_text(text, encoding="utf-8", newline="\n")
 
 
+def build_report():
+    """The creature sheet and the desktop Bestiaire with their report sheet open, a line picked (issue #32)."""
+    for source, target, title in (("Monstre.dc.html", "Signaler.dc.html", "Signaler — feuille du bas"),
+                                  ("Desktop-Bestiaire.dc.html", "Desktop-Signaler.dc.html", "Signaler — boîte de dialogue")):
+        text = (P / source).read_text(encoding="utf-8")
+        text = re.sub(r"<title>.*?</title>", f"<title>{title}</title>", text, count=1)
+        closed = "report: false, kind: 'data', line: null"
+        assert text.count(closed) == 1
+        text = text.replace(closed, "report: true, kind: 'data', line: 'trunk'", 1)
+        (P / target).write_text(text, encoding="utf-8", newline="\n")
+
+
 def main():
     build_mobile()
     build_desktop()
@@ -252,6 +264,7 @@ def main():
         </a>
 ''')
     build_context()
+    build_report()
     print("ok")
 
 
