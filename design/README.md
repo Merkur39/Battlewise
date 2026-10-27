@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v69** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v74** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -19,6 +19,12 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 - Page **Menu · pistes** (`Menu-A` to `Menu-C`): the three tracks for Ton équipement and Ton monde on a
   phone. The phone boards carry track C's summary button (VD and enemy scale) opening track B's bottom
   sheet, animated; the « Ton contexte » board of Origine shows it open. Made by hand as well.
+- Page **Compétence** (`Competence`): the Blocking skill field of Ton équipement on a 360 px phone, as it
+  overflowed, and two ways to keep its label on one line; track A (the value at the end of the slider) is
+  the one carried into the Ton équipement boards. Made by hand as well.
+- Page **Encaisses** (`Encaisses`): the « Ce que tu encaisses » card on a 360 px phone, as it jumped, and two
+  steady layouts; track B (the legend under the title, numbers alone on each guard's line) is the one
+  carried into the phone Ton équipement board. Made by hand as well.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
   (« Ton contexte », the phone Bestiaire with its context sheet open).
 - Réglages boards carry the seven palettes themselves (live preview); their state line must stay
@@ -26,7 +32,7 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
 
 ## Workflow
 
-1. Refresh the working copy when the live artifact is newer than v69: read the artifact's file list
+1. Refresh the working copy when the live artifact is newer than v74: read the artifact's file list
    (`Artifact` action `list`, scope `files`) and fetch `project/canvas.json` and every `project/*.dc.html` into
    `canvas/project/`.
 2. Edit Origine boards only. Every hex colour must be one of the 16 Origine tokens (see `scripts/palettes.py`),

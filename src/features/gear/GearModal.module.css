@@ -39,8 +39,7 @@
 }
 
 .withstandHeader,
-.guardLine,
-.skillHeader {
+.guardLine {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -51,6 +50,31 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* Phone: what each zone of the gauges means, once; each guard then holds on one line, whatever its
+ * values. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--secondary);
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Over the gauge's own sizing of its zones (the bad one fills the rest). */
+.legend .swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
 }
 
 /* Large values push the thresholds to a line of their own rather than out of the box. */
@@ -114,7 +138,9 @@
   background: var(--bad-fill);
 }
 
-/* The item that blocks: a native select, with its group and parry bonus beside it. */
+/* The item that blocks: a native select across the whole box, so that a tap anywhere opens it; its
+ * group and parry bonus lie over its right end, letting taps through, over a fade that hides a long
+ * name running under them. */
 .item {
   grid-column: 1 / -1;
   display: flex;
@@ -123,22 +149,23 @@
 }
 
 .select {
+  --select-background: var(--surface);
+
+  position: relative;
   height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: var(--surface);
+  background: var(--select-background);
 }
 
 .selectInput {
-  flex: 1;
-  min-width: 0;
-  height: 46px;
-  padding: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
   border: 0;
+  border-radius: 4px;
   background: transparent;
   font-size: 15px;
   text-overflow: ellipsis;
@@ -161,6 +188,18 @@
   color: var(--ink);
 }
 
+.extras {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 0 20px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(to right, transparent, var(--select-background) 14px);
+  pointer-events: none;
+}
+
 .tag {
   flex: none;
   padding: 1px 6px;
@@ -176,7 +215,6 @@
 .chevron {
   flex: none;
   color: var(--secondary);
-  pointer-events: none;
 }
 
 .level,
@@ -187,19 +225,27 @@
   gap: 6px;
 }
 
-.skillHeader {
+/* The label on its own line, whole; the value at the end of the slider it follows. */
+.skill .label {
+  white-space: nowrap;
+}
+
+.skillControl {
+  display: flex;
   align-items: center;
-  height: 15px;
+  gap: 10px;
 }
 
 .skillValue {
+  min-width: 3ch;
   font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1;
+  font-size: 15px;
+  text-align: right;
 }
 
 .range {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   height: 44px;
   margin: 0;
   accent-color: var(--accent);
@@ -234,12 +280,9 @@
   }
 
   .select {
-    height: 44px;
-    background: var(--bg);
-  }
+    --select-background: var(--bg);
 
-  .selectInput {
-    height: 42px;
+    height: 44px;
   }
 
   .range {

@@ -82,8 +82,34 @@ export function GearModal() {
             </h3>
             <span className={styles.meta}>{t.gear.emptyBar}</span>
           </div>
-          <GuardRow name={t.gear.block} gauge={taken.block} scale={taken.scale} />
-          <GuardRow name={t.gear.parry} gauge={taken.parry} scale={taken.scale} />
+          {!isDesktop && (
+            <div aria-hidden="true" className={styles.legend}>
+              <span className={styles.key}>
+                <span className={`${styles.swatch ?? ''} ${styles.okFill ?? ''}`} />
+                {t.gear.unstaggered}
+              </span>
+              <span className={styles.key}>
+                <span className={`${styles.swatch ?? ''} ${styles.warnFill ?? ''}`} />
+                {t.gear.unbroken}
+              </span>
+              <span className={styles.key}>
+                <span className={`${styles.swatch ?? ''} ${styles.badFill ?? ''}`} />
+                {t.verdicts.broken}
+              </span>
+            </div>
+          )}
+          <GuardRow
+            name={t.gear.block}
+            gauge={taken.block}
+            scale={taken.scale}
+            compact={!isDesktop}
+          />
+          <GuardRow
+            name={t.gear.parry}
+            gauge={taken.parry}
+            scale={taken.scale}
+            compact={!isDesktop}
+          />
           <span className={styles.meta}>
             {t.gear.staggersAt(
               taken.staggerAt,
@@ -119,13 +145,15 @@ export function GearModal() {
                 </optgroup>
               ))}
             </select>
-            <span className={styles.tag}>
-              {t.gear.groupTags[group]} ·{' '}
-              {blocker.timedBlockBonus > 1
-                ? t.gear.parryBonus(blocker.timedBlockBonus)
-                : t.gear.noParry}
+            <span className={styles.extras}>
+              <span className={styles.tag}>
+                {t.gear.groupTags[group]} ·{' '}
+                {blocker.timedBlockBonus > 1
+                  ? t.gear.parryBonus(blocker.timedBlockBonus)
+                  : t.gear.noParry}
+              </span>
+              <ChevronDownIcon size={18} className={styles.chevron} />
             </span>
-            <ChevronDownIcon size={18} className={styles.chevron} />
           </div>
           {isDesktop && <p className={styles.note}>{t.gear.torch}</p>}
         </div>
@@ -147,24 +175,24 @@ export function GearModal() {
         </div>
 
         <div className={styles.skill}>
-          <div className={styles.skillHeader}>
-            <label htmlFor={skillId} className={styles.label}>
-              {t.gear.skill}
-            </label>
+          <label htmlFor={skillId} className={styles.label}>
+            {t.gear.skill}
+          </label>
+          <div className={styles.skillControl}>
+            <input
+              id={skillId}
+              type="range"
+              min={0}
+              max={100}
+              step={1}
+              value={draft.skill}
+              className={styles.range}
+              onChange={(event) => {
+                pick({ skill: Number(event.target.value) })
+              }}
+            />
             <span className={styles.skillValue}>{n(draft.skill)}</span>
           </div>
-          <input
-            id={skillId}
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={draft.skill}
-            className={styles.range}
-            onChange={(event) => {
-              pick({ skill: Number(event.target.value) })
-            }}
-          />
         </div>
 
         <NumberField
@@ -205,14 +233,19 @@ function GuardRow({
   name,
   gauge,
   scale,
+  compact,
 }: {
   readonly name: string
   readonly gauge: GuardGauge | null
   readonly scale: number
+  /** Phone: the legend above names the thresholds, so the line shows the numbers alone; the words stay
+   * for screen readers. */
+  readonly compact: boolean
 }) {
   const t = useT()
   const language = useLanguage()
   const n = (value: number) => formatNumber(value, language)
+  const word = compact ? 'visually-hidden' : undefined
   return (
     <div role="group" aria-label={name} className={styles.guard}>
       <div className={styles.guardLine}>
@@ -222,9 +255,10 @@ function GuardRow({
         </span>
         {gauge ? (
           <span className={styles.thresholds}>
-            {t.gear.unstaggered}{' '}
+            <span className={word}>{t.gear.unstaggered} </span>
             <span className={styles.ok}>{n(Math.floor(gauge.unstaggered))}</span> ·{' '}
-            {t.gear.unbroken} <span className={styles.warn}>{n(Math.floor(gauge.unbroken))}</span>
+            <span className={word}>{t.gear.unbroken} </span>
+            <span className={styles.warn}>{n(Math.floor(gauge.unbroken))}</span>
           </span>
         ) : (
           <span className={styles.thresholds}>{t.gear.cannotParry}</span>

@@ -297,6 +297,22 @@
       "is_interactive": true,
       "page": "menu"
     },
+    "Competence.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 520,
+      "title": "Compétence Blocage — deux pistes",
+      "page": "competence"
+    },
+    "Encaisses.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 560,
+      "title": "Ce que tu encaisses — deux pistes",
+      "page": "encaisses"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1644,6 +1660,22 @@
       "maxW": 1330,
       "page": "menu"
     },
+    "competence-row1": {
+      "kind": "title1",
+      "text": "Compétence Blocage",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "competence"
+    },
+    "encaisses-row1": {
+      "kind": "title1",
+      "text": "Ce que tu encaisses",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "encaisses"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -2018,6 +2050,8 @@
     "Menu-A.dc.html",
     "Menu-B.dc.html",
     "Menu-C.dc.html",
+    "Competence.dc.html",
+    "Encaisses.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -2177,6 +2211,14 @@
     {
       "id": "menu",
       "name": "Menu · pistes"
+    },
+    {
+      "id": "competence",
+      "name": "Compétence"
+    },
+    {
+      "id": "encaisses",
+      "name": "Encaisses"
     },
     {
       "id": "braise",

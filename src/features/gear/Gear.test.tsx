@@ -31,6 +31,31 @@ describe('Your gear', () => {
     expect(withstand).toHaveTextContent('Titube à 60 (40 % de 150 PV) · armure 45')
   })
 
+  it('names the zones of the gauges once, in a legend, on a phone', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, fr)
+
+    const dialog = await openGear(user)
+
+    const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
+    expect(within(withstand).getByText('ne passe pas')).toBeInTheDocument()
+    expect(within(withstand).getAllByText('sans tituber')).toHaveLength(3)
+  })
+
+  it('keeps the words beside the numbers on a desktop, with no legend', async () => {
+    const user = userEvent.setup()
+    setViewportWidth('desktop')
+    renderWithStore(<App />, fr)
+
+    const dialog = await openGear(user)
+
+    const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
+    expect(within(withstand).queryByText('ne passe pas')).not.toBeInTheDocument()
+    expect(within(withstand).getByRole('group', { name: 'Bloquer' })).toHaveTextContent(
+      'sans tituber 124 · tient 139',
+    )
+  })
+
   it('works out what you can take again as the gear changes, before it is saved', async () => {
     const user = userEvent.setup()
     renderWithStore(<App />, fr)

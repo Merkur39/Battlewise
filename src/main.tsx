@@ -4,11 +4,12 @@ import '@fontsource/ibm-plex-sans/400.css'
 import '@fontsource/ibm-plex-sans/500.css'
 import '@fontsource/ibm-plex-mono/400.css'
 import '@fontsource/ibm-plex-mono/500.css'
+// The global styles before any component: each component's own styles come after them, and prevail.
+import './styles/themes.css'
+import './styles/base.css'
 import { App } from './app/App'
 import { browserStorage, createStore } from './app/store'
 import { StoreContext } from './app/useAppState'
-import './styles/themes.css'
-import './styles/base.css'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) {
