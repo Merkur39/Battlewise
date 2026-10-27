@@ -32,6 +32,9 @@ whichever way it comes in; one heard elsewhere is copied there by hand, labelled
 The Inbox is emptied every week: each report is planned, answered, or closed as a duplicate or as
 won't fix, with a word saying why.
 
+An attack name changes only with a source: the game, or the Valheim wiki. Where neither names an
+attack, Battlewise names it, and a report that only suggests another name is closed as won't fix.
+
 ## Requirements
 
 - Node.js ≥ 22.12.
