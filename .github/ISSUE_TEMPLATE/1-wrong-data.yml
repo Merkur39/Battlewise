@@ -28,14 +28,11 @@ body:
       description: Or what it should be.
     validations:
       required: true
-  - type: dropdown
+  - type: input
     id: checked
     attributes:
       label: How you checked
-      options:
-        - In game
-        - On the wiki
-        - Other
+      placeholder: In game, on the wiki, elsewhere…
     validations:
       required: true
   - type: input
