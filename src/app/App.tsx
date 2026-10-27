@@ -5,6 +5,7 @@ import { creatureName } from '@/features/bestiary/model'
 import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
+import { ScreenCrash } from '@/features/report/Crash'
 import type { ReportOrigin } from '@/features/report/model'
 import { NewsModal } from '@/features/report/NewsModal'
 import { ReportSheet } from '@/features/report/ReportSheet'
@@ -22,6 +23,7 @@ import { WorldModal } from '@/features/world/WorldModal'
 import { useLanguage, useT } from '@/i18n/useT'
 import styles from './App.module.css'
 import { APP_NAME } from './brand'
+import { CrashBoundary } from './CrashBoundary'
 import { PreviewContext, usePreview, type Preview } from './preview'
 import { routeHash, SCREENS, screenHash, type Route, type Screen } from './routes'
 import { Sidebar } from './Sidebar'
@@ -106,15 +108,21 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
     <OpenReportContext value={setReport}>
       <div className={isDesktop ? styles.desktop : styles.phone}>
         {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
-        {screen === 'bestiary' ? (
-          <BestiaryScreen route={route} />
-        ) : screen === 'simulation' ? (
-          <SimulationScreen route={route} />
-        ) : screen === 'arsenal' ? (
-          <ArsenalScreen route={route} />
-        ) : (
-          <GuideScreen route={route} />
-        )}
+        {/* Each screen under its own net, which another tab leaves behind: the bars stay. */}
+        <CrashBoundary
+          key={screen}
+          fallback={(crash, retry) => <ScreenCrash screen={screen} crash={crash} onRetry={retry} />}
+        >
+          {screen === 'bestiary' ? (
+            <BestiaryScreen route={route} />
+          ) : screen === 'simulation' ? (
+            <SimulationScreen route={route} />
+          ) : screen === 'arsenal' ? (
+            <ArsenalScreen route={route} />
+          ) : (
+            <GuideScreen route={route} />
+          )}
+        </CrashBoundary>
         {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
         {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
         {modal === 'attack' && <AttackPicker />}

@@ -363,8 +363,38 @@ export const fr = {
     attachedSummary: "Version, données, ce que l'écran affiche, ton contexte",
     device: (version: string, gameVersion: string) =>
       `Battlewise ${version} · lues dans Valheim ${gameVersion}`,
-    screen: (language: Language, screen: 'creature' | 'simulation' | 'settings', width: number) =>
-      `${{ fr: 'Français', en: 'Anglais' }[language]} · ${{ creature: 'fiche monstre', simulation: 'Simulation', settings: 'Réglages' }[screen]} · écran de ${n(width)} px`,
+    screen: (
+      language: Language,
+      screen: 'creature' | 'simulation' | 'settings' | 'app' | 'bestiary' | 'arsenal' | 'guide',
+      width: number,
+    ) =>
+      [
+        { fr: 'Français', en: 'Anglais' }[language],
+        ...(screen === 'app'
+          ? []
+          : [
+              {
+                creature: 'fiche monstre',
+                simulation: 'Simulation',
+                settings: 'Réglages',
+                bestiary: 'Bestiaire',
+                arsenal: 'Arsenal',
+                guide: 'Mémo',
+              }[screen],
+            ]),
+        `écran de ${n(width)} px`,
+      ].join(' · '),
+    crashText: 'Ce que tu faisais',
+    crashHint: {
+      creature: "J'ai passé le Troll à 2★.",
+      bestiary: "J'ai changé de biome.",
+      simulation: "J'ai choisi une attaque.",
+      arsenal: "J'ai changé de niveau.",
+      guide: "J'ai ouvert une règle.",
+      app: "J'ai ouvert Battlewise.",
+    },
+    crashSummary: "Version, écran, l'erreur et sa pile",
+    moreLines: (count: number) => `… ${plural(count, 'ligne', 'lignes')} de plus`,
     nothingElse: "Rien d'autre : ni adresse IP, ni identifiant.",
     public: 'Ton signalement devient public sur GitHub, avec ton pseudo si tu en donnes un.',
     send: 'Envoyer',
@@ -381,6 +411,37 @@ export const fr = {
       'Il ne partira pas tel quel. Écris-le plutôt sur GitHub, où chaque formulaire te guide.',
     onGitHub: 'Ouvrir un ticket sur GitHub',
     done: 'Fermer',
+  },
+  crash: {
+    sheetTitle: 'Cette fiche a planté',
+    sheetNote: 'Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.',
+    retry: 'Réessayer',
+    appTitle: 'Battlewise a planté',
+    appNote:
+      'Tes réglages, ton équipement et ton monde restent sur cet appareil : recharge pour reprendre.',
+    reload: 'Recharger',
+    send: 'Envoyer le rapport',
+    trust: "Rien ne part sans toi : le rapport n'est envoyé que si tu le demandes.",
+    screens: {
+      bestiary: {
+        title: 'Le Bestiaire a planté',
+        note: "Le reste de Battlewise marche : passe à la Simulation, à l'Arsenal ou au Mémo.",
+      },
+      simulation: {
+        title: 'La Simulation a planté',
+        note: "Le reste de Battlewise marche : passe au Bestiaire, à l'Arsenal ou au Mémo.",
+      },
+      arsenal: {
+        title: "L'Arsenal a planté",
+        note: 'Le reste de Battlewise marche : passe au Bestiaire, à la Simulation ou au Mémo.',
+      },
+      guide: {
+        title: 'Le Mémo a planté',
+        note: "Le reste de Battlewise marche : passe au Bestiaire, à la Simulation ou à l'Arsenal.",
+      },
+    },
+    row: 'Cette ligne a planté',
+    report: 'Signaler',
   },
   loop: {
     feedback: 'Tes retours',

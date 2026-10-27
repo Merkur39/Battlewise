@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.7.0',
+    date: '2026-10-27',
+    notes: [
+      {
+        text: {
+          fr: "Si une fiche, un écran ou une ligne plante, le reste de Battlewise marche : réessaie, ou envoie le rapport, l'erreur jointe. Rien ne part sans toi.",
+          en: 'If a sheet, a screen or a row crashes, the rest of Battlewise works: try again, or send the report, the error attached. Nothing leaves without you.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.6.0',
     date: '2026-10-27',
     notes: [

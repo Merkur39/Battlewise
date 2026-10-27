@@ -24,6 +24,9 @@ import type { Receipt } from './outbox'
 import styles from './ReportSheet.module.css'
 import { useOutbox } from './useReport'
 
+/** Lines of a crash's stack the sheet shows. */
+const STACK_SHOWN = 3
+
 type Step =
   | { readonly step: 'form' }
   | { readonly step: 'sending' }
@@ -72,9 +75,17 @@ export function ReportSheet({
     width: window.innerWidth,
   }
   const pickLines = draft.kind === 'data' && origin.lines.length > 0
+  const { crash } = origin
+  // The error, then the first lines of its stack: the rest leaves with it, unshown.
+  const stack = crash
+    ? crash.stack
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line !== '' && line !== crash.message)
+    : []
 
   const send = async () => {
-    if (!canSend(draft)) return
+    if (!canSend(draft, origin)) return
     setStep({ step: 'sending' })
     const outcome = await outbox.submit(buildReport(origin, draft, device), titleOf(origin, draft))
     setStep(
@@ -220,13 +231,28 @@ export function ReportSheet({
 
               <label className={styles.field}>
                 <span className={styles.label}>
-                  {draft.kind ? t.report.text[draft.kind] : t.report.message}
+                  {crash ? (
+                    <>
+                      {t.report.crashText}{' '}
+                      <span className={styles.optional}>· {t.report.optional}</span>
+                    </>
+                  ) : draft.kind ? (
+                    t.report.text[draft.kind]
+                  ) : (
+                    t.report.message
+                  )}
                 </span>
                 <textarea
                   value={draft.text}
                   maxLength={MAX_LENGTH.text}
                   rows={isDesktop ? 4 : 3}
-                  placeholder={draft.kind ? t.report.textHint[draft.kind] : undefined}
+                  placeholder={
+                    crash
+                      ? t.report.crashHint[origin.screen === 'settings' ? 'app' : origin.screen]
+                      : draft.kind
+                        ? t.report.textHint[draft.kind]
+                        : undefined
+                  }
                   className={styles.text}
                   onChange={(event) => {
                     change({ text: event.target.value })
@@ -285,11 +311,14 @@ export function ReportSheet({
                 }}
               />
 
-              <details open={isDesktop} className={styles.attached}>
+              {/* A crash shows what it sends at once: an error and its stack are not what one expects. */}
+              <details open={isDesktop || crash !== undefined} className={styles.attached}>
                 <summary className={styles.summary}>
                   <span className={styles.summaryText}>
                     <span>{t.report.attached}</span>
-                    <span className={styles.summaryNote}>{t.report.attachedSummary}</span>
+                    <span className={styles.summaryNote}>
+                      {crash ? t.report.crashSummary : t.report.attachedSummary}
+                    </span>
                   </span>
                   <ChevronDownIcon size={16} strokeWidth={2} className={styles.chevron} />
                 </summary>
@@ -299,6 +328,21 @@ export function ReportSheet({
                   {origin.shows.map((line) => (
                     <span key={line}>{line}</span>
                   ))}
+                  {crash && (
+                    <>
+                      <span className={styles.crashLine}>{crash.message}</span>
+                      {stack.slice(0, STACK_SHOWN).map((line, index) => (
+                        <span key={index} className={styles.stackLine}>
+                          {line}
+                        </span>
+                      ))}
+                      {stack.length > STACK_SHOWN && (
+                        <span className={styles.stackLine}>
+                          {t.report.moreLines(stack.length - STACK_SHOWN)}
+                        </span>
+                      )}
+                    </>
+                  )}
                   <span className={styles.nothingElse}>{t.report.nothingElse}</span>
                 </div>
               </details>
@@ -313,7 +357,7 @@ export function ReportSheet({
               )}
               <button
                 type="submit"
-                disabled={!canSend(draft) || step.step === 'sending'}
+                disabled={!canSend(draft, origin) || step.step === 'sending'}
                 className={styles.send}
               >
                 {step.step === 'sending' ? t.report.sending : t.report.send}

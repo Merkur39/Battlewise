@@ -27,6 +27,17 @@ const sheet: ReportOrigin = {
   ],
 }
 
+/** The Troll's sheet as it fails while drawing: no line, nothing shown, the error. */
+const crashed: ReportOrigin = {
+  ...sheet,
+  kind: 'bug',
+  heading: 'Troll',
+  ids: { creature: 'Troll' },
+  shows: [],
+  lines: [],
+  crash: { message: 'TypeError: x', stack: 'TypeError: x\n    at attackDamage' },
+}
+
 const device = { version: '1.4.0', gameVersion: '0.221.4', language: 'fr', width: 390 } as const
 
 const draft: ReadyDraft = {
@@ -40,13 +51,17 @@ const draft: ReadyDraft = {
 
 describe('canSend', () => {
   it('waits for a kind and some text', () => {
-    expect(canSend({ ...draft, kind: null })).toBe(false)
-    expect(canSend({ ...draft, text: '   ' })).toBe(false)
-    expect(canSend(draft)).toBe(true)
+    expect(canSend({ ...draft, kind: null }, sheet)).toBe(false)
+    expect(canSend({ ...draft, text: '   ' }, sheet)).toBe(false)
+    expect(canSend(draft, sheet)).toBe(true)
   })
 
   it('refuses a text longer than the limit', () => {
-    expect(canSend({ ...draft, text: 'a'.repeat(MAX_LENGTH.text + 1) })).toBe(false)
+    expect(canSend({ ...draft, text: 'a'.repeat(MAX_LENGTH.text + 1) }, sheet)).toBe(false)
+  })
+
+  it('lets a crash leave without a word', () => {
+    expect(canSend({ ...draft, kind: 'bug', text: '' }, crashed)).toBe(true)
   })
 })
 
@@ -103,6 +118,18 @@ describe('buildReport', () => {
   })
 })
 
+describe('buildReport, for a crash', () => {
+  it('attaches the error, cut to the limits', () => {
+    const long = { ...crashed, crash: { message: 'm'.repeat(600), stack: 's'.repeat(5000) } }
+    const report = buildReport(long, { ...draft, kind: 'bug', text: '' }, device)
+    expect(report.text).toBe('')
+    expect(report.crash).toEqual({
+      message: 'm'.repeat(MAX_LENGTH.crashMessage),
+      stack: 's'.repeat(MAX_LENGTH.crashStack),
+    })
+  })
+})
+
 describe('titleOf', () => {
   it('names the creature, and the line picked', () => {
     expect(titleOf(sheet, draft)).toBe('Troll')
@@ -114,5 +141,10 @@ describe('titleOf', () => {
     const idea = { ...draft, kind: 'idea', text: '  Les boss\nphase par phase  ' } as const
     expect(titleOf(settings, idea)).toBe('Les boss phase par phase')
     expect(titleOf(settings, { ...draft, text: 'mot '.repeat(30) })).toMatch(/^mot mot .{40,}…$/)
+  })
+
+  it('names a crash from nowhere in particular by its error, when no word says more', () => {
+    const app: ReportOrigin = { ...crashed, screen: 'app', title: null, ids: {} }
+    expect(titleOf(app, { ...draft, kind: 'bug', text: '' })).toBe('TypeError: x')
   })
 })

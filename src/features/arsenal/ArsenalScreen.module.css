@@ -154,6 +154,17 @@
   border-top: 1px solid var(--line);
 }
 
+/* A row that failed while drawing keeps the height of the others. */
+.brokenCard {
+  min-height: 64px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.brokenRow {
+  min-height: 52px;
+}
+
 .card {
   display: flex;
   flex-direction: column;

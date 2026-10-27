@@ -198,3 +198,9 @@ export const BackIcon = (props: IconProps) => (
     <path d="M19 12H5M11 6l-6 6 6 6" />
   </Icon>
 )
+
+export const ReloadIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" />
+  </Icon>
+)

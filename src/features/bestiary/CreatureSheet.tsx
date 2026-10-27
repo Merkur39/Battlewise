@@ -5,8 +5,11 @@ import { creatureHealth, staggerThreshold, toInflict } from '@/combat/creature'
 import { game } from '@/data'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { GameCreature, GameHit } from '@/data/types'
+import { CrashCard } from '@/features/report/Crash'
+import type { Crash } from '@/features/report/model'
 import { useCreatureOrigin } from '@/features/report/origins'
 import { ReportLink } from '@/features/report/ReportLink'
+import { useOpenReport } from '@/features/report/useReport'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
@@ -73,7 +76,6 @@ export function CreatureSheet({
   const threshold = staggerThreshold(creature, stars)
   const biome = game.biomes.find((candidate) => candidate.id === place.biome)?.name[language]
   const name = creatureName(creature, language)
-  const Title = layout === 'page' ? 'h1' : 'h2'
 
   const health = formatNumber(creatureHealth(creature.health, stars), language)
   const inflict =
@@ -137,20 +139,7 @@ export function CreatureSheet({
   if (layout === 'page') {
     return (
       <main className={styles.page}>
-        <div className={styles.pageHeader}>
-          <RouteLink
-            to={bestiaryRoute(place.biome, null, place.query)}
-            how="return"
-            aria-label={t.creature.back}
-            className={styles.back}
-          >
-            <BackIcon size={22} />
-          </RouteLink>
-          <Title className={styles.pageTitle}>
-            <CreatureName creature={creature} />
-          </Title>
-          {biome && <span className={styles.biome}>{biome}</span>}
-        </div>
+        <PageHeader creature={creature} place={place} />
         <div className={styles.pageBody}>
           {starPicker}
           {body}
@@ -164,15 +153,98 @@ export function CreatureSheet({
       <div className={styles.panelBody}>
         <div className={styles.panelHeader}>
           <div className={styles.panelTitles}>
-            <Title className={styles.panelTitle}>
+            <h2 className={styles.panelTitle}>
               <CreatureName creature={creature} />
-            </Title>
+            </h2>
             {biome && <span className={styles.biome}>{biome}</span>}
           </div>
           {starPicker}
         </div>
         {body}
       </div>
+    </section>
+  )
+}
+
+/** The top of a creature's page on a phone: the way back to the list, its name and its biome. */
+function PageHeader({
+  creature,
+  place,
+}: {
+  readonly creature: GameCreature
+  readonly place: Place
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const biome = game.biomes.find((candidate) => candidate.id === place.biome)?.name[language]
+  return (
+    <div className={styles.pageHeader}>
+      <RouteLink
+        to={bestiaryRoute(place.biome, null, place.query)}
+        how="return"
+        aria-label={t.creature.back}
+        className={styles.back}
+      >
+        <BackIcon size={22} />
+      </RouteLink>
+      <h1 className={styles.pageTitle}>
+        <CreatureName creature={creature} />
+      </h1>
+      {biome && <span className={styles.biome}>{biome}</span>}
+    </div>
+  )
+}
+
+/** A creature's sheet that failed while drawing: a card in its place, which tries again or reports the
+ * crash in the report sheet; on a phone, its page keeps the way back and the name. */
+export function CreatureSheetCrash({
+  creature,
+  place,
+  layout,
+  crash,
+  onRetry,
+}: {
+  readonly creature: GameCreature
+  readonly place: Place
+  readonly layout: 'page' | 'panel'
+  readonly crash: Crash
+  readonly onRetry: () => void
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const openReport = useOpenReport()
+  const name = creatureName(creature, language)
+  const card = (
+    <CrashCard
+      title={t.crash.sheetTitle}
+      note={t.crash.sheetNote}
+      onRetry={onRetry}
+      onReport={() => {
+        openReport({
+          screen: 'creature',
+          kind: 'bug',
+          heading: name,
+          title: name,
+          subject: creatureName(creature, 'en'),
+          ids: { creature: creature.id },
+          shows: [],
+          lines: [],
+          crash,
+        })
+      }}
+    />
+  )
+  if (layout === 'page') {
+    return (
+      <main className={styles.page}>
+        <PageHeader creature={creature} place={place} />
+        <div className={styles.pageBody}>{card}</div>
+      </main>
+    )
+  }
+  return (
+    <section aria-label={name} className={styles.panel}>
+      <div className={styles.panelBody}>{card}</div>
     </section>
   )
 }
