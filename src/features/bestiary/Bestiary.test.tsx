@@ -19,7 +19,7 @@ describe('Bestiary', () => {
 
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Prairies')
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent(
-      'Biome 1 sur 9 · 9 créatures',
+      'Biome 1 sur 9 · 8 créatures',
     )
     expect(row('Sanglier')).toHaveTextContent('10 PV')
     expect(

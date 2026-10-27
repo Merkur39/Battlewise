@@ -1,10 +1,15 @@
 """Where each creature is met in a normal world, under which condition, and at which levels (1.0.20):
 
 - open world: SpawnSystem.UpdateSpawnList runs every enabled SpawnSystemList entry (chance above 0, day or
-  night) where the ground biome is in its m_biome; m_requiredGlobalKey waits for a key,
-  m_requiredPersistentEvent for that persistent event. Enabled AltBiomeList alt biomes are taken as present
-  (most worlds have them, but GenerateAltBiomes may place none of one: Lox, Goblin and Death Plains are
-  rare) and add entries in their own m_biome, locations and vegetation in their sectors.
+  night) where the ground biome is in its m_biome, never with an m_biomeArea of 0 (IsSpawnPointGood);
+  m_requiredGlobalKey waits for a key, m_requiredPersistentEvent for that persistent event,
+  m_requiredEnvironments for an environment EnvMan picks (IsEnvironment), so only the biomes whose setups
+  (EnvMan's, the LocationLists') or alt biomes (added, forced) hold one count; the environments raids,
+  events and EnvZones force where they run are left out. Enabled AltBiomeList alt biomes are taken as
+  present (most worlds have them, but GenerateAltBiomes may place none of one: Lox, Goblin and Death Plains
+  are rare) on sectors of their own m_biome only: UpdateSpawning runs their entries in the zones touching
+  one (m_cornerAltBiomes), counted within that m_biome (what a zone astride the sector's edge spawns in the
+  next biome is left out), and they add locations and vegetation in their sectors.
 - locations: ZoneSystem places every enabled ZoneLocation (ZoneSystem, LocationLists, alt biomes) in its
   m_biome, its prefab found by asset ID (softref), never by m_prefabName. ZoneSystem.SpawnLocation keeps
   objects active up to the root; RandomSpawn.Randomize drops those whose chance is 0 or whose
@@ -41,7 +46,7 @@ from collections import defaultdict
 from . import softref
 
 CLASSES = [
-    "SpawnSystem", "SpawnSystemList", "ZoneSystem", "LocationList", "AltBiomeList", "Location", "DungeonDB",
+    "SpawnSystem", "SpawnSystemList", "EnvMan", "ZoneSystem", "LocationList", "AltBiomeList", "Location", "DungeonDB",
     "RoomList", "DungeonGenerator", "RandEventSystem", "PersistentEventSystem", "RandomSpawn",
     "CreatureSpawner", "SpawnArea", "TriggerSpawner", "TriggerSpawnAbility", "EggHatch", "OfferingBowl",
     "Humanoid", "Character", "CharacterDrop", "Procreation", "Growup", "EggGrow",
@@ -53,6 +58,7 @@ BIOMES = {
     256: "ocean", 512: "mistlands",
 }
 EVERY_BIOME = sum(BIOMES)
+EVERY_AREA = 3  # Heightmap.BiomeArea: Edge 1, Median 2
 CREATURES = ("Humanoid", "Character")
 PLACERS = ("CreatureSpawner", "SpawnArea", "TriggerSpawner", "EggHatch", "OfferingBowl", "DungeonGenerator")
 LEVEL_ONE = (1, 1)
@@ -99,6 +105,7 @@ class _Game:
         self.location_lists = _referenced(found, "ZoneSystem", "m_locationLists", "LocationList")
         alt_lists = _referenced(found, "ZoneSystem", "m_altBiomeLists", "AltBiomeList")
         self.alt_biomes = [alt for row in alt_lists for alt in row["data"]["m_alts"] if alt["m_enabled"]]
+        self.weathers = _weathers(found, self.location_lists, self.alt_biomes)
         self.rooms = _rooms(self, _referenced(found, "DungeonDB", "m_roomLists", "RoomList"))
         self.persistent_events = {}
         for row in found.rows("PersistentEventSystem"):
@@ -135,6 +142,22 @@ def _referenced(found, owner, field, cls):
     """Rows of `cls` that some `owner` component lists in `field`, by GameObject or by component."""
     refs = {_ref(p) for row in found.rows(owner) for p in row["data"].get(field, [])}
     return [r for r in found.rows(cls) if r["go_ref"] in refs or _component_ref(r) in refs]
+
+
+def _weathers(found, location_lists, alt_biomes):
+    """{biome bit: environment names EnvMan can pick there}: the setups of EnvMan and of the LocationLists
+    (AppendBiomeSetup), and what alt biomes add or force (GetAvailableEnvironments, GetEnvironmentOverride)."""
+    weathers = defaultdict(set)
+    setups = [setup for row in found.rows("EnvMan") for setup in row["data"]["m_biomes"]]
+    setups += [setup for row in location_lists for setup in row["data"].get("m_biomeEnvironments", [])]
+    for setup in setups:
+        weathers[setup["m_biome"]] |= {entry["m_environment"] for entry in setup["m_environments"]}
+    for alt in alt_biomes:
+        added = {entry["m_environment"] for entry in alt["m_addEnvironments"]} | ({alt["m_forceEnvironment"]} - {""})
+        for bit in BIOMES:
+            if alt["m_biome"] & bit:
+                weathers[bit] |= added
+    return weathers
 
 
 def _rooms(game, room_lists):
@@ -339,11 +362,21 @@ PLACING = {
 
 
 # ---------------------------------------------------------------------- world
+def _weathered(game, entry):
+    """Biomes where EnvMan can pick an environment the entry waits for (EnvMan.IsEnvironment)."""
+    wanted = set(entry["m_requiredEnvironments"])
+    if not wanted:
+        return EVERY_BIOME
+    return sum(bit for bit in BIOMES if game.weathers.get(bit, set()) & wanted)
+
+
 def _spawn_entry(game, out, entry, ctx):
     """One SpawnSystem.SpawnData, of a spawn list, an alt biome or a raid."""
     if not (entry["m_enabled"] and entry["m_spawnChance"] > 0 and (entry["m_spawnAtDay"] or entry["m_spawnAtNight"])):
         return
-    ctx = dict(ctx, biomes=ctx["biomes"] & entry["m_biome"])
+    if not entry["m_biomeArea"] & EVERY_AREA:  # IsSpawnPointGood: no ground lies in its area
+        return
+    ctx = dict(ctx, biomes=ctx["biomes"] & entry["m_biome"] & _weathered(game, entry))
     event, key = entry["m_requiredPersistentEvent"], entry["m_requiredGlobalKey"]
     if event:
         ctx = _conditional(ctx, "event:" + event, "during " + event)
@@ -359,9 +392,9 @@ def _open_world(game, out):
     for row in game.spawn_lists:
         for entry in row["data"]["m_spawners"]:
             _spawn_entry(game, out, entry, _context('world "%s"' % entry["m_name"], EVERY_BIOME))
-    for alt in game.alt_biomes:
+    for alt in game.alt_biomes:  # run on its sectors only, which lie in its m_biome (GenerateAltBiomes)
         for entry in alt["m_spawn"]:
-            _spawn_entry(game, out, entry, _context('alt biome "%s"' % alt["m_name"], EVERY_BIOME))
+            _spawn_entry(game, out, entry, _context('alt biome "%s"' % alt["m_name"], alt["m_biome"]))
 
 
 def _zone_entries(game, field, alt_field):
