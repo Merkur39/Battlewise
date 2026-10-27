@@ -54,6 +54,11 @@ Vercel builds this repository: every merge on `main` goes to production, every p
 preview. Every pull request that changes the app bumps the version in `package.json` (`feat` → minor,
 `fix` → patch); Settings › About shows it, and an installed app takes the new version on its own.
 
+GitHub Actions runs `npm run check` on every pull request and on `main`. Dependabot opens its
+updates once a month, grouped, and npm releases only once they are a week old: `fix(deps)` for what
+ships in the app, which takes a patch bump on its branch before it merges, `chore(deps-dev)` for the
+tooling.
+
 ## Layout
 
 | Path                      | Contents                                                                       |
