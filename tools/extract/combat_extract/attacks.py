@@ -1,6 +1,6 @@
 """A creature's attacks: the weapon items its Humanoid is given (GiveDefaultItems), kept when
 ItemData.IsWeapon and aimed at enemies (EquipBestWeapon), followed through every prefab they spawn as
-the 1.0.20 code does.
+the 1.0.21 code does.
 
 - Attack.OnAttackTrigger: melee and area attacks hit with the item damage x m_damageMultiplier and spawn
   m_spawnOnTrigger; melee also spawns m_shared.m_spawnOnHit once anything is hit (DoMeleeAttack);

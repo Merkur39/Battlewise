@@ -1,4 +1,4 @@
-"""Creature attacks as the 1.0.20 code deals them, pinned on values read in the game data.
+"""Creature attacks as the 1.0.21 code deals them, pinned on values read in the game data.
 
 They read the local Valheim install (read-only) and are skipped when it is not found.
 Run from tools/extract:  python -m unittest tests.test_attacks -v

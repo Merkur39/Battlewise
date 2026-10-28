@@ -26,7 +26,7 @@ Where an item comes from (`obtain`), the first that applies:
 - upgradeOnly: it comes from a conversion and its recipe only upgrades it (the cast Nord gold items);
 - trader: a Trader sells it;
 - world: a container, pickable, drop table or creature drop holds it (WORLD, CharacterDrop).
-An item with none of these is left out (KnifeVoid, PickaxeStone in 1.0.20).
+An item with none of these is left out (KnifeVoid, PickaxeStone in 1.0.21).
 
 Limits of these sources:
 - a component counts wherever it sits, except in a location every location list leaves disabled
@@ -36,7 +36,7 @@ Limits of these sources:
 - a creature drop counts when the creature sits in a location or a SPAWNERS field references it,
   whether that spawner entry is enabled or not;
 - recipe ingredients, crafting and conversion stations are not checked for a source; loose items lying
-  in locations are not read (none is a blocker in 1.0.20).
+  in locations are not read (none is a blocker in 1.0.21).
 """
 import fnmatch
 

@@ -1,5 +1,5 @@
 """Characterisation tests of combat_extract.arsenal: the blockers as the game data defines them (items,
-recipes, traders, world sources), pinned on values read in the installed game (1.0.20).
+recipes, traders, world sources), pinned on values read in the installed game (1.0.21).
 
 They read the local Valheim install (read-only) and are skipped when it is not found.
 Run from tools/extract:  python -m unittest tests.test_arsenal -v

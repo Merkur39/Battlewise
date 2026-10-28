@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.8.1',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "Les chiffres sont lus dans Valheim 1.0.21 : contre Kall Mandefimbul, le sol en feu que laisse la Nova de l'Aspect de l'Âme tourmentée inflige deux fois moins de Feu.",
+          en: "The numbers are read from Valheim 1.0.21: against Kall Fimbulbringer, the burning ground the Aspect of the Twisted Soul's Nova leaves deals half the Fire.",
+        },
+      },
+    ],
+  },
+  {
     version: '1.8.0',
     date: '2026-10-28',
     notes: [
