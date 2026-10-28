@@ -10,13 +10,14 @@ export interface Place {
 }
 
 /** A biome or creature the address names but the data lacks is left out: the creature's own biome,
- * else the first, stands in. */
-export function placeOf(route: Route): Place {
+ * else the player's (`picked`, the last one picked in the Bestiary), else the first, stands in. */
+export function placeOf(route: Route, picked: BiomeId | null): Place {
   const [biomeId, creatureId] = route.path
   const creature = game.creatures.find((candidate) => candidate.id === creatureId) ?? null
   const biome =
     game.biomes.find((candidate) => candidate.id === biomeId)?.id ??
     creature?.biomes[0] ??
+    picked ??
     game.biomes[0]!.id
   return { biome, creature, query: route.query }
 }

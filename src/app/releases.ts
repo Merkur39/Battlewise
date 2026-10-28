@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.11.0',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "Le Bestiaire s'ouvre sur le dernier biome que tu as choisi, plus sur les Prairies. Une créature ouverte depuis la recherche ne le change pas, et un lien vers un autre biome ouvre toujours celui-là.",
+          en: 'The Bestiary opens on the biome you last picked, no longer on the Meadows. A creature opened from the search does not change it, and a link to another biome still opens that one.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.10.0',
     date: '2026-10-28',
     notes: [

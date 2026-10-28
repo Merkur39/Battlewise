@@ -1,7 +1,8 @@
-import { screen, waitFor, within } from '@testing-library/react'
+import { cleanup, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
+import type { Store } from '@/app/store'
 import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
@@ -12,6 +13,13 @@ const chips = (name: string) =>
   within(screen.getByRole('list', { name }))
     .getAllByRole('listitem')
     .map((item) => item.textContent)
+
+/** Closes the app and opens it again at its bare address, as the installed app does on its start_url. */
+function relaunch(store: Store) {
+  cleanup()
+  window.history.replaceState(null, '', '/')
+  renderWithStore(<App />, {}, { store })
+}
 
 describe('Bestiary', () => {
   it('lists the creatures of the Meadows first, with their health and how to take them', () => {
@@ -290,6 +298,40 @@ describe('Bestiary', () => {
     await waitFor(() => {
       expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Marécages')
     })
+  })
+
+  it('opens again on the biome last picked, at the bare address of the app', async () => {
+    const user = userEvent.setup()
+    const { store } = renderWithStore(<App />, { language: 'fr' })
+
+    await user.click(screen.getByRole('button', { name: 'Biome suivant : Forêt noire' }))
+    await screen.findByText('Biome 2 sur 9 · 12 créatures')
+    relaunch(store)
+
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Forêt noire')
+  })
+
+  it('opens on the biome a link names, over the one last picked', () => {
+    window.history.replaceState(null, '', '#/bestiary/mountain')
+    renderWithStore(<App />, { language: 'fr', biome: 'swamp' })
+
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Montagne')
+  })
+
+  it('keeps the biome last picked when the search opens a creature of another', async () => {
+    const user = userEvent.setup()
+    const { store } = renderWithStore(<App />, { language: 'fr', biome: 'swamp' })
+
+    await user.type(
+      screen.getByRole('searchbox', { name: 'Rechercher dans tous les biomes' }),
+      'troll',
+    )
+    const creatures = await screen.findByRole('region', { name: /^Créatures · \d+$/ })
+    await user.click(within(creatures).getByRole('link', { name: /^Troll/ }))
+    await sheetHeading('Troll')
+    relaunch(store)
+
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Marécages')
   })
 
   describe('on a desktop', () => {
