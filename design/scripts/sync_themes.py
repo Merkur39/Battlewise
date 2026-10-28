@@ -20,7 +20,7 @@ LIGHT_THEMES = {"jour", "parchemin"}
 DARK_SCHEME = ":root{color-scheme:dark}"
 
 M_W, M_H, M_GAP, M_ROW = 390, 844, 80, 1264
-D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 7824
+D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 9088
 NOTE_ABOVE = 300
 
 # (row title, [(file, board title, interactive)]) — one canvas row each.
@@ -37,6 +37,7 @@ MOBILE = [
     ("Plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
                    ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
                    ("Simulation-Plantee", "Simulation plantée", True), ("Secours", "Battlewise a planté", True)]),
+    ("Première arrivée", [("Installer", "Installer l'app", True), ("Installer-Safari", "Installer l'app · Safari", True)]),
 ]
 DESKTOP = [
     ("Desktop · écrans principaux", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),
@@ -51,6 +52,7 @@ DESKTOP = [
                              ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
                              ("Simulation-Plantee", "Simulation plantée", True),
                              ("Secours", "Battlewise a planté", True)]),
+    ("Desktop · première arrivée", [("Installer", "Installer l'app", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960
 

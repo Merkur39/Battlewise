@@ -171,9 +171,25 @@
       "title": "Battlewise a planté",
       "is_interactive": true
     },
+    "Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "is_interactive": true
+    },
+    "Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "is_interactive": true
+    },
     "Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -182,7 +198,7 @@
     },
     "Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -191,7 +207,7 @@
     },
     "Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -200,7 +216,7 @@
     },
     "Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -209,7 +225,7 @@
     },
     "Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -217,7 +233,7 @@
     },
     "Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -226,7 +242,7 @@
     },
     "Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -234,7 +250,7 @@
     },
     "Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -242,7 +258,7 @@
     },
     "Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -250,7 +266,7 @@
     },
     "Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -259,7 +275,7 @@
     },
     "Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -268,7 +284,7 @@
     },
     "Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -276,7 +292,7 @@
     },
     "Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -284,7 +300,7 @@
     },
     "Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -293,7 +309,7 @@
     },
     "Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -302,7 +318,7 @@
     },
     "Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -311,7 +327,7 @@
     },
     "Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -320,7 +336,7 @@
     },
     "Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -329,10 +345,19 @@
     },
     "Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "is_interactive": true
     },
@@ -702,6 +727,70 @@
       "title": "Piste C · Une carte pour tous",
       "page": "filets"
     },
+    "Arrivee-Auj.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Aujourd'hui · ce que voit un joueur qui arrive",
+      "page": "arrivee"
+    },
+    "Arrivee-A.dc.html": {
+      "x": 0,
+      "y": 1120,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste A · Une feuille au premier lancement",
+      "page": "arrivee"
+    },
+    "Arrivee-B.dc.html": {
+      "x": 0,
+      "y": 2240,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste B · Trois questions avant le Bestiaire",
+      "page": "arrivee"
+    },
+    "Arrivee-C.dc.html": {
+      "x": 0,
+      "y": 3360,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste C · Un rappel sur place, sans interrompre",
+      "page": "arrivee"
+    },
+    "Installer-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste A · Un écran au premier lancement, avant le parcours",
+      "page": "installer"
+    },
+    "Installer-B.dc.html": {
+      "x": 0,
+      "y": 1120,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste B · Une feuille à la fin du parcours",
+      "page": "installer"
+    },
+    "Installer-C.dc.html": {
+      "x": 0,
+      "y": 2240,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste C · Une carte au deuxième lancement",
+      "page": "installer"
+    },
+    "Installer-Reglages.dc.html": {
+      "x": 0,
+      "y": 3360,
+      "w": 1440,
+      "h": 1000,
+      "title": "Réglages · la rangée, pour les trois pistes",
+      "page": "installer"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -893,9 +982,27 @@
       "page": "braise",
       "is_interactive": true
     },
+    "Braise-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "braise",
+      "is_interactive": true
+    },
     "Braise-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -905,7 +1012,7 @@
     },
     "Braise-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -915,7 +1022,7 @@
     },
     "Braise-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -925,7 +1032,7 @@
     },
     "Braise-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -935,7 +1042,7 @@
     },
     "Braise-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -944,7 +1051,7 @@
     },
     "Braise-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -954,7 +1061,7 @@
     },
     "Braise-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -963,7 +1070,7 @@
     },
     "Braise-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -972,7 +1079,7 @@
     },
     "Braise-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -981,7 +1088,7 @@
     },
     "Braise-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -991,7 +1098,7 @@
     },
     "Braise-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1001,7 +1108,7 @@
     },
     "Braise-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -1010,7 +1117,7 @@
     },
     "Braise-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -1019,7 +1126,7 @@
     },
     "Braise-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -1029,7 +1136,7 @@
     },
     "Braise-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -1039,7 +1146,7 @@
     },
     "Braise-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -1049,7 +1156,7 @@
     },
     "Braise-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -1059,7 +1166,7 @@
     },
     "Braise-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -1069,10 +1176,20 @@
     },
     "Braise-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "braise",
       "is_interactive": true
@@ -1268,9 +1385,27 @@
       "page": "brume",
       "is_interactive": true
     },
+    "Brume-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "brume",
+      "is_interactive": true
+    },
     "Brume-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1280,7 +1415,7 @@
     },
     "Brume-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1290,7 +1425,7 @@
     },
     "Brume-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1300,7 +1435,7 @@
     },
     "Brume-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1310,7 +1445,7 @@
     },
     "Brume-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1319,7 +1454,7 @@
     },
     "Brume-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1329,7 +1464,7 @@
     },
     "Brume-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1338,7 +1473,7 @@
     },
     "Brume-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1347,7 +1482,7 @@
     },
     "Brume-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -1356,7 +1491,7 @@
     },
     "Brume-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -1366,7 +1501,7 @@
     },
     "Brume-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1376,7 +1511,7 @@
     },
     "Brume-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -1385,7 +1520,7 @@
     },
     "Brume-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -1394,7 +1529,7 @@
     },
     "Brume-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -1404,7 +1539,7 @@
     },
     "Brume-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -1414,7 +1549,7 @@
     },
     "Brume-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -1424,7 +1559,7 @@
     },
     "Brume-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -1434,7 +1569,7 @@
     },
     "Brume-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -1444,10 +1579,20 @@
     },
     "Brume-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "brume",
       "is_interactive": true
@@ -1643,9 +1788,27 @@
       "page": "jour",
       "is_interactive": true
     },
+    "Jour-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "jour",
+      "is_interactive": true
+    },
     "Jour-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -1655,7 +1818,7 @@
     },
     "Jour-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -1665,7 +1828,7 @@
     },
     "Jour-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -1675,7 +1838,7 @@
     },
     "Jour-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -1685,7 +1848,7 @@
     },
     "Jour-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -1694,7 +1857,7 @@
     },
     "Jour-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -1704,7 +1867,7 @@
     },
     "Jour-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -1713,7 +1876,7 @@
     },
     "Jour-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -1722,7 +1885,7 @@
     },
     "Jour-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -1731,7 +1894,7 @@
     },
     "Jour-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -1741,7 +1904,7 @@
     },
     "Jour-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -1751,7 +1914,7 @@
     },
     "Jour-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -1760,7 +1923,7 @@
     },
     "Jour-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -1769,7 +1932,7 @@
     },
     "Jour-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -1779,7 +1942,7 @@
     },
     "Jour-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -1789,7 +1952,7 @@
     },
     "Jour-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -1799,7 +1962,7 @@
     },
     "Jour-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -1809,7 +1972,7 @@
     },
     "Jour-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -1819,10 +1982,20 @@
     },
     "Jour-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "jour",
       "is_interactive": true
@@ -2018,9 +2191,27 @@
       "page": "runes",
       "is_interactive": true
     },
+    "Runes-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "runes",
+      "is_interactive": true
+    },
     "Runes-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -2030,7 +2221,7 @@
     },
     "Runes-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -2040,7 +2231,7 @@
     },
     "Runes-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -2050,7 +2241,7 @@
     },
     "Runes-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -2060,7 +2251,7 @@
     },
     "Runes-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -2069,7 +2260,7 @@
     },
     "Runes-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -2079,7 +2270,7 @@
     },
     "Runes-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -2088,7 +2279,7 @@
     },
     "Runes-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -2097,7 +2288,7 @@
     },
     "Runes-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -2106,7 +2297,7 @@
     },
     "Runes-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -2116,7 +2307,7 @@
     },
     "Runes-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -2126,7 +2317,7 @@
     },
     "Runes-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -2135,7 +2326,7 @@
     },
     "Runes-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -2144,7 +2335,7 @@
     },
     "Runes-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -2154,7 +2345,7 @@
     },
     "Runes-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -2164,7 +2355,7 @@
     },
     "Runes-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -2174,7 +2365,7 @@
     },
     "Runes-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -2184,7 +2375,7 @@
     },
     "Runes-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -2194,10 +2385,20 @@
     },
     "Runes-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "runes",
       "is_interactive": true
@@ -2393,9 +2594,27 @@
       "page": "graphite",
       "is_interactive": true
     },
+    "Graphite-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "graphite",
+      "is_interactive": true
+    },
     "Graphite-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -2405,7 +2624,7 @@
     },
     "Graphite-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -2415,7 +2634,7 @@
     },
     "Graphite-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -2425,7 +2644,7 @@
     },
     "Graphite-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -2435,7 +2654,7 @@
     },
     "Graphite-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -2444,7 +2663,7 @@
     },
     "Graphite-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -2454,7 +2673,7 @@
     },
     "Graphite-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -2463,7 +2682,7 @@
     },
     "Graphite-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -2472,7 +2691,7 @@
     },
     "Graphite-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -2481,7 +2700,7 @@
     },
     "Graphite-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -2491,7 +2710,7 @@
     },
     "Graphite-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -2501,7 +2720,7 @@
     },
     "Graphite-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -2510,7 +2729,7 @@
     },
     "Graphite-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -2519,7 +2738,7 @@
     },
     "Graphite-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -2529,7 +2748,7 @@
     },
     "Graphite-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -2539,7 +2758,7 @@
     },
     "Graphite-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -2549,7 +2768,7 @@
     },
     "Graphite-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -2559,7 +2778,7 @@
     },
     "Graphite-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -2569,10 +2788,20 @@
     },
     "Graphite-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "graphite",
       "is_interactive": true
@@ -2768,9 +2997,27 @@
       "page": "parchemin",
       "is_interactive": true
     },
+    "Parchemin-Installer.dc.html": {
+      "x": 0,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Installer-Safari.dc.html": {
+      "x": 470,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Installer l'app · Safari",
+      "page": "parchemin",
+      "is_interactive": true
+    },
     "Parchemin-Desktop-Bestiaire.dc.html": {
       "x": 0,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · desktop",
@@ -2780,7 +3027,7 @@
     },
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html": {
       "x": 1520,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Bestiaire · recherche · desktop",
@@ -2790,7 +3037,7 @@
     },
     "Parchemin-Desktop-Combat.dc.html": {
       "x": 3040,
-      "y": 7824,
+      "y": 9088,
       "w": 1440,
       "h": 900,
       "title": "Simulation · desktop",
@@ -2800,7 +3047,7 @@
     },
     "Parchemin-Desktop-Arsenal.dc.html": {
       "x": 0,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Arsenal · desktop",
@@ -2810,7 +3057,7 @@
     },
     "Parchemin-Desktop-Memo.dc.html": {
       "x": 1520,
-      "y": 9144,
+      "y": 10408,
       "w": 1440,
       "h": 900,
       "title": "Mémo · desktop",
@@ -2819,7 +3066,7 @@
     },
     "Parchemin-Desktop-Attaque.dc.html": {
       "x": 0,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · desktop",
@@ -2829,7 +3076,7 @@
     },
     "Parchemin-Desktop-Recherche.dc.html": {
       "x": 1520,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Choisir une attaque · recherche · desktop",
@@ -2838,7 +3085,7 @@
     },
     "Parchemin-Desktop-Equipement.dc.html": {
       "x": 3040,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton équipement · desktop",
@@ -2847,7 +3094,7 @@
     },
     "Parchemin-Desktop-Monde.dc.html": {
       "x": 4560,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Ton monde · desktop",
@@ -2856,7 +3103,7 @@
     },
     "Parchemin-Desktop-Reglages.dc.html": {
       "x": 6080,
-      "y": 10464,
+      "y": 11728,
       "w": 1440,
       "h": 900,
       "title": "Réglages · desktop",
@@ -2866,7 +3113,7 @@
     },
     "Parchemin-Desktop-Signaler.dc.html": {
       "x": 0,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Signaler · desktop",
@@ -2876,7 +3123,7 @@
     },
     "Parchemin-Desktop-Signalements.dc.html": {
       "x": 1520,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Mes signalements · desktop",
@@ -2885,7 +3132,7 @@
     },
     "Parchemin-Desktop-Nouveautes.dc.html": {
       "x": 3040,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Nouveautés · desktop",
@@ -2894,7 +3141,7 @@
     },
     "Parchemin-Desktop-Merci.dc.html": {
       "x": 4560,
-      "y": 11784,
+      "y": 13048,
       "w": 1440,
       "h": 900,
       "title": "Corrigé grâce à toi · desktop",
@@ -2904,7 +3151,7 @@
     },
     "Parchemin-Desktop-Plantee.dc.html": {
       "x": 0,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Fiche plantée · desktop",
@@ -2914,7 +3161,7 @@
     },
     "Parchemin-Desktop-Ligne-Plantee.dc.html": {
       "x": 1520,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Bestiaire · desktop",
@@ -2924,7 +3171,7 @@
     },
     "Parchemin-Desktop-Arsenal-Ligne-Plantee.dc.html": {
       "x": 3040,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Ligne plantée · Arsenal · desktop",
@@ -2934,7 +3181,7 @@
     },
     "Parchemin-Desktop-Simulation-Plantee.dc.html": {
       "x": 4560,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Simulation plantée · desktop",
@@ -2944,10 +3191,20 @@
     },
     "Parchemin-Desktop-Secours.dc.html": {
       "x": 6080,
-      "y": 13104,
+      "y": 14368,
       "w": 1440,
       "h": 900,
       "title": "Battlewise a planté · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Installer.dc.html": {
+      "x": 0,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Installer l'app · desktop",
       "expand": "fill",
       "page": "parchemin",
       "is_interactive": true
@@ -3004,40 +3261,54 @@
       "y": 6020,
       "maxW": 2270
     },
+    "m-row7": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860
+    },
     "d-row1": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480
     },
     "d-row2": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960
     },
     "d-row3": {
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520
     },
     "d-row4": {
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000
     },
     "d-row5": {
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520
+    },
+    "d-row6": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440
     },
     "sim-row1": {
       "kind": "title1",
@@ -3195,6 +3466,22 @@
       "maxW": 1440,
       "page": "filets"
     },
+    "arrivee-row1": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "arrivee"
+    },
+    "installer-row1": {
+      "kind": "title1",
+      "text": "Installer l'app",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "installer"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -3243,11 +3530,19 @@
       "maxW": 2270,
       "page": "braise"
     },
+    "m-row7-braise": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "braise"
+    },
     "d-row1-braise": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "braise"
     },
@@ -3255,7 +3550,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "braise"
     },
@@ -3263,7 +3558,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "braise"
     },
@@ -3271,7 +3566,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "braise"
     },
@@ -3279,8 +3574,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "braise"
+    },
+    "d-row6-braise": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "braise"
     },
     "m-row1-brume": {
@@ -3331,11 +3634,19 @@
       "maxW": 2270,
       "page": "brume"
     },
+    "m-row7-brume": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "brume"
+    },
     "d-row1-brume": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "brume"
     },
@@ -3343,7 +3654,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "brume"
     },
@@ -3351,7 +3662,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "brume"
     },
@@ -3359,7 +3670,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "brume"
     },
@@ -3367,8 +3678,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "brume"
+    },
+    "d-row6-brume": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "brume"
     },
     "m-row1-jour": {
@@ -3419,11 +3738,19 @@
       "maxW": 2270,
       "page": "jour"
     },
+    "m-row7-jour": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "jour"
+    },
     "d-row1-jour": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "jour"
     },
@@ -3431,7 +3758,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "jour"
     },
@@ -3439,7 +3766,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "jour"
     },
@@ -3447,7 +3774,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "jour"
     },
@@ -3455,8 +3782,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "jour"
+    },
+    "d-row6-jour": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "jour"
     },
     "m-row1-runes": {
@@ -3507,11 +3842,19 @@
       "maxW": 2270,
       "page": "runes"
     },
+    "m-row7-runes": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "runes"
+    },
     "d-row1-runes": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "runes"
     },
@@ -3519,7 +3862,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "runes"
     },
@@ -3527,7 +3870,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "runes"
     },
@@ -3535,7 +3878,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "runes"
     },
@@ -3543,8 +3886,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "runes"
+    },
+    "d-row6-runes": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "runes"
     },
     "m-row1-graphite": {
@@ -3595,11 +3946,19 @@
       "maxW": 2270,
       "page": "graphite"
     },
+    "m-row7-graphite": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "graphite"
+    },
     "d-row1-graphite": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "graphite"
     },
@@ -3607,7 +3966,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "graphite"
     },
@@ -3615,7 +3974,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "graphite"
     },
@@ -3623,7 +3982,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "graphite"
     },
@@ -3631,8 +3990,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "graphite"
+    },
+    "d-row6-graphite": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "graphite"
     },
     "m-row1-parchemin": {
@@ -3683,11 +4050,19 @@
       "maxW": 2270,
       "page": "parchemin"
     },
+    "m-row7-parchemin": {
+      "kind": "title1",
+      "text": "Première arrivée",
+      "x": 0,
+      "y": 7284,
+      "maxW": 860,
+      "page": "parchemin"
+    },
     "d-row1-parchemin": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
-      "y": 7524,
+      "y": 8788,
       "maxW": 4480,
       "page": "parchemin"
     },
@@ -3695,7 +4070,7 @@
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
-      "y": 8844,
+      "y": 10108,
       "maxW": 2960,
       "page": "parchemin"
     },
@@ -3703,7 +4078,7 @@
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
-      "y": 10164,
+      "y": 11428,
       "maxW": 7520,
       "page": "parchemin"
     },
@@ -3711,7 +4086,7 @@
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
-      "y": 11484,
+      "y": 12748,
       "maxW": 6000,
       "page": "parchemin"
     },
@@ -3719,8 +4094,16 @@
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
-      "y": 12804,
+      "y": 14068,
       "maxW": 7520,
+      "page": "parchemin"
+    },
+    "d-row6-parchemin": {
+      "kind": "title1",
+      "text": "Desktop · première arrivée",
+      "x": 0,
+      "y": 15388,
+      "maxW": 1440,
       "page": "parchemin"
     }
   },
@@ -3747,6 +4130,8 @@
     "Arsenal-Ligne-Plantee.dc.html",
     "Simulation-Plantee.dc.html",
     "Secours.dc.html",
+    "Installer.dc.html",
+    "Installer-Safari.dc.html",
     "Desktop-Bestiaire.dc.html",
     "Desktop-Bestiaire-Recherche.dc.html",
     "Desktop-Combat.dc.html",
@@ -3766,6 +4151,7 @@
     "Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Desktop-Simulation-Plantee.dc.html",
     "Desktop-Secours.dc.html",
+    "Desktop-Installer.dc.html",
     "Sim-A.dc.html",
     "Sim-B.dc.html",
     "Sim-C.dc.html",
@@ -3809,6 +4195,14 @@
     "Filets-B.dc.html",
     "Filets-Desktop.dc.html",
     "Filets-C.dc.html",
+    "Arrivee-Auj.dc.html",
+    "Arrivee-A.dc.html",
+    "Arrivee-B.dc.html",
+    "Arrivee-C.dc.html",
+    "Installer-A.dc.html",
+    "Installer-B.dc.html",
+    "Installer-C.dc.html",
+    "Installer-Reglages.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -3831,6 +4225,8 @@
     "Braise-Arsenal-Ligne-Plantee.dc.html",
     "Braise-Simulation-Plantee.dc.html",
     "Braise-Secours.dc.html",
+    "Braise-Installer.dc.html",
+    "Braise-Installer-Safari.dc.html",
     "Braise-Desktop-Bestiaire.dc.html",
     "Braise-Desktop-Bestiaire-Recherche.dc.html",
     "Braise-Desktop-Combat.dc.html",
@@ -3850,6 +4246,7 @@
     "Braise-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Braise-Desktop-Simulation-Plantee.dc.html",
     "Braise-Desktop-Secours.dc.html",
+    "Braise-Desktop-Installer.dc.html",
     "Brume-Bestiaire.dc.html",
     "Brume-Bestiaire-Recherche.dc.html",
     "Brume-Monstre.dc.html",
@@ -3872,6 +4269,8 @@
     "Brume-Arsenal-Ligne-Plantee.dc.html",
     "Brume-Simulation-Plantee.dc.html",
     "Brume-Secours.dc.html",
+    "Brume-Installer.dc.html",
+    "Brume-Installer-Safari.dc.html",
     "Brume-Desktop-Bestiaire.dc.html",
     "Brume-Desktop-Bestiaire-Recherche.dc.html",
     "Brume-Desktop-Combat.dc.html",
@@ -3891,6 +4290,7 @@
     "Brume-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Brume-Desktop-Simulation-Plantee.dc.html",
     "Brume-Desktop-Secours.dc.html",
+    "Brume-Desktop-Installer.dc.html",
     "Jour-Bestiaire.dc.html",
     "Jour-Bestiaire-Recherche.dc.html",
     "Jour-Monstre.dc.html",
@@ -3913,6 +4313,8 @@
     "Jour-Arsenal-Ligne-Plantee.dc.html",
     "Jour-Simulation-Plantee.dc.html",
     "Jour-Secours.dc.html",
+    "Jour-Installer.dc.html",
+    "Jour-Installer-Safari.dc.html",
     "Jour-Desktop-Bestiaire.dc.html",
     "Jour-Desktop-Bestiaire-Recherche.dc.html",
     "Jour-Desktop-Combat.dc.html",
@@ -3932,6 +4334,7 @@
     "Jour-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Jour-Desktop-Simulation-Plantee.dc.html",
     "Jour-Desktop-Secours.dc.html",
+    "Jour-Desktop-Installer.dc.html",
     "Runes-Bestiaire.dc.html",
     "Runes-Bestiaire-Recherche.dc.html",
     "Runes-Monstre.dc.html",
@@ -3954,6 +4357,8 @@
     "Runes-Arsenal-Ligne-Plantee.dc.html",
     "Runes-Simulation-Plantee.dc.html",
     "Runes-Secours.dc.html",
+    "Runes-Installer.dc.html",
+    "Runes-Installer-Safari.dc.html",
     "Runes-Desktop-Bestiaire.dc.html",
     "Runes-Desktop-Bestiaire-Recherche.dc.html",
     "Runes-Desktop-Combat.dc.html",
@@ -3973,6 +4378,7 @@
     "Runes-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Runes-Desktop-Simulation-Plantee.dc.html",
     "Runes-Desktop-Secours.dc.html",
+    "Runes-Desktop-Installer.dc.html",
     "Graphite-Bestiaire.dc.html",
     "Graphite-Bestiaire-Recherche.dc.html",
     "Graphite-Monstre.dc.html",
@@ -3995,6 +4401,8 @@
     "Graphite-Arsenal-Ligne-Plantee.dc.html",
     "Graphite-Simulation-Plantee.dc.html",
     "Graphite-Secours.dc.html",
+    "Graphite-Installer.dc.html",
+    "Graphite-Installer-Safari.dc.html",
     "Graphite-Desktop-Bestiaire.dc.html",
     "Graphite-Desktop-Bestiaire-Recherche.dc.html",
     "Graphite-Desktop-Combat.dc.html",
@@ -4014,6 +4422,7 @@
     "Graphite-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Graphite-Desktop-Simulation-Plantee.dc.html",
     "Graphite-Desktop-Secours.dc.html",
+    "Graphite-Desktop-Installer.dc.html",
     "Parchemin-Bestiaire.dc.html",
     "Parchemin-Bestiaire-Recherche.dc.html",
     "Parchemin-Monstre.dc.html",
@@ -4036,6 +4445,8 @@
     "Parchemin-Arsenal-Ligne-Plantee.dc.html",
     "Parchemin-Simulation-Plantee.dc.html",
     "Parchemin-Secours.dc.html",
+    "Parchemin-Installer.dc.html",
+    "Parchemin-Installer-Safari.dc.html",
     "Parchemin-Desktop-Bestiaire.dc.html",
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html",
     "Parchemin-Desktop-Combat.dc.html",
@@ -4054,7 +4465,8 @@
     "Parchemin-Desktop-Ligne-Plantee.dc.html",
     "Parchemin-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Parchemin-Desktop-Simulation-Plantee.dc.html",
-    "Parchemin-Desktop-Secours.dc.html"
+    "Parchemin-Desktop-Secours.dc.html",
+    "Parchemin-Desktop-Installer.dc.html"
   ],
   "pages": [
     {
@@ -4116,6 +4528,14 @@
     {
       "id": "filets",
       "name": "Filets · pistes"
+    },
+    {
+      "id": "arrivee",
+      "name": "Première arrivée · pistes"
+    },
+    {
+      "id": "installer",
+      "name": "Installer · pistes"
     },
     {
       "id": "braise",
