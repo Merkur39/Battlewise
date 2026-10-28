@@ -1,4 +1,4 @@
-import { APP_NAME } from '@/app/brand'
+import { APP_NAME, PUBLISHER } from '@/app/brand'
 import type { Theme } from '@/app/store'
 import type { Language } from './detect'
 import { formatNumber } from './format'
@@ -489,6 +489,31 @@ export const fr = {
     source: 'Code source et licence',
     licence: (copyright: string) => `${copyright} · logiciel libre sous GPLv3, sans garantie.`,
     themes,
+  },
+  // {wiki}, {licence} and {email} stand for links.
+  notices: {
+    title: 'Mentions et crédits',
+    rowMeta: 'Projet de fan, crédits, tes données',
+    fan: 'Projet de fan',
+    fanText: `${APP_NAME} est un projet de fan, non officiel : ni Iron Gate ni Coffee Stain ne l'ont fait ni approuvé. Valheim, et les noms et données tirés du jeu, appartiennent à Iron Gate.`,
+    credits: 'Crédits',
+    wikiText:
+      "Noms d'attaques : en partie tirés du {wiki}, écrits par ses contributeurs, sous licence {licence}. Les noms français en sont pour la plupart des traductions.",
+    wiki: 'wiki Valheim',
+    fonts: 'Polices : IBM Plex Sans et IBM Plex Mono, © IBM Corp., sous SIL Open Font License 1.1.',
+    libraries: 'Bibliothèques : React, © Meta Platforms, et Workbox, © Google, sous licence MIT.',
+    licenceTexts: 'Textes complets des licences',
+    data: 'Tes données',
+    device:
+      "Tes réglages, ton équipement et la liste de tes signalements restent sur cet appareil. Pas de compte, pas de cookie, pas de mesure d'audience.",
+    reports:
+      "Un signalement devient une issue publique sur GitHub, envoyée par Vercel : ton texte, ton pseudo si tu en donnes un, et ce que l'app joint. Ton pseudo peut aussi paraître dans les Nouveautés, pour te remercier.",
+    network:
+      "Pour suivre tes signalements, l'app demande leur état à GitHub. Comme pour tout site, Vercel, qui sert l'app, et GitHub voient l'adresse IP de ta connexion ; elle n'est jamais jointe à un signalement.",
+    removal: 'Pour faire retirer un signalement ou ton pseudo, écris à {email}.',
+    legal: 'Mentions légales',
+    publisher: `Éditeur : ${PUBLISHER}, à titre non professionnel.`,
+    host: 'Hébergeur : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.',
   },
   install: {
     title: `Installe ${APP_NAME}`,

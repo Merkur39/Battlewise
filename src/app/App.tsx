@@ -7,6 +7,7 @@ import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
 import { InstallOffer } from '@/features/install/Install'
 import { useInstallOffer } from '@/features/install/useInstall'
+import { NoticesModal } from '@/features/notices/NoticesModal'
 import { ScreenCrash } from '@/features/report/Crash'
 import type { ReportOrigin } from '@/features/report/model'
 import { NewsModal } from '@/features/report/NewsModal'
@@ -133,6 +134,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
         {modal === 'world' && <WorldModal />}
         {modal === 'reports' && <ReportsModal />}
         {modal === 'news' && <NewsModal />}
+        {modal === 'notices' && <NoticesModal />}
         {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
         {installOffer && <InstallOffer way={installOffer} onClose={leaveInstallOffer} />}
         {report && (

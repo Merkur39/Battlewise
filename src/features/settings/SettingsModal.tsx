@@ -213,16 +213,16 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
                 <button
                   type="button"
                   aria-haspopup="dialog"
-                  className={`${styles.source ?? ''} ${styles.install ?? ''}`}
+                  className={`${styles.source ?? ''} ${styles.twoLines ?? ''}`}
                   onClick={() => {
                     if (installWay === 'prompt') void install.prompt()
                     else setInstallSteps(true)
                   }}
                 >
                   <InstallIcon size={isDesktop ? 13 : 16} strokeWidth={2} />
-                  <span className={styles.installText}>
+                  <span className={styles.sourceText}>
                     <span className={styles.sourceLabel}>{t.install.row}</span>
-                    {!isDesktop && <span className={styles.installMeta}>{t.install.rowMeta}</span>}
+                    {!isDesktop && <span className={styles.sourceMeta}>{t.install.rowMeta}</span>}
                   </span>
                   {!isDesktop && <ChevronRightIcon size={14} className={styles.go} />}
                 </button>
@@ -240,6 +240,21 @@ export function SettingsModal({ onPreview }: { readonly onPreview: (preview: Pre
                 <span className={styles.sourceLabel}>{t.report.fromSettings}</span>
                 {!isDesktop && <ChevronRightIcon size={14} className={styles.go} />}
               </button>
+              <RouteLink
+                to={{ ...route, modal: 'notices' }}
+                how="replace"
+                className={`${styles.source ?? ''} ${styles.twoLines ?? ''}`}
+              >
+                <span className={styles.sourceText}>
+                  <span className={styles.sourceLabel}>{t.notices.title}</span>
+                  {!isDesktop && <span className={styles.sourceMeta}>{t.notices.rowMeta}</span>}
+                </span>
+                {isDesktop ? (
+                  <ChevronRightIcon size={12} strokeWidth={2} />
+                ) : (
+                  <ChevronRightIcon size={14} className={styles.go} />
+                )}
+              </RouteLink>
               <a className={styles.source} href={SOURCE_URL} target="_blank" rel="noopener">
                 <span className={styles.sourceLabel}>{t.settings.source}</span>{' '}
                 {!isDesktop && <span className={styles.sourceHost}>GitHub</span>}

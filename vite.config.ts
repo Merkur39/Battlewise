@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { APP_NAME } from './src/app/brand.ts'
+import { licences } from './src/app/licences.ts'
 import { iconPreset, manifest } from './src/app/pwa.ts'
 
 const { version } = JSON.parse(readFileSync('package.json', 'utf8')) as { version: string }
@@ -13,8 +15,14 @@ export default defineConfig({
   define: { __APP_VERSION__: JSON.stringify(version) },
   plugins: [
     react(),
-    // Installable and offline: the whole build is cached, game data and fonts included, and a new
-    // version takes over on its own (the saved state lives in localStorage, untouched).
+    // Settings › Notices and credits links to it: the licences of the code and fonts the app ships,
+    // the service worker's Workbox included (generateSW builds it from these).
+    licences({
+      title: `${APP_NAME} ${version}`,
+      serviceWorker: ['workbox-core', 'workbox-precaching', 'workbox-routing'],
+    }),
+    // Installable and offline: the whole build is cached, game data, fonts and licences included,
+    // and a new version takes over on its own (the saved state lives in localStorage, untouched).
     VitePWA({
       registerType: 'autoUpdate',
       manifest,
@@ -26,7 +34,7 @@ export default defineConfig({
         injectThemeColor: false,
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,txt}'],
       },
     }),
   ],

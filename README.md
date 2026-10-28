@@ -101,4 +101,6 @@ useful, but without any warranty.
 The licence covers the project's own work: the code, the extraction tooling and the design canvas.
 It does not cover what belongs to the game: Valheim and the names and data read from it, in
 `src/data/game.json`, are Iron Gate's, and the attack names taken from the Valheim wiki keep the
-wiki's licence, CC BY-SA 3.0.
+wiki's licence, CC BY-SA 3.0. The fonts and libraries the app ships keep their own licences: the build
+writes them in full to `licences.txt` (`src/app/licences.ts`), which Settings › About › Notices and
+credits links to, beside these notices.
