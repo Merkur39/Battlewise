@@ -2,6 +2,7 @@ import { useId, useMemo, type ReactNode } from 'react'
 import { CrashBoundary } from '@/app/CrashBoundary'
 import type { Route } from '@/app/routes'
 import { RouteLink } from '@/app/RouteLink'
+import { useAppState, useUpdate } from '@/app/useAppState'
 import { useIsDesktop } from '@/app/useMediaQuery'
 import { replaceRoute } from '@/app/useRoute'
 import { attackDamage, attackVerdicts } from '@/combat/attack'
@@ -35,7 +36,7 @@ import {
  * the sheet of a creature takes the whole screen on a phone, sits beside the list on a desktop. */
 export function BestiaryScreen({ route }: { readonly route: Route }) {
   const isDesktop = useIsDesktop()
-  const place = placeOf(route)
+  const place = placeOf(route, useAppState().biome)
   const t = useT()
 
   if (isDesktop) {
@@ -100,6 +101,7 @@ export function BestiaryScreen({ route }: { readonly route: Route }) {
 
 function Finder({ place, selected }: { readonly place: Place; readonly selected: string | null }) {
   const t = useT()
+  const update = useUpdate()
   const searching = place.query.trim() !== ''
   return (
     <>
@@ -114,6 +116,8 @@ function Finder({ place, selected }: { readonly place: Place; readonly selected:
               t.bestiary.biomeCount(index, total, creaturesOf(place.biome).length)
             }
             onChange={(biome) => {
+              // Only a pick says where the player is: a creature found in another biome does not.
+              update({ biome })
               replaceRoute(bestiaryRoute(biome, null, ''))
             }}
           />

@@ -1,5 +1,6 @@
 import type { World } from '@/combat/world'
 import { game } from '@/data'
+import type { BiomeId } from '@/data/types'
 import { maxLevel } from '@/features/gear/model'
 import { LANGUAGES } from '@/i18n/detect'
 
@@ -47,6 +48,9 @@ export interface AppState {
   readonly seenVersion: string | null
   /** The app offered to install itself, once, on a browser that can: the offer stays in Settings. */
   readonly installOffered: boolean
+  /** The biome the player last picked in the Bestiary, where it opens when the address names none.
+   * Null before the first pick. */
+  readonly biome: BiomeId | null
 }
 
 /** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
@@ -59,6 +63,7 @@ export const DEFAULT_STATE: AppState = {
   recentAttacks: [],
   seenVersion: null,
   installOffered: false,
+  biome: null,
 }
 
 export const STORAGE_KEY = 'foelore'
@@ -125,6 +130,11 @@ function load(storage: KeyValueStorage | null): AppState {
         ? saved.seenVersion
         : null,
     installOffered: saved.installOffered === true,
+    biome:
+      oneOf(
+        game.biomes.map((biome) => biome.id),
+        saved.biome,
+      ) ?? null,
   }
 }
 

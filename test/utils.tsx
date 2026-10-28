@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import type { UserEvent } from '@testing-library/user-event'
 import type { ReactNode } from 'react'
 import { vi } from 'vitest'
-import { createStore, type AppState, type Gear } from '@/app/store'
+import { createStore, type AppState, type Gear, type Store } from '@/app/store'
 import { StoreContext } from '@/app/useAppState'
 import { createIssueStates } from '@/features/report/issues'
 import { createOutbox, SendError, type Outbox } from '@/features/report/outbox'
@@ -20,14 +20,17 @@ export const MOCKUP_GEAR: Gear = {
 /** An outbox kept in memory, offline: what is reported waits in it. */
 export const offlineOutbox = () => createOutbox(null, () => Promise.reject(new SendError(null)))
 
-/** Renders `ui` with a store of its own, unsaved, on the defaults with `state` over them, an outbox of
- * its own, offline unless one is given, and issue states kept nowhere (GitHub is what fetch answers). */
+/** Renders `ui` with a store of its own, unsaved, on the defaults (or the store given, as a relaunch
+ * finds it) with `state` over them, an outbox of its own, offline unless one is given, and issue states
+ * kept nowhere (GitHub is what fetch answers). */
 export function renderWithStore(
   ui: ReactNode,
   state: Partial<AppState> = {},
-  { outbox = offlineOutbox() }: { readonly outbox?: Outbox } = {},
+  {
+    outbox = offlineOutbox(),
+    store = createStore(null),
+  }: { readonly outbox?: Outbox; readonly store?: Store } = {},
 ) {
-  const store = createStore(null)
   store.update(state)
   return {
     store,

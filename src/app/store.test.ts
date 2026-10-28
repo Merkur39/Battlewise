@@ -35,6 +35,7 @@ const changed: AppState = {
   recentAttacks: [{ fighter: 'Troll', attack: 'troll_groundslam' }],
   seenVersion: '1.4.0',
   installOffered: true,
+  biome: 'swamp',
 }
 
 describe('createStore', () => {
@@ -44,6 +45,10 @@ describe('createStore', () => {
 
   it('has not offered to install the app yet on a first launch', () => {
     expect(createStore(memoryStorage()).getState().installOffered).toBe(false)
+  })
+
+  it('knows no biome of the player on a first launch', () => {
+    expect(createStore(memoryStorage()).getState().biome).toBeNull()
   })
 
   it('starts with the gear of a new character: a wooden shield, no skill, no armour, 25 HP', () => {
@@ -94,6 +99,7 @@ describe('createStore', () => {
       recentAttacks: [],
       seenVersion: null,
       installOffered: false,
+      biome: null,
     })
   })
 
@@ -111,6 +117,7 @@ describe('createStore', () => {
     ['a language the app does not speak', { language: 'de' }, 'language'],
     ['a version that is no version', { seenVersion: 'latest' }, 'seenVersion'],
     ['an install offer neither made nor not', { installOffered: 'yes' }, 'installOffered'],
+    ['a biome the game no longer has', { biome: 'jungle' }, 'biome'],
   ] as const)('puts back the default instead of %s', (_, saved, setting) => {
     const state = createStore(memoryStorage(JSON.stringify(saved))).getState()
 

@@ -90,7 +90,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   useSendWaitingReports()
   const [fixes, dismissFixes] = useFixesSinceUpdate()
   const [installOffer, leaveInstallOffer] = useInstallOffer()
-  const creature = screen === 'bestiary' ? placeOf(route).creature : null
+  const creature = screen === 'bestiary' ? placeOf(route, saved.biome).creature : null
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
   const title = creature ? creatureName(creature, language) : t.screens[screen]
