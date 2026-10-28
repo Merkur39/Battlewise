@@ -1,0 +1,210 @@
+/* The questions of the first arrival (design canvas, Arrivee-* and Desktop-Arrivee-*): the whole screen
+   of a phone, a 600 px dialog over the app on a desktop. */
+.dialog {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog::backdrop {
+  background: rgb(4 6 7 / 0.72);
+}
+
+.header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 6px 0 16px;
+}
+
+.step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.skip {
+  height: 44px;
+  padding: 0 10px;
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.progress > span {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.progress > .done {
+  background: var(--accent);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 16px 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.lead {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* The biomes: the rows of Ton monde's presets. */
+.biomes {
+  composes: presets from '../world/WorldForm.module.css';
+  flex: none;
+}
+
+.biome {
+  composes: preset from '../world/WorldForm.module.css';
+}
+
+.radio {
+  composes: radio from '../world/WorldForm.module.css';
+}
+
+.biomeName {
+  composes: presetName from '../world/WorldForm.module.css';
+}
+
+.footer {
+  flex: none;
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px max(24px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+.back {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--secondary);
+}
+
+.primary {
+  flex: 1;
+  height: 48px;
+  border-radius: 4px;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Desktop: centred over the app, Précédent in words beside the button that goes on. */
+@media (min-width: 1024px) {
+  .dialog {
+    width: min(600px, 100% - 64px);
+    /* Not auto: a modal dialog is fixed with inset 0, so auto would fill the screen. */
+    height: fit-content;
+    max-height: calc(100% - 64px);
+    margin: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  .header {
+    gap: 12px;
+    padding: 12px 12px 18px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .top {
+    padding: 0;
+  }
+
+  .skip {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .progress {
+    padding: 0 12px 0 0;
+  }
+
+  .heading {
+    padding: 6px 0 0;
+  }
+
+  .body {
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .footer {
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+  }
+
+  .previous {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .primary {
+    flex: none;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+}

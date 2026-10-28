@@ -106,6 +106,27 @@ describe('Offering to install Foelore', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Bestiaire' })).toBeInTheDocument()
   })
 
+  it('comes before the questions of the first arrival, which wait under it', async () => {
+    const user = userEvent.setup()
+    // The browser shows the dialog opened last over the others.
+    const opened: string[] = []
+    vi.spyOn(HTMLDialogElement.prototype, 'showModal').mockImplementation(function (
+      this: HTMLDialogElement,
+    ) {
+      this.open = true
+      opened.push(this.querySelector('h2')?.textContent ?? '')
+    })
+    const browser = chromium()
+    browser.offers()
+    launch(browser, { language: 'fr', onboarding: false })
+
+    expect(opened).toEqual(['Où en es-tu ?', 'Installe Foelore'])
+    await user.click(screen.getByRole('button', { name: 'Continuer dans le navigateur' }))
+
+    expect(offer()).not.toBeInTheDocument()
+    expect(screen.getByRole('dialog', { name: 'Où en es-tu ?' })).toBeInTheDocument()
+  })
+
   it('offers it no more to a player it was offered to', () => {
     const browser = chromium()
     browser.offers()

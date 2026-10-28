@@ -51,6 +51,9 @@ export interface AppState {
   /** The biome the player last picked in the Bestiary, where it opens when the address names none.
    * Null before the first pick. */
   readonly biome: BiomeId | null
+  /** The questions of the first arrival (the biome, the gear, the world) were answered or skipped:
+   * asked once, of players of earlier versions too. */
+  readonly onboarding: boolean
 }
 
 /** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
@@ -64,6 +67,7 @@ export const DEFAULT_STATE: AppState = {
   seenVersion: null,
   installOffered: false,
   biome: null,
+  onboarding: false,
 }
 
 export const STORAGE_KEY = 'foelore'
@@ -135,6 +139,7 @@ function load(storage: KeyValueStorage | null): AppState {
         game.biomes.map((biome) => biome.id),
         saved.biome,
       ) ?? null,
+    onboarding: saved.onboarding === true,
   }
 }
 

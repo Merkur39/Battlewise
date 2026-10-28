@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
+import { FirstArrival } from '@/features/arrival/FirstArrival'
 import { ArsenalScreen } from '@/features/arsenal/ArsenalScreen'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
 import { creatureName } from '@/features/bestiary/model'
@@ -135,6 +136,9 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
         {modal === 'reports' && <ReportsModal />}
         {modal === 'news' && <NewsModal />}
         {modal === 'notices' && <NoticesModal />}
+        {/* Opened before the sheets below: each of them shows over the questions, the offer to
+            install included, which comes first at a first launch. */}
+        {!saved.onboarding && <FirstArrival />}
         {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
         {installOffer && <InstallOffer way={installOffer} onClose={leaveInstallOffer} />}
         {report && (

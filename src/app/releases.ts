@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.12.0',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "À la première ouverture, Foelore pose trois questions avant le Bestiaire : où tu en es, ton équipement et ton monde, pour que ses verdicts parlent de toi dès le début. Chacune se passe, et tout reste réglable ensuite. Si tu utilisais déjà l'app, tu les verras une fois, tes réglages déjà remplis.",
+          en: 'When first opened, Foelore asks three questions before the Bestiary: where you are, your gear and your world, so that its verdicts are about you from the start. Each can be skipped, and everything can still be set later. If you already used the app, you will see them once, your settings already filled in.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.11.0',
     date: '2026-10-28',
     notes: [
