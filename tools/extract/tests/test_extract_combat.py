@@ -1,5 +1,5 @@
 """Characterisation tests of the assembled game.json: they pin combat values read in the game data and
-code (1.0.20). The modules have their own tests (attacks, spawns, arsenal, animation, localization).
+code (1.0.21). The modules have their own tests (attacks, spawns, arsenal, animation, localization).
 
 They read the local Valheim install (read-only) and are skipped when it is not found.
 Run from tools/extract:  python -m unittest discover -s tests -v
@@ -323,7 +323,7 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual(self.report.stale_ignored, [])
 
     def test_game_version_is_recorded(self):
-        self.assertEqual(self.data["game"]["version"], "1.0.20")
+        self.assertEqual(self.data["game"]["version"], "1.0.21")
 
 
 if __name__ == "__main__":

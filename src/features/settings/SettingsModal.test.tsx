@@ -149,7 +149,7 @@ describe('Settings', () => {
 
     const dialog = await openSettings(user)
 
-    expect(dialog).toHaveTextContent('Lues dans Valheim 1.0.20 · sans mod')
+    expect(dialog).toHaveTextContent('Lues dans Valheim 1.0.21 · sans mod')
   })
 
   it('shows the version of the build next to the name', async () => {

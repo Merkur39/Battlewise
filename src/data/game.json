@@ -1,7 +1,7 @@
 {
   "game": {
-    "version": "1.0.20",
-    "build": 25909357
+    "version": "1.0.21",
+    "build": 26249040
   },
   "world": {
     "damageScalePerPlayer": 0.04,
@@ -10938,7 +10938,7 @@
             },
             {
               "damages": {
-                "fire": 250
+                "fire": 125
               },
               "staggerMultiplier": 1,
               "blockable": false,

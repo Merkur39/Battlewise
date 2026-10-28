@@ -1,4 +1,4 @@
-"""Where each creature is met in a normal world, under which condition, and at which levels (1.0.20):
+"""Where each creature is met in a normal world, under which condition, and at which levels (1.0.21):
 
 - open world: SpawnSystem.UpdateSpawnList runs every enabled SpawnSystemList entry (chance above 0, day or
   night) where the ground biome is in its m_biome, never with an m_biomeArea of 0 (IsSpawnPointGood);

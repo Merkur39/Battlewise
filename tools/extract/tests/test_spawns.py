@@ -1,4 +1,4 @@
-"""Where creatures are met and at which star levels: pinned on the 1.0.20 game data.
+"""Where creatures are met and at which star levels: pinned on the 1.0.21 game data.
 
 They read the local Valheim install (read-only) and are skipped when it is not found.
 Run from tools/extract:  python -m unittest tests.test_spawns -v

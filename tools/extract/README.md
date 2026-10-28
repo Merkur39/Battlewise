@@ -71,7 +71,7 @@ then by shared words, and writes `out/wiki_names.json`: a proposal to review, ne
 
 ## What the extraction follows
 
-Each module states, in its docstring, the game code it reproduces (decompiled 1.0.20):
+Each module states, in its docstring, the game code it reproduces (decompiled 1.0.21):
 
 - `attacks.py`: the weapons a creature is given and its AI can aim, every hit they deal through
   `Attack.OnAttackTrigger` (melee, area, projectile volleys and bursts), what they spawn (projectiles,
