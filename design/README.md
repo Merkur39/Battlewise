@@ -78,7 +78,8 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   chosen. Made by hand as well, verdicts from the app's model on `src/data/game.json` at the time. Carried into
   Origine in the row « Première arrivée », after the offer to install (whose ways out now lead to it): `Arrivee-Biome`,
   `Arrivee-Equipement`, `Arrivee-Monde` on a phone, `Desktop-Arrivee-*` as a 600 px dialog over the app. The forms of
-  questions 2 and 3 are those of the Ton équipement and Ton monde dialogs, shared. « Suivant » saves the answer;
+  questions 2 and 3 are those of the Ton équipement and Ton monde dialogs, shared. « Suivant » keeps the answer, and
+  the answers kept are written as the questions end, so the app behind the desktop dialog does not move meanwhile;
   « Passer » (and Escape on a desktop) leaves the questions left, and the one on screen, at what they hold; the last
   button names the biome picked and opens the Bestiaire on it.
 - Page **Installer · pistes** (`Installer-A` to `Installer-C`, `Installer-Reglages`): offering to install the app

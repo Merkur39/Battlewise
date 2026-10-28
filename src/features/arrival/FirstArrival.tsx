@@ -1,5 +1,5 @@
 import { useId, useLayoutEffect, useRef, useState } from 'react'
-import type { Gear } from '@/app/store'
+import type { AppState, Gear } from '@/app/store'
 import { useAppState, useUpdate } from '@/app/useAppState'
 import { useIsDesktop } from '@/app/useMediaQuery'
 import { replaceRoute, useRoute } from '@/app/useRoute'
@@ -17,9 +17,10 @@ const QUESTIONS = 3
 
 /** The questions of the first arrival, before any creature: where the player fights, then Ton
  * équipement and Ton monde, with their dialogs' own forms, on what is saved (a player of an earlier
- * version finds theirs). Suivant saves the answer on screen; the last button saves the world and opens
- * the Bestiary on the biome picked. Passer, like every other way out (Escape), leaves the rest as it
- * is: the questions are behind the player either way. */
+ * version finds theirs). Suivant keeps the answer on screen, written as the questions end: the app
+ * behind does not move while they are open. The last button adds the world and opens the Bestiary on
+ * the biome picked; Passer, like every other way out (Escape), writes the answers kept and leaves the
+ * rest as it is. The questions are behind the player either way. */
 export function FirstArrival() {
   const t = useT()
   const language = useLanguage()
@@ -33,6 +34,7 @@ export function FirstArrival() {
   const [biome, setBiome] = useState<BiomeId>(() => placeOf(route, saved.biome).biome)
   const [gear, setGear] = useState<Gear>(saved.gear)
   const [world, setWorld] = useState<World>(saved.world)
+  const [answers, setAnswers] = useState<Partial<Pick<AppState, 'biome' | 'gear'>>>({})
 
   useLayoutEffect(() => {
     if (dialog.current?.open === false) dialog.current.showModal()
@@ -50,12 +52,12 @@ export function FirstArrival() {
   const { title, lead } = questions[step] ?? questions[0]
 
   const goOn = () => {
-    if (step === 0) update({ biome })
-    if (step === 1) update({ gear })
     if (!last) {
+      setAnswers({ ...answers, ...(step === 0 ? { biome } : { gear }) })
       setStep(step + 1)
       return
     }
+    // The biome and the gear are kept already: Suivant took them on the way here.
     update({ world })
     replaceRoute(bestiaryRoute(biome, null, ''))
     close()
@@ -67,7 +69,7 @@ export function FirstArrival() {
       aria-labelledby={titleId}
       className={styles.dialog}
       onClose={() => {
-        update({ onboarding: true })
+        update({ ...answers, onboarding: true })
       }}
     >
       <header className={styles.header}>

@@ -39,13 +39,13 @@ describe('The first arrival', () => {
     expect(screen.queryByRole('dialog', { name: 'Où en es-tu ?' })).not.toBeInTheDocument()
   })
 
-  it('saves the biome on Suivant, then asks for the gear', async () => {
+  it('keeps the biome for the end on Suivant, then asks for the gear', async () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
 
     const dialog = await answerWhere(user, 'Forêt noire')
 
-    expect(store.getState().biome).toBe('blackForest')
+    expect(store.getState().biome).toBeNull()
     expect(dialog).toHaveTextContent('2 sur 3')
     expect(dialog).toHaveTextContent('Ce que tu tiens en main gauche, et tes stats défensives.')
   })
@@ -67,7 +67,7 @@ describe('The first arrival', () => {
     expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
   })
 
-  it('saves the gear on Suivant, then asks for the world', async () => {
+  it('keeps the gear for the end on Suivant, then asks for the world', async () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
@@ -75,16 +75,17 @@ describe('The first arrival', () => {
     await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
 
-    expect(store.getState().gear.blocker).toBe('ShieldBronzeBuckler')
+    expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
     const world = await question('Ton monde')
     expect(world).toHaveTextContent('3 sur 3')
     expect(within(world).getByRole('radio', { name: 'Normal ×1' })).toBeChecked()
   })
 
-  it('ends on the Bestiary of the biome picked, the world saved, and asks no more', async () => {
+  it('saves every answer as it ends, on the Bestiary of the biome picked, and asks no more', async () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
+    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
     const world = await question('Ton monde')
 
@@ -94,11 +95,28 @@ describe('The first arrival', () => {
 
     expect(world).not.toBeInTheDocument()
     expect(store.getState()).toMatchObject({
+      biome: 'blackForest',
+      gear: { blocker: 'ShieldBronzeBuckler' },
       world: { difficulty: 'hard', players: 3 },
       onboarding: true,
     })
     expect(window.location.hash).toBe('#/bestiary/blackForest')
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Forêt noire')
+  })
+
+  it('changes nothing in the app behind it before it ends, on a desktop', async () => {
+    const user = userEvent.setup()
+    setViewportWidth('desktop')
+    firstLaunch()
+    const gear = await answerWhere(user, 'Forêt noire')
+
+    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
+
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Prairies')
+    expect(screen.getByRole('link', { name: /^Ton équipement :/ })).toHaveAccessibleName(
+      /Bouclier en bois/,
+    )
   })
 
   it('names the biome picked on its last button', async () => {
@@ -141,8 +159,9 @@ describe('The first arrival', () => {
   })
 
   it('ends as Passer does on any other way out: Escape, on a desktop', async () => {
+    const user = userEvent.setup()
     const { store } = firstLaunch()
-    const dialog = await question('Où en es-tu ?')
+    const dialog = await answerWhere(user, 'Montagne')
 
     act(() => {
       // What the browser does on Escape: it closes the dialog.
@@ -150,7 +169,7 @@ describe('The first arrival', () => {
     })
 
     expect(dialog).not.toBeInTheDocument()
-    expect(store.getState().onboarding).toBe(true)
+    expect(store.getState()).toMatchObject({ biome: 'mountain', onboarding: true })
   })
 
   it('asks a player of an earlier version once, on the settings already set', async () => {
