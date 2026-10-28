@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Installer l'app — desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#2C383D transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2C383D;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#7D8B91}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes pop-in{from{opacity:0;transform:translateY(-6px)}}
+a{color:#8EBDE3}a:hover{color:#B5D4F0}
+</style>
+</helmet>
+<div style="height: 100vh; min-height: 680px; box-sizing: border-box; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+  <div style="flex: 1; display: flex; flex-direction: column; padding: 20px 24px">
+    <span style="display: flex; align-items: center; height: 40px"><span style="display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 500"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Battlewise</span></span>
+    <div style="align-self: center; width: 440px; display: flex; flex-direction: column; gap: 22px; padding-top: 120px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 500">Installe Battlewise</h1>
+        <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #97A5AA">Pour l'avoir sous la main, à côté du jeu.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px"><span style="display: flex; align-items: center; gap: 12px; min-height: 34px; font-size: 15px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"></rect></svg>Une icône à côté de tes autres apps</span><span style="display: flex; align-items: center; gap: 12px; min-height: 34px; font-size: 15px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>Sa propre fenêtre, sans barre d'adresse</span><span style="display: flex; align-items: center; gap: 12px; min-height: 34px; font-size: 15px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5a10 10 0 0 1 4.2-2.3M14.8 10.2a10 10 0 0 1 4.2 2.3M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"></path><path d="M2 8.8a15 15 0 0 1 4.6-2.9M10.5 4.6A15 15 0 0 1 22 8.8M3 3l18 18"></path></svg>Marche sans connexion</span></div>
+      <div style="display: flex; gap: 10px; padding-top: 4px">
+        <button type="button" onClick="{{ openPrompt }}" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Installer</button>
+        <a href="Desktop-Bestiaire.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #2C383D; font-size: 14px; color: #E2E8E8; text-decoration: none">Continuer dans le navigateur</a>
+      </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #7D8B91; ">Tu la retrouves dans Réglages › À propos.</span>
+    </div>
+  </div>
+  <sc-if value="{{ prompt }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePrompt }}" style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72)"></div>
+    <div role="dialog" aria-modal="true" aria-label="Installer l'application" style="position: absolute; top: 8px; right: 24px; width: 340px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; padding: 18px 18px 16px; border: 1px solid #2C383D; border-radius: 10px; background: #151C1F; animation: pop-in 0.15s ease-out"><span style="font-size: 11px; letter-spacing: 0.08em; color: #7D8B91">FENÊTRE DU NAVIGATEUR</span>
+      <span style="display: flex; align-items: center; gap: 14px">
+        <span style="width: 48px; height: 48px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 12px; background: #0D1214; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Battlewise</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">battlewise-valheim.vercel.app</span></span>
+      </span>
+      <span style="display: flex; justify-content: flex-end; gap: 8px">
+        <button type="button" onClick="{{ closePrompt }}" style="height: 40px; padding: 0 16px; font-size: 14px; color: #97A5AA">Annuler</button>
+        <a href="Desktop-Bestiaire.dc.html" style="height: 40px; padding: 0 20px; display: flex; align-items: center; border-radius: 20px; background: #1F2A2E; font-size: 14px; color: #E2E8E8; text-decoration: none">Installer</a>
+      </span></div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { prompt: false };
+  }
+  renderVals() {
+    return {
+      prompt: this.state.prompt,
+      openPrompt: () => this.setState({ prompt: true }),
+      closePrompt: () => this.setState({ prompt: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

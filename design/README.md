@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v107** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v121** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -70,6 +70,20 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
   Bestiaire and Arsenal boards gain a `broken` state (the row of that name fails: the short row with « Signaler »,
   which on the desktop Bestiaire opens its report dialog), Main and Desktop-Combat a `crashed` state (the card of
   the screen).
+- Page **Première arrivée · pistes** (`Arrivee-Auj`, `Arrivee-A` to `Arrivee-C`): onboarding, what a first launch
+  shows today (a new character's gear, verdicts right in the Meadows and nearly all « dodge » in the Black Forest,
+  nothing pointing at « VD 6 ×1 ») and three tracks on a phone: one bottom sheet at the first launch leading to Ton
+  équipement and Ton monde; three full-screen questions (the biome, the gear, the world) before the Bestiaire; no
+  interruption, a card above the list and a dot on the context button until the gear is set. Track B is the one
+  chosen. Made by hand as well, verdicts from the app's model on `src/data/game.json` at the time.
+- Page **Installer · pistes** (`Installer-A` to `Installer-C`, `Installer-Reglages`): offering to install the app
+  (#49), apart from the onboarding and once, in three tracks on a phone (a full screen at the first launch, before the
+  onboarding; a bottom sheet as the onboarding ends; a card above the Bestiary's list at the second launch), each on
+  Android (a button, where `beforeinstallprompt` fired) and in Safari on an iPhone (the steps; a Home Screen app there
+  does not share Safari's storage), then the row of Réglages › À propos that keeps the offer within reach. Made by
+  hand as well. Track A is the one chosen, carried into Origine as a row « Première arrivée »: `Installer` (« Installer »
+  opens the browser's prompt, drawn), `Installer-Safari` (the steps) and `Desktop-Installer`; `Reglages` gains the row
+  under the version, opening the steps' sheet, and `Desktop-Reglages` a small « Installer Battlewise » button.
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
