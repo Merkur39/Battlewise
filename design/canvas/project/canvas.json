@@ -94,8 +94,15 @@
       "title": "Réglages",
       "is_interactive": true
     },
-    "Tokens.dc.html": {
+    "Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits"
+    },
+    "Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -168,7 +175,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "is_interactive": true
     },
     "Installer.dc.html": {
@@ -273,6 +280,14 @@
       "expand": "fill",
       "is_interactive": true
     },
+    "Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill"
+    },
     "Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -348,7 +363,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "is_interactive": true
     },
@@ -791,6 +806,38 @@
       "title": "Réglages · la rangée, pour les trois pistes",
       "page": "installer"
     },
+    "Mentions-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1140,
+      "title": "Piste A · Une page à part — retenue",
+      "page": "mentions"
+    },
+    "Mentions-B.dc.html": {
+      "x": 0,
+      "y": 1260,
+      "w": 1440,
+      "h": 1140,
+      "title": "Piste B · Tout dans À propos, replié",
+      "page": "mentions"
+    },
+    "Mentions-C.dc.html": {
+      "x": 0,
+      "y": 2520,
+      "w": 1440,
+      "h": 1140,
+      "title": "Piste C · Chaque mention où elle sert",
+      "page": "mentions"
+    },
+    "Mentions-Texte.dc.html": {
+      "x": 0,
+      "y": 3780,
+      "w": 1440,
+      "h": 1140,
+      "title": "Le texte · FR et EN",
+      "page": "mentions"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -895,8 +942,16 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Tokens.dc.html": {
+    "Braise-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "braise"
+    },
+    "Braise-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -978,7 +1033,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "braise",
       "is_interactive": true
     },
@@ -1096,6 +1151,15 @@
       "page": "braise",
       "is_interactive": true
     },
+    "Braise-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "braise"
+    },
     "Braise-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -1179,7 +1243,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "braise",
       "is_interactive": true
@@ -1298,8 +1362,16 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Tokens.dc.html": {
+    "Brume-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "brume"
+    },
+    "Brume-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1381,7 +1453,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "brume",
       "is_interactive": true
     },
@@ -1499,6 +1571,15 @@
       "page": "brume",
       "is_interactive": true
     },
+    "Brume-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "brume"
+    },
     "Brume-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -1582,7 +1663,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "brume",
       "is_interactive": true
@@ -1701,8 +1782,16 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Tokens.dc.html": {
+    "Jour-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "jour"
+    },
+    "Jour-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -1784,7 +1873,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "jour",
       "is_interactive": true
     },
@@ -1902,6 +1991,15 @@
       "page": "jour",
       "is_interactive": true
     },
+    "Jour-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "jour"
+    },
     "Jour-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -1985,7 +2083,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "jour",
       "is_interactive": true
@@ -2104,8 +2202,16 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Tokens.dc.html": {
+    "Runes-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "runes"
+    },
+    "Runes-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -2187,7 +2293,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "runes",
       "is_interactive": true
     },
@@ -2305,6 +2411,15 @@
       "page": "runes",
       "is_interactive": true
     },
+    "Runes-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "runes"
+    },
     "Runes-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -2388,7 +2503,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "runes",
       "is_interactive": true
@@ -2507,8 +2622,16 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Tokens.dc.html": {
+    "Graphite-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "graphite"
+    },
+    "Graphite-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -2590,7 +2713,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "graphite",
       "is_interactive": true
     },
@@ -2708,6 +2831,15 @@
       "page": "graphite",
       "is_interactive": true
     },
+    "Graphite-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "graphite"
+    },
     "Graphite-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -2791,7 +2923,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "graphite",
       "is_interactive": true
@@ -2910,8 +3042,16 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Tokens.dc.html": {
+    "Parchemin-Mentions.dc.html": {
       "x": 1880,
+      "y": 3792,
+      "w": 390,
+      "h": 844,
+      "title": "Mentions et crédits",
+      "page": "parchemin"
+    },
+    "Parchemin-Tokens.dc.html": {
+      "x": 2350,
       "y": 3792,
       "w": 880,
       "h": 960,
@@ -2993,7 +3133,7 @@
       "y": 6320,
       "w": 390,
       "h": 844,
-      "title": "Battlewise a planté",
+      "title": "Foelore a planté",
       "page": "parchemin",
       "is_interactive": true
     },
@@ -3111,6 +3251,15 @@
       "page": "parchemin",
       "is_interactive": true
     },
+    "Parchemin-Desktop-Mentions.dc.html": {
+      "x": 7600,
+      "y": 11728,
+      "w": 1440,
+      "h": 900,
+      "title": "Mentions et crédits · desktop",
+      "expand": "fill",
+      "page": "parchemin"
+    },
     "Parchemin-Desktop-Signaler.dc.html": {
       "x": 0,
       "y": 13048,
@@ -3194,7 +3343,7 @@
       "y": 14368,
       "w": 1440,
       "h": 900,
-      "title": "Battlewise a planté · desktop",
+      "title": "Foelore a planté · desktop",
       "expand": "fill",
       "page": "parchemin",
       "is_interactive": true
@@ -3245,7 +3394,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760
+      "maxW": 3230
     },
     "m-row5": {
       "kind": "title1",
@@ -3287,7 +3436,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520
+      "maxW": 9040
     },
     "d-row4": {
       "kind": "title1",
@@ -3482,6 +3631,14 @@
       "maxW": 1440,
       "page": "installer"
     },
+    "mentions-row1": {
+      "kind": "title1",
+      "text": "Mentions et crédits",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "mentions"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -3511,7 +3668,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "braise"
     },
     "m-row5-braise": {
@@ -3559,7 +3716,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "braise"
     },
     "d-row4-braise": {
@@ -3615,7 +3772,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "brume"
     },
     "m-row5-brume": {
@@ -3663,7 +3820,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "brume"
     },
     "d-row4-brume": {
@@ -3719,7 +3876,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "jour"
     },
     "m-row5-jour": {
@@ -3767,7 +3924,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "jour"
     },
     "d-row4-jour": {
@@ -3823,7 +3980,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "runes"
     },
     "m-row5-runes": {
@@ -3871,7 +4028,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "runes"
     },
     "d-row4-runes": {
@@ -3927,7 +4084,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "graphite"
     },
     "m-row5-graphite": {
@@ -3975,7 +4132,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "graphite"
     },
     "d-row4-graphite": {
@@ -4031,7 +4188,7 @@
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 2760,
+      "maxW": 3230,
       "page": "parchemin"
     },
     "m-row5-parchemin": {
@@ -4079,7 +4236,7 @@
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 7520,
+      "maxW": 9040,
       "page": "parchemin"
     },
     "d-row4-parchemin": {
@@ -4120,6 +4277,7 @@
     "Monde.dc.html",
     "Contexte.dc.html",
     "Reglages.dc.html",
+    "Mentions.dc.html",
     "Tokens.dc.html",
     "Signaler.dc.html",
     "Signalements.dc.html",
@@ -4142,6 +4300,7 @@
     "Desktop-Equipement.dc.html",
     "Desktop-Monde.dc.html",
     "Desktop-Reglages.dc.html",
+    "Desktop-Mentions.dc.html",
     "Desktop-Signaler.dc.html",
     "Desktop-Signalements.dc.html",
     "Desktop-Nouveautes.dc.html",
@@ -4203,6 +4362,10 @@
     "Installer-B.dc.html",
     "Installer-C.dc.html",
     "Installer-Reglages.dc.html",
+    "Mentions-A.dc.html",
+    "Mentions-B.dc.html",
+    "Mentions-C.dc.html",
+    "Mentions-Texte.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -4215,6 +4378,7 @@
     "Braise-Monde.dc.html",
     "Braise-Contexte.dc.html",
     "Braise-Reglages.dc.html",
+    "Braise-Mentions.dc.html",
     "Braise-Tokens.dc.html",
     "Braise-Signaler.dc.html",
     "Braise-Signalements.dc.html",
@@ -4237,6 +4401,7 @@
     "Braise-Desktop-Equipement.dc.html",
     "Braise-Desktop-Monde.dc.html",
     "Braise-Desktop-Reglages.dc.html",
+    "Braise-Desktop-Mentions.dc.html",
     "Braise-Desktop-Signaler.dc.html",
     "Braise-Desktop-Signalements.dc.html",
     "Braise-Desktop-Nouveautes.dc.html",
@@ -4259,6 +4424,7 @@
     "Brume-Monde.dc.html",
     "Brume-Contexte.dc.html",
     "Brume-Reglages.dc.html",
+    "Brume-Mentions.dc.html",
     "Brume-Tokens.dc.html",
     "Brume-Signaler.dc.html",
     "Brume-Signalements.dc.html",
@@ -4281,6 +4447,7 @@
     "Brume-Desktop-Equipement.dc.html",
     "Brume-Desktop-Monde.dc.html",
     "Brume-Desktop-Reglages.dc.html",
+    "Brume-Desktop-Mentions.dc.html",
     "Brume-Desktop-Signaler.dc.html",
     "Brume-Desktop-Signalements.dc.html",
     "Brume-Desktop-Nouveautes.dc.html",
@@ -4303,6 +4470,7 @@
     "Jour-Monde.dc.html",
     "Jour-Contexte.dc.html",
     "Jour-Reglages.dc.html",
+    "Jour-Mentions.dc.html",
     "Jour-Tokens.dc.html",
     "Jour-Signaler.dc.html",
     "Jour-Signalements.dc.html",
@@ -4325,6 +4493,7 @@
     "Jour-Desktop-Equipement.dc.html",
     "Jour-Desktop-Monde.dc.html",
     "Jour-Desktop-Reglages.dc.html",
+    "Jour-Desktop-Mentions.dc.html",
     "Jour-Desktop-Signaler.dc.html",
     "Jour-Desktop-Signalements.dc.html",
     "Jour-Desktop-Nouveautes.dc.html",
@@ -4347,6 +4516,7 @@
     "Runes-Monde.dc.html",
     "Runes-Contexte.dc.html",
     "Runes-Reglages.dc.html",
+    "Runes-Mentions.dc.html",
     "Runes-Tokens.dc.html",
     "Runes-Signaler.dc.html",
     "Runes-Signalements.dc.html",
@@ -4369,6 +4539,7 @@
     "Runes-Desktop-Equipement.dc.html",
     "Runes-Desktop-Monde.dc.html",
     "Runes-Desktop-Reglages.dc.html",
+    "Runes-Desktop-Mentions.dc.html",
     "Runes-Desktop-Signaler.dc.html",
     "Runes-Desktop-Signalements.dc.html",
     "Runes-Desktop-Nouveautes.dc.html",
@@ -4391,6 +4562,7 @@
     "Graphite-Monde.dc.html",
     "Graphite-Contexte.dc.html",
     "Graphite-Reglages.dc.html",
+    "Graphite-Mentions.dc.html",
     "Graphite-Tokens.dc.html",
     "Graphite-Signaler.dc.html",
     "Graphite-Signalements.dc.html",
@@ -4413,6 +4585,7 @@
     "Graphite-Desktop-Equipement.dc.html",
     "Graphite-Desktop-Monde.dc.html",
     "Graphite-Desktop-Reglages.dc.html",
+    "Graphite-Desktop-Mentions.dc.html",
     "Graphite-Desktop-Signaler.dc.html",
     "Graphite-Desktop-Signalements.dc.html",
     "Graphite-Desktop-Nouveautes.dc.html",
@@ -4435,6 +4608,7 @@
     "Parchemin-Monde.dc.html",
     "Parchemin-Contexte.dc.html",
     "Parchemin-Reglages.dc.html",
+    "Parchemin-Mentions.dc.html",
     "Parchemin-Tokens.dc.html",
     "Parchemin-Signaler.dc.html",
     "Parchemin-Signalements.dc.html",
@@ -4457,6 +4631,7 @@
     "Parchemin-Desktop-Equipement.dc.html",
     "Parchemin-Desktop-Monde.dc.html",
     "Parchemin-Desktop-Reglages.dc.html",
+    "Parchemin-Desktop-Mentions.dc.html",
     "Parchemin-Desktop-Signaler.dc.html",
     "Parchemin-Desktop-Signalements.dc.html",
     "Parchemin-Desktop-Nouveautes.dc.html",
@@ -4538,6 +4713,10 @@
       "name": "Installer · pistes"
     },
     {
+      "id": "mentions",
+      "name": "Mentions · pistes"
+    },
+    {
       "id": "braise",
       "name": "Braise"
     },
@@ -4562,5 +4741,5 @@
       "name": "Parchemin"
     }
   ],
-  "title": "Battlewise — design"
+  "title": "Foelore — design"
 }

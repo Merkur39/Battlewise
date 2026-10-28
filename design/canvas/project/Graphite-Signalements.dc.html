@@ -22,7 +22,7 @@ a{color:#6EA0FF}a:hover{color:#9CBEFF}
   </header>
   <main style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column">
     <sc-for list="{{ reports }}" as="r" hint-placeholder-count="5">
-      <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 4px; padding: 12px 16px; border-bottom: 1px solid #222226; color: #EDEDEF; text-decoration: none">
+      <a href="https://github.com/Merkur39/Foelore/issues" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 4px; padding: 12px 16px; border-bottom: 1px solid #222226; color: #EDEDEF; text-decoration: none">
         <span style="display: flex; align-items: center; gap: 10px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#A1A1AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="{{ r.kindIcon }}"></path></svg><span style="flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ r.subject }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A1A1AA">{{ r.number }}</span></span>
         <span style="display: flex; justify-content: space-between; padding-left: 26px; font-size: 12px"><span style="display: inline-flex; align-items: center; gap: 4px; color: {{ r.stateColor }}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ r.stateIcon }}"></path></svg>{{ r.state }}</span><span style="color: #8A8A93">{{ r.date }}</span></span>
       </a>
