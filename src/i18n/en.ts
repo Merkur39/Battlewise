@@ -455,4 +455,43 @@ export const en: Catalog = {
       parchemin: { name: 'Parchment', description: 'Warm light, blue ink' },
     },
   },
+  install: {
+    title: 'Install Battlewise',
+    lead: 'To keep it at hand, next to the game.',
+    perks: {
+      phone: ['An icon on your home screen', 'Full screen, no address bar', 'Works offline'],
+      desktop: [
+        'An icon beside your other apps',
+        'Its own window, no address bar',
+        'Works offline',
+      ],
+    },
+    inSafari: 'In Safari',
+    steps: {
+      'ios-menu': [
+        `Tap {more} next to the address, then ${quoted('Share')}.`,
+        `Choose ${quoted('Add to Home Screen')}, then ${quoted('Add')}.`,
+        'Open Battlewise from your home screen.',
+      ],
+      'ios-bar': [
+        `Tap {share} ${quoted('Share')} in Safari's bar.`,
+        `Choose ${quoted('Add to Home Screen')}, then ${quoted('Add')}.`,
+        'Open Battlewise from your home screen.',
+      ],
+      mac: [
+        `In the menu bar, choose File › ${quoted('Add to Dock')}.`,
+        'Open Battlewise from the Dock.',
+      ],
+    },
+    first: "Do it before setting anything: the installed app doesn't get what you set in Safari.",
+    later:
+      "The installed app starts from scratch: Safari doesn't pass it your settings, you set them there once.",
+    install: 'Install',
+    continueInBrowser: 'Continue in the browser',
+    continueInSafari: 'Continue in Safari',
+    inSettings: "You'll find it in Settings › About.",
+    row: 'Install Battlewise',
+    rowMeta: 'On your home screen, offline',
+    close: 'Close',
+  },
 }

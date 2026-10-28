@@ -1,12 +1,17 @@
 import { act } from '@testing-library/react'
 
 // jsdom has no matchMedia. This one answers min-width queries against a width the tests set: a phone
-// unless a test says otherwise.
+// unless a test says otherwise; and display-mode ones, in a browser tab unless a test runs the app
+// installed.
 const WIDTHS = { phone: 390, desktop: 1440 } as const
 let width: number = WIDTHS.phone
+type DisplayMode = 'browser' | 'standalone'
+let displayMode: DisplayMode = 'browser'
 const lists = new Set<{ readonly update: () => void }>()
 
 function matches(query: string): boolean {
+  const mode = /\(display-mode:\s*([a-z-]+)\)/.exec(query)?.[1]
+  if (mode !== undefined) return mode === displayMode
   const minWidth = /\(min-width:\s*(\d+)px\)/.exec(query)?.[1]
   if (minWidth === undefined) throw new Error(`matchMedia stub: unsupported query ${query}`)
   return width >= Number(minWidth)
@@ -40,10 +45,19 @@ const resizeWindow = () => {
 }
 resizeWindow()
 
-export function setViewportWidth(viewport: keyof typeof WIDTHS) {
-  width = WIDTHS[viewport]
-  resizeWindow()
+const updateLists = () => {
   act(() => {
     for (const list of lists) list.update()
   })
+}
+
+export function setViewportWidth(viewport: keyof typeof WIDTHS) {
+  width = WIDTHS[viewport]
+  resizeWindow()
+  updateLists()
+}
+
+export function setDisplayMode(mode: DisplayMode) {
+  displayMode = mode
+  updateLists()
 }

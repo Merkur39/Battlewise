@@ -490,6 +490,51 @@ export const fr = {
     licence: (copyright: string) => `${copyright} · logiciel libre sous GPLv3, sans garantie.`,
     themes,
   },
+  install: {
+    title: 'Installe Battlewise',
+    lead: "Pour l'avoir sous la main, à côté du jeu.",
+    perks: {
+      phone: [
+        "Une icône sur ton écran d'accueil",
+        "En plein écran, sans barre d'adresse",
+        'Marche sans connexion',
+      ],
+      desktop: [
+        'Une icône à côté de tes autres apps',
+        "Sa propre fenêtre, sans barre d'adresse",
+        'Marche sans connexion',
+      ],
+    },
+    inSafari: 'Dans Safari',
+    // {more} and {share} stand for Safari's buttons, drawn.
+    steps: {
+      'ios-menu': [
+        `Touche {more} à côté de l'adresse, puis ${quoted('Partager')}.`,
+        `Choisis ${quoted("Sur l'écran d'accueil")}, puis ${quoted('Ajouter')}.`,
+        "Ouvre Battlewise depuis ton écran d'accueil.",
+      ],
+      'ios-bar': [
+        `Touche {share} ${quoted('Partager')} dans la barre de Safari.`,
+        `Choisis ${quoted("Sur l'écran d'accueil")}, puis ${quoted('Ajouter')}.`,
+        "Ouvre Battlewise depuis ton écran d'accueil.",
+      ],
+      mac: [
+        `Dans la barre des menus, choisis Fichier › ${quoted('Ajouter au Dock')}.`,
+        'Ouvre Battlewise depuis le Dock.',
+      ],
+    },
+    first:
+      "Fais-le avant de régler quoi que ce soit : l'app installée ne reprend pas ce que tu règles dans Safari.",
+    later:
+      "L'app installée repart de zéro : Safari ne lui passe pas tes réglages, tu les y refais une fois.",
+    install: 'Installer',
+    continueInBrowser: 'Continuer dans le navigateur',
+    continueInSafari: 'Continuer dans Safari',
+    inSettings: 'Tu la retrouves dans Réglages › À propos.',
+    row: 'Installer Battlewise',
+    rowMeta: "Sur l'écran d'accueil, sans connexion",
+    close: 'Fermer',
+  },
 }
 
 export type Catalog = typeof fr

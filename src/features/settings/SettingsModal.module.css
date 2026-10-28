@@ -300,6 +300,30 @@
   color: var(--faint);
 }
 
+/* Each icon keeps its size, however long the label beside it. */
+.source > svg {
+  flex: none;
+}
+
+/* Installing: a row of two lines on a phone, what it brings under its name. */
+.install {
+  height: auto;
+  min-height: 52px;
+  padding: 6px 12px;
+}
+
+.installText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.installMeta {
+  font-size: 12px;
+  color: var(--secondary);
+}
+
 /* Desktop: sections ruled apart, the language note beside the control, theme cards in a grid. */
 @media (min-width: 1024px) {
   .section {
@@ -393,8 +417,15 @@
     background: none;
   }
 
+  /* The section's name stays on one line; its buttons wrap under one another rather than shrink. */
+  .about > .label {
+    flex: none;
+  }
+
   .aboutLinks {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 8px;
   }
 
@@ -407,6 +438,16 @@
   .sourceLabel {
     flex: none;
     font-size: 13px;
+  }
+
+  .install {
+    min-height: 0;
+    height: 32px;
+    padding: 0 12px;
+  }
+
+  .installText {
+    flex: none;
   }
 }
 

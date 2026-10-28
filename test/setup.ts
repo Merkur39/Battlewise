@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
 import { afterEach, vi } from 'vitest'
-import { installMatchMedia, setViewportWidth } from './viewport'
+import { installMatchMedia, setDisplayMode, setViewportWidth } from './viewport'
 
 // jsdom 30 has no showModal nor close. Opening and closing are enough for the journeys; the top layer,
 // the inert background, Escape and focus are the browser's, checked there.
@@ -25,5 +25,6 @@ afterEach(() => {
   cleanup()
   vi.restoreAllMocks()
   setViewportWidth('phone')
+  setDisplayMode('browser')
   window.history.replaceState(null, '', '/')
 })

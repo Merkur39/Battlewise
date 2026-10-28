@@ -5,6 +5,8 @@ import { creatureName } from '@/features/bestiary/model'
 import { placeOf } from '@/features/bestiary/place'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
+import { InstallOffer } from '@/features/install/Install'
+import { useInstallOffer } from '@/features/install/useInstall'
 import { ScreenCrash } from '@/features/report/Crash'
 import type { ReportOrigin } from '@/features/report/model'
 import { NewsModal } from '@/features/report/NewsModal'
@@ -86,6 +88,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   const [report, setReport] = useState<ReportOrigin | null>(null)
   useSendWaitingReports()
   const [fixes, dismissFixes] = useFixesSinceUpdate()
+  const [installOffer, leaveInstallOffer] = useInstallOffer()
   const creature = screen === 'bestiary' ? placeOf(route).creature : null
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
@@ -131,6 +134,7 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
         {modal === 'reports' && <ReportsModal />}
         {modal === 'news' && <NewsModal />}
         {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
+        {installOffer && <InstallOffer way={installOffer} onClose={leaveInstallOffer} />}
         {report && (
           <ReportSheet
             origin={report}
