@@ -175,9 +175,7 @@ describe('When a screen fails', () => {
 
     expect(screen.getByRole('heading', { name: 'La Simulation a planté' })).toBeInTheDocument()
     expect(
-      screen.getByText(
-        "Le reste de Battlewise marche : passe au Bestiaire, à l'Arsenal ou au Mémo.",
-      ),
+      screen.getByText("Le reste de Foelore marche : passe au Bestiaire, à l'Arsenal ou au Mémo."),
     ).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'Navigation' })).toBeInTheDocument()
 

@@ -49,7 +49,7 @@ describe('Bestiary', () => {
     await user.click(row('Troll'))
 
     expect(await sheetHeading('Troll')).toBeInTheDocument()
-    expect(document.title).toBe('Troll — Battlewise')
+    expect(document.title).toBe('Troll — Foelore')
     expect(screen.queryByRole('banner')).not.toBeInTheDocument()
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument()
     expect(screen.getByText('Forêt noire')).toBeInTheDocument()
@@ -233,7 +233,7 @@ describe('Bestiary', () => {
     renderWithStore(<App />, { language: 'fr' })
 
     expect(await sheetHeading('Squelette · Marécages')).toBeInTheDocument()
-    expect(document.title).toBe('Squelette · Marécages — Battlewise')
+    expect(document.title).toBe('Squelette · Marécages — Foelore')
   })
 
   it('finds the creatures of one name apart', async () => {

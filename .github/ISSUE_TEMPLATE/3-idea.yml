@@ -1,5 +1,5 @@
 name: Idea
-description: Something Battlewise could do, or something it misses.
+description: Something Foelore could do, or something it misses.
 labels: [idea]
 body:
   - type: markdown

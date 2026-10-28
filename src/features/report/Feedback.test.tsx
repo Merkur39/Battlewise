@@ -113,10 +113,10 @@ describe('Closing the loop', () => {
     ])
     expect(reports.getByRole('link', { name: /Troll › Frappe au sol/ })).toHaveAttribute(
       'href',
-      'https://github.com/Merkur39/Battlewise/issues/48',
+      'https://github.com/Merkur39/Foelore/issues/48',
     )
     expect(fetch).toHaveBeenCalledWith(
-      'https://api.github.com/repos/Merkur39/Battlewise/issues/52',
+      'https://api.github.com/repos/Merkur39/Foelore/issues/52',
       expect.anything(),
     )
   })

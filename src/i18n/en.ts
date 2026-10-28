@@ -1,3 +1,4 @@
+import { APP_NAME } from '@/app/brand'
 import { formatNumber } from './format'
 import type { Catalog } from './fr'
 
@@ -326,7 +327,7 @@ export const en: Catalog = {
     nicknameHint: 'Your name',
     attached: 'Attached to the report',
     attachedSummary: 'Version, data, what the screen shows, your setup',
-    device: (version, gameVersion) => `Battlewise ${version} · read from Valheim ${gameVersion}`,
+    device: (version, gameVersion) => `${APP_NAME} ${version} · read from Valheim ${gameVersion}`,
     screen: (language, screen, width) =>
       [
         { fr: 'French', en: 'English' }[language],
@@ -351,7 +352,7 @@ export const en: Catalog = {
       simulation: 'I picked an attack.',
       arsenal: 'I changed the level.',
       guide: 'I opened a rule.',
-      app: 'I opened Battlewise.',
+      app: `I opened ${APP_NAME}.`,
     },
     crashSummary: 'Version, screen, the error and its stack',
     moreLines: (count) => `… ${plural(count, 'more line', 'more lines')}`,
@@ -364,8 +365,7 @@ export const en: Catalog = {
     receivedNote: "It's public on GitHub. Thank you: every fix helps every player.",
     view: 'View on GitHub',
     queued: 'Kept on your device',
-    queuedNote:
-      'It could not leave yet. It will on its own once the network is back, or the next time you open Battlewise.',
+    queuedNote: `It could not leave yet. It will on its own once the network is back, or the next time you open ${APP_NAME}.`,
     refused: 'Refused by the server',
     refusedNote:
       "It won't go through as it is. Write it on GitHub instead, where each form guides you.",
@@ -374,9 +374,9 @@ export const en: Catalog = {
   },
   crash: {
     sheetTitle: 'This sheet crashed',
-    sheetNote: 'The rest of Battlewise works: pick another creature, or go to the Simulation.',
+    sheetNote: `The rest of ${APP_NAME} works: pick another creature, or go to the Simulation.`,
     retry: 'Try again',
-    appTitle: 'Battlewise crashed',
+    appTitle: `${APP_NAME} crashed`,
     appNote: 'Your settings, your gear and your world stay on this device: reload to carry on.',
     reload: 'Reload',
     send: 'Send the report',
@@ -384,19 +384,19 @@ export const en: Catalog = {
     screens: {
       bestiary: {
         title: 'The Bestiary crashed',
-        note: 'The rest of Battlewise works: go to the Simulation, the Arsenal or the Guide.',
+        note: `The rest of ${APP_NAME} works: go to the Simulation, the Arsenal or the Guide.`,
       },
       simulation: {
         title: 'The Simulation crashed',
-        note: 'The rest of Battlewise works: go to the Bestiary, the Arsenal or the Guide.',
+        note: `The rest of ${APP_NAME} works: go to the Bestiary, the Arsenal or the Guide.`,
       },
       arsenal: {
         title: 'The Arsenal crashed',
-        note: 'The rest of Battlewise works: go to the Bestiary, the Simulation or the Guide.',
+        note: `The rest of ${APP_NAME} works: go to the Bestiary, the Simulation or the Guide.`,
       },
       guide: {
         title: 'The Guide crashed',
-        note: 'The rest of Battlewise works: go to the Bestiary, the Simulation or the Arsenal.',
+        note: `The rest of ${APP_NAME} works: go to the Bestiary, the Simulation or the Arsenal.`,
       },
     },
     row: 'This row crashed',
@@ -456,7 +456,7 @@ export const en: Catalog = {
     },
   },
   install: {
-    title: 'Install Battlewise',
+    title: `Install ${APP_NAME}`,
     lead: 'To keep it at hand, next to the game.',
     perks: {
       phone: ['An icon on your home screen', 'Full screen, no address bar', 'Works offline'],
@@ -471,16 +471,16 @@ export const en: Catalog = {
       'ios-menu': [
         `Tap {more} next to the address, then ${quoted('Share')}.`,
         `Choose ${quoted('Add to Home Screen')}, then ${quoted('Add')}.`,
-        'Open Battlewise from your home screen.',
+        `Open ${APP_NAME} from your home screen.`,
       ],
       'ios-bar': [
         `Tap {share} ${quoted('Share')} in Safari's bar.`,
         `Choose ${quoted('Add to Home Screen')}, then ${quoted('Add')}.`,
-        'Open Battlewise from your home screen.',
+        `Open ${APP_NAME} from your home screen.`,
       ],
       mac: [
         `In the menu bar, choose File › ${quoted('Add to Dock')}.`,
-        'Open Battlewise from the Dock.',
+        `Open ${APP_NAME} from the Dock.`,
       ],
     },
     first: "Do it before setting anything: the installed app doesn't get what you set in Safari.",
@@ -490,7 +490,7 @@ export const en: Catalog = {
     continueInBrowser: 'Continue in the browser',
     continueInSafari: 'Continue in Safari',
     inSettings: "You'll find it in Settings › About.",
-    row: 'Install Battlewise',
+    row: `Install ${APP_NAME}`,
     rowMeta: 'On your home screen, offline',
     close: 'Close',
   },

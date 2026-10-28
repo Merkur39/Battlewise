@@ -1,4 +1,4 @@
-# Battlewise
+# Foelore
 
 A mobile-first, offline-capable web app (PWA) for Valheim that tells you, in two seconds and next to the
 game, how to take each creature with your gear. French and English.

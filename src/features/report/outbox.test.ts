@@ -165,9 +165,9 @@ describe('the outbox', () => {
 
   it('reads what an older version kept, which had no title', () => {
     const storage = memoryStorage()
-    storage.setItem('battlewise-outbox', JSON.stringify([{ id: 'a', report: report('Rien.') }]))
+    storage.setItem('foelore-outbox', JSON.stringify([{ id: 'a', report: report('Rien.') }]))
     storage.setItem(
-      'battlewise-reports',
+      'foelore-reports',
       JSON.stringify([{ number: 40, kind: 'bug', at: '2026-10-27T18:00:00.000Z' }]),
     )
     const outbox = createOutbox(storage, numbered(), at)

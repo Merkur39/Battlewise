@@ -49,21 +49,21 @@ function launch(
   )
 }
 
-const offer = () => screen.queryByRole('dialog', { name: 'Installe Battlewise' })
+const offer = () => screen.queryByRole('dialog', { name: 'Installe Foelore' })
 
 async function openSettings(user: UserEvent) {
   await user.click(screen.getByRole('link', { name: 'Réglages' }))
   return screen.findByRole('dialog', { name: 'Réglages' })
 }
 
-describe('Offering to install Battlewise', () => {
+describe('Offering to install Foelore', () => {
   it('offers it over the whole screen at the first launch, where the browser can install it', () => {
     const browser = chromium()
     browser.offers()
 
     launch(browser)
 
-    const dialog = screen.getByRole('dialog', { name: 'Installe Battlewise' })
+    const dialog = screen.getByRole('dialog', { name: 'Installe Foelore' })
     expect(dialog).toHaveTextContent("Pour l'avoir sous la main, à côté du jeu.")
     expect(dialog).toHaveTextContent("Une icône sur ton écran d'accueil")
     expect(dialog).toHaveTextContent("En plein écran, sans barre d'adresse")
@@ -130,14 +130,14 @@ describe('Offering to install Battlewise', () => {
     safariOnIPhone()
     launch()
 
-    const dialog = screen.getByRole('dialog', { name: 'Installe Battlewise' })
+    const dialog = screen.getByRole('dialog', { name: 'Installe Foelore' })
     const steps = within(within(dialog).getByRole('list', { name: 'Dans Safari' })).getAllByRole(
       'listitem',
     )
     expect(steps).toHaveLength(3)
     expect(steps[0]).toHaveTextContent(/^Touche ⋯ à côté de l'adresse, puis « Partager »\.$/)
     expect(steps[1]).toHaveTextContent(/^Choisis « Sur l'écran d'accueil », puis « Ajouter »\.$/)
-    expect(steps[2]).toHaveTextContent("Ouvre Battlewise depuis ton écran d'accueil.")
+    expect(steps[2]).toHaveTextContent("Ouvre Foelore depuis ton écran d'accueil.")
     expect(dialog).toHaveTextContent(
       "Fais-le avant de régler quoi que ce soit : l'app installée ne reprend pas ce que tu règles dans Safari.",
     )
@@ -155,7 +155,7 @@ describe('Offering to install Battlewise', () => {
     const settings = await openSettings(user)
 
     expect(
-      within(settings).queryByRole('button', { name: /^Installer Battlewise/ }),
+      within(settings).queryByRole('button', { name: /^Installer Foelore/ }),
     ).not.toBeInTheDocument()
   })
 
@@ -169,7 +169,7 @@ describe('Offering to install Battlewise', () => {
     const settings = await openSettings(user)
 
     expect(
-      within(settings).queryByRole('button', { name: /^Installer Battlewise/ }),
+      within(settings).queryByRole('button', { name: /^Installer Foelore/ }),
     ).not.toBeInTheDocument()
   })
 
@@ -179,7 +179,7 @@ describe('Offering to install Battlewise', () => {
 
     launch(browser, { language: 'en' })
 
-    const dialog = screen.getByRole('dialog', { name: 'Install Battlewise' })
+    const dialog = screen.getByRole('dialog', { name: 'Install Foelore' })
     expect(within(dialog).getByRole('button', { name: 'Install' })).toBeInTheDocument()
     expect(
       within(dialog).getByRole('button', { name: 'Continue in the browser' }),
@@ -195,7 +195,7 @@ describe('Offering to install Battlewise', () => {
 
     launch(browser)
 
-    const dialog = screen.getByRole('dialog', { name: 'Installe Battlewise' })
+    const dialog = screen.getByRole('dialog', { name: 'Installe Foelore' })
     expect(dialog).toHaveTextContent('Une icône à côté de tes autres apps')
     expect(dialog).toHaveTextContent("Sa propre fenêtre, sans barre d'adresse")
   })
@@ -209,7 +209,7 @@ describe('Installing from Settings', () => {
     launch(browser, { language: 'fr', installOffered: true })
     const settings = await openSettings(user)
 
-    await user.click(within(settings).getByRole('button', { name: /^Installer Battlewise/ }))
+    await user.click(within(settings).getByRole('button', { name: /^Installer Foelore/ }))
 
     expect(browser.event.prompt).toHaveBeenCalledOnce()
   })
@@ -220,9 +220,9 @@ describe('Installing from Settings', () => {
     launch(undefined, { language: 'fr', installOffered: true })
     const settings = await openSettings(user)
 
-    await user.click(within(settings).getByRole('button', { name: /^Installer Battlewise/ }))
+    await user.click(within(settings).getByRole('button', { name: /^Installer Foelore/ }))
 
-    const sheet = screen.getByRole('dialog', { name: 'Installe Battlewise' })
+    const sheet = screen.getByRole('dialog', { name: 'Installe Foelore' })
     expect(
       within(within(sheet).getByRole('list', { name: 'Dans Safari' })).getAllByRole('listitem'),
     ).toHaveLength(3)
@@ -248,7 +248,7 @@ describe('Installing from Settings', () => {
     browser.installs()
 
     expect(
-      within(settings).queryByRole('button', { name: /^Installer Battlewise/ }),
+      within(settings).queryByRole('button', { name: /^Installer Foelore/ }),
     ).not.toBeInTheDocument()
   })
 })

@@ -19,7 +19,7 @@ import urllib.request
 from combat_extract import build, curation, source
 
 API = "https://valheim.fandom.com/api.php"
-UA = {"User-Agent": "Battlewise-extract/0.1 (personal project)"}
+UA = {"User-Agent": "Foelore-extract/0.1 (personal project)"}
 TYPES = {"blunt", "slash", "pierce", "fire", "frost", "lightning", "poison", "spirit"}
 DAMAGE = re.compile(r"(\d+(?:\.\d+)?)\s*(?:\[\[[^\]|]*\|)?(\w+)|(\w+)\s+(\d+(?:\.\d+)?)")
 LINK = re.compile(r"\[\[(?:[^|\]]*\|)?([^\]]*)\]\]")

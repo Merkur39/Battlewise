@@ -54,8 +54,8 @@ export interface Outbox {
   readonly flush: () => Promise<void>
 }
 
-export const OUTBOX_KEY = 'battlewise-outbox'
-export const RECEIPTS_KEY = 'battlewise-reports'
+export const OUTBOX_KEY = 'foelore-outbox'
+export const RECEIPTS_KEY = 'foelore-reports'
 
 interface Entry {
   readonly id: string

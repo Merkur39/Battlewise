@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.9.0',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "Battlewise s'appelle désormais Foelore, à une nouvelle adresse : foelore.vercel.app. Ton équipement, ton monde et tes réglages ne suivent pas : règle-les une fois, et réinstalle l'app si tu l'avais installée.",
+          en: 'Battlewise is now Foelore, at a new address: foelore.vercel.app. Your gear, your world and your settings do not follow: set them once, and install the app again if you had.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.8.1',
     date: '2026-10-28',
     notes: [
@@ -40,8 +52,8 @@ export const RELEASES: readonly Release[] = [
     notes: [
       {
         text: {
-          fr: "Battlewise propose une fois de s'installer, là où ton navigateur le permet : une icône sur ton écran d'accueil, en plein écran, sans connexion. Sur iPhone, il donne les étapes de Safari. L'offre reste dans Réglages › À propos.",
-          en: "Battlewise offers once to install itself, where your browser can: an icon on your home screen, full screen, offline. On an iPhone, it gives Safari's steps. The offer stays in Settings › About.",
+          fr: "Foelore propose une fois de s'installer, là où ton navigateur le permet : une icône sur ton écran d'accueil, en plein écran, sans connexion. Sur iPhone, il donne les étapes de Safari. L'offre reste dans Réglages › À propos.",
+          en: "Foelore offers once to install itself, where your browser can: an icon on your home screen, full screen, offline. On an iPhone, it gives Safari's steps. The offer stays in Settings › About.",
         },
       },
     ],
@@ -64,8 +76,8 @@ export const RELEASES: readonly Release[] = [
     notes: [
       {
         text: {
-          fr: "Si une fiche, un écran ou une ligne plante, le reste de Battlewise marche : réessaie, ou envoie le rapport, l'erreur jointe. Rien ne part sans toi.",
-          en: 'If a sheet, a screen or a row crashes, the rest of Battlewise works: try again, or send the report, the error attached. Nothing leaves without you.',
+          fr: "Si une fiche, un écran ou une ligne plante, le reste de Foelore marche : réessaie, ou envoie le rapport, l'erreur jointe. Rien ne part sans toi.",
+          en: 'If a sheet, a screen or a row crashes, the rest of Foelore works: try again, or send the report, the error attached. Nothing leaves without you.',
         },
       },
     ],
@@ -94,8 +106,8 @@ export const RELEASES: readonly Release[] = [
       },
       {
         text: {
-          fr: 'Quand une mise à jour corrige un de tes signalements, Battlewise te le dit, une fois.',
-          en: 'When an update fixes one of your reports, Battlewise tells you, once.',
+          fr: 'Quand une mise à jour corrige un de tes signalements, Foelore te le dit, une fois.',
+          en: 'When an update fixes one of your reports, Foelore tells you, once.',
         },
       },
     ],

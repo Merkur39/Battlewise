@@ -27,7 +27,7 @@ export function useRoute(): Route {
 
 // The history state of an entry the app pushed to open something from where the user stood: a modal,
 // the sheet of a creature. Back, or the way out the app offers, returns there.
-const OPENED_HERE = 'battlewise:opened'
+const OPENED_HERE = 'foelore:opened'
 
 /** Opens `route` from the current one, as a history entry of its own: Back returns. */
 export function openRoute(route: Route) {
