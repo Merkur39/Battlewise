@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.10.0',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "Réglages › À propos › Mentions et crédits : Foelore y dit qu'il est un projet de fan non officiel, ce qu'il doit au wiki Valheim, aux polices et aux bibliothèques qu'il utilise, ce que deviennent tes données, et à qui écrire pour faire retirer un signalement ou ton pseudo.",
+          en: 'Settings › About › Notices and credits: Foelore says there that it is an unofficial fan project, what it owes to the Valheim wiki and to the fonts and libraries it uses, what becomes of your data, and whom to write to to have a report or your nickname removed.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.9.0',
     date: '2026-10-28',
     notes: [

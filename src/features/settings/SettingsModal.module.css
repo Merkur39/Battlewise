@@ -305,21 +305,21 @@
   flex: none;
 }
 
-/* Installing: a row of two lines on a phone, what it brings under its name. */
-.install {
+/* Installing, the notices: a row of two lines on a phone, what it holds under its name. */
+.twoLines {
   height: auto;
   min-height: 52px;
   padding: 6px 12px;
 }
 
-.installText {
+.sourceText {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.installMeta {
+.sourceMeta {
   font-size: 12px;
   color: var(--secondary);
 }
@@ -440,13 +440,13 @@
     font-size: 13px;
   }
 
-  .install {
+  .twoLines {
     min-height: 0;
     height: 32px;
     padding: 0 12px;
   }
 
-  .installText {
+  .sourceText {
     flex: none;
   }
 }

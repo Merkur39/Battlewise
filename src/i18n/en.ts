@@ -1,4 +1,4 @@
-import { APP_NAME } from '@/app/brand'
+import { APP_NAME, PUBLISHER } from '@/app/brand'
 import { formatNumber } from './format'
 import type { Catalog } from './fr'
 
@@ -454,6 +454,31 @@ export const en: Catalog = {
       graphite: { name: 'Graphite', description: 'Neutral greys, understated' },
       parchemin: { name: 'Parchment', description: 'Warm light, blue ink' },
     },
+  },
+  notices: {
+    title: 'Notices and credits',
+    rowMeta: 'Fan project, credits, your data',
+    fan: 'Fan project',
+    fanText: `${APP_NAME} is an unofficial fan project, not made or endorsed by Iron Gate or Coffee Stain. Valheim, and the names and data read from the game, belong to Iron Gate.`,
+    credits: 'Credits',
+    wikiText:
+      'Attack names: partly from the {wiki}, written by its contributors, under {licence}. Most of the French names translate them.',
+    wiki: 'Valheim wiki',
+    fonts:
+      'Fonts: IBM Plex Sans and IBM Plex Mono, © IBM Corp., under the SIL Open Font License 1.1.',
+    libraries: 'Libraries: React, © Meta Platforms, and Workbox, © Google, under the MIT licence.',
+    licenceTexts: 'Full licence texts',
+    data: 'Your data',
+    device:
+      'Your settings, your gear and the list of your reports stay on this device. No account, no cookies, no analytics.',
+    reports:
+      "A report becomes a public issue on GitHub, sent through Vercel: your words, your nickname if you give one, and what the app attaches. Your nickname may also appear in What's new, to thank you.",
+    network:
+      "To follow your reports, the app asks GitHub for their state. As with any site, Vercel, which serves the app, and GitHub see your connection's IP address; it is never attached to a report.",
+    removal: 'To have a report or your nickname removed, write to {email}.',
+    legal: 'Legal notice',
+    publisher: `Publisher: ${PUBLISHER}, as a private individual.`,
+    host: 'Host: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
   },
   install: {
     title: `Install ${APP_NAME}`,
