@@ -36,6 +36,7 @@ const changed: AppState = {
   seenVersion: '1.4.0',
   installOffered: true,
   biome: 'swamp',
+  onboarding: true,
 }
 
 describe('createStore', () => {
@@ -45,6 +46,19 @@ describe('createStore', () => {
 
   it('has not offered to install the app yet on a first launch', () => {
     expect(createStore(memoryStorage()).getState().installOffered).toBe(false)
+  })
+
+  it('has the questions of the first arrival still to ask on a first launch', () => {
+    expect(createStore(memoryStorage()).getState().onboarding).toBe(false)
+  })
+
+  it('asks them once of a player of an earlier version, whose settings it keeps', () => {
+    const earlier = { gear: changed.gear, world: changed.world, installOffered: true }
+
+    const state = createStore(memoryStorage(JSON.stringify(earlier))).getState()
+
+    expect(state.onboarding).toBe(false)
+    expect(state.gear).toEqual(changed.gear)
   })
 
   it('knows no biome of the player on a first launch', () => {
@@ -100,6 +114,7 @@ describe('createStore', () => {
       seenVersion: null,
       installOffered: false,
       biome: null,
+      onboarding: false,
     })
   })
 
@@ -118,6 +133,7 @@ describe('createStore', () => {
     ['a version that is no version', { seenVersion: 'latest' }, 'seenVersion'],
     ['an install offer neither made nor not', { installOffered: 'yes' }, 'installOffered'],
     ['a biome the game no longer has', { biome: 'jungle' }, 'biome'],
+    ['questions neither asked nor not', { onboarding: 1 }, 'onboarding'],
   ] as const)('puts back the default instead of %s', (_, saved, setting) => {
     const state = createStore(memoryStorage(JSON.stringify(saved))).getState()
 

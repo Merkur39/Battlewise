@@ -480,6 +480,18 @@ export const en: Catalog = {
     publisher: `Publisher: ${PUBLISHER}, as a private individual.`,
     host: 'Host: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
   },
+  arrival: {
+    step: (index, count) => `${n(index)} of ${n(count)}`,
+    skip: 'Skip',
+    next: 'Next',
+    previous: 'Back',
+    previousLabel: 'Previous question',
+    where: 'Where are you?',
+    whereLead: 'The biome you fight in right now.',
+    gearLead: 'What your left hand holds, and your defensive stats.',
+    worldLead: `Your world's ${quoted('Combat')} setting, and who plays along.`,
+    see: (_biome, name) => `See the ${name}`,
+  },
   install: {
     title: `Install ${APP_NAME}`,
     lead: 'To keep it at hand, next to the game.',

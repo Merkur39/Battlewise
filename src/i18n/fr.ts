@@ -1,5 +1,6 @@
 import { APP_NAME, PUBLISHER } from '@/app/brand'
 import type { Theme } from '@/app/store'
+import type { BiomeId } from '@/data/types'
 import type { Language } from './detect'
 import { formatNumber } from './format'
 
@@ -25,6 +26,20 @@ const themes: Record<Theme, { readonly name: string; readonly description: strin
   runes: { name: 'Runes', description: 'Pierre sombre, rune turquoise' },
   graphite: { name: 'Graphite', description: 'Gris neutres, sobre' },
   parchemin: { name: 'Parchemin', description: 'Clair chaud, encre bleue' },
+}
+
+// The article of each biome's name, for « Voir la Forêt noire »: the names are the game's, the articles
+// are not.
+const biomeArticles: Record<BiomeId, string> = {
+  meadows: 'les ',
+  blackForest: 'la ',
+  swamp: 'les ',
+  mountain: 'la ',
+  plains: 'les ',
+  mistlands: 'les ',
+  ashlands: 'les ',
+  deepNorth: 'le ',
+  ocean: "l'",
 }
 
 /** An attack in one sentence, for screen readers. */
@@ -514,6 +529,18 @@ export const fr = {
     legal: 'Mentions légales',
     publisher: `Éditeur : ${PUBLISHER}, à titre non professionnel.`,
     host: 'Hébergeur : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.',
+  },
+  arrival: {
+    step: (index: number, count: number) => `${n(index)} sur ${n(count)}`,
+    skip: 'Passer',
+    next: 'Suivant',
+    previous: 'Précédent',
+    previousLabel: 'Question précédente',
+    where: 'Où en es-tu ?',
+    whereLead: 'Le biome où tu te bats en ce moment.',
+    gearLead: 'Ce que tu tiens en main gauche, et tes stats défensives.',
+    worldLead: `Le réglage ${quoted('Combat')} de ton monde, et qui joue avec toi.`,
+    see: (biome: BiomeId, name: string) => `Voir ${biomeArticles[biome]}${name}`,
   },
   install: {
     title: `Installe ${APP_NAME}`,

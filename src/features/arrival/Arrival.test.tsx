@@ -1,0 +1,207 @@
+import { act, screen, within } from '@testing-library/react'
+import userEvent, { type UserEvent } from '@testing-library/user-event'
+import { describe, expect, it } from 'vitest'
+import { App } from '@/app/App'
+import type { AppState } from '@/app/store'
+import { DEFAULT_STATE } from '@/app/store'
+import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
+import { setViewportWidth } from '../../../test/viewport'
+
+const firstLaunch = (state: Partial<AppState> = {}) =>
+  renderWithStore(<App />, { language: 'fr', onboarding: false, ...state })
+
+const question = (name: string) => screen.findByRole('dialog', { name })
+
+async function answerWhere(user: UserEvent, biome: string) {
+  const dialog = await question('Où en es-tu ?')
+  await user.click(within(dialog).getByRole('radio', { name: biome }))
+  await user.click(within(dialog).getByRole('button', { name: 'Suivant' }))
+  return question('Ton équipement')
+}
+
+describe('The first arrival', () => {
+  it('asks first where the player fights, out of the biomes of the game', async () => {
+    firstLaunch()
+
+    const dialog = await question('Où en es-tu ?')
+
+    expect(dialog).toHaveTextContent('1 sur 3')
+    expect(dialog).toHaveTextContent('Le biome où tu te bats en ce moment.')
+    const biomes = within(dialog).getByRole('radiogroup', { name: 'Où en es-tu ?' })
+    expect(within(biomes).getAllByRole('radio')).toHaveLength(9)
+    expect(within(biomes).getByRole('radio', { name: 'Prairies' })).toBeChecked()
+    expect(within(biomes).getByRole('radio', { name: 'Océan' })).not.toBeChecked()
+  })
+
+  it('is never asked again once behind the player', () => {
+    renderWithStore(<App />, { language: 'fr', onboarding: true })
+
+    expect(screen.queryByRole('dialog', { name: 'Où en es-tu ?' })).not.toBeInTheDocument()
+  })
+
+  it('saves the biome on Suivant, then asks for the gear', async () => {
+    const user = userEvent.setup()
+    const { store } = firstLaunch()
+
+    const dialog = await answerWhere(user, 'Forêt noire')
+
+    expect(store.getState().biome).toBe('blackForest')
+    expect(dialog).toHaveTextContent('2 sur 3')
+    expect(dialog).toHaveTextContent('Ce que tu tiens en main gauche, et tes stats défensives.')
+  })
+
+  it('asks for the gear with the form of Ton équipement, worked out as it changes', async () => {
+    const user = userEvent.setup()
+    const { store } = firstLaunch()
+    const dialog = await answerWhere(user, 'Forêt noire')
+
+    await user.selectOptions(
+      within(dialog).getByLabelText('Objet qui bloque'),
+      'Bouclier en bronze',
+    )
+    await user.click(within(dialog).getByRole('button', { name: 'Niveau supérieur' }))
+    await user.click(within(dialog).getByRole('button', { name: 'Niveau supérieur' }))
+
+    const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
+    expect(within(withstand).getByRole('group', { name: 'Bloquer' })).toHaveTextContent('VD 28')
+    expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
+  })
+
+  it('saves the gear on Suivant, then asks for the world', async () => {
+    const user = userEvent.setup()
+    const { store } = firstLaunch()
+    const gear = await answerWhere(user, 'Forêt noire')
+
+    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
+
+    expect(store.getState().gear.blocker).toBe('ShieldBronzeBuckler')
+    const world = await question('Ton monde')
+    expect(world).toHaveTextContent('3 sur 3')
+    expect(within(world).getByRole('radio', { name: 'Normal ×1' })).toBeChecked()
+  })
+
+  it('ends on the Bestiary of the biome picked, the world saved, and asks no more', async () => {
+    const user = userEvent.setup()
+    const { store } = firstLaunch()
+    const gear = await answerWhere(user, 'Forêt noire')
+    await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
+    const world = await question('Ton monde')
+
+    await user.click(within(world).getByRole('radio', { name: 'Difficile ×1,5' }))
+    await user.click(within(world).getByRole('button', { name: '3' }))
+    await user.click(within(world).getByRole('button', { name: 'Voir la Forêt noire' }))
+
+    expect(world).not.toBeInTheDocument()
+    expect(store.getState()).toMatchObject({
+      world: { difficulty: 'hard', players: 3 },
+      onboarding: true,
+    })
+    expect(window.location.hash).toBe('#/bestiary/blackForest')
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Forêt noire')
+  })
+
+  it('names the biome picked on its last button', async () => {
+    const user = userEvent.setup()
+    firstLaunch()
+    const gear = await answerWhere(user, 'Océan')
+    await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
+
+    const world = await question('Ton monde')
+
+    expect(within(world).getByRole('button', { name: "Voir l'Océan" })).toBeInTheDocument()
+  })
+
+  it('goes back to the question before, its answer kept', async () => {
+    const user = userEvent.setup()
+    firstLaunch()
+    const gear = await answerWhere(user, 'Marécages')
+
+    await user.click(within(gear).getByRole('button', { name: 'Question précédente' }))
+
+    const where = await question('Où en es-tu ?')
+    expect(within(where).getByRole('radio', { name: 'Marécages' })).toBeChecked()
+  })
+
+  it('skips the questions left on Passer, the one on screen unsaved', async () => {
+    const user = userEvent.setup()
+    const { store } = firstLaunch()
+    const gear = await answerWhere(user, 'Forêt noire')
+
+    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.click(within(gear).getByRole('button', { name: 'Passer' }))
+
+    expect(gear).not.toBeInTheDocument()
+    expect(store.getState()).toMatchObject({
+      biome: 'blackForest',
+      gear: DEFAULT_STATE.gear,
+      onboarding: true,
+    })
+    expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Forêt noire')
+  })
+
+  it('ends as Passer does on any other way out: Escape, on a desktop', async () => {
+    const { store } = firstLaunch()
+    const dialog = await question('Où en es-tu ?')
+
+    act(() => {
+      // What the browser does on Escape: it closes the dialog.
+      ;(dialog as HTMLDialogElement).close()
+    })
+
+    expect(dialog).not.toBeInTheDocument()
+    expect(store.getState().onboarding).toBe(true)
+  })
+
+  it('asks a player of an earlier version once, on the settings already set', async () => {
+    const user = userEvent.setup()
+    firstLaunch({ gear: MOCKUP_GEAR, biome: 'mountain' })
+
+    const where = await question('Où en es-tu ?')
+    expect(within(where).getByRole('radio', { name: 'Montagne' })).toBeChecked()
+    await user.click(within(where).getByRole('button', { name: 'Suivant' }))
+
+    const gear = await question('Ton équipement')
+    const withstand = within(gear).getByRole('region', { name: 'Ce que tu encaisses' })
+    expect(within(withstand).getByRole('group', { name: 'Bloquer' })).toHaveTextContent('VD 81')
+  })
+
+  it('starts on the biome a link names', async () => {
+    window.history.replaceState(null, '', '#/bestiary/plains')
+    firstLaunch()
+
+    const where = await question('Où en es-tu ?')
+
+    expect(within(where).getByRole('radio', { name: 'Plaines' })).toBeChecked()
+  })
+
+  describe('on a desktop', () => {
+    it('goes back in words, beside Suivant', async () => {
+      const user = userEvent.setup()
+      setViewportWidth('desktop')
+      firstLaunch()
+
+      const gear = await answerWhere(user, 'Forêt noire')
+
+      expect(within(gear).getByRole('button', { name: 'Précédent' })).toBeInTheDocument()
+      expect(
+        within(gear).queryByRole('button', { name: 'Question précédente' }),
+      ).not.toBeInTheDocument()
+    })
+  })
+
+  it('speaks English', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'en', onboarding: false })
+
+    const where = await question('Where are you?')
+    expect(where).toHaveTextContent('1 of 3')
+    await user.click(within(where).getByRole('radio', { name: 'Black Forest' }))
+    await user.click(within(where).getByRole('button', { name: 'Next' }))
+    await user.click(within(await question('Your gear')).getByRole('button', { name: 'Next' }))
+
+    const world = await question('Your world')
+    expect(within(world).getByRole('button', { name: 'See the Black Forest' })).toBeInTheDocument()
+    expect(within(world).getByRole('button', { name: 'Skip' })).toBeInTheDocument()
+  })
+})

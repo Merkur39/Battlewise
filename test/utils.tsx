@@ -22,7 +22,8 @@ export const offlineOutbox = () => createOutbox(null, () => Promise.reject(new S
 
 /** Renders `ui` with a store of its own, unsaved, on the defaults (or the store given, as a relaunch
  * finds it) with `state` over them, an outbox of its own, offline unless one is given, and issue states
- * kept nowhere (GitHub is what fetch answers). */
+ * kept nowhere (GitHub is what fetch answers). The questions of the first arrival are behind the player
+ * unless `state` asks them (`onboarding: false`). */
 export function renderWithStore(
   ui: ReactNode,
   state: Partial<AppState> = {},
@@ -31,7 +32,7 @@ export function renderWithStore(
     store = createStore(null),
   }: { readonly outbox?: Outbox; readonly store?: Store } = {},
 ) {
-  store.update(state)
+  store.update({ onboarding: true, ...state })
   return {
     store,
     ...render(
