@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v128** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v131** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
