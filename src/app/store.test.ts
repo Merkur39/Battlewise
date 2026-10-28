@@ -34,11 +34,16 @@ const changed: AppState = {
   language: 'fr',
   recentAttacks: [{ fighter: 'Troll', attack: 'troll_groundslam' }],
   seenVersion: '1.4.0',
+  installOffered: true,
 }
 
 describe('createStore', () => {
   it('starts on the defaults on a first launch', () => {
     expect(createStore(memoryStorage()).getState()).toEqual(DEFAULT_STATE)
+  })
+
+  it('has not offered to install the app yet on a first launch', () => {
+    expect(createStore(memoryStorage()).getState().installOffered).toBe(false)
   })
 
   it('starts with the gear of a new character: a wooden shield, no skill, no armour, 25 HP', () => {
@@ -88,6 +93,7 @@ describe('createStore', () => {
       language: 'fr',
       recentAttacks: [],
       seenVersion: null,
+      installOffered: false,
     })
   })
 
@@ -104,6 +110,7 @@ describe('createStore', () => {
     ['no player at all', { world: { difficulty: 'hard', players: 0 } }, 'world'],
     ['a language the app does not speak', { language: 'de' }, 'language'],
     ['a version that is no version', { seenVersion: 'latest' }, 'seenVersion'],
+    ['an install offer neither made nor not', { installOffered: 'yes' }, 'installOffered'],
   ] as const)('puts back the default instead of %s', (_, saved, setting) => {
     const state = createStore(memoryStorage(JSON.stringify(saved))).getState()
 

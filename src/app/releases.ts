@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.8.0',
+    date: '2026-10-28',
+    notes: [
+      {
+        text: {
+          fr: "Battlewise propose une fois de s'installer, là où ton navigateur le permet : une icône sur ton écran d'accueil, en plein écran, sans connexion. Sur iPhone, il donne les étapes de Safari. L'offre reste dans Réglages › À propos.",
+          en: "Battlewise offers once to install itself, where your browser can: an icon on your home screen, full screen, offline. On an iPhone, it gives Safari's steps. The offer stays in Settings › About.",
+        },
+      },
+    ],
+  },
+  {
     version: '1.7.1',
     date: '2026-10-28',
     notes: [

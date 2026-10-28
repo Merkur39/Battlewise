@@ -204,3 +204,47 @@ export const ReloadIcon = (props: IconProps) => (
     <path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" />
   </Icon>
 )
+
+export const InstallIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+  </Icon>
+)
+
+export const AppsIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="4" y="4" width="6.5" height="6.5" rx="1.5" />
+    <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" />
+    <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" />
+    <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" />
+  </Icon>
+)
+
+export const ExpandIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+  </Icon>
+)
+
+export const OfflineIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5 12.5a10 10 0 0 1 4.2-2.3M14.8 10.2a10 10 0 0 1 4.2 2.3M8.5 16a5 5 0 0 1 7 0M12 19.5h.01" />
+    <path d="M2 8.8a15 15 0 0 1 4.6-2.9M10.5 4.6A15 15 0 0 1 22 8.8M3 3l18 18" />
+  </Icon>
+)
+
+/** Safari's ⋯ button. */
+export const MoreIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="5.5" cy="12" r="1.3" />
+    <circle cx="12" cy="12" r="1.3" />
+    <circle cx="18.5" cy="12" r="1.3" />
+  </Icon>
+)
+
+/** Safari's Share button. */
+export const ShareIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 3v12M8 7l4-4 4 4M8 10H6v11h12V10h-2" />
+  </Icon>
+)

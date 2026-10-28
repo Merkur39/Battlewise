@@ -1,0 +1,308 @@
+/* The offer of the first launch: a page over the whole app, the brand at its head (design canvas,
+   Installer and Desktop-Installer). */
+.page {
+  box-sizing: border-box;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.page::backdrop {
+  background: var(--bg);
+}
+
+.frame {
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+}
+
+.brand {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.shield {
+  flex: none;
+  color: var(--accent);
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 16px 16px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.lead {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perk {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+  font-size: 15px;
+}
+
+.perkIcon {
+  flex: none;
+  color: var(--accent);
+}
+
+/* Safari's steps, numbered by the list itself. */
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.step {
+  counter-increment: step;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.step:last-child {
+  border-bottom: 0;
+}
+
+.step::before {
+  content: counter(step);
+  flex: none;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--secondary);
+}
+
+/* Safari's own button, drawn in the line. */
+.button {
+  vertical-align: -4px;
+  color: var(--ink);
+}
+
+.why {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--secondary);
+}
+
+.footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px max(24px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  border-radius: 4px;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.quiet {
+  min-height: 44px;
+  margin: -4px 0 -6px;
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.outlined {
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--faint);
+}
+
+/* From Settings: the report sheet's frame, the steps in it. */
+.sheet {
+  composes: sheet from '../report/ReportSheet.module.css';
+}
+
+.content {
+  composes: content from '../report/ReportSheet.module.css';
+}
+
+.handle {
+  composes: handle from '../report/ReportSheet.module.css';
+}
+
+.header {
+  composes: header from '../report/ReportSheet.module.css';
+}
+
+.sheetTitle {
+  composes: title from '../report/ReportSheet.module.css';
+}
+
+.close {
+  composes: close from '../report/ReportSheet.module.css';
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sheetLead {
+  margin: -8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+/* Desktop: the column of the page in the middle, its buttons side by side; the sheet, a dialog. */
+@media (min-width: 1024px) {
+  .brand {
+    gap: 10px;
+    height: 40px;
+    padding: 20px 24px 0;
+    font-size: 16px;
+  }
+
+  .column {
+    flex: none;
+    align-self: center;
+    width: 440px;
+    gap: 22px;
+    padding: 120px 0 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .footer {
+    align-self: center;
+    width: 440px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 22px 0 24px;
+    border-top: 0;
+  }
+
+  .primary {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  .primary svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .quiet,
+  .outlined {
+    height: 40px;
+    min-height: 0;
+    margin: 0;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .note {
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .sheet {
+    width: min(480px, 100% - 64px);
+  }
+
+  .body {
+    padding: 6px 24px 22px;
+  }
+}
