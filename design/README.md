@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v131** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v132** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -75,7 +75,12 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   nothing pointing at « VD 6 ×1 ») and three tracks on a phone: one bottom sheet at the first launch leading to Ton
   équipement and Ton monde; three full-screen questions (the biome, the gear, the world) before the Bestiaire; no
   interruption, a card above the list and a dot on the context button until the gear is set. Track B is the one
-  chosen. Made by hand as well, verdicts from the app's model on `src/data/game.json` at the time.
+  chosen. Made by hand as well, verdicts from the app's model on `src/data/game.json` at the time. Carried into
+  Origine in the row « Première arrivée », after the offer to install (whose ways out now lead to it): `Arrivee-Biome`,
+  `Arrivee-Equipement`, `Arrivee-Monde` on a phone, `Desktop-Arrivee-*` as a 600 px dialog over the app. The forms of
+  questions 2 and 3 are those of the Ton équipement and Ton monde dialogs, shared. « Suivant » saves the answer;
+  « Passer » (and Escape on a desktop) leaves the questions left, and the one on screen, at what they hold; the last
+  button names the biome picked and opens the Bestiaire on it.
 - Page **Installer · pistes** (`Installer-A` to `Installer-C`, `Installer-Reglages`): offering to install the app
   (#49), apart from the onboarding and once, in three tracks on a phone (a full screen at the first launch, before the
   onboarding; a bottom sheet as the onboarding ends; a card above the Bestiary's list at the second launch), each on
