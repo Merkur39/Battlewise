@@ -73,7 +73,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
     <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
       <span style="font-size: 11px; letter-spacing: 0.08em; color: {{ t.secondary }}">{{ s.data }}</span>
       <span style="display: flex; align-items: baseline; gap: 8px">
-        <span style="font-size: 14px">Battlewise</span>
+        <span style="font-size: 14px">Foelore</span>
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">0.1.0</span>
       </span>
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">{{ s.dataLine }}</span>
@@ -87,7 +87,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
         <span style="flex: 1; font-size: 14px">{{ s.report }}</span>
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
       </button>
-      <a href="https://github.com/Merkur39/Battlewise" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; margin-top: 4px; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.accent }}; text-decoration: none">
+      <a href="Graphite-Mentions.dc.html" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 12px; margin-top: 4px; box-sizing: border-box; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.accent }}; text-decoration: none">
+        <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{ s.mentions }}</span><span style="font-size: 12px; color: {{ t.secondary }}">{{ s.mentionsMeta }}</span></span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="{{ t.faint }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="https://github.com/Merkur39/Foelore" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; margin-top: 4px; border-radius: 4px; border: 1px solid {{ t.line }}; background: {{ t.surface }}; color: {{ t.accent }}; text-decoration: none">
         <span style="flex: 1; font-size: 14px">{{ s.source }}</span>
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ t.secondary }}">GitHub</span>
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
@@ -146,20 +150,20 @@ class Component extends DCLogic {
     const detected = 'fr';
     const S = {
       fr: {
-        install: 'Installer Battlewise', installMeta: 'Sur l\'écran d\'accueil, sans connexion', installTitle: 'Installe Battlewise', installSub: 'Pour l\'avoir sous la main, à côté du jeu.', perk1: 'Une icône sur ton écran d\'accueil', perk2: 'En plein écran, sans barre d\'adresse', perk3: 'Marche sans connexion', inSafari: 'DANS SAFARI', step1a: 'Touche', step1b: 'à côté de l\'adresse, puis «\u00a0Partager\u00a0».', step2: 'Choisis «\u00a0Sur l\'écran d\'accueil\u00a0», puis «\u00a0Ajouter\u00a0».', step3: 'Ouvre Battlewise depuis ton écran d\'accueil.', installNote: 'L\'app installée repart de zéro : Safari ne lui passe pas tes réglages, tu les y refais une fois.',
+        install: 'Installer Foelore', installMeta: 'Sur l\'écran d\'accueil, sans connexion', installTitle: 'Installe Foelore', installSub: 'Pour l\'avoir sous la main, à côté du jeu.', perk1: 'Une icône sur ton écran d\'accueil', perk2: 'En plein écran, sans barre d\'adresse', perk3: 'Marche sans connexion', inSafari: 'DANS SAFARI', step1a: 'Touche', step1b: 'à côté de l\'adresse, puis «\u00a0Partager\u00a0».', step2: 'Choisis «\u00a0Sur l\'écran d\'accueil\u00a0», puis «\u00a0Ajouter\u00a0».', step3: 'Ouvre Foelore depuis ton écran d\'accueil.', installNote: 'L\'app installée repart de zéro : Safari ne lui passe pas tes réglages, tu les y refais une fois.',
         closeSheet: 'Fermer', code: 'fr', title: 'Réglages', feedback: 'TES RETOURS', reports: 'Mes signalements', reportsMeta: '5 envoyés · 2 corrigés', news: 'Nouveautés', newsMeta: '1.5.0 · 2 NOV.', close: 'Fermer sans enregistrer', lang: 'LANGUE', auto: 'Automatique',
         langNote: 'Automatique suit ton appareil (français détecté), sinon l\'anglais. Les noms du jeu suivent la langue choisie.',
         theme: 'THÈME', byDefault: 'PAR DÉFAUT', themeNote: 'Gardés sur cet appareil. L\'aperçu change dès que tu touches un choix.',
         data: 'À PROPOS', dataLine: 'LUES DANS VALHEIM 1.0.20 · SANS MOD', save: 'Valider',
-        report: 'Signaler un problème ou une idée', source: 'Code source et licence', licence: '© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.'
+        report: 'Signaler un problème ou une idée', mentions: 'Mentions et crédits', mentionsMeta: 'Projet de fan, crédits, tes données', source: 'Code source et licence', licence: '© 2026 Merkur39 · logiciel libre sous GPLv3, sans garantie.'
       },
       en: {
-        install: 'Install Battlewise', installMeta: 'On your home screen, offline', installTitle: 'Install Battlewise', installSub: 'To keep it at hand, next to the game.', perk1: 'An icon on your home screen', perk2: 'Full screen, no address bar', perk3: 'Works offline', inSafari: 'IN SAFARI', step1a: 'Tap', step1b: 'next to the address, then “Share”.', step2: 'Choose “Add to Home Screen”, then “Add”.', step3: 'Open Battlewise from your home screen.', installNote: 'The installed app starts from scratch: Safari doesn\'t pass it your settings, you set them there once.',
+        install: 'Install Foelore', installMeta: 'On your home screen, offline', installTitle: 'Install Foelore', installSub: 'To keep it at hand, next to the game.', perk1: 'An icon on your home screen', perk2: 'Full screen, no address bar', perk3: 'Works offline', inSafari: 'IN SAFARI', step1a: 'Tap', step1b: 'next to the address, then “Share”.', step2: 'Choose “Add to Home Screen”, then “Add”.', step3: 'Open Foelore from your home screen.', installNote: 'The installed app starts from scratch: Safari doesn\'t pass it your settings, you set them there once.',
         closeSheet: 'Close', code: 'en', title: 'Settings', feedback: 'YOUR FEEDBACK', reports: 'My reports', reportsMeta: '5 sent · 2 fixed', news: "What's new", newsMeta: '1.5.0 · NOV 2', close: 'Close without saving', lang: 'LANGUAGE', auto: 'Automatic',
         langNote: 'Automatic follows your device (French detected), otherwise English. Game names follow the chosen language.',
         theme: 'THEME', byDefault: 'DEFAULT', themeNote: 'Saved on this device. The preview changes as soon as you tap a choice.',
         data: 'ABOUT', dataLine: 'READ FROM VALHEIM 1.0.20 · NO MODS', save: 'Save',
-        report: 'Report a problem or an idea', source: 'Source code and licence', licence: '© 2026 Merkur39 · free software under the GPLv3, no warranty.'
+        report: 'Report a problem or an idea', mentions: 'Notices and credits', mentionsMeta: 'Fan project, credits, your data', source: 'Source code and licence', licence: '© 2026 Merkur39 · free software under the GPLv3, no warranty.'
       }
     };
     const st = this.state;

@@ -39,7 +39,7 @@ textarea::placeholder{color:#8D86A4}
   <nav aria-label="Navigation principale" class="bw-nav" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #342D47">
     <div class="bw-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#BBA6F7" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
-      <span class="bw-label" style="font-size: 16px; font-weight: 500">Battlewise</span>
+      <span class="bw-label" style="font-size: 16px; font-weight: 500">Foelore</span>
     </div>
     <div style="display: flex; flex-direction: column; gap: 2px">
       <a href="Brume-Desktop-Bestiaire.dc.html" aria-current="page" class="bw-link" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; background: #2E2747; color: #BBA6F7"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg><span class="bw-label">Bestiaire</span></a>
@@ -131,7 +131,7 @@ textarea::placeholder{color:#8D86A4}
             <div role="alert" style="max-width: 520px; display: flex; flex-direction: column; gap: 12px; padding: 24px; box-sizing: border-box; border: 1px solid #342D47; border-radius: 6px; background: #1A1724">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
               <h2 style="margin: 0; font-size: 20px; font-weight: 500">Cette fiche a planté</h2>
-              <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9A2BF">Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.</p>
+              <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9A2BF">Le reste de Foelore marche : change de monstre, ou passe à la Simulation.</p>
               <div style="display: flex; gap: 10px; padding-top: 4px">
                 <button type="button" onClick="{{ retry }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
                 <button type="button" onClick="{{ rep.openCrash }}" style="height: 40px; padding: 0 16px; border-radius: 4px; border: 1px solid #342D47; font-size: 14px">Envoyer le rapport</button>
@@ -279,7 +279,7 @@ textarea::placeholder{color:#8D86A4}
             <span style="font-size: 14px; line-height: 1.5; color: #A9A2BF">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
           </div>
           <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #342D47">
-            <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #342D47; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+            <a href="https://github.com/Merkur39/Foelore/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 4px; border: 1px solid #342D47; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
             <button type="button" onClick="{{ rep.close }}" style="height: 40px; padding: 0 20px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #BBA6F7; color: #110F18">Fermer</button>
           </div>
         </sc-if>
@@ -449,7 +449,7 @@ class Component extends DCLogic {
       chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
       toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
       context: st.crash ? [
-        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FOELORE 1.3.0 · LUES DANS VALHEIM 1.0.20',
         'FRANÇAIS · BESTIAIRE, FICHE DU TROLL · FENÊTRE 1440 PX',
         'TROLL · ' + stars + '★',
         "TypeError: Cannot read properties of undefined (reading 'hits')",
@@ -458,7 +458,7 @@ class Component extends DCLogic {
         '\u00a0\u00a0at CreatureSheet (index-Cq3RNw5M.js:1:53102)',
         '\u00a0\u00a0… 11 lignes de plus'
       ] : [
-        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FOELORE 1.3.0 · LUES DANS VALHEIM 1.0.20',
         'FRANÇAIS · BESTIAIRE, FICHE DU TROLL · FENÊTRE 1440 PX',
         'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),
         'COUP DE POING ' + 70 * mult + ' · COUP DE TRONC ' + 130 * mult + ' · FRAPPE AU SOL ' + 160 * mult + ', AVEC LEURS VERDICTS',

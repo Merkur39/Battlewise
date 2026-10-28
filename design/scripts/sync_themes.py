@@ -31,12 +31,13 @@ MOBILE = [
                     ("Recherche", "Choisir une attaque · recherche", False)]),
     ("Arsenal et mémo", [("Arsenal", "Arsenal", True), ("Memo", "Mémo", True)]),
     ("Fenêtres et système", [("Profil", "Ton équipement", False), ("Monde", "Ton monde", False),
-                             ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True), ("Tokens", None, False)]),
+                             ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True),
+                             ("Mentions", "Mentions et crédits", False), ("Tokens", None, False)]),
     ("Tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
                      ("Nouveautes", "Nouveautés", False), ("Merci", "Corrigé grâce à toi", True)]),
     ("Plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
                    ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
-                   ("Simulation-Plantee", "Simulation plantée", True), ("Secours", "Battlewise a planté", True)]),
+                   ("Simulation-Plantee", "Simulation plantée", True), ("Secours", "Foelore a planté", True)]),
     ("Première arrivée", [("Installer", "Installer l'app", True), ("Installer-Safari", "Installer l'app · Safari", True)]),
 ]
 DESKTOP = [
@@ -45,13 +46,14 @@ DESKTOP = [
     ("Desktop · arsenal et mémo", [("Arsenal", "Arsenal", True), ("Memo", "Mémo", False)]),
     ("Desktop · fenêtres", [("Attaque", "Choisir une attaque", True), ("Recherche", "Choisir une attaque · recherche", False),
                             ("Equipement", "Ton équipement", False),
-                            ("Monde", "Ton monde", False), ("Reglages", "Réglages", True)]),
+                            ("Monde", "Ton monde", False), ("Reglages", "Réglages", True),
+                            ("Mentions", "Mentions et crédits", False)]),
     ("Desktop · tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
                                ("Nouveautes", "Nouveautés", False), ("Merci", "Corrigé grâce à toi", True)]),
     ("Desktop · plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
                              ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
                              ("Simulation-Plantee", "Simulation plantée", True),
-                             ("Secours", "Battlewise a planté", True)]),
+                             ("Secours", "Foelore a planté", True)]),
     ("Desktop · première arrivée", [("Installer", "Installer l'app", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960

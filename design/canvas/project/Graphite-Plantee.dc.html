@@ -35,7 +35,7 @@ a{color:#6EA0FF}a:hover{color:#9CBEFF}
       <div role="alert" style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; border: 1px solid #2E2E33; border-radius: 6px; background: #1A1A1D">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A1A1AA" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8v5M12 16h.01"></path></svg>
         <h2 style="margin: 0; font-size: 18px; font-weight: 500">Cette fiche a planté</h2>
-        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A1A1AA">Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A1A1AA">Le reste de Foelore marche : change de monstre, ou passe à la Simulation.</p>
         <button type="button" onClick="{{ retry }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 4px; font-weight: 500; background: #6EA0FF; color: #111113"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>Réessayer</button>
         <button type="button" onClick="{{ rep.openCrash }}" style="min-height: 44px; font-size: 14px; color: #6EA0FF">Envoyer le rapport</button>
       </div>
@@ -165,7 +165,7 @@ a{color:#6EA0FF}a:hover{color:#9CBEFF}
           <span style="font-size: 17px; font-weight: 500">Reçu, c'est le <span style="font-family: 'IBM Plex Mono', monospace">#48</span></span>
         </div>
         <span style="flex: none; font-size: 14px; line-height: 1.5; color: #A1A1AA">Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.</span>
-        <a href="https://github.com/Merkur39/Battlewise/issues" target="_blank" rel="noopener" style="flex: none; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+        <a href="https://github.com/Merkur39/Foelore/issues" target="_blank" rel="noopener" style="flex: none; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 14px; text-decoration: none">Voir sur GitHub<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
         <button type="button" onClick="{{ rep.close }}" style="flex: none; height: 48px; border-radius: 4px; border: 1px solid #2E2E33; font-size: 15px">Fermer</button>
       </sc-if>
     </div>
@@ -283,7 +283,7 @@ class Component extends DCLogic {
       chevron: st.ctxOpen ? 'rotate(180deg)' : 'none',
       toggleCtx: () => this.setState({ ctxOpen: !st.ctxOpen }),
       context: st.crash ? [
-        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FOELORE 1.3.0 · LUES DANS VALHEIM 1.0.20',
         'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
         'TROLL · ' + stars + '★',
         "TypeError: Cannot read properties of undefined (reading 'hits')",
@@ -292,7 +292,7 @@ class Component extends DCLogic {
         '\u00a0\u00a0at CreatureSheet (index-Cq3RNw5M.js:1:53102)',
         '\u00a0\u00a0… 11 lignes de plus'
       ] : [
-        'BATTLEWISE 1.3.0 · LUES DANS VALHEIM 1.0.20',
+        'FOELORE 1.3.0 · LUES DANS VALHEIM 1.0.20',
         'FRANÇAIS · FICHE MONSTRE · ÉCRAN 390 PX',
         'TROLL · ' + stars + '★ · PV ' + 600 * (stars + 1) + ' · À INFLIGER ' + 180 * (stars + 1),
         'COUP DE POING ' + 70 * mult + ' · COUP DE TRONC ' + 130 * mult + ' · FRAPPE AU SOL ' + 160 * mult + ', AVEC LEURS VERDICTS',

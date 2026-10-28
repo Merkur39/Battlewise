@@ -1,8 +1,8 @@
-# Battlewise — design canvas
+# Foelore — design canvas
 
-The mockups live in a Claude Design artifact: [Battlewise — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
+The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v121** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v128** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -83,7 +83,14 @@ The mockups live in a Claude Design artifact: [Battlewise — design](https://cl
   does not share Safari's storage), then the row of Réglages › À propos that keeps the offer within reach. Made by
   hand as well. Track A is the one chosen, carried into Origine as a row « Première arrivée »: `Installer` (« Installer »
   opens the browser's prompt, drawn), `Installer-Safari` (the steps) and `Desktop-Installer`; `Reglages` gains the row
-  under the version, opening the steps' sheet, and `Desktop-Reglages` a small « Installer Battlewise » button.
+  under the version, opening the steps' sheet, and `Desktop-Reglages` a small « Installer Foelore » button.
+- Page **Mentions · pistes** (`Mentions-A` to `Mentions-C`, `Mentions-Texte`): the notices and credits of Réglages ›
+  À propos (fan project, credits for the wiki's attack names, fonts and libraries, the player's data, publisher and
+  host), in three tracks on a phone: a page of its own behind one row; everything in À propos, folded; each notice
+  where it serves (the data notice in the report sheet, two short notes and a row to a short page). `Mentions-Texte`
+  holds the shared copy, French and English. Made by hand as well. Track A is the one chosen, carried into Origine:
+  `Mentions` and `Desktop-Mentions` (the page, from Réglages), a « Mentions et crédits » row in `Reglages` between
+  Signaler and Code source, and a small button in `Desktop-Reglages`.
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
