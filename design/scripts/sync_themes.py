@@ -38,7 +38,10 @@ MOBILE = [
     ("Plantages", [("Plantee", "Fiche plantée", True), ("Ligne-Plantee", "Ligne plantée · Bestiaire", True),
                    ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
                    ("Simulation-Plantee", "Simulation plantée", True), ("Secours", "Foelore a planté", True)]),
-    ("Première arrivée", [("Installer", "Installer l'app", True), ("Installer-Safari", "Installer l'app · Safari", True)]),
+    ("Première arrivée", [("Installer", "Installer l'app", True), ("Installer-Safari", "Installer l'app · Safari", True),
+                          ("Arrivee-Biome", "Première arrivée · 1 · biome", True),
+                          ("Arrivee-Equipement", "Première arrivée · 2 · équipement", True),
+                          ("Arrivee-Monde", "Première arrivée · 3 · monde", True)]),
 ]
 DESKTOP = [
     ("Desktop · écrans principaux", [("Bestiaire", "Bestiaire", True), ("Bestiaire-Recherche", "Bestiaire · recherche", True),
@@ -54,7 +57,10 @@ DESKTOP = [
                              ("Arsenal-Ligne-Plantee", "Ligne plantée · Arsenal", True),
                              ("Simulation-Plantee", "Simulation plantée", True),
                              ("Secours", "Foelore a planté", True)]),
-    ("Desktop · première arrivée", [("Installer", "Installer l'app", True)]),
+    ("Desktop · première arrivée", [("Installer", "Installer l'app", True),
+                                    ("Arrivee-Biome", "Première arrivée · 1 · biome", True),
+                                    ("Arrivee-Equipement", "Première arrivée · 2 · équipement", True),
+                                    ("Arrivee-Monde", "Première arrivée · 3 · monde", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960
 

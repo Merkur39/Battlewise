@@ -194,6 +194,30 @@
       "title": "Installer l'app · Safari",
       "is_interactive": true
     },
+    "Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "is_interactive": true
+    },
+    "Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "is_interactive": true
+    },
+    "Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "is_interactive": true
+    },
     "Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -373,6 +397,33 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "is_interactive": true
     },
@@ -1055,6 +1106,33 @@
       "page": "braise",
       "is_interactive": true
     },
+    "Braise-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "braise",
+      "is_interactive": true
+    },
     "Braise-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -1254,6 +1332,36 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "page": "braise",
       "is_interactive": true
@@ -1475,6 +1583,33 @@
       "page": "brume",
       "is_interactive": true
     },
+    "Brume-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "brume",
+      "is_interactive": true
+    },
     "Brume-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -1674,6 +1809,36 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "page": "brume",
       "is_interactive": true
@@ -1895,6 +2060,33 @@
       "page": "jour",
       "is_interactive": true
     },
+    "Jour-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "jour",
+      "is_interactive": true
+    },
     "Jour-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -2094,6 +2286,36 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "page": "jour",
       "is_interactive": true
@@ -2315,6 +2537,33 @@
       "page": "runes",
       "is_interactive": true
     },
+    "Runes-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "runes",
+      "is_interactive": true
+    },
     "Runes-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -2514,6 +2763,36 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "page": "runes",
       "is_interactive": true
@@ -2735,6 +3014,33 @@
       "page": "graphite",
       "is_interactive": true
     },
+    "Graphite-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "graphite",
+      "is_interactive": true
+    },
     "Graphite-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -2934,6 +3240,36 @@
       "w": 1440,
       "h": 900,
       "title": "Installer l'app · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
       "expand": "fill",
       "page": "graphite",
       "is_interactive": true
@@ -3155,6 +3491,33 @@
       "page": "parchemin",
       "is_interactive": true
     },
+    "Parchemin-Arrivee-Biome.dc.html": {
+      "x": 940,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 1 · biome",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Arrivee-Equipement.dc.html": {
+      "x": 1410,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 2 · équipement",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Arrivee-Monde.dc.html": {
+      "x": 1880,
+      "y": 7584,
+      "w": 390,
+      "h": 844,
+      "title": "Première arrivée · 3 · monde",
+      "page": "parchemin",
+      "is_interactive": true
+    },
     "Parchemin-Desktop-Bestiaire.dc.html": {
       "x": 0,
       "y": 9088,
@@ -3357,6 +3720,36 @@
       "expand": "fill",
       "page": "parchemin",
       "is_interactive": true
+    },
+    "Parchemin-Desktop-Arrivee-Biome.dc.html": {
+      "x": 1520,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 1 · biome · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Arrivee-Equipement.dc.html": {
+      "x": 3040,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 2 · équipement · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Arrivee-Monde.dc.html": {
+      "x": 4560,
+      "y": 15688,
+      "w": 1440,
+      "h": 900,
+      "title": "Première arrivée · 3 · monde · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -3415,7 +3808,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860
+      "maxW": 2270
     },
     "d-row1": {
       "kind": "title1",
@@ -3457,7 +3850,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440
+      "maxW": 6000
     },
     "sim-row1": {
       "kind": "title1",
@@ -3692,7 +4085,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "braise"
     },
     "d-row1-braise": {
@@ -3740,7 +4133,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "braise"
     },
     "m-row1-brume": {
@@ -3796,7 +4189,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "brume"
     },
     "d-row1-brume": {
@@ -3844,7 +4237,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "brume"
     },
     "m-row1-jour": {
@@ -3900,7 +4293,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "jour"
     },
     "d-row1-jour": {
@@ -3948,7 +4341,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "jour"
     },
     "m-row1-runes": {
@@ -4004,7 +4397,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "runes"
     },
     "d-row1-runes": {
@@ -4052,7 +4445,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "runes"
     },
     "m-row1-graphite": {
@@ -4108,7 +4501,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "graphite"
     },
     "d-row1-graphite": {
@@ -4156,7 +4549,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "graphite"
     },
     "m-row1-parchemin": {
@@ -4212,7 +4605,7 @@
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 860,
+      "maxW": 2270,
       "page": "parchemin"
     },
     "d-row1-parchemin": {
@@ -4260,7 +4653,7 @@
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 1440,
+      "maxW": 6000,
       "page": "parchemin"
     }
   },
@@ -4290,6 +4683,9 @@
     "Secours.dc.html",
     "Installer.dc.html",
     "Installer-Safari.dc.html",
+    "Arrivee-Biome.dc.html",
+    "Arrivee-Equipement.dc.html",
+    "Arrivee-Monde.dc.html",
     "Desktop-Bestiaire.dc.html",
     "Desktop-Bestiaire-Recherche.dc.html",
     "Desktop-Combat.dc.html",
@@ -4311,6 +4707,9 @@
     "Desktop-Simulation-Plantee.dc.html",
     "Desktop-Secours.dc.html",
     "Desktop-Installer.dc.html",
+    "Desktop-Arrivee-Biome.dc.html",
+    "Desktop-Arrivee-Equipement.dc.html",
+    "Desktop-Arrivee-Monde.dc.html",
     "Sim-A.dc.html",
     "Sim-B.dc.html",
     "Sim-C.dc.html",
@@ -4391,6 +4790,9 @@
     "Braise-Secours.dc.html",
     "Braise-Installer.dc.html",
     "Braise-Installer-Safari.dc.html",
+    "Braise-Arrivee-Biome.dc.html",
+    "Braise-Arrivee-Equipement.dc.html",
+    "Braise-Arrivee-Monde.dc.html",
     "Braise-Desktop-Bestiaire.dc.html",
     "Braise-Desktop-Bestiaire-Recherche.dc.html",
     "Braise-Desktop-Combat.dc.html",
@@ -4412,6 +4814,9 @@
     "Braise-Desktop-Simulation-Plantee.dc.html",
     "Braise-Desktop-Secours.dc.html",
     "Braise-Desktop-Installer.dc.html",
+    "Braise-Desktop-Arrivee-Biome.dc.html",
+    "Braise-Desktop-Arrivee-Equipement.dc.html",
+    "Braise-Desktop-Arrivee-Monde.dc.html",
     "Brume-Bestiaire.dc.html",
     "Brume-Bestiaire-Recherche.dc.html",
     "Brume-Monstre.dc.html",
@@ -4437,6 +4842,9 @@
     "Brume-Secours.dc.html",
     "Brume-Installer.dc.html",
     "Brume-Installer-Safari.dc.html",
+    "Brume-Arrivee-Biome.dc.html",
+    "Brume-Arrivee-Equipement.dc.html",
+    "Brume-Arrivee-Monde.dc.html",
     "Brume-Desktop-Bestiaire.dc.html",
     "Brume-Desktop-Bestiaire-Recherche.dc.html",
     "Brume-Desktop-Combat.dc.html",
@@ -4458,6 +4866,9 @@
     "Brume-Desktop-Simulation-Plantee.dc.html",
     "Brume-Desktop-Secours.dc.html",
     "Brume-Desktop-Installer.dc.html",
+    "Brume-Desktop-Arrivee-Biome.dc.html",
+    "Brume-Desktop-Arrivee-Equipement.dc.html",
+    "Brume-Desktop-Arrivee-Monde.dc.html",
     "Jour-Bestiaire.dc.html",
     "Jour-Bestiaire-Recherche.dc.html",
     "Jour-Monstre.dc.html",
@@ -4483,6 +4894,9 @@
     "Jour-Secours.dc.html",
     "Jour-Installer.dc.html",
     "Jour-Installer-Safari.dc.html",
+    "Jour-Arrivee-Biome.dc.html",
+    "Jour-Arrivee-Equipement.dc.html",
+    "Jour-Arrivee-Monde.dc.html",
     "Jour-Desktop-Bestiaire.dc.html",
     "Jour-Desktop-Bestiaire-Recherche.dc.html",
     "Jour-Desktop-Combat.dc.html",
@@ -4504,6 +4918,9 @@
     "Jour-Desktop-Simulation-Plantee.dc.html",
     "Jour-Desktop-Secours.dc.html",
     "Jour-Desktop-Installer.dc.html",
+    "Jour-Desktop-Arrivee-Biome.dc.html",
+    "Jour-Desktop-Arrivee-Equipement.dc.html",
+    "Jour-Desktop-Arrivee-Monde.dc.html",
     "Runes-Bestiaire.dc.html",
     "Runes-Bestiaire-Recherche.dc.html",
     "Runes-Monstre.dc.html",
@@ -4529,6 +4946,9 @@
     "Runes-Secours.dc.html",
     "Runes-Installer.dc.html",
     "Runes-Installer-Safari.dc.html",
+    "Runes-Arrivee-Biome.dc.html",
+    "Runes-Arrivee-Equipement.dc.html",
+    "Runes-Arrivee-Monde.dc.html",
     "Runes-Desktop-Bestiaire.dc.html",
     "Runes-Desktop-Bestiaire-Recherche.dc.html",
     "Runes-Desktop-Combat.dc.html",
@@ -4550,6 +4970,9 @@
     "Runes-Desktop-Simulation-Plantee.dc.html",
     "Runes-Desktop-Secours.dc.html",
     "Runes-Desktop-Installer.dc.html",
+    "Runes-Desktop-Arrivee-Biome.dc.html",
+    "Runes-Desktop-Arrivee-Equipement.dc.html",
+    "Runes-Desktop-Arrivee-Monde.dc.html",
     "Graphite-Bestiaire.dc.html",
     "Graphite-Bestiaire-Recherche.dc.html",
     "Graphite-Monstre.dc.html",
@@ -4575,6 +4998,9 @@
     "Graphite-Secours.dc.html",
     "Graphite-Installer.dc.html",
     "Graphite-Installer-Safari.dc.html",
+    "Graphite-Arrivee-Biome.dc.html",
+    "Graphite-Arrivee-Equipement.dc.html",
+    "Graphite-Arrivee-Monde.dc.html",
     "Graphite-Desktop-Bestiaire.dc.html",
     "Graphite-Desktop-Bestiaire-Recherche.dc.html",
     "Graphite-Desktop-Combat.dc.html",
@@ -4596,6 +5022,9 @@
     "Graphite-Desktop-Simulation-Plantee.dc.html",
     "Graphite-Desktop-Secours.dc.html",
     "Graphite-Desktop-Installer.dc.html",
+    "Graphite-Desktop-Arrivee-Biome.dc.html",
+    "Graphite-Desktop-Arrivee-Equipement.dc.html",
+    "Graphite-Desktop-Arrivee-Monde.dc.html",
     "Parchemin-Bestiaire.dc.html",
     "Parchemin-Bestiaire-Recherche.dc.html",
     "Parchemin-Monstre.dc.html",
@@ -4621,6 +5050,9 @@
     "Parchemin-Secours.dc.html",
     "Parchemin-Installer.dc.html",
     "Parchemin-Installer-Safari.dc.html",
+    "Parchemin-Arrivee-Biome.dc.html",
+    "Parchemin-Arrivee-Equipement.dc.html",
+    "Parchemin-Arrivee-Monde.dc.html",
     "Parchemin-Desktop-Bestiaire.dc.html",
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html",
     "Parchemin-Desktop-Combat.dc.html",
@@ -4641,7 +5073,10 @@
     "Parchemin-Desktop-Arsenal-Ligne-Plantee.dc.html",
     "Parchemin-Desktop-Simulation-Plantee.dc.html",
     "Parchemin-Desktop-Secours.dc.html",
-    "Parchemin-Desktop-Installer.dc.html"
+    "Parchemin-Desktop-Installer.dc.html",
+    "Parchemin-Desktop-Arrivee-Biome.dc.html",
+    "Parchemin-Desktop-Arrivee-Equipement.dc.html",
+    "Parchemin-Desktop-Arrivee-Monde.dc.html"
   ],
   "pages": [
     {

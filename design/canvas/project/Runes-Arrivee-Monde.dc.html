@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Première arrivée — 3 · Ton monde · Runes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#30363A transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#30363A;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#8E8A80}
+button,select,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#4FE0C8}a:hover{color:#8CEEDD}
+</style>
+</helmet>
+<div role="dialog" aria-modal="true" aria-labelledby="a-title" style="width: 390px; height: 844px; box-sizing: border-box; background: #0F1113; color: #ECE8DF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="flex: none; display: flex; align-items: center; justify-content: space-between; padding: 6px 6px 0 16px">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ABA79D">3 SUR 3</span>
+    <a href="Runes-Bestiaire.dc.html" style="height: 44px; padding: 0 10px; display: flex; align-items: center; font-size: 15px; text-decoration: none">Passer</a>
+  </header>
+  <div aria-hidden="true" style="flex: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 0 16px"><span style="height: 3px; border-radius: 2px; background: #4FE0C8"></span><span style="height: 3px; border-radius: 2px; background: #4FE0C8"></span><span style="height: 3px; border-radius: 2px; background: #4FE0C8"></span></div>
+  <div style="flex: none; padding: 18px 16px 4px; display: flex; flex-direction: column; gap: 6px">
+    <h1 id="a-title" style="margin: 0; font-size: 22px; font-weight: 500">Ton monde</h1>
+    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #ABA79D">Le réglage « Combat » de ton monde, et qui joue avec toi.</p>
+  </div>
+
+  <main style="flex: 1; min-height: 0; overflow-y: auto; padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
+          <legend style="padding: 0; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">DIFFICULTÉ DU COMBAT</legend>
+          <div style="border: 1px solid #30363A; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; background: #191C1F"><label style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px; border-bottom: 1px solid #22272A; font-size: 15px;"><input type="radio" name="difficulty" style="accent-color: #4FE0C8; width: 18px; height: 18px"><span style="flex: 1">Très facile, Tranquille</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ABA79D">×0,5</span></label><label style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px; border-bottom: 1px solid #22272A; font-size: 15px;"><input type="radio" name="difficulty" style="accent-color: #4FE0C8; width: 18px; height: 18px"><span style="flex: 1">Facile</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ABA79D">×0,75</span></label><label style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px; border-bottom: 1px solid #22272A; font-size: 15px; background: #123A35;"><input type="radio" name="difficulty" checked style="accent-color: #4FE0C8; width: 18px; height: 18px"><span style="flex: 1; color: #4FE0C8; font-weight: 500">Normal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4FE0C8">×1</span></label><label style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px; border-bottom: 1px solid #22272A; font-size: 15px;"><input type="radio" name="difficulty" style="accent-color: #4FE0C8; width: 18px; height: 18px"><span style="flex: 1">Difficile</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ABA79D">×1,5</span></label><label style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px; font-size: 15px;"><input type="radio" name="difficulty" style="accent-color: #4FE0C8; width: 18px; height: 18px"><span style="flex: 1">Très difficile, Cauchemar</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ABA79D">×2</span></label></div>
+          <span style="font-size: 12px; color: #8E8A80">Le réglage « Combat » des modificateurs du monde.</span>
+        </fieldset>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span id="q-players" style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">JOUEURS À MOINS DE 100 M, TOI COMPRIS</span>
+          <div role="group" aria-labelledby="q-players" style="display: flex; border: 1px solid #30363A; border-radius: 4px; overflow: hidden"><button type="button" aria-pressed="true" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; background: #4FE0C8; color: #0F1113; font-weight: 500">1</button><button type="button" aria-pressed="false" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; color: #ABA79D; border-left: 1px solid #30363A">2</button><button type="button" aria-pressed="false" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; color: #ABA79D; border-left: 1px solid #30363A">3</button><button type="button" aria-pressed="false" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; color: #ABA79D; border-left: 1px solid #30363A">4</button><button type="button" aria-pressed="false" style="flex: 1; height: 44px; font-family: 'IBM Plex Mono', monospace; color: #ABA79D; border-left: 1px solid #30363A">5+</button></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #ABA79D">CE QUE ÇA DONNE</span>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.8; color: #ABA79D; background: #191C1F; border-radius: 4px; padding: 10px 12px"><div>COUPS DES MONSTRES <span style="color: #ECE8DF">×1</span></div><div>TES DÉGÂTS ET TON STAGGER <span style="color: #ECE8DF">×1</span></div><div>CHANCE D'ÉTOILES <span style="color: #ECE8DF">×1</span></div></div>
+          <span style="font-size: 12px; color: #8E8A80">Les règles (fenêtre de parade, seuils) ne changent pas.</span>
+        </div>
+      </div>
+  </main>
+
+  <footer style="flex: none; display: flex; gap: 8px; padding: 12px 16px 24px; border-top: 1px solid #30363A">
+    <a href="Runes-Arrivee-Equipement.dc.html" aria-label="Question précédente" style="flex: none; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; box-sizing: border-box; border: 1px solid #30363A; border-radius: 4px; color: #ABA79D"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a><a href="Runes-Bestiaire.dc.html" style="flex: 1; display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; background: #4FE0C8; color: #0F1113; font-weight: 500; text-decoration: none">Voir la Forêt noire</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
