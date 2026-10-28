@@ -1,11 +1,11 @@
 name: Wrong number or name
-description: A number, a name or a verdict in Battlewise does not match the game.
+description: A number, a name or a verdict in Foelore does not match the game.
 labels: [data]
 body:
   - type: markdown
     attributes:
       value: |
-        Battlewise reads its numbers and names from the game's own files. The game names no monster attack, so attack names come from the Valheim wiki or were written by hand: they are the likeliest to be wrong. Thank you for checking.
+        Foelore reads its numbers and names from the game's own files. The game names no monster attack, so attack names come from the Valheim wiki or were written by hand: they are the likeliest to be wrong. Thank you for checking.
 
         **Reporting from the app is better**: under a creature's attacks or under a verdict, « Wrong number or name? Report it » sends what the app shows, its version and your gear and world along with your words, so the report can be handled without going back and forth.
 
@@ -20,7 +20,7 @@ body:
   - type: textarea
     id: app
     attributes:
-      label: What Battlewise shows
+      label: What Foelore shows
     validations:
       required: true
   - type: textarea
@@ -40,7 +40,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Battlewise version
+      label: Foelore version
       description: Settings › About shows it.
       placeholder: 1.3.0
   - type: textarea

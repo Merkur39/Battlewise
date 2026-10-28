@@ -18,7 +18,7 @@ const STANDALONE = '(display-mode: standalone)'
 const openedFromHomeScreen = () =>
   (navigator as Navigator & { readonly standalone?: boolean }).standalone === true
 
-/** How this browser installs Battlewise now; null in the installed app, or where it cannot. */
+/** How this browser installs the app now; null in the installed app, or where it cannot. */
 export function useInstallWay(): InstallWay | null {
   const install = useInstallPrompt()
   const canPrompt = useSyncExternalStore(install.subscribe, install.canPrompt)

@@ -1,3 +1,4 @@
+import { APP_NAME } from '@/app/brand'
 import type { Theme } from '@/app/store'
 import type { Language } from './detect'
 import { formatNumber } from './format'
@@ -362,7 +363,7 @@ export const fr = {
     attached: 'Joint au signalement',
     attachedSummary: "Version, données, ce que l'écran affiche, ton contexte",
     device: (version: string, gameVersion: string) =>
-      `Battlewise ${version} · lues dans Valheim ${gameVersion}`,
+      `${APP_NAME} ${version} · lues dans Valheim ${gameVersion}`,
     screen: (
       language: Language,
       screen: 'creature' | 'simulation' | 'settings' | 'app' | 'bestiary' | 'arsenal' | 'guide',
@@ -391,7 +392,7 @@ export const fr = {
       simulation: "J'ai choisi une attaque.",
       arsenal: "J'ai changé de niveau.",
       guide: "J'ai ouvert une règle.",
-      app: "J'ai ouvert Battlewise.",
+      app: `J'ai ouvert ${APP_NAME}.`,
     },
     crashSummary: "Version, écran, l'erreur et sa pile",
     moreLines: (count: number) => `… ${plural(count, 'ligne', 'lignes')} de plus`,
@@ -404,8 +405,7 @@ export const fr = {
     receivedNote: 'Il est public sur GitHub. Merci : chaque correction sert à tous les joueurs.',
     view: 'Voir sur GitHub',
     queued: 'Gardé sur ton appareil',
-    queuedNote:
-      "Il n'a pas pu partir pour l'instant. Il partira tout seul dès que le réseau revient, ou à la prochaine ouverture de Battlewise.",
+    queuedNote: `Il n'a pas pu partir pour l'instant. Il partira tout seul dès que le réseau revient, ou à la prochaine ouverture de ${APP_NAME}.`,
     refused: 'Refusé par le serveur',
     refusedNote:
       'Il ne partira pas tel quel. Écris-le plutôt sur GitHub, où chaque formulaire te guide.',
@@ -414,9 +414,9 @@ export const fr = {
   },
   crash: {
     sheetTitle: 'Cette fiche a planté',
-    sheetNote: 'Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.',
+    sheetNote: `Le reste de ${APP_NAME} marche : change de monstre, ou passe à la Simulation.`,
     retry: 'Réessayer',
-    appTitle: 'Battlewise a planté',
+    appTitle: `${APP_NAME} a planté`,
     appNote:
       'Tes réglages, ton équipement et ton monde restent sur cet appareil : recharge pour reprendre.',
     reload: 'Recharger',
@@ -425,19 +425,19 @@ export const fr = {
     screens: {
       bestiary: {
         title: 'Le Bestiaire a planté',
-        note: "Le reste de Battlewise marche : passe à la Simulation, à l'Arsenal ou au Mémo.",
+        note: `Le reste de ${APP_NAME} marche : passe à la Simulation, à l'Arsenal ou au Mémo.`,
       },
       simulation: {
         title: 'La Simulation a planté',
-        note: "Le reste de Battlewise marche : passe au Bestiaire, à l'Arsenal ou au Mémo.",
+        note: `Le reste de ${APP_NAME} marche : passe au Bestiaire, à l'Arsenal ou au Mémo.`,
       },
       arsenal: {
         title: "L'Arsenal a planté",
-        note: 'Le reste de Battlewise marche : passe au Bestiaire, à la Simulation ou au Mémo.',
+        note: `Le reste de ${APP_NAME} marche : passe au Bestiaire, à la Simulation ou au Mémo.`,
       },
       guide: {
         title: 'Le Mémo a planté',
-        note: "Le reste de Battlewise marche : passe au Bestiaire, à la Simulation ou à l'Arsenal.",
+        note: `Le reste de ${APP_NAME} marche : passe au Bestiaire, à la Simulation ou à l'Arsenal.`,
       },
     },
     row: 'Cette ligne a planté',
@@ -491,7 +491,7 @@ export const fr = {
     themes,
   },
   install: {
-    title: 'Installe Battlewise',
+    title: `Installe ${APP_NAME}`,
     lead: "Pour l'avoir sous la main, à côté du jeu.",
     perks: {
       phone: [
@@ -511,16 +511,16 @@ export const fr = {
       'ios-menu': [
         `Touche {more} à côté de l'adresse, puis ${quoted('Partager')}.`,
         `Choisis ${quoted("Sur l'écran d'accueil")}, puis ${quoted('Ajouter')}.`,
-        "Ouvre Battlewise depuis ton écran d'accueil.",
+        `Ouvre ${APP_NAME} depuis ton écran d'accueil.`,
       ],
       'ios-bar': [
         `Touche {share} ${quoted('Partager')} dans la barre de Safari.`,
         `Choisis ${quoted("Sur l'écran d'accueil")}, puis ${quoted('Ajouter')}.`,
-        "Ouvre Battlewise depuis ton écran d'accueil.",
+        `Ouvre ${APP_NAME} depuis ton écran d'accueil.`,
       ],
       mac: [
         `Dans la barre des menus, choisis Fichier › ${quoted('Ajouter au Dock')}.`,
-        'Ouvre Battlewise depuis le Dock.',
+        `Ouvre ${APP_NAME} depuis le Dock.`,
       ],
     },
     first:
@@ -531,7 +531,7 @@ export const fr = {
     continueInBrowser: 'Continuer dans le navigateur',
     continueInSafari: 'Continuer dans Safari',
     inSettings: 'Tu la retrouves dans Réglages › À propos.',
-    row: 'Installer Battlewise',
+    row: `Installer ${APP_NAME}`,
     rowMeta: "Sur l'écran d'accueil, sans connexion",
     close: 'Fermer',
   },

@@ -1,4 +1,4 @@
-/** How this browser installs Battlewise: its own prompt; Safari's steps on an iPhone (its Share button
+/** How this browser installs the app: its own prompt; Safari's steps on an iPhone (its Share button
  * behind ⋯ since Safari 26, in its bar before), on an iPad (in its bar), on a Mac (File › Add to Dock,
  * from Safari 17). */
 export type InstallWay = 'prompt' | 'ios-menu' | 'ios-bar' | 'mac'

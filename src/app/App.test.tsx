@@ -12,14 +12,14 @@ describe('App', () => {
   it('names the app in its top bar', () => {
     renderWithStore(<App />)
 
-    expect(within(screen.getByRole('banner')).getByText('Battlewise')).toBeInTheDocument()
+    expect(within(screen.getByRole('banner')).getByText('Foelore')).toBeInTheDocument()
   })
 
   it('opens on the Bestiary, named for screen readers and in the browser tab', () => {
     renderWithStore(<App />, { language: 'fr' })
 
     expect(mainHeading()).toHaveTextContent('Bestiaire')
-    expect(document.title).toBe('Bestiaire — Battlewise')
+    expect(document.title).toBe('Bestiaire — Foelore')
     expect(screen.getByRole('link', { name: 'Bestiaire' })).toHaveAttribute('aria-current', 'page')
   })
 
@@ -38,7 +38,7 @@ describe('App', () => {
     await user.click(screen.getByRole('link', { name: 'Simulation' }))
 
     expect(await screen.findByRole('heading', { level: 1, name: 'Simulation' })).toBeInTheDocument()
-    expect(document.title).toBe('Simulation — Battlewise')
+    expect(document.title).toBe('Simulation — Foelore')
     expect(screen.getByRole('link', { name: 'Simulation' })).toHaveAttribute('aria-current', 'page')
 
     window.history.back()
@@ -113,7 +113,7 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Your setup: Block 81 ×1' }))
 
     expect(mainHeading()).toHaveTextContent('Bestiary')
-    expect(document.title).toBe('Bestiary — Battlewise')
+    expect(document.title).toBe('Bestiary — Foelore')
     expect(screen.getByRole('link', { name: /^Your gear/ })).toHaveTextContent(
       'Your gearSilver ShieldLv3 · Block 81',
     )

@@ -1,6 +1,6 @@
 # Reports from the app
 
-`POST /api/feedback` turns a report sent from Battlewise into a public issue on this repository,
+`POST /api/feedback` turns a report sent from Foelore into a public issue on this repository,
 labelled `from:app` and with its kind (`data`, `bug` or `idea`), so that it lands in the Inbox of the
 board. A wrong-data report on a line of a creature that an open issue from the app is already about
 becomes a +1 comment on that issue instead. It writes as a GitHub App installed on this repository
@@ -17,9 +17,9 @@ or in a ticket: from GitHub straight into Vercel.
 On GitHub, Settings › Developer settings › GitHub Apps › **New GitHub App**
 ([github.com/settings/apps/new](https://github.com/settings/apps/new)):
 
-- **GitHub App name**: `Battlewise reports` (the name must be free on all of GitHub; the issues it
+- **GitHub App name**: `Foelore reports` (the name must be free on all of GitHub; the issues it
   opens show it as their author, with a `bot` badge).
-- **Homepage URL**: `https://battlewise-valheim.vercel.app`.
+- **Homepage URL**: `https://foelore.vercel.app`.
 - **Webhook**: untick **Active**. The app only writes; it listens to nothing.
 - **Permissions › Repository permissions › Issues**: **Read and write**. Leave every other permission
   on No access; Metadata turns to Read-only on its own, GitHub requires it.
@@ -35,10 +35,10 @@ On the page of the app:
 - at the bottom, under Private keys, **Generate a private key**: the browser downloads a `.pem`
   file. It is the only copy; keep it out of the repository.
 
-### 3. Install it on Battlewise only
+### 3. Install it on Foelore only
 
 Still on the page of the app, **Install App** in the menu on the left, then **Install** next to your
-account, **Only select repositories**, pick **Battlewise**, **Install**.
+account, **Only select repositories**, pick **Foelore**, **Install**.
 
 GitHub then shows the installation's settings, at an address like
 `https://github.com/settings/installations/12345678`: the number at the end is the **installation
@@ -46,7 +46,7 @@ id**; note it.
 
 ### 4. Give them to Vercel
 
-In Vercel, the `battlewise` project, Settings › **Environment Variables**, add three variables:
+In Vercel, the `foelore` project, Settings › **Environment Variables**, add three variables:
 
 | Name                         | Value                                                             |
 | ---------------------------- | ----------------------------------------------------------------- |

@@ -1,12 +1,12 @@
-# Battlewise
+# Foelore
 
 A mobile-first web app that works offline (PWA) and tells you, in two seconds and next to the game,
 how to take each creature with your gear: whether to block, parry or dodge each of its attacks, and
 what it costs you. In French and English.
 
-Open it at [battlewise-valheim.vercel.app](https://battlewise-valheim.vercel.app) and install it from
-the browser, on a phone or a desktop. Work is tracked on the
-[Battlewise board](https://github.com/users/Merkur39/projects/4).
+Open it at [foelore.vercel.app](https://foelore.vercel.app) and install it from the browser, on a
+phone or a desktop. Work is tracked on the [Foelore board](https://github.com/users/Merkur39/projects/4).
+It was called Battlewise until 1.9.0.
 
 ## What it does
 
@@ -24,7 +24,7 @@ It starts from the creature, not from a number: in the game, you never see how m
 A number or a name that does not match the game, a bug, an idea: report it from the app, under a
 creature's attacks, under a verdict or in Settings › About. It becomes a public issue at once, with
 what the app showed, its version and your setup, and no account is needed; offline, it leaves when
-the network is back. Or [open an issue](https://github.com/Merkur39/Battlewise/issues/new/choose)
+the network is back. Or [open an issue](https://github.com/Merkur39/Foelore/issues/new/choose)
 and pick its form. French is welcome.
 
 Every report lands in the Inbox of the [board](https://github.com/users/Merkur39/projects/4),
@@ -33,7 +33,7 @@ The Inbox is emptied every week: each report is planned, answered, or closed as 
 won't fix, with a word saying why.
 
 An attack name changes only with a source: the game, or the Valheim wiki. Where neither names an
-attack, Battlewise names it, and a report that only suggests another name is closed as won't fix.
+attack, Foelore names it, and a report that only suggests another name is closed as won't fix.
 
 ## Requirements
 
@@ -87,13 +87,13 @@ game names no monster attack, except those made with a player's weapon: the othe
 `tools/extract/curation.json`, each with its source. The app ships numbers and names only, no game
 art, and the decompiled game code used to check the rules is never committed.
 
-Battlewise is a fan project, not affiliated with Iron Gate or Coffee Stain.
+Foelore is a fan project, not affiliated with Iron Gate or Coffee Stain.
 
 ## Licence
 
 Copyright © 2026 Merkur39.
 
-Battlewise is free software: you can redistribute it and/or modify it under the terms of the
+Foelore is free software: you can redistribute it and/or modify it under the terms of the
 [GNU General Public License](LICENSE) as published by the Free Software Foundation, either version 3
 of the License, or (at your option) any later version. It is distributed in the hope that it will be
 useful, but without any warranty.

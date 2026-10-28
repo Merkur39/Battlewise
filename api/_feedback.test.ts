@@ -52,7 +52,7 @@ const crash: Report = {
     message: "TypeError: Cannot read properties of undefined (reading 'hits')",
     stack: [
       "TypeError: Cannot read properties of undefined (reading 'hits')",
-      '    at attackDamage (https://battlewise.test/assets/index.js:1:48211)',
+      '    at attackDamage (https://foelore.test/assets/index.js:1:48211)',
       '    at ```Sheet``` @octocat (index.js:1:2)',
     ].join('\n'),
   },
@@ -278,10 +278,10 @@ const calls = (fetch: ReturnType<typeof github>, method: string, path: string) =
     .map(([input, init]) => ({ url: urlOf(input), init }))
     .filter(({ url, init }) => (init?.method ?? 'GET') === method && url.pathname === path)
 
-const ISSUES = '/repos/Merkur39/Battlewise/issues'
+const ISSUES = '/repos/Merkur39/Foelore/issues'
 
 const post = (body: string, type = 'application/json') =>
-  new Request('https://battlewise.test/api/feedback', {
+  new Request('https://foelore.test/api/feedback', {
     method: 'POST',
     headers: { 'Content-Type': type },
     body,
@@ -377,7 +377,7 @@ describe('handle', () => {
 
   it('takes POST only', async () => {
     const fetch = github()
-    const response = await handle(new Request('https://battlewise.test/api/feedback'), {
+    const response = await handle(new Request('https://foelore.test/api/feedback'), {
       env,
       fetch,
       now,

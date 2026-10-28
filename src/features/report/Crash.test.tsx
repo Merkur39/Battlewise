@@ -68,9 +68,7 @@ describe('When a creature sheet fails', () => {
     expect(screen.getByRole('heading', { name: 'Cette fiche a planté' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Retour' })).toBeInTheDocument()
     expect(
-      screen.getByText(
-        'Le reste de Battlewise marche : change de monstre, ou passe à la Simulation.',
-      ),
+      screen.getByText('Le reste de Foelore marche : change de monstre, ou passe à la Simulation.'),
     ).toBeInTheDocument()
 
     failing.sheet = false
@@ -128,7 +126,7 @@ describe('When the frame of every screen fails', () => {
     failing.frame = true
     renderApp('#/bestiary/blackForest/Troll', sender, true)
 
-    expect(screen.getByRole('heading', { name: 'Battlewise a planté' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Foelore a planté' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Recharger' })).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Envoyer le rapport' }))

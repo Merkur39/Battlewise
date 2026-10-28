@@ -158,7 +158,7 @@ describe('Settings', () => {
 
     const dialog = await openSettings(user)
 
-    expect(dialog).toHaveTextContent(`Battlewise ${version}`)
+    expect(dialog).toHaveTextContent(`Foelore ${version}`)
   })
 
   it('links to its source code and licence, in a new tab', async () => {
@@ -168,7 +168,7 @@ describe('Settings', () => {
     const dialog = await openSettings(user)
 
     const source = within(dialog).getByRole('link', { name: 'Code source et licence GitHub' })
-    expect(source).toHaveAttribute('href', 'https://github.com/Merkur39/Battlewise')
+    expect(source).toHaveAttribute('href', 'https://github.com/Merkur39/Foelore')
     expect(source).toHaveAttribute('target', '_blank')
     expect(source).toHaveAttribute('rel', 'noopener')
   })

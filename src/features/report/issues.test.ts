@@ -20,12 +20,9 @@ describe('fetchIssueState', () => {
     const fetch = github(200, { number: 48, state: 'closed', state_reason: 'completed' })
 
     await expect(fetchIssueState(48)).resolves.toEqual({ state: 'closed', reason: 'completed' })
-    expect(fetch).toHaveBeenCalledWith(
-      'https://api.github.com/repos/Merkur39/Battlewise/issues/48',
-      {
-        headers: { Accept: 'application/vnd.github+json' },
-      },
-    )
+    expect(fetch).toHaveBeenCalledWith('https://api.github.com/repos/Merkur39/Foelore/issues/48', {
+      headers: { Accept: 'application/vnd.github+json' },
+    })
   })
 
   it('reads an open issue, and a reason it does not know as none', async () => {

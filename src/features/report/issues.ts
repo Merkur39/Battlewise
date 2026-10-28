@@ -1,8 +1,8 @@
 import type { KeyValueStorage } from '@/app/store'
 import type { IssueState } from './loop'
 
-const ISSUES = 'https://api.github.com/repos/Merkur39/Battlewise/issues'
-export const ISSUES_KEY = 'battlewise-issues'
+const ISSUES = 'https://api.github.com/repos/Merkur39/Foelore/issues'
+export const ISSUES_KEY = 'foelore-issues'
 
 const REASONS = ['completed', 'not_planned', 'duplicate'] as const
 

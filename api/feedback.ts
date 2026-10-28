@@ -25,7 +25,7 @@ export const LIMITS = {
   body: 32_000,
 } as const
 
-const REPOSITORY = 'Merkur39/Battlewise'
+const REPOSITORY = 'Merkur39/Foelore'
 const GITHUB = 'https://api.github.com'
 const SCREENS = [
   'creature',
@@ -166,7 +166,8 @@ export interface Issue {
 }
 
 /** Where the next report on the same line of the same creature finds the issue, hidden in its body;
- * none for a report that names no line. Its ids are the validated ones: nothing in them closes it. */
+ * none for a report that names no line. Its ids are the validated ones: nothing in them closes it.
+ * It keeps the app's first name, Battlewise: the issues opened before the rename bear it. */
 function markOf({ kind, line, context }: Report): string | null {
   return kind === 'data' && line?.id !== undefined && context.creature !== undefined
     ? `<!-- battlewise-line: ${context.creature}/${line.id} -->`
@@ -259,7 +260,7 @@ function appToken(appId: string, privateKey: string, now: number): string {
 const headers = (token: string) => ({
   Accept: 'application/vnd.github+json',
   Authorization: `Bearer ${token}`,
-  'User-Agent': 'battlewise-reports',
+  'User-Agent': 'foelore-reports',
   'X-GitHub-Api-Version': '2022-11-28',
 })
 

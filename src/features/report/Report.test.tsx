@@ -60,7 +60,7 @@ describe('Reporting', () => {
     await user.click(inSheet().getByText('Joint au signalement'))
 
     const attached = inSheet().getByRole('group', { name: 'Joint au signalement' })
-    expect(attached).toHaveTextContent(`Battlewise ${__APP_VERSION__}`)
+    expect(attached).toHaveTextContent(`Foelore ${__APP_VERSION__}`)
     expect(attached).toHaveTextContent('Bouclier en argent')
     expect(attached).toHaveTextContent('Frappe au sol')
     expect(attached).toHaveTextContent("Rien d'autre : ni adresse IP, ni identifiant.")
@@ -107,7 +107,7 @@ describe('Reporting', () => {
     expect(await inSheet().findByText('Refusé par le serveur')).toBeInTheDocument()
     expect(inSheet().getByRole('link', { name: /^Ouvrir un ticket sur GitHub/ })).toHaveAttribute(
       'href',
-      'https://github.com/Merkur39/Battlewise/issues/new/choose',
+      'https://github.com/Merkur39/Foelore/issues/new/choose',
     )
   })
 

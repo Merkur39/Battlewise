@@ -45,7 +45,7 @@ export interface AppState {
   /** The version the app ran last on this device: after an update, what it fixed is told once. Null
    * before the first launch. */
   readonly seenVersion: string | null
-  /** Battlewise offered to install itself, once, on a browser that can: the offer stays in Settings. */
+  /** The app offered to install itself, once, on a browser that can: the offer stays in Settings. */
   readonly installOffered: boolean
 }
 
@@ -61,7 +61,7 @@ export const DEFAULT_STATE: AppState = {
   installOffered: false,
 }
 
-export const STORAGE_KEY = 'battlewise'
+export const STORAGE_KEY = 'foelore'
 
 export type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem'>
 

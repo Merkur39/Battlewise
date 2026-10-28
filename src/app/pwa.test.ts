@@ -14,8 +14,8 @@ const tokenOf = (theme: string, token: string) => {
 describe('the web app manifest', () => {
   it('names the app the same in every language and opens it on its own', () => {
     expect(manifest).toMatchObject({
-      name: 'Battlewise',
-      short_name: 'Battlewise',
+      name: 'Foelore',
+      short_name: 'Foelore',
       display: 'standalone',
       start_url: '.',
       scope: '.',
