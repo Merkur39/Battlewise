@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipement — piste A</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:dark}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+input,select{font:inherit;color:inherit;margin:0}
+a{color:#8EBDE3}a:hover{color:#B5D4F0}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 40px; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 28px">
+  <header style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 26px; font-weight: 500">A · Tout dans Ton équipement</h1>
+    <p style="margin: 0; max-width: 1240px; font-size: 15px; line-height: 1.5; color: #97A5AA">Les pièces et les effets en cours se déclarent au même endroit, Ton équipement : une section Armure (les quatre pièces et leur niveau, ou l'armure tapée), une section Effets en cours (des cases à cocher, groupées comme le jeu les donne). «&nbsp;Valider&nbsp;» enregistre tout. Le bouton du contexte compte les effets actifs, et rappelle au lancement suivant ceux restés cochés.</p>
+    <p style="margin: 0; max-width: 1240px; font-size: 13px; line-height: 1.5; color: #7D8B91">Pour : un seul endroit, un seul Valider ; la première arrivée reprend la section Armure telle quelle (sans les effets). Contre : un long formulaire sur téléphone ; changer d'effet en plein combat, c'est ouvrir, défiler, cocher, valider ; un effet reste coché tant qu'on ne le décoche pas, plus longtemps que dans le jeu (d'où le rappel). EN : «&nbsp;Armor&nbsp;», «&nbsp;By piece&nbsp;», «&nbsp;Total&nbsp;», «&nbsp;Effects on&nbsp;», «&nbsp;Guardian powers&nbsp;», «&nbsp;Drinks&nbsp;», «&nbsp;Trinket&nbsp;», «&nbsp;Still on?&nbsp;», «&nbsp;Keep&nbsp;», «&nbsp;Clear&nbsp;».</p>
+  </header>
+  <div style="display: flex; gap: 32px; align-items: flex-start">
+    <div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">TON ÉQUIPEMENT · ARMURE</span><div style="position: relative; flex: none; width: 390px; height: 744px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214; display: flex; flex-direction: column"><header style="flex: none; display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #2C383D">
+      <a href="#" aria-label="Fermer sans enregistrer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+      <h2 style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Ton équipement</h2>
+    </header>
+    <main style="position: relative; flex: 1; min-height: 0; overflow: hidden">
+      <div style="margin-top: -12px; padding: 16px; display: flex; flex-direction: column; gap: 18px">
+      <section aria-labelledby="a-enc" style="flex: none; border: 1px solid #2C383D; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; line-height: 14px">
+          <h3 id="a-enc" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #97A5AA">CE QUE TU ENCAISSES</h3>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">BARRE VIDE</span>
+        </div>
+        <div aria-hidden="true" style="display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; color: #97A5AA"><span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #2E7A4B"></span>sans tituber</span><span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #B5760C"></span>tient</span><span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #7A2A24"></span>ne passe pas</span></div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; line-height: 18px">
+            <span style="font-size: 12px; white-space: nowrap">Bloquer <span style="font-family: 'IBM Plex Mono', monospace; color: #7D8B91">· VD 43,2</span></span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; white-space: nowrap; color: #97A5AA"><span style="color: #6CC08A; font-size: 14px">88</span> · <span style="color: #D9A043; font-size: 14px">99</span></span>
+          </div>
+          <div style="height: 10px; display: flex; border-radius: 2px; overflow: hidden"><span style="width: 44.35%; background: #2E7A4B"></span><span style="width: 5.25%; min-width: 2px; background: #B5760C"></span><span style="flex: 1; background: #7A2A24"></span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; line-height: 18px">
+            <span style="font-size: 12px; white-space: nowrap">Parer <span style="font-family: 'IBM Plex Mono', monospace; color: #7D8B91">· VD 108</span></span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; white-space: nowrap; color: #97A5AA"><span style="color: #6CC08A; font-size: 14px">140</span> · <span style="color: #D9A043; font-size: 14px">155</span></span>
+          </div>
+          <div style="height: 10px; display: flex; border-radius: 2px; overflow: hidden"><span style="width: 70.05%; background: #2E7A4B"></span><span style="width: 7.7%; min-width: 2px; background: #B5760C"></span><span style="flex: 1; background: #7A2A24"></span></div>
+        </div>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; color: #7D8B91">TITUBE À 56 (40&nbsp;% DE 140 PV) · ARMURE 49</span>
+      </section>
+      <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">OBJET QUI BLOQUE</span>
+        <div style="display: flex; gap: 8px">
+          <div style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 48px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; padding: 0 12px; background: #151C1F">
+            <span style="flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Bouclier en fer</span>
+            <span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA; border: 1px solid #2C383D; border-radius: 3px; padding: 1px 6px">TARGE · ×2,5</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#97A5AA" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div role="group" aria-label="Niveau" style="flex: none; display: flex; align-items: center; height: 48px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; background: #151C1F">
+            <button type="button" aria-label="Niveau inférieur" style="flex: none; width: 30px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+            <span style="min-width: 30px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px">N3</span>
+            <button type="button" aria-label="Niveau supérieur" style="flex: none; width: 30px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+        </div>
+      </div>
+      <section aria-labelledby="a-armor" style="flex: none; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 36px">
+          <h3 id="a-armor" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">ARMURE</h3>
+          <div role="group" aria-label="Armure" style="display: flex; height: 36px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; overflow: hidden">
+            <button type="button" aria-pressed="true" style="padding: 0 12px; font-size: 13px; background: #8EBDE3; color: #0D1214; font-weight: 500; cursor: default">Par pièce</button><button type="button" aria-pressed="false" style="padding: 0 14px; font-size: 13px; color: #97A5AA; border-left: 1px solid #2C383D; cursor: default">Total</button>
+          </div>
+        </div>
+        <div style="border: 1px solid #2C383D; border-radius: 4px; overflow: hidden; background: #151C1F">
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; padding: 0 10px 0 12px; border-bottom: 1px solid #1F2A2E; ">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 13px">CASQUE</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 18px"><span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Casque en fer</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </span>
+            <span role="group" aria-label="Niveau" style="flex: none; display: flex; align-items: center; height: 32px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px">
+              <button type="button" aria-label="Niveau inférieur" disabled style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #7D8B91; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+              <span style="min-width: 26px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N1</span>
+              <button type="button" aria-label="Niveau supérieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            </span>
+            <span style="flex: none; width: 22px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">14</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; padding: 0 10px 0 12px; border-bottom: 1px solid #1F2A2E; ">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 13px">PLASTRON</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 18px"><span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Cuirasse de racines</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </span>
+            <span role="group" aria-label="Niveau" style="flex: none; display: flex; align-items: center; height: 32px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px">
+              <button type="button" aria-label="Niveau inférieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+              <span style="min-width: 26px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N4</span>
+              <button type="button" aria-label="Niveau supérieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            </span>
+            <span style="flex: none; width: 22px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">14</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; padding: 0 10px 0 12px; border-bottom: 1px solid #1F2A2E; ">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 13px">JAMBIÈRES</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 18px"><span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Jambières en plaques de fer</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </span>
+            <span role="group" aria-label="Niveau" style="flex: none; display: flex; align-items: center; height: 32px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px">
+              <button type="button" aria-label="Niveau inférieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+              <span style="min-width: 26px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N4</span>
+              <button type="button" aria-label="Niveau supérieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            </span>
+            <span style="flex: none; width: 22px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">20</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; padding: 0 10px 0 12px; ">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+              <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 13px">CAPE</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 18px"><span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Cape en fourrure de loup</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#97A5AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </span>
+            <span role="group" aria-label="Niveau" style="flex: none; display: flex; align-items: center; height: 32px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px">
+              <button type="button" aria-label="Niveau inférieur" disabled style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #7D8B91; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+              <span style="min-width: 26px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N1</span>
+              <button type="button" aria-label="Niveau supérieur" style="flex: none; width: 28px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            </span>
+            <span style="flex: none; width: 22px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">1</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px">
+          <span style="flex: none; font-size: 15px; line-height: 22px; margin-right: 2px">Armure <span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px">49</span></span>
+          <span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; box-sizing: border-box; padding: 0 7px; border-radius: 3px; border: 1px solid #2C383D; color: #97A5AA; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase; white-space: nowrap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg><span>Perforant · <span style="font-weight: 500">Résistant ×0,5</span></span></span>
+          <span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; box-sizing: border-box; padding: 0 7px; border-radius: 3px; border: 1px solid #2C383D; color: #97A5AA; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase; white-space: nowrap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg><span>Glace · <span style="font-weight: 500">Résistant ×0,5</span></span></span>
+          <span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; box-sizing: border-box; padding: 0 7px; border-radius: 3px; border: 1px solid #97A5AA; color: #E2E8E8; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase; white-space: nowrap"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg><span>Feu · <span style="font-weight: 500">Faible ×1,5</span></span></span>
+        </div>
+        <span style="font-size: 12px; line-height: 16px; color: #7D8B91">Total : l'armure lue dans l'inventaire, sans résistance.</span>
+      </section>
+      <div style="flex: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px; white-space: nowrap">COMPÉTENCE BLOCAGE</span>
+          <div style="display: flex; align-items: center; gap: 10px; height: 44px"><input type="range" min="0" max="100" value="16" aria-label="Compétence Blocage" style="flex: 1; min-width: 0; margin: 0; accent-color: #8EBDE3"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; min-width: 3ch; text-align: right">16</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">PV MAX</span>
+          <div style="display: flex; align-items: center; height: 44px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; background: #151C1F">
+            <button type="button" aria-label="Moins de PV" style="flex: none; width: 44px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+            <span style="flex: 1; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 17px">140</span>
+            <button type="button" aria-label="Plus de PV" style="flex: none; width: 44px; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #E2E8E8; cursor: default"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+        </div>
+      </div>
+      </div>
+      <span aria-hidden="true" style="position: absolute; top: 5px; right: 2px; width: 3px; height: 242px; border-radius: 2px; background: #2C383D"></span>
+    </main>
+    <footer style="flex: none; padding: 12px 16px 24px; border-top: 1px solid #2C383D">
+      <a href="#" style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; background: #8EBDE3; color: #0D1214; font-weight: 500; text-decoration: none">Valider</a>
+    </footer></div></div><div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">TON ÉQUIPEMENT · EFFETS EN COURS</span><div style="position: relative; flex: none; width: 390px; height: 744px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214; display: flex; flex-direction: column"><header style="flex: none; display: flex; align-items: center; gap: 4px; padding: 6px 16px 6px 4px; border-bottom: 1px solid #2C383D">
+      <a href="#" aria-label="Fermer sans enregistrer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+      <h2 style="margin: 0; flex: 1; font-size: 18px; font-weight: 500">Ton équipement</h2>
+    </header>
+    <main style="position: relative; flex: 1; min-height: 0; overflow: hidden">
+      <section aria-labelledby="a-effects" style="padding: 4px 16px 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; line-height: 14px; margin-bottom: -4px">
+          <h3 id="a-effects" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #97A5AA">EFFETS EN COURS</h3>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">2 ACTIFS</span>
+        </div>
+        <div role="group" style="display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; line-height: 16px"><span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">POUVOIRS · 5 MIN</span><span style="font-size: 12px; line-height: 16px; color: #7D8B91; white-space: nowrap">Le tien et ceux du groupe à moins de 10 m</span></div>
+          <div style="border: 1px solid #2C383D; border-radius: 4px; overflow: hidden; background: #151C1F">
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 4px 12px; border-bottom: 1px solid #1F2A2E; background: #1D3344">
+            <input type="checkbox" checked style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #8EBDE3; font-weight: 500">Masse-d'Os</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #97A5AA; white-space: nowrap">Contondant, Coupant et Perforant ×0,75</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #97A5AA; white-space: nowrap">bloquer : +5 endurance, parer : +10</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Moder</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Glace · Résistant ×0,5</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Yagluth</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Foudre · Résistant ×0,5</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">La Reine</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Poison · Résistant ×0,5</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Pouvoir de Fader</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Feu · Résistant ×0,5 · stagger reçu ×0,5</span></span>
+          </label>
+          </div>
+        </div>
+        <div role="group" style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">BOISSONS</span>
+          <div style="border: 1px solid #2C383D; border-radius: 4px; overflow: hidden; background: #151C1F">
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 4px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Hydromel des berserkir</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Contondant, Coupant et Perforant ×1,5</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">endurance de blocage −80 % · 20 s</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Vin d'orge de résistance au feu</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Feu · Résistant ×0,5 · 10 min</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Hydromel de résistance au gel</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Glace · Résistant ×0,5 · 10 min</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; background: transparent">
+            <input type="checkbox" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Hydromel de résistance au poison</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Poison · Très résistant ×0,25 · 10 min</span></span>
+          </label>
+          </div>
+        </div>
+        <div role="group" style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; line-height: 14px">BIBELOT · JAUGE PLEINE</span>
+          <div style="border: 1px solid #2C383D; border-radius: 4px; overflow: hidden; background: #151C1F">
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="radio" name="bibelot" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Aucun</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">jauge pas pleine, ou pas de bibelot</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: #1D3344">
+            <input type="radio" name="bibelot" checked style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #8EBDE3; font-weight: 500">Broche en fer</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #97A5AA; white-space: nowrap">Armure +20 · 30 s · jauge de 65</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 5px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="radio" name="bibelot" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Perce-cou</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Armure +20 · 30 s · jauge de 65</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 4px 12px; border-bottom: 1px solid #1F2A2E; background: transparent">
+            <input type="radio" name="bibelot" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Cœur de cristal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">Contondant, Coupant et Perforant ×0,75</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">50 s · jauge de 80</span></span>
+          </label>
+          <label style="display: flex; align-items: flex-start; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 4px 12px; background: transparent">
+            <input type="radio" name="bibelot" style="flex: none; width: 18px; height: 18px; margin: 0; accent-color: #8EBDE3">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; color: #E2E8E8">Voile d'ombre</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">VD en parade ×1,5 · 120 s · jauge de 60</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 15px; color: #7D8B91; white-space: nowrap">endurance de blocage −50 %</span></span>
+          </label>
+          </div>
+        </div>
+        <span style="font-size: 12px; line-height: 16px; color: #7D8B91">Pour un même type de dégâts, rien ne se multiplie : la meilleure résistance l'emporte, et une résistance l'emporte toujours sur une faiblesse.</span>
+      </section>
+      <span aria-hidden="true" style="position: absolute; top: 282px; right: 2px; width: 3px; height: 242px; border-radius: 2px; background: #2C383D"></span>
+    </main>
+    <footer style="flex: none; padding: 12px 16px 24px; border-top: 1px solid #2C383D">
+      <a href="#" style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 4px; background: #8EBDE3; color: #0D1214; font-weight: 500; text-decoration: none">Valider</a>
+    </footer></div></div><div style="flex: none; width: 390px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">BESTIAIRE · AU LANCEMENT SUIVANT</span><div style="position: relative; flex: none; width: 390px; height: 744px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 8px; overflow: hidden; background: #0D1214; display: flex; flex-direction: column"><header style="flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 16px 4px">
+      <span style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>Foelore</span>
+      <button type="button" aria-haspopup="dialog" aria-label="Ton contexte : VD 43,2, 2 effets en cours, ×1" style="flex: none; height: 36px; display: flex; align-items: center; gap: 6px; padding: 0 8px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #E2E8E8; cursor: default">
+        <span style="display: flex; align-items: center; gap: 3px; white-space: nowrap"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#8EBDE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>VD 43,2</span>
+        <span style="display: flex; align-items: center; gap: 3px; white-space: nowrap"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#E2E8E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 3l2.1 6.9L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.1z"></path></svg>2 effets</span>
+        <span style="display: flex; align-items: center; gap: 3px; white-space: nowrap"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#8EBDE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>×1</span>
+      </button>
+      <a href="#" aria-label="Réglages" style="flex: none; width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center; color: #97A5AA"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg></a>
+    </header>
+    <main style="flex: 1; min-height: 0; padding: 4px 16px 12px; display: flex; flex-direction: column; gap: 12px">
+      <div role="status" style="flex: none; display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid #2C383D; border-radius: 6px; background: #151C1F">
+        <div style="display: flex; align-items: flex-start; gap: 8px">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#E2E8E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M12 3l2.1 6.9L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.1z"></path></svg>
+          <p style="margin: 0; font-size: 14px; line-height: 20px">Effets cochés depuis 2&nbsp;h : <span style="white-space: nowrap">Masse-d'Os</span>, <span style="white-space: nowrap">Broche en fer</span>. Toujours en cours&nbsp;?</p>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <button type="button" style="flex: 1; height: 40px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; font-size: 14px; color: #E2E8E8; cursor: default">Garder</button>
+          <button type="button" style="flex: 1; height: 40px; border-radius: 4px; font-size: 14px; font-weight: 500; background: #8EBDE3; color: #0D1214; cursor: default">Retirer</button>
+        </div>
+      </div>
+      <a href="#" aria-label="Rechercher dans tous les biomes" style="flex: none; display: flex; align-items: center; gap: 8px; height: 44px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; padding: 0 12px; font-size: 15px; color: #7D8B91; text-decoration: none"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7D8B91" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Monstre ou attaque, tous biomes</a>
+      <div role="group" aria-label="Biome" style="flex: none; display: flex; align-items: center; background: #151C1F; border-radius: 6px">
+        <button type="button" aria-label="Biome précédent : Marécages" style="width: 48px; height: 52px; display: flex; align-items: center; justify-content: center; color: #97A5AA; cursor: default"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px">
+          <span style="font-size: 16px; font-weight: 500">Montagne</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">BIOME 4 SUR 9 · 11 CRÉATURES</span>
+        </div>
+        <button type="button" aria-label="Biome suivant : Plaines" style="width: 48px; height: 52px; display: flex; align-items: center; justify-content: center; color: #97A5AA; cursor: default"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+      </div>
+      <div style="flex: 1; min-height: 0; display: flex; flex-direction: column">
+        <div style="flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid #2C383D">
+          <span style="font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">COMMENT LE PRENDRE</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">AVEC TON ÉQUIPEMENT</span>
+        </div>
+        <div aria-label="Créatures du biome" style="flex: 1; min-height: 0; overflow: hidden">
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Squelette</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">40 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6CC08A"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>Tu bloques tout sans tituber</span></span>
+            </a>
+          </li>
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Loup</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">80 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6CC08A"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>Tu bloques tout sans tituber</span></span>
+            </a>
+          </li>
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Fenring</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">300 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : tu titubes" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #B5760C; color: #D9A043"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #D9A043"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg><span>Pare-le : en bloquant, tu titubes</span></span>
+            </a>
+          </li>
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Cultiste</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">200 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : imparable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #7A2A24; color: #E36B5E"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : imparable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #7A2A24; color: #E36B5E"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #E36B5E"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg><span>Esquive «&nbsp;Flammes&nbsp;», bloque le reste</span></span>
+            </a>
+          </li>
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Warg</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">50 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6CC08A"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>Tu bloques tout sans tituber</span></span>
+            </a>
+          </li>
+          <li style="border-bottom: 1px solid #1F2A2E">
+            <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 64px; padding: 6px 0; color: #E2E8E8; text-decoration: none">
+              <span style="display: flex; align-items: center; gap: 12px">
+                <span style="flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 15px">Chauve souris</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">10 PV</span></span>
+                <span style="display: flex; gap: 6px"><span role="img" aria-label="Blocage : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg></span><span role="img" aria-label="Parade : tient" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg></span><span role="img" aria-label="Esquive : esquivable" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid #2E7A4B; color: #6CC08A"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg></span></span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6CC08A"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>Tu bloques tout sans tituber</span></span>
+            </a>
+          </li>
+        </ul>
+        </div>
+      </div>
+      <div style="flex: none; display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid #2C383D">
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: #97A5AA">
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>blocage</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path><path d="M13 7.5l-3 4.5h4l-3 4.5"></path></svg>parade</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 14.5-6.5"></path><path d="M19 4.5v5h-5"></path><path d="M3 20h8"></path></svg>esquive</span>
+          <span><span style="color: #6CC08A">tient</span> · <span style="color: #D9A043">tu titubes</span> · <span style="color: #E36B5E">ne passe pas</span></span>
+        </div>
+      </div>
+    </main>
+    <nav aria-label="Navigation" style="flex: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #2C383D; padding: 6px 0 14px">
+      <a href="#" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; text-decoration: none; color: #8EBDE3"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire</a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; text-decoration: none; color: #7D8B91"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation</a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; text-decoration: none; color: #7D8B91"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal</a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; justify-content: center; font-size: 11px; text-decoration: none; color: #7D8B91"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo</a>
+    </nav></div></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

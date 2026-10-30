@@ -889,6 +889,72 @@
       "title": "Le texte · FR et EN",
       "page": "mentions"
     },
+    "Equipement-Auj.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Aujourd'hui · une armure tapée, aucune résistance",
+      "page": "equipement"
+    },
+    "Equipement-A.dc.html": {
+      "x": 0,
+      "y": 1120,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste A · Tout dans Ton équipement",
+      "page": "equipement"
+    },
+    "Equipement-B.dc.html": {
+      "x": 0,
+      "y": 2240,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste B · Les pièces dans Ton équipement, les effets d'un geste",
+      "page": "equipement"
+    },
+    "Equipement-C.dc.html": {
+      "x": 0,
+      "y": 3360,
+      "w": 1440,
+      "h": 1000,
+      "title": "Piste C · Les pièces, et les effets en « et si… »",
+      "page": "equipement"
+    },
+    "Equipement-C2.dc.html": {
+      "x": 0,
+      "y": 4480,
+      "w": 2158,
+      "h": 1000,
+      "title": "Piste C · itération 1 · ce que tu emportes, et « Ce qui t'aiderait » en modale",
+      "page": "equipement"
+    },
+    "Equipement-C3.dc.html": {
+      "x": 0,
+      "y": 5600,
+      "w": 3002,
+      "h": 1080,
+      "title": "Piste C · itération 2 · « Ce qui t'aiderait » en plein écran, à essayer",
+      "page": "equipement",
+      "is_interactive": true
+    },
+    "Equipement-C3-Avec.dc.html": {
+      "x": 0,
+      "y": 6800,
+      "w": 1330,
+      "h": 1000,
+      "title": "« Avec » : trois façons de montrer ce qui est appliqué · C retenue",
+      "page": "equipement"
+    },
+    "Equipement-C4.dc.html": {
+      "x": 0,
+      "y": 7920,
+      "w": 2580,
+      "h": 1060,
+      "title": "Piste C · itération 3 · tes effets temporaires, dépliés sur place",
+      "is_interactive": true,
+      "page": "equipement"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -4032,6 +4098,14 @@
       "maxW": 1440,
       "page": "mentions"
     },
+    "equipement-row1": {
+      "kind": "title1",
+      "text": "Pièces d'armure et effets en cours",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "equipement"
+    },
     "m-row1-braise": {
       "kind": "title1",
       "text": "Bestiaire",
@@ -4765,6 +4839,14 @@
     "Mentions-B.dc.html",
     "Mentions-C.dc.html",
     "Mentions-Texte.dc.html",
+    "Equipement-Auj.dc.html",
+    "Equipement-A.dc.html",
+    "Equipement-B.dc.html",
+    "Equipement-C.dc.html",
+    "Equipement-C2.dc.html",
+    "Equipement-C3.dc.html",
+    "Equipement-C3-Avec.dc.html",
+    "Equipement-C4.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -5150,6 +5232,10 @@
     {
       "id": "mentions",
       "name": "Mentions · pistes"
+    },
+    {
+      "id": "equipement",
+      "name": "Équipement · pistes"
     },
     {
       "id": "braise",
