@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v161** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v171** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -21,7 +21,8 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   sheet, animated; the « Ton contexte » board of Origine shows it open. Made by hand as well.
 - Page **Compétence** (`Competence`): the Blocking skill field of Ton équipement on a 360 px phone, as it
   overflowed, and two ways to keep its label on one line; track A (the value at the end of the slider) is
-  the one carried into the Ton équipement boards. Made by hand as well.
+  the one carried into the Ton équipement boards, until the owner had the slider replaced by a field with − and +, like
+  Niveau and PV max (v164). Made by hand as well.
 - Page **Encaisses** (`Encaisses`): the « Ce que tu encaisses » card on a 360 px phone, as it jumped, and two
   steady layouts; track B (the legend under the title, numbers alone on each guard's line) is the one
   carried into the phone Ton équipement board. Made by hand as well.
@@ -135,7 +136,19 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   emportes », one row each like the trinket and the power, and « Ajouter une boisson »; a set shows only once complete,
   by its game name, and only the four whose bonus changes a fight (none on phone 1, so « Ensemble : aucun complet » is
   gone; phone 1 bis wears Fenris: « ENSEMBLE COMPLET », Bénédiction de Fenris, « Feu ×0,5 », under the resistances it
-  joins). Approved by the owner on 2026-10-30 (v161): `Equipement-C4` is the spec for #62 and #63.
+  joins). Approved by the owner on 2026-10-30 (v161): `Equipement-C4` is the spec for #62 and #63. Carried into Origine
+  (v163): `Profil`, `Desktop-Equipement` and the first arrival's question 2 (`Arrivee-Equipement`,
+  `Desktop-Arrivee-Equipement`) take the pieces and « Ce que tu emportes » in place of the typed armor (iron level 1
+  and the wolf cape level 3 for armor 45, frost resistant, a Broche en fer, Masse-d'Os and the frost mead carried;
+  bronze for armor 28 at the first arrival, nothing carried). `Monstre`, the sheet of `Desktop-Bestiaire`, `Main`
+  and `Desktop-Combat` (an attack only: a free value has no type to resist) gain the card « Avec tes effets
+  temporaires », the frost mead greyed (« Ne change rien : pas de glace »), what is on counted in their formulas as
+  the engine counts it: armor +20, blunt ×0,75 past the shield, Bonemass's block stamina (+5 blocking, +10 for a
+  parry that holds). With both on, every parry holds while the ground slam still breaks the block: the sheet's
+  advice reads « Pare-le : le blocage cède », the wording of the app's fix for a block that breaks. The Bestiaire boards, and the search boards
+  `build_bestiary_search.py` writes, read « SANS TES EFFETS TEMPORAIRES ». In the four forms (v170), the item that
+  blocks becomes « MAIN GAUCHE », one row like a piece (its tag beside the name, its level on the right), just above
+  PIÈCES, with PV MAX and COMPÉTENCE BLOCAGE side by side above it; the torch note and the level note are gone. PIÈCES reads « PIÈCES D'ARMURES » (v171).
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
