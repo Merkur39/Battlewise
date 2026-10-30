@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v132** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v161** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -97,6 +97,45 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   holds the shared copy, French and English. Made by hand as well. Track A is the one chosen, carried into Origine:
   `Mentions` and `Desktop-Mentions` (the page, from Réglages), a « Mentions et crédits » row in `Reglages` between
   Signaler and Code source, and a small button in `Desktop-Reglages`.
+- Page **Équipement · pistes** (`Equipement-Auj`, `Equipement-A` to `Equipement-C`, `Equipement-C2`, `Equipement-C3`,
+  `Equipement-C3-Avec`, `Equipement-C4`): declaring the armor pieces worn
+  (#62) and the temporary effects on (#63), on the owner's fight against Moder (Iron Buckler level 3, Root Harnesk
+  among the pieces, numbers from the app's engine on `src/data/game.json`). Today: the typed armor, no resistance,
+  the bite parried at 5,8 where the game deals 1,4. Three tracks on a phone: everything in Ton équipement (a section
+  for the pieces or the typed armor, one for the effects, checked until unchecked, a reminder at the next launch);
+  the pieces in Ton équipement (four cards, a picker per slot, the typed armor kept as a way out) and the effects as
+  switches in the context sheet that go off at the end of their time in the game; the pieces only, and no effect
+  declared: the creature sheet lists what each effect would change against it, applied to the sheet and the
+  Simulation while one reads them. Made by hand as well (drawn from Profil, Contexte, Monstre and Main). Track C
+  chosen, with changes: `Equipement-C2`, its first iteration, adds what one carries to Ton équipement (trinket,
+  power, drinks), kept out of the verdicts; the creature sheet and the Simulation open « Ce qui t'aiderait » in a
+  bottom sheet (what one carries first, then the others, then what makes it worse), and what is applied holds for
+  the sheet and the Simulation of its attacks until another creature. `Equipement-C3`, the second, is interactive
+  (Play, « Revenir au départ » resets it): seven phones, from Ton équipement and Moder in the Bestiary (« sans tes
+  effets temporaires ») to the sheet, « Ce qui t'aiderait » full page (a bulb, not a sparkle), and the Simulation of
+  the Bite. With nothing applied, the sheet and the Simulation say it in one short line, « Verdicts sans tes effets
+  temporaires », beside the way into « Ce qui t'aiderait » (no card). Each effect shows its name, then its kind and
+  duration; what changes nothing is greyed, without a
+  switch (the owner had the intro and the sentence under each effect taken out: « trop d'info tue l'info »); one
+  trinket at a time; the sections are the creature's (« À double tranchant » for the Berserkir mead); in the
+  Simulation, what is greyed follows its stagger bar; phones 4 to 7 share what is applied. Every state (32 switch
+  states, 4 bars) is computed by the app's engine and model, by `scripts/equipement-c3/` (from that folder:
+  `node --import ./hooks.mjs states.mts`, then `node build_c3.mjs`; `node check_c3.cjs <board>` checks the
+  bindings), which also words what each effect changes (`out/states.json`), kept as a spec though the board no
+  longer shows it. What is applied, on the sheet and in the Simulation, came in three ways (`Equipement-C3-Avec`,
+  static, `build_avec.mjs`): one card, a line of chips, a list; the list (C), a card headed « Avec » with one row
+  per effect (kind, duration, a cross to take it off) and « Ce qui t'aiderait » at its head, is the one carried
+  into `Equipement-C3`. `Equipement-C4`, the third (interactive, six phones, `build_c4.mjs`, `check_c4.cjs`),
+  drops the « Ce qui t'aiderait » screen: on the sheet and in the Simulation, a card « Avec tes effets temporaires »
+  unfolds in place and lists what Ton équipement says one carries (trinket, power, drinks), a switch each, counted at
+  once until another creature; folded, it names what is on, or « Aucun allumé ». Nothing is on on arrival; what
+  changes nothing against the creature is greyed, without a switch, and says so on a third line with its main reason in
+  brief (« Ne change rien : ta cape résiste déjà », « … : pas de feu »; `states.mts` gives each muted row a
+  `brief`); « Les autres » and « À double tranchant » are gone. In Ton équipement, the drinks join « Ce que tu
+  emportes », one row each like the trinket and the power, and « Ajouter une boisson »; a set shows only once complete,
+  by its game name, and only the four whose bonus changes a fight (none on phone 1, so « Ensemble : aucun complet » is
+  gone; phone 1 bis wears Fenris: « ENSEMBLE COMPLET », Bénédiction de Fenris, « Feu ×0,5 », under the resistances it
+  joins). Approved by the owner on 2026-10-30 (v161): `Equipement-C4` is the spec for #62 and #63.
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
