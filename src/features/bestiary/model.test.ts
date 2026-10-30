@@ -77,7 +77,7 @@ describe('assess', () => {
     )
 
     expect(assessment).toMatchObject({ block: 'staggered', parry: 'holds', dodgeable: true })
-    expect(assessment.advice).toEqual({ kind: 'parryAll' })
+    expect(assessment.advice).toEqual({ kind: 'parryAll', block: 'staggered' })
   })
 
   it('lists the attacks of every phase of a boss, the creature first', () => {

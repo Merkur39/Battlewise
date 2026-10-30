@@ -153,7 +153,8 @@ export const fr = {
   advice: {
     unknown: 'Aucune attaque directe',
     blockAll: 'Tu bloques tout sans tituber',
-    parryAll: 'Pare-le : en bloquant, tu titubes',
+    parryAll: (block: 'staggered' | 'broken') =>
+      `Pare-le : ${block === 'broken' ? 'le blocage cède' : 'en bloquant, tu titubes'}`,
     dodgeAll: (rolls: boolean, canParry: boolean) =>
       `${rolls ? 'Esquive' : 'Évite'} tout : même ${canParry ? 'parées' : 'bloquées'}, ses attaques passent`,
     dodgeSome: (rolls: boolean, attacks: readonly string[], rest: 'block' | 'parry') =>

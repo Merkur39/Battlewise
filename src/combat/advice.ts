@@ -26,7 +26,8 @@ export function attackAdvice({ block, parry }: GuardVerdicts): AttackAdvice {
 export type CreatureAdvice =
   | { readonly kind: 'unknown' }
   | { readonly kind: 'blockAll' }
-  | { readonly kind: 'parryAll' }
+  /** `block` says why blocking is not enough: the worst it does among the attacks. */
+  | { readonly kind: 'parryAll'; readonly block: 'staggered' | 'broken' }
   | { readonly kind: 'dodgeAll' }
   /** `dodge` holds the indexes of the attacks no guard takes; `rest` is how to take the others. */
   | {
@@ -44,7 +45,12 @@ export function creatureAdvice(attacks: readonly GuardVerdicts[]): CreatureAdvic
   const restBlocks = attacks.every(
     (attack, index) => dodge.includes(index) || attack.block === 'holds',
   )
-  if (dodge.length === 0) return { kind: restBlocks ? 'blockAll' : 'parryAll' }
+  if (dodge.length === 0) {
+    if (restBlocks) return { kind: 'blockAll' }
+    // A parry holds only against what can be blocked: here the block staggers you, or gives way.
+    const breaks = attacks.some((attack) => attack.block === 'broken')
+    return { kind: 'parryAll', block: breaks ? 'broken' : 'staggered' }
+  }
   if (dodge.length === attacks.length) return { kind: 'dodgeAll' }
   return { kind: 'dodgeSome', dodge, rest: restBlocks ? 'block' : 'parry' }
 }

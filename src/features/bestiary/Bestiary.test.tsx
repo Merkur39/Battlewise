@@ -37,6 +37,14 @@ describe('Bestiary', () => {
     expect(row('Eikthyr')).toHaveTextContent('Boss · 500 PV')
   })
 
+  it('says, where every parry holds, whether blocking staggers you or the block gives way', () => {
+    window.history.replaceState(null, '', '#/bestiary/plains')
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+
+    expect(row('Lox')).toHaveTextContent('Pare-le : en bloquant, tu titubes')
+    expect(row('Ours maudit')).toHaveTextContent('Pare-le : le blocage cède')
+  })
+
   it('moves from biome to biome', async () => {
     const user = userEvent.setup()
     renderWithStore(<App />, { language: 'fr' })
@@ -194,6 +202,16 @@ describe('Bestiary', () => {
     )
   })
 
+  it('says on the sheet that the block gives way, as the Simulation of the attack does', () => {
+    window.history.replaceState(null, '', '#/bestiary/mountain/Dragon')
+    renderWithStore(<App />, {
+      language: 'fr',
+      gear: { ...MOCKUP_GEAR, blocker: 'ShieldIronBuckler', skill: 16, armor: 49 },
+    })
+
+    expect(screen.getByText('Pare-le : le blocage cède')).toBeInTheDocument()
+  })
+
   it('finds a creature or an attack in every biome, and opens its sheet', async () => {
     const user = userEvent.setup()
     renderWithStore(<App />, { language: 'fr' })
@@ -284,6 +302,19 @@ describe('Bestiary', () => {
 
     expect(screen.getByText(/^Trample, blunt, 20 damage\./)).toBeInTheDocument()
     expect(screen.getByText('When running', { exact: false })).toBeInTheDocument()
+  })
+
+  it('says whether blocking staggers you or the block gives way in English too', () => {
+    window.history.replaceState(null, '', '#/bestiary/plains')
+    renderWithStore(<App />, { language: 'en', gear: MOCKUP_GEAR })
+    const creatures = within(screen.getByRole('list', { name: 'Creatures of the biome' }))
+
+    expect(creatures.getByRole('link', { name: /^Lox/ })).toHaveTextContent(
+      'Parry it: blocking staggers you',
+    )
+    expect(creatures.getByRole('link', { name: /^Vile/ })).toHaveTextContent(
+      'Parry it: the block gives way',
+    )
   })
 
   it('brings the tab back to the biome it was left on', async () => {

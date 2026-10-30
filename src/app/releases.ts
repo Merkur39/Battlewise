@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.12.1',
+    date: '2026-10-30',
+    notes: [
+      {
+        text: {
+          fr: "Quand chaque parade tient mais qu'un blocage cède, le Bestiaire et la fiche de la créature disent que le blocage cède, comme la Simulation, et non plus que tu titubes en bloquant.",
+          en: "When every parry holds but a block gives way, the Bestiary and the creature's sheet say that the block gives way, as the Simulation does, no longer that blocking staggers you.",
+        },
+      },
+    ],
+  },
+  {
     version: '1.12.0',
     date: '2026-10-28',
     notes: [

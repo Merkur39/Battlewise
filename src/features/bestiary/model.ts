@@ -58,7 +58,7 @@ export interface Hazards {
 export type Advice =
   | { readonly kind: 'unknown' }
   | { readonly kind: 'blockAll' }
-  | { readonly kind: 'parryAll' }
+  | { readonly kind: 'parryAll'; readonly block: 'staggered' | 'broken' }
   | { readonly kind: 'dodgeAll'; readonly rollsAvoid: boolean }
   | {
       readonly kind: 'dodgeSome'

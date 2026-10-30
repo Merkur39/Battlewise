@@ -116,7 +116,8 @@ export const en: Catalog = {
   advice: {
     unknown: 'No direct attack',
     blockAll: 'You block everything without staggering',
-    parryAll: 'Parry it: blocking staggers you',
+    parryAll: (block) =>
+      `Parry it: ${block === 'broken' ? 'the block gives way' : 'blocking staggers you'}`,
     dodgeAll: (rolls, canParry) =>
       `${rolls ? 'Dodge' : 'Avoid'} everything: even ${canParry ? 'parried' : 'blocked'}, its attacks get through`,
     dodgeSome: (rolls, attacks, rest) =>

@@ -30,6 +30,8 @@ export function adviceShown(assessment: Assessment, t: Catalog, language: Langua
   const { advice } = assessment
   const tone = ADVICE_TONES[advice.kind]
   switch (advice.kind) {
+    case 'parryAll':
+      return { tone, text: t.advice.parryAll(advice.block) }
     case 'dodgeAll':
       return { tone, text: t.advice.dodgeAll(advice.rollsAvoid, assessment.canParry) }
     case 'dodgeSome':

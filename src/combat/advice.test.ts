@@ -56,6 +56,7 @@ describe('attackAdvice', () => {
 describe('creatureAdvice', () => {
   const holds: GuardVerdicts = { block: 'holds', parry: 'holds' }
   const parryOnly: GuardVerdicts = { block: 'staggered', parry: 'holds' }
+  const blockBreaks: GuardVerdicts = { block: 'broken', parry: 'holds' }
   const neither: GuardVerdicts = { block: 'broken', parry: 'staggered' }
 
   it('has nothing to say before the attacks are known', () => {
@@ -67,7 +68,14 @@ describe('creatureAdvice', () => {
   })
 
   it('parries everything when some blocks stagger but every parry holds', () => {
-    expect(creatureAdvice([holds, parryOnly])).toEqual({ kind: 'parryAll' })
+    expect(creatureAdvice([holds, parryOnly])).toEqual({ kind: 'parryAll', block: 'staggered' })
+  })
+
+  it('parries everything, the block giving way, when it breaks against one of the attacks', () => {
+    expect(creatureAdvice([holds, parryOnly, blockBreaks])).toEqual({
+      kind: 'parryAll',
+      block: 'broken',
+    })
   })
 
   it('dodges everything when no attack can be guarded', () => {
