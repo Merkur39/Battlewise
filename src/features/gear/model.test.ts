@@ -5,7 +5,15 @@ import type { World } from '@/combat/world'
 import { game } from '@/data'
 import { blockerGroups, blockPowerParts, FORGE_MAX_LEVEL, maxLevel, withstand } from './model'
 
-const silverShield: Defence = { blockPower: 81, parryPower: 121.5, armor: 45, maxHealth: 150 }
+const silverShield: Defence = {
+  blockPower: 81,
+  parryPower: 121.5,
+  armor: 45,
+  maxHealth: 150,
+  staggerFactor: 0.4,
+  blockStaminaDrain: 10,
+  parryStaminaDrain: 0,
+}
 const normal: World = { difficulty: 'normal', players: 1 }
 
 describe('withstand', () => {

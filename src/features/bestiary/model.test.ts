@@ -17,7 +17,15 @@ import {
 } from './model'
 
 // Stagger limit 40: blunt 10 holds; 70 staggers a block but a parry holds it; 200 breaks both.
-const defence: Defence = { blockPower: 50, parryPower: 75, armor: 0, maxHealth: 100 }
+const defence: Defence = {
+  blockPower: 50,
+  parryPower: 75,
+  armor: 0,
+  maxHealth: 100,
+  staggerFactor: 0.4,
+  blockStaminaDrain: 10,
+  parryStaminaDrain: 0,
+}
 const world: World = { difficulty: 'normal', players: 1 }
 
 const hit = (blunt: number, rest: Partial<GameHit> = {}): GameHit => ({

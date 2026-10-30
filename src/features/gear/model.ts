@@ -39,7 +39,7 @@ export function withstand(defence: Defence, world: World): Withstand {
     block,
     parry,
     scale: gaugeScale([block.unbroken, ...(parry ? [parry.unbroken] : [])]),
-    staggerAt: defence.maxHealth * game.player.staggerFactor,
+    staggerAt: defence.maxHealth * defence.staggerFactor,
   }
 }
 

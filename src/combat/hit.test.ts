@@ -4,10 +4,27 @@ import type { Damages } from './damage'
 import { resolveHit, type Hit, type HitOptions } from './hit'
 import type { World } from './world'
 
+// The Player prefab's rules in 1.0.21.
+const rules = { staggerFactor: 0.4, blockStaminaDrain: 10, parryStaminaDrain: 0 }
 // Silver shield level 3, blocking skill 25, armor 45, 150 health: the worked example of the
 // « Le combat dans Valheim » page and of the design mockups.
-const silverShield: Defence = { blockPower: 81, parryPower: 121.5, armor: 45, maxHealth: 150 }
-const ironTower: Defence = { blockPower: 81, parryPower: null, armor: 45, maxHealth: 150 }
+const silverShield: Defence = {
+  blockPower: 81,
+  parryPower: 121.5,
+  armor: 45,
+  maxHealth: 150,
+  ...rules,
+}
+const ironTower: Defence = { ...silverShield, parryPower: null }
+// Iron Buckler level 3, Blocking 16, armor 48, 140 health, against Moder's bite: the fight the
+// audit of 2026-10-30 checked against the game's code.
+const ironBuckler: Defence = {
+  blockPower: 43.2,
+  parryPower: 108,
+  armor: 48,
+  maxHealth: 140,
+  ...rules,
+}
 
 const alone = (difficulty: World['difficulty'] = 'normal'): World => ({ difficulty, players: 1 })
 const hitOf = (damages: Damages, more: Partial<Hit> = {}): Hit => ({
@@ -247,5 +264,111 @@ describe('resolveHit', () => {
     // 10 against 81 leaves 0.31: 0.06 blunt, dropped, and 0.25 fire, burned.
     expect(result?.taken).toBeCloseTo(0.247, 3)
     expect(result?.bar.armor).toBe(0)
+  })
+
+  it("puts the stagger limit at the player's share of max health", () => {
+    const sturdier: Defence = { ...silverShield, staggerFactor: 0.5 }
+
+    expect(resolveHit(sturdier, hitOf({ blunt: 90 }), alone(), block)?.bar.limit).toBe(75)
+  })
+
+  it("charges the player's block drain, in proportion to the power used", () => {
+    const costlier: Defence = { ...silverShield, blockStaminaDrain: 20 }
+
+    expect(resolveHit(costlier, hitOf({ blunt: 90 }), alone(), block)?.stamina).toBeCloseTo(
+      16.05,
+      2,
+    )
+  })
+})
+
+describe('resolveHit, with the gear and effects of the player', () => {
+  const bite = hitOf({ pierce: 120 })
+
+  it('breaks the block of the bite and takes it whole, for the whole drain', () => {
+    const result = resolveHit(ironBuckler, bite, alone(), block)
+
+    expect(result?.verdict).toBe('broken')
+    expect(result?.taken).toBe(72)
+    expect(result?.stamina).toBe(10)
+  })
+
+  it('parries the bite for 5.8, the bar at 39.1 of 56', () => {
+    const result = resolveHit(ironBuckler, bite, alone(), parry)
+
+    expect(result?.verdict).toBe('holds')
+    expect(result?.taken).toBeCloseTo(5.787, 3)
+    expect((result?.bar.shield ?? 0) + (result?.bar.armor ?? 0)).toBeCloseTo(39.12, 2)
+  })
+
+  it('lets a resistance lower what passes the guard, never the guard: the Root Harnesk', () => {
+    const harnesk: Defence = { ...ironBuckler, modifiers: { pierce: 'resistant' } }
+    const blocked = resolveHit(harnesk, bite, alone(), block)
+
+    expect(blocked?.verdict).toBe('broken')
+    expect(blocked?.taken).toBeCloseTo(18.75, 6)
+    expect(resolveHit(harnesk, bite, alone(), parry)?.taken).toBeCloseTo(1.447, 3)
+  })
+
+  it("halves both parts of the bar under Fader's power, so the blocked bite holds", () => {
+    const fader: Defence = { ...ironBuckler, staggerModifier: -0.5 }
+    const result = resolveHit(fader, bite, alone(), block)
+
+    expect(result?.verdict).toBe('holds')
+    expect(result?.taken).toBeCloseTo(30.72, 6)
+    expect(result?.bar.shield).toBeCloseTo(38.4, 6)
+    expect(result?.bar.armor).toBeCloseTo(15.36, 6)
+  })
+
+  it("takes the pieces' share off a block's stamina: 8 with the Ashen Cape", () => {
+    const ashenCape: Defence = { ...ironBuckler, blockStaminaGear: -0.2 }
+
+    expect(resolveHit(ashenCape, bite, alone(), block)?.stamina).toBeCloseTo(8, 6)
+  })
+
+  it("then takes each effect's share of that cost: 2 under the Berserkir Mead, 4 with the cape and the Evasion Mantle", () => {
+    const berserkir: Defence = { ...ironBuckler, blockStaminaEffects: -0.8 }
+    const capeAndMantle: Defence = {
+      ...ironBuckler,
+      blockStaminaGear: -0.2,
+      blockStaminaEffects: -0.5,
+    }
+
+    expect(resolveHit(berserkir, bite, alone(), block)?.stamina).toBeCloseTo(2, 6)
+    expect(resolveHit(capeAndMantle, bite, alone(), block)?.stamina).toBeCloseTo(4, 6)
+  })
+
+  it("gives stamina back below zero under Bonemass's power: 5 on a block, 10 on a parry that holds", () => {
+    const bonemass: Defence = { ...ironBuckler, blockStaminaEffects: -1, blockStaminaFlat: -5 }
+
+    expect(resolveHit(bonemass, bite, alone(), block)?.stamina).toBeCloseTo(-5, 6)
+    expect(resolveHit(bonemass, bite, alone(), parry)?.stamina).toBeCloseTo(-10, 6)
+  })
+
+  it('gives the flat amount back once only on a parry that breaks', () => {
+    const bonemass: Defence = { ...ironBuckler, blockStaminaEffects: -1, blockStaminaFlat: -5 }
+    const result = resolveHit(bonemass, bite, alone(), { ...parry, barBefore: 0.5 })
+
+    expect(result?.verdict).toBe('broken')
+    expect(result?.stamina).toBeCloseTo(-5, 6)
+  })
+
+  it("gives the item's refund on a parry that holds instead of the flat amount again", () => {
+    const torchUnderBonemass: Defence = {
+      ...ironBuckler,
+      parryStaminaRegen: 10,
+      blockStaminaEffects: -1,
+      blockStaminaFlat: -5,
+    }
+
+    expect(resolveHit(torchUnderBonemass, bite, alone(), parry)?.stamina).toBeCloseTo(-15, 6)
+  })
+
+  it("charges a parry's own drain twice when it holds, the pieces' share taken off the second time", () => {
+    // The Player prefab's parry costs nothing in 1.0.21; with a drain, the game would charge
+    // 5 × (1 − 0.2), then 5 × (1 + 0.2).
+    const costlyParry: Defence = { ...ironBuckler, parryStaminaDrain: 5, blockStaminaGear: -0.2 }
+
+    expect(resolveHit(costlyParry, bite, alone(), parry)?.stamina).toBeCloseTo(10, 6)
   })
 })

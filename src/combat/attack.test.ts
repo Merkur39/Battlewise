@@ -4,7 +4,15 @@ import type { Defence } from './block'
 import type { World } from './world'
 
 // Stagger limit 40: blunt 10 holds, 40 holds at 0★ but staggers at 2★, 200 breaks the block.
-const defence: Defence = { blockPower: 50, parryPower: 75, armor: 0, maxHealth: 100 }
+const defence: Defence = {
+  blockPower: 50,
+  parryPower: 75,
+  armor: 0,
+  maxHealth: 100,
+  staggerFactor: 0.4,
+  blockStaminaDrain: 10,
+  parryStaminaDrain: 0,
+}
 const world: World = { difficulty: 'normal', players: 1 }
 const blunt = (damage: number, rest: Partial<AttackHit> = {}): AttackHit => ({
   damages: { blunt: damage },

@@ -21,9 +21,9 @@ export function presetOf(world: World): GameWorldPreset {
 export const gearBlockPower = (gear: Gear) =>
   blockPower(blockerOf(gear.blocker), gear.level, gear.skill)
 
-/** What a hit is resolved against with this gear, the player's own modifiers included. */
+/** What a hit is resolved against with this gear, under the player's own rules. */
 export const gearDefence = (gear: Gear): Defence =>
-  defenceOf({ ...gear, blocker: blockerOf(gear.blocker), modifiers: game.player.modifiers })
+  defenceOf({ ...gear, blocker: blockerOf(gear.blocker), player: game.player })
 
 /** What the world multiplies the hits monsters land on you by. */
 export const enemyScale = (world: World) => worldScale(world).enemy

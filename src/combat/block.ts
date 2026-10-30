@@ -1,4 +1,4 @@
-import type { DamageModifiers } from './modifiers'
+import { mergeModifiers, type DamageModifiers } from './modifiers'
 
 /** What an item brings to a block, as the game data lists it. */
 export interface Blocker {
@@ -12,15 +12,58 @@ export interface Blocker {
   readonly perfectBlockStaminaRegen?: number
 }
 
+/** The player's own rules, as the game data lists them (the Player prefab). */
+export interface PlayerRules {
+  /** Spirit immune. */
+  readonly modifiers: DamageModifiers
+  /** Share of max health the stagger bar holds (m_staggerDamageFactor). */
+  readonly staggerFactor: number
+  /** What a block costs in stamina when it uses its whole power (m_blockStaminaDrain). */
+  readonly blockStaminaDrain: number
+  /** What a parry costs in stamina (m_perfectBlockStaminaDrain). */
+  readonly perfectBlockStaminaDrain: number
+}
+
+/** A helmet, chest, legs or cape worn, at its level, with what the game data lists for it. */
+export interface ArmorPiece {
+  readonly armor: number
+  readonly armorPerLevel: number
+  readonly level: number
+  readonly modifiers?: DamageModifiers
+  /** Share it adds to what a guard costs in stamina (m_blockStaminaModifier): the Ashen Cape's −0.2. */
+  readonly blockStaminaModifier?: number
+}
+
+/** What an active status effect changes in a fight (SE_Stats); each value is neutral when left out. */
+export interface Effect {
+  readonly modifiers?: DamageModifiers
+  /** Added to the armor (m_addArmor)… */
+  readonly addArmor?: number
+  /** …which then grows by this share (m_armorMultiplier). */
+  readonly armorMultiplier?: number
+  /** Share added to the stagger taken (m_staggerModifier): Fader's power halves it with −0.5. */
+  readonly staggerModifier?: number
+  /** Share added to the parry power, after the item's bonus (m_timedBlockBonus). */
+  readonly parryBonus?: number
+  /** Share added to what a guard costs in stamina (m_blockStaminaUseModifier)… */
+  readonly blockStaminaModifier?: number
+  /** …then a flat amount: below zero, the guard gives stamina back (m_blockStaminaUseFlatValue). */
+  readonly blockStaminaFlat?: number
+}
+
 export interface Profile {
+  readonly player: PlayerRules
   readonly blocker: Blocker
   readonly level: number
   /** Blocking skill, 0 to 100. */
   readonly skill: number
+  /** Typed by the player; the pieces' armor adds up to it. */
   readonly armor: number
   readonly maxHealth: number
-  /** The player's own damage modifiers (spirit immune), with any from gear or effects. */
-  readonly modifiers?: DamageModifiers
+  /** In the game's order: chest, legs, helmet, cape. */
+  readonly pieces?: readonly ArmorPiece[]
+  /** In the order they came. */
+  readonly effects?: readonly Effect[]
 }
 
 /** The values a hit is resolved against. */
@@ -30,11 +73,22 @@ export interface Defence {
   readonly parryPower: number | null
   readonly armor: number
   readonly maxHealth: number
-  /** The player's, applied past the guard and before the armor (Character.RPC_Damage). */
+  readonly staggerFactor: number
+  readonly blockStaminaDrain: number
+  readonly parryStaminaDrain: number
+  /** The player's, the pieces' and the effects', applied past the guard and before the armor
+   * (Character.RPC_Damage). */
   readonly modifiers?: DamageModifiers
   /** The blocker's, applied to the hit before the block, and kept when the block breaks. */
   readonly blockerModifiers?: DamageModifiers
   readonly parryStaminaRegen?: number
+  /** The effects' stagger modifiers, added up. */
+  readonly staggerModifier?: number
+  /** The pieces' share of a guard's stamina (Player.GetEquipmentBlockStaminaModifier)… */
+  readonly blockStaminaGear?: number
+  /** …then the effects' share of that, and their flat amount (SEMan.ModifyBlockStaminaUsage). */
+  readonly blockStaminaEffects?: number
+  readonly blockStaminaFlat?: number
 }
 
 // ItemDrop.ItemData.GetBlockPower: the skill adds up to half of the base value.
@@ -48,21 +102,54 @@ export function parryPower(blocker: Blocker, level: number, skill: number): numb
   return blockPower(blocker, level, skill) * blocker.timedBlockBonus
 }
 
+const sumOf = <T>(items: readonly T[], value: (item: T) => number | undefined) =>
+  items.reduce((sum, item) => sum + (value(item) ?? 0), 0)
+
+// Player.GetBodyArmor: the pieces' armor at their level (ItemData.GetArmor), then each effect adds its
+// own and grows the total (SE_Stats.ModifyArmorMods).
+function bodyArmor(typed: number, pieces: readonly ArmorPiece[], effects: readonly Effect[]) {
+  const worn =
+    typed + sumOf(pieces, (piece) => piece.armor + (piece.level - 1) * piece.armorPerLevel)
+  return effects.reduce(
+    (armor, effect) => (armor + (effect.addArmor ?? 0)) * (1 + (effect.armorMultiplier ?? 0)),
+    worn,
+  )
+}
+
 export function defenceOf({
+  player,
   blocker,
   level,
   skill,
   armor,
   maxHealth,
-  modifiers,
+  pieces = [],
+  effects = [],
 }: Profile): Defence {
+  const parry = parryPower(blocker, level, skill)
   return {
     blockPower: blockPower(blocker, level, skill),
-    parryPower: parryPower(blocker, level, skill),
-    armor,
+    // SEMan.ModifyTimedBlockBonus, after the item's bonus.
+    parryPower:
+      parry === null
+        ? null
+        : effects.reduce((power, effect) => power * (1 + (effect.parryBonus ?? 0)), parry),
+    armor: bodyArmor(armor, pieces, effects),
     maxHealth,
-    modifiers: modifiers ?? {},
+    staggerFactor: player.staggerFactor,
+    blockStaminaDrain: player.blockStaminaDrain,
+    parryStaminaDrain: player.perfectBlockStaminaDrain,
+    // Character.GetDamageModifiers.
+    modifiers: mergeModifiers(
+      player.modifiers,
+      ...pieces.map((piece) => piece.modifiers ?? {}),
+      ...effects.map((effect) => effect.modifiers ?? {}),
+    ),
     blockerModifiers: blocker.modifiers ?? {},
     parryStaminaRegen: blocker.perfectBlockStaminaRegen ?? 0,
+    staggerModifier: sumOf(effects, (effect) => effect.staggerModifier),
+    blockStaminaGear: sumOf(pieces, (piece) => piece.blockStaminaModifier),
+    blockStaminaEffects: sumOf(effects, (effect) => effect.blockStaminaModifier),
+    blockStaminaFlat: sumOf(effects, (effect) => effect.blockStaminaFlat),
   }
 }

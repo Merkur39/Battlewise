@@ -140,8 +140,15 @@ describe('game data', () => {
     expect(crowded.you).toBeCloseTo(1 / (1 + (maxPlayers - 1) * healthScalePerPlayer), 9)
   })
 
-  it('charges the stamina and fills the bar the way the engine does', () => {
-    const defence = { blockPower: 10, parryPower: 15, armor: 0, maxHealth: 100 }
+  it("resolves a hit with the player's own rules", () => {
+    const defence = defenceOf({
+      player: game.player,
+      blocker: { blockPower: 10, blockPowerPerLevel: 0, timedBlockBonus: 1.5 },
+      level: 1,
+      skill: 0,
+      armor: 0,
+      maxHealth: 100,
+    })
     const overwhelming = { damages: { blunt: 1000 }, staggerMultiplier: 1, blockable: true }
     const world = { difficulty: 'normal', players: 1 } as const
     const blocked = resolveHit(defence, overwhelming, world, {
@@ -163,6 +170,7 @@ describe('game data', () => {
   it('rebuilds the worked example from the extracted silver shield', () => {
     expect(
       defenceOf({
+        player: game.player,
         blocker: blocker('ShieldSilver'),
         level: 3,
         skill: 25,
