@@ -103,8 +103,7 @@ class _Game:
                 self._add(cls, row)
         self.spawn_lists = _referenced(found, "SpawnSystem", "m_spawnLists", "SpawnSystemList")
         self.location_lists = _referenced(found, "ZoneSystem", "m_locationLists", "LocationList")
-        alt_lists = _referenced(found, "ZoneSystem", "m_altBiomeLists", "AltBiomeList")
-        self.alt_biomes = [alt for row in alt_lists for alt in row["data"]["m_alts"] if alt["m_enabled"]]
+        self.alt_biomes = _alt_biomes(found)
         self.weathers = _weathers(found, self.location_lists, self.alt_biomes)
         self.rooms = _rooms(self, _referenced(found, "DungeonDB", "m_roomLists", "RoomList"))
         self.persistent_events = {}
@@ -142,6 +141,17 @@ def _referenced(found, owner, field, cls):
     """Rows of `cls` that some `owner` component lists in `field`, by GameObject or by component."""
     refs = {_ref(p) for row in found.rows(owner) for p in row["data"].get(field, [])}
     return [r for r in found.rows(cls) if r["go_ref"] in refs or _component_ref(r) in refs]
+
+
+def weathers(found):
+    """{biome bit: environment names EnvMan can pick there}, from the CLASSES components."""
+    location_lists = _referenced(found, "ZoneSystem", "m_locationLists", "LocationList")
+    return _weathers(found, location_lists, _alt_biomes(found))
+
+
+def _alt_biomes(found):
+    alt_lists = _referenced(found, "ZoneSystem", "m_altBiomeLists", "AltBiomeList")
+    return [alt for row in alt_lists for alt in row["data"]["m_alts"] if alt["m_enabled"]]
 
 
 def _weathers(found, location_lists, alt_biomes):

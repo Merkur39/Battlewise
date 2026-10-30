@@ -238,22 +238,66 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual(presets["veryHard"], [{"fr": "Cauchemar", "en": "Hardcore"}])
         self.assertEqual((presets["easy"], presets["normal"], presets["hard"]), ([], [], []))
 
-    def test_rule_effects_are_the_powers_meads_trinkets_sets_and_capes_of_the_game(self):
+    def test_rule_effects_are_the_powers_drinks_trinkets_and_sets_that_change_a_fight(self):
+        physical = ("blunt", "slash", "pierce")
+        slightly_resistant = {t: "slightlyResistant" for t in physical}
         effects = {e["name"]["en"]: {k: v for k, v in e.items() if k != "name"} for e in self.data["ruleEffects"]}
         self.assertEqual(effects, {
-            "Fader": {"kind": "power", "stagger": 0.5},
-            "Bonemass": {"kind": "power", "blockStamina": 0, "blockStaminaFlat": -5},
-            "Berserkir Mead": {"kind": "consumable", "blockStamina": 0.2, "dodgeStamina": 0.2},
-            "Evasion Mantle": {"kind": "trinket", "blockStamina": 0.5, "parryPower": 1.5},
-            "Vanguard": {"kind": "set", "dodgeStamina": 0.8},
-            "Ashen Cape": {"kind": "equipment", "blockStamina": 0.8},
-            "Asksvin Cloak": {"kind": "equipment", "dodgeStamina": 0.85},
-            "Cape of the Caller": {"kind": "equipment", "dodgeStamina": 0.9},
+            "Bonemass": {"id": "GP_Bonemass", "kind": "power", "ttl": 300, "cooldown": 1200,
+                         "modifiers": slightly_resistant, "blockStaminaModifier": -1, "blockStaminaFlat": -5},
+            "Fader": {"id": "GP_Fader", "kind": "power", "ttl": 300, "cooldown": 1200,
+                      "modifiers": {"fire": "resistant"}, "staggerModifier": -0.5},
+            "Moder": {"id": "GP_Moder", "kind": "power", "ttl": 300, "cooldown": 1200, "modifiers": {"frost": "resistant"}},
+            "The Queen": {"id": "GP_Queen", "kind": "power", "ttl": 300, "cooldown": 1200,
+                          "modifiers": {"poison": "resistant"}},
+            "Yagluth": {"id": "GP_Yagluth", "kind": "power", "ttl": 300, "cooldown": 1200,
+                        "modifiers": {"lightning": "resistant"}},
+            "Berserkir Mead": {"id": "Potion_bzerker", "kind": "consumable", "items": ["MeadBzerker"], "ttl": 20,
+                               "modifiers": {t: "weak" for t in physical}, "blockStaminaModifier": -0.8,
+                               "dodgeStaminaModifier": -0.8},
+            "Fire Resistance Barley Wine": {"id": "Potion_barleywine", "kind": "consumable", "items": ["BarleyWine"],
+                                            "ttl": 600, "modifiers": {"fire": "resistant"}},
+            "Frost Resistance Mead": {"id": "Potion_frostresist", "kind": "consumable", "items": ["MeadFrostResist"],
+                                      "ttl": 600, "modifiers": {"frost": "resistant"}},
+            "Poison Resistance Mead": {"id": "Potion_poisonresist", "kind": "consumable", "items": ["MeadPoisonResist"],
+                                       "ttl": 600, "modifiers": {"poison": "veryResistant"}},
+            "Crystal Heart": {"id": "TrinketSilverResist", "kind": "trinket", "items": ["TrinketSilverResist"],
+                              "adrenaline": 80, "ttl": 50, "modifiers": slightly_resistant},
+            "Evasion Mantle": {"id": "TrinketBlackStamina", "kind": "trinket", "items": ["TrinketBlackStamina"],
+                               "adrenaline": 60, "ttl": 120, "parryBonus": 0.5, "blockStaminaModifier": -0.5},
+            "Iron Brooch": {"id": "TrinketIronHealth", "kind": "trinket", "items": ["TrinketIronHealth"],
+                            "adrenaline": 65, "ttl": 30, "addArmor": 20},
+            "Neckstabber": {"id": "TrinketBloodGoldHealth", "kind": "trinket", "items": ["TrinketBloodGoldHealth"],
+                            "adrenaline": 65, "ttl": 30, "addArmor": 20},
+            "Berserk": {"id": "SetEffect_BerserkerArmor", "kind": "set", "set": {"id": "berserker_armor", "size": 3},
+                        "modifiers": {t: "slightlyWeak" for t in physical}},
+            "Fenris blessing": {"id": "SetEffect_FenringArmor", "kind": "set", "set": {"id": "fenring_armor", "size": 3},
+                                "modifiers": {"fire": "resistant"}},
+            "Vanguard": {"id": "SetEffect_DeepNorthMediumArmor", "kind": "set",
+                         "set": {"id": "DeepNorthMediumArmor", "size": 3}, "dodgeStaminaModifier": -0.2},
+            "Vilebone Wrath": {"id": "SetEffect_BerserkerUndeadArmor", "kind": "set",
+                               "set": {"id": "berserker_armor_undead", "size": 3},
+                               "modifiers": {t: "slightlyWeak" for t in physical}},
         })
 
     def test_rule_effects_keep_the_names_of_the_game(self):
         names = {e["name"]["en"]: e["name"]["fr"] for e in self.data["ruleEffects"]}
-        self.assertEqual((names["Fader"], names["Evasion Mantle"]), ("Pouvoir de Fader", "Voile d'ombre"))
+        self.assertEqual((names["Fader"], names["Evasion Mantle"], names["Iron Brooch"]),
+                         ("Pouvoir de Fader", "Voile d'ombre", "Broche en fer"))
+
+    def test_freezing_wears_the_player_down_where_the_weather_freezes(self):
+        self.assertEqual(self.data["freezing"], {
+            "name": {"fr": "En train de geler", "en": "Freezing"},
+            "damagePerSecond": 1,
+            "healthRegen": 0,
+            "biomes": ["mountain"],
+        })
+
+    def test_armor_pieces_are_listed_apart_from_the_effects(self):
+        pieces = {p["id"]: p for p in self.data["armorPieces"]}
+        self.assertEqual(len(pieces), 113)
+        self.assertEqual(pieces["CapeAsh"]["blockStaminaModifier"], -0.2)
+        self.assertNotIn("equipment", {e["kind"] for e in self.data["ruleEffects"]})
 
     def test_the_forge_of_potential_is_named(self):
         self.assertEqual(self.data["forge"], {"name": {"fr": "Forge du potentiel", "en": "Forge of Potential"}})

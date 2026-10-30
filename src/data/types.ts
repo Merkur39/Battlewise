@@ -1,4 +1,4 @@
-import type { Blocker } from '@/combat/block'
+import type { ArmorPiece, Blocker, Effect } from '@/combat/block'
 import type { DamageModifier, DamageModifiers } from '@/combat/modifiers'
 import type { DamageType, Damages } from '@/combat/damage'
 import type { HitScaling } from '@/combat/hit'
@@ -201,6 +201,25 @@ export interface GameBlocker extends Blocker {
   readonly consumable: boolean
 }
 
+export type ArmorSlot = 'helmet' | 'chest' | 'legs' | 'cape'
+
+/** A helmet, chest, legs or cape the player can get: the only items whose armor and modifiers count. */
+export interface GameArmorPiece extends Omit<ArmorPiece, 'level'> {
+  readonly id: string
+  readonly name: Localized
+  readonly slot: ArmorSlot
+  readonly maxQuality: number
+  /** Only the damage types it changes. */
+  readonly modifiers: DamageModifiers
+  /** Share it adds to what a dodge costs in stamina. */
+  readonly dodgeStaminaModifier?: number
+  /** The set it belongs to, when wearing it whole brings an effect (`set` of a rule effect). */
+  readonly set?: string
+  readonly upgradable: boolean
+  readonly forge: { readonly idol: string } | null
+  readonly obtain: Obtain
+}
+
 export interface GameStatusEffect {
   readonly name: Localized
   /** Seconds. */
@@ -226,19 +245,25 @@ export interface GameWorldPreset {
 /** Where the player gets an effect that changes the rules. */
 export type RuleEffectKind = 'power' | 'consumable' | 'trinket' | 'set' | 'equipment'
 
-/** A guardian power, a mead, a trinket, a set or a piece of gear that changes the rules: each
- * multiplier is given only when it is not neutral. */
-export interface GameRuleEffect {
+/** A guardian power, a drink, a trinket, a set or an item worn that changes a fight: what it changes, as
+ * the engine takes it, each change given only when it is not neutral. */
+export interface GameRuleEffect extends Effect {
+  /** The status effect's asset name. */
+  readonly id: string
   readonly name: Localized
   readonly kind: RuleEffectKind
-  /** The stagger you take. */
-  readonly stagger?: number
-  /** The stamina a block costs, then added to it (Bonemass: none, then 5 given back). */
-  readonly blockStamina?: number
-  readonly blockStaminaFlat?: number
-  readonly dodgeStamina?: number
-  /** Your parry power. */
-  readonly parryPower?: number
+  /** The drinks, trinkets or items worn that give it. */
+  readonly items?: readonly string[]
+  /** A trinket's: the adrenaline at which it starts. */
+  readonly adrenaline?: number
+  /** A set's: its name in the game data, and how many of its pieces it takes. */
+  readonly set?: { readonly id: string; readonly size: number }
+  /** Seconds; left out when it lasts as long as what is worn. */
+  readonly ttl?: number
+  /** Seconds before a guardian power can be used again. */
+  readonly cooldown?: number
+  /** Share added to what a dodge costs in stamina. */
+  readonly dodgeStaminaModifier?: number
 }
 
 export interface GameData {
@@ -260,6 +285,16 @@ export interface GameData {
     /** Share of the dodge stamina a perfect dodge gives back. */
     readonly perfectDodgeRefund: number
   }
+  /** The cold that wears the player down where the weather freezes, away from fire and shelter, unless
+   * they resist frost (Player.UpdateEnvStatusEffects). */
+  readonly freezing: {
+    readonly name: Localized
+    /** Generic damage: neither armor nor resistance lowers it. */
+    readonly damagePerSecond: number
+    /** Multiplies the health regeneration meanwhile. */
+    readonly healthRegen: number
+    readonly biomes: readonly BiomeId[]
+  }
   readonly biomes: readonly { readonly id: BiomeId; readonly name: Localized }[]
   readonly damageTypes: Readonly<Record<DamageType, Localized>>
   readonly toolTypes: Readonly<Record<ToolType, Localized>>
@@ -267,6 +302,7 @@ export interface GameData {
   readonly statusEffects: Readonly<Record<string, GameStatusEffect>>
   readonly creatures: readonly GameCreature[]
   readonly blockers: readonly GameBlocker[]
+  readonly armorPieces: readonly GameArmorPiece[]
   /** The station that upgrades an item past its maxQuality; null when no world has one. */
   readonly forge: { readonly name: Localized } | null
   readonly ruleEffects: readonly GameRuleEffect[]

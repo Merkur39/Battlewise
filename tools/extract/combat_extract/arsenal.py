@@ -1,5 +1,5 @@
-"""The blockers: what the player can block with, read from the game components (components.collect over
-CLASSES), with where each one comes from and how far it can be upgraded.
+"""The blockers and the armor pieces: what the player can block with and wear, read from the game
+components (components.collect over CLASSES), with where each one comes from and how far it can be upgraded.
 
 Game rules followed:
 - Humanoid.GetCurrentBlocker blocks with the left-hand item, else the current weapon, else
@@ -17,7 +17,12 @@ Game rules followed:
 - forge: at a station with m_upgrader (the Forge of Potential), the same recipe goes past maxQuality
   when it has an m_upgraderResource, the idol paid at each level (InventoryGui.DoCrafting);
 - consumable: an attack uses the item up (Attack.m_consumeItem, Attack.ConsumeItem) and its projectile
-  does not drop it back (Projectile.m_respawnItemOnHit, set on thrown spears): bombs, snowballs.
+  does not drop it back (Projectile.m_respawnItemOnHit, set on thrown spears): bombs, snowballs;
+- pieces: the helmets, chests, legs and capes (ItemData.ItemType 6, 7, 11, 17), the only items
+  Player.GetBodyArmor adds the armor of (ItemData.GetArmor: m_armor, plus m_armorPerLevel per level)
+  and Player.ApplyArmorDamageMods the modifiers of; a piece names its set (m_setName) when wearing
+  m_setSize items of it brings m_setStatusEffect (Humanoid.HaveSetEffect); its block and dodge stamina
+  modifiers are shares Player.UpdateModifiers adds up over every item worn.
 
 Where an item comes from (`obtain`), the first that applies:
 - dlc: m_shared.m_dlc is set (Humanoid.EquipItem and Player.GetAvailableRecipes ask for the DLC);
@@ -45,6 +50,9 @@ from .damage import pair_modifiers
 
 # ItemDrop.ItemData.ItemType of the items that can block, and their group.
 BLOCKER_TYPES = {3: "weapon", 4: "weapon", 5: "shield", 14: "weapon", 15: "other", 22: "weapon"}
+# ItemDrop.ItemData.ItemType of the armor pieces, and their slot, in the order pieces are listed.
+PIECE_SLOTS = {6: "helmet", 7: "chest", 11: "legs", 17: "cape"}
+SLOT_ORDER = ("helmet", "chest", "legs", "cape")
 # Components that hold items in the world, and their fields that do.
 WORLD = {
     "Container": ("m_defaultItems",),
@@ -84,45 +92,79 @@ CLASSES = tuple(sorted(
 ))
 
 
+class _Catalog:
+    """The items ObjectDB registers, where each one comes from and how far it can be upgraded."""
+
+    def __init__(self, found):
+        self.items = _items(found)
+        placed = _placed(found)
+        self.recipes = _recipes(found, self.items)
+        self.sources = _sources(found, self.items, self.recipes, placed)
+        self.upgrade_only = {_made_by(r, self.items)[0] for r in self.recipes if r["m_noCraftOnlyUpgrade"]}
+        self.has_forge = any(row["data"]["m_upgrader"] for row in found.rows("CraftingStation") if placed(row))
+
+    def upgrades(self, shared):
+        upgradable, idol = _upgrades(shared, self.recipes, self.items)
+        return {"upgradable": upgradable, "forge": {"idol": idol} if self.has_forge and idol in self.sources else None}
+
+    def obtain(self, item_id, shared):
+        return _obtain(shared, self.sources[item_id], item_id in self.upgrade_only)
+
+
 def blockers(found, names, ignored):
     """Blocker dicts sorted by group, block power and id. `found` holds the CLASSES components (a
     components.Components), `names` maps a localisation key to {"fr", "en"}, `ignored` holds fnmatch
     patterns of item ids (curation "ignoredItems")."""
-    items = _items(found)
-    placed = _placed(found)
-    recipes = _recipes(found, items)
-    sources = _sources(found, items, recipes, placed)
-    upgrade_only = {_made_by(r, items)[0] for r in recipes if r["m_noCraftOnlyUpgrade"]}
-    has_forge = any(row["data"]["m_upgrader"] for row in found.rows("CraftingStation") if placed(row))
+    catalog = _Catalog(found)
     given_back = {row["go_ref"] for row in found.rows("Projectile") if row["data"]["m_respawnItemOnHit"]}
 
     def blocker(item_id, shared, name, group, obtain):
-        upgradable, idol = _upgrades(shared, recipes, items)
         return dict(
             _stats(item_id, shared, name, group),
-            upgradable=upgradable,
-            forge={"idol": idol} if has_forge and idol in sources else None,
+            **catalog.upgrades(shared),
             obtain=obtain,
             consumable=_used_up(shared, given_back),
         )
 
     result = []
-    for item_id, shared in _candidates(items):
+    for item_id, shared in _candidates(catalog.items):
         name = names(shared["m_name"])
-        if item_id in sources and name["en"] and not _ignored(item_id, ignored):
-            obtain = _obtain(shared, sources[item_id], item_id in upgrade_only)
-            result.append(blocker(item_id, shared, name, _group(shared), obtain))
-    unarmed = _unarmed(found, items)
+        if item_id in catalog.sources and name["en"] and not _ignored(item_id, ignored):
+            result.append(blocker(item_id, shared, name, _group(shared), catalog.obtain(item_id, shared)))
+    unarmed = _unarmed(found, catalog.items)
     if unarmed and not _ignored(unarmed[0], ignored):
         result.append(dict(blocker(*unarmed, names("skill_unarmed"), "unarmed", None), movementModifier=0))
     return sorted(result, key=lambda b: (b["group"], b["blockPower"], b["id"]))
 
 
+def pieces(found, names):
+    """Armor piece dicts, the helmets, chests, legs and capes the player can get, sorted by slot, armor
+    and id. `found` and `names` as for blockers()."""
+    catalog = _Catalog(found)
+    result = []
+    for item_id, shared in _worn(catalog.items):
+        name = names(shared["m_name"])
+        if item_id in catalog.sources and name["en"]:
+            result.append({
+                "id": item_id,
+                "name": name,
+                "slot": PIECE_SLOTS[shared["m_itemType"]],
+                "maxQuality": shared["m_maxQuality"],
+                "armor": _number(shared["m_armor"]),
+                "armorPerLevel": _number(shared["m_armorPerLevel"]),
+                "modifiers": pair_modifiers(shared["m_damageModifiers"]),
+                **_stamina_modifiers(shared),
+                **_set(shared),
+                **catalog.upgrades(shared),
+                "obtain": catalog.obtain(item_id, shared),
+            })
+    return sorted(result, key=lambda p: (SLOT_ORDER.index(p["slot"]), p["armor"], p["id"]))
+
+
 def obtainable(found):
     """{item id: m_shared} of the items the player can get, as blockers() finds their sources."""
-    items = _items(found)
-    sources = _sources(found, items, _recipes(found, items), _placed(found))
-    return {item_id: shared for item_id, shared in items.values() if item_id in sources}
+    catalog = _Catalog(found)
+    return {item_id: shared for item_id, shared in catalog.items.values() if item_id in catalog.sources}
 
 
 def forge(found, names):
@@ -153,6 +195,30 @@ def _candidates(items):
         if item_id not in seen and shared["m_itemType"] in BLOCKER_TYPES and shared["m_blockPower"] > 0:
             seen.add(item_id)
             yield item_id, shared
+
+
+def _worn(items):
+    seen = set()
+    for item_id, shared in items.values():
+        if item_id not in seen and shared["m_itemType"] in PIECE_SLOTS:
+            seen.add(item_id)
+            yield item_id, shared
+
+
+def _stamina_modifiers(shared):
+    """The shares a piece adds to what a block and a dodge cost, when it has any."""
+    shares = {
+        "blockStaminaModifier": _number(shared["m_blockStaminaModifier"]),
+        "dodgeStaminaModifier": _number(shared["m_dodgeStaminaModifier"]),
+    }
+    return {key: share for key, share in shares.items() if share}
+
+
+def _set(shared):
+    """{"set"} when wearing m_setSize items that share m_setName brings an effect (Humanoid.HaveSetEffect)."""
+    if shared["m_setStatusEffect"].get("_ref") and shared["m_setName"] and shared["m_setSize"] > 1:
+        return {"set": shared["m_setName"]}
+    return {}
 
 
 def _unarmed(found, items):

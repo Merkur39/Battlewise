@@ -1,5 +1,5 @@
-"""Characterisation tests of combat_extract.arsenal: the blockers as the game data defines them (items,
-recipes, traders, world sources), pinned on values read in the installed game (1.0.21).
+"""Characterisation tests of combat_extract.arsenal: the blockers and the armor pieces as the game data
+defines them (items, recipes, traders, world sources), pinned on values read in the installed game (1.0.21).
 
 They read the local Valheim install (read-only) and are skipped when it is not found.
 Run from tools/extract:  python -m unittest tests.test_arsenal -v
@@ -31,6 +31,8 @@ class ArsenalTests(unittest.TestCase):
         cls.found = components.collect(arsenal.CLASSES)
         cls.list = arsenal.blockers(cls.found, names, {})
         cls.blockers = {b["id"]: b for b in cls.list}
+        cls.piece_list = arsenal.pieces(cls.found, names)
+        cls.pieces = {p["id"]: p for p in cls.piece_list}
 
     # ------------------------------------------------------------------ stats
     def test_a_round_shield_carries_its_block_stats_and_where_it_comes_from(self):
@@ -139,6 +141,54 @@ class ArsenalTests(unittest.TestCase):
         self.assertNotIn("ShieldWood", kept)
         self.assertNotIn("ShieldWoodTower", kept)
         self.assertIn("ShieldSilver", kept)
+
+    # ------------------------------------------------------------------ armor pieces
+    def test_a_piece_carries_its_armor_its_resistances_its_set_and_where_it_comes_from(self):
+        self.assertEqual(self.pieces["ArmorRootChest"], {
+            "id": "ArmorRootChest",
+            "name": {"fr": "Cuirasse de racines", "en": "Root Harnesk"},
+            "slot": "chest",
+            "maxQuality": 4,
+            "armor": 8,
+            "armorPerLevel": 2,
+            "modifiers": {"pierce": "resistant", "fire": "weak"},
+            "set": "root_armor",
+            "upgradable": True,
+            "forge": {"idol": "Upgrader2Armor"},
+            "obtain": "craft",
+        })
+
+    def test_a_piece_carries_what_it_changes_in_a_guard_or_a_dodge(self):
+        self.assertEqual(self.pieces["CapeAsh"]["blockStaminaModifier"], -0.2)
+        self.assertEqual(self.pieces["CapeAsksvin"]["dodgeStaminaModifier"], -0.15)
+        self.assertNotIn("blockStaminaModifier", self.pieces["ArmorRootChest"])
+
+    def test_pieces_are_the_helmets_chests_legs_and_capes_the_player_can_get(self):
+        slots = {}
+        for piece in self.piece_list:
+            slots[piece["slot"]] = slots.get(piece["slot"], 0) + 1
+        self.assertEqual(slots, {"helmet": 40, "chest": 42, "legs": 20, "cape": 11})
+        self.assertNotIn("BeltStrength", self.pieces)  # a belt's armor never counts (Player.GetBodyArmor)
+        self.assertNotIn("TrinketIronHealth", self.pieces)
+
+    def test_fifteen_pieces_resist_or_suffer_a_damage_type(self):
+        self.assertEqual(sorted(p["id"] for p in self.piece_list if p["modifiers"]), [
+            "ArmorDeepNorthHeavyChest", "ArmorDeepNorthMageChest", "ArmorDeepNorthMediumChest",
+            "ArmorFenringChest", "ArmorRootChest", "ArmorRootLegs", "ArmorWolfChest",
+            "CapeAsh", "CapeAsksvin", "CapeDeepNorth", "CapeDeepNorthMage", "CapeFeather", "CapeLox", "CapeWolf",
+            "HelmetRoot",
+        ])
+
+    def test_a_piece_names_its_set_only_when_wearing_it_whole_brings_an_effect(self):
+        self.assertEqual({self.pieces[p].get("set") for p in ("HelmetFenring", "ArmorFenringChest", "ArmorFenringLegs")},
+                         {"fenring_armor"})
+        self.assertNotIn("set", self.pieces["ArmorWolfChest"])  # its set effect is attached to no piece
+
+    def test_pieces_are_sorted_by_slot_then_armor(self):
+        slots = [p["slot"] for p in self.piece_list]
+        self.assertEqual(slots, sorted(slots, key=["helmet", "chest", "legs", "cape"].index))
+        capes = [p["armor"] for p in self.piece_list if p["slot"] == "cape"]
+        self.assertEqual(capes, sorted(capes))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,9 @@
-import type { GameRuleEffect, Localized, RuleEffectKind } from '@/data/types'
+import { DAMAGE_TYPES } from '@/combat/damage'
+import { damageMultiplier, type DamageModifiers } from '@/combat/modifiers'
+import { game } from '@/data'
+import type { GameArmorPiece, GameRuleEffect, Localized, RuleEffectKind } from '@/data/types'
 import { formatNumber } from '@/i18n/format'
-import { figures, type GuideSheet } from '../sheets'
+import { figures, type GuideSheet, type RuleChange } from '../sheets'
 
 const n = (value: number) => formatNumber(value, 'fr')
 const name = (localized: Localized) => localized.fr
@@ -8,7 +11,8 @@ const lower = (localized: Localized) => localized.fr.toLocaleLowerCase('fr')
 const capitalised = (text: string) => `${text.charAt(0).toLocaleUpperCase('fr')}${text.slice(1)}`
 const list = (words: readonly string[]) =>
   new Intl.ListFormat('fr', { type: 'conjunction' }).format(words)
-const percentLess = (multiplier: number) => `−${n(Math.round((1 - multiplier) * 100))} %`
+const percent = (share: number) =>
+  `${share < 0 ? '−' : '+'}${n(Math.round(Math.abs(share) * 100))} %`
 
 const kinds: Record<RuleEffectKind, string> = {
   power: 'pouvoir du gardien',
@@ -18,20 +22,56 @@ const kinds: Record<RuleEffectKind, string> = {
   equipment: 'équipement',
 }
 
-function effect({ name: effectName, kind, ...change }: GameRuleEffect) {
-  const parts: string[] = []
-  if (change.stagger !== undefined) parts.push(`stagger reçu ×${n(change.stagger)}`)
-  if (change.parryPower !== undefined) parts.push(`VD en parade ×${n(change.parryPower)}`)
-  if (change.blockStamina === 0 && (change.blockStaminaFlat ?? 0) < 0) {
-    parts.push(`bloquer ne coûte plus d'endurance et en rend ${n(-change.blockStaminaFlat!)}`)
-  } else if (change.blockStamina !== undefined) {
-    parts.push(`endurance de blocage ${percentLess(change.blockStamina)}`)
+// « Contondant, Coupant et Perforant · Légèrement résistant ×0,75 », in the words of the creature sheet.
+function resistances(modifiers: DamageModifiers = {}) {
+  const byState = new Map<keyof typeof game.modifiers, string[]>()
+  for (const type of DAMAGE_TYPES) {
+    const state = modifiers[type]
+    if (state === undefined || state === 'normal' || state === 'ignore') continue
+    byState.set(state, [...(byState.get(state) ?? []), name(game.damageTypes[type])])
   }
-  if (change.dodgeStamina !== undefined) {
-    parts.push(`endurance de roulade ${percentLess(change.dodgeStamina)}`)
-  }
-  return `${name(effectName)} (${kinds[kind]}) : ${parts.join(', ')}.`
+  return [...byState].map(
+    ([state, types]) =>
+      `${list(types)} · ${name(game.modifiers[state])} ×${n(damageMultiplier(state))}`,
+  )
 }
+
+function changes(change: RuleChange) {
+  const parts = resistances(change.modifiers)
+  if (change.addArmor) parts.push(`armure +${n(change.addArmor)}`)
+  if (change.armorMultiplier) parts.push(`armure ×${n(1 + change.armorMultiplier)}`)
+  if (change.staggerModifier) parts.push(`stagger reçu ×${n(1 + change.staggerModifier)}`)
+  if (change.parryBonus) parts.push(`VD en parade ×${n(1 + change.parryBonus)}`)
+  const flat = change.blockStaminaFlat ?? 0
+  if (change.blockStaminaModifier === -1 && flat < 0) {
+    // A parry that holds pays the flat amount twice (Humanoid.BlockAttack).
+    parts.push(
+      `bloquer ne coûte plus d'endurance et en rend ${n(-flat)} (${n(-2 * flat)} sur une parade qui tient)`,
+    )
+  } else if (change.blockStaminaModifier) {
+    parts.push(`endurance de blocage ${percent(change.blockStaminaModifier)}`)
+  }
+  if (change.dodgeStaminaModifier) {
+    parts.push(`endurance de roulade ${percent(change.dodgeStaminaModifier)}`)
+  }
+  return parts.join(' ; ')
+}
+
+// « pouvoir du gardien, 300 s », « bibelot, 30 s dès 65 d'adrénaline », « bonus d'ensemble, 3 pièces ».
+function origin({ kind, ttl, adrenaline, set }: GameRuleEffect) {
+  if (set) return `${kinds[kind]}, ${n(set.size)} pièces`
+  const lasting = ttl === undefined ? kinds[kind] : `${kinds[kind]}, ${n(ttl)} s`
+  return adrenaline === undefined ? lasting : `${lasting} dès ${n(adrenaline)} d'adrénaline`
+}
+
+const effect = (e: GameRuleEffect) => `${name(e.name)} (${origin(e)}) : ${changes(e)}.`
+const gear = (piece: GameArmorPiece) =>
+  `${name(piece.name)} (${kinds.equipment}) : ${changes(piece)}.`
+const rules = [...figures.ruleEffects.map(effect), ...figures.gearRules.map(gear)]
+
+const { freezing } = figures
+const frost = lower(figures.frost)
+const freezes = `${list(freezing.biomes.map(name))} : hors du feu et des abris, « ${name(freezing.name)} » retire ${n(freezing.damagePerSecond)} PV par seconde${freezing.healthRegen === 0 ? ' et coupe la régénération de vie' : ''}. Toute résistance à la ${frost} l'évite, ainsi que le ralentissement des coups de ${frost}, comme le ${name(figures.coldBreath)} de ${name(figures.moder)}.`
 
 const refunds = figures.parryRefunds
   .map(({ stamina, items }) => `${list(items.map(name))} en rendent ${n(stamina)}`)
@@ -130,7 +170,11 @@ export const guideFr: readonly GuideSheet[] = [
   {
     id: 'effects',
     title: 'Effets qui changent les règles',
-    fact: `${n(figures.ruleEffects.length)} effets`,
-    items: figures.ruleEffects.map(effect),
+    fact: `${n(rules.length)} effets`,
+    items: [
+      "Pour un même type de dégâts, rien ne se multiplie : la meilleure résistance l'emporte, et une résistance l'emporte toujours sur une faiblesse.",
+      freezes,
+      ...rules,
+    ],
   },
 ]

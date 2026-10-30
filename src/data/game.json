@@ -86,6 +86,17 @@
     "dodgeStamina": 15,
     "perfectDodgeRefund": 0.5
   },
+  "freezing": {
+    "name": {
+      "fr": "En train de geler",
+      "en": "Freezing"
+    },
+    "damagePerSecond": 1,
+    "healthRegen": 0,
+    "biomes": [
+      "mountain"
+    ]
+  },
   "biomes": [
     {
       "id": "meadows",
@@ -15663,6 +15674,1913 @@
       "consumable": false
     }
   ],
+  "armorPieces": [
+    {
+      "id": "HelmetCelebration",
+      "name": {
+        "fr": "Bonnet festif",
+        "en": "Celebratory Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetHat1",
+      "name": {
+        "fr": "Foulard noué bleu",
+        "en": "Blue Tied Headscarf"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat10",
+      "name": {
+        "fr": "Bonnet violet simple",
+        "en": "Simple Purple Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat2",
+      "name": {
+        "fr": "Foulard torsadé vert",
+        "en": "Green Twisted Headscarf"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat3",
+      "name": {
+        "fr": "Bonnet en fourrure marron",
+        "en": "Brown Fur Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat4",
+      "name": {
+        "fr": "Bonnet vert extravagant",
+        "en": "Extravagant Green Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat5",
+      "name": {
+        "fr": "Bonnet rouge simple",
+        "en": "Simple Red Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat6",
+      "name": {
+        "fr": "Foulard noué jaune",
+        "en": "Yellow Tied Headscarf"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat7",
+      "name": {
+        "fr": "Foulard torsadé rouge",
+        "en": "Red Twisted Headscarf"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat8",
+      "name": {
+        "fr": "Bonnet en fourrure gris",
+        "en": "Grey Fur Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetHat9",
+      "name": {
+        "fr": "Bonnet orange extravagant",
+        "en": "Extravagant Orange Cap"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetMidsummerCrown",
+      "name": {
+        "fr": "Couronne de la mi-été",
+        "en": "Midsummer Crown"
+      },
+      "slot": "helmet",
+      "maxQuality": 1,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetOdin",
+      "name": {
+        "fr": "Cagoule d'Odin",
+        "en": "Hood of Oden"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "dlc"
+    },
+    {
+      "id": "HelmetPointyHat",
+      "name": {
+        "fr": "Chapeau pointu",
+        "en": "Pointy Hat"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetRootCrown",
+      "name": {
+        "fr": "Couronne de racines",
+        "en": "Crown of Roots"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetStrawHat",
+      "name": {
+        "fr": "Chapeau de paille",
+        "en": "Straw Hat"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "harvester",
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetSweatBand",
+      "name": {
+        "fr": "Bandeau",
+        "en": "Headband"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetYule",
+      "name": {
+        "fr": "Chapeau de Noël",
+        "en": "Yule Hat"
+      },
+      "slot": "helmet",
+      "maxQuality": 1,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetDverger",
+      "name": {
+        "fr": "Diadème de dverger",
+        "en": "Dverger Circlet"
+      },
+      "slot": "helmet",
+      "maxQuality": 1,
+      "armor": 2,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "HelmetLeather",
+      "name": {
+        "fr": "Casque en cuir",
+        "en": "Leather Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 2,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetTrollLeather",
+      "name": {
+        "fr": "Casque en cuir de troll",
+        "en": "Troll Leather Hood"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 6,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "troll",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetBerserkerHood",
+      "name": {
+        "fr": "Coiffe de l'ours",
+        "en": "Headdress of the Bear"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 7,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetBronze",
+      "name": {
+        "fr": "Casque en bronze",
+        "en": "Bronze Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetFishingHat",
+      "name": {
+        "fr": "Chapeau de pêcheur",
+        "en": "Fishing Hat"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 4,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetRoot",
+      "name": {
+        "fr": "Casque de racine",
+        "en": "Root Mask"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "poison": "resistant",
+        "fire": "weak"
+      },
+      "set": "root_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetFenring",
+      "name": {
+        "fr": "Capuche de Fenris",
+        "en": "Fenris Hood"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 10,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "fenring_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetBerserkerUndead",
+      "name": {
+        "fr": "Visage d'ours maudit",
+        "en": "Vilebone Visage"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 12,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor_undead",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetIron",
+      "name": {
+        "fr": "Casque en fer",
+        "en": "Iron Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 14,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetLox",
+      "name": {
+        "fr": "Capuche en fourrure de lox",
+        "en": "Lox Fur Hood"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "lox",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetMage",
+      "name": {
+        "fr": "Capuchon d'Eitr tissé",
+        "en": "Eitr-weave Hood"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetMage_Ashlands",
+      "name": {
+        "fr": "Capuche d'Embla",
+        "en": "Hood of Embla"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 19,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetDrake",
+      "name": {
+        "fr": "Casque de drac",
+        "en": "Drake Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 20,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetDNMage",
+      "name": {
+        "fr": "Coiffe de l'orateur",
+        "en": "Headdress of the Caller"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 22,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "HelmetPadded",
+      "name": {
+        "fr": "Casque rembourré",
+        "en": "Padded Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 26,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetAshlandsMediumHood",
+      "name": {
+        "fr": "Capuche d'Ask",
+        "en": "Hood of Ask"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 28,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "AshlandsMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetCarapace",
+      "name": {
+        "fr": "Casque en carapace",
+        "en": "Carapace Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 32,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetDNMediumHood",
+      "name": {
+        "fr": "Capuche de l'Avant-garde",
+        "en": "Hood of the Vanguard"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 34,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "DeepNorthMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "HelmetFlametal",
+      "name": {
+        "fr": "Casque en flamétal",
+        "en": "Flametal Helmet"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 38,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "HelmetDNHeavy",
+      "name": {
+        "fr": "Casque du courage",
+        "en": "Helmet of the Protector"
+      },
+      "slot": "helmet",
+      "maxQuality": 4,
+      "armor": 44,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": null,
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "HelmetCrownofValheim",
+      "name": {
+        "fr": "Couronne de Valheim",
+        "en": "Crown of Valheim"
+      },
+      "slot": "helmet",
+      "maxQuality": 1,
+      "armor": 50,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDress1",
+      "name": {
+        "fr": "Robe marron simple",
+        "en": "Plain Brown Dress"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress10",
+      "name": {
+        "fr": "Robe neutre simple",
+        "en": "Simple Undyed Dress"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress2",
+      "name": {
+        "fr": "Robe marron avec châle",
+        "en": "Brown Dress with Shawl"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress3",
+      "name": {
+        "fr": "Robe marron avec perles",
+        "en": "Brown Dress with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress4",
+      "name": {
+        "fr": "Robe bleue simple",
+        "en": "Plain Blue Dress"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress5",
+      "name": {
+        "fr": "Robe bleue avec châle",
+        "en": "Blue Dress with Shawl"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress6",
+      "name": {
+        "fr": "Robe bleue avec perles",
+        "en": "Blue Dress with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress7",
+      "name": {
+        "fr": "Robe jaune simple",
+        "en": "Plain Yellow Dress"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress8",
+      "name": {
+        "fr": "Robe jaune avec châle",
+        "en": "Yellow Dress with Shawl"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorDress9",
+      "name": {
+        "fr": "Robe jaune avec perles",
+        "en": "Yellow Dress with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorHarvester1",
+      "name": {
+        "fr": "Tunique des moissons",
+        "en": "Harvest Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "set": "harvester",
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorHarvester2",
+      "name": {
+        "fr": "Robe des moissons",
+        "en": "Harvest Dress"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "set": "harvester",
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorRagsChest",
+      "name": {
+        "fr": "Tunique en haillons",
+        "en": "Rag Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 2,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorTunic1",
+      "name": {
+        "fr": "Tunique bleue simple",
+        "en": "Plain Blue Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic10",
+      "name": {
+        "fr": "Tunique neutre simple",
+        "en": "Simple Undyed Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic2",
+      "name": {
+        "fr": "Tunique bleue avec cape",
+        "en": "Blue Tunic with Cape"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic3",
+      "name": {
+        "fr": "Tunique bleue avec perles",
+        "en": "Blue Tunic with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic4",
+      "name": {
+        "fr": "Tunique rouge simple",
+        "en": "Plain Red Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic5",
+      "name": {
+        "fr": "Tunique rouge avec cape",
+        "en": "Red Tunic with Cape"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic6",
+      "name": {
+        "fr": "Tunique rouge avec perles",
+        "en": "Red Tunic with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic7",
+      "name": {
+        "fr": "Tunique jaune simple",
+        "en": "Plain Yellow Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic8",
+      "name": {
+        "fr": "Tunique jaune avec cape",
+        "en": "Yellow Tunic with Cape"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorTunic9",
+      "name": {
+        "fr": "Tunique jaune avec perles",
+        "en": "Yellow Tunic with Beads"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": false,
+      "forge": null,
+      "obtain": "trader"
+    },
+    {
+      "id": "ArmorLeatherChest",
+      "name": {
+        "fr": "Tunique en cuir",
+        "en": "Leather Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 2,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorTrollLeatherChest",
+      "name": {
+        "fr": "Tunique en cuir de troll",
+        "en": "Troll Leather Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 6,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "troll",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBerserkerChest",
+      "name": {
+        "fr": "Marque de l'ours",
+        "en": "Patterns of the Bear"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 7,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBronzeChest",
+      "name": {
+        "fr": "Cuirasse en plaques de bronze",
+        "en": "Bronze Plate Tunic"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorRootChest",
+      "name": {
+        "fr": "Cuirasse de racines",
+        "en": "Root Harnesk"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "pierce": "resistant",
+        "fire": "weak"
+      },
+      "set": "root_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorFenringChest",
+      "name": {
+        "fr": "Manteau de Fenris",
+        "en": "Fenris Coat"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 10,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "set": "fenring_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorIronChest",
+      "name": {
+        "fr": "Armure d'écailles de fer",
+        "en": "Iron Scale Mail"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 14,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorLoxChest",
+      "name": {
+        "fr": "Veste en fourrure de lox",
+        "en": "Lox Fur Jacket"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "lox",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorMageChest",
+      "name": {
+        "fr": "Robe d'Eitr tissé",
+        "en": "Eitr-weave Robe"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBerserkerUndeadChest",
+      "name": {
+        "fr": "Torse d'ours maudit",
+        "en": "Vilebone Cage"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 18,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor_undead",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorMageChest_Ashlands",
+      "name": {
+        "fr": "Robe d'Embla",
+        "en": "Robes of Embla"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 19,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorWolfChest",
+      "name": {
+        "fr": "Plastron de loup",
+        "en": "Wolf Hide Chestpiece"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 20,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthMageChest",
+      "name": {
+        "fr": "Robe de l'orateur",
+        "en": "Robes of the Caller"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 22,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "ArmorPaddedCuirass",
+      "name": {
+        "fr": "Cuirasse rembourrée",
+        "en": "Padded Cuirass"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 26,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorAshlandsMediumChest",
+      "name": {
+        "fr": "Plastron d'Ask",
+        "en": "Breastplate of Ask"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 28,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "AshlandsMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorCarapaceChest",
+      "name": {
+        "fr": "Plastron en carapace",
+        "en": "Carapace Breastplate"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 32,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthMediumChest",
+      "name": {
+        "fr": "Plastron de cuir de l'Avant-garde",
+        "en": "Chestpiece of the Vanguard"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 34,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "set": "DeepNorthMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "ArmorFlametalChest",
+      "name": {
+        "fr": "Plastron en flametal",
+        "en": "Flametal Breastplate"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 38,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthHeavyChest",
+      "name": {
+        "fr": "Plastron du courage",
+        "en": "Breastplate of the Protector"
+      },
+      "slot": "chest",
+      "maxQuality": 4,
+      "armor": 44,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "ArmorRagsLegs",
+      "name": {
+        "fr": "Pantalon en haillons",
+        "en": "Rag Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 2,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorLeatherLegs",
+      "name": {
+        "fr": "Pantalon en cuir",
+        "en": "Leather Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 2,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorTrollLeatherLegs",
+      "name": {
+        "fr": "Pantalon en cuir de troll",
+        "en": "Troll Leather Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 6,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "troll",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBerserkerLegs",
+      "name": {
+        "fr": "Pagne de l'ours",
+        "en": "Loincloth of the Bear"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 7,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBronzeLegs",
+      "name": {
+        "fr": "Jambières en plaques de bronze",
+        "en": "Bronze Plate Leggings"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorRootLegs",
+      "name": {
+        "fr": "Bottes de racines",
+        "en": "Root Leggings"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 8,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "fire": "weak"
+      },
+      "set": "root_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorFenringLegs",
+      "name": {
+        "fr": "Braies de Fenris",
+        "en": "Fenris Leggings"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 10,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "fenring_armor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorIronLegs",
+      "name": {
+        "fr": "Jambières en plaques de fer",
+        "en": "Iron Greaves"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 14,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader2Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorLoxLegs",
+      "name": {
+        "fr": "Pantalon en fourrure de lox",
+        "en": "Lox Fur Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "lox",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorMageLegs",
+      "name": {
+        "fr": "Pantalon d'Eitr tissé",
+        "en": "Eitr-weave Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 16,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorBerserkerUndeadLegs",
+      "name": {
+        "fr": "Parure d'ours maudit",
+        "en": "Vilebone Drapes"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 18,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "berserker_armor_undead",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorMageLegs_Ashlands",
+      "name": {
+        "fr": "Pantalon d'Embla",
+        "en": "Trousers of Embla"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 19,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorWolfLegs",
+      "name": {
+        "fr": "Jambières de loup",
+        "en": "Wolf Hide Trousers"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 20,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthMagelegs",
+      "name": {
+        "fr": "Pantalon de l'orateur",
+        "en": "Trousers of the Caller"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 22,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "ArmorPaddedGreaves",
+      "name": {
+        "fr": "Jambières rembourrées",
+        "en": "Padded Greaves"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 26,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorAshlandsMediumlegs",
+      "name": {
+        "fr": "Pantalon d'Ask",
+        "en": "Trousers of Ask"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 28,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "AshlandsMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorCarapaceLegs",
+      "name": {
+        "fr": "Jambières en carapace",
+        "en": "Carapace Greaves"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 32,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthMediumlegs",
+      "name": {
+        "fr": "Pantalon de l'Avant-garde",
+        "en": "Trousers of the Vanguard"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 34,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "set": "DeepNorthMediumArmor",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "ArmorFlametalLegs",
+      "name": {
+        "fr": "Jambières en flametal",
+        "en": "Flametal Greaves"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 38,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "ArmorDeepNorthHeavylegs",
+      "name": {
+        "fr": "Pantalon du courage",
+        "en": "Trousers of the Protector"
+      },
+      "slot": "legs",
+      "maxQuality": 4,
+      "armor": 44,
+      "armorPerLevel": 2,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "upgradeOnly"
+    },
+    {
+      "id": "CapeAsksvin",
+      "name": {
+        "fr": "Manteau en asksvin",
+        "en": "Asksvin Cloak"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "dodgeStaminaModifier": -0.15,
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeDeerHide",
+      "name": {
+        "fr": "Cape en peau de cerf",
+        "en": "Deer Hide Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader0Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeFeather",
+      "name": {
+        "fr": "Cape de plumes",
+        "en": "Feather Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {
+        "fire": "veryWeak",
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader5Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeLinen",
+      "name": {
+        "fr": "Cape en tissu",
+        "en": "Linen Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeLox",
+      "name": {
+        "fr": "Cape de Lox",
+        "en": "Lox Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader4Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeOdin",
+      "name": {
+        "fr": "Cape d'Odin",
+        "en": "Cape of Oden"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "dlc"
+    },
+    {
+      "id": "CapeTrollHide",
+      "name": {
+        "fr": "Cape en peau de troll",
+        "en": "Troll Hide Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {},
+      "set": "troll",
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader1Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeWolf",
+      "name": {
+        "fr": "Cape en fourrure de loup",
+        "en": "Wolf Fur Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 1,
+      "armorPerLevel": 1,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader3Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeAsh",
+      "name": {
+        "fr": "Cape des cendres",
+        "en": "Ashen Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 12,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "blockStaminaModifier": -0.2,
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader6Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeDeepNorth",
+      "name": {
+        "fr": "Cape en peau d'élan",
+        "en": "Moose Hide Cape"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 12,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "craft"
+    },
+    {
+      "id": "CapeDeepNorthMage",
+      "name": {
+        "fr": "Cape de l'orateur",
+        "en": "Cape of the Caller"
+      },
+      "slot": "cape",
+      "maxQuality": 4,
+      "armor": 12,
+      "armorPerLevel": 2,
+      "modifiers": {
+        "frost": "resistant"
+      },
+      "dodgeStaminaModifier": -0.1,
+      "upgradable": true,
+      "forge": {
+        "idol": "Upgrader7Armor"
+      },
+      "obtain": "craft"
+    }
+  ],
   "forge": {
     "name": {
       "fr": "Forge du potentiel",
@@ -15671,71 +17589,261 @@
   },
   "ruleEffects": [
     {
+      "id": "GP_Bonemass",
       "name": {
         "fr": "Masse-d'Os",
         "en": "Bonemass"
       },
       "kind": "power",
-      "blockStamina": 0,
+      "ttl": 300,
+      "cooldown": 1200,
+      "modifiers": {
+        "blunt": "slightlyResistant",
+        "slash": "slightlyResistant",
+        "pierce": "slightlyResistant"
+      },
+      "blockStaminaModifier": -1,
       "blockStaminaFlat": -5
     },
     {
+      "id": "GP_Fader",
       "name": {
         "fr": "Pouvoir de Fader",
         "en": "Fader"
       },
       "kind": "power",
-      "stagger": 0.5
+      "ttl": 300,
+      "cooldown": 1200,
+      "modifiers": {
+        "fire": "resistant"
+      },
+      "staggerModifier": -0.5
     },
     {
+      "id": "GP_Moder",
+      "name": {
+        "fr": "Moder",
+        "en": "Moder"
+      },
+      "kind": "power",
+      "ttl": 300,
+      "cooldown": 1200,
+      "modifiers": {
+        "frost": "resistant"
+      }
+    },
+    {
+      "id": "GP_Queen",
+      "name": {
+        "fr": "La Reine",
+        "en": "The Queen"
+      },
+      "kind": "power",
+      "ttl": 300,
+      "cooldown": 1200,
+      "modifiers": {
+        "poison": "resistant"
+      }
+    },
+    {
+      "id": "GP_Yagluth",
+      "name": {
+        "fr": "Yagluth",
+        "en": "Yagluth"
+      },
+      "kind": "power",
+      "ttl": 300,
+      "cooldown": 1200,
+      "modifiers": {
+        "lightning": "resistant"
+      }
+    },
+    {
+      "id": "Potion_bzerker",
       "name": {
         "fr": "Hydromel des berserkir",
         "en": "Berserkir Mead"
       },
       "kind": "consumable",
-      "blockStamina": 0.2,
-      "dodgeStamina": 0.2
+      "items": [
+        "MeadBzerker"
+      ],
+      "ttl": 20,
+      "modifiers": {
+        "slash": "weak",
+        "blunt": "weak",
+        "pierce": "weak"
+      },
+      "blockStaminaModifier": -0.8,
+      "dodgeStaminaModifier": -0.8
     },
     {
+      "id": "Potion_barleywine",
+      "name": {
+        "fr": "Vin d'orge de résistance au feu",
+        "en": "Fire Resistance Barley Wine"
+      },
+      "kind": "consumable",
+      "items": [
+        "BarleyWine"
+      ],
+      "ttl": 600,
+      "modifiers": {
+        "fire": "resistant"
+      }
+    },
+    {
+      "id": "Potion_frostresist",
+      "name": {
+        "fr": "Hydromel de résistance au gel",
+        "en": "Frost Resistance Mead"
+      },
+      "kind": "consumable",
+      "items": [
+        "MeadFrostResist"
+      ],
+      "ttl": 600,
+      "modifiers": {
+        "frost": "resistant"
+      }
+    },
+    {
+      "id": "Potion_poisonresist",
+      "name": {
+        "fr": "Hydromel de résistance au poison",
+        "en": "Poison Resistance Mead"
+      },
+      "kind": "consumable",
+      "items": [
+        "MeadPoisonResist"
+      ],
+      "ttl": 600,
+      "modifiers": {
+        "poison": "veryResistant"
+      }
+    },
+    {
+      "id": "TrinketSilverResist",
+      "name": {
+        "fr": "Cœur de cristal",
+        "en": "Crystal Heart"
+      },
+      "kind": "trinket",
+      "items": [
+        "TrinketSilverResist"
+      ],
+      "adrenaline": 80,
+      "ttl": 50,
+      "modifiers": {
+        "blunt": "slightlyResistant",
+        "slash": "slightlyResistant",
+        "pierce": "slightlyResistant"
+      }
+    },
+    {
+      "id": "TrinketBlackStamina",
       "name": {
         "fr": "Voile d'ombre",
         "en": "Evasion Mantle"
       },
       "kind": "trinket",
-      "blockStamina": 0.5,
-      "parryPower": 1.5
+      "items": [
+        "TrinketBlackStamina"
+      ],
+      "adrenaline": 60,
+      "ttl": 120,
+      "parryBonus": 0.5,
+      "blockStaminaModifier": -0.5
     },
     {
+      "id": "TrinketIronHealth",
+      "name": {
+        "fr": "Broche en fer",
+        "en": "Iron Brooch"
+      },
+      "kind": "trinket",
+      "items": [
+        "TrinketIronHealth"
+      ],
+      "adrenaline": 65,
+      "ttl": 30,
+      "addArmor": 20
+    },
+    {
+      "id": "TrinketBloodGoldHealth",
+      "name": {
+        "fr": "Perce-cou",
+        "en": "Neckstabber"
+      },
+      "kind": "trinket",
+      "items": [
+        "TrinketBloodGoldHealth"
+      ],
+      "adrenaline": 65,
+      "ttl": 30,
+      "addArmor": 20
+    },
+    {
+      "id": "SetEffect_BerserkerArmor",
+      "name": {
+        "fr": "Berserker",
+        "en": "Berserk"
+      },
+      "kind": "set",
+      "set": {
+        "id": "berserker_armor",
+        "size": 3
+      },
+      "modifiers": {
+        "blunt": "slightlyWeak",
+        "slash": "slightlyWeak",
+        "pierce": "slightlyWeak"
+      }
+    },
+    {
+      "id": "SetEffect_FenringArmor",
+      "name": {
+        "fr": "Bénédiction de Fenris",
+        "en": "Fenris blessing"
+      },
+      "kind": "set",
+      "set": {
+        "id": "fenring_armor",
+        "size": 3
+      },
+      "modifiers": {
+        "fire": "resistant"
+      }
+    },
+    {
+      "id": "SetEffect_DeepNorthMediumArmor",
       "name": {
         "fr": "Avant-garde",
         "en": "Vanguard"
       },
       "kind": "set",
-      "dodgeStamina": 0.8
+      "set": {
+        "id": "DeepNorthMediumArmor",
+        "size": 3
+      },
+      "dodgeStaminaModifier": -0.2
     },
     {
+      "id": "SetEffect_BerserkerUndeadArmor",
       "name": {
-        "fr": "Cape des cendres",
-        "en": "Ashen Cape"
+        "fr": "Colère de l'ours maudit",
+        "en": "Vilebone Wrath"
       },
-      "kind": "equipment",
-      "blockStamina": 0.8
-    },
-    {
-      "name": {
-        "fr": "Manteau en asksvin",
-        "en": "Asksvin Cloak"
+      "kind": "set",
+      "set": {
+        "id": "berserker_armor_undead",
+        "size": 3
       },
-      "kind": "equipment",
-      "dodgeStamina": 0.85
-    },
-    {
-      "name": {
-        "fr": "Cape de l'orateur",
-        "en": "Cape of the Caller"
-      },
-      "kind": "equipment",
-      "dodgeStamina": 0.9
+      "modifiers": {
+        "blunt": "slightlyWeak",
+        "slash": "slightlyWeak",
+        "pierce": "slightlyWeak"
+      }
     }
   ]
 }

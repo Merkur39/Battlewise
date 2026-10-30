@@ -359,6 +359,24 @@ def _player(found):
     }
 
 
+def _freezing(found, names, biomes):
+    """Freezing, which Player.UpdateEnvStatusEffects gives in a freezing weather (EnvSetup.m_isFreezing),
+    away from fire and shelter, unless the player resists frost: its tick takes m_healthPerTick every
+    m_tickInterval s as generic damage, which neither armor nor resistance lowers. `biomes` holds the biome
+    ids in the order game.json lists them."""
+    se = next(row["data"] for row in found.rows("SE_Stats") if row["data"]["m_Name"] == "Freezing")
+    freezes = {setup["m_name"] for row in found.rows("EnvMan") for setup in row["data"]["m_environments"]
+               if setup["m_isFreezing"]}
+    where = {spawns.BIOMES[bit] for bit, weathers in spawns.weathers(found).items()
+             if bit in spawns.BIOMES and weathers & freezes}
+    return {
+        "name": names(se["m_name"]),
+        "damagePerSecond": _round(-se["m_healthPerTick"] / se["m_tickInterval"]),
+        "healthRegen": _round(se["m_healthRegenMultiplier"]),
+        "biomes": [biome for biome in biomes if biome in where],
+    }
+
+
 def _world(found, names):
     """Game's per-player scaling and the presets of the start screen's Combat slider, whose keys
     Game.UpdateWorldRates reads as percentages (enemyleveluprate multiplies the chance of a star,
@@ -466,6 +484,7 @@ def build(index, curation, workers=8):
         "game": source.game_version(),
         "world": _world(found, names),
         "player": _player(found),
+        "freezing": _freezing(found, names, curation["biomes"]),
         "biomes": [{"id": b, "name": names(BIOME_KEYS[b])} for b in curation["biomes"]],
         "damageTypes": {t: names("inventory_" + t) for t in DAMAGE_TYPES},
         "toolTypes": {t: names("inventory_" + t) for t in TOOL_TYPES},
@@ -473,6 +492,7 @@ def build(index, curation, workers=8):
         "statusEffects": _status_effects(found, creatures, names, report),
         "creatures": creatures,
         "blockers": arsenal.blockers(found, names, curation["ignoredItems"]),
+        "armorPieces": arsenal.pieces(found, names),
         "forge": arsenal.forge(found, names),
         "ruleEffects": rules.effects(found, names),
     }
