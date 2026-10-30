@@ -63,10 +63,6 @@ export interface HitResult {
   readonly bar: StaggerBar
 }
 
-// The player staggers at 40 % of max health (m_staggerDamageFactor).
-const STAGGER_LIMIT = 0.4
-// Player.m_blockStaminaDrain, spent in proportion to the share of the block power used.
-const BLOCK_STAMINA = 10
 // Character.ApplyDamage drops a direct hit of 0.1 or less, and its stagger with it.
 const MIN_DAMAGE = 0.1
 // Attack.GetLevelDamageFactor: each star adds half of the damage.
@@ -84,6 +80,27 @@ function scalingOf(scaling: HitScaling, world: World, stars: number): [number, n
   if (scaling === 'attack') return [worldScale(world).enemy * starFactor, starFactor]
   if (scaling === 'world') return [worldScale(world).enemy, 1]
   return [1, 1]
+}
+
+/**
+ * Humanoid.BlockAttack: a block costs the player's drain in proportion to the power it uses, a parry
+ * its own drain; the pieces add their share, then each effect its share of that and a flat amount,
+ * and a total below zero gives stamina back (SEMan.ModifyBlockStaminaUsage). A parry that holds then
+ * gives the item's refund, or else charges its drain once more, the pieces' share taken off this time.
+ */
+function guardStamina(defence: Defence, guard: Guard, used: number, broken: boolean): number {
+  const gear = defence.blockStaminaGear ?? 0
+  const cost = (drain: number, gearShare: number) => {
+    const withGear = drain + drain * gearShare
+    return (
+      withGear + withGear * (defence.blockStaminaEffects ?? 0) + (defence.blockStaminaFlat ?? 0)
+    )
+  }
+  if (guard === 'block') return cost(defence.blockStaminaDrain * used, gear)
+  const parried = cost(defence.parryStaminaDrain, gear)
+  if (broken) return parried
+  const refund = defence.parryStaminaRegen ?? 0
+  return refund > 0 ? parried - refund : parried + cost(defence.parryStaminaDrain, -gear)
 }
 
 /** The hit as the game lists it at these stars, before the world: what the interface shows. */
@@ -106,8 +123,10 @@ export function resolveHit(
   let damages = scaleDamages(hit.damages, typedFactor)
   const trueDamage = (hit.trueDamage ?? 0) * trueFactor
   const received = totalDamage(damages) + trueDamage
-  const limit = STAGGER_LIMIT * defence.maxHealth
+  const limit = defence.staggerFactor * defence.maxHealth
   const before = barBefore * limit
+  // Character.AddStaggerDamage: each effect adds its share of the stagger, at the shield and at the armor.
+  const staggerShare = 1 + (defence.staggerModifier ?? 0)
 
   let shield = 0
   let stamina = 0
@@ -116,11 +135,9 @@ export function resolveHit(
     damages = applyModifiers(damages, defence.blockerModifiers ?? {})
     const pastShield = applyArmorTo(damages, power)
     const blocked = totalDamage(damages) - totalDamage(pastShield)
-    shield = staggerDamage(pastShield)
+    shield = staggerDamage(pastShield) * staggerShare
     broken = before + shield >= limit
-    const refund = defence.parryStaminaRegen ?? 0
-    if (guard === 'block') stamina = BLOCK_STAMINA * Math.min(1, blocked / power)
-    else if (!broken && refund > 0) stamina = -refund
+    stamina = guardStamina(defence, guard, Math.min(1, blocked / power), broken)
     if (!broken) damages = pastShield
   }
 
@@ -128,7 +145,7 @@ export function resolveHit(
   const overTime = overTimeDamage(pastArmor)
   const direct = totalDamage(pastArmor) - overTime + trueDamage
   const landed = direct > MIN_DAMAGE
-  const armor = landed ? staggerDamage(pastArmor) * hit.staggerMultiplier : 0
+  const armor = landed ? staggerDamage(pastArmor) * hit.staggerMultiplier * staggerShare : 0
   const staggered = before + shield + armor >= limit
 
   return {

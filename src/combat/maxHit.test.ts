@@ -5,7 +5,15 @@ import { resolveHit, type Guard } from './hit'
 import { gaugeScale, maxHit, type Endurance } from './maxHit'
 import type { Difficulty, World } from './world'
 
-const silverShield: Defence = { blockPower: 81, parryPower: 121.5, armor: 45, maxHealth: 150 }
+const silverShield: Defence = {
+  blockPower: 81,
+  parryPower: 121.5,
+  armor: 45,
+  maxHealth: 150,
+  staggerFactor: 0.4,
+  blockStaminaDrain: 10,
+  parryStaminaDrain: 0,
+}
 const normal: World = { difficulty: 'normal', players: 1 }
 
 describe('maxHit', () => {
@@ -35,6 +43,10 @@ describe('maxHit', () => {
       parryPower: fc.constant(null),
       armor: fc.double({ min: 0, max: 300, noNaN: true }),
       maxHealth: fc.double({ min: 25, max: 400, noNaN: true }),
+      staggerFactor: fc.constant(0.4),
+      blockStaminaDrain: fc.constant(10),
+      parryStaminaDrain: fc.constant(0),
+      staggerModifier: fc.double({ min: -0.9, max: 1, noNaN: true }),
     })
     const world = fc.record({
       difficulty: fc.constantFrom(...difficulties),
