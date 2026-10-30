@@ -117,7 +117,7 @@ def build_mobile():
       <section aria-labelledby="b-cre" style="flex: none; display: flex; flex-direction: column">
         <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid #2C383D">
           <h2 id="b-cre" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #97A5AA">CRÉATURES · {{{{ creCount }}}}</h2>
-          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">AVEC TON ÉQUIPEMENT</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">SANS TES EFFETS TEMPORAIRES</span>
         </div>
         <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
         <sc-for list="{{{{ rows }}}}" as="r" hint-placeholder-count="1">
@@ -177,7 +177,7 @@ def build_desktop():
           <section aria-labelledby="b-cre" style="flex: none; display: flex; flex-direction: column">
             <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 1px solid #2C383D">
               <h3 id="b-cre" style="margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: #97A5AA">CRÉATURES · {{{{ creCount }}}}</h3>
-              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">AVEC TON ÉQUIPEMENT</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #7D8B91">SANS TES EFFETS TEMPORAIRES</span>
             </div>
             <ul style="list-style: none; margin: 0 -16px; padding: 0; display: flex; flex-direction: column">
               <sc-for list="{{{{ rows }}}}" as="r" hint-placeholder-count="1">

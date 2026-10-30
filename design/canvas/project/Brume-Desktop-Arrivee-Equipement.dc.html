@@ -74,39 +74,6 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
           </div>
           <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8D86A4">TITUBE À 28 (40 % DE 70 PV) · ARMURE 28 · VD = 28 × 1,1</span>
         </section>
-        <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px">
-          <label for="q-item" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">OBJET QUI BLOQUE</label>
-          <div style="display: flex; align-items: center; gap: 8px; height: 44px; border: 1px solid #342D47; border-radius: 4px; padding: 0 12px; background: #110F18">
-            <select id="q-item" style="flex: 1; height: 42px; background: transparent; border: 0; font-size: 15px; appearance: none"><option>Bouclier en bronze</option></select>
-            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9A2BF; border: 1px solid #342D47; border-radius: 3px; padding: 1px 6px">TARGE · ×2,5</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-          </div>
-          <span style="font-size: 12px; color: #8D86A4">Avec une torche en main gauche, c'est elle qui bloque.</span>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <label for="q-lvl" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">NIVEAU D'AMÉLIORATION</label>
-          <div style="display: flex; align-items: center; align-self: flex-start; border: 1px solid #342D47; border-radius: 4px; background: #110F18">
-            <button type="button" aria-label="Niveau inférieur" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-            <input id="q-lvl" type="text" inputmode="numeric" value="3" style="width: 48px; height: 40px; text-align: center; background: transparent; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
-            <button type="button" aria-label="Niveau supérieur" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
-          </div>
-          <span style="font-size: 12px; color: #8D86A4">+6 de VD par niveau ; au-delà du niveau 3 : Forge du potentiel.</span>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <label for="q-skill" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; white-space: nowrap">COMPÉTENCE BLOCAGE</label>
-          <div style="display: flex; align-items: center; gap: 10px">
-            <input id="q-skill" type="range" min="0" max="100" step="1" value="20" style="flex: 1; min-width: 0; height: 40px; margin: 0; accent-color: #BBA6F7">
-            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; min-width: 3ch; text-align: right">20</span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <label for="q-armor" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">ARMURE</label>
-          <div style="display: flex; align-items: center; border: 1px solid #342D47; border-radius: 4px; background: #110F18">
-            <button type="button" aria-label="Moins d'armure" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-            <input id="q-armor" type="text" inputmode="numeric" value="28" style="flex: 1; min-width: 0; width: 100%; height: 40px; text-align: center; background: transparent; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
-            <button type="button" aria-label="Plus d'armure" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
-          </div>
-        </div>
         <div style="display: flex; flex-direction: column; gap: 6px">
           <label for="q-hp" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF">PV MAX</label>
           <div style="display: flex; align-items: center; border: 1px solid #342D47; border-radius: 4px; background: #110F18">
@@ -115,6 +82,61 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
             <button type="button" aria-label="Plus de PV" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
           </div>
         </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="q-skill" style="font-size: 11px; letter-spacing: 0.08em; color: #A9A2BF; white-space: nowrap">COMPÉTENCE BLOCAGE</label>
+          <div style="display: flex; align-items: center; border: 1px solid #342D47; border-radius: 4px; background: #110F18">
+            <button type="button" aria-label="Moins de compétence" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+            <input id="q-skill" type="text" inputmode="numeric" value="20" style="flex: 1; min-width: 0; width: 100%; height: 40px; text-align: center; background: transparent; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">
+            <button type="button" aria-label="Plus de compétence" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+        </div>
+        <div style="grid-column: 1 / -1; border: 1px solid #342D47; border-radius: 4px; background: #110F18">
+          <div style="display: flex; align-items: center; min-height: 44px; padding-left: 10px">
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding: 4px 6px 4px 0"><label for="q-item" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">MAIN GAUCHE</label><span style="display: flex; align-items: center; gap: 4px"><select id="q-item" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option>Bouclier en bronze</option></select><span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; color: #A9A2BF; border: 1px solid #342D47; border-radius: 3px; padding: 1px 5px">TARGE · ×2,5</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span></span>
+            <span role="group" aria-label="Niveau 3" style="flex: none; display: flex; align-items: center; height: 44px; border-left: 1px solid #241F33"><button type="button" aria-label="Niveau inférieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span style="width: 24px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N3</span><button type="button" aria-label="Niveau supérieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
+          </div>
+        </div>
+        <section aria-labelledby="q-pieces" style="flex: none; display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1">
+          <h3 id="q-pieces" style="margin: 0; font-size: 11px; line-height: 14px; font-weight: 400; letter-spacing: 0.08em; color: #A9A2BF">PIÈCES D'ARMURES</h3>
+          <div style="border: 1px solid #342D47; border-radius: 4px; overflow: hidden; background: #110F18">
+            <div style="display: flex; align-items: center; min-height: 44px; padding-left: 10px; border-bottom: 1px solid #241F33">
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding: 4px 6px 4px 0"><label for="q-helmet" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">CASQUE</label><span style="display: flex; align-items: center; gap: 4px"><select id="q-helmet" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option>Casque en bronze</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span></span>
+              <span role="group" aria-label="Niveau 2" style="flex: none; display: flex; align-items: center; height: 44px; border-left: 1px solid #241F33"><button type="button" aria-label="Niveau inférieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span style="width: 24px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N2</span><button type="button" aria-label="Niveau supérieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
+            </div>
+            <div style="display: flex; align-items: center; min-height: 44px; padding-left: 10px; border-bottom: 1px solid #241F33">
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding: 4px 6px 4px 0"><label for="q-chest" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">PLASTRON</label><span style="display: flex; align-items: center; gap: 4px"><select id="q-chest" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option>Cuirasse en plaques de bronze</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span></span>
+              <span role="group" aria-label="Niveau 2" style="flex: none; display: flex; align-items: center; height: 44px; border-left: 1px solid #241F33"><button type="button" aria-label="Niveau inférieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span style="width: 24px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N2</span><button type="button" aria-label="Niveau supérieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
+            </div>
+            <div style="display: flex; align-items: center; min-height: 44px; padding-left: 10px; border-bottom: 1px solid #241F33">
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding: 4px 6px 4px 0"><label for="q-legs" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">JAMBIÈRES</label><span style="display: flex; align-items: center; gap: 4px"><select id="q-legs" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option>Jambières en plaques de bronze</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span></span>
+              <span role="group" aria-label="Niveau 1" style="flex: none; display: flex; align-items: center; height: 44px; border-left: 1px solid #241F33"><button type="button" aria-label="Niveau inférieur" disabled style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center; color: #342D47; cursor: default"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span style="width: 24px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px">N1</span><button type="button" aria-label="Niveau supérieur" style="width: 30px; height: 44px; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span>
+            </div>
+            <div style="display: flex; align-items: center; min-height: 44px; padding-left: 10px">
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding: 4px 10px 4px 0"><label for="q-cape" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">CAPE</label><span style="display: flex; align-items: center; gap: 4px"><select id="q-cape" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option>Aucune</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span></span>
+            </div>
+          </div>
+          <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+              <span style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 13px; line-height: 17px; color: #A9A2BF">Armure</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; line-height: 22px">28</span></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; color: #8D86A4">10 + 10 + 8</span>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="q-carry" style="flex: none; display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1">
+          <h3 id="q-carry" style="margin: 0; font-size: 11px; line-height: 14px; font-weight: 400; letter-spacing: 0.08em; color: #A9A2BF">CE QUE TU EMPORTES</h3>
+          <div style="border: 1px solid #342D47; border-radius: 4px; overflow: hidden; background: #110F18">
+            <div style="display: flex; flex-direction: column; gap: 2px; padding: 5px 10px 6px; border-bottom: 1px solid #241F33">
+              <label for="q-trinket" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">BIBELOT</label>
+              <span style="display: flex; align-items: center; gap: 4px"><select id="q-trinket" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option selected>Aucun</option><option>Broche en fer</option><option>Perce-cou</option><option>Cœur de cristal</option><option>Voile d'ombre</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 2px; padding: 5px 10px 6px; border-bottom: 1px solid #241F33">
+              <label for="q-power" style="font-size: 10px; line-height: 13px; letter-spacing: 0.08em; color: #A9A2BF">POUVOIR</label>
+              <span style="display: flex; align-items: center; gap: 4px"><select id="q-power" style="flex: 1; min-width: 0; height: 18px; padding: 0; border: 0; background: none; font-size: 14px; line-height: 18px; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; cursor: pointer"><option selected>Aucun</option><option>Masse-d'Os</option><option>Moder</option><option>Yagluth</option><option>La Reine</option><option>Pouvoir de Fader</option></select><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#A9A2BF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </div>
+            <button type="button" style="display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; box-sizing: border-box; padding: 0 10px; font-size: 14px; line-height: 18px; color: #BBA6F7; text-align: left"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 5v14M5 12h14"></path></svg>Ajouter une boisson</button>
+          </div>
+          <p style="margin: 2px 0 0; font-size: 12px; line-height: 17px; color: #8D86A4">Pas comptés d'office&nbsp;: allume-les sur la fiche d'une créature ou dans la Simulation, quand ils sont actifs.</p>
+        </section>
       </div>
       </div>
 

@@ -95,6 +95,34 @@ a{color:#24467A}a:hover{color:#1A3560}
                 </sc-for>
               </div>
             </div>
+            <div style="flex: none; border: 1px solid #CDBFA3; border-radius: 6px; background: #EFE7D6">
+              <button type="button" onClick="{{ fx.fold }}" aria-expanded="{{ fx.expanded }}" aria-controls="{{ fx.listId }}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; box-sizing: border-box; padding: 8px 12px; text-align: left">
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+                  <span style="font-size: 15px; line-height: 20px; color: #2B2219">Avec tes effets temporaires</span>
+                  <span style="font-size: 12px; line-height: 16px; color: #5E5141">{{ fx.summary }}</span>
+                </span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5E5141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transition: transform 0.15s; transform: {{ fx.chevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ fx.open }}" hint-placeholder-val="{{ false }}">
+              <div id="{{ fx.listId }}" role="group" aria-label="Tes effets temporaires" style="padding: 0 12px; border-top: 1px solid #E2D7C1">
+                <sc-for list="{{ fx.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-top: {{ r.divider }}">
+                    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+                      <span id="{{ r.id }}" style="font-size: 14px; line-height: 18px; color: {{ r.nameColor }}">{{ r.name }}</span>
+                      <span id="{{ r.tagId }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; line-height: 13px; letter-spacing: 0.04em; color: #685B4A">{{ r.tag }}</span>
+                      <sc-if value="{{ r.hasNote }}" hint-placeholder-val="{{ false }}">
+                        <span id="{{ r.noteId }}" style="font-size: 12px; line-height: 16px; color: #685B4A">{{ r.note }}</span>
+                      </sc-if>
+                    </div>
+                    <sc-if value="{{ r.switchable }}" hint-placeholder-val="{{ true }}">
+                      <button type="button" role="switch" aria-checked="{{ r.checked }}" aria-labelledby="{{ r.id }}" aria-describedby="{{ r.describedBy }}" onClick="{{ r.toggle }}" style="flex: none; width: 44px; height: 44px; margin: -4px 0; display: flex; align-items: center; justify-content: center"><span aria-hidden="true" style="position: relative; width: 38px; height: 22px; border: 1px solid {{ r.trackBorder }}; border-radius: 12px; background: {{ r.track }}; transition: background 0.15s, border-color 0.15s"><span style="position: absolute; top: 2px; left: {{ r.knob }}; width: 18px; height: 18px; border-radius: 50%; background: {{ r.knobColor }}; transition: left 0.15s"></span></span></button>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <p style="margin: 0; padding: 8px 0 10px; border-top: 1px solid #E2D7C1; font-size: 12px; line-height: 16px; color: #685B4A">Vaut jusqu'à ce que tu changes de créature.</p>
+              </div>
+              </sc-if>
+            </div>
           </sc-if>
           <sc-if value="{{ isValue }}" hint-placeholder-val="{{ false }}">
             <div style="display: flex; align-items: center; gap: 16px">
@@ -162,7 +190,52 @@ a{color:#24467A}a:hover{color:#1A3560}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { mode: 'attack', stars: 0, barPct: 0, value: 90, crashed: true };
+    this.state = { fx: [], fxOpen: false, mode: 'attack', stars: 0, barPct: 0, value: 90, crashed: true };
+  }
+  // « Avec tes effets temporaires »: what Ton équipement says the player carries, a switch each; folded, what is on.
+  fxCard(id, muted) {
+    const st = this.state;
+    const FX = [
+      { id: 'broche', name: 'Broche en fer', tag: "BIBELOT · 30 S DÈS 65 D'ADRÉNALINE" },
+      { id: 'masse', name: "Masse-d'Os", tag: 'POUVOIR · 5 MIN' },
+      { id: 'gel', name: 'Hydromel de résistance au gel', tag: 'BOISSON · 10 MIN' }
+    ];
+    const on = st.fx;
+    const names = FX.filter((e) => on.indexOf(e.id) !== -1).map((e) => e.name);
+    return {
+      open: st.fxOpen,
+      expanded: String(st.fxOpen),
+      fold: () => this.setState({ fxOpen: !st.fxOpen }),
+      chevron: st.fxOpen ? 'rotate(180deg)' : 'none',
+      listId: id + '-fx',
+      summary: names.length === 0 ? 'Aucun allumé' : names.length === 1 ? names[0] : names.slice(0, -1).join(', ') + ' et ' + names[names.length - 1],
+      rows: FX.map((e, i) => {
+        const lit = on.indexOf(e.id) !== -1;
+        const why = muted[e.id];
+        const key = id + '-fx-' + e.id;
+        return {
+          id: key,
+          tagId: key + '-tag',
+          noteId: key + '-note',
+          name: e.name,
+          nameColor: why ? '#5E5141' : '#2B2219',
+          tag: e.tag,
+          // What changes nothing says why, in brief.
+          hasNote: Boolean(why),
+          note: why ? 'Ne change rien\u00a0: ' + why : '',
+          describedBy: key + '-tag' + (why ? ' ' + key + '-note' : ''),
+          divider: i === 0 ? 'none' : '1px solid #E2D7C1',
+          // What changes nothing against this creature has no switch, unless it is on.
+          switchable: !why || lit,
+          checked: String(lit),
+          track: lit ? '#24467A' : '#CDBFA3',
+          trackBorder: lit ? '#24467A' : '#685B4A',
+          knob: lit ? '18px' : '2px',
+          knobColor: lit ? '#EFE7D6' : '#5E5141',
+          toggle: () => this.setState({ fx: FX.map((x) => x.id).filter((x) => (x === e.id ? !lit : on.indexOf(x) !== -1)) })
+        };
+      })
+    };
   }
   renderVals() {
     const fmt = (n, d) => Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 1 : d });
@@ -171,6 +244,12 @@ class Component extends DCLogic {
     const st = this.state;
     const isAttack = st.mode === 'attack';
     const hit = isAttack ? 130 * [1, 1.5, 2][st.stars] : st.value;
+    // What is on in « Avec tes effets temporaires », for an attack: the Brooch's armor, Bonemass's blunt resistance
+    // past the shield and its block stamina.
+    const on = isAttack ? st.fx : [];
+    const fxArmor = on.indexOf('broche') !== -1 ? 20 : 0;
+    const masse = on.indexOf('masse') !== -1;
+    const fxBlunt = masse ? 0.75 : 1, fxShare = masse ? -1 : 0, fxFlat = masse ? -5 : 0;
 
     const colors = { ok: '#2F6B33', warn: '#8A5300', bad: '#A3322A' };
     const fills = { ok: '#8CC48A', warn: '#E7B456', bad: '#DB8072' };
@@ -178,10 +257,12 @@ class Component extends DCLogic {
     const resolve = (mode, parry) => {
       const power = parry ? bp * pb : bp;
       const passes = armor(hit, power);
-      const cost = parry ? 0 : 10 * Math.min(1, (hit - passes) / power);
       const bar0 = T * st.barPct / 100;
       const broke = bar0 + passes >= T;
-      const taken = broke ? armor(hit, ac) : armor(passes, ac);
+      // SEMan.ModifyBlockStaminaUsage: each effect its share of the drain and a flat amount; a parry that holds pays twice.
+      const drain = (d) => d + d * fxShare + fxFlat;
+      const cost = parry ? (broke ? drain(0) : drain(0) + drain(0)) : drain(10 * Math.min(1, (hit - passes) / power));
+      const taken = broke ? armor(hit * fxBlunt, ac + fxArmor) : armor(passes * fxBlunt, ac + fxArmor);
       const shown = taken > 0.1 ? taken : 0;
       const staggered = broke || bar0 + passes + shown >= T;
       const state = broke ? 'bad' : (staggered ? 'warn' : 'ok');
@@ -195,7 +276,7 @@ class Component extends DCLogic {
         state: state, mode: mode, word: words[state], color: colors[state], fill: fills[state],
         border: state === 'ok' ? '#CDBFA3' : fills[state],
         taken: shown > 0 ? fmt(shown) : '0',
-        cost: parry ? '0 endurance' : '−' + fmt(cost, 0) + ' endurance',
+        cost: cost < 0 ? '+' + fmt(-cost, 0) + ' endurance' : parry ? '0 endurance' : '−' + fmt(cost, 0) + ' endurance',
         s0: segs[0].toFixed(2), s1: segs[1].toFixed(2), s2: segs[2].toFixed(2),
         barTxt: staggered ? 'barre de stagger : déborde' : 'barre de stagger : ' + fmt(total) + ' / ' + fmt(T),
         barColor: staggered ? colors[state] : '#685B4A',
@@ -215,6 +296,7 @@ class Component extends DCLogic {
       crashed: st.crashed,
       fine: !st.crashed,
       retry: () => this.setState({ crashed: false }),
+      fx: this.fxCard('d', { gel: 'pas de glace' }),
       isAttack: isAttack,
       isValue: !isAttack,
       modeOpts: [['attack', "Attaque d'un monstre"], ['value', 'Valeur libre']].map(([id, label]) => ({
