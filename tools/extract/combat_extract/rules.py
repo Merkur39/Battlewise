@@ -1,27 +1,28 @@
-"""The status effects and the equipment that change the rules the app explains: the stagger the player
-takes, the stamina a block or a dodge costs, the parry bonus.
+"""The status effects that change a fight for the player: what a hit takes from them (resistances, armor),
+the stagger they take, the power and the stamina of a guard, the stamina of a dodge; and where the player
+gets each one.
 
 Game rules followed:
-- SE_Stats.ModifyStagger, ModifyBlockStaminaUsage and ModifyDodgeStaminaUsage add the base value
-  times their modifier, so each multiplies the base by 1 + modifier; ModifyBlockStaminaUsage then
-  adds m_blockStaminaUseFlatValue; ModifyTimedBlockBonus multiplies the parry power by
-  1 + m_timedBlockBonus (Humanoid.BlockAttack);
-- equipment: Player.GetEquipmentBlockStaminaModifier and GetEquipmentDodgeStaminaModifier add up
-  m_blockStaminaModifier and m_dodgeStaminaModifier of the items worn, on the same base;
-- the player gets a status effect from a guardian power (ItemStand.m_guardianPower), a consumable
-  (m_consumeStatusEffect), a trinket at full adrenaline (m_fullAdrenalineSE), a set
-  (m_setStatusEffect) or an item worn (m_equipStatusEffect), of an item it can get (arsenal.obtainable).
+- resistances: SE_Stats.m_mods, merged as HitData.DamageModifiers.Apply does (SEMan.ApplyDamageMods);
+- armor: SE_Stats.ModifyArmorMods adds m_addArmor, then multiplies by 1 + m_armorMultiplier;
+- SE_Stats.ModifyStagger, ModifyBlockStaminaUsage and ModifyDodgeStaminaUsage add the base value times
+  their modifier, and ModifyBlockStaminaUsage then adds m_blockStaminaUseFlatValue; ModifyTimedBlockBonus
+  multiplies the parry power by 1 + m_timedBlockBonus (Humanoid.BlockAttack). Each value is kept as the
+  game holds it, a share added to the base, and only when it changes something;
+- where an effect comes from: a guardian power (ItemStand.m_guardianPower, which
+  Player.ActivateGuardianPower gives for m_ttl and holds back for m_cooldown); a drink, the
+  m_consumeStatusEffect of a Consumable item (Humanoid.CanConsumeItem refuses any other type, such as the
+  mead bases); a trinket, its m_fullAdrenalineSE once the adrenaline reaches Player.m_maxAdrenaline plus the
+  items' m_maxAdrenaline (Player.GetMaxAdrenaline, AddAdrenaline); a set, its m_setStatusEffect once m_setSize
+  items worn share m_setName (Humanoid.HaveSetEffect); an item worn, its m_equipStatusEffect. Only items the
+  player can get count (arsenal.obtainable). An effect is known by its asset name, as SEMan keys it.
 """
 from . import arsenal
+from .damage import pair_modifiers
 
-CLASSES = ("SE_Stats", "ItemStand")
+CLASSES = ("SE_Stats", "ItemStand", "Player")
 KINDS = ("power", "consumable", "trinket", "set", "equipment")
-ITEM_EFFECTS = (
-    ("m_consumeStatusEffect", "consumable"),
-    ("m_fullAdrenalineSE", "trinket"),
-    ("m_setStatusEffect", "set"),
-    ("m_equipStatusEffect", "equipment"),
-)
+CONSUMABLE = 2  # ItemDrop.ItemData.ItemType
 
 
 def _number(value, digits=4):
@@ -29,43 +30,54 @@ def _number(value, digits=4):
     return int(value) if value.is_integer() else value
 
 
-def _status_changes(se):
-    changes = {
-        "stagger": 1 + se["m_staggerModifier"],
-        "blockStamina": 1 + se["m_blockStaminaUseModifier"],
-        "blockStaminaFlat": se["m_blockStaminaUseFlatValue"],
-        "dodgeStamina": 1 + se["m_dodgeStaminaUseModifier"],
-        "parryPower": 1 + se["m_timedBlockBonus"],
+def changes(se):
+    """What an SE_Stats changes in a fight, named as the engine's Effect names it, without what changes
+    nothing."""
+    values = {
+        "modifiers": pair_modifiers(se["m_mods"]),
+        "addArmor": _number(se["m_addArmor"]),
+        "armorMultiplier": _number(se["m_armorMultiplier"]),
+        "staggerModifier": _number(se["m_staggerModifier"]),
+        "parryBonus": _number(se["m_timedBlockBonus"]),
+        "blockStaminaModifier": _number(se["m_blockStaminaUseModifier"]),
+        "blockStaminaFlat": _number(se["m_blockStaminaUseFlatValue"]),
+        "dodgeStaminaModifier": _number(se["m_dodgeStaminaUseModifier"]),
     }
-    neutral = {"blockStaminaFlat": 0}
-    return {k: _number(v) for k, v in changes.items() if _number(v) != neutral.get(k, 1)}
+    return {key: value for key, value in values.items() if value}
 
 
-def _item_changes(shared):
-    changes = {
-        "blockStamina": 1 + (shared.get("m_blockStaminaModifier") or 0),
-        "dodgeStamina": 1 + (shared.get("m_dodgeStaminaModifier") or 0),
-    }
-    return {k: _number(v) for k, v in changes.items() if _number(v) != 1}
+def _sources(found):
+    """(kind, status effect ref, where it comes from) of every way the player gets an effect."""
+    player = next(row for row in found.rows("Player") if row["go_ref"] == row["root_ref"])["data"]
+    for row in found.rows("ItemStand"):
+        yield "power", row["data"]["m_guardianPower"].get("_ref"), {}
+    for item_id, shared in sorted(arsenal.obtainable(found).items()):
+        if shared["m_itemType"] == CONSUMABLE:
+            yield "consumable", shared["m_consumeStatusEffect"].get("_ref"), {"items": [item_id]}
+        adrenaline = _number(player["m_maxAdrenaline"] + shared["m_maxAdrenaline"])
+        yield "trinket", shared["m_fullAdrenalineSE"].get("_ref"), {"items": [item_id], "adrenaline": adrenaline}
+        if shared["m_setName"] and shared["m_setSize"] > 1:
+            yield "set", shared["m_setStatusEffect"].get("_ref"), {"set": {"id": shared["m_setName"], "size": shared["m_setSize"]}}
+        yield "equipment", shared["m_equipStatusEffect"].get("_ref"), {"items": [item_id]}
 
 
 def effects(found, names):
-    """Rule effect dicts ({name, kind, and the multipliers that are not neutral}), by kind then
-    English name. `found` holds CLASSES and arsenal.CLASSES."""
+    """Rule effect dicts ({id, name, kind, where it comes from, ttl, cooldown, and its changes}), by kind
+    then English name. `found` holds CLASSES and arsenal.CLASSES."""
     stats = {"%s:%s" % (row["cab"], row["pid"]): row["data"] for row in found.rows("SE_Stats")}
-    sources = [("power", row["data"]["m_guardianPower"].get("_ref")) for row in found.rows("ItemStand")]
-    result, seen = [], set()
-    for item_id, shared in sorted(arsenal.obtainable(found).items()):
-        sources += [(kind, shared[field].get("_ref")) for field, kind in ITEM_EFFECTS]
-        own = _item_changes(shared)
-        if own:
-            result.append({"name": names(shared["m_name"]), "kind": "equipment", **own})
-    for kind, ref in sources:
+    result = {}
+    for kind, ref, source in _sources(found):
         se = stats.get(ref)
-        if se is None or se["m_name"] in seen:
+        if se is None or not changes(se):
             continue
-        seen.add(se["m_name"])
-        changes = _status_changes(se)
-        if changes:
-            result.append({"name": names(se["m_name"]), "kind": kind, **changes})
-    return sorted(result, key=lambda e: (KINDS.index(e["kind"]), e["name"]["en"]))
+        effect = result.get(se["m_Name"])
+        if effect is None:
+            effect = result[se["m_Name"]] = {"id": se["m_Name"], "name": names(se["m_name"]), "kind": kind, **source}
+            if se["m_ttl"] > 0:
+                effect["ttl"] = _number(se["m_ttl"])
+            if kind == "power":
+                effect["cooldown"] = _number(se["m_cooldown"])
+            effect.update(changes(se))
+        elif "items" in source:
+            effect["items"] = sorted(set(effect.get("items", [])) | set(source["items"]))
+    return sorted(result.values(), key=lambda e: (KINDS.index(e["kind"]), e["name"]["en"]))

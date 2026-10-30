@@ -1,6 +1,6 @@
 import { DAMAGE_TYPES, STAGGER_TYPES, type DamageType } from '@/combat/damage'
 import { game } from '@/data'
-import type { GameCreature, Localized } from '@/data/types'
+import type { BiomeId, GameCreature, GameRuleEffect, Localized } from '@/data/types'
 
 export const SHEETS = [
   'parry',
@@ -15,6 +15,19 @@ export const SHEETS = [
 ] as const
 export type SheetId = (typeof SHEETS)[number]
 
+/** What an effect or a piece of armor changes in a fight, as the Guide words it. */
+export type RuleChange = Pick<
+  GameRuleEffect,
+  | 'modifiers'
+  | 'addArmor'
+  | 'armorMultiplier'
+  | 'staggerModifier'
+  | 'parryBonus'
+  | 'blockStaminaModifier'
+  | 'blockStaminaFlat'
+  | 'dodgeStaminaModifier'
+>
+
 /** A sheet of the Guide: its title, the figure it turns on, and its rules, one sentence each. */
 export interface GuideSheet {
   readonly id: SheetId
@@ -27,6 +40,18 @@ const creature = (id: string): GameCreature => {
   const found = game.creatures.find((candidate) => candidate.id === id)
   if (!found) throw new Error(`No creature ${id} in the game data`)
   return found
+}
+
+const biomeName = (id: BiomeId): Localized => {
+  const found = game.biomes.find((biome) => biome.id === id)
+  if (!found) throw new Error(`No biome ${id} in the game data`)
+  return found.name
+}
+
+const attackName = (creatureId: string, attackId: string): Localized => {
+  const found = creature(creatureId).attacks.find((attack) => attack.ids.includes(attackId))
+  if (!found) throw new Error(`No attack ${attackId} for ${creatureId} in the game data`)
+  return found.name
 }
 
 const fighters = game.creatures.flatMap((c) => [c, ...(c.phases ?? [])])
@@ -68,4 +93,12 @@ export const figures = {
   eikthyr: creature('Eikthyr').name,
   gammeltroll: creature('TrollFrost').name,
   ruleEffects: game.ruleEffects,
+  freezing: { ...game.freezing, biomes: game.freezing.biomes.map(biomeName) },
+  frost: game.damageTypes.frost,
+  moder: creature('Dragon').name,
+  coldBreath: attackName('Dragon', 'dragon_coldbreath'),
+  /** The pieces whose own stamina shares change what a guard or a dodge costs. */
+  gearRules: game.armorPieces.filter(
+    (piece) => piece.blockStaminaModifier !== undefined || piece.dodgeStaminaModifier !== undefined,
+  ),
 }

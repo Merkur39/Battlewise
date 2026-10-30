@@ -30,6 +30,8 @@ const names = [
   ...summons.flatMap((s) => (s.name ? [s.name] : [])),
   ...fighters.flatMap((f) => (f.weakSpots ?? []).map((spot) => spot.name)),
   ...game.blockers.map((b) => b.name),
+  ...game.armorPieces.map((p) => p.name),
+  game.freezing.name,
   ...(game.forge ? [game.forge.name] : []),
   ...game.ruleEffects.map((e) => e.name),
 ]
@@ -37,6 +39,8 @@ const modifierSets = [
   game.player.modifiers,
   ...statusEffects.map((s) => s.modifiers),
   ...game.blockers.map((b) => b.modifiers),
+  ...game.armorPieces.map((p) => p.modifiers),
+  ...game.ruleEffects.map((e) => e.modifiers ?? {}),
   ...fighters.flatMap((f) => [
     f.modifiers,
     f.toolModifiers ?? {},
@@ -46,6 +50,16 @@ const modifierSets = [
 const blocker = (id: string) => {
   const found = game.blockers.find((b) => b.id === id)
   if (!found) throw new Error(`no blocker ${id}`)
+  return found
+}
+const piece = (id: string) => {
+  const found = game.armorPieces.find((p) => p.id === id)
+  if (!found) throw new Error(`no armor piece ${id}`)
+  return found
+}
+const effect = (id: string) => {
+  const found = game.ruleEffects.find((e) => e.id === id)
+  if (!found) throw new Error(`no rule effect ${id}`)
   return found
 }
 const duplicates = (ids: string[]) => ids.filter((id, index) => ids.indexOf(id) !== index)
@@ -87,14 +101,30 @@ describe('game data', () => {
     expect(clashes).toEqual([])
   })
 
+  it('freezes the player only in biomes the data lists', () => {
+    expect(game.freezing.biomes).not.toEqual([])
+    expect(game.freezing.biomes.filter((b) => !biomeIds.has(b))).toEqual([])
+  })
+
   it('takes the origin of a creature among the biomes', () => {
     const origins = game.creatures.flatMap((c) => (c.origin ? [c.origin] : []))
     expect(origins.filter((origin) => !biomeIds.has(origin))).toEqual([])
   })
 
-  it('has unique creature and blocker ids', () => {
+  it('has unique creature, blocker, armor piece and effect ids', () => {
     expect(duplicates(game.creatures.map((c) => c.id))).toEqual([])
     expect(duplicates(game.blockers.map((b) => b.id))).toEqual([])
+    expect(duplicates(game.armorPieces.map((p) => p.id))).toEqual([])
+    expect(duplicates(game.ruleEffects.map((e) => e.id))).toEqual([])
+  })
+
+  it("brings a set's effect only with pieces enough to wear it whole", () => {
+    const sets = game.ruleEffects.flatMap((e) => (e.set ? [e.set] : []))
+    const short = sets.filter(
+      (set) => game.armorPieces.filter((p) => p.set === set.id).length < set.size,
+    )
+    expect(sets).not.toEqual([])
+    expect(short).toEqual([])
   })
 
   it('describes every status effect an attack carries', () => {
@@ -178,5 +208,36 @@ describe('game data', () => {
         maxHealth: 150,
       }),
     ).toMatchObject({ blockPower: 81, parryPower: 121.5 })
+  })
+
+  it('gives the engine the pieces and the effects as the data lists them', () => {
+    const defence = defenceOf({
+      player: game.player,
+      blocker: blocker('ShieldIronBuckler'),
+      level: 3,
+      skill: 16,
+      armor: 0,
+      maxHealth: 140,
+      pieces: [
+        { ...piece('ArmorRootChest'), level: 4 },
+        { ...piece('CapeAsh'), level: 1 },
+      ],
+      effects: [effect('TrinketIronHealth'), effect('GP_Bonemass')],
+    })
+
+    expect(defence).toMatchObject({
+      armor: 14 + 12 + 20,
+      modifiers: {
+        blunt: 'slightlyResistant',
+        slash: 'slightlyResistant',
+        pierce: 'resistant',
+        fire: 'weak',
+        frost: 'resistant',
+        spirit: 'immune',
+      },
+      blockStaminaGear: -0.2,
+      blockStaminaEffects: -1,
+      blockStaminaFlat: -5,
+    })
   })
 })
