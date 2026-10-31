@@ -1,5 +1,5 @@
 // What the Arsenal tracks of #67 list, read from the game data with the app's own rules: every armor piece
-// by slot at the level picked, every power, trinket and drink that changes a fight, and the size of each
+// by slot at the level picked, every power, every trinket and drink that changes a fight, and the size of each
 // category. Run from this folder: node --import ../equipement-c3/hooks.mjs data.mts, then node build.mjs
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { game } from '@/data'
@@ -71,7 +71,8 @@ function changesOf(effect: GameRuleEffect): string[] {
   else if (block < 0) out.push(`bloquer coûte ${share(block)} d'endurance en moins`)
   if (effect.dodgeStaminaModifier) out.push(`esquiver coûte ${share(effect.dodgeStaminaModifier)} d'endurance en moins`)
   if (effect.staggerModifier) out.push(`tu titubes ${n(1 / (1 + effect.staggerModifier))}× moins vite`)
-  return out
+  // Eikthyr's and The Elder's powers.
+  return out.length > 0 ? out : ['ne change aucun coup']
 }
 
 const sets = new Map(game.ruleEffects.filter((e) => e.kind === 'set').map((e) => [e.set!.id, e]))
@@ -109,7 +110,7 @@ const pieces = Object.fromEntries(
 
 // Powers in the order the bosses fall, trinkets and drinks as Ton équipement lists them.
 const ORDER = [
-  'GP_Bonemass', 'GP_Moder', 'GP_Yagluth', 'GP_Queen', 'GP_Fader',
+  'GP_Eikthyr', 'GP_TheElder', 'GP_Bonemass', 'GP_Moder', 'GP_Yagluth', 'GP_Queen', 'GP_Fader',
   'TrinketIronHealth', 'TrinketBloodGoldHealth', 'TrinketSilverResist', 'TrinketBlackStamina',
   'Potion_frostresist', 'Potion_barleywine', 'Potion_poisonresist', 'Potion_bzerker',
 ]
