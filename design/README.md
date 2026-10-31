@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v200** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v201** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -219,7 +219,9 @@ v195), and their generators still write them (`scripts/arsenal/build.mjs --track
   rebuilt from the game data and stay interactive (a family or a category picked in Play shows its list; their state
   keeps `broken`, which the « Ligne plantée » boards set); their search fields open the new `Arsenal-Recherche` and
   `Desktop-Arsenal-Recherche`, drawn with « fer » as the Bestiaire's are with « tro », in the « Arsenal et mémo » rows.
-  The old Arsenal's hand-typed shields (level stepper, push-back, speed) are gone.
+  The old Arsenal's hand-typed shields (level stepper, push-back, speed) are gone. In v201, as the app's 1.15.1, the
+  powers are the game's seven: Eikthyr's and The Elder's come first, saying « Ne change aucun coup », and the desktop's
+  lede for what one carries reads « Lu dans le jeu : les pouvoirs, et les bibelots et boissons qui changent un combat ».
 - Page **Équipement → Arsenal · pistes** (`Choix-A` to `Choix-C`, each with its `-Desktop`), v194: three ways for Ton
   équipement's rows (En main, the pieces, what one carries) to lead to the Arsenal's lists (#67), on the mockups' scene
   (the wolf cape N3 swapped for the Ashen Cape, armor 45 → 58, gauges from the app's engine). Track A, the Arsenal's

@@ -827,7 +827,7 @@ ${logicHead()}
         ? 'Au niveau 1, avec ta compétence Blocage ${data.skill}\\u00a0; touche-en un pour choisir son niveau dans Ton équipement.'
         : kind === 'p'
           ? 'Au niveau 1\\u00a0; touche-en une pour choisir son niveau dans Ton équipement.'
-          : "Seulement ce qui change un combat, lu dans le jeu. L'emporter l'ajoute à Ton équipement\\u00a0; tu l'allumes sur la fiche d'une créature ou dans la Simulation."
+          : "Lu dans le jeu\\u00a0: les pouvoirs, et les bibelots et boissons qui changent un combat. L'emporter l'ajoute à Ton équipement\\u00a0; tu l'allumes sur la fiche d'une créature ou dans la Simulation."
     };
   }
 }
