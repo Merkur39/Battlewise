@@ -50,6 +50,10 @@ export function useEffectWording() {
   }
 
   return {
+    /** How long it lasts: « 30 s dès 65 d'adrénaline », « 5 min ». */
+    lasting,
+    /** What it changes, each change apart, the resistances first: « armure +20 ». */
+    changes,
     /** How long it lasts with its first change, then each other change on a line of its own. */
     lines(effect: GameRuleEffect): readonly string[] {
       const [first, ...rest] = changes(effect)

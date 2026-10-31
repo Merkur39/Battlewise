@@ -37,16 +37,16 @@ describe('parseRoute', () => {
     expect(parseRoute('#/simulation?modal=world')).toEqual(route('simulation', { modal: 'world' }))
   })
 
-  it('reads the item Your gear opens with, from the Arsenal', () => {
-    expect(parseRoute('#/arsenal?modal=gear&item=ShieldWood&level=2')).toEqual(
-      route('arsenal', { modal: 'gear', equip: { item: 'ShieldWood', level: 2 } }),
+  it('reads the item Your gear opens with, from the Arsenal: held, worn or carried', () => {
+    expect(parseRoute('#/arsenal/capes?modal=gear&item=CapeWolf')).toEqual(
+      route('arsenal', { path: ['capes'], modal: 'gear', equip: { item: 'CapeWolf' } }),
     )
   })
 
-  it('reads an item only for Your gear, and with a whole level', () => {
-    expect(parseRoute('#/arsenal?item=ShieldWood&level=2')).toEqual(route('arsenal'))
-    expect(parseRoute('#/arsenal?modal=gear&item=ShieldWood&level=two')).toEqual(
-      route('arsenal', { modal: 'gear' }),
+  it('reads an item only for Your gear, and leaves a level written before it', () => {
+    expect(parseRoute('#/arsenal?item=ShieldWood')).toEqual(route('arsenal'))
+    expect(parseRoute('#/arsenal?modal=gear&item=ShieldWood&level=2')).toEqual(
+      route('arsenal', { modal: 'gear', equip: { item: 'ShieldWood' } }),
     )
   })
 
@@ -68,10 +68,10 @@ describe('routeHash', () => {
   })
 
   it('writes the item Your gear opens with only while it is open', () => {
-    const equip = { item: 'ShieldWood', level: 2 }
+    const equip = { item: 'ShieldWood' }
 
     expect(routeHash(route('arsenal', { modal: 'gear', equip }))).toBe(
-      '#/arsenal?modal=gear&item=ShieldWood&level=2',
+      '#/arsenal?modal=gear&item=ShieldWood',
     )
     expect(routeHash(route('arsenal', { modal: null, equip }))).toBe('#/arsenal')
   })
@@ -83,7 +83,7 @@ describe('routeHash', () => {
       route('arsenal', {
         path: ['shields'],
         modal: 'gear',
-        equip: { item: 'ShieldWood', level: 3 },
+        equip: { item: 'GP_Bonemass' },
       }),
     ]
 

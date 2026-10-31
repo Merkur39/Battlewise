@@ -244,11 +244,10 @@ function CarriedSection({
   readonly onCarry: (carried: Carried) => void
 }) {
   const t = useT()
-  const language = useLanguage()
   const headingId = useId()
   // A drink row picked nothing yet: the first while none is carried, then one at a time on demand.
   const [adding, setAdding] = useState(false)
-  const drinks = carriable('consumable', language)
+  const drinks = carriable('consumable')
   const rows = [...carried.drinks, ...(adding || carried.drinks.length === 0 ? [NONE] : [])]
   const canAdd = !rows.includes(NONE) && carried.drinks.length < drinks.length
 
@@ -279,7 +278,7 @@ function CarriedSection({
           label={t.effects.kinds.trinket}
           value={carried.trinket ?? NONE}
           none={t.gear.noTrinket}
-          options={carriable('trinket', language)}
+          options={carriable('trinket')}
           onSelect={(id) => {
             onCarry({ ...carried, trinket: id === NONE ? null : id })
           }}
@@ -288,7 +287,7 @@ function CarriedSection({
           label={t.effects.kinds.power}
           value={carried.power ?? NONE}
           none={t.gear.noPower}
-          options={carriable('power', language)}
+          options={carriable('power')}
           onSelect={(id) => {
             onCarry({ ...carried, power: id === NONE ? null : id })
           }}

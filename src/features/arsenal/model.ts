@@ -1,76 +1,222 @@
 import { blockPower, parryPower } from '@/combat/block'
 import { game } from '@/data'
-import type { GameBlocker } from '@/data/types'
-import { maxLevel } from '@/features/gear/model'
+import type {
+  ArmorSlot,
+  GameArmorPiece,
+  GameBlocker,
+  GameRuleEffect,
+  Localized,
+} from '@/data/types'
+import { matchRange } from '@/features/bestiary/model'
+import {
+  carriable,
+  type Carried,
+  type CarriedEffect,
+  type CarriedKind,
+} from '@/features/gear/carried'
+import { pieceArmor, type Pieces } from '@/features/gear/pieces'
+import type { Language } from '@/i18n/detect'
 
-export const CATEGORIES = ['shields', 'weapons', 'others'] as const
-export type ArsenalCategory = (typeof CATEGORIES)[number]
+/** The Arsenal's categories, by the three families of Your gear. */
+export const FAMILIES = [
+  { id: 'hand', categories: ['shields', 'weapons', 'others'] },
+  { id: 'armor', categories: ['helmets', 'chests', 'legs', 'capes'] },
+  { id: 'carry', categories: ['powers', 'trinkets', 'drinks'] },
+] as const
 
-export const SORTS = ['power', 'parry', 'force', 'speed'] as const
-export type ArsenalSort = (typeof SORTS)[number]
+export type ArsenalFamily = (typeof FAMILIES)[number]['id']
+export type ArsenalCategory = (typeof FAMILIES)[number]['categories'][number]
+export type BlockerCategory = (typeof FAMILIES)[0]['categories'][number]
+export type PieceCategory = (typeof FAMILIES)[1]['categories'][number]
+export type EffectCategory = (typeof FAMILIES)[2]['categories'][number]
 
-export interface ArsenalOptions {
-  /** The upgrade level picked; each item stops at its own max. */
-  readonly level: number
-  /** Blocking skill, 0 to 100. */
-  readonly skill: number
-  /** The id of the item that blocks in Your gear. */
-  readonly equipped: string
-  readonly sort: ArsenalSort
+export const CATEGORIES: readonly ArsenalCategory[] = FAMILIES.flatMap(
+  ({ categories }) => categories,
+)
+
+export const familyOf = (category: ArsenalCategory) =>
+  FAMILIES.find(({ categories }) => (categories as readonly ArsenalCategory[]).includes(category))
+    ?.id ?? 'hand'
+
+const SLOTS: Record<PieceCategory, ArmorSlot> = {
+  helmets: 'helmet',
+  chests: 'chest',
+  legs: 'legs',
+  capes: 'cape',
+}
+const KINDS: Record<EffectCategory, CarriedKind> = {
+  powers: 'power',
+  trinkets: 'trinket',
+  drinks: 'consumable',
 }
 
-export interface ArsenalRow {
-  readonly blocker: GameBlocker
-  /** The level shown: the one picked, or the item's max when it stops below. */
-  readonly level: number
-  readonly power: number
-  /** Null when the item cannot parry. */
-  readonly parry: number | null
-  /** How hard a block pushes the attacker back. */
-  readonly force: number
-  /** Share of the movement speed it adds while held: -0.05 for 5 % slower. */
-  readonly speed: number
-  readonly equipped: boolean
-}
+export const isBlockerCategory = (category: ArsenalCategory): category is BlockerCategory =>
+  familyOf(category) === 'hand'
+export const isPieceCategory = (category: ArsenalCategory): category is PieceCategory =>
+  familyOf(category) === 'armor'
 
 /** The tab an item is listed under; null for what its own attack uses up (bombs, snowballs), which
  * nobody holds up to block. */
-export function categoryOf(blocker: GameBlocker): ArsenalCategory | null {
+export function categoryOf(blocker: GameBlocker): BlockerCategory | null {
   if (blocker.consumable) return null
   if (blocker.group === 'weapon') return 'weapons'
   if (blocker.group === 'other' || blocker.group === 'unarmed') return 'others'
   return 'shields'
 }
 
-const sortKey: Record<ArsenalSort, (row: ArsenalRow) => number> = {
-  power: (row) => row.power,
-  parry: (row) => row.parry ?? -Infinity,
-  force: (row) => row.force,
-  speed: (row) => row.speed,
+export const SORTS = ['power', 'parry'] as const
+export type ArsenalSort = (typeof SORTS)[number]
+
+export interface BlockerRow {
+  readonly id: string
+  readonly blocker: GameBlocker
+  readonly power: number
+  /** Null when the item cannot parry. */
+  readonly parry: number | null
+  readonly equipped: boolean
 }
 
-/** The items of a tab at your skill and the level picked: the one you hold first, then the most of
- * what the sort asks for first, the block power breaking ties. */
-export function arsenalRows(
-  category: ArsenalCategory,
-  { level, skill, equipped, sort }: ArsenalOptions,
-): ArsenalRow[] {
-  const key = sortKey[sort]
+/** What blocks, at level 1 and your skill: the item you hold first, then the most of what the sort
+ * asks for, the block power breaking ties. Its level is picked in Your gear. */
+export function blockerRows(
+  category: BlockerCategory,
+  {
+    skill,
+    equipped,
+    sort,
+  }: { readonly skill: number; readonly equipped: string; readonly sort: ArsenalSort },
+): BlockerRow[] {
+  const key = (row: BlockerRow) => (sort === 'power' ? row.power : (row.parry ?? -Infinity))
   return game.blockers
     .filter((blocker) => categoryOf(blocker) === category)
-    .map((blocker) => {
-      const shown = Math.min(level, maxLevel(blocker))
-      return {
-        blocker,
-        level: shown,
-        power: blockPower(blocker, shown, skill),
-        parry: parryPower(blocker, shown, skill),
-        force: blocker.deflectionForce + (shown - 1) * blocker.deflectionForcePerLevel,
-        speed: blocker.movementModifier,
-        equipped: blocker.id === equipped,
-      }
-    })
+    .map((blocker) => ({
+      id: blocker.id,
+      blocker,
+      power: blockPower(blocker, 1, skill),
+      parry: parryPower(blocker, 1, skill),
+      equipped: blocker.id === equipped,
+    }))
     .toSorted(
       (a, b) => Number(b.equipped) - Number(a.equipped) || key(b) - key(a) || b.power - a.power,
     )
+}
+
+export interface PieceRow {
+  readonly id: string
+  readonly piece: GameArmorPiece
+  /** At level 1. */
+  readonly armor: number
+  readonly perLevel: number
+  /** The set it belongs to, when wearing it whole changes a fight. */
+  readonly set: GameRuleEffect | null
+  readonly equipped: boolean
+}
+
+/** A slot's pieces at level 1: those worn first, then the most armor, then by name. */
+export function pieceRows(category: PieceCategory, worn: Pieces, language: Language = 'fr') {
+  const slot = SLOTS[category]
+  return game.armorPieces
+    .filter((piece) => piece.slot === slot)
+    .map((piece): PieceRow => ({
+      id: piece.id,
+      piece,
+      armor: pieceArmor(piece, 1),
+      perLevel: piece.armorPerLevel,
+      set:
+        game.ruleEffects.find(
+          (effect) => effect.set !== undefined && effect.set.id === piece.set,
+        ) ?? null,
+      equipped: worn[slot]?.id === piece.id,
+    }))
+    .toSorted(
+      (a, b) =>
+        Number(b.equipped) - Number(a.equipped) ||
+        b.armor - a.armor ||
+        a.piece.name[language].localeCompare(b.piece.name[language], language),
+    )
+}
+
+export interface EffectRow {
+  readonly id: string
+  readonly effect: CarriedEffect
+  readonly carried: boolean
+}
+
+/** What one carries of a kind, in the order of Your gear, what is carried first. */
+export function effectRows(category: EffectCategory, carried: Carried): EffectRow[] {
+  const ids = [carried.trinket, carried.power, ...carried.drinks]
+  return carriable(KINDS[category])
+    .map((effect) => ({ id: effect.id, effect, carried: ids.includes(effect.id) }))
+    .toSorted((a, b) => Number(b.carried) - Number(a.carried))
+}
+
+/** How many items a category lists. */
+export function categorySize(category: ArsenalCategory): number {
+  if (isBlockerCategory(category))
+    return game.blockers.filter((blocker) => categoryOf(blocker) === category).length
+  if (isPieceCategory(category))
+    return game.armorPieces.filter((piece) => piece.slot === SLOTS[category]).length
+  return carriable(KINDS[category]).length
+}
+
+/** What the Arsenal lists against: your skill, what you hold, wear and carry. */
+export interface ArsenalGear {
+  readonly skill: number
+  readonly equipped: string
+  readonly pieces: Pieces
+  readonly carried: Carried
+}
+
+export type CategoryRows =
+  | {
+      readonly kind: 'blocker'
+      readonly category: BlockerCategory
+      readonly rows: readonly BlockerRow[]
+    }
+  | { readonly kind: 'piece'; readonly category: PieceCategory; readonly rows: readonly PieceRow[] }
+  | {
+      readonly kind: 'effect'
+      readonly category: EffectCategory
+      readonly rows: readonly EffectRow[]
+    }
+
+/** A category's rows, in its own order; what blocks sorted as asked. */
+export function rowsOf(
+  category: ArsenalCategory,
+  gear: ArsenalGear,
+  language: Language,
+  sort: ArsenalSort = 'power',
+): CategoryRows {
+  if (isBlockerCategory(category))
+    return { kind: 'blocker', category, rows: blockerRows(category, { ...gear, sort }) }
+  if (isPieceCategory(category))
+    return { kind: 'piece', category, rows: pieceRows(category, gear.pieces, language) }
+  return { kind: 'effect', category, rows: effectRows(category, gear.carried) }
+}
+
+/** The rows of a category whose names hold the search. */
+function matching(found: CategoryRows, query: string, language: Language): CategoryRows {
+  const holds = (name: Localized) => matchRange(name[language], query) !== null
+  switch (found.kind) {
+    case 'blocker':
+      return { ...found, rows: found.rows.filter((row) => holds(row.blocker.name)) }
+    case 'piece':
+      return { ...found, rows: found.rows.filter((row) => holds(row.piece.name)) }
+    case 'effect':
+      return { ...found, rows: found.rows.filter((row) => holds(row.effect.name)) }
+  }
+}
+
+/** The categories whose names hold the search, accents and case aside, in the order of the families,
+ * each with the rows that match; nothing for an empty search. */
+export function searchArsenal(
+  query: string,
+  language: Language,
+  gear: ArsenalGear,
+  sort: ArsenalSort = 'power',
+): CategoryRows[] {
+  if (query.trim() === '') return []
+  return CATEGORIES.map((category) =>
+    matching(rowsOf(category, gear, language, sort), query, language),
+  ).filter(({ rows }) => rows.length > 0)
 }

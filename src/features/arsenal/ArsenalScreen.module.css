@@ -1,4 +1,4 @@
-/* Phone: the tabs, the level, then the cards, which alone scroll. */
+/* Phone: the search, the family and its categories, then the cards, which alone scroll. */
 .phone {
   flex: 1;
   min-width: 0;
@@ -13,15 +13,87 @@
   flex: none;
 }
 
-/* Desktop: the page title, the tools, then the table, which alone scrolls. */
+/* Desktop: the categories in a column, beside the page and its table, which alone scrolls. */
 .desktop {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  gap: 28px;
+  padding: 28px 32px 32px;
+}
+
+.aside {
+  flex: 0 0 196px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 2px;
+  overflow-y: auto;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.navCaption {
+  padding: 0 10px 4px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.navItem:hover {
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.navItem[aria-current='true'] {
+  background: var(--selection);
+  color: var(--accent);
+}
+
+/* What the search finds nothing in recedes. */
+.navNone,
+.navNone:hover {
+  color: var(--faint);
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navCount {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.navItem[aria-current='true'] .navCount {
+  color: var(--accent);
+}
+
+.page {
   flex: 1;
   min-width: 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 28px 32px 32px;
 }
 
 .pageHeader {
@@ -62,7 +134,82 @@
   flex: 1;
 }
 
-/* The tabs: one segmented control. */
+.note,
+.count {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--secondary);
+}
+
+/* The search, across every category. */
+.search {
+  box-sizing: border-box;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.search.compact {
+  flex: none;
+  height: 40px;
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--faint);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  appearance: none;
+}
+
+.compact .searchInput {
+  height: 36px;
+  font-size: 14px;
+}
+
+.searchInput::placeholder {
+  color: var(--faint);
+}
+
+/* The field has its own clear button. */
+.searchInput::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.clear {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.compact .clear {
+  width: 36px;
+  height: 36px;
+}
+
+/* The families: one segmented control; their categories: pills. */
 .segments {
   display: flex;
   overflow: hidden;
@@ -87,71 +234,112 @@
   font-weight: 500;
 }
 
+.pills {
+  display: flex;
+  gap: 6px;
+}
+
+.pill {
+  flex: 1;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--secondary);
+}
+
+.pill[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--selection);
+  color: var(--accent);
+}
+
 .segment:focus-visible,
-.step:focus-visible {
+.pill:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: -4px;
 }
 
-.phoneToolbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.phoneIntro {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 12px;
-  line-height: 1.35;
-  color: var(--secondary);
-}
-
-.level {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.stepper {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-}
-
-.step {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.step:disabled {
-  color: var(--line);
-  cursor: default;
-}
-
-.levelValue {
-  min-width: 36px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-/* Cards: the name and its tags, then four figures. */
-.cards {
+.phone > .list,
+.phone > .results {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   margin: 0 -16px;
+  padding: 0 16px;
+}
+
+.list {
+  border-top: 1px solid var(--line);
+}
+
+/* What the search found: each category under its name and family. */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 12px;
+}
+
+.desktop .results {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  gap: 24px;
+}
+
+.group {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.groupHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.desktop .groupHead {
+  padding-bottom: 8px;
+  border-bottom: 0;
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.groupFamily {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.seeAll {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Cards: the name and its tags, then what it brings. */
+.cards {
+  margin: 0 -16px;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--line);
 }
 
 /* A row that failed while drawing keeps the height of the others. */
@@ -168,7 +356,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   padding: 10px 16px;
   border-bottom: 1px solid var(--line-soft);
   color: var(--ink);
@@ -179,8 +367,9 @@
   color: var(--ink);
 }
 
-.card.equipped,
-tr.equipped {
+/* What is held, worn or carried stands out. */
+.card.owned,
+tr.owned {
   background: var(--selection);
 }
 
@@ -200,7 +389,7 @@ tr.equipped {
 }
 
 .tag,
-.equippedTag {
+.ownedTag {
   flex: none;
   padding: 1px 5px;
   border: 1px solid var(--line);
@@ -212,7 +401,7 @@ tr.equipped {
   color: var(--secondary);
 }
 
-.equippedTag {
+.ownedTag {
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -223,9 +412,8 @@ tr.equipped {
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  display: flex;
+  gap: 28px;
 }
 
 .stat {
@@ -261,28 +449,69 @@ tr.equipped {
   color: var(--faint);
 }
 
-/* Desktop tools. */
+.chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.chip {
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  white-space: nowrap;
+  color: var(--secondary);
+}
+
+.weak {
+  border-color: var(--secondary);
+  color: var(--ink);
+}
+
+.chipIcon {
+  margin-right: 5px;
+  vertical-align: -2px;
+}
+
+.line {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--secondary);
+}
+
+.chips + .line {
+  margin-top: 4px;
+}
+
+.when {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.changes {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Desktop: the sort of what blocks, then the table. */
 .toolbar {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 16px;
-}
-
-.toolbar .segment {
-  flex: none;
-  width: 120px;
-  height: 36px;
-}
-
-.toolbar .step {
-  width: 36px;
-  height: 36px;
-}
-
-.toolbar .levelValue {
-  min-width: 40px;
-  font-size: 14px;
 }
 
 .sort {
@@ -294,13 +523,17 @@ tr.equipped {
   font-size: 14px;
 }
 
-/* The table: its header stays put while the rows scroll. */
 .tableBox {
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+/* The table of a category alone scrolls, under a header that stays put. */
+.tableBox.scrolls {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  border: 1px solid var(--line);
-  border-radius: 6px;
 }
 
 .table {
@@ -311,8 +544,9 @@ tr.equipped {
 
 .table th,
 .table td {
-  padding: 0 8px;
+  padding: 10px 8px;
   text-align: left;
+  vertical-align: middle;
 }
 
 .table th:first-child,
@@ -330,21 +564,37 @@ tr.equipped {
   top: 0;
   z-index: 1;
   height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
   border-bottom: 1px solid var(--line);
   background: var(--surface);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--secondary);
 }
 
 .nameColumn {
-  width: 30%;
+  width: 26%;
 }
 
+.typeColumn {
+  width: 10%;
+}
+
+.durationColumn {
+  width: 9%;
+}
+
+.wide {
+  width: 28%;
+}
+
+/* Wide enough that the figures aligned right before it keep their distance from « Équiper ». */
 .actionColumn {
-  width: 120px;
+  width: 320px;
 }
 
 .table thead .number {
@@ -361,7 +611,7 @@ tr.equipped {
   font-weight: 400;
 }
 
-.nameCell .equippedTag {
+.nameCell .ownedTag {
   margin-left: 10px;
 }
 
@@ -380,7 +630,7 @@ tr.equipped {
   white-space: nowrap;
 }
 
-.powerCell {
+.table .powerCell {
   font-size: 17px;
   font-weight: 500;
 }
@@ -390,11 +640,25 @@ tr.equipped {
   font-weight: 400;
 }
 
+.monoCell {
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.listCell {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.listCell .changes {
+  font-size: 14px;
+}
+
 .table .actionCell {
   text-align: right;
 }
 
-.equippedAction {
+.ownedAction {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -402,7 +666,7 @@ tr.equipped {
   color: var(--accent);
 }
 
-.equip {
+.action {
   display: inline-flex;
   align-items: center;
   height: 32px;
@@ -414,7 +678,7 @@ tr.equipped {
   text-decoration: none;
 }
 
-.equip:hover {
+.action:hover {
   border-color: var(--faint);
   color: var(--ink);
 }

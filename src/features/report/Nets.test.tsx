@@ -51,14 +51,18 @@ vi.mock('@/features/arsenal/model', async (actual) => {
   const real = await actual<typeof import('@/features/arsenal/model')>()
   return {
     ...real,
-    arsenalRows: (...args: Parameters<typeof real.arsenalRows>) =>
-      real
-        .arsenalRows(...args)
-        .map((row) =>
-          row.blocker.id === failing.shield
+    rowsOf: (...args: Parameters<typeof real.rowsOf>) => {
+      const found = real.rowsOf(...args)
+      if (found.kind !== 'blocker') return found
+      return {
+        ...found,
+        rows: found.rows.map((row) =>
+          row.id === failing.shield
             ? { ...row, blocker: { ...row.blocker, name: undefined } as unknown as GameBlocker }
             : row,
         ),
+      }
+    },
   }
 })
 

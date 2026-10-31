@@ -5,11 +5,10 @@ export type Screen = (typeof SCREENS)[number]
 export const MODALS = ['settings', 'attack', 'gear', 'world', 'reports', 'news', 'notices'] as const
 export type Modal = (typeof MODALS)[number]
 
-/** The item Your gear opens with instead of the one saved: the Arsenal's « Équiper ». */
+/** What Your gear opens with besides what is saved: the Arsenal's « Équiper » or « Emporter ». */
 export interface Equip {
-  /** An item id of the game data, checked by the dialog. */
+  /** The id of an item that blocks, an armor piece or an effect one carries, checked by the dialog. */
   readonly item: string
-  readonly level: number
 }
 
 export interface Route {
@@ -36,7 +35,7 @@ function decode(segment: string) {
 }
 
 /** `#/bestiary/swamp/Troll?q=tro&modal=settings`; an unknown screen is the Bestiary. Your gear may
- * open with an item: `?modal=gear&item=ShieldWood&level=2`. */
+ * open with an item: `?modal=gear&item=ShieldWood`. */
 export function parseRoute(hash: string): Route {
   const [location = '', search = ''] = hash.replace(/^#\/?/, '').split('?')
   const [screen, ...path] = location
@@ -46,14 +45,12 @@ export function parseRoute(hash: string): Route {
   const params = new URLSearchParams(search)
   const modal = oneOf(MODALS, params.get('modal')) ?? null
   const item = params.get('item')
-  const level = Number(params.get('level'))
-  const equip = modal === 'gear' && item !== null && Number.isInteger(level) && level >= 1
   return {
     screen: oneOf(SCREENS, screen) ?? 'bestiary',
     path,
     query: params.get('q') ?? '',
     modal,
-    ...(equip ? { equip: { item, level } } : {}),
+    ...(modal === 'gear' && item !== null ? { equip: { item } } : {}),
   }
 }
 
@@ -61,10 +58,7 @@ export function routeHash({ screen, path, query, modal, equip }: Route): string 
   const params = new URLSearchParams()
   if (query !== '') params.set('q', query)
   if (modal !== null) params.set('modal', modal)
-  if (modal === 'gear' && equip) {
-    params.set('item', equip.item)
-    params.set('level', String(equip.level))
-  }
+  if (modal === 'gear' && equip) params.set('item', equip.item)
   const search = params.toString()
   const location = [screen, ...path].map(encodeURIComponent).join('/')
   return search === '' ? `#/${location}` : `#/${location}?${search}`
