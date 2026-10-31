@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.14.2',
+    date: '2026-10-31',
+    notes: [
+      {
+        text: {
+          fr: 'Les boutons + et − se maintiennent : tes PV max, ta compétence Blocage, le niveau de ce que tu portes et la Valeur libre de la Simulation avancent seuls, de plus en plus vite, tant que tu appuies. Cliquer vite ou appuyer longtemps ne sélectionne plus le texte d’à côté : un texte se sélectionne en double-cliquant dessus.',
+          en: 'The + and − buttons can be held: your Max HP, your Blocking skill, the level of what you wear and the Simulation’s Free value move on their own, faster and faster, while you press. Clicking fast or pressing long no longer selects the text beside them: a text is selected by double-clicking on it.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.14.1',
     date: '2026-10-31',
     notes: [
