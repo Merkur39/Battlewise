@@ -30,6 +30,20 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.15.0',
+    date: '2026-10-31',
+    notes: [
+      {
+        kind: 'improved',
+        title: { fr: "Nouveautés se lit d'un coup d'œil", en: "What's new reads at a glance" },
+        detail: {
+          fr: 'Une étiquette, un titre court, au plus une phrase.',
+          en: 'A tag, a short title, one sentence at most.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.14.2',
     date: '2026-10-31',
     notes: [
