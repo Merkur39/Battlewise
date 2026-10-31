@@ -30,6 +30,23 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.15.1',
+    date: '2026-10-31',
+    notes: [
+      {
+        kind: 'fixed',
+        title: {
+          fr: "Les sept pouvoirs sont dans l'Arsenal",
+          en: 'All seven powers are in the Arsenal',
+        },
+        detail: {
+          fr: "Eikthyr et L'Aîné s'emportent aussi, sans changer aucun coup.",
+          en: 'Eikthyr and The Elder can be carried too; they change no hit.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.15.0',
     date: '2026-10-31',
     notes: [
