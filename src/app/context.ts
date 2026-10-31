@@ -2,6 +2,7 @@ import { blockPower, defenceOf, type Defence } from '@/combat/block'
 import { worldScale } from '@/combat/world'
 import { game } from '@/data'
 import type { GameBlocker, GameWorldPreset } from '@/data/types'
+import { setEffects, wornPieces } from '@/features/gear/pieces'
 import type { Gear } from './store'
 import type { World } from '@/combat/world'
 
@@ -21,9 +22,16 @@ export function presetOf(world: World): GameWorldPreset {
 export const gearBlockPower = (gear: Gear) =>
   blockPower(blockerOf(gear.blocker), gear.level, gear.skill)
 
-/** What a hit is resolved against with this gear, under the player's own rules. */
+/** What a hit is resolved against with this gear, under the player's own rules: the pieces worn and the
+ * bonus of a complete set count, what is carried does not. */
 export const gearDefence = (gear: Gear): Defence =>
-  defenceOf({ ...gear, blocker: blockerOf(gear.blocker), player: game.player })
+  defenceOf({
+    ...gear,
+    blocker: blockerOf(gear.blocker),
+    player: game.player,
+    pieces: wornPieces(gear.pieces ?? {}),
+    effects: setEffects(gear.pieces ?? {}),
+  })
 
 /** What the world multiplies the hits monsters land on you by. */
 export const enemyScale = (world: World) => worldScale(world).enemy

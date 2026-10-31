@@ -1,18 +1,22 @@
-import { useId } from 'react'
+import { useId, type ReactNode } from 'react'
 import { blockerOf, gearDefence } from '@/app/context'
 import type { Gear } from '@/app/store'
 import { useIsDesktop } from '@/app/useMediaQuery'
+import { DAMAGE_TYPES } from '@/combat/damage'
+import { damageMultiplier } from '@/combat/modifiers'
 import type { World } from '@/combat/world'
 import { game } from '@/data'
+import type { ArmorSlot, GameRuleEffect } from '@/data/types'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
-import { ChevronDownIcon } from '@/ui/icons'
+import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
+import { ChevronDownIcon, MinusIcon, PlusIcon } from '@/ui/icons'
 import { NumberField } from '@/ui/NumberField'
 import { blockerGroups, blockPowerParts, maxLevel, withstand, type GuardGauge } from './model'
+import { pieceOf, SLOTS, slotPieces, summarize, type Pieces, type Worn } from './pieces'
 import styles from './GearForm.module.css'
 
-// Wide enough for any gear of the game; the fields only keep a typo in bounds.
-const MAX_ARMOR = 999
+// Wide enough for any gear of the game; the field only keeps a typo in bounds.
 const MAX_HEALTH = 999
 
 /** The fields of « Ton équipement », and what you can take with them in `world`, worked out again as
@@ -30,24 +34,19 @@ export function GearForm({
   const language = useLanguage()
   const isDesktop = useIsDesktop()
   const withstandId = useId()
-  const itemId = useId()
-  const skillId = useId()
 
   const blocker = blockerOf(gear.blocker)
-  const top = maxLevel(blocker)
-  const taken = withstand(gearDefence(gear), world)
+  const defence = gearDefence(gear)
+  const taken = withstand(defence, world)
   const parts = blockPowerParts(blocker, gear.level, gear.skill)
-  const n = (value: number) => formatNumber(value, language)
-  const group = blocker.group === 'unarmed' ? 'other' : blocker.group
 
-  const levelNote =
-    top === 1
-      ? t.gear.notUpgradable
-      : t.gear.levelNote(
-          blocker.blockPowerPerLevel,
-          blocker.maxQuality,
-          top > blocker.maxQuality && game.forge ? game.forge.name[language] : null,
-        )
+  // Picking a piece wears the pieces from then on: an earlier player's typed armor makes way for them.
+  const wear = (slot: ArmorSlot, worn: Worn | null) => {
+    const others = Object.fromEntries(
+      Object.entries(gear.pieces ?? {}).filter(([key]) => key !== slot),
+    ) as Pieces
+    onChange({ pieces: worn ? { ...others, [slot]: worn } : others, armor: 0 })
+  }
 
   return (
     <div className={styles.form}>
@@ -91,97 +90,12 @@ export function GearForm({
             taken.staggerAt,
             game.player.staggerFactor * 100,
             gear.maxHealth,
-            gear.armor,
+            defence.armor,
           )}
           {isDesktop && ` · ${t.gear.powerParts(parts.base, parts.skill)}`}
         </span>
       </section>
 
-      <div className={styles.item}>
-        <label htmlFor={itemId} className={styles.label}>
-          {t.gear.item}
-        </label>
-        <div className={styles.select}>
-          <select
-            id={itemId}
-            value={gear.blocker}
-            className={styles.selectInput}
-            onChange={(event) => {
-              const next = blockerOf(event.target.value)
-              onChange({ blocker: next.id, level: Math.min(gear.level, maxLevel(next)) })
-            }}
-          >
-            {blockerGroups(language).map(({ group: id, blockers }) => (
-              <optgroup key={id} label={t.gear.groups[id]}>
-                {blockers.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.name[language]}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-          <span className={styles.extras}>
-            <span className={styles.tag}>
-              {t.gear.groupTags[group]} ·{' '}
-              {blocker.timedBlockBonus > 1
-                ? t.gear.parryBonus(blocker.timedBlockBonus)
-                : t.gear.noParry}
-            </span>
-            <ChevronDownIcon size={18} className={styles.chevron} />
-          </span>
-        </div>
-        {isDesktop && <p className={styles.note}>{t.gear.torch}</p>}
-      </div>
-
-      <div className={styles.level}>
-        <NumberField
-          label={isDesktop ? t.gear.levelLong : t.gear.level}
-          value={gear.level}
-          min={1}
-          max={top}
-          lowerLabel={t.gear.lowerLevel}
-          raiseLabel={t.gear.raiseLevel}
-          compact={isDesktop}
-          onChange={(level) => {
-            onChange({ level })
-          }}
-        />
-        {isDesktop && <p className={styles.note}>{levelNote}</p>}
-      </div>
-
-      <div className={styles.skill}>
-        <label htmlFor={skillId} className={styles.label}>
-          {t.gear.skill}
-        </label>
-        <div className={styles.skillControl}>
-          <input
-            id={skillId}
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={gear.skill}
-            className={styles.range}
-            onChange={(event) => {
-              onChange({ skill: Number(event.target.value) })
-            }}
-          />
-          <span className={styles.skillValue}>{n(gear.skill)}</span>
-        </div>
-      </div>
-
-      <NumberField
-        label={t.gear.armor}
-        value={gear.armor}
-        min={0}
-        max={MAX_ARMOR}
-        lowerLabel={t.gear.lowerArmor}
-        raiseLabel={t.gear.raiseArmor}
-        onChange={(armor) => {
-          onChange({ armor })
-        }}
-      />
       <NumberField
         label={t.gear.health}
         value={gear.maxHealth}
@@ -193,8 +107,256 @@ export function GearForm({
           onChange({ maxHealth })
         }}
       />
+      <NumberField
+        label={t.gear.skill}
+        value={gear.skill}
+        min={0}
+        max={100}
+        lowerLabel={t.gear.lowerSkill}
+        raiseLabel={t.gear.raiseSkill}
+        onChange={(skill) => {
+          onChange({ skill })
+        }}
+      />
 
-      {!isDesktop && <p className={styles.footnote}>{`${t.gear.torch} ${levelNote}`}</p>}
+      <div className={styles.rows}>
+        <Row
+          label={t.gear.held}
+          value={gear.blocker}
+          onSelect={(id) => {
+            const next = blockerOf(id)
+            onChange({ blocker: next.id, level: Math.min(gear.level, maxLevel(next)) })
+          }}
+          level={gear.level}
+          max={maxLevel(blocker)}
+          onLevel={(level) => {
+            onChange({ level })
+          }}
+        >
+          {blockerGroups(language).map(({ group, blockers }) => (
+            <optgroup key={group} label={t.gear.groups[group]}>
+              {blockers.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name[language]}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </Row>
+      </div>
+
+      <PiecesSection gear={gear} onWear={wear} />
+    </div>
+  )
+}
+
+const NONE = ''
+
+/** The pieces worn, slot by slot, their armor, and what they and their complete sets resist. */
+function PiecesSection({
+  gear,
+  onWear,
+}: {
+  readonly gear: Gear
+  readonly onWear: (slot: ArmorSlot, worn: Worn | null) => void
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const headingId = useId()
+  const pieces: Pieces = gear.pieces ?? {}
+  const summary = summarize(pieces)
+  const typed = gear.pieces === undefined && gear.armor > 0
+  const n = (value: number) => formatNumber(value, language)
+
+  return (
+    <section aria-labelledby={headingId} className={styles.pieces}>
+      <h3 id={headingId} className={styles.label}>
+        {t.gear.pieces}
+      </h3>
+      <div className={styles.rows}>
+        {SLOTS.map((slot) => {
+          const worn = pieces[slot]
+          return (
+            <Row
+              key={slot}
+              label={t.gear.slots[slot]}
+              value={worn?.id ?? NONE}
+              onSelect={(id) => {
+                onWear(
+                  slot,
+                  id === NONE
+                    ? null
+                    : { id, level: Math.min(worn?.level ?? 1, maxLevel(pieceOf(id))) },
+                )
+              }}
+              level={worn?.level ?? null}
+              max={worn ? maxLevel(pieceOf(worn.id)) : 1}
+              onLevel={(level) => {
+                if (worn) onWear(slot, { ...worn, level })
+              }}
+            >
+              <option value={NONE}>{t.gear.noPiece}</option>
+              {slotPieces(slot, language).map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name[language]}
+                </option>
+              ))}
+            </Row>
+          )
+        })}
+      </div>
+
+      <div className={styles.total}>
+        <div className={styles.totalLine}>
+          <span className={styles.totalName}>
+            <span className={styles.totalLabel}>{t.gear.armor}</span>
+            <span className={styles.totalValue}>{n(typed ? gear.armor : summary.armor)}</span>
+          </span>
+          {summary.parts.length > 0 && (
+            <span className={styles.parts}>{t.gear.armorParts(summary.parts)}</span>
+          )}
+        </div>
+        {typed && <p className={styles.note}>{t.gear.typedArmor}</p>}
+        <Resistances modifiers={summary.modifiers} />
+        {summary.sets.map((set) => (
+          <SetBlock key={set.id} set={set} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/** One chip per damage type, the game's names: a weakness stands out, a resistance recedes. */
+function Resistances({
+  modifiers,
+}: {
+  readonly modifiers: ReturnType<typeof summarize>['modifiers']
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const shown = DAMAGE_TYPES.flatMap((type) => {
+    const modifier = modifiers[type]
+    return modifier === undefined || modifier === 'normal' || modifier === 'ignore'
+      ? []
+      : [{ type, modifier, multiplier: damageMultiplier(modifier) }]
+  })
+  if (shown.length === 0) return null
+  return (
+    <ul aria-label={t.gear.resistances} className={styles.chips}>
+      {shown.map(({ type, modifier, multiplier }) => (
+        <li
+          key={type}
+          className={`${styles.chip ?? ''} ${multiplier > 1 ? (styles.weak ?? '') : ''}`}
+        >
+          <DamageTypeIcon type={type} className={styles.chipIcon} />
+          {t.creature.modifier(
+            game.damageTypes[type][language],
+            game.modifiers[modifier][language],
+            multiplier,
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+/** A set worn whole, by its name in the game, and what it changes. */
+function SetBlock({ set }: { readonly set: GameRuleEffect }) {
+  const t = useT()
+  const language = useLanguage()
+  const byMultiplier = new Map<number, string[]>()
+  for (const type of DAMAGE_TYPES) {
+    const modifier = set.modifiers?.[type]
+    if (modifier === undefined || modifier === 'normal' || modifier === 'ignore') continue
+    const multiplier = damageMultiplier(modifier)
+    byMultiplier.set(multiplier, [
+      ...(byMultiplier.get(multiplier) ?? []),
+      game.damageTypes[type][language],
+    ])
+  }
+  const changes = [
+    ...[...byMultiplier].map(([multiplier, types]) => t.gear.setModifier(types, multiplier)),
+    ...(set.dodgeStaminaModifier ? [t.gear.dodgeCost(-set.dodgeStaminaModifier * 100)] : []),
+  ]
+  return (
+    <div role="group" aria-label={t.gear.fullSet} className={styles.set}>
+      <span className={styles.setLabel}>{t.gear.fullSet}</span>
+      <span className={styles.setName}>{set.name[language]}</span>
+      {changes.map((change) => (
+        <span key={change} className={styles.setChange}>
+          {change}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+/** A row of what Your gear holds: its name over a list to change it, its level on the right. */
+function Row({
+  label,
+  value,
+  onSelect,
+  level,
+  max,
+  onLevel,
+  children,
+}: {
+  readonly label: string
+  readonly value: string
+  readonly onSelect: (id: string) => void
+  /** Null when the row holds nothing. */
+  readonly level: number | null
+  readonly max: number
+  readonly onLevel: (level: number) => void
+  readonly children: ReactNode
+}) {
+  const t = useT()
+  const id = useId()
+  return (
+    <div className={styles.row}>
+      <span className={styles.rowMain}>
+        <label htmlFor={id} className={styles.rowLabel}>
+          {label}
+        </label>
+        <span className={styles.rowSelect}>
+          <select
+            id={id}
+            value={value}
+            className={styles.selectInput}
+            onChange={(event) => {
+              onSelect(event.target.value)
+            }}
+          >
+            {children}
+          </select>
+          <ChevronDownIcon size={14} className={styles.chevron} />
+        </span>
+      </span>
+      <span role="group" aria-label={t.gear.levelOf(label, level)} className={styles.stepper}>
+        <button
+          type="button"
+          aria-label={t.gear.lowerLevelOf(label)}
+          disabled={level === null || level <= 1}
+          className={styles.step}
+          onClick={() => {
+            if (level !== null) onLevel(level - 1)
+          }}
+        >
+          <MinusIcon size={14} />
+        </button>
+        <span className={styles.stepValue}>{level === null ? '—' : t.gear.levelValue(level)}</span>
+        <button
+          type="button"
+          aria-label={t.gear.raiseLevelOf(label)}
+          disabled={level === null || level >= max}
+          className={styles.step}
+          onClick={() => {
+            if (level !== null) onLevel(level + 1)
+          }}
+        >
+          <PlusIcon size={14} />
+        </button>
+      </span>
     </div>
   )
 }

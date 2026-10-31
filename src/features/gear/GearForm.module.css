@@ -20,8 +20,7 @@
   color: var(--faint);
 }
 
-.note,
-.footnote {
+.note {
   margin: 0;
   font-size: 12px;
   color: var(--faint);
@@ -138,24 +137,50 @@
   background: var(--bad-fill);
 }
 
-/* The item that blocks: a native select across the whole box, so that a tap anywhere opens it; its
- * group and parry bonus lie over its right end, letting taps through, over a fade that hides a long
- * name running under them. */
-.item {
+/* What Your gear holds, a row each: in hand, then the pieces. */
+.rows {
+  --rows-background: var(--surface);
+
   grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.select {
-  --select-background: var(--surface);
-
-  position: relative;
-  height: 48px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: var(--select-background);
+  background: var(--rows-background);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-left: 10px;
+}
+
+.row + .row {
+  border-top: 1px solid var(--line-soft);
+}
+
+/* The row's name over a native select that covers both, so that a tap anywhere on them opens it. */
+.rowMain {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+}
+
+.rowMain:has(:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+
+.rowLabel {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  pointer-events: none;
 }
 
 .selectInput {
@@ -163,11 +188,12 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 0 12px;
+  padding: 17px 24px 0 0;
   border: 0;
-  border-radius: 4px;
   background: transparent;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 18px;
+  white-space: nowrap;
   text-overflow: ellipsis;
   appearance: none;
   cursor: pointer;
@@ -177,82 +203,151 @@
   outline: none;
 }
 
-.select:has(:focus-visible) {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
-
 .selectInput option,
 .selectInput optgroup {
   background: var(--surface);
   color: var(--ink);
 }
 
-.extras {
+.chevron {
   position: absolute;
-  inset: 0 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 12px 0 20px;
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(to right, transparent, var(--select-background) 14px);
+  right: 6px;
+  bottom: 7px;
+  color: var(--secondary);
   pointer-events: none;
 }
 
-.tag {
+/* The level, stepped one by one, apart from the name. */
+.stepper {
   flex: none;
-  padding: 1px 6px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-left: 1px solid var(--line-soft);
+}
+
+.step {
+  width: 30px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step:disabled {
+  color: var(--line);
+  cursor: default;
+}
+
+.stepValue {
+  min-width: 28px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--secondary);
+  font-size: 13px;
+  text-align: center;
 }
 
-.chevron {
-  flex: none;
-  color: var(--secondary);
-}
-
-.level,
-.skill {
-  min-width: 0;
+.pieces {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* The label on its own line, whole; the value at the end of the slider it follows. */
-.skill .label {
-  white-space: nowrap;
-}
-
-.skillControl {
+.total {
+  margin-top: 4px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.skillValue {
-  min-width: 3ch;
+.totalLine {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.totalName {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.totalLabel {
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+.totalValue {
   font-family: var(--font-mono);
-  font-size: 15px;
-  text-align: right;
+  font-size: 17px;
 }
 
-.range {
-  flex: 1;
-  min-width: 0;
-  height: 44px;
+.parts {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+/* Damage types stay neutral: a weakness stands out, a resistance recedes. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   margin: 0;
-  accent-color: var(--accent);
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
 }
 
-.footnote {
-  grid-column: 1 / -1;
+.chip {
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--secondary);
+}
+
+.weak {
+  border-color: var(--secondary);
+  color: var(--ink);
+}
+
+.chipIcon {
+  margin-right: 5px;
+  vertical-align: -2px;
+}
+
+.set {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px 10px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--rows-background, var(--surface));
+}
+
+.setLabel {
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.setName {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.setChange {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--faint);
 }
 
 @media (min-width: 1024px) {
@@ -279,13 +374,8 @@
     font-size: 15px;
   }
 
-  .select {
-    --select-background: var(--bg);
-
-    height: 44px;
-  }
-
-  .range {
-    height: 40px;
+  .rows,
+  .set {
+    --rows-background: var(--bg);
   }
 }

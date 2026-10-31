@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { vi } from 'vitest'
 import { createStore, type AppState, type Gear, type Store } from '@/app/store'
 import { StoreContext } from '@/app/useAppState'
+import type { Pieces } from '@/features/gear/pieces'
 import { createIssueStates } from '@/features/report/issues'
 import { createOutbox, SendError, type Outbox } from '@/features/report/outbox'
 import { IssueStatesContext, OutboxContext } from '@/features/report/useReport'
@@ -15,6 +16,15 @@ export const MOCKUP_GEAR: Gear = {
   skill: 25,
   armor: 45,
   maxHealth: 150,
+}
+
+/** The pieces of the mockups: iron at level 1 and the wolf cape at level 3, armor 45 as MOCKUP_GEAR types
+ * it, with the cape's resistance to frost. */
+export const MOCKUP_PIECES: Pieces = {
+  helmet: { id: 'HelmetIron', level: 1 },
+  chest: { id: 'ArmorIronChest', level: 1 },
+  legs: { id: 'ArmorIronLegs', level: 1 },
+  cape: { id: 'CapeWolf', level: 3 },
 }
 
 /** An outbox kept in memory, offline: what is reported waits in it. */

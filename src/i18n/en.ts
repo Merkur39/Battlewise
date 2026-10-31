@@ -31,6 +31,10 @@ export const en: Catalog = {
     summary: (item, level, blockPower, skill) =>
       `Your gear: ${item} level ${n(level)}, block power ${n(blockPower)}, Blocking skill ${n(skill)}`,
     levelAndPower: (level, blockPower) => `Lv${n(level)} · Block ${n(blockPower)}`,
+    bodySummary: (armor, health, pieces) =>
+      pieces === null
+        ? `Armor ${n(armor)}, typed · ${n(health)} max HP`
+        : `Armor ${n(armor)} · ${n(health)} max HP${pieces.length > 0 ? `: ${pieces.join(', ')}` : ''}`,
     title: 'Your gear',
     withstand: 'What you can take',
     emptyBar: 'Empty bar',
@@ -43,7 +47,7 @@ export const en: Catalog = {
     staggersAt: (limit, share, health, armor) =>
       `Staggers at ${n(limit)} (${n(share)}% of ${n(health)} HP) · armor ${n(armor)}`,
     powerParts: (base, skill) => `power = ${n(base)} × ${n(skill)}`,
-    item: 'Blocking item',
+    held: 'In hand',
     groups: {
       round: 'Round shields',
       buckler: 'Bucklers',
@@ -60,23 +64,26 @@ export const en: Catalog = {
     },
     parryBonus: (bonus) => `×${n(bonus)}`,
     noParry: "can't parry",
-    torch: 'With a torch in your left hand, the torch blocks.',
-    level: 'Level',
-    levelLong: 'Upgrade level',
     lowerLevel: 'Lower level',
     raiseLevel: 'Higher level',
-    levelNote: (perLevel, maxQuality, forge) => {
-      const gain =
-        perLevel > 0 ? `+${n(perLevel)} power per level` : 'The level leaves its power alone'
-      return forge
-        ? `${gain}; past level ${n(maxQuality)}: ${forge}.`
-        : `${gain}, up to the item's max level.`
-    },
-    notUpgradable: "This item can't be upgraded.",
+    levelOf: (row, level) => (level === null ? `${row}: none` : `${row}: level ${n(level)}`),
+    lowerLevelOf: (row) => `${row}: lower level`,
+    raiseLevelOf: (row) => `${row}: higher level`,
+    levelValue: (level) => `Lv${n(level)}`,
     skill: 'Blocking skill',
+    lowerSkill: 'Less skill',
+    raiseSkill: 'More skill',
+    pieces: 'Armor pieces',
+    slots: { helmet: 'Helmet', chest: 'Chest', legs: 'Legs', cape: 'Cape' },
+    noPiece: 'None',
     armor: 'Armor',
-    lowerArmor: 'Less armor',
-    raiseArmor: 'More armor',
+    armorParts: (parts) => parts.map(n).join(' + '),
+    typedArmor: 'Armor typed in an earlier version: pick your pieces to replace it.',
+    resistances: 'Your resistances',
+    fullSet: 'Full set',
+    setModifier: (types, multiplier) =>
+      `${new Intl.ListFormat('en', { type: 'conjunction' }).format(types)} ×${n(multiplier)}`,
+    dodgeCost: (share) => `Dodging costs ${n(share)}% less stamina`,
     health: 'Max HP',
     lowerHealth: 'Less HP',
     raiseHealth: 'More HP',

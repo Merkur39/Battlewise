@@ -55,8 +55,8 @@ export function blockPowerParts(blocker: Blocker, level: number, skill: number) 
  * the game sets no end, each level only costs more. */
 export const FORGE_MAX_LEVEL = 10
 
-export const maxLevel = (blocker: GameBlocker) =>
-  blocker.forge ? Math.max(blocker.maxQuality, FORGE_MAX_LEVEL) : blocker.maxQuality
+export const maxLevel = (item: Pick<GameBlocker, 'forge' | 'maxQuality'>) =>
+  item.forge ? Math.max(item.maxQuality, FORGE_MAX_LEVEL) : item.maxQuality
 
 /** The groups of the item picker; bare hands go with the others. */
 export type PickerGroup = Exclude<BlockerGroup, 'unarmed'>

@@ -1,4 +1,4 @@
-import { blockerOf, gearBlockPower, presetOf } from '@/app/context'
+import { blockerOf, gearBlockPower, gearDefence, presetOf } from '@/app/context'
 import { useAppState } from '@/app/useAppState'
 import type { HitResult } from '@/combat/hit'
 import { game } from '@/data'
@@ -11,6 +11,7 @@ import {
   type FoundAttack,
 } from '@/features/bestiary/model'
 import { useAttackSummary } from '@/features/bestiary/wording'
+import { pieceOf, SLOTS } from '@/features/gear/pieces'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import type { ReportLine, ReportOrigin } from './model'
@@ -27,11 +28,20 @@ export const SETTINGS_ORIGIN: ReportOrigin = {
   lines: [],
 }
 
-/** Your gear and Your world, as their summaries put them: every verdict hangs on them. */
+/** Your gear and Your world, as their summaries put them, with the armor, the max health and the pieces
+ * worn: every verdict hangs on them. */
 function useSetupLines(): readonly string[] {
   const t = useT()
   const language = useLanguage()
   const { gear, world } = useAppState()
+  const worn = gear.pieces
+    ? SLOTS.flatMap((slot) => {
+        const piece = gear.pieces?.[slot]
+        return piece
+          ? [`${pieceOf(piece.id).name[language]} ${t.gear.levelValue(piece.level)}`]
+          : []
+      })
+    : null
   return [
     t.gear.summary(
       blockerOf(gear.blocker).name[language],
@@ -39,6 +49,7 @@ function useSetupLines(): readonly string[] {
       gearBlockPower(gear),
       gear.skill,
     ),
+    t.gear.bodySummary(gearDefence(gear).armor, gear.maxHealth, worn),
     t.world.summary(presetOf(world).name[language], world.players),
   ]
 }
