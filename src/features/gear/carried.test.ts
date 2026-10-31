@@ -1,9 +1,21 @@
 import { describe, expect, it } from 'vitest'
-import { carriable, carriedEffects, NOTHING_CARRIED } from './carried'
+import { carriable, carriedEffects, changesNoHit, NOTHING_CARRIED } from './carried'
+
+describe('changesNoHit', () => {
+  it("tells Eikthyr's and The Elder's powers, nothing of which reaches a hit", () => {
+    expect(
+      carriable('power')
+        .filter(changesNoHit)
+        .map(({ id }) => id),
+    ).toEqual(['GP_Eikthyr', 'GP_TheElder'])
+  })
+})
 
 describe('carriable', () => {
-  it('lists the powers in the order their bosses fall', () => {
+  it('lists the seven powers in the order their bosses fall', () => {
     expect(carriable('power').map(({ id }) => id)).toEqual([
+      'GP_Eikthyr',
+      'GP_TheElder',
       'GP_Bonemass',
       'GP_Moder',
       'GP_Yagluth',

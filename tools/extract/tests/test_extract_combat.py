@@ -242,11 +242,15 @@ class ExtractCombatTests(unittest.TestCase):
         self.assertEqual(presets["veryHard"], [{"fr": "Cauchemar", "en": "Hardcore"}])
         self.assertEqual((presets["easy"], presets["normal"], presets["hard"]), ([], [], []))
 
-    def test_rule_effects_are_the_powers_drinks_trinkets_and_sets_that_change_a_fight(self):
+    def test_rule_effects_are_every_power_and_the_drinks_trinkets_and_sets_that_change_a_fight(self):
+        # Eikthyr's and The Elder's powers change no hit (the stamina of a run, a jump or a swim; health
+        # regeneration and tool damage), yet a player carries one of the seven.
         physical = ("blunt", "slash", "pierce")
         slightly_resistant = {t: "slightlyResistant" for t in physical}
         effects = {e["name"]["en"]: {k: v for k, v in e.items() if k != "name"} for e in self.data["ruleEffects"]}
         self.assertEqual(effects, {
+            "Eikthyr": {"id": "GP_Eikthyr", "kind": "power", "ttl": 300, "cooldown": 1200},
+            "The Elder": {"id": "GP_TheElder", "kind": "power", "ttl": 300, "cooldown": 1200},
             "Bonemass": {"id": "GP_Bonemass", "kind": "power", "ttl": 300, "cooldown": 1200,
                          "modifiers": slightly_resistant, "blockStaminaModifier": -1, "blockStaminaFlat": -5},
             "Fader": {"id": "GP_Fader", "kind": "power", "ttl": 300, "cooldown": 1200,
@@ -286,8 +290,8 @@ class ExtractCombatTests(unittest.TestCase):
 
     def test_rule_effects_keep_the_names_of_the_game(self):
         names = {e["name"]["en"]: e["name"]["fr"] for e in self.data["ruleEffects"]}
-        self.assertEqual((names["Fader"], names["Evasion Mantle"], names["Iron Brooch"]),
-                         ("Pouvoir de Fader", "Voile d'ombre", "Broche en fer"))
+        self.assertEqual((names["Fader"], names["The Elder"], names["Evasion Mantle"], names["Iron Brooch"]),
+                         ("Pouvoir de Fader", "L'Aîné", "Voile d'ombre", "Broche en fer"))
 
     def test_freezing_wears_the_player_down_where_the_weather_freezes(self):
         self.assertEqual(self.data["freezing"], {

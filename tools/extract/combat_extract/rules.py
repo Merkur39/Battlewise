@@ -15,7 +15,9 @@ Game rules followed:
   mead bases); a trinket, its m_fullAdrenalineSE once the adrenaline reaches Player.m_maxAdrenaline plus the
   items' m_maxAdrenaline (Player.GetMaxAdrenaline, AddAdrenaline); a set, its m_setStatusEffect once m_setSize
   items worn share m_setName (Humanoid.HaveSetEffect); an item worn, its m_equipStatusEffect. Only items the
-  player can get count (arsenal.obtainable). An effect is known by its asset name, as SEMan keys it.
+  player can get count (arsenal.obtainable), and only effects that change something, except the powers: a
+  player carries one, even Eikthyr's or The Elder's, which change no hit. An effect is known by its asset
+  name, as SEMan keys it.
 """
 from . import arsenal
 from .damage import pair_modifiers
@@ -68,7 +70,7 @@ def effects(found, names):
     result = {}
     for kind, ref, source in _sources(found):
         se = stats.get(ref)
-        if se is None or not changes(se):
+        if se is None or not (changes(se) or kind == "power"):
             continue
         effect = result.get(se["m_Name"])
         if effect is None:

@@ -36,6 +36,12 @@ describe('idleOf', () => {
     ).toBeNull()
   })
 
+  it('says a power that changes no hit changes none here either: Eikthyr against the Troll', () => {
+    expect(idleOf(effectOf('GP_Eikthyr'), against(worn, creatureHits(creature('Troll'))))).toEqual({
+      kind: 'noHit',
+    })
+  })
+
   it('says it changes nothing against a creature that deals none of its types', () => {
     expect(
       idleOf(effectOf('Potion_barleywine'), against(worn, creatureHits(creature('Troll')))),

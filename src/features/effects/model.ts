@@ -6,7 +6,7 @@ import { mergeModifiers, type DamageModifiers } from '@/combat/modifiers'
 import type { World } from '@/combat/world'
 import type { ArmorSlot, GameCreature, GameRuleEffect } from '@/data/types'
 import { fightersOf } from '@/features/bestiary/model'
-import { isCarried, type CarriedKind } from '@/features/gear/carried'
+import { changesNoHit, isCarried, type CarriedKind } from '@/features/gear/carried'
 import { pieceOf, setEffects, SLOTS } from '@/features/gear/pieces'
 
 /** What already resists a damage type as well as an effect would. */
@@ -15,9 +15,10 @@ export type Holder =
   | { readonly kind: 'set' }
   | { readonly kind: CarriedKind }
 
-/** Why an effect changes nothing in a fight, its main reason first: none of its types is dealt, or what
- * is dealt is already resisted; `nothing` when neither says it. */
+/** Why an effect changes nothing in a fight, its main reason first: it changes no hit at all, none of its
+ * types is dealt, or what is dealt is already resisted; `nothing` when none says it. */
 export type Idle =
+  | { readonly kind: 'noHit' }
   | { readonly kind: 'notDealt'; readonly types: readonly DamageType[] }
   | { readonly kind: 'resisted'; readonly by: Holder }
   | { readonly kind: 'nothing' }
@@ -71,6 +72,7 @@ function reasonOf(
   others: readonly GameRuleEffect[],
   hits: readonly Hit[],
 ): Idle {
+  if (changesNoHit(effect)) return { kind: 'noHit' }
   const types = changed(effect.modifiers)
   const dealt = types.filter((type) => hits.some((hit) => (hit.damages[type] ?? 0) > 0))
   if (types.length > 0 && dealt.length === 0) return { kind: 'notDealt', types }

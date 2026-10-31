@@ -242,6 +242,8 @@ export const fr = {
     /** `share` in percent, below zero for less. */
     blockStamina: (share: number) => `bloquer coûte ${staminaShare(share)}`,
     dodgeStamina: (share: number) => `esquiver coûte ${staminaShare(share)}`,
+    /** Eikthyr's and The Elder's powers. */
+    noHit: 'ne change aucun coup',
     card: 'Avec tes effets temporaires',
     group: 'Tes effets temporaires',
     noneOn: 'Aucun allumé',
@@ -251,6 +253,7 @@ export const fr = {
     /** Why it changes nothing, in brief: « Ne change rien : pas de feu ». */
     idle: (reason: string) => `Ne change rien : ${reason}`,
     idleHere: 'Ne change rien ici',
+    idleNoHit: 'Ne change aucun coup',
     notDealt: (types: readonly string[]) => `pas ${noneOf(types)}`,
     resistedBy: {
       helmet: 'ton casque résiste déjà',
@@ -498,7 +501,7 @@ export const fr = {
       armor: 'Au niveau 1 ; touche-en une pour choisir son niveau dans Ton équipement.',
     },
     carryLede:
-      "Seulement ce qui change un combat, lu dans le jeu. L'emporter l'ajoute à Ton équipement ; tu l'allumes sur la fiche d'une créature ou dans la Simulation.",
+      "Lu dans le jeu : les pouvoirs, et les bibelots et boissons qui changent un combat. L'emporter l'ajoute à Ton équipement ; tu l'allumes sur la fiche d'une créature ou dans la Simulation.",
     sort: 'Trier par',
     columns: {
       type: 'Type',

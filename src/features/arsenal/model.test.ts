@@ -37,7 +37,7 @@ describe('the categories', () => {
     expect(categorySize('capes')).toBe(
       game.armorPieces.filter(({ slot }) => slot === 'cape').length,
     )
-    expect(categorySize('powers')).toBe(5)
+    expect(categorySize('powers')).toBe(7)
     expect(categorySize('drinks')).toBe(4)
   })
 })
@@ -90,6 +90,8 @@ describe('pieceRows', () => {
 describe('effectRows', () => {
   it('lists the powers in the order the bosses fall, what you carry first', () => {
     expect(ids(effectRows('powers', NOTHING_CARRIED))).toEqual([
+      'GP_Eikthyr',
+      'GP_TheElder',
       'GP_Bonemass',
       'GP_Moder',
       'GP_Yagluth',

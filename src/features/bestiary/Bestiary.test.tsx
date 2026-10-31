@@ -414,6 +414,18 @@ describe('Bestiary', () => {
       expect(effects()).toHaveTextContent("Vaut jusqu'à ce que tu changes de créature.")
     })
 
+    it('greys without a switch a power that changes no hit', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      const carried = { ...CARRYING.carried, power: 'GP_Eikthyr' }
+      renderWithStore(<App />, { language: 'fr', gear: { ...CARRYING, carried } })
+
+      await user.click(card())
+
+      expect(within(effects()).queryByRole('switch', { name: 'Eikthyr' })).not.toBeInTheDocument()
+      expect(effects()).toHaveTextContent('EikthyrPouvoir · 5 minNe change aucun coup')
+    })
+
     it('counts at once what is switched on: the Lox, parried, is then blocked whole', async () => {
       const user = userEvent.setup()
       window.history.replaceState(null, '', '#/bestiary/plains/Lox')

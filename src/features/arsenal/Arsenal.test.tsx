@@ -74,6 +74,8 @@ describe('Arsenal', () => {
     const powers = list('Pouvoirs')
     expect(powers.map((power) => power.getAttribute('aria-label'))).toEqual([
       "Masse-d'Os, emporté. Ouvrir dans Ton équipement.",
+      'Eikthyr. Ouvrir dans Ton équipement.',
+      "L'Aîné. Ouvrir dans Ton équipement.",
       'Moder. Ouvrir dans Ton équipement.',
       'Yagluth. Ouvrir dans Ton équipement.',
       'La Reine. Ouvrir dans Ton équipement.',
@@ -82,7 +84,9 @@ describe('Arsenal', () => {
     expect(powers[0]).toHaveTextContent('5 min · recharge 20 min')
     expect(powers[0]).toHaveTextContent('Contondant, Coupant et Perforant ×0,75')
     expect(powers[0]).toHaveTextContent("Bloquer rend 5 d'endurance")
-    expect(powers[4]).toHaveTextContent('Tu titubes 2× moins vite')
+    expect(powers[1]).toHaveTextContent('5 min · recharge 20 min')
+    expect(powers[1]).toHaveTextContent('Ne change aucun coup')
+    expect(powers[6]).toHaveTextContent('Tu titubes 2× moins vite')
   })
 
   it('opens Your gear with the item picked, at the level of the one it replaces', async () => {
@@ -206,7 +210,7 @@ describe('Arsenal', () => {
         'aria-current',
         'true',
       )
-      expect(within(nav).getByRole('link', { name: /^Pouvoirs/ })).toHaveTextContent('Pouvoirs5')
+      expect(within(nav).getByRole('link', { name: /^Pouvoirs/ })).toHaveTextContent('Pouvoirs7')
       expect(screen.getByText(/^Au niveau 1 ; touche-en une/)).toBeInTheDocument()
     })
 

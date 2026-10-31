@@ -166,6 +166,7 @@ export const en: Catalog = {
     blockGivesBack: (stamina) => `blocking gives ${n(stamina)} stamina back`,
     blockStamina: (share) => `blocking costs ${staminaShare(share)}`,
     dodgeStamina: (share) => `dodging costs ${staminaShare(share)}`,
+    noHit: 'changes no hit',
     card: 'With your temporary effects',
     group: 'Your temporary effects',
     noneOn: 'None on',
@@ -173,6 +174,7 @@ export const en: Catalog = {
     holds: 'Holds until you change creature.',
     idle: (reason) => `Changes nothing: ${reason}`,
     idleHere: 'Changes nothing here',
+    idleNoHit: 'Changes no hit',
     notDealt: (types) =>
       `no ${new Intl.ListFormat('en', { type: 'disjunction' }).format(types.map((type) => type.toLocaleLowerCase('en')))}`,
     resistedBy: {
@@ -413,7 +415,7 @@ export const en: Catalog = {
       armor: 'At level 1; pick one to choose its level in Your gear.',
     },
     carryLede:
-      'Only what changes a fight, read from the game. Carrying it adds it to Your gear; you switch it on in a creature’s sheet or in the Simulation.',
+      'Read from the game: the powers, and the trinkets and drinks that change a fight. Carrying it adds it to Your gear; you switch it on in a creature’s sheet or in the Simulation.',
     sort: 'Sort by',
     columns: {
       type: 'Type',
