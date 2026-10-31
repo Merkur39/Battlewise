@@ -32,6 +32,8 @@ export function effectOf(id: string): GameRuleEffect {
 // The powers in the order their bosses fall, the trinkets and drinks as the mockups list them; what a
 // later version of the game adds comes after them.
 const ORDER = [
+  'GP_Eikthyr',
+  'GP_TheElder',
   'GP_Bonemass',
   'GP_Moder',
   'GP_Yagluth',
@@ -50,6 +52,21 @@ const rank = (effect: GameRuleEffect) => {
   const at = ORDER.indexOf(effect.id)
   return at === -1 ? ORDER.length : at
 }
+
+const CHANGES = [
+  'modifiers',
+  'addArmor',
+  'armorMultiplier',
+  'staggerModifier',
+  'parryBonus',
+  'blockStaminaModifier',
+  'blockStaminaFlat',
+  'dodgeStaminaModifier',
+] as const satisfies readonly (keyof GameRuleEffect)[]
+
+/** Eikthyr's and The Elder's powers: carried like the others, though nothing in them reaches a hit. */
+export const changesNoHit = (effect: GameRuleEffect) =>
+  CHANGES.every((change) => effect[change] === undefined)
 
 /** The effects of a kind one can carry, in the order Your gear and the Arsenal list them. */
 export const carriable = (kind: CarriedKind): CarriedEffect[] =>

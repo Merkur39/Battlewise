@@ -1,6 +1,7 @@
 import { DAMAGE_TYPES, STAGGER_TYPES, type DamageType } from '@/combat/damage'
 import { game } from '@/data'
 import type { BiomeId, GameCreature, GameRuleEffect, Localized } from '@/data/types'
+import { changesNoHit } from '@/features/gear/carried'
 
 export const SHEETS = [
   'parry',
@@ -92,7 +93,7 @@ export const figures = {
   ),
   eikthyr: creature('Eikthyr').name,
   gammeltroll: creature('TrollFrost').name,
-  ruleEffects: game.ruleEffects,
+  ruleEffects: game.ruleEffects.filter((effect) => !changesNoHit(effect)),
   freezing: { ...game.freezing, biomes: game.freezing.biomes.map(biomeName) },
   frost: game.damageTypes.frost,
   moder: creature('Dragon').name,

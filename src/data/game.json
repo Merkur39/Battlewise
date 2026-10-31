@@ -17611,6 +17611,16 @@
       "blockStaminaFlat": -5
     },
     {
+      "id": "GP_Eikthyr",
+      "name": {
+        "fr": "Eikthyr",
+        "en": "Eikthyr"
+      },
+      "kind": "power",
+      "ttl": 300,
+      "cooldown": 1200
+    },
+    {
       "id": "GP_Fader",
       "name": {
         "fr": "Pouvoir de Fader",
@@ -17636,6 +17646,16 @@
       "modifiers": {
         "frost": "resistant"
       }
+    },
+    {
+      "id": "GP_TheElder",
+      "name": {
+        "fr": "L'Aîné",
+        "en": "The Elder"
+      },
+      "kind": "power",
+      "ttl": 300,
+      "cooldown": 1200
     },
     {
       "id": "GP_Queen",

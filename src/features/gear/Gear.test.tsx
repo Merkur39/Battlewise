@@ -316,6 +316,16 @@ describe('Your gear', () => {
       )
     })
 
+    it('says of a power that changes no hit that it changes none', async () => {
+      const user = userEvent.setup()
+      const carried = { ...CARRYING.carried, power: 'GP_TheElder' }
+      renderWithStore(<App />, { language: 'fr', gear: { ...CARRYING, carried } })
+      const section = carry(await openGear(user))
+
+      expect(within(section).getByRole('button', { name: "Pouvoir : L'Aîné" })).toBeInTheDocument()
+      expect(section).toHaveTextContent('5 min · ne change aucun coup')
+    })
+
     it('carries nothing at first: no trinket, no power, a way to add a drink', async () => {
       const user = userEvent.setup()
       renderWithStore(<App />, fr)

@@ -2,7 +2,7 @@ import { DAMAGE_TYPES } from '@/combat/damage'
 import { damageMultiplier } from '@/combat/modifiers'
 import { game } from '@/data'
 import type { GameRuleEffect } from '@/data/types'
-import type { CarriedEffect } from '@/features/gear/carried'
+import { changesNoHit, type CarriedEffect } from '@/features/gear/carried'
 import { useLanguage, useT } from '@/i18n/useT'
 import type { Idle } from './model'
 
@@ -29,6 +29,7 @@ export function useEffectWording() {
         game.damageTypes[type][language],
       ])
     }
+    if (changesNoHit(effect)) return [t.effects.noHit]
     const flat = effect.blockStaminaFlat ?? 0
     const block = effect.blockStaminaModifier ?? 0
     return [
@@ -64,6 +65,8 @@ export function useEffectWording() {
     tag: (effect: CarriedEffect) => t.effects.tag(t.effects.kinds[effect.kind], lasting(effect)),
     idle(idle: Idle): string {
       switch (idle.kind) {
+        case 'noHit':
+          return t.effects.idleNoHit
         case 'notDealt':
           return t.effects.idle(
             t.effects.notDealt(idle.types.map((type) => game.damageTypes[type][language])),

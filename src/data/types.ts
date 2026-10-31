@@ -248,8 +248,9 @@ export interface GameWorldPreset {
 /** Where the player gets an effect that changes the rules. */
 export type RuleEffectKind = 'power' | 'consumable' | 'trinket' | 'set' | 'equipment'
 
-/** A guardian power, a drink, a trinket, a set or an item worn that changes a fight: what it changes, as
- * the engine takes it, each change given only when it is not neutral. */
+/** A guardian power, even one that changes no hit, or a drink, a trinket, a set or an item worn that
+ * changes a fight: what it changes, as the engine takes it, each change given only when it is not
+ * neutral. */
 export interface GameRuleEffect extends Effect {
   /** The status effect's asset name. */
   readonly id: string

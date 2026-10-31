@@ -20,7 +20,7 @@ describe('Guide', () => {
     expect(sheet('Roulade')).toHaveTextContent('15 end.')
   })
 
-  it('lists the effects that change the rules from the game, with their names', () => {
+  it('lists the effects that change the rules from the game, with their names, and no other', () => {
     window.history.replaceState(null, '', '#/guide')
 
     renderWithStore(<App />, { language: 'fr' })
@@ -30,6 +30,9 @@ describe('Guide', () => {
     // whose stats change a cost.
     expect(within(effects).getAllByRole('listitem')).toHaveLength(2 + 20)
     expect(effects).toHaveTextContent('20 effets')
+    // Eikthyr's and The Elder's powers change no hit.
+    expect(effects).not.toHaveTextContent('Eikthyr')
+    expect(effects).not.toHaveTextContent("L'Aîné")
     expect(effects).toHaveTextContent(
       'Pouvoir de Fader (pouvoir du gardien, 300 s) : Feu · Résistant ×0,5 ; stagger reçu ×0,5.',
     )
