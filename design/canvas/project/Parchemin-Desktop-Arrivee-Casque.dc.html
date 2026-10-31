@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Première arrivée — ton casque, desktop · Parchemin</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+:root{color-scheme:light}
+*{scrollbar-width:thin;scrollbar-color:#CDBFA3 transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#CDBFA3;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#685B4A}
+button,select,input{font:inherit;color:inherit;margin:0}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:#24467A}a:hover{color:#1A3560}
+</style>
+</helmet>
+<div style="position: relative; height: 100vh; min-height: 680px; box-sizing: border-box; display: flex; flex-wrap: wrap; background: #EFE7D6; color: #2B2219; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <div aria-hidden="true" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #CDBFA3">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px; font-size: 16px; font-weight: 500">Foelore</div>
+    <div style="display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border-radius: 6px; background: #E3D3B0; color: #24467A">Bestiaire</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #5E5141">Simulation</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #5E5141">Arsenal</span>
+      <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; color: #5E5141">Mémo</span>
+    </div>
+  </div>
+  <div aria-hidden="true" style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px; display: flex; flex-direction: column; gap: 24px">
+    <span style="font-size: 26px; font-weight: 500">Bestiaire</span>
+    <div style="display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 24px">
+      <div style="height: 560px; border-radius: 8px; background: #F9F4E8"></div>
+      <div style="height: 420px; border-radius: 8px; background: #F9F4E8"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; inset: 0; background: rgba(4, 6, 7, 0.72); display: flex; align-items: center; justify-content: center; padding: 32px; box-sizing: border-box">
+    <div role="dialog" aria-modal="true" aria-labelledby="d-title" style="width: min(1180px, 100%); height: 100%; max-height: 100%; display: flex; flex-direction: column; background: #F9F4E8; border: 1px solid #CDBFA3; border-radius: 10px; overflow: hidden">
+      <header style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 12px 12px 18px 24px; border-bottom: 1px solid #CDBFA3">
+        <span style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5141">2 SUR 3</span>
+          <a href="Parchemin-Desktop-Bestiaire.dc.html" style="height: 40px; padding: 0 12px; display: flex; align-items: center; font-size: 14px; text-decoration: none">Passer</a>
+        </span>
+        <div aria-hidden="true" style="flex: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 0 12px 0 0"><span style="height: 3px; border-radius: 2px; background: #24467A"></span><span style="height: 3px; border-radius: 2px; background: #24467A"></span><span style="height: 3px; border-radius: 2px; background: #CDBFA3"></span></div>
+        <span style="display: flex; flex-direction: column; gap: 6px; padding-top: 6px">
+          <h2 id="d-title" style="margin: 0; font-size: 22px; font-weight: 500">Ton équipement</h2>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #5E5141">Ce que tu tiens en main gauche, et tes stats défensives.</p>
+        </span>
+      </header>
+      <div style="flex: none; display: flex; align-items: center; gap: 8px; padding: 10px 24px 10px 12px; border-bottom: 1px solid #CDBFA3">
+        <a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Retour à la question, sans rien changer" style="flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #5E5141"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+        <span style="flex: 1; display: flex; align-items: baseline; gap: 8px"><span style="font-size: 14px; color: #685B4A">Ton équipement ›</span><h2 style="margin: 0; font-size: 18px; font-weight: 500">Ton casque</h2></span>
+      </div>
+      <div style="flex: 1; min-height: 0; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 14px">
+        <div style="flex: none; display: flex; align-items: center; gap: 16px"><label style="flex: 0 0 280px; display: flex; align-items: center; gap: 8px; height: 40px; box-sizing: border-box; border: 1px solid #CDBFA3; border-radius: 4px; padding: 0 12px; font-size: 14px; color: #685B4A; white-space: nowrap; overflow: hidden"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#685B4A" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" style="flex: none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Chercher un casque</span>Chercher un casque</label><span style="font-size: 14px; color: #5E5141">Au niveau 1&nbsp;; celui que tu choisis garde ton N2, s’il y monte.</span></div>
+        <div role="table" aria-label="Casques" style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid #CDBFA3; border-radius: 6px; overflow: hidden">
+        <div role="row" style="display: grid; gap: 16px; align-items: center; padding: 12px 20px; background: #F9F4E8; border-bottom: 1px solid #CDBFA3; white-space: nowrap; font-size: 11px; letter-spacing: 0.08em; color: #5E5141; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+          <span role="columnheader">CASQUE</span><span role="columnheader" style="text-align: right">ARMURE ↓</span><span role="columnheader" style="text-align: right">PAR NIVEAU</span><span role="columnheader">RÉSISTANCES ET FAIBLESSES</span><span role="columnheader">ENSEMBLE</span><span role="columnheader"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Action</span></span>
+        </div>
+        <div style="flex: 1; min-height: 0; overflow-y: auto">
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell">Aucun casque</span><span role="cell" style="grid-column: 2 / -2; font-size: 13px; color: #685B4A">retire celui que tu portes</span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Aucun casque" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Retirer</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px; background: #E3D3B0">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en bronze</span><span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 5px; border-radius: 3px; border: 1px solid #24467A; color: #24467A">ÉQUIPÉ</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">8</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #24467A"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>Équipé</span></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Couronne de Valheim</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">50</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Couronne de Valheim" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque du courage</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">44</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque du courage" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en flamétal</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">38</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque en flamétal" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuche de l'Avant-garde</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">34</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Avant-garde <span style="color: #685B4A">· 3 pièces</span><span style="display: block; font-size: 12px; color: #5E5141">Esquiver coûte 20 % d'endurance en moins</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuche de l'Avant-garde" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en carapace</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">32</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque en carapace" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuche d'Ask</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">28</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuche d'Ask" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque rembourré</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">26</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque rembourré" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Coiffe de l'orateur</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">22</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Coiffe de l'orateur" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque de drac</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">20</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque de drac" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuche d'Embla</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">19</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuche d'Embla" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuche en fourrure de lox</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">16</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuche en fourrure de lox" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuchon d'Eitr tissé</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">16</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuchon d'Eitr tissé" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en fer</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">14</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque en fer" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Visage d'ours maudit</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">12</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Colère de l'ours maudit <span style="color: #685B4A">· 3 pièces</span><span style="display: block; font-size: 12px; color: #5E5141">Contondant, Coupant et Perforant ×1,25</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Visage d'ours maudit" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Capuche de Fenris</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">10</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Bénédiction de Fenris <span style="color: #685B4A">· 3 pièces</span><span style="display: block; font-size: 12px; color: #5E5141">Feu ×0,5</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Capuche de Fenris" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque de racine</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">8</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #5E5141; border-radius: 3px; color: #2B2219; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg>Feu · <span style="font-weight: 500">Faible ×1,5</span></li><li style="padding: 3px 7px; border: 1px solid #CDBFA3; border-radius: 3px; color: #5E5141; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3c3 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-6.5 6-11z"></path></svg>Poison · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque de racine" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Chapeau de pêcheur</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">8</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+4</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Chapeau de pêcheur" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Coiffe de l'ours</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">7</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Berserker <span style="color: #685B4A">· 3 pièces</span><span style="display: block; font-size: 12px; color: #5E5141">Contondant, Coupant et Perforant ×1,25</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Coiffe de l'ours" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en cuir de troll</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">6</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque en cuir de troll" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Casque en cuir</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">2</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Casque en cuir" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Diadème de dverger</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">2</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Diadème de dverger" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bandeau</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bandeau" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet en fourrure gris</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet en fourrure gris" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet en fourrure marron</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet en fourrure marron" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet festif</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet festif" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet orange extravagant</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet orange extravagant" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet rouge simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet rouge simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet vert extravagant</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet vert extravagant" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Bonnet violet simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Bonnet violet simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Cagoule d'Odin</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Cagoule d'Odin" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Chapeau de Noël</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Chapeau de Noël" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Chapeau de paille</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Chapeau de paille" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Chapeau pointu</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Chapeau pointu" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Couronne de la mi-été</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Couronne de la mi-été" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Couronne de racines</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Couronne de racines" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Foulard noué bleu</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Foulard noué bleu" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Foulard noué jaune</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Foulard noué jaune" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Foulard torsadé rouge</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Foulard torsadé rouge" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #E2D7C1; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Foulard torsadé vert</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #685B4A">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="Parchemin-Desktop-Arrivee-Equipement.dc.html" aria-label="Choisir&nbsp;: Foulard torsadé vert" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #CDBFA3; border-radius: 4px; font-size: 13px; color: #2B2219; text-decoration: none">Choisir</a></span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

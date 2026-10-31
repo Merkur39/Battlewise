@@ -2,6 +2,7 @@
 // beside what blocks, each on two phones (three for C) and a desktop. The lists come from out/arsenal.json.
 // Run from this folder after data.mts: node build.mjs
 import { readFileSync, writeFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 
 const PROJECT = new URL('../../canvas/project/', import.meta.url)
 const read = (file) => readFileSync(new URL(file, PROJECT), 'utf8')
@@ -566,11 +567,16 @@ const iteration = {
   'Arsenal-AC-Desktop-4.dc.html': desktopBoard(`Arsenal — recherche ${QUERY}`, deskSearch(QUERY)),
 }
 
-const written = process.argv.includes('--tracks') ? { ...boards, ...iteration } : iteration
-for (const [file, html] of Object.entries(written)) {
-  if (html.includes('{{')) throw new Error(`${file}: a hole is left`)
-  writeFileSync(new URL(file, PROJECT), html, 'utf8')
-  console.log(file, html.length)
+// Imported by other generators (../choix), it writes nothing: only run directly does it.
+const isMain = process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href
+
+if (isMain) {
+  const written = process.argv.includes('--tracks') ? { ...boards, ...iteration } : iteration
+  for (const [file, html] of Object.entries(written)) {
+    if (html.includes('{{')) throw new Error(`${file}: a hole is left`)
+    writeFileSync(new URL(file, PROJECT), html, 'utf8')
+    console.log(file, html.length)
+  }
 }
 
 // ---- Origine (--origine): the approved iteration carried into the Arsenal boards. ----
@@ -869,7 +875,7 @@ function origineSearchDesktop(desktopArsenal) {
   return text
 }
 
-if (process.argv.includes('--origine')) {
+if (isMain && process.argv.includes('--origine')) {
   const phoneBoard = originePhone(read('Arsenal.dc.html'))
   const desktopBoard = origineDesktop(read('Desktop-Arsenal.dc.html'))
   const origine = {
@@ -883,4 +889,36 @@ if (process.argv.includes('--origine')) {
     writeFileSync(new URL(file, PROJECT), html, 'utf8')
     console.log(file, html.length)
   }
+}
+
+export {
+  HEAD,
+  TAIL,
+  PHONE_HEADER,
+  PHONE_NAV,
+  DESK_NAV,
+  CHEVRON,
+  CHECK,
+  ICONS,
+  MONO,
+  CAPTION,
+  SEARCH_ICON,
+  data,
+  upper,
+  tag,
+  chips,
+  pieceCard,
+  effectCard,
+  blockerCard,
+  armorTable,
+  effectTable,
+  blockerTable,
+  desktop,
+  asideC,
+  ledeAC,
+  navAS,
+  phone,
+  board,
+  desktopBoard,
+  phoneWidth,
 }

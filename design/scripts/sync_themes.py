@@ -20,7 +20,7 @@ LIGHT_THEMES = {"jour", "parchemin"}
 DARK_SCHEME = ":root{color-scheme:dark}"
 
 M_W, M_H, M_GAP, M_ROW = 390, 844, 80, 1264
-D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 9088
+D_W, D_H, D_GAP, D_ROW, D_TOP = 1440, 900, 80, 1320, 10352
 NOTE_ABOVE = 300
 
 # (row title, [(file, board title, interactive)]) — one canvas row each.
@@ -31,7 +31,11 @@ MOBILE = [
                     ("Recherche", "Choisir une attaque · recherche", False)]),
     ("Arsenal et mémo", [("Arsenal", "Arsenal", True), ("Arsenal-Recherche", "Arsenal · recherche", True),
                          ("Memo", "Mémo", True)]),
-    ("Fenêtres et système", [("Profil", "Ton équipement", False), ("Monde", "Ton monde", False),
+    ("Ton équipement", [("Profil", "Ton équipement", False), ("Equipement-Tenu", "Ton équipement · ce que tu tiens", False),
+                        ("Equipement-Cape", "Ton équipement · ta cape", False),
+                        ("Equipement-Bibelot", "Ton équipement · ton bibelot", False),
+                        ("Equipement-Boisson", "Ton équipement · une boisson de plus", False)]),
+    ("Fenêtres et système", [("Monde", "Ton monde", False),
                              ("Contexte", "Ton contexte", True), ("Reglages", "Réglages", True),
                              ("Mentions", "Mentions et crédits", False), ("Tokens", None, False)]),
     ("Tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
@@ -42,6 +46,7 @@ MOBILE = [
     ("Première arrivée", [("Installer", "Installer l'app", True), ("Installer-Safari", "Installer l'app · Safari", True),
                           ("Arrivee-Biome", "Première arrivée · 1 · biome", True),
                           ("Arrivee-Equipement", "Première arrivée · 2 · équipement", True),
+                          ("Arrivee-Casque", "Première arrivée · 2 · ton casque", False),
                           ("Arrivee-Monde", "Première arrivée · 3 · monde", True)]),
 ]
 DESKTOP = [
@@ -49,8 +54,12 @@ DESKTOP = [
                                      ("Combat", "Simulation", True)]),
     ("Desktop · arsenal et mémo", [("Arsenal", "Arsenal", True), ("Arsenal-Recherche", "Arsenal · recherche", True),
                                    ("Memo", "Mémo", False)]),
+    ("Desktop · ton équipement", [("Equipement", "Ton équipement", False),
+                                  ("Equipement-Tenu", "Ton équipement · ce que tu tiens", False),
+                                  ("Equipement-Cape", "Ton équipement · ta cape", False),
+                                  ("Equipement-Bibelot", "Ton équipement · ton bibelot", False),
+                                  ("Equipement-Boisson", "Ton équipement · une boisson de plus", False)]),
     ("Desktop · fenêtres", [("Attaque", "Choisir une attaque", True), ("Recherche", "Choisir une attaque · recherche", False),
-                            ("Equipement", "Ton équipement", False),
                             ("Monde", "Ton monde", False), ("Reglages", "Réglages", True),
                             ("Mentions", "Mentions et crédits", False)]),
     ("Desktop · tes retours", [("Signaler", "Signaler", True), ("Signalements", "Mes signalements", False),
@@ -62,6 +71,7 @@ DESKTOP = [
     ("Desktop · première arrivée", [("Installer", "Installer l'app", True),
                                     ("Arrivee-Biome", "Première arrivée · 1 · biome", True),
                                     ("Arrivee-Equipement", "Première arrivée · 2 · équipement", True),
+                                    ("Arrivee-Casque", "Première arrivée · 2 · ton casque", False),
                                     ("Arrivee-Monde", "Première arrivée · 3 · monde", True)]),
 ]
 TOKENS_W, TOKENS_H = 880, 960

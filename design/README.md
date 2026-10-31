@@ -2,23 +2,19 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v192** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v196** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
 - `canvas.json`: pages, boards (position, size, title), notes (row titles), board order, canvas title.
-- Page **Origine** (default page, boards without a prefix): mobile boards (390×844) in four rows, desktop boards
-  (1440×900) in three rows below. These are the only boards edited by hand.
+- Page **Origine** (default page, boards without a prefix): mobile boards (390×844) in rows, desktop boards
+  (1440×900) in rows below them (`sync_themes.py` lays them out from its `MOBILE` and `DESKTOP` tables). These are the only boards edited by hand.
 - Six theme pages, **generated** from Origine: `Braise-`, `Brume-`, `Jour-`, `Runes-`, `Graphite-`, `Parchemin-`
   prefixes. Do not edit them.
-- Page **Simulation · pistes** (`Sim-*`, `SimB-*`): archive of the three Simulation tracks, never regenerated.
 - Page **Icône** (`Icone`): the app icon tracks; track A (the brand shield in trait) is the one shipped, as
   `public/icon.svg`. Like every page made by hand, `sync_themes.py` leaves it alone.
 - Page **Version** (`Version`): how the app version sits next to the name in Réglages › À propos; track A
   (mono, secondary) is the one shipped, in the Réglages boards. Made by hand as well.
-- Page **Menu · pistes** (`Menu-A` to `Menu-C`): the three tracks for Ton équipement and Ton monde on a
-  phone. The phone boards carry track C's summary button (VD and enemy scale) opening track B's bottom
-  sheet, animated; the « Ton contexte » board of Origine shows it open. Made by hand as well.
 - Page **Compétence** (`Competence`): the Blocking skill field of Ton équipement on a 360 px phone, as it
   overflowed, and two ways to keep its label on one line; track A (the value at the end of the slider) is
   the one carried into the Ton équipement boards, until the owner had the slider replaced by a field with − and +, like
@@ -26,6 +22,39 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
 - Page **Encaisses** (`Encaisses`): the « Ce que tu encaisses » card on a 360 px phone, as it jumped, and two
   steady layouts; track B (the legend under the title, numbers alone on each guard's line) is the one
   carried into the phone Ton équipement board. Made by hand as well.
+- The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
+  media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
+- Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
+  (« Ton contexte », the phone Bestiaire with its context sheet open). Generated the same way, `Signaler` (Monstre
+  with its report sheet open) and `Desktop-Signaler` (the desktop Bestiaire with its report dialog open), a line
+  picked; `Merci` and `Desktop-Merci`, the Bestiaire with its thank-you sheet or dialog open; `Plantee` and
+  `Desktop-Plantee`, the creature sheet and the desktop Bestiaire with the sheet crashed; `Ligne-Plantee` and
+  `Desktop-Ligne-Plantee`, the Troll's row failed (on desktop, its sheet beside it too); `Arsenal-Ligne-Plantee`
+  and `Desktop-Arsenal-Ligne-Plantee`, a shield's row failed; `Simulation-Plantee` and
+  `Desktop-Simulation-Plantee`, the Simulation crashed. With `Secours`, they make the « Plantages » rows of
+  Origine, phone and desktop.
+- Réglages boards carry the seven palettes themselves (live preview); their state line must stay
+  `this.state = { theme: 'origine', lang: 'auto' };` for the theme copies.
+- Page **Origine**, row « Ton équipement » (v196): `Profil` and its lists. Each row of Ton équipement and of the first
+  arrival's question 2 names what it holds with a chevron, and opens its list (track A of « Équipement → Arsenal »,
+  approved in v195): `Equipement-Tenu` (« Ce que tu tiens », the pills Boucliers, Armes, Autres), `Equipement-Cape`
+  (« Ta cape », « Aucune cape » first; it stands for every piece), `Equipement-Bibelot` (« Ton bibelot ») and
+  `Equipement-Boisson` (« Une boisson de plus », from « Ajouter une boisson »), each with its `Desktop-` board (the
+  dialog widened to the category's table, « Choisir » on each row), and `Arrivee-Casque` / `Desktop-Arrivee-Casque`
+  under the question's step. In Play, a row opens its list (the helmet, legs, chest, power and a carried drink have
+  no board of their own) and a pick or the back arrow returns. Written once by `scripts/choix/origine.mjs`.
+
+## Track pages, removed from the canvas (v196)
+
+A version of the canvas holds at most 511 files. Once every track below was carried into Origine, the owner had their
+pages removed (2026-10-31): their boards are in this repository's history (and in the canvas's versions up to
+v195), and their generators still write them (`scripts/arsenal/build.mjs --tracks`, `scripts/equipement-c3/`,
+`scripts/choix/build.mjs`, which needs the Origine boards from before `origine.mjs`).
+
+- Page **Simulation · pistes** (`Sim-*`, `SimB-*`): archive of the three Simulation tracks, never regenerated.
+- Page **Menu · pistes** (`Menu-A` to `Menu-C`): the three tracks for Ton équipement and Ton monde on a
+  phone. The phone boards carry track C's summary button (VD and enemy scale) opening track B's bottom
+  sheet, animated; the « Ton contexte » board of Origine shows it open. Made by hand as well.
 - Page **Fiche · pistes** (`Fiche`, `Fiche-Desktop`): what the creature sheet showed of the game data and
   now shows too (weak spots, tools, trample, death effects), as 360 px phone fragments in three tracks, then
   track A on the desktop panel for the cases the Troll cannot show; track A (everything in the existing
@@ -174,19 +203,21 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   keeps `broken`, which the « Ligne plantée » boards set); their search fields open the new `Arsenal-Recherche` and
   `Desktop-Arsenal-Recherche`, drawn with « fer » as the Bestiaire's are with « tro », in the « Arsenal et mémo » rows.
   The old Arsenal's hand-typed shields (level stepper, push-back, speed) are gone.
-- The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
-  media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
-- Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
-  (« Ton contexte », the phone Bestiaire with its context sheet open). Generated the same way, `Signaler` (Monstre
-  with its report sheet open) and `Desktop-Signaler` (the desktop Bestiaire with its report dialog open), a line
-  picked; `Merci` and `Desktop-Merci`, the Bestiaire with its thank-you sheet or dialog open; `Plantee` and
-  `Desktop-Plantee`, the creature sheet and the desktop Bestiaire with the sheet crashed; `Ligne-Plantee` and
-  `Desktop-Ligne-Plantee`, the Troll's row failed (on desktop, its sheet beside it too); `Arsenal-Ligne-Plantee`
-  and `Desktop-Arsenal-Ligne-Plantee`, a shield's row failed; `Simulation-Plantee` and
-  `Desktop-Simulation-Plantee`, the Simulation crashed. With `Secours`, they make the « Plantages » rows of
-  Origine, phone and desktop.
-- Réglages boards carry the seven palettes themselves (live preview); their state line must stay
-  `this.state = { theme: 'origine', lang: 'auto' };` for the theme copies.
+- Page **Équipement → Arsenal · pistes** (`Choix-A` to `Choix-C`, each with its `-Desktop`), v194: three ways for Ton
+  équipement's rows (En main, the pieces, what one carries) to lead to the Arsenal's lists (#67), on the mockups' scene
+  (the wolf cape N3 swapped for the Ashen Cape, armor 45 → 58, gauges from the app's engine). Track A, the Arsenal's
+  list for that row inside Ton équipement (a back arrow, « Aucune cape » first, the dialog widened on a desktop); track
+  B, the Arsenal itself in a choosing mode (a banner, « Annuler », « Sans cape » first; the first arrival keeps its
+  lists); track C, richer lists in place (a sheet on a phone, unfolded under the row on a desktop, « Comparer dans
+  l'Arsenal » at the foot). Generated by `scripts/choix/` (from that folder: `node --import
+  ../equipement-c3/hooks.mjs data.mts`, `node build.mjs`, `node add.mjs`), which imports the Arsenal's cards and
+  tables from `scripts/arsenal/build.mjs` (it writes nothing when imported).
+  The owner picked track A. Iteration 1 (`Choix-A1`, `Choix-A1-Desktop-1` and `-2`, v195): each kind of row's list,
+  titled by what it picks (« Ce que tu tiens » with the Arsenal's pills for shields, weapons and the rest, no « Aucun »:
+  bare hands are among the rest; « Ton bibelot », « Aucun bibelot » first; « Une boisson de plus » with only the
+  drinks not carried yet; a carried drink's « Ta boisson », to swap or « Retirer cette boisson »), and the first
+  arrival's question 2 with the list under its step, « Passer » kept. What is picked keeps the level of what it
+  replaces, within its own. Approved by the owner on 2026-10-31 (v195): iteration 1 is the spec for the app.
 
 ## Workflow
 
