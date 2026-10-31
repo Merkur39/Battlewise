@@ -30,10 +30,10 @@ describe('Bestiary', () => {
       'Biome 1 sur 9 · 8 créatures',
     )
     expect(row('Sanglier')).toHaveTextContent('10 PV')
-    expect(
-      within(row('Sanglier')).getByRole('img', { name: 'Blocage : tient' }),
-    ).toBeInTheDocument()
-    expect(row('Sanglier')).toHaveTextContent('Tu bloques tout sans tituber')
+    // A new character holds nothing: a boar staggers bare hands, a neck does not.
+    expect(row('Sanglier')).toHaveTextContent('Esquive tout : même parées, ses attaques passent')
+    expect(within(row('Nixe')).getByRole('img', { name: 'Blocage : tient' })).toBeInTheDocument()
+    expect(row('Nixe')).toHaveTextContent('Tu bloques tout sans tituber')
     expect(row('Eikthyr')).toHaveTextContent('Boss · 500 PV')
   })
 

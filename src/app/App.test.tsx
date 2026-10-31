@@ -105,6 +105,17 @@ describe('App', () => {
     ).toHaveTextContent('Difficile3 joueurs · ×1,62')
   })
 
+  it('tells bare hands without a level, a new character’s gear', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    await user.click(screen.getByRole('button', { name: /^Ton contexte/ }))
+
+    const chip = screen.getByRole('link', { name: /^Ton équipement/ })
+    expect(chip).toHaveAccessibleName('Ton équipement : Sans armes, VD 2, compétence Blocage 0')
+    expect(chip).toHaveTextContent('Sans armesVD 2')
+  })
+
   it('speaks English to an English-speaking device, game names included', async () => {
     const user = userEvent.setup()
     deviceSpeaks('en-GB')

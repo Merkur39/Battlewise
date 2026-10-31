@@ -2,7 +2,6 @@ import type { ArmorPiece } from '@/combat/block'
 import { mergeModifiers, type DamageModifiers } from '@/combat/modifiers'
 import { game } from '@/data'
 import type { ArmorSlot, GameArmorPiece, GameRuleEffect } from '@/data/types'
-import type { Language } from '@/i18n/detect'
 
 /** A piece worn, by its id in the game data, at its level. */
 export interface Worn {
@@ -29,12 +28,6 @@ export function pieceOf(id: string): GameArmorPiece {
 /** ItemDrop.ItemData.GetArmor. */
 export const pieceArmor = (piece: GameArmorPiece, level: number) =>
   piece.armor + (level - 1) * piece.armorPerLevel
-
-/** The pieces a slot can take, sorted by name in the language shown. */
-export const slotPieces = (slot: ArmorSlot, language: Language) =>
-  game.armorPieces
-    .filter((piece) => piece.slot === slot)
-    .toSorted((a, b) => a.name[language].localeCompare(b.name[language], language))
 
 const worn = (pieces: Pieces, order: readonly ArmorSlot[]) =>
   order.flatMap((slot) => {

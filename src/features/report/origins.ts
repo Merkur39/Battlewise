@@ -11,6 +11,7 @@ import {
   type FoundAttack,
 } from '@/features/bestiary/model'
 import { useAttackSummary } from '@/features/bestiary/wording'
+import { leveled } from '@/features/gear/model'
 import { pieceOf, SLOTS } from '@/features/gear/pieces'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
@@ -45,7 +46,7 @@ function useSetupLines(on: readonly GameRuleEffect[]): readonly string[] {
   return [
     t.gear.summary(
       blockerOf(gear.blocker).name[language],
-      gear.level,
+      leveled(blockerOf(gear.blocker)) ? gear.level : null,
       gearBlockPower(gear),
       gear.skill,
     ),

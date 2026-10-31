@@ -1,9 +1,7 @@
 import type { Blocker, Defence } from '@/combat/block'
 import { gaugeScale, maxHit } from '@/combat/maxHit'
 import type { World } from '@/combat/world'
-import { game } from '@/data'
-import type { BlockerGroup, GameBlocker } from '@/data/types'
-import type { Language } from '@/i18n/detect'
+import type { GameBlocker } from '@/data/types'
 
 /** What a guard takes with an empty bar, in hits as listed: without staggering, then before it breaks. */
 export interface GuardGauge {
@@ -55,19 +53,8 @@ export function blockPowerParts(blocker: Blocker, level: number, skill: number) 
  * the game sets no end, each level only costs more. */
 export const FORGE_MAX_LEVEL = 10
 
+/** Bare hands are no item: they have no level. */
+export const leveled = (blocker: Pick<GameBlocker, 'group'>) => blocker.group !== 'unarmed'
+
 export const maxLevel = (item: Pick<GameBlocker, 'forge' | 'maxQuality'>) =>
   item.forge ? Math.max(item.maxQuality, FORGE_MAX_LEVEL) : item.maxQuality
-
-/** The groups of the item picker; bare hands go with the others. */
-export type PickerGroup = Exclude<BlockerGroup, 'unarmed'>
-const GROUPS: readonly PickerGroup[] = ['round', 'buckler', 'tower', 'weapon', 'other']
-
-/** Every blocker, by group, each group sorted by name in the language shown. */
-export function blockerGroups(language: Language) {
-  return GROUPS.map((group) => ({
-    group,
-    blockers: game.blockers
-      .filter((blocker) => (blocker.group === 'unarmed' ? 'other' : blocker.group) === group)
-      .toSorted((a, b) => a.name[language].localeCompare(b.name[language], language)),
-  }))
-}

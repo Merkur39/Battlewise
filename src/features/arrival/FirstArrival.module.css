@@ -87,6 +87,56 @@
   color: var(--secondary);
 }
 
+/* A list of Ton équipement, under the question's step: a way back, where it stands, what it picks. */
+.listHeading {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px 4px 4px;
+}
+
+.listBack {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.listTitles {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.listTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.aside {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.footer[hidden] {
+  display: none;
+}
+
 .body {
   flex: 1;
   min-height: 0;
@@ -180,6 +230,38 @@
 
   .heading {
     padding: 6px 0 0;
+  }
+
+  /* While a list shows, the dialog widens to its table. */
+  .listing {
+    width: min(1180px, 100% - 64px);
+    height: calc(100% - 64px);
+  }
+
+  .listHeading {
+    padding: 0;
+  }
+
+  .listBack {
+    width: 40px;
+    height: 40px;
+    margin-left: -12px;
+  }
+
+  .listTitles {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .kicker {
+    font-size: 14px;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .kicker::after {
+    content: ' ›';
   }
 
   .body {

@@ -93,9 +93,9 @@ describe('Arsenal', () => {
     await user.click(screen.getByRole('link', { name: /^Bouclier en sombracier\./ }))
     const dialog = await screen.findByRole('dialog', { name: 'Ton équipement' })
 
-    expect(within(dialog).getByRole('combobox', { name: 'En main' })).toHaveValue(
-      'ShieldBlackmetal',
-    )
+    expect(
+      within(dialog).getByRole('button', { name: 'En main : Bouclier en sombracier' }),
+    ).toBeInTheDocument()
     expect(within(dialog).getByRole('group', { name: 'En main : niveau 3' })).toBeInTheDocument()
 
     await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
@@ -264,7 +264,7 @@ describe('Arsenal', () => {
       await user.click(within(powers).getByRole('link', { name: 'Emporter : Moder' }))
 
       const dialog = await screen.findByRole('dialog', { name: 'Ton équipement' })
-      expect(within(dialog).getByRole('combobox', { name: 'Pouvoir' })).toHaveDisplayValue('Moder')
+      expect(within(dialog).getByRole('button', { name: 'Pouvoir : Moder' })).toBeInTheDocument()
     })
 
     it('shows what the search finds in each category, the counts beside', async () => {

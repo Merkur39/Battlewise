@@ -63,11 +63,10 @@ export interface AppState {
   readonly onboarding: boolean
 }
 
-/** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
- * never too kind. */
+/** A new character's gear: bare hands, nothing worn, verdicts too harsh until it is set, never too kind. */
 export const DEFAULT_STATE: AppState = {
   gear: {
-    blocker: 'ShieldWood',
+    blocker: 'PlayerUnarmed',
     level: 1,
     skill: 0,
     armor: 0,

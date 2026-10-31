@@ -19,6 +19,19 @@ async function answerWhere(user: UserEvent, biome: string) {
   return question('Ton équipement')
 }
 
+/** Holds the bronze buckler, picked among the shields in the list of what is held: the question comes
+ * back with it. */
+async function holdBronze(user: UserEvent, dialog: HTMLElement) {
+  await user.click(within(dialog).getByRole('button', { name: /^En main : (?!niveau )/ }))
+  // A new character holds nothing: the list opens on the rest, beside the shields.
+  await user.click(within(dialog).getByRole('button', { name: /^Boucliers / }))
+  await user.click(
+    within(dialog).getByRole('button', {
+      name: /^(Bouclier en bronze\. |Choisir : Bouclier en bronze$)/,
+    }),
+  )
+}
+
 describe('The first arrival', () => {
   it('asks first where the player fights, out of the biomes of the game', async () => {
     firstLaunch()
@@ -55,7 +68,7 @@ describe('The first arrival', () => {
     const { store } = firstLaunch()
     const dialog = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(dialog).getByLabelText('En main'), 'Bouclier en bronze')
+    await holdBronze(user, dialog)
     await user.click(within(dialog).getByRole('button', { name: 'En main : niveau supérieur' }))
     await user.click(within(dialog).getByRole('button', { name: 'En main : niveau supérieur' }))
 
@@ -64,12 +77,34 @@ describe('The first arrival', () => {
     expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
   })
 
+  it('opens a row’s list under the question’s step, and comes back to the question', async () => {
+    const user = userEvent.setup()
+    firstLaunch()
+    const dialog = await answerWhere(user, 'Forêt noire')
+
+    await user.click(within(dialog).getByRole('button', { name: 'Casque : Aucun' }))
+
+    expect(dialog).toHaveAccessibleName('Ton casque')
+    expect(dialog).toHaveTextContent('2 sur 3')
+    expect(dialog).toHaveTextContent('Question 2 · Ton équipement')
+    expect(within(dialog).getByRole('button', { name: 'Passer' })).toBeInTheDocument()
+    expect(within(dialog).queryByRole('button', { name: 'Suivant' })).not.toBeInTheDocument()
+
+    await user.click(within(dialog).getByRole('button', { name: /^Casque en bronze\. / }))
+
+    expect(dialog).toHaveAccessibleName('Ton équipement')
+    expect(
+      within(dialog).getByRole('button', { name: 'Casque : Casque en bronze' }),
+    ).toBeInTheDocument()
+    expect(within(dialog).getByRole('button', { name: 'Suivant' })).toBeInTheDocument()
+  })
+
   it('keeps the gear for the end on Suivant, then asks for the world', async () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
+    await holdBronze(user, gear)
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
 
     expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
@@ -82,7 +117,7 @@ describe('The first arrival', () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
-    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
+    await holdBronze(user, gear)
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
     const world = await question('Ton monde')
 
@@ -107,12 +142,12 @@ describe('The first arrival', () => {
     firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
+    await holdBronze(user, gear)
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
 
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Prairies')
     expect(screen.getByRole('link', { name: /^Ton équipement :/ })).toHaveAccessibleName(
-      /Bouclier en bois/,
+      /Sans armes/,
     )
   })
 
@@ -143,7 +178,7 @@ describe('The first arrival', () => {
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
+    await holdBronze(user, gear)
     await user.click(within(gear).getByRole('button', { name: 'Passer' }))
 
     expect(gear).not.toBeInTheDocument()
