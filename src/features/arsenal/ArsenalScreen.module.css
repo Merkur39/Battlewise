@@ -615,19 +615,46 @@ tr.owned {
   width: 28%;
 }
 
-/* Wide enough that the figures aligned right before it keep their distance from « Équiper ». */
+/* « Emporter » or « Équiper » after text: the button needs no more room than its own. */
 .actionColumn {
+  width: 160px;
+}
+
+/* What blocks: wide enough that the figures aligned right before it keep their distance from
+ * « Équiper », short of it on a narrow desktop, where they would lose their own. */
+.blockers .actionColumn {
   width: 320px;
 }
 
-/* A list of Your gear, in its dialog: « Choisir » needs less room, the figures keep theirs. */
+@media (max-width: 1279px) {
+  .blockers .actionColumn {
+    width: 200px;
+  }
+}
+
+/* A list of Your gear, in its dialog: the figures keep their room. */
 .picking .nameColumn,
 .picking .wide {
   width: 24%;
 }
 
-.picking .actionColumn {
-  width: 240px;
+/* Armor pieces, in the Arsenal and in a list of Your gear: their figures keep their headers and their
+ * resistances a chip a line; the name takes what is left, and wraps. */
+.pieces .nameColumn {
+  width: auto;
+}
+
+.pieces .number {
+  width: 84px;
+}
+
+.pieces .wide {
+  width: 25%;
+}
+
+/* « Choisir », in a list of Your gear, needs less room still. */
+.table.picking .actionColumn {
+  width: 140px;
 }
 
 .table thead .number {

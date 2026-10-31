@@ -464,11 +464,13 @@ export function CategoryTable({
             head(t.arsenal.changes[found.category], styles.wide),
           ]
   const rows: readonly AnyRow[] = found.rows
+  // Each kind lays its columns out its own way.
+  const kind = { blocker: styles.blockers, piece: styles.pieces, effect: '' }[found.kind] ?? ''
   return (
     <div className={`${styles.tableBox ?? ''} ${scrolls ? (styles.scrolls ?? '') : ''}`}>
       <table
         aria-label={t.arsenal.categories[category]}
-        className={`${styles.table ?? ''} ${select.kind === 'pick' ? (styles.picking ?? '') : ''}`}
+        className={`${styles.table ?? ''} ${select.kind === 'pick' ? (styles.picking ?? '') : ''} ${kind}`}
       >
         <thead>
           <tr>
