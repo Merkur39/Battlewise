@@ -1,7 +1,8 @@
 import type { World } from '@/combat/world'
 import { game } from '@/data'
-import type { BiomeId } from '@/data/types'
+import type { ArmorSlot, BiomeId } from '@/data/types'
 import { maxLevel } from '@/features/gear/model'
+import { SLOTS, type Pieces, type Worn } from '@/features/gear/pieces'
 import { LANGUAGES } from '@/i18n/detect'
 
 /** The seven palettes of src/styles/themes.css, applied through data-theme on the root. */
@@ -26,8 +27,11 @@ export interface Gear {
   readonly level: number
   /** Blocking skill, 0 to 100. */
   readonly skill: number
+  /** Typed in an earlier version, before the pieces: it stands until the player picks one. */
   readonly armor: number
   readonly maxHealth: number
+  /** Left out by players of earlier versions, whose typed armor stands for them. */
+  readonly pieces?: Pieces
 }
 
 /** An attack, by the creature or boss phase that makes it and its first item id. */
@@ -59,7 +63,7 @@ export interface AppState {
 /** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
  * never too kind. */
 export const DEFAULT_STATE: AppState = {
-  gear: { blocker: 'ShieldWood', level: 1, skill: 0, armor: 0, maxHealth: 25 },
+  gear: { blocker: 'ShieldWood', level: 1, skill: 0, armor: 0, maxHealth: 25, pieces: {} },
   world: { difficulty: 'normal', players: 1 },
   theme: 'origine',
   language: 'auto',
@@ -124,7 +128,7 @@ function load(storage: KeyValueStorage | null): AppState {
   }
   if (!isRecord(saved)) return DEFAULT_STATE
   return {
-    gear: isGear(saved.gear) ? saved.gear : DEFAULT_STATE.gear,
+    gear: isGear(saved.gear) ? withPieces(saved.gear) : DEFAULT_STATE.gear,
     world: isWorld(saved.world) ? saved.world : DEFAULT_STATE.world,
     theme: oneOf(THEMES, saved.theme) ?? DEFAULT_STATE.theme,
     language: oneOf(LANGUAGE_SETTINGS, saved.language) ?? DEFAULT_STATE.language,
@@ -163,6 +167,26 @@ function isGear(value: unknown): value is Gear {
     isNumber(value.armor, 0) &&
     isNumber(value.maxHealth, 1)
   )
+}
+
+// The pieces are checked one by one: a piece the game no longer has, or out of its slot, is dropped,
+// a level clamped, and the rest of the gear kept; pieces that are no pieces leave the typed armor.
+function withPieces({ pieces, ...gear }: Gear): Gear {
+  if (!isRecord(pieces)) return gear
+  const kept: Partial<Record<ArmorSlot, Worn>> = {}
+  for (const slot of SLOTS) {
+    const worn = pieces[slot]
+    if (!isRecord(worn) || typeof worn.level !== 'number' || !Number.isFinite(worn.level)) continue
+    const piece = game.armorPieces.find(
+      (candidate) => candidate.id === worn.id && candidate.slot === slot,
+    )
+    if (!piece) continue
+    kept[slot] = {
+      id: piece.id,
+      level: Math.min(Math.max(Math.round(worn.level), 1), maxLevel(piece)),
+    }
+  }
+  return { ...gear, pieces: kept }
 }
 
 const isWorld = (value: unknown): value is World =>

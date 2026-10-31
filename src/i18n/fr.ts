@@ -73,6 +73,11 @@ export const fr = {
     summary: (item: string, level: number, blockPower: number, skill: number) =>
       `Ton équipement : ${item} niveau ${n(level)}, VD ${n(blockPower)}, compétence Blocage ${n(skill)}`,
     levelAndPower: (level: number, blockPower: number) => `N${n(level)} · VD ${n(blockPower)}`,
+    /** The pieces worn, each with its level; null for an armor typed in an earlier version. */
+    bodySummary: (armor: number, health: number, pieces: readonly string[] | null) =>
+      pieces === null
+        ? `Armure ${n(armor)}, tapée · ${n(health)} PV max`
+        : `Armure ${n(armor)} · ${n(health)} PV max${pieces.length > 0 ? ` : ${pieces.join(', ')}` : ''}`,
     title: 'Ton équipement',
     withstand: 'Ce que tu encaisses',
     emptyBar: 'Barre vide',
@@ -85,7 +90,7 @@ export const fr = {
     staggersAt: (limit: number, share: number, health: number, armor: number) =>
       `Titube à ${n(limit)} (${n(share)} % de ${n(health)} PV) · armure ${n(armor)}`,
     powerParts: (base: number, skill: number) => `VD = ${n(base)} × ${n(skill)}`,
-    item: 'Objet qui bloque',
+    held: 'En main',
     groups: {
       round: 'Boucliers ronds',
       buckler: 'Targes',
@@ -96,24 +101,30 @@ export const fr = {
     groupTags: { round: 'Rond', buckler: 'Targe', tower: 'Écu', weapon: 'Arme', other: 'Autre' },
     parryBonus: (bonus: number) => `×${n(bonus)}`,
     noParry: 'ne pare pas',
-    torch: "Avec une torche en main gauche, c'est elle qui bloque.",
-    level: 'Niveau',
-    levelLong: "Niveau d'amélioration",
     lowerLevel: 'Niveau inférieur',
     raiseLevel: 'Niveau supérieur',
-    /** `forge` names the station that takes the item past `maxQuality`, if any. */
-    levelNote: (perLevel: number, maxQuality: number, forge: string | null) => {
-      const gain =
-        perLevel > 0 ? `+${n(perLevel)} de VD par niveau` : 'Le niveau ne change pas sa VD'
-      return forge
-        ? `${gain} ; au-delà du niveau ${n(maxQuality)} : ${forge}.`
-        : `${gain}, jusqu'au niveau max de l'objet.`
-    },
-    notUpgradable: "Cet objet ne s'améliore pas.",
+    /** The level of a row, by what the row holds; null when it holds nothing. */
+    levelOf: (row: string, level: number | null) =>
+      level === null ? `${row} : aucun` : `${row} : niveau ${n(level)}`,
+    lowerLevelOf: (row: string) => `${row} : niveau inférieur`,
+    raiseLevelOf: (row: string) => `${row} : niveau supérieur`,
+    levelValue: (level: number) => `N${n(level)}`,
     skill: 'Compétence Blocage',
+    lowerSkill: 'Moins de compétence',
+    raiseSkill: 'Plus de compétence',
+    pieces: "Pièces d'armures",
+    slots: { helmet: 'Casque', chest: 'Plastron', legs: 'Jambières', cape: 'Cape' },
+    noPiece: 'Aucun',
     armor: 'Armure',
-    lowerArmor: "Moins d'armure",
-    raiseArmor: "Plus d'armure",
+    armorParts: (parts: readonly number[]) => parts.map(n).join(' + '),
+    typedArmor: 'Armure tapée avant cette version : choisis tes pièces pour la remplacer.',
+    resistances: 'Tes résistances',
+    fullSet: 'Ensemble complet',
+    /** What a set changes, by damage types sharing a multiplier: « Contondant, Coupant et Perforant ×1,25 ». */
+    setModifier: (types: readonly string[], multiplier: number) =>
+      `${new Intl.ListFormat('fr', { type: 'conjunction' }).format(types)} ×${n(multiplier)}`,
+    /** `share` in percent. */
+    dodgeCost: (share: number) => `Esquiver coûte ${n(share)} % d'endurance en moins`,
     health: 'PV max',
     lowerHealth: 'Moins de PV',
     raiseHealth: 'Plus de PV',

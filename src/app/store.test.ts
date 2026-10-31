@@ -65,14 +65,54 @@ describe('createStore', () => {
     expect(createStore(memoryStorage()).getState().biome).toBeNull()
   })
 
-  it('starts with the gear of a new character: a wooden shield, no skill, no armour, 25 HP', () => {
+  it('starts with the gear of a new character: a wooden shield, no skill, no piece, 25 HP', () => {
     expect(createStore(memoryStorage()).getState().gear).toEqual({
       blocker: 'ShieldWood',
       level: 1,
       skill: 0,
       armor: 0,
       maxHealth: 25,
+      pieces: {},
     })
+  })
+
+  it("keeps the pieces across a reload, and an earlier player's typed armor when they have none", () => {
+    const storage = memoryStorage()
+    const pieces = { chest: { id: 'ArmorIronChest', level: 2 }, cape: { id: 'CapeWolf', level: 1 } }
+    createStore(storage).update({ gear: { ...changed.gear, armor: 0, pieces } })
+
+    expect(createStore(storage).getState().gear.pieces).toEqual(pieces)
+    expect(
+      createStore(memoryStorage(JSON.stringify({ gear: changed.gear }))).getState().gear,
+    ).toEqual(changed.gear)
+  })
+
+  it('checks the pieces one by one, never putting the whole gear back for one of them', () => {
+    const saved = {
+      gear: {
+        ...changed.gear,
+        armor: 0,
+        pieces: {
+          helmet: { id: 'HelmetOfAnotherGame', level: 1 },
+          chest: { id: 'ArmorIronChest', level: 12 },
+          legs: { id: 'CapeWolf', level: 1 },
+          cape: { id: 'CapeWolf', level: 0 },
+          shoulders: { id: 'CapeWolf', level: 1 },
+        },
+      },
+    }
+
+    expect(createStore(memoryStorage(JSON.stringify(saved))).getState().gear).toEqual({
+      ...changed.gear,
+      armor: 0,
+      pieces: { chest: { id: 'ArmorIronChest', level: 10 }, cape: { id: 'CapeWolf', level: 1 } },
+    })
+  })
+
+  it('keeps the typed armor when the saved pieces are not pieces at all', () => {
+    const saved = { gear: { ...changed.gear, pieces: 'iron' } }
+
+    expect(createStore(memoryStorage(JSON.stringify(saved))).getState().gear).toEqual(changed.gear)
   })
 
   it('starts on the defaults without storage', () => {

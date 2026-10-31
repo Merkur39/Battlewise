@@ -55,12 +55,9 @@ describe('The first arrival', () => {
     const { store } = firstLaunch()
     const dialog = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(
-      within(dialog).getByLabelText('Objet qui bloque'),
-      'Bouclier en bronze',
-    )
-    await user.click(within(dialog).getByRole('button', { name: 'Niveau supérieur' }))
-    await user.click(within(dialog).getByRole('button', { name: 'Niveau supérieur' }))
+    await user.selectOptions(within(dialog).getByLabelText('En main'), 'Bouclier en bronze')
+    await user.click(within(dialog).getByRole('button', { name: 'En main : niveau supérieur' }))
+    await user.click(within(dialog).getByRole('button', { name: 'En main : niveau supérieur' }))
 
     const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
     expect(within(withstand).getByRole('group', { name: 'Bloquer' })).toHaveTextContent('VD 28')
@@ -72,7 +69,7 @@ describe('The first arrival', () => {
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
 
     expect(store.getState().gear).toEqual(DEFAULT_STATE.gear)
@@ -85,7 +82,7 @@ describe('The first arrival', () => {
     const user = userEvent.setup()
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
-    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
     const world = await question('Ton monde')
 
@@ -110,7 +107,7 @@ describe('The first arrival', () => {
     firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Suivant' }))
 
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Prairies')
@@ -146,7 +143,7 @@ describe('The first arrival', () => {
     const { store } = firstLaunch()
     const gear = await answerWhere(user, 'Forêt noire')
 
-    await user.selectOptions(within(gear).getByLabelText('Objet qui bloque'), 'Bouclier en bronze')
+    await user.selectOptions(within(gear).getByLabelText('En main'), 'Bouclier en bronze')
     await user.click(within(gear).getByRole('button', { name: 'Passer' }))
 
     expect(gear).not.toBeInTheDocument()

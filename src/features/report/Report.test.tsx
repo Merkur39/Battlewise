@@ -1,8 +1,9 @@
-import { screen, waitFor, within } from '@testing-library/react'
+import { cleanup, screen, waitFor, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { App } from '@/app/App'
-import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
+import type { Gear } from '@/app/store'
+import { MOCKUP_GEAR, MOCKUP_PIECES, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 import type { Report } from './model'
 import { createOutbox, SendError, type Sender } from './outbox'
@@ -13,10 +14,10 @@ const send = () => inSheet().getByRole('button', { name: 'Envoyer' })
 const sentReport = (sender: ReturnType<typeof vi.fn<Sender>>): Report | undefined =>
   sender.mock.calls[0]?.[0]
 
-function renderApp(hash: string, sender: Sender) {
+function renderApp(hash: string, sender: Sender, gear: Gear = MOCKUP_GEAR) {
   window.history.replaceState(null, '', hash)
   const outbox = createOutbox(null, sender)
-  renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR }, { outbox })
+  renderWithStore(<App />, { language: 'fr', gear }, { outbox })
   return outbox
 }
 
@@ -129,6 +130,27 @@ describe('Reporting', () => {
       context: { screen: 'simulation', creature: 'Troll', attack: 'troll_groundslam' },
     })
     expect(report?.context.shows.join('\n')).toMatch(/Bouclier en argent/)
+  })
+
+  it('attaches the armor, the max health and the pieces worn, or says the armor was typed', async () => {
+    const shows = async (gear: Gear) => {
+      const user = userEvent.setup()
+      const sender = vi.fn<Sender>().mockResolvedValue({ number: 50 })
+      renderApp('#/simulation/Troll/troll_groundslam', sender, gear)
+      await user.click(
+        screen.getByRole('button', { name: 'Ce verdict te paraît faux ? Signale-le' }),
+      )
+      await write(user, "Qu'est-ce qui est faux ?", 'Je ne titube pas en jeu.')
+      await user.click(send())
+      await inSheet().findByText(/^Reçu, c'est le/)
+      return sentReport(sender)?.context.shows ?? []
+    }
+
+    expect(await shows({ ...MOCKUP_GEAR, armor: 0, pieces: MOCKUP_PIECES })).toContain(
+      "Armure 45 · 150 PV max : Casque en fer N1, Armure d'écailles de fer N1, Jambières en plaques de fer N1, Cape en fourrure de loup N3",
+    )
+    cleanup()
+    expect(await shows(MOCKUP_GEAR)).toContain('Armure 45, tapée · 150 PV max')
   })
 
   it('reports a bug or an idea from Settings, its kind picked first', async () => {

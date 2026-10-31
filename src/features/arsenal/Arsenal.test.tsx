@@ -64,10 +64,12 @@ describe('Arsenal', () => {
     await user.click(screen.getByRole('link', { name: /^Bouclier en sombracier\./ }))
     const dialog = await screen.findByRole('dialog', { name: 'Ton équipement' })
 
-    expect(within(dialog).getByRole('combobox', { name: 'Objet qui bloque' })).toHaveValue(
+    expect(within(dialog).getByRole('combobox', { name: 'En main' })).toHaveValue(
       'ShieldBlackmetal',
     )
-    expect(within(dialog).getByRole('textbox', { name: 'Niveau' })).toHaveValue('3')
+    expect(within(dialog).getByRole('group', { name: 'En main : niveau 3' })).toHaveTextContent(
+      'N3',
+    )
 
     await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
 
@@ -122,7 +124,7 @@ describe('Arsenal', () => {
       await user.click(screen.getByRole('link', { name: 'Équiper : Targe nordique' }))
 
       const dialog = await screen.findByRole('dialog', { name: 'Ton équipement' })
-      expect(within(dialog).getByRole('combobox', { name: 'Objet qui bloque' })).toHaveValue(
+      expect(within(dialog).getByRole('combobox', { name: 'En main' })).toHaveValue(
         'ShieldGoldBuckler',
       )
     })
