@@ -585,6 +585,7 @@ export const en: Catalog = {
       declined: 'Closed · not planned',
     },
     news: "What's new",
+    noteKinds: { new: 'New', improved: 'Improved', fixed: 'Fixed' },
     newsSummary: (version, date) => `${version} · ${date}`,
     thanks: (names) => `Thanks ${new Intl.ListFormat('en', { type: 'conjunction' }).format(names)}`,
     yours: (numbers) =>

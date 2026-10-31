@@ -7,21 +7,26 @@ const releases: readonly Release[] = [
   {
     version: '1.6.0',
     date: '2026-11-10',
-    notes: [{ text: { fr: 'Draugr', en: 'Draugr' }, fixes: [50] }],
+    notes: [{ kind: 'fixed', title: { fr: 'Draugr', en: 'Draugr' }, fixes: [50] }],
   },
   {
     version: '1.5.0',
     date: '2026-11-02',
     notes: [
       {
-        text: { fr: 'Frappe au sol : 60.', en: 'Ground slam: 60.' },
+        kind: 'fixed',
+        title: { fr: 'Frappe au sol : 60', en: 'Ground slam: 60' },
         fixes: [48],
         thanks: ['Ragnar'],
       },
-      { text: { fr: 'Mes signalements.', en: 'My reports.' } },
+      { kind: 'new', title: { fr: 'Mes signalements', en: 'My reports' } },
     ],
   },
-  { version: '1.4.0', date: '2026-10-27', notes: [{ text: { fr: 'Signaler.', en: 'Report.' } }] },
+  {
+    version: '1.4.0',
+    date: '2026-10-27',
+    notes: [{ kind: 'new', title: { fr: 'Signaler', en: 'Report' } }],
+  },
 ]
 
 const receipt = (number: number): Receipt => ({

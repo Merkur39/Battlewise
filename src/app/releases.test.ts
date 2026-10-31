@@ -25,14 +25,30 @@ describe('the releases', () => {
     }
   })
 
-  it('say each note in both languages, and fix issues by their numbers', () => {
+  it('give each note its kind and its title in both languages, and fix issues by their numbers', () => {
     for (const { notes } of RELEASES) {
       expect(notes.length).toBeGreaterThan(0)
       for (const note of notes) {
-        expect(note.text.fr.trim()).not.toBe('')
-        expect(note.text.en.trim()).not.toBe('')
+        expect(['new', 'improved', 'fixed']).toContain(note.kind)
+        for (const text of [note.title, ...(note.detail ? [note.detail] : [])]) {
+          expect(text.fr.trim()).not.toBe('')
+          expect(text.en.trim()).not.toBe('')
+        }
         for (const issue of note.fixes ?? [])
           expect(Number.isInteger(issue) && issue > 0).toBe(true)
+      }
+    }
+  })
+
+  it('stay short: a title of ten words at most, a detail of sixteen', () => {
+    const words = (text: string) => text.split(/\s+/).filter((word) => /[\p{L}\p{N}]/u.test(word))
+    for (const { notes } of RELEASES) {
+      for (const { title, detail } of notes) {
+        for (const language of ['fr', 'en'] as const) {
+          expect(words(title[language]).length, title[language]).toBeLessThanOrEqual(10)
+          if (detail)
+            expect(words(detail[language]).length, detail[language]).toBeLessThanOrEqual(16)
+        }
       }
     }
   })

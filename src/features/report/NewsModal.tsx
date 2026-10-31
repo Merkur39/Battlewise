@@ -46,13 +46,17 @@ export function NewsModal() {
               ].filter((part) => part !== null)
               const credit = credits.join(' · ')
               return (
-                <li key={note.text.en} className={styles.entry}>
-                  <p className={styles.noteText}>{note.text[language]}</p>
-                  {credit !== '' && (
-                    <p className={styles.credit}>
-                      {credit.charAt(0).toUpperCase() + credit.slice(1)}
-                    </p>
-                  )}
+                <li key={note.title.en} className={styles.entry}>
+                  <span className={styles.noteKind}>{t.loop.noteKinds[note.kind]}</span>
+                  <div className={styles.noteBody}>
+                    <p className={styles.noteTitle}>{note.title[language]}</p>
+                    {note.detail && <p className={styles.noteDetail}>{note.detail[language]}</p>}
+                    {credit !== '' && (
+                      <p className={styles.credit}>
+                        {credit.charAt(0).toUpperCase() + credit.slice(1)}
+                      </p>
+                    )}
+                  </div>
                 </li>
               )
             })}
