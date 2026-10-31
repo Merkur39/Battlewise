@@ -688,6 +688,7 @@ export const fr = {
       declined: 'Fermé · non retenu',
     },
     news: 'Nouveautés',
+    noteKinds: { new: 'Nouveau', improved: 'Amélioré', fixed: 'Corrigé' },
     newsSummary: (version: string, date: string) => `${version} · ${date}`,
     thanks: (names: readonly string[]) =>
       `Merci ${new Intl.ListFormat('fr', { type: 'conjunction' }).format(names)}`,

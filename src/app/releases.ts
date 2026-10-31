@@ -1,8 +1,15 @@
 import type { Localized } from '@/data/types'
 
+/** What a note is about, shown as its tag: something new, something better, something fixed. */
+export type NoteKind = 'new' | 'improved' | 'fixed'
+
 /** A line of a version's notes. */
 export interface ReleaseNote {
-  readonly text: Localized
+  readonly kind: NoteKind
+  /** What the player can do now, or what changed, in ten words at most. */
+  readonly title: Localized
+  /** One more sentence when it helps, sixteen words at most; only What's new shows it. */
+  readonly detail?: Localized
   /** The issues it fixes: a player who reported one of them is thanked for it. */
   readonly fixes?: readonly number[]
   /** The names the players who reported it gave, thanked under it. */
@@ -27,9 +34,18 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-31',
     notes: [
       {
-        text: {
-          fr: 'Les boutons + et − se maintiennent : tes PV max, ta compétence Blocage, le niveau de ce que tu portes et la Valeur libre de la Simulation avancent seuls, de plus en plus vite, tant que tu appuies. Cliquer vite ou appuyer longtemps ne sélectionne plus le texte d’à côté : un texte se sélectionne en double-cliquant dessus.',
-          en: 'The + and − buttons can be held: your Max HP, your Blocking skill, the level of what you wear and the Simulation’s Free value move on their own, faster and faster, while you press. Clicking fast or pressing long no longer selects the text beside them: a text is selected by double-clicking on it.',
+        kind: 'improved',
+        title: { fr: 'Maintiens + ou − pour aller plus vite', en: 'Hold + or − to go faster' },
+        detail: {
+          fr: 'PV max, compétence Blocage, niveaux, Valeur libre.',
+          en: 'Max HP, Blocking skill, levels, Free value.',
+        },
+      },
+      {
+        kind: 'fixed',
+        title: {
+          fr: 'Cliquer vite ne sélectionne plus le texte voisin',
+          en: 'Fast clicks no longer select nearby text',
         },
       },
     ],
@@ -39,9 +55,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-31',
     notes: [
       {
-        text: {
-          fr: 'Dans Ton monde, « Ce que ça donne » montre aussi la taille et la vitesse au sol des monstres, que la difficulté du combat change hors donjons (×1,2 en Très difficile). Le rythme de leurs attaques, lui, ne change jamais.',
-          en: 'In Your world, “What it does” also shows the monsters’ size and ground speed, which the combat difficulty changes outside dungeons (×1.2 on Very Hard). The pace of their attacks never changes.',
+        kind: 'new',
+        title: {
+          fr: 'Ton monde montre la taille et la vitesse des monstres',
+          en: "Your world shows the monsters' size and speed",
+        },
+        detail: {
+          fr: "Jusqu'à ×1,2 en Très difficile, hors donjons. Leurs attaques ne vont pas plus vite.",
+          en: "Up to ×1.2 on Very Hard, outside dungeons. Their attacks don't speed up.",
         },
       },
     ],
@@ -51,21 +72,36 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-31',
     notes: [
       {
-        text: {
-          fr: "Dans Ton équipement, « Ce que tu emportes » garde ton bibelot, ton pouvoir et tes boissons, comme la Broche en fer, Masse-d'Os ou l'Hydromel de résistance au gel, chacun avec sa durée et ce qu'il change. Sur la fiche d'une créature et dans la Simulation, « Avec tes effets temporaires » les allume un par un : les verdicts, les dégâts, l'endurance et ce que tu encaisses suivent. Ce qui ne change rien face à la créature est grisé, avec sa raison. Le Bestiaire, lui, reste « Sans tes effets temporaires ».",
-          en: 'In Your gear, “What you carry” keeps your trinket, your power and your drinks, such as the Iron Brooch, Bonemass or the Frost Resistance Mead, each with how long it lasts and what it changes. On a creature’s sheet and in the Simulation, “With your temporary effects” switches them on one by one: the verdicts, the damage, the stamina and what you can take follow. What changes nothing against the creature is greyed, with its reason. The Bestiary stays “Without your temporary effects”.',
+        kind: 'new',
+        title: {
+          fr: 'Emporte ton bibelot, ton pouvoir et tes boissons',
+          en: 'Carry your trinket, power and drinks',
+        },
+        detail: {
+          fr: 'Allume-les sur une fiche ou dans la Simulation : les verdicts suivent.',
+          en: 'Switch them on in a sheet or the Simulation: the verdicts follow.',
         },
       },
       {
-        text: {
-          fr: "L'Arsenal liste aussi les casques, plastrons, jambières et capes, les pouvoirs, les bibelots et les boissons, rangés comme Ton équipement : En main, Pièces d'armures, Ce que tu emportes. Chaque pièce donne son armure, ses résistances et faiblesses, et l'ensemble dont le bonus compte en combat ; chaque effet, sa durée et ce qu'il change. Une recherche fouille toutes les catégories d'un coup, et une ligne ouvre Ton équipement avec l'objet. Tout s'y lit au niveau 1 : le sélecteur de niveau, la vitesse et la repousse s'en vont, le niveau se règle dans Ton équipement.",
-          en: 'The Arsenal also lists helmets, chests, legs and capes, powers, trinkets and drinks, sorted as Your gear is: In hand, Armor pieces, What you carry. Each piece gives its armor, its resistances and weaknesses, and the set whose bonus counts in a fight; each effect, how long it lasts and what it changes. A search looks through every category at once, and a row opens Your gear with the item. Everything reads at level 1: the level picker, the speed and the push-back go, the level is set in Your gear.',
+        kind: 'new',
+        title: {
+          fr: "L'Arsenal liste aussi armures, capes et effets",
+          en: 'The Arsenal also lists armor, capes and effects',
+        },
+        detail: {
+          fr: "Une recherche fouille tout ; une ligne t'en équipe.",
+          en: 'One search looks through it all; a row equips you.',
         },
       },
       {
-        text: {
-          fr: 'Dans Ton équipement, chaque ligne ouvre sa liste de l’Arsenal, avec sa recherche, au lieu d’une liste déroulante ; « Aucune cape », « Aucun bibelot »… en tête retirent ce que tu portes ou emportes. Un nouveau joueur commence à mains nues : « Sans armes », sans niveau, en tête de ce que tu tiens.',
-          en: 'In Your gear, each row opens its Arsenal list, with its search, instead of a drop-down; “No cape”, “No trinket”… at its head take off what you wear or carry. A new player starts bare-handed: “Fists”, with no level, at the head of what you hold.',
+        kind: 'improved',
+        title: {
+          fr: "Ton équipement se choisit dans les listes de l'Arsenal",
+          en: "Your gear is picked from the Arsenal's lists",
+        },
+        detail: {
+          fr: 'Un nouveau joueur commence à mains nues.',
+          en: 'A new player starts bare-handed.',
         },
       },
     ],
@@ -75,21 +111,32 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-31',
     notes: [
       {
-        text: {
-          fr: "Dans Ton équipement, tu choisis ton casque, ton plastron, tes jambières et ta cape, chacun à son niveau, au lieu de taper ton armure : Foelore en connaît l'armure et les résistances, comme la Cape en fourrure de loup contre la glace ou la Cuirasse de racines contre le perforant, mais faible au feu, et le bonus d'un ensemble complet. Les verdicts, la fiche, la Simulation et ce que tu encaisses en tiennent compte. Si tu avais tapé ton armure, elle compte jusqu'à ce que tu choisisses une pièce.",
-          en: 'In Your gear, you pick your helmet, chest, legs and cape, each at its level, instead of typing your armor: Foelore knows their armor and resistances, such as the Wolf Fur Cape against frost or the Root Harnesk against pierce, though weak to fire, and the bonus of a full set. The verdicts, the sheet, the Simulation and what you can take count them. If you had typed your armor, it counts until you pick a piece.',
+        kind: 'new',
+        title: {
+          fr: 'Choisis ton casque, ton plastron, tes jambières et ta cape',
+          en: 'Pick your helmet, chest, legs and cape',
+        },
+        detail: {
+          fr: "Armure, résistances et bonus d'ensemble comptent dans chaque verdict.",
+          en: 'Armor, resistances and set bonuses count in every verdict.',
         },
       },
       {
-        text: {
-          fr: 'Ta compétence Blocage se règle comme tes PV max, et ce que tu tiens devient « En main », une ligne avec son niveau à droite.',
-          en: 'Your Blocking skill is set like your max HP, and what you hold becomes “In hand”, one row with its level on the right.',
+        kind: 'improved',
+        title: {
+          fr: 'Compétence Blocage réglable avec − et +',
+          en: 'Blocking skill set with − and +',
         },
       },
       {
-        text: {
-          fr: "Dans le Mémo, chaque effet donne ses résistances, son armure et sa durée : les résistances ne se multiplient jamais, la plus forte l'emporte. Une ligne explique aussi le gel de la Montagne, qui épargne qui résiste à la glace.",
-          en: 'In the Guide, each effect gives its resistances, armor and duration: resistances never multiply, the strongest wins. A line also explains freezing in the Mountain, which spares anyone resistant to frost.',
+        kind: 'new',
+        title: {
+          fr: 'Le Mémo explique résistances et gel',
+          en: 'The Guide explains resistances and freezing',
+        },
+        detail: {
+          fr: "Les résistances ne se multiplient jamais : la plus forte l'emporte.",
+          en: 'Resistances never multiply: the strongest wins.',
         },
       },
     ],
@@ -99,9 +146,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-30',
     notes: [
       {
-        text: {
-          fr: "Quand chaque parade tient mais qu'un blocage cède, le Bestiaire et la fiche de la créature disent que le blocage cède, comme la Simulation, et non plus que tu titubes en bloquant.",
-          en: "When every parry holds but a block gives way, the Bestiary and the creature's sheet say that the block gives way, as the Simulation does, no longer that blocking staggers you.",
+        kind: 'fixed',
+        title: {
+          fr: 'Le Bestiaire dit enfin quand le blocage cède',
+          en: 'The Bestiary now says when the block gives way',
+        },
+        detail: {
+          fr: 'Comme la Simulation, au lieu de « tu titubes ».',
+          en: 'As the Simulation does, instead of “you stagger”.',
         },
       },
     ],
@@ -111,9 +163,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "À la première ouverture, Foelore pose trois questions avant le Bestiaire : où tu en es, ton équipement et ton monde, pour que ses verdicts parlent de toi dès le début. Chacune se passe, et tout reste réglable ensuite. Si tu utilisais déjà l'app, tu les verras une fois, tes réglages déjà remplis.",
-          en: 'When first opened, Foelore asks three questions before the Bestiary: where you are, your gear and your world, so that its verdicts are about you from the start. Each can be skipped, and everything can still be set later. If you already used the app, you will see them once, your settings already filled in.',
+        kind: 'new',
+        title: {
+          fr: 'Trois questions à la première ouverture',
+          en: 'Three questions on first launch',
+        },
+        detail: {
+          fr: 'Ton biome, ton équipement, ton monde : des verdicts justes dès le départ.',
+          en: 'Your biome, gear and world: verdicts about you from the start.',
         },
       },
     ],
@@ -123,9 +180,10 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "Le Bestiaire s'ouvre sur le dernier biome que tu as choisi, plus sur les Prairies. Une créature ouverte depuis la recherche ne le change pas, et un lien vers un autre biome ouvre toujours celui-là.",
-          en: 'The Bestiary opens on the biome you last picked, no longer on the Meadows. A creature opened from the search does not change it, and a link to another biome still opens that one.',
+        kind: 'improved',
+        title: {
+          fr: 'Le Bestiaire rouvre ton dernier biome',
+          en: 'The Bestiary reopens your last biome',
         },
       },
     ],
@@ -135,9 +193,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "Réglages › À propos › Mentions et crédits : Foelore y dit qu'il est un projet de fan non officiel, ce qu'il doit au wiki Valheim, aux polices et aux bibliothèques qu'il utilise, ce que deviennent tes données, et à qui écrire pour faire retirer un signalement ou ton pseudo.",
-          en: 'Settings › About › Notices and credits: Foelore says there that it is an unofficial fan project, what it owes to the Valheim wiki and to the fonts and libraries it uses, what becomes of your data, and whom to write to to have a report or your nickname removed.',
+        kind: 'new',
+        title: {
+          fr: 'Mentions et crédits, dans Réglages',
+          en: 'Notices and credits, in Settings',
+        },
+        detail: {
+          fr: 'Projet de fan, sources, tes données.',
+          en: 'Fan project, sources, your data.',
         },
       },
     ],
@@ -147,9 +210,11 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "Battlewise s'appelle désormais Foelore, à une nouvelle adresse : foelore.vercel.app. Ton équipement, ton monde et tes réglages ne suivent pas : règle-les une fois, et réinstalle l'app si tu l'avais installée.",
-          en: 'Battlewise is now Foelore, at a new address: foelore.vercel.app. Your gear, your world and your settings do not follow: set them once, and install the app again if you had.',
+        kind: 'new',
+        title: { fr: 'Battlewise devient Foelore', en: 'Battlewise is now Foelore' },
+        detail: {
+          fr: 'Nouvelle adresse, foelore.vercel.app. Tes réglages sont à refaire.',
+          en: 'New address, foelore.vercel.app. Your settings need setting again.',
         },
       },
     ],
@@ -159,9 +224,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "Les chiffres sont lus dans Valheim 1.0.21 : contre Kall Mandefimbul, le sol en feu que laisse la Nova de l'Aspect de l'Âme tourmentée inflige deux fois moins de Feu.",
-          en: "The numbers are read from Valheim 1.0.21: against Kall Fimbulbringer, the burning ground the Aspect of the Twisted Soul's Nova leaves deals half the Fire.",
+        kind: 'fixed',
+        title: {
+          fr: 'Chiffres à jour pour Valheim 1.0.21',
+          en: 'Numbers updated for Valheim 1.0.21',
+        },
+        detail: {
+          fr: 'Le sol en feu de la Nova contre Kall Mandefimbul : deux fois moins de Feu.',
+          en: "The Nova's burning ground against Kall Fimbulbringer: half the Fire.",
         },
       },
     ],
@@ -171,10 +241,12 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: "Foelore propose une fois de s'installer, là où ton navigateur le permet : une icône sur ton écran d'accueil, en plein écran, sans connexion. Sur iPhone, il donne les étapes de Safari. L'offre reste dans Réglages › À propos.",
-          en: "Foelore offers once to install itself, where your browser can: an icon on your home screen, full screen, offline. On an iPhone, it gives Safari's steps. The offer stays in Settings › About.",
+        kind: 'new',
+        title: {
+          fr: "Installe Foelore sur ton écran d'accueil",
+          en: 'Install Foelore on your home screen',
         },
+        detail: { fr: 'Plein écran, hors ligne.', en: 'Full screen, offline.' },
       },
     ],
   },
@@ -183,9 +255,10 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-28',
     notes: [
       {
-        text: {
-          fr: 'Fermer les Réglages avec Retour remet aussitôt le thème et la langue enregistrés, sans laisser voir un instant ceux que tu essayais.',
-          en: 'Closing Settings with Back brings the saved theme and language back at once, without a glimpse of the ones you were trying.',
+        kind: 'fixed',
+        title: {
+          fr: 'Quitter les Réglages ne fait plus clignoter le thème',
+          en: 'Leaving Settings no longer flashes the theme',
         },
       },
     ],
@@ -195,9 +268,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-27',
     notes: [
       {
-        text: {
-          fr: "Si une fiche, un écran ou une ligne plante, le reste de Foelore marche : réessaie, ou envoie le rapport, l'erreur jointe. Rien ne part sans toi.",
-          en: 'If a sheet, a screen or a row crashes, the rest of Foelore works: try again, or send the report, the error attached. Nothing leaves without you.',
+        kind: 'new',
+        title: {
+          fr: "Un plantage ne bloque plus toute l'app",
+          en: 'A crash no longer takes down the whole app',
+        },
+        detail: {
+          fr: 'Réessaie ou envoie le rapport. Rien ne part sans toi.',
+          en: 'Try again or send the report. Nothing leaves without you.',
         },
       },
     ],
@@ -207,9 +285,10 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-27',
     notes: [
       {
-        text: {
-          fr: "Signaler une ligne déjà signalée, et pas encore corrigée, ajoute un +1 à son ticket au lieu d'en ouvrir un autre.",
-          en: 'Reporting a line already reported, and not fixed yet, adds a +1 to its issue instead of opening another.',
+        kind: 'improved',
+        title: {
+          fr: 'Un signalement déjà ouvert reçoit un +1',
+          en: 'A report already open gets a +1',
         },
       },
     ],
@@ -219,15 +298,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-27',
     notes: [
       {
-        text: {
-          fr: 'Mes signalements et Nouveautés, dans Réglages : où en est chacun de tes signalements, et ce que corrige chaque version.',
-          en: "My reports and What's new, in Settings: where each of your reports stands, and what each version fixes.",
+        kind: 'new',
+        title: {
+          fr: 'Suis tes signalements et les nouveautés',
+          en: "Follow your reports and what's new",
         },
-      },
-      {
-        text: {
-          fr: 'Quand une mise à jour corrige un de tes signalements, Foelore te le dit, une fois.',
-          en: 'When an update fixes one of your reports, Foelore tells you, once.',
+        detail: {
+          fr: "Dans Réglages. Foelore te prévient quand l'un des tiens est corrigé.",
+          en: 'In Settings. Foelore tells you when one of yours is fixed.',
         },
       },
     ],
@@ -237,9 +315,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-27',
     notes: [
       {
-        text: {
-          fr: "Le Bestiaire ne liste plus une créature là où le jeu ne la fait jamais apparaître, et une attaque à projectile n'est plus comptée comme une zone.",
-          en: 'The Bestiary no longer lists a creature where the game never spawns it, and a projectile attack is no longer counted as an area.',
+        kind: 'fixed',
+        title: {
+          fr: 'Fini les créatures hors de leur biome',
+          en: 'No more creatures out of their biome',
+        },
+        detail: {
+          fr: "Le Bestiaire suit les apparitions du jeu, et un projectile n'est plus une zone.",
+          en: "The Bestiary follows the game's spawns, and a projectile is no longer an area.",
         },
       },
     ],
@@ -249,9 +332,14 @@ export const RELEASES: readonly Release[] = [
     date: '2026-10-27',
     notes: [
       {
-        text: {
-          fr: "Signale un chiffre ou un nom faux, un bug ou une idée depuis l'app.",
-          en: 'Report a wrong number or name, a bug or an idea from the app.',
+        kind: 'new',
+        title: {
+          fr: 'Signale une erreur, un bug ou une idée',
+          en: 'Report a mistake, a bug or an idea',
+        },
+        detail: {
+          fr: 'Depuis une fiche, la Simulation ou Réglages.',
+          en: 'From a sheet, the Simulation or Settings.',
         },
       },
     ],

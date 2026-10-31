@@ -17,20 +17,26 @@ vi.mock('@/app/releases', async (actual) => ({
       date: '2026-11-02',
       notes: [
         {
-          text: {
-            fr: 'Troll › Frappe au sol : 60 dégâts, plus 70.',
-            en: 'Troll › Ground slam: 60.',
+          kind: 'fixed',
+          title: {
+            fr: 'Troll › Frappe au sol : 70 dégâts, pas 60',
+            en: 'Troll › Ground slam: 70 damage, not 60',
           },
+          detail: { fr: 'Comme dans le jeu.', en: 'As in the game.' },
           fixes: [48],
           thanks: ['Ragnar'],
         },
-        { text: { fr: 'Mes signalements, dans Réglages.', en: 'My reports, in Settings.' } },
+        {
+          kind: 'new',
+          title: { fr: 'Suis tes signalements', en: 'Follow your reports' },
+          detail: { fr: 'Dans Réglages.', en: 'In Settings.' },
+        },
       ],
     },
     {
       version: '1.0.0',
       date: '2026-10-20',
-      notes: [{ text: { fr: 'La première version.', en: 'The first version.' } }],
+      notes: [{ kind: 'new', title: { fr: 'La première version', en: 'The first version' } }],
     },
   ],
 }))
@@ -160,9 +166,30 @@ describe('Closing the loop', () => {
     expect(
       news.getByRole('heading', { name: new RegExp(`^${__APP_VERSION__}`) }),
     ).toBeInTheDocument()
-    expect(news.getByText('Troll › Frappe au sol : 60 dégâts, plus 70.')).toBeInTheDocument()
     expect(news.getByText(/^Merci Ragnar/)).toHaveTextContent('Merci Ragnar · ton signalement #48')
-    expect(news.getByText('La première version.')).toBeInTheDocument()
+    expect(news.getByText('La première version')).toBeInTheDocument()
+  })
+
+  it('tags each note with its kind, then gives its title and its detail', async () => {
+    await renderApp('#/bestiary?modal=news', { seenVersion: __APP_VERSION__ })
+
+    const [fix, follow] = within(dialog('Nouveautés')).getAllByRole('listitem')
+    expect(within(fix!).getByText('Corrigé')).toBeInTheDocument()
+    expect(within(fix!).getByText('Troll › Frappe au sol : 70 dégâts, pas 60')).toBeInTheDocument()
+    expect(within(fix!).getByText('Comme dans le jeu.')).toBeInTheDocument()
+    expect(within(follow!).getByText('Nouveau')).toBeInTheDocument()
+    expect(within(follow!).getByText('Suis tes signalements')).toBeInTheDocument()
+    expect(within(follow!).getByText('Dans Réglages.')).toBeInTheDocument()
+  })
+
+  it('says it in English with English tags', async () => {
+    await renderApp('#/bestiary?modal=news', { language: 'en', seenVersion: __APP_VERSION__ })
+
+    const [fix] = within(screen.getByRole('dialog', { name: "What's new" })).getAllByRole(
+      'listitem',
+    )
+    expect(within(fix!).getByText('Fixed')).toBeInTheDocument()
+    expect(within(fix!).getByText('Troll › Ground slam: 70 damage, not 60')).toBeInTheDocument()
   })
 
   it('thanks the player once, after the update that fixed their report', async () => {
@@ -171,7 +198,10 @@ describe('Closing the loop', () => {
 
     const thanks = within(await screen.findByRole('dialog', { name: 'Corrigé grâce à toi' }))
     expect(thanks.getByText('Troll › Frappe au sol')).toBeInTheDocument()
-    expect(thanks.getByText('Troll › Frappe au sol : 60 dégâts, plus 70.')).toBeInTheDocument()
+    // What changed: the note's title with its tag, never its detail.
+    expect(thanks.getByText('Corrigé')).toBeInTheDocument()
+    expect(thanks.getByText('Troll › Frappe au sol : 70 dégâts, pas 60')).toBeInTheDocument()
+    expect(thanks.queryByText('Comme dans le jeu.')).not.toBeInTheDocument()
     expect(
       thanks.getByText(
         `Ton signalement est corrigé dans ${__APP_VERSION__}. Merci, Ragnar : chaque correction sert à tous les joueurs.`,

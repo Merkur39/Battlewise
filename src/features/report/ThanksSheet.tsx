@@ -59,7 +59,10 @@ export function ThanksSheet({
                 <span>{receipt.title === '' ? t.report.kind[receipt.kind] : receipt.title}</span>
                 <span className={styles.number}>#{receipt.number}</span>
               </span>
-              <span className={styles.change}>{note.text[language]}</span>
+              <span className={styles.change}>
+                <span className={styles.noteKind}>{t.loop.noteKinds[note.kind]}</span>
+                <span>{note.title[language]}</span>
+              </span>
             </div>
           ))}
           <p className={styles.thanks}>
