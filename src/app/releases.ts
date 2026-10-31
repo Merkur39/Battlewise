@@ -23,6 +23,30 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.14.0',
+    date: '2026-10-31',
+    notes: [
+      {
+        text: {
+          fr: "Dans Ton équipement, « Ce que tu emportes » garde ton bibelot, ton pouvoir et tes boissons, comme la Broche en fer, Masse-d'Os ou l'Hydromel de résistance au gel, chacun avec sa durée et ce qu'il change. Sur la fiche d'une créature et dans la Simulation, « Avec tes effets temporaires » les allume un par un : les verdicts, les dégâts, l'endurance et ce que tu encaisses suivent. Ce qui ne change rien face à la créature est grisé, avec sa raison. Le Bestiaire, lui, reste « Sans tes effets temporaires ».",
+          en: 'In Your gear, “What you carry” keeps your trinket, your power and your drinks, such as the Iron Brooch, Bonemass or the Frost Resistance Mead, each with how long it lasts and what it changes. On a creature’s sheet and in the Simulation, “With your temporary effects” switches them on one by one: the verdicts, the damage, the stamina and what you can take follow. What changes nothing against the creature is greyed, with its reason. The Bestiary stays “Without your temporary effects”.',
+        },
+      },
+      {
+        text: {
+          fr: "L'Arsenal liste aussi les casques, plastrons, jambières et capes, les pouvoirs, les bibelots et les boissons, rangés comme Ton équipement : En main, Pièces d'armures, Ce que tu emportes. Chaque pièce donne son armure, ses résistances et faiblesses, et l'ensemble dont le bonus compte en combat ; chaque effet, sa durée et ce qu'il change. Une recherche fouille toutes les catégories d'un coup, et une ligne ouvre Ton équipement avec l'objet. Tout s'y lit au niveau 1 : le sélecteur de niveau, la vitesse et la repousse s'en vont, le niveau se règle dans Ton équipement.",
+          en: 'The Arsenal also lists helmets, chests, legs and capes, powers, trinkets and drinks, sorted as Your gear is: In hand, Armor pieces, What you carry. Each piece gives its armor, its resistances and weaknesses, and the set whose bonus counts in a fight; each effect, how long it lasts and what it changes. A search looks through every category at once, and a row opens Your gear with the item. Everything reads at level 1: the level picker, the speed and the push-back go, the level is set in Your gear.',
+        },
+      },
+      {
+        text: {
+          fr: 'Dans Ton équipement, chaque ligne ouvre sa liste de l’Arsenal, avec sa recherche, au lieu d’une liste déroulante ; « Aucune cape », « Aucun bibelot »… en tête retirent ce que tu portes ou emportes. Un nouveau joueur commence à mains nues : « Sans armes », sans niveau, en tête de ce que tu tiens.',
+          en: 'In Your gear, each row opens its Arsenal list, with its search, instead of a drop-down; “No cape”, “No trinket”… at its head take off what you wear or carry. A new player starts bare-handed: “Fists”, with no level, at the head of what you hold.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.13.0',
     date: '2026-10-31',
     notes: [
