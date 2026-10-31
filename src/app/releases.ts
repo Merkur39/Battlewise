@@ -23,6 +23,18 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.14.1',
+    date: '2026-10-31',
+    notes: [
+      {
+        text: {
+          fr: 'Dans Ton monde, « Ce que ça donne » montre aussi la taille et la vitesse au sol des monstres, que la difficulté du combat change hors donjons (×1,2 en Très difficile). Le rythme de leurs attaques, lui, ne change jamais.',
+          en: 'In Your world, “What it does” also shows the monsters’ size and ground speed, which the combat difficulty changes outside dungeons (×1.2 on Very Hard). The pace of their attacks never changes.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.14.0',
     date: '2026-10-31',
     notes: [
