@@ -56,8 +56,16 @@
       "title": "Arsenal",
       "is_interactive": true
     },
-    "Memo.dc.html": {
+    "Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "is_interactive": true
+    },
+    "Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -254,8 +262,17 @@
       "expand": "fill",
       "is_interactive": true
     },
-    "Desktop-Memo.dc.html": {
+    "Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -955,6 +972,94 @@
       "is_interactive": true,
       "page": "equipement"
     },
+    "Arsenal-A.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 892,
+      "h": 1220,
+      "title": "Piste A · deux étages : la famille, puis sa catégorie",
+      "page": "arsenal"
+    },
+    "Arsenal-B.dc.html": {
+      "x": 972,
+      "y": 0,
+      "w": 892,
+      "h": 1220,
+      "title": "Piste B · une seule rangée qui défile",
+      "page": "arsenal"
+    },
+    "Arsenal-C.dc.html": {
+      "x": 1944,
+      "y": 0,
+      "w": 1314,
+      "h": 1220,
+      "title": "Piste C · un sélecteur de catégorie",
+      "page": "arsenal"
+    },
+    "Arsenal-A-Desktop.dc.html": {
+      "x": 0,
+      "y": 1620,
+      "w": 1440,
+      "h": 900,
+      "title": "Piste A · desktop",
+      "page": "arsenal"
+    },
+    "Arsenal-B-Desktop.dc.html": {
+      "x": 1520,
+      "y": 1620,
+      "w": 1440,
+      "h": 900,
+      "title": "Piste B · desktop",
+      "page": "arsenal"
+    },
+    "Arsenal-C-Desktop.dc.html": {
+      "x": 3040,
+      "y": 1620,
+      "w": 1440,
+      "h": 900,
+      "title": "Piste C · desktop",
+      "page": "arsenal"
+    },
+    "Arsenal-AC.dc.html": {
+      "x": 0,
+      "y": 2920,
+      "w": 1736,
+      "h": 1160,
+      "title": "Itération 1 · A sur téléphone, « En main »",
+      "page": "arsenal"
+    },
+    "Arsenal-AC-Desktop-1.dc.html": {
+      "x": 0,
+      "y": 4480,
+      "w": 1440,
+      "h": 900,
+      "title": "Itération 1 · C sur desktop · boucliers",
+      "page": "arsenal"
+    },
+    "Arsenal-AC-Desktop-2.dc.html": {
+      "x": 1520,
+      "y": 4480,
+      "w": 1440,
+      "h": 900,
+      "title": "Itération 1 · C sur desktop · plastrons",
+      "page": "arsenal"
+    },
+    "Arsenal-AC-Desktop-3.dc.html": {
+      "x": 3040,
+      "y": 4480,
+      "w": 1440,
+      "h": 900,
+      "title": "Itération 1 · C sur desktop · boissons",
+      "page": "arsenal"
+    },
+    "Arsenal-AC-Desktop-4.dc.html": {
+      "x": 4560,
+      "y": 4480,
+      "w": 1440,
+      "h": 900,
+      "title": "Itération 1 · C sur desktop · recherche « fer »",
+      "page": "arsenal"
+    },
     "Braise-Bestiaire.dc.html": {
       "x": 0,
       "y": 0,
@@ -1016,8 +1121,17 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Memo.dc.html": {
+    "Braise-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -1239,8 +1353,18 @@
       "page": "braise",
       "is_interactive": true
     },
-    "Braise-Desktop-Memo.dc.html": {
+    "Braise-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "braise",
+      "is_interactive": true
+    },
+    "Braise-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -1493,8 +1617,17 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Memo.dc.html": {
+    "Brume-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -1716,8 +1849,18 @@
       "page": "brume",
       "is_interactive": true
     },
-    "Brume-Desktop-Memo.dc.html": {
+    "Brume-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "brume",
+      "is_interactive": true
+    },
+    "Brume-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -1970,8 +2113,17 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Memo.dc.html": {
+    "Jour-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -2193,8 +2345,18 @@
       "page": "jour",
       "is_interactive": true
     },
-    "Jour-Desktop-Memo.dc.html": {
+    "Jour-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "jour",
+      "is_interactive": true
+    },
+    "Jour-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -2447,8 +2609,17 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Memo.dc.html": {
+    "Runes-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -2670,8 +2841,18 @@
       "page": "runes",
       "is_interactive": true
     },
-    "Runes-Desktop-Memo.dc.html": {
+    "Runes-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "runes",
+      "is_interactive": true
+    },
+    "Runes-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -2924,8 +3105,17 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Memo.dc.html": {
+    "Graphite-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -3147,8 +3337,18 @@
       "page": "graphite",
       "is_interactive": true
     },
-    "Graphite-Desktop-Memo.dc.html": {
+    "Graphite-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "graphite",
+      "is_interactive": true
+    },
+    "Graphite-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -3401,8 +3601,17 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Memo.dc.html": {
+    "Parchemin-Arsenal-Recherche.dc.html": {
       "x": 470,
+      "y": 2528,
+      "w": 390,
+      "h": 844,
+      "title": "Arsenal · recherche",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Memo.dc.html": {
+      "x": 940,
       "y": 2528,
       "w": 390,
       "h": 844,
@@ -3624,8 +3833,18 @@
       "page": "parchemin",
       "is_interactive": true
     },
-    "Parchemin-Desktop-Memo.dc.html": {
+    "Parchemin-Desktop-Arsenal-Recherche.dc.html": {
       "x": 1520,
+      "y": 10408,
+      "w": 1440,
+      "h": 900,
+      "title": "Arsenal · recherche · desktop",
+      "expand": "fill",
+      "page": "parchemin",
+      "is_interactive": true
+    },
+    "Parchemin-Desktop-Memo.dc.html": {
+      "x": 3040,
       "y": 10408,
       "w": 1440,
       "h": 900,
@@ -3832,91 +4051,104 @@
       "text": "Bestiaire",
       "x": 0,
       "y": -300,
-      "maxW": 1330
+      "maxW": 1330,
+      "w": 240
     },
     "m-row2": {
       "kind": "title1",
       "text": "Simulation",
       "x": 0,
       "y": 964,
-      "maxW": 1330
+      "maxW": 1330,
+      "w": 240
     },
     "m-row3": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860
+      "maxW": 1330,
+      "w": 240
     },
     "m-row4": {
       "kind": "title1",
       "text": "Fenêtres et système",
       "x": 0,
       "y": 3492,
-      "maxW": 3230
+      "maxW": 3230,
+      "w": 240
     },
     "m-row5": {
       "kind": "title1",
       "text": "Tes retours",
       "x": 0,
       "y": 4756,
-      "maxW": 1800
+      "maxW": 1800,
+      "w": 240
     },
     "m-row6": {
       "kind": "title1",
       "text": "Plantages",
       "x": 0,
       "y": 6020,
-      "maxW": 2270
+      "maxW": 2270,
+      "w": 240
     },
     "m-row7": {
       "kind": "title1",
       "text": "Première arrivée",
       "x": 0,
       "y": 7284,
-      "maxW": 2270
+      "maxW": 2270,
+      "w": 240
     },
     "d-row1": {
       "kind": "title1",
       "text": "Desktop · écrans principaux",
       "x": 0,
       "y": 8788,
-      "maxW": 4480
+      "maxW": 4480,
+      "w": 240
     },
     "d-row2": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960
+      "maxW": 4480,
+      "w": 240
     },
     "d-row3": {
       "kind": "title1",
       "text": "Desktop · fenêtres",
       "x": 0,
       "y": 11428,
-      "maxW": 9040
+      "maxW": 9040,
+      "w": 240
     },
     "d-row4": {
       "kind": "title1",
       "text": "Desktop · tes retours",
       "x": 0,
       "y": 12748,
-      "maxW": 6000
+      "maxW": 6000,
+      "w": 240
     },
     "d-row5": {
       "kind": "title1",
       "text": "Desktop · plantages",
       "x": 0,
       "y": 14068,
-      "maxW": 7520
+      "maxW": 7520,
+      "w": 240
     },
     "d-row6": {
       "kind": "title1",
       "text": "Desktop · première arrivée",
       "x": 0,
       "y": 15388,
-      "maxW": 6000
+      "maxW": 6000,
+      "w": 240
     },
     "sim-row1": {
       "kind": "title1",
@@ -3924,7 +4156,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "sim"
+      "page": "sim",
+      "w": 240
     },
     "sim-row2": {
       "kind": "title1",
@@ -3932,7 +4165,8 @@
       "x": 0,
       "y": 964,
       "maxW": 2270,
-      "page": "sim"
+      "page": "sim",
+      "w": 240
     },
     "icone-row1": {
       "kind": "title1",
@@ -3940,7 +4174,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "icone"
+      "page": "icone",
+      "w": 240
     },
     "version-row1": {
       "kind": "title1",
@@ -3948,7 +4183,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "version"
+      "page": "version",
+      "w": 240
     },
     "menu-row1": {
       "kind": "title1",
@@ -3956,7 +4192,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "menu"
+      "page": "menu",
+      "w": 240
     },
     "competence-row1": {
       "kind": "title1",
@@ -3964,7 +4201,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "competence"
+      "page": "competence",
+      "w": 240
     },
     "encaisses-row1": {
       "kind": "title1",
@@ -3972,7 +4210,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "encaisses"
+      "page": "encaisses",
+      "w": 240
     },
     "etroit-row1": {
       "kind": "title1",
@@ -3980,7 +4219,8 @@
       "x": 0,
       "y": -300,
       "maxW": 2384,
-      "page": "etroit"
+      "page": "etroit",
+      "w": 240
     },
     "etroit-note1": {
       "x": 2464,
@@ -3995,7 +4235,8 @@
       "x": 0,
       "y": 920,
       "maxW": 2384,
-      "page": "etroit"
+      "page": "etroit",
+      "w": 240
     },
     "etroit-note2": {
       "x": 2464,
@@ -4010,7 +4251,8 @@
       "x": 0,
       "y": 2140,
       "maxW": 2384,
-      "page": "etroit"
+      "page": "etroit",
+      "w": 240
     },
     "etroit-note3": {
       "x": 2464,
@@ -4025,7 +4267,8 @@
       "x": 0,
       "y": 3360,
       "maxW": 2384,
-      "page": "etroit"
+      "page": "etroit",
+      "w": 240
     },
     "etroit-note4": {
       "x": 2464,
@@ -4040,7 +4283,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "licence"
+      "page": "licence",
+      "w": 240
     },
     "signaler-row1": {
       "kind": "title1",
@@ -4048,7 +4292,8 @@
       "x": 0,
       "y": -300,
       "maxW": 2960,
-      "page": "signaler"
+      "page": "signaler",
+      "w": 240
     },
     "retours-row1": {
       "kind": "title1",
@@ -4056,7 +4301,8 @@
       "x": 0,
       "y": -300,
       "maxW": 2960,
-      "page": "retours"
+      "page": "retours",
+      "w": 240
     },
     "plantage-row1": {
       "kind": "title1",
@@ -4064,7 +4310,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "plantage"
+      "page": "plantage",
+      "w": 240
     },
     "filets-row1": {
       "kind": "title1",
@@ -4072,7 +4319,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "filets"
+      "page": "filets",
+      "w": 240
     },
     "arrivee-row1": {
       "kind": "title1",
@@ -4080,7 +4328,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "arrivee"
+      "page": "arrivee",
+      "w": 240
     },
     "installer-row1": {
       "kind": "title1",
@@ -4088,7 +4337,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "installer"
+      "page": "installer",
+      "w": 240
     },
     "mentions-row1": {
       "kind": "title1",
@@ -4096,7 +4346,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "mentions"
+      "page": "mentions",
+      "w": 240
     },
     "equipement-row1": {
       "kind": "title1",
@@ -4104,7 +4355,44 @@
       "x": 0,
       "y": -300,
       "maxW": 1440,
-      "page": "equipement"
+      "page": "equipement",
+      "w": 240
+    },
+    "arsenal-row1": {
+      "kind": "title1",
+      "text": "L'Arsenal avec les pièces d'armures et ce que tu emportes · téléphone",
+      "x": 0,
+      "y": -300,
+      "maxW": 3258,
+      "page": "arsenal",
+      "w": 240
+    },
+    "arsenal-row2": {
+      "kind": "title1",
+      "text": "Les mêmes pistes · desktop",
+      "x": 0,
+      "y": 1320,
+      "maxW": 4480,
+      "page": "arsenal",
+      "w": 240
+    },
+    "arsenal-row3": {
+      "kind": "title1",
+      "text": "Itération 1 · A sur téléphone",
+      "x": 0,
+      "y": 2620,
+      "maxW": 1736,
+      "page": "arsenal",
+      "w": 240
+    },
+    "arsenal-row4": {
+      "kind": "title1",
+      "text": "Itération 1 · C sur desktop",
+      "x": 0,
+      "y": 4180,
+      "maxW": 6000,
+      "page": "arsenal",
+      "w": 240
     },
     "m-row1-braise": {
       "kind": "title1",
@@ -4112,7 +4400,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row2-braise": {
       "kind": "title1",
@@ -4120,15 +4409,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row3-braise": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "braise"
+      "maxW": 1330,
+      "page": "braise",
+      "w": 240
     },
     "m-row4-braise": {
       "kind": "title1",
@@ -4136,7 +4427,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row5-braise": {
       "kind": "title1",
@@ -4144,7 +4436,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row6-braise": {
       "kind": "title1",
@@ -4152,7 +4445,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row7-braise": {
       "kind": "title1",
@@ -4160,7 +4454,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "d-row1-braise": {
       "kind": "title1",
@@ -4168,15 +4463,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "d-row2-braise": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "braise"
+      "maxW": 4480,
+      "page": "braise",
+      "w": 240
     },
     "d-row3-braise": {
       "kind": "title1",
@@ -4184,7 +4481,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "d-row4-braise": {
       "kind": "title1",
@@ -4192,7 +4490,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "d-row5-braise": {
       "kind": "title1",
@@ -4200,7 +4499,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "d-row6-braise": {
       "kind": "title1",
@@ -4208,7 +4508,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "braise"
+      "page": "braise",
+      "w": 240
     },
     "m-row1-brume": {
       "kind": "title1",
@@ -4216,7 +4517,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row2-brume": {
       "kind": "title1",
@@ -4224,15 +4526,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row3-brume": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "brume"
+      "maxW": 1330,
+      "page": "brume",
+      "w": 240
     },
     "m-row4-brume": {
       "kind": "title1",
@@ -4240,7 +4544,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row5-brume": {
       "kind": "title1",
@@ -4248,7 +4553,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row6-brume": {
       "kind": "title1",
@@ -4256,7 +4562,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row7-brume": {
       "kind": "title1",
@@ -4264,7 +4571,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "d-row1-brume": {
       "kind": "title1",
@@ -4272,15 +4580,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "d-row2-brume": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "brume"
+      "maxW": 4480,
+      "page": "brume",
+      "w": 240
     },
     "d-row3-brume": {
       "kind": "title1",
@@ -4288,7 +4598,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "d-row4-brume": {
       "kind": "title1",
@@ -4296,7 +4607,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "d-row5-brume": {
       "kind": "title1",
@@ -4304,7 +4616,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "d-row6-brume": {
       "kind": "title1",
@@ -4312,7 +4625,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "brume"
+      "page": "brume",
+      "w": 240
     },
     "m-row1-jour": {
       "kind": "title1",
@@ -4320,7 +4634,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row2-jour": {
       "kind": "title1",
@@ -4328,15 +4643,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row3-jour": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "jour"
+      "maxW": 1330,
+      "page": "jour",
+      "w": 240
     },
     "m-row4-jour": {
       "kind": "title1",
@@ -4344,7 +4661,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row5-jour": {
       "kind": "title1",
@@ -4352,7 +4670,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row6-jour": {
       "kind": "title1",
@@ -4360,7 +4679,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row7-jour": {
       "kind": "title1",
@@ -4368,7 +4688,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "d-row1-jour": {
       "kind": "title1",
@@ -4376,15 +4697,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "d-row2-jour": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "jour"
+      "maxW": 4480,
+      "page": "jour",
+      "w": 240
     },
     "d-row3-jour": {
       "kind": "title1",
@@ -4392,7 +4715,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "d-row4-jour": {
       "kind": "title1",
@@ -4400,7 +4724,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "d-row5-jour": {
       "kind": "title1",
@@ -4408,7 +4733,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "d-row6-jour": {
       "kind": "title1",
@@ -4416,7 +4742,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "jour"
+      "page": "jour",
+      "w": 240
     },
     "m-row1-runes": {
       "kind": "title1",
@@ -4424,7 +4751,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row2-runes": {
       "kind": "title1",
@@ -4432,15 +4760,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row3-runes": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "runes"
+      "maxW": 1330,
+      "page": "runes",
+      "w": 240
     },
     "m-row4-runes": {
       "kind": "title1",
@@ -4448,7 +4778,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row5-runes": {
       "kind": "title1",
@@ -4456,7 +4787,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row6-runes": {
       "kind": "title1",
@@ -4464,7 +4796,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row7-runes": {
       "kind": "title1",
@@ -4472,7 +4805,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "d-row1-runes": {
       "kind": "title1",
@@ -4480,15 +4814,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "d-row2-runes": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "runes"
+      "maxW": 4480,
+      "page": "runes",
+      "w": 240
     },
     "d-row3-runes": {
       "kind": "title1",
@@ -4496,7 +4832,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "d-row4-runes": {
       "kind": "title1",
@@ -4504,7 +4841,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "d-row5-runes": {
       "kind": "title1",
@@ -4512,7 +4850,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "d-row6-runes": {
       "kind": "title1",
@@ -4520,7 +4859,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "runes"
+      "page": "runes",
+      "w": 240
     },
     "m-row1-graphite": {
       "kind": "title1",
@@ -4528,7 +4868,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row2-graphite": {
       "kind": "title1",
@@ -4536,15 +4877,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row3-graphite": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "graphite"
+      "maxW": 1330,
+      "page": "graphite",
+      "w": 240
     },
     "m-row4-graphite": {
       "kind": "title1",
@@ -4552,7 +4895,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row5-graphite": {
       "kind": "title1",
@@ -4560,7 +4904,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row6-graphite": {
       "kind": "title1",
@@ -4568,7 +4913,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row7-graphite": {
       "kind": "title1",
@@ -4576,7 +4922,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "d-row1-graphite": {
       "kind": "title1",
@@ -4584,15 +4931,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "d-row2-graphite": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "graphite"
+      "maxW": 4480,
+      "page": "graphite",
+      "w": 240
     },
     "d-row3-graphite": {
       "kind": "title1",
@@ -4600,7 +4949,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "d-row4-graphite": {
       "kind": "title1",
@@ -4608,7 +4958,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "d-row5-graphite": {
       "kind": "title1",
@@ -4616,7 +4967,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "d-row6-graphite": {
       "kind": "title1",
@@ -4624,7 +4976,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "graphite"
+      "page": "graphite",
+      "w": 240
     },
     "m-row1-parchemin": {
       "kind": "title1",
@@ -4632,7 +4985,8 @@
       "x": 0,
       "y": -300,
       "maxW": 1330,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "m-row2-parchemin": {
       "kind": "title1",
@@ -4640,15 +4994,17 @@
       "x": 0,
       "y": 964,
       "maxW": 1330,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "m-row3-parchemin": {
       "kind": "title1",
       "text": "Arsenal et mémo",
       "x": 0,
       "y": 2228,
-      "maxW": 860,
-      "page": "parchemin"
+      "maxW": 1330,
+      "page": "parchemin",
+      "w": 240
     },
     "m-row4-parchemin": {
       "kind": "title1",
@@ -4656,7 +5012,8 @@
       "x": 0,
       "y": 3492,
       "maxW": 3230,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "m-row5-parchemin": {
       "kind": "title1",
@@ -4664,7 +5021,8 @@
       "x": 0,
       "y": 4756,
       "maxW": 1800,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "m-row6-parchemin": {
       "kind": "title1",
@@ -4672,7 +5030,8 @@
       "x": 0,
       "y": 6020,
       "maxW": 2270,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "m-row7-parchemin": {
       "kind": "title1",
@@ -4680,7 +5039,8 @@
       "x": 0,
       "y": 7284,
       "maxW": 2270,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "d-row1-parchemin": {
       "kind": "title1",
@@ -4688,15 +5048,17 @@
       "x": 0,
       "y": 8788,
       "maxW": 4480,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "d-row2-parchemin": {
       "kind": "title1",
       "text": "Desktop · arsenal et mémo",
       "x": 0,
       "y": 10108,
-      "maxW": 2960,
-      "page": "parchemin"
+      "maxW": 4480,
+      "page": "parchemin",
+      "w": 240
     },
     "d-row3-parchemin": {
       "kind": "title1",
@@ -4704,7 +5066,8 @@
       "x": 0,
       "y": 11428,
       "maxW": 9040,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "d-row4-parchemin": {
       "kind": "title1",
@@ -4712,7 +5075,8 @@
       "x": 0,
       "y": 12748,
       "maxW": 6000,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "d-row5-parchemin": {
       "kind": "title1",
@@ -4720,7 +5084,8 @@
       "x": 0,
       "y": 14068,
       "maxW": 7520,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     },
     "d-row6-parchemin": {
       "kind": "title1",
@@ -4728,7 +5093,8 @@
       "x": 0,
       "y": 15388,
       "maxW": 6000,
-      "page": "parchemin"
+      "page": "parchemin",
+      "w": 240
     }
   },
   "order": [
@@ -4739,6 +5105,7 @@
     "Attaque.dc.html",
     "Recherche.dc.html",
     "Arsenal.dc.html",
+    "Arsenal-Recherche.dc.html",
     "Memo.dc.html",
     "Profil.dc.html",
     "Monde.dc.html",
@@ -4764,6 +5131,7 @@
     "Desktop-Bestiaire-Recherche.dc.html",
     "Desktop-Combat.dc.html",
     "Desktop-Arsenal.dc.html",
+    "Desktop-Arsenal-Recherche.dc.html",
     "Desktop-Memo.dc.html",
     "Desktop-Attaque.dc.html",
     "Desktop-Recherche.dc.html",
@@ -4847,6 +5215,17 @@
     "Equipement-C3.dc.html",
     "Equipement-C3-Avec.dc.html",
     "Equipement-C4.dc.html",
+    "Arsenal-A.dc.html",
+    "Arsenal-B.dc.html",
+    "Arsenal-C.dc.html",
+    "Arsenal-A-Desktop.dc.html",
+    "Arsenal-B-Desktop.dc.html",
+    "Arsenal-C-Desktop.dc.html",
+    "Arsenal-AC.dc.html",
+    "Arsenal-AC-Desktop-1.dc.html",
+    "Arsenal-AC-Desktop-2.dc.html",
+    "Arsenal-AC-Desktop-3.dc.html",
+    "Arsenal-AC-Desktop-4.dc.html",
     "Braise-Bestiaire.dc.html",
     "Braise-Bestiaire-Recherche.dc.html",
     "Braise-Monstre.dc.html",
@@ -4854,6 +5233,7 @@
     "Braise-Attaque.dc.html",
     "Braise-Recherche.dc.html",
     "Braise-Arsenal.dc.html",
+    "Braise-Arsenal-Recherche.dc.html",
     "Braise-Memo.dc.html",
     "Braise-Profil.dc.html",
     "Braise-Monde.dc.html",
@@ -4879,6 +5259,7 @@
     "Braise-Desktop-Bestiaire-Recherche.dc.html",
     "Braise-Desktop-Combat.dc.html",
     "Braise-Desktop-Arsenal.dc.html",
+    "Braise-Desktop-Arsenal-Recherche.dc.html",
     "Braise-Desktop-Memo.dc.html",
     "Braise-Desktop-Attaque.dc.html",
     "Braise-Desktop-Recherche.dc.html",
@@ -4906,6 +5287,7 @@
     "Brume-Attaque.dc.html",
     "Brume-Recherche.dc.html",
     "Brume-Arsenal.dc.html",
+    "Brume-Arsenal-Recherche.dc.html",
     "Brume-Memo.dc.html",
     "Brume-Profil.dc.html",
     "Brume-Monde.dc.html",
@@ -4931,6 +5313,7 @@
     "Brume-Desktop-Bestiaire-Recherche.dc.html",
     "Brume-Desktop-Combat.dc.html",
     "Brume-Desktop-Arsenal.dc.html",
+    "Brume-Desktop-Arsenal-Recherche.dc.html",
     "Brume-Desktop-Memo.dc.html",
     "Brume-Desktop-Attaque.dc.html",
     "Brume-Desktop-Recherche.dc.html",
@@ -4958,6 +5341,7 @@
     "Jour-Attaque.dc.html",
     "Jour-Recherche.dc.html",
     "Jour-Arsenal.dc.html",
+    "Jour-Arsenal-Recherche.dc.html",
     "Jour-Memo.dc.html",
     "Jour-Profil.dc.html",
     "Jour-Monde.dc.html",
@@ -4983,6 +5367,7 @@
     "Jour-Desktop-Bestiaire-Recherche.dc.html",
     "Jour-Desktop-Combat.dc.html",
     "Jour-Desktop-Arsenal.dc.html",
+    "Jour-Desktop-Arsenal-Recherche.dc.html",
     "Jour-Desktop-Memo.dc.html",
     "Jour-Desktop-Attaque.dc.html",
     "Jour-Desktop-Recherche.dc.html",
@@ -5010,6 +5395,7 @@
     "Runes-Attaque.dc.html",
     "Runes-Recherche.dc.html",
     "Runes-Arsenal.dc.html",
+    "Runes-Arsenal-Recherche.dc.html",
     "Runes-Memo.dc.html",
     "Runes-Profil.dc.html",
     "Runes-Monde.dc.html",
@@ -5035,6 +5421,7 @@
     "Runes-Desktop-Bestiaire-Recherche.dc.html",
     "Runes-Desktop-Combat.dc.html",
     "Runes-Desktop-Arsenal.dc.html",
+    "Runes-Desktop-Arsenal-Recherche.dc.html",
     "Runes-Desktop-Memo.dc.html",
     "Runes-Desktop-Attaque.dc.html",
     "Runes-Desktop-Recherche.dc.html",
@@ -5062,6 +5449,7 @@
     "Graphite-Attaque.dc.html",
     "Graphite-Recherche.dc.html",
     "Graphite-Arsenal.dc.html",
+    "Graphite-Arsenal-Recherche.dc.html",
     "Graphite-Memo.dc.html",
     "Graphite-Profil.dc.html",
     "Graphite-Monde.dc.html",
@@ -5087,6 +5475,7 @@
     "Graphite-Desktop-Bestiaire-Recherche.dc.html",
     "Graphite-Desktop-Combat.dc.html",
     "Graphite-Desktop-Arsenal.dc.html",
+    "Graphite-Desktop-Arsenal-Recherche.dc.html",
     "Graphite-Desktop-Memo.dc.html",
     "Graphite-Desktop-Attaque.dc.html",
     "Graphite-Desktop-Recherche.dc.html",
@@ -5114,6 +5503,7 @@
     "Parchemin-Attaque.dc.html",
     "Parchemin-Recherche.dc.html",
     "Parchemin-Arsenal.dc.html",
+    "Parchemin-Arsenal-Recherche.dc.html",
     "Parchemin-Memo.dc.html",
     "Parchemin-Profil.dc.html",
     "Parchemin-Monde.dc.html",
@@ -5139,6 +5529,7 @@
     "Parchemin-Desktop-Bestiaire-Recherche.dc.html",
     "Parchemin-Desktop-Combat.dc.html",
     "Parchemin-Desktop-Arsenal.dc.html",
+    "Parchemin-Desktop-Arsenal-Recherche.dc.html",
     "Parchemin-Desktop-Memo.dc.html",
     "Parchemin-Desktop-Attaque.dc.html",
     "Parchemin-Desktop-Recherche.dc.html",
@@ -5238,6 +5629,10 @@
       "name": "Équipement · pistes"
     },
     {
+      "id": "arsenal",
+      "name": "Arsenal · pistes"
+    },
+    {
       "id": "braise",
       "name": "Braise"
     },
@@ -5262,5 +5657,126 @@
       "name": "Parchemin"
     }
   ],
-  "title": "Foelore — design"
+  "title": "Foelore — design",
+  "noteOrder": [
+    "m-row1",
+    "m-row2",
+    "m-row3",
+    "m-row4",
+    "m-row5",
+    "m-row6",
+    "m-row7",
+    "d-row1",
+    "d-row2",
+    "d-row3",
+    "d-row4",
+    "d-row5",
+    "d-row6",
+    "sim-row1",
+    "sim-row2",
+    "icone-row1",
+    "version-row1",
+    "menu-row1",
+    "competence-row1",
+    "encaisses-row1",
+    "etroit-row1",
+    "etroit-note1",
+    "etroit-row2",
+    "etroit-note2",
+    "etroit-row3",
+    "etroit-note3",
+    "etroit-row4",
+    "etroit-note4",
+    "licence-row1",
+    "signaler-row1",
+    "retours-row1",
+    "plantage-row1",
+    "filets-row1",
+    "arrivee-row1",
+    "installer-row1",
+    "mentions-row1",
+    "equipement-row1",
+    "arsenal-row1",
+    "arsenal-row2",
+    "arsenal-row3",
+    "arsenal-row4",
+    "m-row1-braise",
+    "m-row2-braise",
+    "m-row3-braise",
+    "m-row4-braise",
+    "m-row5-braise",
+    "m-row6-braise",
+    "m-row7-braise",
+    "d-row1-braise",
+    "d-row2-braise",
+    "d-row3-braise",
+    "d-row4-braise",
+    "d-row5-braise",
+    "d-row6-braise",
+    "m-row1-brume",
+    "m-row2-brume",
+    "m-row3-brume",
+    "m-row4-brume",
+    "m-row5-brume",
+    "m-row6-brume",
+    "m-row7-brume",
+    "d-row1-brume",
+    "d-row2-brume",
+    "d-row3-brume",
+    "d-row4-brume",
+    "d-row5-brume",
+    "d-row6-brume",
+    "m-row1-jour",
+    "m-row2-jour",
+    "m-row3-jour",
+    "m-row4-jour",
+    "m-row5-jour",
+    "m-row6-jour",
+    "m-row7-jour",
+    "d-row1-jour",
+    "d-row2-jour",
+    "d-row3-jour",
+    "d-row4-jour",
+    "d-row5-jour",
+    "d-row6-jour",
+    "m-row1-runes",
+    "m-row2-runes",
+    "m-row3-runes",
+    "m-row4-runes",
+    "m-row5-runes",
+    "m-row6-runes",
+    "m-row7-runes",
+    "d-row1-runes",
+    "d-row2-runes",
+    "d-row3-runes",
+    "d-row4-runes",
+    "d-row5-runes",
+    "d-row6-runes",
+    "m-row1-graphite",
+    "m-row2-graphite",
+    "m-row3-graphite",
+    "m-row4-graphite",
+    "m-row5-graphite",
+    "m-row6-graphite",
+    "m-row7-graphite",
+    "d-row1-graphite",
+    "d-row2-graphite",
+    "d-row3-graphite",
+    "d-row4-graphite",
+    "d-row5-graphite",
+    "d-row6-graphite",
+    "m-row1-parchemin",
+    "m-row2-parchemin",
+    "m-row3-parchemin",
+    "m-row4-parchemin",
+    "m-row5-parchemin",
+    "m-row6-parchemin",
+    "m-row7-parchemin",
+    "d-row1-parchemin",
+    "d-row2-parchemin",
+    "d-row3-parchemin",
+    "d-row4-parchemin",
+    "d-row5-parchemin",
+    "d-row6-parchemin"
+  ]
 }
