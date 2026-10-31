@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v196** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v197** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -43,6 +43,10 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
   dialog widened to the category's table, « Choisir » on each row), and `Arrivee-Casque` / `Desktop-Arrivee-Casque`
   under the question's step. In Play, a row opens its list (the helmet, legs, chest, power and a carried drink have
   no board of their own) and a pick or the back arrow returns. Written once by `scripts/choix/origine.mjs`.
+- Ton monde (`Monde`, `Desktop-Monde`, and the first arrival's `Arrivee-Monde`, `Desktop-Arrivee-Monde`), v197: « Ce
+  que ça donne » holds the four effects of the Combat setting, the fourth « Taille et vitesse au sol » (the game's
+  `enemyspeedsize`), in two columns on a desktop; its note says size and speed hold outside dungeons only, and that
+  the pace of attacks never changes.
 
 ## Track pages, removed from the canvas (v196)
 
