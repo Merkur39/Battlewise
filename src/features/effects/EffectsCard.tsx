@@ -1,0 +1,130 @@
+import { useId, useState } from 'react'
+import { useAppState } from '@/app/useAppState'
+import type { Hit } from '@/combat/hit'
+import type { GameCreature } from '@/data/types'
+import type { CarriedEffect } from '@/features/gear/carried'
+import { useLanguage, useT } from '@/i18n/useT'
+import { ChevronDownIcon } from '@/ui/icons'
+import styles from './EffectsCard.module.css'
+import { useLit } from './lit'
+import { idleOf, type Against } from './model'
+import { useEffectWording } from './wording'
+
+/**
+ * « Avec tes effets temporaires », folded: what Your gear carries, a switch each, counted at once on
+ * the creature's sheet and in the Simulation of its attacks. What changes nothing against `hits` is
+ * greyed, without a switch unless it is on, and says why. Nothing when nothing is carried.
+ */
+export function EffectsCard({
+  creature,
+  hits,
+  stars,
+}: {
+  readonly creature: GameCreature
+  readonly hits: readonly Hit[]
+  readonly stars: number
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const { gear, world } = useAppState()
+  const { carried, on, toggle } = useLit(creature)
+  const [open, setOpen] = useState(false)
+  const listId = useId()
+  if (carried.length === 0) return null
+  const names = on.map((effect) => effect.name[language])
+  const against: Against = { gear, on, hits, world, stars }
+
+  return (
+    <div className={styles.card}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={listId}
+        className={styles.head}
+        onClick={() => {
+          setOpen(!open)
+        }}
+      >
+        <span className={styles.titles}>
+          <span className={styles.title}>{t.effects.card}</span>
+          <span className={styles.summary}>
+            {names.length === 0 ? t.effects.noneOn : t.effects.on(names)}
+          </span>
+        </span>
+        <ChevronDownIcon size={18} className={styles.chevron} />
+      </button>
+      <div
+        id={listId}
+        role="group"
+        aria-label={t.effects.group}
+        hidden={!open}
+        className={styles.list}
+      >
+        {carried.map((effect) => (
+          <EffectRow
+            key={effect.id}
+            effect={effect}
+            lit={on.includes(effect)}
+            against={against}
+            onToggle={() => {
+              toggle(effect.id)
+            }}
+          />
+        ))}
+        <p className={styles.holds}>{t.effects.holds}</p>
+      </div>
+    </div>
+  )
+}
+
+function EffectRow({
+  effect,
+  lit,
+  against,
+  onToggle,
+}: {
+  readonly effect: CarriedEffect
+  readonly lit: boolean
+  readonly against: Against
+  readonly onToggle: () => void
+}) {
+  const language = useLanguage()
+  const wording = useEffectWording()
+  const id = useId()
+  const idle = idleOf(effect, against)
+  return (
+    <div className={styles.row}>
+      <div className={styles.text}>
+        <span
+          id={`${id}-name`}
+          className={`${styles.name ?? ''} ${idle ? (styles.idle ?? '') : ''}`}
+        >
+          {effect.name[language]}
+        </span>
+        <span id={`${id}-tag`} className={styles.tag}>
+          {wording.tag(effect)}
+        </span>
+        {idle && (
+          <span id={`${id}-note`} className={styles.note}>
+            {wording.idle(idle)}
+          </span>
+        )}
+      </div>
+      {(idle === null || lit) && (
+        <button
+          type="button"
+          role="switch"
+          aria-checked={lit}
+          aria-labelledby={`${id}-name`}
+          aria-describedby={idle ? `${id}-tag ${id}-note` : `${id}-tag`}
+          className={styles.switch}
+          onClick={onToggle}
+        >
+          <span aria-hidden="true" className={styles.track}>
+            <span className={styles.knob} />
+          </span>
+        </button>
+      )}
+    </div>
+  )
+}

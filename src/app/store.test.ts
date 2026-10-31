@@ -73,6 +73,7 @@ describe('createStore', () => {
       armor: 0,
       maxHealth: 25,
       pieces: {},
+      carried: { trinket: null, power: null, drinks: [] },
     })
   })
 
@@ -107,6 +108,60 @@ describe('createStore', () => {
       armor: 0,
       pieces: { chest: { id: 'ArmorIronChest', level: 10 }, cape: { id: 'CapeWolf', level: 1 } },
     })
+  })
+
+  it('keeps what is carried across a reload', () => {
+    const storage = memoryStorage()
+    const carried = {
+      trinket: 'TrinketIronHealth',
+      power: 'GP_Bonemass',
+      drinks: ['Potion_frostresist', 'Potion_barleywine'],
+    }
+    createStore(storage).update({ gear: { ...changed.gear, carried } })
+
+    expect(createStore(storage).getState().gear.carried).toEqual(carried)
+  })
+
+  it('checks what is carried one by one, each in its own kind, a drink once', () => {
+    const saved = {
+      gear: {
+        ...changed.gear,
+        carried: {
+          trinket: 'GP_Bonemass',
+          power: 'GP_Moder',
+          drinks: [
+            'Potion_frostresist',
+            'MeadOfAnotherGame',
+            'Potion_frostresist',
+            3,
+            'Potion_bzerker',
+          ],
+        },
+      },
+    }
+
+    expect(createStore(memoryStorage(JSON.stringify(saved))).getState().gear).toEqual({
+      ...changed.gear,
+      carried: {
+        trinket: null,
+        power: 'GP_Moder',
+        drinks: ['Potion_frostresist', 'Potion_bzerker'],
+      },
+    })
+  })
+
+  it('carries nothing when what is saved as carried is not a list of effects at all', () => {
+    const saved = { gear: { ...changed.gear, carried: { trinket: 7, drinks: 'mead' } } }
+
+    expect(createStore(memoryStorage(JSON.stringify(saved))).getState().gear).toEqual({
+      ...changed.gear,
+      carried: { trinket: null, power: null, drinks: [] },
+    })
+    expect(
+      createStore(
+        memoryStorage(JSON.stringify({ gear: { ...changed.gear, carried: 'mead' } })),
+      ).getState().gear,
+    ).toEqual(changed.gear)
   })
 
   it('keeps the typed armor when the saved pieces are not pieces at all', () => {

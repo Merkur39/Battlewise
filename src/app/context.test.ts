@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { effectOf } from '@/features/gear/carried'
 import { gearDefence } from './context'
 import type { Gear } from './store'
 
@@ -35,5 +36,31 @@ describe('gearDefence', () => {
 
   it("keeps an earlier player's typed armor while they wear no piece", () => {
     expect(gearDefence({ ...silver, armor: 45 }).armor).toBe(45)
+  })
+
+  it('leaves out what is carried until it is switched on', () => {
+    const carrying: Gear = {
+      ...silver,
+      carried: { trinket: 'TrinketIronHealth', power: 'GP_Bonemass', drinks: [] },
+    }
+
+    expect(gearDefence(carrying)).toEqual(gearDefence(silver))
+  })
+
+  it('counts each effect switched on: armor, resistances and what a guard costs', () => {
+    const defence = gearDefence({ ...silver, armor: 45 }, [
+      effectOf('TrinketIronHealth'),
+      effectOf('GP_Bonemass'),
+    ])
+
+    expect(defence.armor).toBe(65)
+    expect(defence.modifiers).toEqual({
+      spirit: 'immune',
+      blunt: 'slightlyResistant',
+      slash: 'slightlyResistant',
+      pierce: 'slightlyResistant',
+    })
+    expect(defence.blockStaminaEffects).toBe(-1)
+    expect(defence.blockStaminaFlat).toBe(-5)
   })
 })

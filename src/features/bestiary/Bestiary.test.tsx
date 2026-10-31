@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
 import type { Store } from '@/app/store'
-import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
+import { MOCKUP_GEAR, MOCKUP_PIECES, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const list = () => screen.getByRole('list', { name: 'Créatures du biome' })
@@ -363,6 +363,139 @@ describe('Bestiary', () => {
     relaunch(store)
 
     expect(screen.getByRole('group', { name: 'Biome' })).toHaveTextContent('Marécages')
+  })
+
+  describe('with your temporary effects', () => {
+    // The mockups' gear, carrying the Iron Brooch, Bonemass's power and the Frost Resistance Mead.
+    const CARRYING = {
+      ...MOCKUP_GEAR,
+      armor: 0,
+      pieces: MOCKUP_PIECES,
+      carried: {
+        trinket: 'TrinketIronHealth',
+        power: 'GP_Bonemass',
+        drinks: ['Potion_frostresist'],
+      },
+    }
+    const card = () => screen.getByRole('button', { name: /^Avec tes effets temporaires/ })
+    const effects = () => screen.getByRole('group', { name: 'Tes effets temporaires' })
+    const effect = (name: string) => within(effects()).getByRole('switch', { name })
+
+    it('folds a card on the sheet, which says that none is on at first', () => {
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+
+      expect(card()).toHaveAttribute('aria-expanded', 'false')
+      expect(card()).toHaveTextContent('Aucun allumé')
+      expect(
+        screen.queryByRole('group', { name: 'Tes effets temporaires' }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('unfolds what you carry, a switch each, and greys with its reason what changes nothing', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+
+      await user.click(card())
+
+      expect(card()).toHaveAttribute('aria-expanded', 'true')
+      expect(effect('Broche en fer')).toHaveAttribute('aria-checked', 'false')
+      expect(effect('Broche en fer')).toHaveAccessibleDescription(
+        "Bibelot · 30 s dès 65 d'adrénaline",
+      )
+      expect(effect("Masse-d'Os")).toHaveAccessibleDescription('Pouvoir · 5 min')
+      expect(
+        within(effects()).queryByRole('switch', { name: 'Hydromel de résistance au gel' }),
+      ).not.toBeInTheDocument()
+      expect(effects()).toHaveTextContent(
+        'Hydromel de résistance au gelBoisson · 10 minNe change rien : pas de glace',
+      )
+      expect(effects()).toHaveTextContent("Vaut jusqu'à ce que tu changes de créature.")
+    })
+
+    it('counts at once what is switched on: the Lox, parried, is then blocked whole', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      expect(screen.getByText('Pare-le : en bloquant, tu titubes')).toBeInTheDocument()
+
+      await user.click(card())
+      await user.click(effect('Broche en fer'))
+      await user.click(effect("Masse-d'Os"))
+
+      expect(effect('Broche en fer')).toHaveAttribute('aria-checked', 'true')
+      expect(card()).toHaveTextContent("Broche en fer et Masse-d'Os")
+      expect(screen.getByText('Tu bloques tout sans tituber')).toBeInTheDocument()
+
+      await user.click(effect('Broche en fer'))
+
+      expect(card()).toHaveTextContent("Masse-d'Os")
+      expect(screen.getByText('Pare-le : en bloquant, tu titubes')).toBeInTheDocument()
+    })
+
+    it('holds in the Simulation of its attacks, until another creature', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      await user.click(card())
+      await user.click(effect("Masse-d'Os"))
+
+      await user.click(screen.getByRole('link', { name: /^Morsure,/ }))
+
+      expect(
+        await screen.findByRole('button', { name: /^Avec tes effets temporaires/ }),
+      ).toHaveTextContent("Masse-d'Os")
+
+      window.location.hash = '#/bestiary/plains/Deathsquito'
+      expect(await sheetHeading('Morstique')).toBeInTheDocument()
+      expect(card()).toHaveTextContent('Aucun allumé')
+
+      window.location.hash = '#/bestiary/plains/Lox'
+      expect(await sheetHeading('Lox')).toBeInTheDocument()
+      expect(card()).toHaveTextContent('Aucun allumé')
+    })
+
+    it('shows no card to a player who carries nothing', () => {
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+
+      expect(
+        screen.queryByRole('button', { name: /^Avec tes effets temporaires/ }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('keeps the list without them, beside the sheet on a desktop', async () => {
+      const user = userEvent.setup()
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+
+      await user.click(card())
+      await user.click(effect('Broche en fer'))
+      await user.click(effect("Masse-d'Os"))
+
+      expect(screen.getByText('Sans tes effets temporaires')).toBeInTheDocument()
+      expect(row('Lox')).toHaveTextContent('Pare-le : en bloquant, tu titubes')
+      expect(screen.getByRole('group', { name: 'Comment le prendre' })).toHaveTextContent(
+        'Tu bloques tout sans tituber',
+      )
+    })
+
+    it('speaks English too', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/bestiary/plains/Lox')
+      renderWithStore(<App />, { language: 'en', gear: CARRYING })
+
+      await user.click(screen.getByRole('button', { name: /^With your temporary effects/ }))
+
+      const group = screen.getByRole('group', { name: 'Your temporary effects' })
+      expect(
+        within(group).getByRole('switch', { name: 'Iron Brooch' }),
+      ).toHaveAccessibleDescription('Trinket · 30 s from 65 adrenaline')
+      expect(group).toHaveTextContent('Changes nothing: no frost')
+      expect(group).toHaveTextContent('Holds until you change creature.')
+    })
   })
 
   describe('on a desktop', () => {

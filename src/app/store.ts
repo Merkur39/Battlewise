@@ -1,6 +1,7 @@
 import type { World } from '@/combat/world'
 import { game } from '@/data'
 import type { ArmorSlot, BiomeId } from '@/data/types'
+import { NOTHING_CARRIED, type Carried, type CarriedKind } from '@/features/gear/carried'
 import { maxLevel } from '@/features/gear/model'
 import { SLOTS, type Pieces, type Worn } from '@/features/gear/pieces'
 import { LANGUAGES } from '@/i18n/detect'
@@ -32,6 +33,8 @@ export interface Gear {
   readonly maxHealth: number
   /** Left out by players of earlier versions, whose typed armor stands for them. */
   readonly pieces?: Pieces
+  /** Left out by players of earlier versions, who carry nothing. */
+  readonly carried?: Carried
 }
 
 /** An attack, by the creature or boss phase that makes it and its first item id. */
@@ -63,7 +66,15 @@ export interface AppState {
 /** A new character's gear, with the first shield it can make: verdicts too harsh until it is set,
  * never too kind. */
 export const DEFAULT_STATE: AppState = {
-  gear: { blocker: 'ShieldWood', level: 1, skill: 0, armor: 0, maxHealth: 25, pieces: {} },
+  gear: {
+    blocker: 'ShieldWood',
+    level: 1,
+    skill: 0,
+    armor: 0,
+    maxHealth: 25,
+    pieces: {},
+    carried: NOTHING_CARRIED,
+  },
   world: { difficulty: 'normal', players: 1 },
   theme: 'origine',
   language: 'auto',
@@ -128,7 +139,7 @@ function load(storage: KeyValueStorage | null): AppState {
   }
   if (!isRecord(saved)) return DEFAULT_STATE
   return {
-    gear: isGear(saved.gear) ? withPieces(saved.gear) : DEFAULT_STATE.gear,
+    gear: isGear(saved.gear) ? withCarried(withPieces(saved.gear)) : DEFAULT_STATE.gear,
     world: isWorld(saved.world) ? saved.world : DEFAULT_STATE.world,
     theme: oneOf(THEMES, saved.theme) ?? DEFAULT_STATE.theme,
     language: oneOf(LANGUAGE_SETTINGS, saved.language) ?? DEFAULT_STATE.language,
@@ -187,6 +198,21 @@ function withPieces({ pieces, ...gear }: Gear): Gear {
     }
   }
   return { ...gear, pieces: kept }
+}
+
+// What is carried is checked one by one too: an effect the game no longer has, or of another kind, is
+// dropped, and a drink kept once; what is no record of it at all carries nothing.
+function withCarried({ carried, ...gear }: Gear): Gear {
+  if (!isRecord(carried)) return gear
+  const effectId = (kind: CarriedKind, value: unknown) =>
+    game.ruleEffects.find((effect) => effect.kind === kind && effect.id === value)?.id ?? null
+  const drinks = Array.isArray(carried.drinks) ? (carried.drinks as unknown[]) : []
+  const kept: Carried = {
+    trinket: effectId('trinket', carried.trinket),
+    power: effectId('power', carried.power),
+    drinks: [...new Set(drinks.flatMap((drink) => effectId('consumable', drink) ?? []))],
+  }
+  return { ...gear, carried: kept }
 }
 
 const isWorld = (value: unknown): value is World =>

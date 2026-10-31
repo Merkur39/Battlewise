@@ -235,6 +235,107 @@ describe('Your gear', () => {
     })
   })
 
+  describe('what you carry', () => {
+    const CARRYING = {
+      ...WORN,
+      carried: {
+        trinket: 'TrinketIronHealth',
+        power: 'GP_Bonemass',
+        drinks: ['Potion_frostresist'],
+      },
+    }
+    const carry = (dialog: HTMLElement) =>
+      within(dialog).getByRole('region', { name: 'Ce que tu emportes' })
+
+    it('lists the trinket, the power and the drinks, how long each lasts and what it changes', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      const section = carry(await openGear(user))
+
+      expect(within(section).getByRole('combobox', { name: 'Bibelot' })).toHaveDisplayValue(
+        'Broche en fer',
+      )
+      expect(section).toHaveTextContent("30 s dès 65 d'adrénaline · armure +20")
+      expect(within(section).getByRole('combobox', { name: 'Pouvoir' })).toHaveDisplayValue(
+        "Masse-d'Os",
+      )
+      expect(section).toHaveTextContent('5 min · Contondant, Coupant et Perforant ×0,75')
+      expect(section).toHaveTextContent("bloquer rend 5 d'endurance")
+      expect(within(section).getByRole('combobox', { name: 'Boisson' })).toHaveDisplayValue(
+        'Hydromel de résistance au gel',
+      )
+      expect(section).toHaveTextContent('10 min · Glace ×0,5')
+      expect(section).toHaveTextContent(
+        "Pas comptés d'office : allume-les sur la fiche d'une créature ou dans la Simulation, quand ils sont actifs.",
+      )
+    })
+
+    it('carries nothing at first: a row of each, empty', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, fr)
+      const section = carry(await openGear(user))
+
+      expect(within(section).getByRole('combobox', { name: 'Bibelot' })).toHaveDisplayValue('Aucun')
+      expect(within(section).getByRole('combobox', { name: 'Pouvoir' })).toHaveDisplayValue('Aucun')
+      expect(within(section).getByRole('combobox', { name: 'Boisson' })).toHaveDisplayValue(
+        'Aucune',
+      )
+      expect(
+        within(section).queryByRole('button', { name: 'Ajouter une boisson' }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('adds a drink, a different one each time, and takes one off with « Aucune »', async () => {
+      const user = userEvent.setup()
+      const { store } = renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      const dialog = await openGear(user)
+      const section = carry(dialog)
+
+      await user.click(within(section).getByRole('button', { name: 'Ajouter une boisson' }))
+      const [first, second] = within(section).getAllByRole('combobox', { name: 'Boisson' })
+      expect(second).toHaveDisplayValue('Aucune')
+      expect(
+        within(second!).queryByRole('option', { name: 'Hydromel de résistance au gel' }),
+      ).not.toBeInTheDocument()
+
+      await user.selectOptions(second!, ['Hydromel des berserkir'])
+      expect(section).toHaveTextContent('20 s · Contondant, Coupant et Perforant ×1,5')
+      await user.selectOptions(first!, ['Aucune'])
+      await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
+
+      expect(store.getState().gear.carried).toEqual({
+        trinket: 'TrinketIronHealth',
+        power: 'GP_Bonemass',
+        drinks: ['Potion_bzerker'],
+      })
+    })
+
+    it('changes nothing of what you can take: what is carried is not on', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      const dialog = await openGear(user)
+
+      expect(within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })).toHaveTextContent(
+        'Titube à 60 (40 % de 150 PV) · armure 45',
+      )
+    })
+
+    it('says it in English too', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, { language: 'en', gear: CARRYING })
+      await openContext(user)
+      await user.click(screen.getByRole('link', { name: /^Your gear:/ }))
+      const dialog = await screen.findByRole('dialog', { name: 'Your gear' })
+      const section = within(dialog).getByRole('region', { name: 'What you carry' })
+
+      expect(within(section).getByRole('combobox', { name: 'Trinket' })).toHaveDisplayValue(
+        'Iron Brooch',
+      )
+      expect(section).toHaveTextContent('30 s from 65 adrenaline · armor +20')
+      expect(section).toHaveTextContent('blocking gives 5 stamina back')
+    })
+  })
+
   describe('on a desktop', () => {
     it('changes nothing on Annuler', async () => {
       const user = userEvent.setup()

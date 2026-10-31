@@ -123,7 +123,7 @@ function Finder({ place, selected }: { readonly place: Place; readonly selected:
           />
           <div className={styles.listHeader}>
             <span className={styles.label}>{t.bestiary.howToTake}</span>
-            <span className={styles.meta}>{t.bestiary.withYourGear}</span>
+            <span className={styles.meta}>{t.bestiary.withoutEffects}</span>
           </div>
           <ul aria-label={t.bestiary.creatures} className={styles.list}>
             {creaturesOf(place.biome).map((creature) => (
@@ -341,7 +341,7 @@ function SearchResults({
             <h2 id={creaturesId} className={styles.label}>
               {t.bestiary.foundCreatures(found.creatures.length)}
             </h2>
-            <span className={styles.meta}>{t.bestiary.withYourGear}</span>
+            <span className={styles.meta}>{t.bestiary.withoutEffects}</span>
           </div>
           <ul className={styles.resultList}>
             {found.creatures.map((creature) => (

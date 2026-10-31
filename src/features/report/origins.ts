@@ -2,7 +2,7 @@ import { blockerOf, gearBlockPower, gearDefence, presetOf } from '@/app/context'
 import { useAppState } from '@/app/useAppState'
 import type { HitResult } from '@/combat/hit'
 import { game } from '@/data'
-import type { GameCreature } from '@/data/types'
+import type { GameCreature, GameRuleEffect } from '@/data/types'
 import {
   creatureName,
   isTool,
@@ -28,9 +28,9 @@ export const SETTINGS_ORIGIN: ReportOrigin = {
   lines: [],
 }
 
-/** Your gear and Your world, as their summaries put them, with the armor, the max health and the pieces
- * worn: every verdict hangs on them. */
-function useSetupLines(): readonly string[] {
+/** Your gear and Your world, as their summaries put them, with the armor, the max health, the pieces
+ * worn and the effects switched on: every verdict hangs on them. */
+function useSetupLines(on: readonly GameRuleEffect[]): readonly string[] {
   const t = useT()
   const language = useLanguage()
   const { gear, world } = useAppState()
@@ -51,6 +51,7 @@ function useSetupLines(): readonly string[] {
     ),
     t.gear.bodySummary(gearDefence(gear).armor, gear.maxHealth, worn),
     t.world.summary(presetOf(world).name[language], world.players),
+    ...(on.length > 0 ? [t.effects.setupLine(on.map((effect) => effect.name[language]))] : []),
   ]
 }
 
@@ -61,6 +62,7 @@ export function useCreatureOrigin({
   assessment,
   health,
   toInflict,
+  on,
 }: {
   readonly creature: GameCreature
   readonly stars: number
@@ -68,11 +70,12 @@ export function useCreatureOrigin({
   /** As the sheet shows them. */
   readonly health: string
   readonly toInflict: string
+  readonly on: readonly GameRuleEffect[]
 }): ReportOrigin {
   const t = useT()
   const language = useLanguage()
   const summary = useAttackSummary()
-  const setup = useSetupLines()
+  const setup = useSetupLines(on)
   const name = `${creatureName(creature, language)} · ${t.creature.star(stars)}`
   const weaknesses = modifierRows(creature)
     .map(({ part, modifiers }) => {
@@ -130,6 +133,7 @@ export function useSimulationOrigin({
   block,
   parry,
   dodgeable,
+  on,
 }: {
   /** The attack simulated, null when the hit is a value typed in. */
   readonly found: FoundAttack | null
@@ -139,10 +143,11 @@ export function useSimulationOrigin({
   readonly block: HitResult | null
   readonly parry: HitResult | null
   readonly dodgeable: boolean | null
+  readonly on: readonly GameRuleEffect[]
 }): ReportOrigin {
   const t = useT()
   const language = useLanguage()
-  const setup = useSetupLines()
+  const setup = useSetupLines(on)
   const guard = (label: string, result: HitResult | null) =>
     result === null
       ? `${label} : ${t.creature.cannotParry}`
