@@ -129,6 +129,20 @@
   font-size: 14px;
 }
 
+/* The advice at every star in one cell, as tall as the longest; the others keep their room unseen. */
+.held {
+  display: grid;
+}
+
+.heldLayer {
+  grid-area: 1 / 1;
+  align-self: start;
+}
+
+.heldLayer[aria-hidden='true'] {
+  visibility: hidden;
+}
+
 .label {
   margin: 0;
   font-size: 10px;

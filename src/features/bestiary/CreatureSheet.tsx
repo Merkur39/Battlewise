@@ -44,6 +44,7 @@ import {
   damageText,
   dodgeShown,
   parryShown,
+  type Shown,
   useAttackSummary,
   useFight,
   useHitsSummary,
@@ -77,6 +78,18 @@ export function CreatureSheet({
   const [stars, setStars] = useState(creature.stars.min)
   const assessment = assess(creature, defence, world, stars)
   const advice = adviceShown(assessment, t, language)
+  const starOptions = Array.from(
+    { length: creature.stars.max - creature.stars.min + 1 },
+    (_, index) => creature.stars.min + index,
+  )
+  const advices = [
+    ...new Map(
+      starOptions.map((option) => {
+        const shown = adviceShown(assess(creature, defence, world, option), t, language)
+        return [shown.text, shown]
+      }),
+    ).values(),
+  ]
   const threshold = staggerThreshold(creature, stars)
   const biome = game.biomes.find((candidate) => candidate.id === place.biome)?.name[language]
   const name = creatureName(creature, language)
@@ -101,11 +114,6 @@ export function CreatureSheet({
       ? { tone: 'ok', text: t.creature.parryStaggers }
       : { tone: 'none', text: t.creature.parryDoesNot }
 
-  const starOptions = Array.from(
-    { length: creature.stars.max - creature.stars.min + 1 },
-    (_, index) => creature.stars.min + index,
-  )
-
   const body = (
     <>
       <div className={styles.stats}>
@@ -113,12 +121,13 @@ export function CreatureSheet({
         <Stat label={t.creature.toInflict} value={inflict} numeric={threshold !== null} />
         <Stat label={t.creature.yourParry} value={parry.text} tone={parry.tone} />
         {layout === 'panel' && (
-          <Stat label={t.bestiary.howToTake} value={advice.text} tone={advice.tone} />
+          <Stat
+            label={t.bestiary.howToTake}
+            value={<HeldAdvice advices={advices} shown={advice.text} layout={layout} />}
+          />
         )}
       </div>
-      {layout === 'page' && (
-        <AdviceLine tone={advice.tone} text={advice.text} className={styles.advice} />
-      )}
+      {layout === 'page' && <HeldAdvice advices={advices} shown={advice.text} layout={layout} />}
       <EffectsCard creature={creature} hits={creatureHits(creature)} stars={stars} />
       <Modifiers creature={creature} />
       {layout === 'page' ? (
@@ -261,6 +270,40 @@ export function CreatureSheetCrash({
   )
 }
 
+/** The advice at every star in the same place, as large as the longest, so that picking stars moves
+ * nothing under it (issue #59): the advice `shown` alone is seen and read. A line under the stats on a
+ * phone, a card's text on a desktop. */
+function HeldAdvice({
+  advices,
+  shown,
+  layout,
+}: {
+  readonly advices: readonly Shown[]
+  readonly shown: string
+  readonly layout: 'page' | 'panel'
+}) {
+  return (
+    <span className={`${styles.held ?? ''} ${layout === 'page' ? (styles.advice ?? '') : ''}`}>
+      {advices.map(({ tone, text }) => {
+        const hidden = text === shown ? undefined : true
+        return layout === 'page' ? (
+          <span key={text} aria-hidden={hidden} className={styles.heldLayer}>
+            <AdviceLine tone={tone} text={text} />
+          </span>
+        ) : (
+          <span
+            key={text}
+            aria-hidden={hidden}
+            className={`${styles.heldLayer ?? ''} ${styles[tone] ?? ''}`}
+          >
+            {text}
+          </span>
+        )
+      })}
+    </span>
+  )
+}
+
 function Stat({
   label,
   short,
@@ -270,7 +313,7 @@ function Stat({
 }: {
   readonly label: string
   readonly short?: string
-  readonly value: string
+  readonly value: ReactNode
   readonly numeric?: boolean
   readonly tone?: Tone
 }) {

@@ -1,4 +1,4 @@
-import { cleanup, screen, waitFor, within } from '@testing-library/react'
+import { cleanup, isInaccessible, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
@@ -9,6 +9,8 @@ import { setViewportWidth } from '../../../test/viewport'
 const list = () => screen.getByRole('list', { name: 'Créatures du biome' })
 const row = (name: string) => within(list()).getByRole('link', { name: new RegExp(`^${name}`) })
 const sheetHeading = (name: string) => screen.findByRole('heading', { level: 1, name })
+/** Whether the advice `text` is the one read, not one kept unseen for the room of other stars. */
+const read = (text: string) => !isInaccessible(screen.getByText(text))
 const chips = (name: string) =>
   within(screen.getByRole('list', { name }))
     .getAllByRole('listitem')
@@ -90,6 +92,20 @@ describe('Bestiary', () => {
     expect(screen.getByRole('button', { name: '1★' })).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByRole('group', { name: 'Points de vie' })).toHaveTextContent('1 200')
     expect(punch()).toHaveTextContent('90')
+  })
+
+  it('holds the advice of every star in its place, the one picked alone read', async () => {
+    const user = userEvent.setup()
+    window.history.replaceState(null, '', '#/bestiary/mountain/Wolf')
+    renderWithStore(<App />, { language: 'en', gear: MOCKUP_GEAR })
+
+    expect(read('You block everything without staggering')).toBe(true)
+    expect(read('Parry it: the block gives way')).toBe(false)
+
+    await user.click(screen.getByRole('button', { name: '2★' }))
+
+    expect(read('You block everything without staggering')).toBe(false)
+    expect(read('Parry it: the block gives way')).toBe(true)
   })
 
   it('sums up the weaknesses and resistances, tools included, in the words of the game', () => {
@@ -430,7 +446,7 @@ describe('Bestiary', () => {
       const user = userEvent.setup()
       window.history.replaceState(null, '', '#/bestiary/plains/Lox')
       renderWithStore(<App />, { language: 'fr', gear: CARRYING })
-      expect(screen.getByText('Pare-le : en bloquant, tu titubes')).toBeInTheDocument()
+      expect(read('Pare-le : en bloquant, tu titubes')).toBe(true)
 
       await user.click(card())
       await user.click(effect('Broche en fer'))
@@ -438,12 +454,12 @@ describe('Bestiary', () => {
 
       expect(effect('Broche en fer')).toHaveAttribute('aria-checked', 'true')
       expect(card()).toHaveTextContent("Broche en fer et Masse-d'Os")
-      expect(screen.getByText('Tu bloques tout sans tituber')).toBeInTheDocument()
+      expect(read('Tu bloques tout sans tituber')).toBe(true)
 
       await user.click(effect('Broche en fer'))
 
       expect(card()).toHaveTextContent("Masse-d'Os")
-      expect(screen.getByText('Pare-le : en bloquant, tu titubes')).toBeInTheDocument()
+      expect(read('Pare-le : en bloquant, tu titubes')).toBe(true)
     })
 
     it('holds in the Simulation of its attacks, until another creature', async () => {
@@ -527,6 +543,23 @@ describe('Bestiary', () => {
       expect(await screen.findByRole('heading', { level: 2, name: 'Troll' })).toBeInTheDocument()
       expect(row('Troll')).toHaveAttribute('aria-current', 'true')
       expect(screen.getByRole('list', { name: 'Créatures du biome' })).toBeInTheDocument()
+    })
+
+    it('holds the advice of every star in its card, the one picked alone read', async () => {
+      const user = userEvent.setup()
+      setViewportWidth('desktop')
+      window.history.replaceState(null, '', '#/bestiary/mountain/Wolf')
+      renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+      const card = () => screen.getByRole('group', { name: 'Comment le prendre' })
+      const readInCard = (text: string) => !isInaccessible(within(card()).getByText(text))
+
+      expect(readInCard('Tu bloques tout sans tituber')).toBe(true)
+      expect(readInCard('Pare-le : le blocage cède')).toBe(false)
+
+      await user.click(screen.getByRole('button', { name: '2★' }))
+
+      expect(readInCard('Tu bloques tout sans tituber')).toBe(false)
+      expect(readInCard('Pare-le : le blocage cède')).toBe(true)
     })
 
     it('puts what a death brings in the table, with a way to its sheet', () => {
