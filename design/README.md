@@ -2,7 +2,7 @@
 
 The mockups live in a Claude Design artifact: [Foelore — design](https://claude.ai/artifact/DDGhnVebZ9JkXRbWsa2dse)
 (artifact type `https://claude.ai/artifact/QKN21svewxgyPb6SYRqWnd`). **The artifact is the source of truth**;
-`canvas/project/` is a local working copy of **v197** (canvas.json + every `.dc.html` board).
+`canvas/project/` is a local working copy of **v200** (canvas.json + every `.dc.html` board).
 
 ## Layout of the canvas
 
@@ -22,6 +22,19 @@ The mockups live in a Claude Design artifact: [Foelore — design](https://claud
 - Page **Encaisses** (`Encaisses`): the « Ce que tu encaisses » card on a 360 px phone, as it jumped, and two
   steady layouts; track B (the legend under the title, numbers alone on each guard's line) is the one
   carried into the phone Ton équipement board. Made by hand as well.
+- Page **Nouveautés · pistes** (`Nouveautes-*`, v198): What's new, as verbose as it was (`Nouveautes-Auj`, the notes of
+  `src/app/releases.ts` at the time), and three tracks on a phone sharing one rewritten copy, a short title and at
+  most one sentence of detail per note (`Nouveautes-Textes`, French and English, with each note's kind and track B's
+  names): A, patch notes (a NOUVEAU / AMÉLIORÉ / CORRIGÉ tag per line); B, named updates (one card per minor version,
+  its name and line, + ↑ ✓ per note, the patches under « Depuis »); C, to try (the screen's icon and a link to it per
+  note, « NOUVEAU » and a dot in Réglages until seen). Each track also shows a fix a player reported, as an example.
+  Static, written by a scratchpad script from the copy. The owner picked A. Iteration 1 (v199, right of A):
+  `Nouveautes-A1`, the phone page with a reported fix on top (1.14.3, an example) and the « Corrigé grâce à toi » sheet,
+  whose card keeps the report and its number, then says what changed by the note's title with its tag (never its
+  detail); `Nouveautes-A1-Desktop`, the 680 px dialog, the version on the left and the tagged notes on the right.
+  Approved by the owner, and carried into Origine and its themes (v200): `Nouveautes` and `Desktop-Nouveautes` (each
+  note a kind, a title, an optional detail), and the thank-you sheet of `Bestiaire` and `Desktop-Bestiaire`, whence
+  `build_bestiary_search.py` writes `Merci` and `Desktop-Merci`.
 - The desktop Bestiaire board is a fluid page that carries track B itself: classes and a `max-width: 1399px`
   media query in its helmet, which the search board inherits. Play it narrower than 1400 px to see it.
 - Generated from the Bestiaire boards: `Bestiaire-Recherche`, `Desktop-Bestiaire-Recherche`, and `Contexte`
