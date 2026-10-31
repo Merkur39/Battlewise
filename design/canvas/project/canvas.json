@@ -4036,6 +4036,62 @@
       "expand": "fill",
       "page": "parchemin",
       "is_interactive": true
+    },
+    "Nouveautes-Auj.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1120,
+      "title": "Nouveautés — aujourd'hui",
+      "page": "nouveautes"
+    },
+    "Nouveautes-A.dc.html": {
+      "x": 0,
+      "y": 1320,
+      "w": 1440,
+      "h": 1120,
+      "title": "A · Notes de patch",
+      "page": "nouveautes"
+    },
+    "Nouveautes-B.dc.html": {
+      "x": 0,
+      "y": 2640,
+      "w": 1440,
+      "h": 1120,
+      "title": "B · Mises à jour nommées",
+      "page": "nouveautes"
+    },
+    "Nouveautes-C.dc.html": {
+      "x": 0,
+      "y": 3960,
+      "w": 1440,
+      "h": 1120,
+      "title": "C · À essayer",
+      "page": "nouveautes"
+    },
+    "Nouveautes-Textes.dc.html": {
+      "x": 0,
+      "y": 5280,
+      "w": 1440,
+      "h": 1980,
+      "title": "Les textes, réécrits",
+      "page": "nouveautes"
+    },
+    "Nouveautes-A1.dc.html": {
+      "x": 1640,
+      "y": 1320,
+      "w": 1440,
+      "h": 1120,
+      "title": "A · Itération 1",
+      "page": "nouveautes"
+    },
+    "Nouveautes-A1-Desktop.dc.html": {
+      "x": 3280,
+      "y": 1320,
+      "w": 1440,
+      "h": 900,
+      "title": "A · Itération 1 · desktop",
+      "page": "nouveautes"
     }
   },
   "createdOnFiles": {
@@ -4998,6 +5054,15 @@
       "y": 17972,
       "maxW": 7520,
       "page": "parchemin"
+    },
+    "nouveautes-row1": {
+      "kind": "title1",
+      "text": "Nouveautés",
+      "x": 0,
+      "y": -300,
+      "maxW": 1440,
+      "page": "nouveautes",
+      "w": 240
     }
   },
   "order": [
@@ -5452,7 +5517,14 @@
     "Parchemin-Desktop-Arrivee-Biome.dc.html",
     "Parchemin-Desktop-Arrivee-Equipement.dc.html",
     "Parchemin-Desktop-Arrivee-Casque.dc.html",
-    "Parchemin-Desktop-Arrivee-Monde.dc.html"
+    "Parchemin-Desktop-Arrivee-Monde.dc.html",
+    "Nouveautes-Auj.dc.html",
+    "Nouveautes-A.dc.html",
+    "Nouveautes-B.dc.html",
+    "Nouveautes-C.dc.html",
+    "Nouveautes-Textes.dc.html",
+    "Nouveautes-A1.dc.html",
+    "Nouveautes-A1-Desktop.dc.html"
   ],
   "pages": [
     {
@@ -5474,6 +5546,10 @@
     {
       "id": "encaisses",
       "name": "Encaisses"
+    },
+    {
+      "id": "nouveautes",
+      "name": "Nouveautés · pistes"
     },
     {
       "id": "braise",
@@ -5519,6 +5595,7 @@
     "version-row1",
     "competence-row1",
     "encaisses-row1",
+    "nouveautes-row1",
     "m-row1-braise",
     "m-row2-braise",
     "m-row3-braise",

@@ -42,11 +42,11 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
       </header>
       <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 18px">
         <sc-for list="{{ versions }}" as="v" hint-placeholder-count="3">
-          <section style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #241F33">
+          <section style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #241F33">
             <h3 style="margin: 0; display: flex; flex-direction: column; gap: 2px; font-weight: 400"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500">{{ v.version }}</span><span style="font-size: 12px; color: #8D86A4">{{ v.date }}</span></h3>
-            <span style="display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; flex-direction: column; gap: 14px">
               <sc-for list="{{ v.items }}" as="i" hint-placeholder-count="2">
-                <p style="margin: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.45"><span>{{ i.text }}</span><sc-if value="{{ i.hasThanks }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: #A9A2BF">Merci {{ i.thanks }}<sc-if value="{{ i.isYours }}" hint-placeholder-val="{{ false }}"> · ton signalement {{ i.number }}</sc-if></span></sc-if></p>
+                <div style="display: grid; grid-template-columns: 76px minmax(0, 1fr); column-gap: 12px; align-items: baseline"><span style="justify-self: start; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; line-height: 18px; padding: 0 5px; border: 1px solid #342D47; border-radius: 3px; color: #A9A2BF">{{ i.kind }}</span><span style="min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 500; line-height: 1.35">{{ i.title }}</span><sc-if value="{{ i.hasDetail }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; line-height: 1.4; color: #A9A2BF">{{ i.detail }}</span></sc-if><sc-if value="{{ i.hasThanks }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: #A9A2BF">Merci {{ i.thanks }}<sc-if value="{{ i.isYours }}" hint-placeholder-val="{{ false }}"> · ton signalement {{ i.number }}</sc-if></span></sc-if></span></div>
               </sc-for>
             </span>
           </section>
@@ -62,18 +62,23 @@ a{color:#BBA6F7}a:hover{color:#D5C8FB}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
   renderVals() {
-    const item = (text, thanks, number) => ({ text: text, hasThanks: Boolean(thanks), thanks: thanks || '', isYours: Boolean(number), number: number || '' });
+    const item = (kind, title, detail, thanks, number) => ({ kind: kind, title: title, hasDetail: Boolean(detail), detail: detail || '', hasThanks: Boolean(thanks), thanks: thanks || '', isYours: Boolean(number), number: number || '' });
     return {
       versions: [
-        { version: '1.5.0', date: '2 nov. 2026', items: [
-          item('Troll › Frappe au sol : 60 dégâts, plus 70.', 'Ragnar', '#48'),
-          item('Mes signalements et Nouveautés, dans Réglages.')
+        { version: '1.14.3', date: '2 nov. 2026', items: [
+          item('CORRIGÉ', 'Troll › Frappe au sol : 70 dégâts, pas 60', '', 'Ragnar', '#48')
         ] },
-        { version: '1.4.1', date: '27 oct. 2026', items: [
-          item("Les invocations que le jeu ne lance jamais n'apparaissent plus.")
+        { version: '1.14.2', date: '31 oct. 2026', items: [
+          item('AMÉLIORÉ', 'Maintiens + ou − pour aller plus vite', 'PV max, compétence Blocage, niveaux, Valeur libre.'),
+          item('CORRIGÉ', 'Cliquer vite ne sélectionne plus le texte voisin')
         ] },
-        { version: '1.4.0', date: '27 oct. 2026', items: [
-          item("Signaler un chiffre, un bug ou une idée depuis l'app.")
+        { version: '1.14.1', date: '31 oct. 2026', items: [
+          item('NOUVEAU', 'Ton monde montre la taille et la vitesse des monstres', "Jusqu'à ×1,2 en Très difficile, hors donjons. Leurs attaques ne vont pas plus vite.")
+        ] },
+        { version: '1.14.0', date: '31 oct. 2026', items: [
+          item('NOUVEAU', 'Emporte ton bibelot, ton pouvoir et tes boissons', 'Allume-les sur une fiche ou dans la Simulation : les verdicts suivent.'),
+          item('NOUVEAU', "L'Arsenal liste aussi armures, capes et effets", "Une recherche fouille tout ; une ligne t'en équipe."),
+          item('AMÉLIORÉ', "Ton équipement se choisit dans les listes de l'Arsenal", 'Un nouveau joueur commence à mains nues.')
         ] }
       ]
     };
