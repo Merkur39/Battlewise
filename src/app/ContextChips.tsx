@@ -1,5 +1,6 @@
 import { useLanguage, useT } from '@/i18n/useT'
 import { ChevronRightIcon, ShieldIcon, WorldIcon } from '@/ui/icons'
+import { leveled } from '@/features/gear/model'
 import { blockerOf, enemyScale, gearBlockPower, presetOf } from './context'
 import styles from './ContextChips.module.css'
 import { RouteLink } from './RouteLink'
@@ -14,7 +15,9 @@ export function ContextChips({ variant }: { readonly variant: 'sidebar' | 'sheet
   const language = useLanguage()
   const route = useRoute()
   const { gear, world } = useAppState()
-  const item = blockerOf(gear.blocker).name[language]
+  const blocker = blockerOf(gear.blocker)
+  const item = blocker.name[language]
+  const level = leveled(blocker) ? gear.level : null
   const power = gearBlockPower(gear)
   const difficulty = presetOf(world).name[language]
   const inSheet = variant === 'sheet'
@@ -24,14 +27,14 @@ export function ContextChips({ variant }: { readonly variant: 'sidebar' | 'sheet
     <div className={inSheet ? styles.sheet : styles.sidebar}>
       <RouteLink
         to={{ ...route, modal: 'gear' }}
-        aria-label={t.gear.summary(item, gear.level, power, gear.skill)}
+        aria-label={t.gear.summary(item, level, power, gear.skill)}
         className={styles.chip}
       >
         <ShieldIcon size={iconSize} strokeWidth={2} className={styles.icon} />
         <span className={styles.lines} aria-hidden="true">
           {inSheet && <span className={styles.label}>{t.gear.title}</span>}
           <span className={styles.name}>{item}</span>
-          <span className={styles.meta}>{t.gear.levelAndPower(gear.level, power)}</span>
+          <span className={styles.meta}>{t.gear.levelAndPower(level, power)}</span>
         </span>
         {inSheet && <ChevronRightIcon size={18} className={styles.go} />}
       </RouteLink>

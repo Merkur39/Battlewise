@@ -2,8 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { blockerOf } from '@/app/context'
 import type { Defence } from '@/combat/block'
 import type { World } from '@/combat/world'
-import { game } from '@/data'
-import { blockerGroups, blockPowerParts, FORGE_MAX_LEVEL, maxLevel, withstand } from './model'
+import { blockPowerParts, FORGE_MAX_LEVEL, maxLevel, withstand } from './model'
 
 const silverShield: Defence = {
   blockPower: 81,
@@ -64,37 +63,5 @@ describe('maxLevel', () => {
 
     expect(silver.maxQuality).toBe(3)
     expect(maxLevel(silver)).toBe(FORGE_MAX_LEVEL)
-  })
-})
-
-describe('blockerGroups', () => {
-  it('lists round shields, bucklers, tower shields, weapons, then the others', () => {
-    expect(blockerGroups('fr').map(({ group }) => group)).toEqual([
-      'round',
-      'buckler',
-      'tower',
-      'weapon',
-      'other',
-    ])
-  })
-
-  it('lists every blocker once, bare hands among the others', () => {
-    const listed = blockerGroups('en').flatMap(({ blockers }) => blockers.map(({ id }) => id))
-
-    expect(listed.toSorted()).toEqual(game.blockers.map(({ id }) => id).toSorted())
-    expect(
-      blockerGroups('en')
-        .find(({ group }) => group === 'other')
-        ?.blockers.map(({ id }) => id),
-    ).toContain('PlayerUnarmed')
-  })
-
-  it('sorts each group by name, in the language shown', () => {
-    for (const language of ['fr', 'en'] as const) {
-      for (const { blockers } of blockerGroups(language)) {
-        const names = blockers.map(({ name }) => name[language])
-        expect(names).toEqual(names.toSorted((a, b) => a.localeCompare(b, language)))
-      }
-    }
   })
 })

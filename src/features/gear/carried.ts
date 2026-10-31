@@ -60,18 +60,3 @@ export const carriable = (kind: CarriedKind): CarriedEffect[] =>
 /** What is carried, as a creature's sheet lists it: the trinket, the power, then the drinks. */
 export const carriedEffects = ({ trinket, power, drinks }: Carried): CarriedEffect[] =>
   [trinket, power, ...drinks].flatMap((id) => (id === null ? [] : [effectOf(id)])).filter(isCarried)
-
-/** What is carried once `effect` is taken too: a trinket or a power in place of the one carried, a
- * drink beside the others, once. */
-export function carry(carried: Carried, effect: CarriedEffect): Carried {
-  switch (effect.kind) {
-    case 'trinket':
-      return { ...carried, trinket: effect.id }
-    case 'power':
-      return { ...carried, power: effect.id }
-    case 'consumable':
-      return carried.drinks.includes(effect.id)
-        ? carried
-        : { ...carried, drinks: [...carried.drinks, effect.id] }
-  }
-}

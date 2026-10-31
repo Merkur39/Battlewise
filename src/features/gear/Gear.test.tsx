@@ -16,6 +16,27 @@ async function openGear(user: UserEvent) {
   return screen.findByRole('dialog', { name: 'Ton équipement' })
 }
 
+const escaped = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+/** Opens a row's list and picks an item there (in the category `pill` of what is held), its card on a
+ * phone, « Choisir » on a desktop: Your gear comes back with it. */
+async function pick(
+  user: UserEvent,
+  dialog: HTMLElement,
+  row: string,
+  item: string,
+  pill?: string,
+) {
+  await user.click(
+    within(dialog).getByRole('button', { name: new RegExp(`^${row} : (?!niveau )`) }),
+  )
+  if (pill) await user.click(within(dialog).getByRole('button', { name: new RegExp(`^${pill} `) }))
+  await user.click(
+    within(dialog).getByRole('button', {
+      name: new RegExp(`^(${escaped(item)}[,.] |Choisir : ${escaped(item)}$)`),
+    }),
+  )
+}
+
 describe('Your gear', () => {
   it('opens from its chip and shows what you can take with an empty bar', async () => {
     const user = userEvent.setup()
@@ -62,14 +83,12 @@ describe('Your gear', () => {
     const user = userEvent.setup()
     renderWithStore(<App />, fr)
     const dialog = await openGear(user)
-    const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
 
     await user.clear(within(dialog).getByRole('textbox', { name: 'PV max' }))
     await user.type(within(dialog).getByRole('textbox', { name: 'PV max' }), '200')
-    await user.selectOptions(within(dialog).getByRole('combobox', { name: 'En main' }), [
-      'Écu en bois',
-    ])
+    await pick(user, dialog, 'En main', 'Écu en bois')
 
+    const withstand = within(dialog).getByRole('region', { name: 'Ce que tu encaisses' })
     expect(withstand).toHaveTextContent('Titube à 80 (40 % de 200 PV)')
     expect(within(withstand).getByRole('group', { name: 'Parer' })).toHaveTextContent(
       'ton objet ne pare pas',
@@ -120,19 +139,18 @@ describe('Your gear', () => {
     const user = userEvent.setup()
     renderWithStore(<App />, fr)
     const dialog = await openGear(user)
-    const item = within(dialog).getByRole('combobox', { name: 'En main' })
-    const raise = within(dialog).getByRole('button', { name: 'En main : niveau supérieur' })
+    const raise = () => within(dialog).getByRole('button', { name: 'En main : niveau supérieur' })
 
-    await user.selectOptions(item, ['Lanterne dvergr'])
+    await pick(user, dialog, 'En main', 'Lanterne dvergr', 'Autres')
 
     expect(within(dialog).getByRole('group', { name: 'En main : niveau 1' })).toHaveTextContent(
       'N1',
     )
-    expect(raise).toBeDisabled()
+    expect(raise()).toBeDisabled()
 
-    await user.selectOptions(item, ['Bouclier en argent'])
+    await pick(user, dialog, 'En main', 'Bouclier en argent', 'Boucliers')
     for (let step = 1; step < 12; step += 1) {
-      if (!(raise as HTMLButtonElement).disabled) await user.click(raise)
+      if (!(raise() as HTMLButtonElement).disabled) await user.click(raise())
     }
 
     expect(within(dialog).getByRole('group', { name: 'En main : niveau 10' })).toBeInTheDocument()
@@ -145,9 +163,9 @@ describe('Your gear', () => {
       const dialog = await openGear(user)
 
       const pieces = within(dialog).getByRole('region', { name: "Pièces d'armures" })
-      expect(within(pieces).getByRole('combobox', { name: 'Casque' })).toHaveDisplayValue(
-        'Casque en fer',
-      )
+      expect(
+        within(pieces).getByRole('button', { name: 'Casque : Casque en fer' }),
+      ).toBeInTheDocument()
       expect(within(pieces).getByRole('group', { name: 'Cape : niveau 3' })).toHaveTextContent('N3')
       expect(pieces).toHaveTextContent('Armure45')
       expect(pieces).toHaveTextContent('14 + 14 + 14 + 3')
@@ -160,13 +178,11 @@ describe('Your gear', () => {
       const user = userEvent.setup()
       renderWithStore(<App />, fr)
       const dialog = await openGear(user)
+
+      await pick(user, dialog, 'Plastron', 'Cuirasse de racines')
+      await user.click(within(dialog).getByRole('button', { name: 'Cape : niveau supérieur' }))
+
       const pieces = within(dialog).getByRole('region', { name: "Pièces d'armures" })
-
-      await user.selectOptions(within(pieces).getByRole('combobox', { name: 'Plastron' }), [
-        'Cuirasse de racines',
-      ])
-      await user.click(within(pieces).getByRole('button', { name: 'Cape : niveau supérieur' }))
-
       expect(pieces).toHaveTextContent('Armure40')
       expect(pieces).toHaveTextContent('14 + 8 + 14 + 4')
       const resistances = within(pieces).getByRole('list', { name: 'Tes résistances' })
@@ -177,14 +193,17 @@ describe('Your gear', () => {
       )
     })
 
-    it('empties a slot with « Aucun », its level with it', async () => {
+    it('empties a slot with « Aucun casque » at the head of its list, its level with it', async () => {
       const user = userEvent.setup()
       renderWithStore(<App />, fr)
       const dialog = await openGear(user)
+
+      await user.click(within(dialog).getByRole('button', { name: 'Casque : Casque en fer' }))
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Aucun casque, retire celui que tu portes.' }),
+      )
+
       const pieces = within(dialog).getByRole('region', { name: "Pièces d'armures" })
-
-      await user.selectOptions(within(pieces).getByRole('combobox', { name: 'Casque' }), ['Aucun'])
-
       expect(pieces).toHaveTextContent('Armure31')
       expect(
         within(pieces).getByRole('button', { name: 'Casque : niveau supérieur' }),
@@ -195,16 +214,16 @@ describe('Your gear', () => {
       const user = userEvent.setup()
       renderWithStore(<App />, fr)
       const dialog = await openGear(user)
-      const pieces = within(dialog).getByRole('region', { name: "Pièces d'armures" })
 
       for (const [slot, piece] of [
         ['Casque', 'Capuche de Fenris'],
         ['Plastron', 'Manteau de Fenris'],
         ['Jambières', 'Braies de Fenris'],
       ] as const) {
-        await user.selectOptions(within(pieces).getByRole('combobox', { name: slot }), [piece])
+        await pick(user, dialog, slot, piece)
       }
 
+      const pieces = within(dialog).getByRole('region', { name: "Pièces d'armures" })
       const set = within(pieces).getByRole('group', { name: 'Ensemble complet' })
       expect(set).toHaveTextContent('Bénédiction de Fenris')
       expect(set).toHaveTextContent('Feu ×0,5')
@@ -222,9 +241,7 @@ describe('Your gear', () => {
       expect(pieces).toHaveTextContent('Armure45')
       expect(pieces).toHaveTextContent('Armure tapée avant cette version')
 
-      await user.selectOptions(within(pieces).getByRole('combobox', { name: 'Plastron' }), [
-        "Armure d'écailles de fer",
-      ])
+      await pick(user, dialog, 'Plastron', "Armure d'écailles de fer")
       await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
 
       expect(store.getState().gear).toEqual({
@@ -252,55 +269,64 @@ describe('Your gear', () => {
       renderWithStore(<App />, { language: 'fr', gear: CARRYING })
       const section = carry(await openGear(user))
 
-      expect(within(section).getByRole('combobox', { name: 'Bibelot' })).toHaveDisplayValue(
-        'Broche en fer',
-      )
+      expect(
+        within(section).getByRole('button', { name: 'Bibelot : Broche en fer' }),
+      ).toBeInTheDocument()
       expect(section).toHaveTextContent("30 s dès 65 d'adrénaline · armure +20")
-      expect(within(section).getByRole('combobox', { name: 'Pouvoir' })).toHaveDisplayValue(
-        "Masse-d'Os",
-      )
+      expect(
+        within(section).getByRole('button', { name: "Pouvoir : Masse-d'Os" }),
+      ).toBeInTheDocument()
       expect(section).toHaveTextContent('5 min · Contondant, Coupant et Perforant ×0,75')
       expect(section).toHaveTextContent("bloquer rend 5 d'endurance")
-      expect(within(section).getByRole('combobox', { name: 'Boisson' })).toHaveDisplayValue(
-        'Hydromel de résistance au gel',
-      )
+      expect(
+        within(section).getByRole('button', { name: 'Boisson : Hydromel de résistance au gel' }),
+      ).toBeInTheDocument()
       expect(section).toHaveTextContent('10 min · Glace ×0,5')
       expect(section).toHaveTextContent(
         "Pas comptés d'office : allume-les sur la fiche d'une créature ou dans la Simulation, quand ils sont actifs.",
       )
     })
 
-    it('carries nothing at first: a row of each, empty', async () => {
+    it('carries nothing at first: no trinket, no power, a way to add a drink', async () => {
       const user = userEvent.setup()
       renderWithStore(<App />, fr)
       const section = carry(await openGear(user))
 
-      expect(within(section).getByRole('combobox', { name: 'Bibelot' })).toHaveDisplayValue('Aucun')
-      expect(within(section).getByRole('combobox', { name: 'Pouvoir' })).toHaveDisplayValue('Aucun')
-      expect(within(section).getByRole('combobox', { name: 'Boisson' })).toHaveDisplayValue(
-        'Aucune',
-      )
+      expect(within(section).getByRole('button', { name: 'Bibelot : Aucun' })).toBeInTheDocument()
+      expect(within(section).getByRole('button', { name: 'Pouvoir : Aucun' })).toBeInTheDocument()
+      expect(within(section).queryByRole('button', { name: /^Boisson : / })).not.toBeInTheDocument()
       expect(
-        within(section).queryByRole('button', { name: 'Ajouter une boisson' }),
-      ).not.toBeInTheDocument()
+        within(section).getByRole('button', { name: 'Ajouter une boisson' }),
+      ).toBeInTheDocument()
     })
 
-    it('adds a drink, a different one each time, and takes one off with « Aucune »', async () => {
+    it('adds a drink not carried yet, swaps one, and takes one off', async () => {
       const user = userEvent.setup()
       const { store } = renderWithStore(<App />, { language: 'fr', gear: CARRYING })
       const dialog = await openGear(user)
-      const section = carry(dialog)
 
-      await user.click(within(section).getByRole('button', { name: 'Ajouter une boisson' }))
-      const [first, second] = within(section).getAllByRole('combobox', { name: 'Boisson' })
-      expect(second).toHaveDisplayValue('Aucune')
+      await user.click(within(dialog).getByRole('button', { name: 'Ajouter une boisson' }))
+      expect(dialog).toHaveAccessibleName('Une boisson de plus')
+      expect(dialog).toHaveTextContent(
+        "Ton Hydromel de résistance au gel est déjà emporté : une boisson ne se prend qu'une fois.",
+      )
       expect(
-        within(second!).queryByRole('option', { name: 'Hydromel de résistance au gel' }),
+        within(dialog).queryByRole('button', { name: /^Hydromel de résistance au gel/ }),
       ).not.toBeInTheDocument()
+      await user.click(within(dialog).getByRole('button', { name: /^Hydromel des berserkir\. / }))
 
-      await user.selectOptions(second!, ['Hydromel des berserkir'])
-      expect(section).toHaveTextContent('20 s · Contondant, Coupant et Perforant ×1,5')
-      await user.selectOptions(first!, ['Aucune'])
+      expect(carry(dialog)).toHaveTextContent('20 s · Contondant, Coupant et Perforant ×1,5')
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Boisson : Hydromel de résistance au gel' }),
+      )
+      await user.click(
+        within(dialog).getByRole('button', { name: /^Vin d'orge de résistance au feu\. / }),
+      )
+      await user.click(
+        within(dialog).getByRole('button', { name: "Boisson : Vin d'orge de résistance au feu" }),
+      )
+      expect(dialog).toHaveAccessibleName('Ta boisson')
+      await user.click(within(dialog).getByRole('button', { name: /^Retirer cette boisson/ }))
       await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
 
       expect(store.getState().gear.carried).toEqual({
@@ -328,15 +354,188 @@ describe('Your gear', () => {
       const dialog = await screen.findByRole('dialog', { name: 'Your gear' })
       const section = within(dialog).getByRole('region', { name: 'What you carry' })
 
-      expect(within(section).getByRole('combobox', { name: 'Trinket' })).toHaveDisplayValue(
-        'Iron Brooch',
-      )
+      expect(
+        within(section).getByRole('button', { name: 'Trinket: Iron Brooch' }),
+      ).toBeInTheDocument()
       expect(section).toHaveTextContent('30 s from 65 adrenaline · armor +20')
       expect(section).toHaveTextContent('blocking gives 5 stamina back')
     })
   })
 
+  describe('what is held', () => {
+    it('starts bare-handed, without a level, under its own label', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, { language: 'fr' })
+      const dialog = await openGear(user)
+
+      const held = within(dialog).getByRole('region', { name: 'En main' })
+      expect(within(held).getByRole('button', { name: 'En main : Sans armes' })).toHaveTextContent(
+        /^Sans armes$/,
+      )
+      expect(
+        within(held).queryByRole('group', { name: /^En main : niveau/ }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('holds what is picked from bare hands at level 1, as its list says', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, {
+        language: 'fr',
+        gear: { ...MOCKUP_GEAR, blocker: 'PlayerUnarmed' },
+      })
+      const dialog = await openGear(user)
+
+      await user.click(within(dialog).getByRole('button', { name: 'En main : Sans armes' }))
+      expect(dialog).toHaveTextContent(
+        'Au niveau 1, avec ta compétence Blocage 25 ; son niveau se règle ensuite.',
+      )
+      await user.click(within(dialog).getByRole('button', { name: /^Boucliers / }))
+      await user.click(within(dialog).getByRole('button', { name: /^Bouclier en argent\. / }))
+
+      expect(within(dialog).getByRole('group', { name: 'En main : niveau 1' })).toBeInTheDocument()
+    })
+
+    it('puts « Sans armes » at the head of the list, which puts down what you hold', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+
+      await user.click(within(dialog).getByRole('button', { name: 'En main : Bouclier en argent' }))
+      const [first] = within(within(dialog).getByRole('list', { name: 'Boucliers' })).getAllByRole(
+        'button',
+      )
+      expect(first).toHaveAccessibleName('Sans armes, lâche ce que tu tiens.')
+      await user.click(first!)
+
+      expect(
+        within(dialog).getByRole('button', { name: 'En main : Sans armes' }),
+      ).toBeInTheDocument()
+      expect(
+        within(dialog).queryByRole('group', { name: /^En main : niveau/ }),
+      ).not.toBeInTheDocument()
+    })
+  })
+
+  describe('its lists', () => {
+    it('opens a row’s list in place of Your gear, titled by what it picks, and comes back unchanged', async () => {
+      const user = userEvent.setup()
+      const { store } = renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Cape : Cape en fourrure de loup' }),
+      )
+
+      expect(dialog).toHaveAccessibleName('Ta cape')
+      expect(dialog).toHaveTextContent('11 capes')
+      expect(dialog).toHaveTextContent(
+        'Au niveau 1 ; celle que tu choisis garde le niveau de ta cape (N3), à régler ensuite.',
+      )
+      const cards = within(within(dialog).getByRole('list', { name: 'Capes' })).getAllByRole(
+        'button',
+      )
+      expect(cards[0]).toHaveAccessibleName('Aucune cape, retire celle que tu portes.')
+      expect(cards[1]).toHaveAccessibleName('Cape en fourrure de loup, équipé. Choisir.')
+      expect(within(dialog).queryByRole('button', { name: 'Valider' })).not.toBeInTheDocument()
+
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Retour à Ton équipement, sans rien changer' }),
+      )
+
+      expect(dialog).toHaveAccessibleName('Ton équipement')
+      expect(
+        within(dialog).getByRole('button', { name: 'Cape : Cape en fourrure de loup' }),
+      ).toBeInTheDocument()
+      expect(store.getState().gear).toEqual(WORN)
+    })
+
+    it('keeps the level of the piece it replaces, within its own', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+
+      await pick(user, dialog, 'Cape', 'Cape des cendres')
+
+      expect(within(dialog).getByRole('group', { name: 'Cape : niveau 3' })).toBeInTheDocument()
+      expect(within(dialog).getByRole('region', { name: "Pièces d'armures" })).toHaveTextContent(
+        '14 + 14 + 14 + 16',
+      )
+    })
+
+    it('switches what is held between the shields, the weapons and the rest', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+
+      await user.click(within(dialog).getByRole('button', { name: 'En main : Bouclier en argent' }))
+
+      expect(dialog).toHaveAccessibleName('Ce que tu tiens')
+      expect(within(dialog).getByRole('button', { name: 'Boucliers 19' })).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      )
+      expect(within(dialog).queryByRole('button', { name: /^Aucun/ })).not.toBeInTheDocument()
+
+      await user.click(within(dialog).getByRole('button', { name: /^Armes / }))
+
+      expect(within(dialog).getByRole('list', { name: 'Armes' })).toBeInTheDocument()
+    })
+
+    it('searches the list, accents and case aside', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Cape : Cape en fourrure de loup' }),
+      )
+
+      await user.type(within(dialog).getByRole('searchbox', { name: 'Chercher une cape' }), 'LOUP')
+
+      expect(
+        within(within(dialog).getByRole('list', { name: 'Capes' })).getAllByRole('button'),
+      ).toHaveLength(2)
+    })
+
+    it('carries a trinket in place of the one carried', async () => {
+      const user = userEvent.setup()
+      renderWithStore(<App />, {
+        language: 'fr',
+        gear: { ...WORN, carried: { trinket: 'TrinketIronHealth', power: null, drinks: [] } },
+      })
+      const dialog = await openGear(user)
+
+      await user.click(within(dialog).getByRole('button', { name: 'Bibelot : Broche en fer' }))
+      expect(dialog).toHaveTextContent('Un seul à la fois : celui que tu choisis remplace le tien.')
+      await user.click(within(dialog).getByRole('button', { name: /^Voile d'ombre\. / }))
+
+      expect(
+        within(dialog).getByRole('button', { name: "Bibelot : Voile d'ombre" }),
+      ).toBeInTheDocument()
+    })
+  })
+
   describe('on a desktop', () => {
+    it('shows a list as the Arsenal’s table, « Choisir » on each row', async () => {
+      const user = userEvent.setup()
+      setViewportWidth('desktop')
+      renderWithStore(<App />, fr)
+      const dialog = await openGear(user)
+
+      await user.click(
+        within(dialog).getByRole('button', { name: 'Cape : Cape en fourrure de loup' }),
+      )
+
+      const table = within(dialog).getByRole('table', { name: 'Capes' })
+      expect(within(table).getAllByRole('row')[1]).toHaveTextContent('Aucune cape')
+      expect(within(table).getByRole('button', { name: 'Retirer' })).toBeInTheDocument()
+
+      await user.click(within(table).getByRole('button', { name: 'Choisir : Cape des cendres' }))
+
+      expect(
+        within(dialog).getByRole('button', { name: 'Cape : Cape des cendres' }),
+      ).toBeInTheDocument()
+    })
+
     it('changes nothing on Annuler', async () => {
       const user = userEvent.setup()
       setViewportWidth('desktop')
@@ -357,9 +556,7 @@ describe('Your gear', () => {
       renderWithStore(<App />, fr)
       const dialog = await openGear(user)
 
-      await user.selectOptions(within(dialog).getByRole('combobox', { name: 'En main' }), [
-        'Écu en bois',
-      ])
+      await pick(user, dialog, 'En main', 'Écu en bois')
       await user.click(within(dialog).getByRole('button', { name: 'Valider' }))
 
       expect(screen.getByRole('group', { name: 'Ta parade' })).toHaveTextContent(

@@ -5,6 +5,11 @@ import styles from './Modal.module.css'
 
 interface ModalProps {
   readonly title: string
+  /** Where the dialog stands, above its title on a phone, before it on a desktop: « Ton équipement ›
+   * Ta cape ». */
+  readonly kicker?: string
+  /** A word at the end of the header, before the close button: how many a list holds. */
+  readonly aside?: string
   /** The dialog's own language, when it shows another than the app's (the Settings preview the
    * language picked). */
   readonly lang?: string
@@ -20,8 +25,9 @@ interface ModalProps {
   readonly back?: { readonly label: string; readonly onBack: () => void }
   /** A dialog that only shows: on a desktop, one button at its foot closes it. */
   readonly done?: string
-  /** The width of the desktop dialog. Wide: two columns, its body laid out by its content. */
-  readonly size?: 'narrow' | 'medium' | 'default' | 'wide'
+  /** The width of the desktop dialog. Wide: two columns, its body laid out by its content. List: as wide
+   * and tall as the screen lets a table be. */
+  readonly size?: 'narrow' | 'medium' | 'default' | 'wide' | 'list'
   /** Every way out ends here: Save, Cancel, the close button, Escape. */
   readonly onClose: () => void
   readonly children: ReactNode
@@ -31,6 +37,8 @@ interface ModalProps {
  * page inert behind it and closes it on Escape. */
 export function Modal({
   title,
+  kicker,
+  aside,
   lang,
   closeLabel,
   footer,
@@ -69,9 +77,13 @@ export function Modal({
             <BackIcon size={isDesktop ? 20 : 22} />
           </button>
         )}
-        <h2 id={titleId} className={styles.title}>
-          {title}
-        </h2>
+        <span className={styles.titles}>
+          {kicker && <span className={styles.kicker}>{kicker}</span>}
+          <h2 id={titleId} className={styles.title}>
+            {title}
+          </h2>
+        </span>
+        {aside && <span className={styles.aside}>{aside}</span>}
         {(!back || isDesktop) && (
           <button type="button" className={styles.close} aria-label={closeLabel} onClick={close}>
             <CloseIcon size={isDesktop ? 20 : 22} />

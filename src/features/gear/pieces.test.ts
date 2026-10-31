@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { maxLevel } from './model'
-import { pieceOf, setEffects, slotPieces, summarize, wornPieces, type Pieces } from './pieces'
+import { pieceOf, setEffects, summarize, wornPieces, type Pieces } from './pieces'
 
 // The mockups' pieces: iron at level 1 and the wolf cape at level 3.
 const iron: Pieces = {
@@ -84,18 +84,6 @@ describe('wornPieces', () => {
       [1, 3],
     ])
     expect(wornPieces({ cape: { id: 'CapeWolf', level: 1 } })).toHaveLength(1)
-  })
-})
-
-describe('slotPieces', () => {
-  it("lists a slot's pieces, sorted by name in the language shown", () => {
-    for (const language of ['fr', 'en'] as const) {
-      const capes = slotPieces('cape', language)
-      const names = capes.map(({ name }) => name[language])
-
-      expect(capes.every(({ slot }) => slot === 'cape')).toBe(true)
-      expect(names).toEqual(names.toSorted((a, b) => a.localeCompare(b, language)))
-    }
   })
 })
 

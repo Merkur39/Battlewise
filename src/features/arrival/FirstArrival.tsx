@@ -8,6 +8,9 @@ import { game } from '@/data'
 import type { BiomeId } from '@/data/types'
 import { bestiaryRoute, placeOf } from '@/features/bestiary/place'
 import { GearForm } from '@/features/gear/GearForm'
+import { GearListView } from '@/features/gear/GearLists'
+import { pickInto, type GearList } from '@/features/gear/lists'
+import { useListHeading } from '@/features/gear/useListHeading'
 import { WorldForm } from '@/features/world/WorldForm'
 import { useLanguage, useT } from '@/i18n/useT'
 import { BackIcon } from '@/ui/icons'
@@ -20,7 +23,8 @@ const QUESTIONS = 3
  * version finds theirs). Suivant keeps the answer on screen, written as the questions end: the app
  * behind does not move while they are open. The last button adds the world and opens the Bestiary on
  * the biome picked; Passer, like every other way out (Escape), writes the answers kept and leaves the
- * rest as it is. The questions are behind the player either way. */
+ * rest as it is. The questions are behind the player either way. A row of Ton équipement opens its list
+ * under the question's step, as in its dialog: picking there, or its back arrow, returns to the question. */
 export function FirstArrival() {
   const t = useT()
   const language = useLanguage()
@@ -35,6 +39,9 @@ export function FirstArrival() {
   const [gear, setGear] = useState<Gear>(saved.gear)
   const [world, setWorld] = useState<World>(saved.world)
   const [answers, setAnswers] = useState<Partial<Pick<AppState, 'biome' | 'gear'>>>({})
+  const [list, setList] = useState<GearList | null>(null)
+  const listHeading = useListHeading()
+  const listing = step === 1 && list ? listHeading(gear, list) : null
 
   useLayoutEffect(() => {
     if (dialog.current?.open === false) dialog.current.showModal()
@@ -67,7 +74,7 @@ export function FirstArrival() {
     <dialog
       ref={dialog}
       aria-labelledby={titleId}
-      className={styles.dialog}
+      className={`${styles.dialog ?? ''} ${listing ? (styles.listing ?? '') : ''}`}
       onClose={() => {
         update({ ...answers, onboarding: true })
       }}
@@ -84,12 +91,34 @@ export function FirstArrival() {
             <span key={index} className={index <= step ? styles.done : undefined} />
           ))}
         </div>
-        <div className={styles.heading}>
-          <h2 id={titleId} className={styles.title}>
-            {title}
-          </h2>
-          <p className={styles.lead}>{lead}</p>
-        </div>
+        {listing ? (
+          <div className={styles.listHeading}>
+            <button
+              type="button"
+              aria-label={t.lists.back}
+              className={styles.listBack}
+              onClick={() => {
+                setList(null)
+              }}
+            >
+              <BackIcon size={20} />
+            </button>
+            <span className={styles.listTitles}>
+              <span className={styles.kicker}>{t.arrival.listKicker}</span>
+              <h2 id={titleId} className={styles.listTitle}>
+                {listing.title}
+              </h2>
+            </span>
+            <span className={styles.aside}>{listing.aside}</span>
+          </div>
+        ) : (
+          <div className={styles.heading}>
+            <h2 id={titleId} className={styles.title}>
+              {title}
+            </h2>
+            <p className={styles.lead}>{lead}</p>
+          </div>
+        )}
       </header>
 
       <div className={styles.body}>
@@ -111,6 +140,16 @@ export function FirstArrival() {
               </label>
             ))}
           </div>
+        ) : step === 1 && list ? (
+          <GearListView
+            key={JSON.stringify(list)}
+            gear={gear}
+            list={list}
+            onPick={(id) => {
+              setGear(pickInto(gear, list, id))
+              setList(null)
+            }}
+          />
         ) : step === 1 ? (
           <GearForm
             gear={gear}
@@ -118,6 +157,7 @@ export function FirstArrival() {
             onChange={(change) => {
               setGear((current) => ({ ...current, ...change }))
             }}
+            onOpenList={setList}
           />
         ) : (
           <WorldForm
@@ -129,7 +169,7 @@ export function FirstArrival() {
         )}
       </div>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer} hidden={listing !== null}>
         {step > 0 &&
           (isDesktop ? (
             <button

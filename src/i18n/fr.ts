@@ -81,9 +81,11 @@ export const fr = {
     contextNote: 'Chaque verdict en dépend',
   },
   gear: {
-    summary: (item: string, level: number, blockPower: number, skill: number) =>
-      `Ton équipement : ${item} niveau ${n(level)}, VD ${n(blockPower)}, compétence Blocage ${n(skill)}`,
-    levelAndPower: (level: number, blockPower: number) => `N${n(level)} · VD ${n(blockPower)}`,
+    /** `level` null for bare hands, which have none. */
+    summary: (item: string, level: number | null, blockPower: number, skill: number) =>
+      `Ton équipement : ${item}${level === null ? ',' : ` niveau ${n(level)},`} VD ${n(blockPower)}, compétence Blocage ${n(skill)}`,
+    levelAndPower: (level: number | null, blockPower: number) =>
+      level === null ? `VD ${n(blockPower)}` : `N${n(level)} · VD ${n(blockPower)}`,
     /** The pieces worn, each with its level; null for an armor typed in an earlier version. */
     bodySummary: (armor: number, health: number, pieces: readonly string[] | null) =>
       pieces === null
@@ -102,13 +104,8 @@ export const fr = {
       `Titube à ${n(limit)} (${n(share)} % de ${n(health)} PV) · armure ${n(armor)}`,
     powerParts: (base: number, skill: number) => `VD = ${n(base)} × ${n(skill)}`,
     held: 'En main',
-    groups: {
-      round: 'Boucliers ronds',
-      buckler: 'Targes',
-      tower: 'Écus',
-      weapon: 'Armes',
-      other: 'Autres',
-    },
+    /** At the head of what is held. */
+    handsFree: 'lâche ce que tu tiens',
     groupTags: { round: 'Rond', buckler: 'Targe', tower: 'Écu', weapon: 'Arme', other: 'Autre' },
     parryBonus: (bonus: number) => `×${n(bonus)}`,
     noParry: 'ne pare pas',
@@ -140,12 +137,89 @@ export const fr = {
     lowerHealth: 'Moins de PV',
     raiseHealth: 'Plus de PV',
     carry: 'Ce que tu emportes',
+    /** A row of Your gear, by what it holds. */
+    rowValue: (row: string, value: string) => `${row} : ${value}`,
     noTrinket: 'Aucun',
     noPower: 'Aucun',
     noDrink: 'Aucune',
     addDrink: 'Ajouter une boisson',
     carriedNote:
       "Pas comptés d'office : allume-les sur la fiche d'une créature ou dans la Simulation, quand ils sont actifs.",
+  },
+  /** The lists the rows of Your gear open, from the Arsenal. */
+  lists: {
+    back: 'Retour à Ton équipement, sans rien changer',
+    titles: {
+      hand: 'Ce que tu tiens',
+      helmet: 'Ton casque',
+      chest: 'Ton plastron',
+      legs: 'Tes jambières',
+      cape: 'Ta cape',
+      trinket: 'Ton bibelot',
+      power: 'Ton pouvoir',
+      drink: 'Ta boisson',
+      moreDrink: 'Une boisson de plus',
+    },
+    search: {
+      hand: 'Chercher ce que tu tiens',
+      helmet: 'Chercher un casque',
+      chest: 'Chercher un plastron',
+      legs: 'Chercher des jambières',
+      cape: 'Chercher une cape',
+      trinket: 'Chercher un bibelot',
+      power: 'Chercher un pouvoir',
+      drink: 'Chercher une boisson',
+      moreDrink: 'Chercher une boisson',
+    },
+    none: {
+      helmet: 'Aucun casque',
+      chest: 'Aucun plastron',
+      legs: 'Aucunes jambières',
+      cape: 'Aucune cape',
+      trinket: 'Aucun bibelot',
+      power: 'Aucun pouvoir',
+      drink: 'Retirer cette boisson',
+    },
+    noneNote: {
+      helmet: 'retire celui que tu portes',
+      chest: 'retire celui que tu portes',
+      legs: 'retire celles que tu portes',
+      cape: 'retire celle que tu portes',
+      trinket: 'retire celui que tu emportes',
+      power: 'retire celui que tu emportes',
+    },
+    /** « 11 capes », by the category's name. */
+    count: (count: number, category: string) => `${n(count)} ${category.toLocaleLowerCase('fr')}`,
+    countOf: (shown: number, all: number) => `${n(shown)} sur ${n(all)}`,
+    /** `level` null for bare hands, which have none to pass on. */
+    handNote: (skill: number, level: number | null) =>
+      level === null
+        ? `Au niveau 1, avec ta compétence Blocage ${n(skill)} ; son niveau se règle ensuite.`
+        : `Au niveau 1, avec ta compétence Blocage ${n(skill)} ; ce que tu choisis garde ton N${n(level)}, s'il y monte.`,
+    /** What a piece picked keeps; `level` null for a slot that holds nothing. */
+    pieceNote: (slot: 'helmet' | 'chest' | 'legs' | 'cape', level: number | null) =>
+      level === null
+        ? 'Au niveau 1 ; son niveau se règle ensuite.'
+        : `Au niveau 1 ; ${
+            {
+              helmet: 'celui que tu choisis garde le niveau de ton casque',
+              chest: 'celui que tu choisis garde le niveau de ton plastron',
+              legs: 'celles que tu choisis gardent le niveau de tes jambières',
+              cape: 'celle que tu choisis garde le niveau de ta cape',
+            }[slot]
+          } (N${n(level)}), à régler ensuite.`,
+    oneAtATime: (carrying: boolean): string =>
+      carrying
+        ? 'Un seul à la fois : celui que tu choisis remplace le tien.'
+        : 'Un seul à la fois.',
+    /** The drinks carried already, by their names in the game. */
+    drinkOnce: (carried: readonly string[]) =>
+      carried.length === 0
+        ? "Une boisson ne se prend qu'une fois."
+        : carried.length === 1
+          ? `Ton ${carried[0] ?? ''} est déjà emporté : une boisson ne se prend qu'une fois.`
+          : `Tes ${new Intl.ListFormat('fr', { type: 'conjunction' }).format(carried)} sont déjà emportés : une boisson ne se prend qu'une fois.`,
+    drinkSwap: (drink: string) => `Choisis-en une autre pour remplacer ton ${drink}, ou retire-le.`,
   },
   /** What one carries, switched on while it lasts: a trinket, a guardian power, drinks. */
   effects: {
@@ -454,6 +528,12 @@ export const fr = {
     carry: 'Emporter',
     equipLabel: (item: string) => `Équiper : ${item}`,
     carryLabel: (item: string) => `Emporter : ${item}`,
+    choose: 'Choisir',
+    chooseLabel: (item: string) => `Choisir : ${item}`,
+    takeOff: 'Retirer',
+    /** A row of a list of Your gear: picking it goes back there with it. */
+    pickLabel: (item: string, state: 'equipped' | 'carried' | null) =>
+      `${item}${state === 'equipped' ? ', équipé' : state === 'carried' ? ', emporté' : ''}. Choisir.`,
     rowLabel: (item: string, state: 'equipped' | 'carried' | null) =>
       `${item}${state === 'equipped' ? ', équipé' : state === 'carried' ? ', emporté' : ''}. Ouvrir dans Ton équipement.`,
     search: "Rechercher dans tout l'Arsenal",
@@ -660,6 +740,8 @@ export const fr = {
     host: 'Hébergeur : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.',
   },
   arrival: {
+    /** Above a list of Ton équipement opened from the question. */
+    listKicker: 'Question 2 · Ton équipement',
     step: (index: number, count: number) => `${n(index)} sur ${n(count)}`,
     skip: 'Passer',
     next: 'Suivant',

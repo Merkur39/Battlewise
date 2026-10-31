@@ -65,9 +65,9 @@ describe('createStore', () => {
     expect(createStore(memoryStorage()).getState().biome).toBeNull()
   })
 
-  it('starts with the gear of a new character: a wooden shield, no skill, no piece, 25 HP', () => {
+  it('starts with the gear of a new character: bare hands, no skill, no piece, 25 HP', () => {
     expect(createStore(memoryStorage()).getState().gear).toEqual({
-      blocker: 'ShieldWood',
+      blocker: 'PlayerUnarmed',
       level: 1,
       skill: 0,
       armor: 0,

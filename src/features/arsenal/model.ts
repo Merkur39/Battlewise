@@ -194,18 +194,24 @@ export function rowsOf(
   return { kind: 'effect', category, rows: effectRows(category, gear.carried) }
 }
 
-/** The rows of a category whose names hold the search. */
-function matching(found: CategoryRows, query: string, language: Language): CategoryRows {
-  const holds = (name: Localized) => matchRange(name[language], query) !== null
+/** The rows of a category that `keep` keeps, by their item's id and name. */
+export function keepRows(
+  found: CategoryRows,
+  keep: (id: string, name: Localized) => boolean,
+): CategoryRows {
   switch (found.kind) {
     case 'blocker':
-      return { ...found, rows: found.rows.filter((row) => holds(row.blocker.name)) }
+      return { ...found, rows: found.rows.filter((row) => keep(row.id, row.blocker.name)) }
     case 'piece':
-      return { ...found, rows: found.rows.filter((row) => holds(row.piece.name)) }
+      return { ...found, rows: found.rows.filter((row) => keep(row.id, row.piece.name)) }
     case 'effect':
-      return { ...found, rows: found.rows.filter((row) => holds(row.effect.name)) }
+      return { ...found, rows: found.rows.filter((row) => keep(row.id, row.effect.name)) }
   }
 }
+
+/** Whether a name holds the search, accents and case aside; an empty search holds every name. */
+export const holds = (name: Localized, query: string, language: Language) =>
+  query.trim() === '' || matchRange(name[language], query) !== null
 
 /** The categories whose names hold the search, accents and case aside, in the order of the families,
  * each with the rows that match; nothing for an empty search. */
@@ -217,6 +223,6 @@ export function searchArsenal(
 ): CategoryRows[] {
   if (query.trim() === '') return []
   return CATEGORIES.map((category) =>
-    matching(rowsOf(category, gear, language, sort), query, language),
+    keepRows(rowsOf(category, gear, language, sort), (_, name) => holds(name, query, language)),
   ).filter(({ rows }) => rows.length > 0)
 }

@@ -31,8 +31,9 @@ export const en: Catalog = {
   },
   gear: {
     summary: (item, level, blockPower, skill) =>
-      `Your gear: ${item} level ${n(level)}, block power ${n(blockPower)}, Blocking skill ${n(skill)}`,
-    levelAndPower: (level, blockPower) => `Lv${n(level)} · Block ${n(blockPower)}`,
+      `Your gear: ${item}${level === null ? ',' : ` level ${n(level)},`} block power ${n(blockPower)}, Blocking skill ${n(skill)}`,
+    levelAndPower: (level, blockPower) =>
+      level === null ? `Block ${n(blockPower)}` : `Lv${n(level)} · Block ${n(blockPower)}`,
     bodySummary: (armor, health, pieces) =>
       pieces === null
         ? `Armor ${n(armor)}, typed · ${n(health)} max HP`
@@ -50,13 +51,7 @@ export const en: Catalog = {
       `Staggers at ${n(limit)} (${n(share)}% of ${n(health)} HP) · armor ${n(armor)}`,
     powerParts: (base, skill) => `power = ${n(base)} × ${n(skill)}`,
     held: 'In hand',
-    groups: {
-      round: 'Round shields',
-      buckler: 'Bucklers',
-      tower: 'Tower shields',
-      weapon: 'Weapons',
-      other: 'Others',
-    },
+    handsFree: 'puts down what you hold',
     groupTags: {
       round: 'Round',
       buckler: 'Buckler',
@@ -90,12 +85,72 @@ export const en: Catalog = {
     lowerHealth: 'Less HP',
     raiseHealth: 'More HP',
     carry: 'What you carry',
+    rowValue: (row, value) => `${row}: ${value}`,
     noTrinket: 'None',
     noPower: 'None',
     noDrink: 'None',
     addDrink: 'Add a drink',
     carriedNote:
       "Not counted by default: switch them on in a creature's sheet or in the Simulation, while they are active.",
+  },
+  lists: {
+    back: 'Back to Your gear, changing nothing',
+    titles: {
+      hand: 'What you hold',
+      helmet: 'Your helmet',
+      chest: 'Your chest',
+      legs: 'Your legs',
+      cape: 'Your cape',
+      trinket: 'Your trinket',
+      power: 'Your power',
+      drink: 'Your drink',
+      moreDrink: 'One more drink',
+    },
+    search: {
+      hand: 'Search what you hold',
+      helmet: 'Search a helmet',
+      chest: 'Search a chest',
+      legs: 'Search legs',
+      cape: 'Search a cape',
+      trinket: 'Search a trinket',
+      power: 'Search a power',
+      drink: 'Search a drink',
+      moreDrink: 'Search a drink',
+    },
+    none: {
+      helmet: 'No helmet',
+      chest: 'No chest',
+      legs: 'No legs',
+      cape: 'No cape',
+      trinket: 'No trinket',
+      power: 'No power',
+      drink: 'Remove this drink',
+    },
+    noneNote: {
+      helmet: 'takes off the one you wear',
+      chest: 'takes off the one you wear',
+      legs: 'takes off the ones you wear',
+      cape: 'takes off the one you wear',
+      trinket: 'takes off the one you carry',
+      power: 'takes off the one you carry',
+    },
+    count: (count, category) => `${n(count)} ${category.toLocaleLowerCase('en')}`,
+    countOf: (shown, all) => `${n(shown)} of ${n(all)}`,
+    handNote: (skill, level) =>
+      level === null
+        ? `At level 1, with your Blocking skill ${n(skill)}; its level is set afterwards.`
+        : `At level 1, with your Blocking skill ${n(skill)}; what you pick keeps your Lv${n(level)}, if it goes that high.`,
+    pieceNote: (slot, level) =>
+      level === null
+        ? 'At level 1; its level is set afterwards.'
+        : `At level 1; ${slot === 'legs' ? 'the ones you pick keep' : 'the one you pick keeps'} the level of your ${slot} (Lv${n(level)}), to set afterwards.`,
+    oneAtATime: (carrying) =>
+      carrying ? 'One at a time: the one you pick replaces yours.' : 'One at a time.',
+    drinkOnce: (carried) =>
+      carried.length === 0
+        ? 'A drink is taken only once.'
+        : `Your ${new Intl.ListFormat('en', { type: 'conjunction' }).format(carried)} ${carried.length === 1 ? 'is' : 'are'} already carried: a drink is taken only once.`,
+    drinkSwap: (drink) => `Pick another to replace your ${drink}, or remove it.`,
   },
   effects: {
     kinds: { trinket: 'Trinket', power: 'Power', consumable: 'Drink' },
@@ -383,6 +438,11 @@ export const en: Catalog = {
     carry: 'Carry',
     equipLabel: (item) => `Equip: ${item}`,
     carryLabel: (item) => `Carry: ${item}`,
+    choose: 'Choose',
+    chooseLabel: (item) => `Choose: ${item}`,
+    takeOff: 'Take off',
+    pickLabel: (item, state) =>
+      `${item}${state === 'equipped' ? ', equipped' : state === 'carried' ? ', carried' : ''}. Choose.`,
     rowLabel: (item, state) =>
       `${item}${state === 'equipped' ? ', equipped' : state === 'carried' ? ', carried' : ''}. Open in Your gear.`,
     search: 'Search the whole Arsenal',
@@ -584,6 +644,7 @@ export const en: Catalog = {
     host: 'Host: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
   },
   arrival: {
+    listKicker: 'Question 2 · Your gear',
     step: (index, count) => `${n(index)} of ${n(count)}`,
     skip: 'Skip',
     next: 'Next',

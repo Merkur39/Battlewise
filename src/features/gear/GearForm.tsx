@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from 'react'
+import { useId } from 'react'
 import { blockerOf, gearDefence } from '@/app/context'
 import type { Gear } from '@/app/store'
 import { useIsDesktop } from '@/app/useMediaQuery'
@@ -6,49 +6,46 @@ import { DAMAGE_TYPES } from '@/combat/damage'
 import { damageMultiplier } from '@/combat/modifiers'
 import type { World } from '@/combat/world'
 import { game } from '@/data'
-import type { ArmorSlot, GameRuleEffect } from '@/data/types'
+import type { GameRuleEffect } from '@/data/types'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { useEffectWording } from '@/features/effects/wording'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
-import { ChevronDownIcon, MinusIcon, PlusIcon } from '@/ui/icons'
+import { ChevronRightIcon, MinusIcon, PlusIcon } from '@/ui/icons'
 import { NumberField } from '@/ui/NumberField'
-import { carriable, effectOf, NOTHING_CARRIED, type Carried, type CarriedEffect } from './carried'
-import { blockerGroups, blockPowerParts, maxLevel, withstand, type GuardGauge } from './model'
-import { pieceOf, SLOTS, slotPieces, summarize, type Pieces, type Worn } from './pieces'
+import { effectOf, NOTHING_CARRIED, type Carried } from './carried'
+import { allDrinksCarried, type GearList } from './lists'
+import { blockPowerParts, leveled, maxLevel, withstand, type GuardGauge } from './model'
+import { pieceOf, SLOTS, summarize, type Pieces } from './pieces'
 import styles from './GearForm.module.css'
 
 // Wide enough for any gear of the game; the field only keeps a typo in bounds.
 const MAX_HEALTH = 999
 
 /** The fields of « Ton équipement », and what you can take with them in `world`, worked out again as
- * `gear` changes: in its dialog, and as a question of the first arrival. */
+ * `gear` changes: in its dialog, and as a question of the first arrival. Each row of what is held, worn
+ * or carried opens its list (`onOpenList`), where it is picked. */
 export function GearForm({
   gear,
   world,
   onChange,
+  onOpenList,
 }: {
   readonly gear: Gear
   readonly world: World
   readonly onChange: (change: Partial<Gear>) => void
+  readonly onOpenList: (list: GearList) => void
 }) {
   const t = useT()
   const language = useLanguage()
   const isDesktop = useIsDesktop()
   const withstandId = useId()
+  const heldId = useId()
 
   const blocker = blockerOf(gear.blocker)
   const defence = gearDefence(gear)
   const taken = withstand(defence, world)
   const parts = blockPowerParts(blocker, gear.level, gear.skill)
-
-  // Picking a piece wears the pieces from then on: an earlier player's typed armor makes way for them.
-  const wear = (slot: ArmorSlot, worn: Worn | null) => {
-    const others = Object.fromEntries(
-      Object.entries(gear.pieces ?? {}).filter(([key]) => key !== slot),
-    ) as Pieces
-    onChange({ pieces: worn ? { ...others, [slot]: worn } : others, armor: 0 })
-  }
 
   return (
     <div className={styles.form}>
@@ -121,52 +118,46 @@ export function GearForm({
         }}
       />
 
-      <div className={styles.rows}>
-        <Row
-          label={t.gear.held}
-          value={gear.blocker}
-          onSelect={(id) => {
-            const next = blockerOf(id)
-            onChange({ blocker: next.id, level: Math.min(gear.level, maxLevel(next)) })
-          }}
-          level={gear.level}
-          max={maxLevel(blocker)}
-          onLevel={(level) => {
-            onChange({ level })
-          }}
-        >
-          {blockerGroups(language).map(({ group, blockers }) => (
-            <optgroup key={group} label={t.gear.groups[group]}>
-              {blockers.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.name[language]}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-        </Row>
-      </div>
+      <section aria-labelledby={heldId} className={styles.section}>
+        <h3 id={heldId} className={styles.label}>
+          {t.gear.held}
+        </h3>
+        <div className={styles.rows}>
+          <Row
+            label={t.gear.held}
+            unlabelled
+            value={blocker.name[language]}
+            onOpen={() => {
+              onOpenList({ kind: 'hand' })
+            }}
+            level={leveled(blocker) ? gear.level : undefined}
+            max={maxLevel(blocker)}
+            onLevel={(level) => {
+              onChange({ level })
+            }}
+          />
+        </div>
+      </section>
 
-      <PiecesSection gear={gear} onWear={wear} />
+      <PiecesSection gear={gear} onChange={onChange} onOpenList={onOpenList} />
       <CarriedSection
         carried={gear.carried ?? NOTHING_CARRIED}
-        onCarry={(carried) => {
-          onChange({ carried })
-        }}
+        full={allDrinksCarried(gear)}
+        onOpenList={onOpenList}
       />
     </div>
   )
 }
 
-const NONE = ''
-
 /** The pieces worn, slot by slot, their armor, and what they and their complete sets resist. */
 function PiecesSection({
   gear,
-  onWear,
+  onChange,
+  onOpenList,
 }: {
   readonly gear: Gear
-  readonly onWear: (slot: ArmorSlot, worn: Worn | null) => void
+  readonly onChange: (change: Partial<Gear>) => void
+  readonly onOpenList: (list: GearList) => void
 }) {
   const t = useT()
   const language = useLanguage()
@@ -188,28 +179,16 @@ function PiecesSection({
             <Row
               key={slot}
               label={t.gear.slots[slot]}
-              value={worn?.id ?? NONE}
-              onSelect={(id) => {
-                onWear(
-                  slot,
-                  id === NONE
-                    ? null
-                    : { id, level: Math.min(worn?.level ?? 1, maxLevel(pieceOf(id))) },
-                )
+              value={worn ? pieceOf(worn.id).name[language] : t.gear.noPiece}
+              onOpen={() => {
+                onOpenList({ kind: 'piece', slot })
               }}
               level={worn?.level ?? null}
               max={worn ? maxLevel(pieceOf(worn.id)) : 1}
               onLevel={(level) => {
-                if (worn) onWear(slot, { ...worn, level })
+                if (worn) onChange({ pieces: { ...pieces, [slot]: { ...worn, level } } })
               }}
-            >
-              <option value={NONE}>{t.gear.noPiece}</option>
-              {slotPieces(slot, language).map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.name[language]}
-                </option>
-              ))}
-            </Row>
+            />
           )
         })}
       </div>
@@ -235,39 +214,19 @@ function PiecesSection({
 }
 
 /** The trinket, the power and the drinks one carries, each with how long it lasts and what it changes:
- * none counts until switched on, on a creature's sheet or in the Simulation. */
+ * none counts until switched on, on a creature's sheet or in the Simulation. Each row opens its list;
+ * « Ajouter une boisson » opens the drinks not carried yet, while there are any. */
 function CarriedSection({
   carried,
-  onCarry,
+  full,
+  onOpenList,
 }: {
   readonly carried: Carried
-  readonly onCarry: (carried: Carried) => void
+  readonly full: boolean
+  readonly onOpenList: (list: GearList) => void
 }) {
   const t = useT()
   const headingId = useId()
-  // A drink row picked nothing yet: the first while none is carried, then one at a time on demand.
-  const [adding, setAdding] = useState(false)
-  const drinks = carriable('consumable')
-  const rows = [...carried.drinks, ...(adding || carried.drinks.length === 0 ? [NONE] : [])]
-  const canAdd = !rows.includes(NONE) && carried.drinks.length < drinks.length
-
-  // The row past the drinks carried adds one; « Aucune » on another takes its drink off.
-  const drinkAt = (index: number, id: string) => {
-    if (index >= carried.drinks.length) {
-      if (id === NONE) return
-      setAdding(false)
-      onCarry({ ...carried, drinks: [...carried.drinks, id] })
-    } else {
-      onCarry({
-        ...carried,
-        drinks:
-          id === NONE
-            ? carried.drinks.filter((_, at) => at !== index)
-            : carried.drinks.map((drink, at) => (at === index ? id : drink)),
-      })
-    }
-  }
-
   return (
     <section aria-labelledby={headingId} className={styles.section}>
       <h3 id={headingId} className={styles.label}>
@@ -276,41 +235,37 @@ function CarriedSection({
       <div className={styles.rows}>
         <CarriedRow
           label={t.effects.kinds.trinket}
-          value={carried.trinket ?? NONE}
+          id={carried.trinket}
           none={t.gear.noTrinket}
-          options={carriable('trinket')}
-          onSelect={(id) => {
-            onCarry({ ...carried, trinket: id === NONE ? null : id })
+          onOpen={() => {
+            onOpenList({ kind: 'trinket' })
           }}
         />
         <CarriedRow
           label={t.effects.kinds.power}
-          value={carried.power ?? NONE}
+          id={carried.power}
           none={t.gear.noPower}
-          options={carriable('power')}
-          onSelect={(id) => {
-            onCarry({ ...carried, power: id === NONE ? null : id })
+          onOpen={() => {
+            onOpenList({ kind: 'power' })
           }}
         />
-        {rows.map((drink, index) => (
+        {carried.drinks.map((drink, index) => (
           <CarriedRow
-            key={drink === NONE ? 'new' : drink}
+            key={drink}
             label={t.effects.kinds.consumable}
-            value={drink}
+            id={drink}
             none={t.gear.noDrink}
-            // A drink once at a time: the others carried are not offered again.
-            options={drinks.filter(({ id }) => id === drink || !carried.drinks.includes(id))}
-            onSelect={(id) => {
-              drinkAt(index, id)
+            onOpen={() => {
+              onOpenList({ kind: 'drink', index })
             }}
           />
         ))}
-        {canAdd && (
+        {!full && (
           <button
             type="button"
             className={styles.add}
             onClick={() => {
-              setAdding(true)
+              onOpenList({ kind: 'drink', index: null })
             }}
           >
             <PlusIcon size={16} />
@@ -323,50 +278,39 @@ function CarriedSection({
   )
 }
 
-/** A row of what one carries: its kind over a list to change it, then how long it lasts and what it
- * changes. */
+/** A row of what one carries: its kind over what it holds, a way to its list, then how long it lasts and
+ * what it changes. */
 function CarriedRow({
   label,
-  value,
+  id,
   none,
-  options,
-  onSelect,
+  onOpen,
 }: {
   readonly label: string
-  readonly value: string
+  readonly id: string | null
   readonly none: string
-  readonly options: readonly CarriedEffect[]
-  readonly onSelect: (id: string) => void
+  readonly onOpen: () => void
 }) {
+  const t = useT()
   const language = useLanguage()
   const wording = useEffectWording()
-  const id = useId()
+  const effect = id === null ? null : effectOf(id)
+  const value = effect ? effect.name[language] : none
   return (
     <div className={styles.carriedRow}>
-      <span className={styles.rowMain}>
-        <label htmlFor={id} className={styles.rowLabel}>
-          {label}
-        </label>
-        <select
-          id={id}
-          value={value}
-          className={styles.selectInput}
-          onChange={(event) => {
-            onSelect(event.target.value)
-          }}
-        >
-          <option value={NONE}>{none}</option>
-          {options.map((option) => (
-            <option key={option.id} value={option.id}>
-              {option.name[language]}
-            </option>
-          ))}
-        </select>
-        <ChevronDownIcon size={14} className={styles.chevron} />
-      </span>
-      {value !== NONE && (
+      <button
+        type="button"
+        aria-label={t.gear.rowValue(label, value)}
+        className={styles.rowMain}
+        onClick={onOpen}
+      >
+        <span className={styles.rowLabel}>{label}</span>
+        <span className={styles.rowValue}>{value}</span>
+        <ChevronRightIcon size={14} className={styles.chevron} />
+      </button>
+      {effect && (
         <span className={styles.effectLines}>
-          {wording.lines(effectOf(value)).map((line) => (
+          {wording.lines(effect).map((line) => (
             <span key={line}>{line}</span>
           ))}
         </span>
@@ -440,72 +384,68 @@ function SetBlock({ set }: { readonly set: GameRuleEffect }) {
   )
 }
 
-/** A row of what Your gear holds: its name over a list to change it, its level on the right. */
+/** A row of what Your gear holds: its name over what it holds (or the name above the box, `unlabelled`),
+ * a way to its list, its level on the right. */
 function Row({
   label,
+  unlabelled = false,
   value,
-  onSelect,
+  onOpen,
   level,
   max,
   onLevel,
-  children,
 }: {
   readonly label: string
+  readonly unlabelled?: boolean
   readonly value: string
-  readonly onSelect: (id: string) => void
-  /** Null when the row holds nothing. */
-  readonly level: number | null
+  readonly onOpen: () => void
+  /** Null when the row holds nothing; undefined for what has no level (bare hands): no stepper. */
+  readonly level: number | null | undefined
   readonly max: number
   readonly onLevel: (level: number) => void
-  readonly children: ReactNode
 }) {
   const t = useT()
-  const id = useId()
   return (
     <div className={styles.row}>
-      <span className={styles.rowMain}>
-        <label htmlFor={id} className={styles.rowLabel}>
-          {label}
-        </label>
-        <span className={styles.rowSelect}>
-          <select
-            id={id}
-            value={value}
-            className={styles.selectInput}
-            onChange={(event) => {
-              onSelect(event.target.value)
+      <button
+        type="button"
+        aria-label={t.gear.rowValue(label, value)}
+        className={styles.rowMain}
+        onClick={onOpen}
+      >
+        {!unlabelled && <span className={styles.rowLabel}>{label}</span>}
+        <span className={styles.rowValue}>{value}</span>
+        <ChevronRightIcon size={14} className={styles.chevron} />
+      </button>
+      {level !== undefined && (
+        <span role="group" aria-label={t.gear.levelOf(label, level)} className={styles.stepper}>
+          <button
+            type="button"
+            aria-label={t.gear.lowerLevelOf(label)}
+            disabled={level === null || level <= 1}
+            className={styles.step}
+            onClick={() => {
+              if (level !== null) onLevel(level - 1)
             }}
           >
-            {children}
-          </select>
-          <ChevronDownIcon size={14} className={styles.chevron} />
+            <MinusIcon size={14} />
+          </button>
+          <span className={styles.stepValue}>
+            {level === null ? '—' : t.gear.levelValue(level)}
+          </span>
+          <button
+            type="button"
+            aria-label={t.gear.raiseLevelOf(label)}
+            disabled={level === null || level >= max}
+            className={styles.step}
+            onClick={() => {
+              if (level !== null) onLevel(level + 1)
+            }}
+          >
+            <PlusIcon size={14} />
+          </button>
         </span>
-      </span>
-      <span role="group" aria-label={t.gear.levelOf(label, level)} className={styles.stepper}>
-        <button
-          type="button"
-          aria-label={t.gear.lowerLevelOf(label)}
-          disabled={level === null || level <= 1}
-          className={styles.step}
-          onClick={() => {
-            if (level !== null) onLevel(level - 1)
-          }}
-        >
-          <MinusIcon size={14} />
-        </button>
-        <span className={styles.stepValue}>{level === null ? '—' : t.gear.levelValue(level)}</span>
-        <button
-          type="button"
-          aria-label={t.gear.raiseLevelOf(label)}
-          disabled={level === null || level >= max}
-          className={styles.step}
-          onClick={() => {
-            if (level !== null) onLevel(level + 1)
-          }}
-        >
-          <PlusIcon size={14} />
-        </button>
-      </span>
+      )}
     </div>
   )
 }
