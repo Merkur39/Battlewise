@@ -281,7 +281,9 @@ export const fr = {
     yourDamage: 'Tes dégâts et ton stagger',
     yourDamageShort: 'Tes dégâts',
     starChance: "Chance d'étoiles",
-    rulesNote: 'Les règles (fenêtre de parade, seuils) ne changent pas.',
+    sizeAndSpeed: 'Taille et vitesse au sol',
+    rulesNote:
+      'Taille et vitesse : hors donjons. Les règles (fenêtre de parade, seuils) et le rythme des attaques ne changent pas.',
   },
   verdicts: {
     block: 'Blocage',

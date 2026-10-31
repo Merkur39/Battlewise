@@ -53,6 +53,20 @@ describe('Your world', () => {
     expect(within(effects).getByRole('group', { name: "Chance d'étoiles" })).toHaveTextContent(
       '×1,2',
     )
+    expect(
+      within(effects).getByRole('group', { name: 'Taille et vitesse au sol' }),
+    ).toHaveTextContent('×1,1')
+  })
+
+  it('says the size and speed hold outside dungeons, and the pace of attacks never changes', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, { language: 'fr' })
+
+    const dialog = await openWorld(user)
+
+    const effects = within(dialog).getByRole('region', { name: 'Ce que ça donne' })
+    expect(effects).toHaveTextContent('Taille et vitesse : hors donjons.')
+    expect(effects).toHaveTextContent('le rythme des attaques ne changent pas.')
   })
 
   it('changes nothing when closed without saving', async () => {

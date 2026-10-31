@@ -88,6 +88,7 @@ export function WorldForm({
             value={scale.you}
           />
           <Effect label={t.world.starChance} value={presetOf(world).levelUpRate} />
+          <Effect label={t.world.sizeAndSpeed} value={presetOf(world).enemySpeedSize} />
         </div>
         <p className={styles.note}>{t.world.rulesNote}</p>
       </section>

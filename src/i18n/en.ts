@@ -204,7 +204,9 @@ export const en: Catalog = {
     yourDamage: 'Your damage and stagger',
     yourDamageShort: 'Your damage',
     starChance: 'Star chance',
-    rulesNote: 'The rules (parry window, thresholds) stay the same.',
+    sizeAndSpeed: 'Size and ground speed',
+    rulesNote:
+      'Size and speed: outside dungeons. The rules (parry window, thresholds) and the pace of attacks stay the same.',
   },
   verdicts: {
     block: 'Block',

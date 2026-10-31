@@ -380,7 +380,8 @@ def _freezing(found, names, biomes):
 def _world(found, names):
     """Game's per-player scaling and the presets of the start screen's Combat slider, whose keys
     Game.UpdateWorldRates reads as percentages (enemyleveluprate multiplies the chance of a star,
-    SpawnSystem.GetLevelUpChance). Each also names the world presets of the start screen that pick it
+    SpawnSystem.GetLevelUpChance; enemyspeedsize scales a creature's size in Character.Awake and its
+    walk and run speed in Character.UpdateWalking, outside interiors only, never its animations). Each also names the world presets of the start screen that pick it
     under another name: a world preset sets its keys (KeyButton.SetKeys), and the slider shows its first
     setting whose keys they all hold, else the one without keys (KeySlider.TryMatch); a world preset
     without any key of the slider leaves the combat alone."""
@@ -417,6 +418,7 @@ def _world(found, names):
             "enemyDamage": _round(int(keys.get("enemydamage", 100)) / 100),
             "playerDamage": _round(int(keys.get("playerdamage", 100)) / 100),
             "levelUpRate": _round(int(keys.get("enemyleveluprate", 100)) / 100),
+            "enemySpeedSize": _round(int(keys.get("enemyspeedsize", 100)) / 100),
             "worldPresets": picked.get(setting["m_name"], []),
         })
     return {

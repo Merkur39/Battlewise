@@ -232,6 +232,10 @@ class ExtractCombatTests(unittest.TestCase):
         rates = [p["levelUpRate"] for p in self.data["world"]["presets"]]
         self.assertEqual(rates, [1, 1, 1, 1.2, 1.4])
 
+    def test_world_presets_carry_the_enemy_size_and_speed(self):
+        rates = [p["enemySpeedSize"] for p in self.data["world"]["presets"]]
+        self.assertEqual(rates, [0.9, 0.95, 1, 1.1, 1.2])
+
     def test_world_presets_name_the_start_presets_that_pick_them_under_another_name(self):
         presets = {p["id"]: p["worldPresets"] for p in self.data["world"]["presets"]}
         self.assertEqual(presets["veryEasy"], [{"fr": "Tranquille", "en": "Casual"}])

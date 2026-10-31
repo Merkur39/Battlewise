@@ -237,6 +237,9 @@ export interface GameWorldPreset {
   readonly playerDamage: number
   /** Multiplies the chance of a star (SpawnSystem.GetLevelUpChance). */
   readonly levelUpRate: number
+  /** Multiplies a creature's size and its walk and run speed, outside dungeons (Character.Awake,
+   * Character.UpdateWalking); never its animations. */
+  readonly enemySpeedSize: number
   /** The world presets of the start screen that pick this setting under another name (Hardcore picks
    * Very hard). */
   readonly worldPresets: readonly Localized[]
