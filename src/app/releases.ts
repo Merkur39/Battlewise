@@ -23,6 +23,30 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.13.0',
+    date: '2026-10-31',
+    notes: [
+      {
+        text: {
+          fr: "Dans Ton équipement, tu choisis ton casque, ton plastron, tes jambières et ta cape, chacun à son niveau, au lieu de taper ton armure : Foelore en connaît l'armure et les résistances, comme la Cape en fourrure de loup contre la glace ou la Cuirasse de racines contre le perforant, mais faible au feu, et le bonus d'un ensemble complet. Les verdicts, la fiche, la Simulation et ce que tu encaisses en tiennent compte. Si tu avais tapé ton armure, elle compte jusqu'à ce que tu choisisses une pièce.",
+          en: 'In Your gear, you pick your helmet, chest, legs and cape, each at its level, instead of typing your armor: Foelore knows their armor and resistances, such as the Wolf Fur Cape against frost or the Root Harnesk against pierce, though weak to fire, and the bonus of a full set. The verdicts, the sheet, the Simulation and what you can take count them. If you had typed your armor, it counts until you pick a piece.',
+        },
+      },
+      {
+        text: {
+          fr: 'Ta compétence Blocage se règle comme tes PV max, et ce que tu tiens devient « En main », une ligne avec son niveau à droite.',
+          en: 'Your Blocking skill is set like your max HP, and what you hold becomes “In hand”, one row with its level on the right.',
+        },
+      },
+      {
+        text: {
+          fr: "Dans le Mémo, chaque effet donne ses résistances, son armure et sa durée : les résistances ne se multiplient jamais, la plus forte l'emporte. Une ligne explique aussi le gel de la Montagne, qui épargne qui résiste à la glace.",
+          en: 'In the Guide, each effect gives its resistances, armor and duration: resistances never multiply, the strongest wins. A line also explains freezing in the Mountain, which spares anyone resistant to frost.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.12.1',
     date: '2026-10-30',
     notes: [
