@@ -4,6 +4,7 @@ import { ArsenalScreen } from '@/features/arsenal/ArsenalScreen'
 import { BestiaryScreen } from '@/features/bestiary/BestiaryScreen'
 import { creatureName } from '@/features/bestiary/model'
 import { placeOf } from '@/features/bestiary/place'
+import { LitContext, useLitState } from '@/features/effects/lit'
 import { GearModal } from '@/features/gear/GearModal'
 import { GuideScreen } from '@/features/guide/GuideScreen'
 import { InstallOffer } from '@/features/install/Install'
@@ -22,6 +23,7 @@ import {
 } from '@/features/report/useReport'
 import { SettingsModal } from '@/features/settings/SettingsModal'
 import { AttackPicker } from '@/features/simulation/AttackPicker'
+import { findAttack, refOf } from '@/features/simulation/model'
 import { SimulationScreen } from '@/features/simulation/SimulationScreen'
 import { WorldModal } from '@/features/world/WorldModal'
 import { useLanguage, useT } from '@/i18n/useT'
@@ -92,6 +94,11 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
   const [fixes, dismissFixes] = useFixesSinceUpdate()
   const [installOffer, leaveInstallOffer] = useInstallOffer()
   const creature = screen === 'bestiary' ? placeOf(route, saved.biome).creature : null
+  // The creature whose sheet or attack is shown, for which the effects switched on hold.
+  const simulated = screen === 'simulation' ? (refOf(route) ?? saved.recentAttacks[0]) : undefined
+  const lit = useLitState(
+    creature?.id ?? (simulated ? (findAttack(simulated)?.creature.id ?? null) : null),
+  )
   // A creature's sheet takes the whole screen of a phone, bars included.
   const detail = !isDesktop && creature !== null
   const title = creature ? creatureName(creature, language) : t.screens[screen]
@@ -111,45 +118,49 @@ function Shell({ onPreview }: { readonly onPreview: (preview: Preview) => void }
 
   return (
     <OpenReportContext value={setReport}>
-      <div className={isDesktop ? styles.desktop : styles.phone}>
-        {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
-        {/* Each screen under its own net, which another tab leaves behind: the bars stay. */}
-        <CrashBoundary
-          key={screen}
-          fallback={(crash, retry) => <ScreenCrash screen={screen} crash={crash} onRetry={retry} />}
-        >
-          {screen === 'bestiary' ? (
-            <BestiaryScreen route={route} />
-          ) : screen === 'simulation' ? (
-            <SimulationScreen route={route} />
-          ) : screen === 'arsenal' ? (
-            <ArsenalScreen route={route} />
-          ) : (
-            <GuideScreen route={route} />
-          )}
-        </CrashBoundary>
-        {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
-        {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
-        {modal === 'attack' && <AttackPicker />}
-        {modal === 'gear' && <GearModal />}
-        {modal === 'world' && <WorldModal />}
-        {modal === 'reports' && <ReportsModal />}
-        {modal === 'news' && <NewsModal />}
-        {modal === 'notices' && <NoticesModal />}
-        {/* Opened before the sheets below: each of them shows over the questions, the offer to
+      <LitContext value={lit}>
+        <div className={isDesktop ? styles.desktop : styles.phone}>
+          {isDesktop ? <Sidebar screen={screen} links={links} /> : !detail && <TopBar />}
+          {/* Each screen under its own net, which another tab leaves behind: the bars stay. */}
+          <CrashBoundary
+            key={screen}
+            fallback={(crash, retry) => (
+              <ScreenCrash screen={screen} crash={crash} onRetry={retry} />
+            )}
+          >
+            {screen === 'bestiary' ? (
+              <BestiaryScreen route={route} />
+            ) : screen === 'simulation' ? (
+              <SimulationScreen route={route} />
+            ) : screen === 'arsenal' ? (
+              <ArsenalScreen route={route} />
+            ) : (
+              <GuideScreen route={route} />
+            )}
+          </CrashBoundary>
+          {!isDesktop && !detail && <TabBar screen={screen} links={links} />}
+          {modal === 'settings' && <SettingsModal onPreview={onPreview} />}
+          {modal === 'attack' && <AttackPicker />}
+          {modal === 'gear' && <GearModal />}
+          {modal === 'world' && <WorldModal />}
+          {modal === 'reports' && <ReportsModal />}
+          {modal === 'news' && <NewsModal />}
+          {modal === 'notices' && <NoticesModal />}
+          {/* Opened before the sheets below: each of them shows over the questions, the offer to
             install included, which comes first at a first launch. */}
-        {!saved.onboarding && <FirstArrival />}
-        {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
-        {installOffer && <InstallOffer way={installOffer} onClose={leaveInstallOffer} />}
-        {report && (
-          <ReportSheet
-            origin={report}
-            onClose={() => {
-              setReport(null)
-            }}
-          />
-        )}
-      </div>
+          {!saved.onboarding && <FirstArrival />}
+          {fixes.length > 0 && <ThanksSheet fixes={fixes} onClose={dismissFixes} />}
+          {installOffer && <InstallOffer way={installOffer} onClose={leaveInstallOffer} />}
+          {report && (
+            <ReportSheet
+              origin={report}
+              onClose={() => {
+                setReport(null)
+              }}
+            />
+          )}
+        </div>
+      </LitContext>
     </OpenReportContext>
   )
 }

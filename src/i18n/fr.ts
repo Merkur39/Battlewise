@@ -14,6 +14,16 @@ const listOf = (words: readonly string[]) =>
   new Intl.ListFormat('fr', { type: 'conjunction' }).format(
     words.map((word) => word.toLocaleLowerCase('fr')),
   )
+const percent = (share: number) => `${share < 0 ? '−' : '+'}${n(Math.abs(share))} %`
+// « de feu », « d'esprit », « de contondant, coupant ni perforant »: the game's names, lowercased.
+function noneOf(types: readonly string[]) {
+  const words = types.map((type) => type.toLocaleLowerCase('fr'))
+  const listed =
+    words.length > 1
+      ? `${words.slice(0, -1).join(', ')} ni ${words.at(-1) ?? ''}`
+      : (words[0] ?? '')
+  return /^[aeiouyéèêh]/i.test(listed) ? `d'${listed}` : `de ${listed}`
+}
 // French guillemets hold their words apart with a no-break space.
 const NO_BREAK_SPACE = String.fromCharCode(0xa0)
 const quoted = (name: string) => `«${NO_BREAK_SPACE}${name}${NO_BREAK_SPACE}»`
@@ -128,6 +138,56 @@ export const fr = {
     health: 'PV max',
     lowerHealth: 'Moins de PV',
     raiseHealth: 'Plus de PV',
+    carry: 'Ce que tu emportes',
+    noTrinket: 'Aucun',
+    noPower: 'Aucun',
+    noDrink: 'Aucune',
+    addDrink: 'Ajouter une boisson',
+    carriedNote:
+      "Pas comptés d'office : allume-les sur la fiche d'une créature ou dans la Simulation, quand ils sont actifs.",
+  },
+  /** What one carries, switched on while it lasts: a trinket, a guardian power, drinks. */
+  effects: {
+    kinds: { trinket: 'Bibelot', power: 'Pouvoir', consumable: 'Boisson' },
+    /** `seconds` in minutes when they make whole minutes: « 5 min », « 30 s ». */
+    duration: (seconds: number) =>
+      seconds >= 60 && seconds % 60 === 0 ? `${n(seconds / 60)} min` : `${n(seconds)} s`,
+    fromAdrenaline: (duration: string, adrenaline: number) =>
+      `${duration} dès ${n(adrenaline)} d'adrénaline`,
+    /** « Bibelot · 30 s dès 65 d'adrénaline ». */
+    tag: (kind: string, lasting: string) => `${kind} · ${lasting}`,
+    /** The first change on the line of how long it lasts: « 10 min · Glace ×0,5 ». */
+    firstLine: (lasting: string, change: string) => `${lasting} · ${change}`,
+    armor: (value: number) => `armure +${n(value)}`,
+    armorTimes: (multiplier: number) => `armure ×${n(multiplier)}`,
+    parry: (multiplier: number) => `VD en parade ×${n(multiplier)}`,
+    stagger: (multiplier: number) => `stagger reçu ×${n(multiplier)}`,
+    blockGivesBack: (stamina: number) => `bloquer rend ${n(stamina)} d'endurance`,
+    /** `share` in percent, below zero for less. */
+    blockStamina: (share: number) => `endurance de blocage ${percent(share)}`,
+    dodgeStamina: (share: number) => `endurance de roulade ${percent(share)}`,
+    card: 'Avec tes effets temporaires',
+    group: 'Tes effets temporaires',
+    noneOn: 'Aucun allumé',
+    on: (names: readonly string[]) =>
+      new Intl.ListFormat('fr', { type: 'conjunction' }).format(names),
+    holds: "Vaut jusqu'à ce que tu changes de créature.",
+    /** Why it changes nothing, in brief: « Ne change rien : pas de feu ». */
+    idle: (reason: string) => `Ne change rien : ${reason}`,
+    idleHere: 'Ne change rien ici',
+    notDealt: (types: readonly string[]) => `pas ${noneOf(types)}`,
+    resistedBy: {
+      helmet: 'ton casque résiste déjà',
+      chest: 'ton plastron résiste déjà',
+      legs: 'tes jambières résistent déjà',
+      cape: 'ta cape résiste déjà',
+      set: 'ton ensemble résiste déjà',
+      trinket: 'ton bibelot résiste déjà',
+      power: 'ton pouvoir résiste déjà',
+      consumable: 'ta boisson résiste déjà',
+    },
+    setupLine: (names: readonly string[]) =>
+      `Effets temporaires allumés : ${new Intl.ListFormat('fr', { type: 'conjunction' }).format(names)}`,
   },
   world: {
     summary: (difficulty: string, count: number) =>
@@ -182,7 +242,7 @@ export const fr = {
     biomeCount: (index: number, total: number, count: number) =>
       `Biome ${n(index)} sur ${n(total)} · ${plural(count, 'créature', 'créatures')}`,
     howToTake: 'Comment le prendre',
-    withYourGear: 'Avec ton équipement',
+    withoutEffects: 'Sans tes effets temporaires',
     creatures: 'Créatures du biome',
     health: (health: number) => `${n(health)} PV`,
     boss: 'Boss',

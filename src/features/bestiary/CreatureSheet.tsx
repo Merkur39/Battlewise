@@ -5,6 +5,9 @@ import { creatureHealth, staggerThreshold, toInflict } from '@/combat/creature'
 import { game } from '@/data'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { GameCreature, GameHit } from '@/data/types'
+import { EffectsCard } from '@/features/effects/EffectsCard'
+import { useLit } from '@/features/effects/lit'
+import { creatureHits } from '@/features/effects/model'
 import { CrashCard } from '@/features/report/Crash'
 import type { Crash } from '@/features/report/model'
 import { useCreatureOrigin } from '@/features/report/origins'
@@ -69,7 +72,8 @@ export function CreatureSheet({
 }) {
   const t = useT()
   const language = useLanguage()
-  const { defence, world } = useFight()
+  const { on } = useLit(creature)
+  const { defence, world } = useFight(on)
   const [stars, setStars] = useState(creature.stars.min)
   const assessment = assess(creature, defence, world, stars)
   const advice = adviceShown(assessment, t, language)
@@ -82,7 +86,14 @@ export function CreatureSheet({
     threshold === null
       ? t.creature.neverStaggers
       : formatNumber(Math.round(toInflict(threshold, world)), language)
-  const report = useCreatureOrigin({ creature, stars, assessment, health, toInflict: inflict })
+  const report = useCreatureOrigin({
+    creature,
+    stars,
+    assessment,
+    health,
+    toInflict: inflict,
+    on,
+  })
 
   const parry: { tone: Tone; text: string } = !assessment.canParry
     ? { tone: 'none', text: t.creature.cannotParry }
@@ -108,6 +119,7 @@ export function CreatureSheet({
       {layout === 'page' && (
         <AdviceLine tone={advice.tone} text={advice.text} className={styles.advice} />
       )}
+      <EffectsCard creature={creature} hits={creatureHits(creature)} stars={stars} />
       <Modifiers creature={creature} />
       {layout === 'page' ? (
         <AttackList creature={creature} assessment={assessment} place={place} />

@@ -153,6 +153,30 @@ describe('Reporting', () => {
     expect(await shows(MOCKUP_GEAR)).toContain('Armure 45, tapée · 150 PV max')
   })
 
+  it('attaches the effects switched on, from the sheet as from the Simulation', async () => {
+    const user = userEvent.setup()
+    const sender = vi.fn<Sender>().mockResolvedValue({ number: 51 })
+    renderApp('#/bestiary/plains/Lox', sender, {
+      ...MOCKUP_GEAR,
+      armor: 0,
+      pieces: MOCKUP_PIECES,
+      carried: { trinket: 'TrinketIronHealth', power: 'GP_Bonemass', drinks: [] },
+    })
+    await user.click(screen.getByRole('button', { name: /^Avec tes effets temporaires/ }))
+    const effects = screen.getByRole('group', { name: 'Tes effets temporaires' })
+    await user.click(within(effects).getByRole('switch', { name: 'Broche en fer' }))
+    await user.click(within(effects).getByRole('switch', { name: "Masse-d'Os" }))
+
+    await user.click(screen.getByRole('button', { name: 'Un chiffre ou un nom faux ? Signale-le' }))
+    await write(user, "Qu'est-ce qui est faux ?", 'La Broche ne compte pas.')
+    await user.click(send())
+
+    await inSheet().findByText(/^Reçu, c'est le/)
+    expect(sentReport(sender)?.context.shows).toContain(
+      "Effets temporaires allumés : Broche en fer et Masse-d'Os",
+    )
+  })
+
   it('reports a bug or an idea from Settings, its kind picked first', async () => {
     const user = userEvent.setup()
     const sender = vi.fn<Sender>().mockResolvedValue({ number: 50 })

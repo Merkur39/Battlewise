@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from 'react'
+import { useId, useState, type ReactNode } from 'react'
 import { blockerOf, gearDefence } from '@/app/context'
 import type { Gear } from '@/app/store'
 import { useIsDesktop } from '@/app/useMediaQuery'
@@ -9,9 +9,11 @@ import { game } from '@/data'
 import type { ArmorSlot, GameRuleEffect } from '@/data/types'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
+import { useEffectWording } from '@/features/effects/wording'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
 import { ChevronDownIcon, MinusIcon, PlusIcon } from '@/ui/icons'
 import { NumberField } from '@/ui/NumberField'
+import { carriable, effectOf, NOTHING_CARRIED, type Carried, type CarriedEffect } from './carried'
 import { blockerGroups, blockPowerParts, maxLevel, withstand, type GuardGauge } from './model'
 import { pieceOf, SLOTS, slotPieces, summarize, type Pieces, type Worn } from './pieces'
 import styles from './GearForm.module.css'
@@ -146,6 +148,12 @@ export function GearForm({
       </div>
 
       <PiecesSection gear={gear} onWear={wear} />
+      <CarriedSection
+        carried={gear.carried ?? NOTHING_CARRIED}
+        onCarry={(carried) => {
+          onChange({ carried })
+        }}
+      />
     </div>
   )
 }
@@ -169,7 +177,7 @@ function PiecesSection({
   const n = (value: number) => formatNumber(value, language)
 
   return (
-    <section aria-labelledby={headingId} className={styles.pieces}>
+    <section aria-labelledby={headingId} className={styles.section}>
       <h3 id={headingId} className={styles.label}>
         {t.gear.pieces}
       </h3>
@@ -223,6 +231,148 @@ function PiecesSection({
         ))}
       </div>
     </section>
+  )
+}
+
+/** The trinket, the power and the drinks one carries, each with how long it lasts and what it changes:
+ * none counts until switched on, on a creature's sheet or in the Simulation. */
+function CarriedSection({
+  carried,
+  onCarry,
+}: {
+  readonly carried: Carried
+  readonly onCarry: (carried: Carried) => void
+}) {
+  const t = useT()
+  const language = useLanguage()
+  const headingId = useId()
+  // A drink row picked nothing yet: the first while none is carried, then one at a time on demand.
+  const [adding, setAdding] = useState(false)
+  const drinks = carriable('consumable', language)
+  const rows = [...carried.drinks, ...(adding || carried.drinks.length === 0 ? [NONE] : [])]
+  const canAdd = !rows.includes(NONE) && carried.drinks.length < drinks.length
+
+  // The row past the drinks carried adds one; « Aucune » on another takes its drink off.
+  const drinkAt = (index: number, id: string) => {
+    if (index >= carried.drinks.length) {
+      if (id === NONE) return
+      setAdding(false)
+      onCarry({ ...carried, drinks: [...carried.drinks, id] })
+    } else {
+      onCarry({
+        ...carried,
+        drinks:
+          id === NONE
+            ? carried.drinks.filter((_, at) => at !== index)
+            : carried.drinks.map((drink, at) => (at === index ? id : drink)),
+      })
+    }
+  }
+
+  return (
+    <section aria-labelledby={headingId} className={styles.section}>
+      <h3 id={headingId} className={styles.label}>
+        {t.gear.carry}
+      </h3>
+      <div className={styles.rows}>
+        <CarriedRow
+          label={t.effects.kinds.trinket}
+          value={carried.trinket ?? NONE}
+          none={t.gear.noTrinket}
+          options={carriable('trinket', language)}
+          onSelect={(id) => {
+            onCarry({ ...carried, trinket: id === NONE ? null : id })
+          }}
+        />
+        <CarriedRow
+          label={t.effects.kinds.power}
+          value={carried.power ?? NONE}
+          none={t.gear.noPower}
+          options={carriable('power', language)}
+          onSelect={(id) => {
+            onCarry({ ...carried, power: id === NONE ? null : id })
+          }}
+        />
+        {rows.map((drink, index) => (
+          <CarriedRow
+            key={drink === NONE ? 'new' : drink}
+            label={t.effects.kinds.consumable}
+            value={drink}
+            none={t.gear.noDrink}
+            // A drink once at a time: the others carried are not offered again.
+            options={drinks.filter(({ id }) => id === drink || !carried.drinks.includes(id))}
+            onSelect={(id) => {
+              drinkAt(index, id)
+            }}
+          />
+        ))}
+        {canAdd && (
+          <button
+            type="button"
+            className={styles.add}
+            onClick={() => {
+              setAdding(true)
+            }}
+          >
+            <PlusIcon size={16} />
+            {t.gear.addDrink}
+          </button>
+        )}
+      </div>
+      <p className={styles.note}>{t.gear.carriedNote}</p>
+    </section>
+  )
+}
+
+/** A row of what one carries: its kind over a list to change it, then how long it lasts and what it
+ * changes. */
+function CarriedRow({
+  label,
+  value,
+  none,
+  options,
+  onSelect,
+}: {
+  readonly label: string
+  readonly value: string
+  readonly none: string
+  readonly options: readonly CarriedEffect[]
+  readonly onSelect: (id: string) => void
+}) {
+  const language = useLanguage()
+  const wording = useEffectWording()
+  const id = useId()
+  return (
+    <div className={styles.carriedRow}>
+      <span className={styles.rowMain}>
+        <label htmlFor={id} className={styles.rowLabel}>
+          {label}
+        </label>
+        <select
+          id={id}
+          value={value}
+          className={styles.selectInput}
+          onChange={(event) => {
+            onSelect(event.target.value)
+          }}
+        >
+          <option value={NONE}>{none}</option>
+          {options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.name[language]}
+            </option>
+          ))}
+        </select>
+        <ChevronDownIcon size={14} className={styles.chevron} />
+      </span>
+      {value !== NONE && (
+        <span className={styles.effectLines}>
+          {wording.lines(effectOf(value)).map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </span>
+      )}
+    </div>
   )
 }
 

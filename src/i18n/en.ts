@@ -13,6 +13,7 @@ const listOf = (words: readonly string[]) =>
     words.map((word) => word.toLocaleLowerCase('en')),
   )
 const quoted = (name: string) => `“${name}”`
+const percent = (share: number) => `${share < 0 ? '−' : '+'}${n(Math.abs(share))}%`
 
 export const en: Catalog = {
   screens: { bestiary: 'Bestiary', simulation: 'Simulation', arsenal: 'Arsenal', guide: 'Guide' },
@@ -87,6 +88,49 @@ export const en: Catalog = {
     health: 'Max HP',
     lowerHealth: 'Less HP',
     raiseHealth: 'More HP',
+    carry: 'What you carry',
+    noTrinket: 'None',
+    noPower: 'None',
+    noDrink: 'None',
+    addDrink: 'Add a drink',
+    carriedNote:
+      "Not counted by default: switch them on in a creature's sheet or in the Simulation, while they are active.",
+  },
+  effects: {
+    kinds: { trinket: 'Trinket', power: 'Power', consumable: 'Drink' },
+    duration: (seconds) =>
+      seconds >= 60 && seconds % 60 === 0 ? `${n(seconds / 60)} min` : `${n(seconds)} s`,
+    fromAdrenaline: (duration, adrenaline) => `${duration} from ${n(adrenaline)} adrenaline`,
+    tag: (kind, lasting) => `${kind} · ${lasting}`,
+    firstLine: (lasting, change) => `${lasting} · ${change}`,
+    armor: (value) => `armor +${n(value)}`,
+    armorTimes: (multiplier) => `armor ×${n(multiplier)}`,
+    parry: (multiplier) => `parry power ×${n(multiplier)}`,
+    stagger: (multiplier) => `stagger taken ×${n(multiplier)}`,
+    blockGivesBack: (stamina) => `blocking gives ${n(stamina)} stamina back`,
+    blockStamina: (share) => `block stamina ${percent(share)}`,
+    dodgeStamina: (share) => `dodge stamina ${percent(share)}`,
+    card: 'With your temporary effects',
+    group: 'Your temporary effects',
+    noneOn: 'None on',
+    on: (names) => new Intl.ListFormat('en', { type: 'conjunction' }).format(names),
+    holds: 'Holds until you change creature.',
+    idle: (reason) => `Changes nothing: ${reason}`,
+    idleHere: 'Changes nothing here',
+    notDealt: (types) =>
+      `no ${new Intl.ListFormat('en', { type: 'disjunction' }).format(types.map((type) => type.toLocaleLowerCase('en')))}`,
+    resistedBy: {
+      helmet: 'your helmet already resists',
+      chest: 'your chest already resists',
+      legs: 'your legs already resist',
+      cape: 'your cape already resists',
+      set: 'your set already resists',
+      trinket: 'your trinket already resists',
+      power: 'your power already resists',
+      consumable: 'your drink already resists',
+    },
+    setupLine: (names) =>
+      `Temporary effects on: ${new Intl.ListFormat('en', { type: 'conjunction' }).format(names)}`,
   },
   world: {
     summary: (difficulty, count) =>
@@ -141,7 +185,7 @@ export const en: Catalog = {
     biomeCount: (index, total, count) =>
       `Biome ${n(index)} of ${n(total)} · ${plural(count, 'creature', 'creatures')}`,
     howToTake: 'How to take it',
-    withYourGear: 'With your gear',
+    withoutEffects: 'Without your temporary effects',
     creatures: 'Creatures of the biome',
     health: (health) => `${n(health)} HP`,
     boss: 'Boss',

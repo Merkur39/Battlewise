@@ -217,6 +217,41 @@
   pointer-events: none;
 }
 
+/* What one carries: the row's kind over its list, then how long it lasts and what it changes. */
+.carriedRow {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.carriedRow + .carriedRow,
+.carriedRow + .add {
+  border-top: 1px solid var(--line-soft);
+}
+
+.effectLines {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 6px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--faint);
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent);
+  text-align: left;
+}
+
 /* The level, stepped one by one, apart from the name. */
 .stepper {
   flex: none;
@@ -246,7 +281,7 @@
   text-align: center;
 }
 
-.pieces {
+.section {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;

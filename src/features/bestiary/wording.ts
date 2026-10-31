@@ -4,7 +4,7 @@ import { useAppState } from '@/app/useAppState'
 import type { AttackVerdicts } from '@/combat/attack'
 import type { Verdict } from '@/combat/hit'
 import { game } from '@/data'
-import type { GameAttack, GameHit } from '@/data/types'
+import type { GameAttack, GameHit, GameRuleEffect } from '@/data/types'
 import type { Language } from '@/i18n/detect'
 import type { Catalog } from '@/i18n/fr'
 import { formatNumber } from '@/i18n/format'
@@ -66,10 +66,12 @@ export const dodgeShown = (dodgeable: boolean | null, t: Catalog): Shown => ({
         : t.verdicts.undodgeable,
 })
 
-/** The gear and the world every verdict is worked out with. */
-export function useFight() {
+const NONE_ON: readonly GameRuleEffect[] = []
+
+/** The gear and the world every verdict is worked out with, and the effects switched on, if any. */
+export function useFight(on: readonly GameRuleEffect[] = NONE_ON) {
   const { gear, world } = useAppState()
-  const defence = useMemo(() => gearDefence(gear), [gear])
+  const defence = useMemo(() => gearDefence(gear, on), [gear, on])
   return { defence, world }
 }
 

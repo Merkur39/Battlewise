@@ -7,10 +7,13 @@ import { openModal, useRoute } from '@/app/useRoute'
 import { attackAdvice } from '@/combat/advice'
 import { attackDamage, hardestHit, type AttackHit } from '@/combat/attack'
 import type { HitResult } from '@/combat/hit'
+import type { GameRuleEffect } from '@/data/types'
 import { game } from '@/data'
 import { creatureName, type FoundAttack } from '@/features/bestiary/model'
 import { AttackTags } from '@/features/bestiary/parts'
 import { useFight } from '@/features/bestiary/wording'
+import { EffectsCard } from '@/features/effects/EffectsCard'
+import { useLit } from '@/features/effects/lit'
 import { useSimulationOrigin } from '@/features/report/origins'
 import { ReportLink } from '@/features/report/ReportLink'
 import { formatNumber } from '@/i18n/format'
@@ -34,6 +37,8 @@ const freeHit = (value: number): AttackHit => ({
 })
 
 const oneDecimal = (value: number) => Math.round(value * 10) / 10
+
+const NONE_ON: readonly GameRuleEffect[] = []
 
 /** « L'attaque d'abord »: the attack of the address, else the last one simulated, against your
  * gear; a free value stands in for an attack on demand. */
@@ -64,14 +69,17 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
   const t = useT()
   const route = useRoute()
   const isDesktop = useIsDesktop()
-  const { defence, world } = useFight()
   const [mode, setMode] = useState<'attack' | 'value'>('attack')
+  const attackMode = mode === 'attack'
+  // A free value has no type to resist: what is on counts for an attack only.
+  const lit = useLit(found?.creature ?? null)
+  const on = attackMode ? lit.on : NONE_ON
+  const { defence, world } = useFight(on)
   const [stars, setStars] = useState(found?.creature.stars.min ?? 0)
   const [bar, setBar] = useState<number>(0)
   const [value, setValue] = useState(DEFAULT_VALUE)
   const barId = useId()
 
-  const attackMode = mode === 'attack'
   const hits = attackMode ? (found?.attack.hits ?? null) : [freeHit(value)]
   const options = { stars: attackMode ? stars : 0, barBefore: bar / 100 }
   const block = hits && hardestHit(defence, hits, world, { guard: 'block', ...options })
@@ -85,6 +93,7 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
     block,
     parry,
     dodgeable,
+    on,
   })
 
   const modeSwitch = (
@@ -140,6 +149,7 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
             </div>
           </div>
         )}
+        <EffectsCard creature={found.creature} hits={found.attack.hits} stars={stars} />
       </>
     ) : (
       <div className={styles.empty}>

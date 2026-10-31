@@ -2,7 +2,7 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { MOCKUP_GEAR, renderWithStore } from '../../../test/utils'
+import { MOCKUP_GEAR, MOCKUP_PIECES, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const slam = { fighter: 'Troll', attack: 'troll_groundslam' }
@@ -157,6 +157,74 @@ describe('Simulation', () => {
     expect(
       within(attacks).getByRole('link', { name: /^Squelette · Montagne · Épée/ }),
     ).toBeInTheDocument()
+  })
+
+  describe('with your temporary effects', () => {
+    const CARRYING = {
+      ...MOCKUP_GEAR,
+      armor: 0,
+      pieces: MOCKUP_PIECES,
+      carried: {
+        trinket: 'TrinketIronHealth',
+        power: 'GP_Bonemass',
+        drinks: ['Potion_frostresist'],
+      },
+    }
+    const card = () => screen.getByRole('button', { name: /^Avec tes effets temporaires/ })
+    const effects = () => screen.getByRole('group', { name: 'Tes effets temporaires' })
+    const effect = (name: string) => within(effects()).getByRole('switch', { name })
+
+    it("counts what is switched on: the Lox's Bite, which staggers a block, then holds", async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/simulation/Lox/lox_bite')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      expect(blocking()).toHaveTextContent('tu titubes')
+      expect(blocking()).toHaveTextContent('15,1 subis')
+      expect(blocking()).toHaveTextContent('−10 endurance')
+
+      await user.click(card())
+      await user.click(effect('Broche en fer'))
+      await user.click(effect("Masse-d'Os"))
+
+      expect(blocking()).toHaveTextContent('tient')
+      expect(blocking()).toHaveTextContent('5,9 subis')
+      expect(blocking()).toHaveTextContent('+5 endurance')
+      expect(parrying()).toHaveTextContent('2,6 subis')
+      expect(parrying()).toHaveTextContent('+10 endurance')
+      expect(screen.getByText('Bloque-le : tu tiens sans tituber')).toBeInTheDocument()
+    })
+
+    it('greys what changes nothing against the attack: no frost in the Bite', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/simulation/Lox/lox_bite')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+
+      await user.click(card())
+
+      expect(effects()).toHaveTextContent('Ne change rien : pas de glace')
+      expect(
+        within(effects()).queryByRole('switch', { name: 'Hydromel de résistance au gel' }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('leaves them out of a free value, which has no type to resist', async () => {
+      const user = userEvent.setup()
+      window.history.replaceState(null, '', '#/simulation/Lox/lox_bite')
+      renderWithStore(<App />, { language: 'fr', gear: CARRYING })
+      await user.click(card())
+      await user.click(effect("Masse-d'Os"))
+
+      await user.click(screen.getByRole('button', { name: 'Valeur libre' }))
+
+      expect(
+        screen.queryByRole('button', { name: /^Avec tes effets temporaires/ }),
+      ).not.toBeInTheDocument()
+      expect(blocking()).not.toHaveTextContent('+5 endurance')
+
+      await user.click(screen.getByRole('button', { name: "Attaque d'un monstre" }))
+
+      expect(card()).toHaveTextContent("Masse-d'Os")
+    })
   })
 
   describe('on a desktop', () => {
