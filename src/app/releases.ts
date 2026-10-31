@@ -30,6 +30,23 @@ export interface Release {
  */
 export const RELEASES: readonly Release[] = [
   {
+    version: '1.15.2',
+    date: '2026-10-31',
+    notes: [
+      {
+        kind: 'fixed',
+        title: {
+          fr: "Changer d'étoiles ne fait plus bouger la fiche",
+          en: 'Changing stars no longer moves the sheet',
+        },
+        detail: {
+          fr: 'Comment le prendre garde la place de son conseil le plus long.',
+          en: 'How to take it keeps room for its longest advice.',
+        },
+      },
+    ],
+  },
+  {
     version: '1.15.1',
     date: '2026-10-31',
     notes: [
