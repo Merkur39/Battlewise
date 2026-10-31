@@ -1,6 +1,5 @@
 import { game } from '@/data'
 import type { GameRuleEffect, RuleEffectKind } from '@/data/types'
-import type { Language } from '@/i18n/detect'
 
 /** What Your gear says the player carries, by the ids of their effects in the game data: none of it
  * counts until it is switched on, on a creature's sheet or in the Simulation. */
@@ -30,12 +29,49 @@ export function effectOf(id: string): GameRuleEffect {
   return effect
 }
 
-/** The effects of a kind one can carry, sorted by name in the language shown. */
-export const carriable = (kind: CarriedKind, language: Language): CarriedEffect[] =>
+// The powers in the order their bosses fall, the trinkets and drinks as the mockups list them; what a
+// later version of the game adds comes after them.
+const ORDER = [
+  'GP_Bonemass',
+  'GP_Moder',
+  'GP_Yagluth',
+  'GP_Queen',
+  'GP_Fader',
+  'TrinketIronHealth',
+  'TrinketBloodGoldHealth',
+  'TrinketSilverResist',
+  'TrinketBlackStamina',
+  'Potion_frostresist',
+  'Potion_barleywine',
+  'Potion_poisonresist',
+  'Potion_bzerker',
+]
+const rank = (effect: GameRuleEffect) => {
+  const at = ORDER.indexOf(effect.id)
+  return at === -1 ? ORDER.length : at
+}
+
+/** The effects of a kind one can carry, in the order Your gear and the Arsenal list them. */
+export const carriable = (kind: CarriedKind): CarriedEffect[] =>
   game.ruleEffects
     .filter((effect): effect is CarriedEffect => effect.kind === kind)
-    .toSorted((a, b) => a.name[language].localeCompare(b.name[language], language))
+    .toSorted((a, b) => rank(a) - rank(b))
 
 /** What is carried, as a creature's sheet lists it: the trinket, the power, then the drinks. */
 export const carriedEffects = ({ trinket, power, drinks }: Carried): CarriedEffect[] =>
   [trinket, power, ...drinks].flatMap((id) => (id === null ? [] : [effectOf(id)])).filter(isCarried)
+
+/** What is carried once `effect` is taken too: a trinket or a power in place of the one carried, a
+ * drink beside the others, once. */
+export function carry(carried: Carried, effect: CarriedEffect): Carried {
+  switch (effect.kind) {
+    case 'trinket':
+      return { ...carried, trinket: effect.id }
+    case 'power':
+      return { ...carried, power: effect.id }
+    case 'consumable':
+      return carried.drinks.includes(effect.id)
+        ? carried
+        : { ...carried, drinks: [...carried.drinks, effect.id] }
+  }
+}

@@ -4,7 +4,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { game } from '@/data'
 import type { DamageModifier, GameArmorPiece, GameRuleEffect } from '@/data/types'
-import { arsenalRows, categoryOf, type ArsenalCategory } from '@/features/arsenal/model'
+import { blockerRows, categoryOf, type BlockerCategory } from '@/features/arsenal/model'
 import { FORGE_MAX_LEVEL } from '@/features/gear/model'
 import { formatNumber } from '@/i18n/format'
 import { fr } from '@/i18n/fr'
@@ -143,18 +143,19 @@ for (const blocker of game.blockers) {
 
 // What blocks, as the Arsenal lists it today: at Blocking 25 and the level picked, the shield held first.
 const SKILL = 25
-const blockerRows = (category: ArsenalCategory) =>
-  arsenalRows(category, { level: LEVEL, skill: SKILL, equipped: 'ShieldSilver', sort: 'power' }).map((row) => {
+// Every item at level 1, as the app's Arsenal lists it since #67.
+const rowsOfBlockers = (category: BlockerCategory) =>
+  blockerRows(category, { skill: SKILL, equipped: 'ShieldSilver', sort: 'power' }).map((row) => {
     const group = row.blocker.group
     return {
       name: row.blocker.name.fr,
       type: group === 'weapon' || group === 'other' || group === 'unarmed' ? null : fr.gear.groupTags[group].toUpperCase(),
       power: n(row.power),
-      stopsAt: row.level < LEVEL ? fr.arsenal.stopsAt(row.level).replace(' ', NBSP) : null,
+      stopsAt: null,
       parry: row.parry === null ? '—' : n(row.parry),
       parryNote: row.parry === null ? fr.gear.noParry : fr.gear.parryBonus(row.blocker.timedBlockBonus),
-      force: n(row.force),
-      speed: fr.arsenal.speed(row.speed).replace(' ', NBSP),
+      force: n(row.blocker.deflectionForce),
+      speed: `${row.blocker.movementModifier < 0 ? '−' : ''}${n(Math.abs(row.blocker.movementModifier) * 100)}${NBSP}%`,
       equipped: row.equipped,
     }
   })
@@ -172,7 +173,7 @@ const data = {
     consumable: game.ruleEffects.filter((e) => e.kind === 'consumable').length,
   },
   skill: SKILL,
-  blockers: { shields: blockerRows('shields'), weapons: blockerRows('weapons'), others: blockerRows('others') },
+  blockers: { shields: rowsOfBlockers('shields'), weapons: rowsOfBlockers('weapons'), others: rowsOfBlockers('others') },
   pieces,
   effects: { power: effectsOf('power'), trinket: effectsOf('trinket'), consumable: effectsOf('consumable') },
 }

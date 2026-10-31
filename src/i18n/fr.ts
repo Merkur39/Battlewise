@@ -14,7 +14,8 @@ const listOf = (words: readonly string[]) =>
   new Intl.ListFormat('fr', { type: 'conjunction' }).format(
     words.map((word) => word.toLocaleLowerCase('fr')),
   )
-const percent = (share: number) => `${share < 0 ? '−' : '+'}${n(Math.abs(share))} %`
+const staminaShare = (share: number) =>
+  `${n(Math.abs(share))} % d'endurance ${share < 0 ? 'en moins' : 'en plus'}`
 // « de feu », « d'esprit », « de contondant, coupant ni perforant »: the game's names, lowercased.
 function noneOf(types: readonly string[]) {
   const words = types.map((type) => type.toLocaleLowerCase('fr'))
@@ -161,11 +162,12 @@ export const fr = {
     armor: (value: number) => `armure +${n(value)}`,
     armorTimes: (multiplier: number) => `armure ×${n(multiplier)}`,
     parry: (multiplier: number) => `VD en parade ×${n(multiplier)}`,
-    stagger: (multiplier: number) => `stagger reçu ×${n(multiplier)}`,
+    /** `multiplier` of the stagger taken: 0,5 staggers you twice more slowly. */
+    stagger: (multiplier: number) => `tu titubes ${n(1 / multiplier)}× moins vite`,
     blockGivesBack: (stamina: number) => `bloquer rend ${n(stamina)} d'endurance`,
     /** `share` in percent, below zero for less. */
-    blockStamina: (share: number) => `endurance de blocage ${percent(share)}`,
-    dodgeStamina: (share: number) => `endurance de roulade ${percent(share)}`,
+    blockStamina: (share: number) => `bloquer coûte ${staminaShare(share)}`,
+    dodgeStamina: (share: number) => `esquiver coûte ${staminaShare(share)}`,
     card: 'Avec tes effets temporaires',
     group: 'Tes effets temporaires',
     noneOn: 'Aucun allumé',
@@ -384,32 +386,87 @@ export const fr = {
     resultsNote: 'Résultats sur tous les biomes.',
   },
   arsenal: {
-    intro: 'Chiffres calculés avec ta compétence Blocage',
-    atLevel: ", au niveau d'amélioration choisi.",
-    sortedByPower: 'Triés par VD',
+    families: { hand: 'En main', armor: "Pièces d'armures", carry: 'Ce que tu emportes' },
+    familiesShort: { hand: 'En main', armor: 'Armures', carry: 'À emporter' },
+    family: 'Famille',
     category: 'Catégorie',
-    categories: { shields: 'Boucliers', weapons: 'Armes', others: 'Autres' },
-    item: { shields: 'Bouclier', weapons: 'Arme', others: 'Objet' },
-    level: 'Niveau',
-    levelGroup: "Niveau d'amélioration",
-    levelValue: (level: number) => `N${n(level)}`,
+    nav: "Catégories de l'Arsenal",
+    categories: {
+      shields: 'Boucliers',
+      weapons: 'Armes',
+      others: 'Autres',
+      helmets: 'Casques',
+      chests: 'Plastrons',
+      legs: 'Jambières',
+      capes: 'Capes',
+      powers: 'Pouvoirs',
+      trinkets: 'Bibelots',
+      drinks: 'Boissons',
+    },
+    item: {
+      shields: 'Bouclier',
+      weapons: 'Arme',
+      others: 'Objet',
+      helmets: 'Casque',
+      chests: 'Plastron',
+      legs: 'Jambières',
+      capes: 'Cape',
+      powers: 'Pouvoir',
+      trinkets: 'Bibelot',
+      drinks: 'Boisson',
+    },
+    /** Before the skill, which the page sets apart. */
+    atLevelOne: 'Au niveau 1, avec ta compétence Blocage',
+    pickLevel: {
+      hand: ' ; touche-en un pour choisir son niveau dans Ton équipement.',
+      armor: 'Au niveau 1 ; touche-en une pour choisir son niveau dans Ton équipement.',
+    },
+    carryLede:
+      "Seulement ce qui change un combat, lu dans le jeu. L'emporter l'ajoute à Ton équipement ; tu l'allumes sur la fiche d'une créature ou dans la Simulation.",
     sort: 'Trier par',
     columns: {
       type: 'Type',
       power: 'VD',
       parry: 'En parade',
-      force: 'Repousse',
-      speed: 'Vitesse',
+      armor: 'Armure',
+      perLevel: 'Par niveau',
+      resistances: 'Résistances et faiblesses',
+      set: 'Ensemble',
+      duration: 'Durée',
+      cooldown: 'Recharge',
+      trigger: 'Se déclenche',
       action: 'Action',
     },
-    speed: (share: number) =>
-      share === 0 ? '0 %' : `${share < 0 ? '−' : '+'}${n(Math.abs(share) * 100)} %`,
-    stopsAt: (level: number) => `N${n(level)} max`,
+    changes: {
+      powers: "Ce qu'il change",
+      trinkets: "Ce qu'il change",
+      drinks: "Ce qu'elle change",
+    },
+    perLevel: (armor: number) => (armor > 0 ? `+${n(armor)}` : '—'),
+    cooldown: (duration: string) => `recharge ${duration}`,
+    trigger: (adrenaline: number) => `dès ${n(adrenaline)} d'adrénaline`,
+    setLine: (set: string, size: number, changes: string) =>
+      `Ensemble ${set}, ${n(size)} pièces : ${changes}`,
+    setSize: (size: number) => `${n(size)} pièces`,
     equipped: 'Équipé',
+    carried: 'Emporté',
     equip: 'Équiper',
+    carry: 'Emporter',
     equipLabel: (item: string) => `Équiper : ${item}`,
-    rowLabel: (item: string, equipped: boolean) =>
-      `${item}${equipped ? ', équipé' : ''}. Ouvrir dans Ton équipement.`,
+    carryLabel: (item: string) => `Emporter : ${item}`,
+    rowLabel: (item: string, state: 'equipped' | 'carried' | null) =>
+      `${item}${state === 'equipped' ? ', équipé' : state === 'carried' ? ', emporté' : ''}. Ouvrir dans Ton équipement.`,
+    search: "Rechercher dans tout l'Arsenal",
+    searchPlaceholder: 'Objet, pièce ou effet, partout',
+    searchPlaceholderShort: 'Rechercher partout',
+    clearSearch: 'Effacer la recherche',
+    found: (results: number, categories: number) =>
+      `${plural(results, 'résultat', 'résultats')} dans ${plural(categories, 'catégorie', 'catégories')}`,
+    foundFor: (results: number, query: string, categories: number) =>
+      `${plural(results, 'résultat', 'résultats')} pour ${quoted(query)}, dans ${plural(categories, 'catégorie', 'catégories')}.`,
+    seeAll: (count: number, category: string) =>
+      `Voir les ${n(count)} ${category.toLocaleLowerCase('fr')}`,
+    nothingFound: (query: string) => `Rien pour ${quoted(query)}`,
   },
   guide: {
     intro: (version: string) => `Les règles du combat, lues dans Valheim ${version}.`,
