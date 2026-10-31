@@ -13,6 +13,7 @@ import { useEffectWording } from '@/features/effects/wording'
 import { DamageTypeIcon } from '@/ui/DamageTypeIcon'
 import { ChevronRightIcon, MinusIcon, PlusIcon } from '@/ui/icons'
 import { NumberField } from '@/ui/NumberField'
+import { StepButton } from '@/ui/StepButton'
 import { effectOf, NOTHING_CARRIED, type Carried } from './carried'
 import { allDrinksCarried, type GearList } from './lists'
 import { blockPowerParts, leveled, maxLevel, withstand, type GuardGauge } from './model'
@@ -419,31 +420,29 @@ function Row({
       </button>
       {level !== undefined && (
         <span role="group" aria-label={t.gear.levelOf(label, level)} className={styles.stepper}>
-          <button
-            type="button"
-            aria-label={t.gear.lowerLevelOf(label)}
+          <StepButton
+            label={t.gear.lowerLevelOf(label)}
             disabled={level === null || level <= 1}
             className={styles.step}
-            onClick={() => {
+            onStep={() => {
               if (level !== null) onLevel(level - 1)
             }}
           >
             <MinusIcon size={14} />
-          </button>
+          </StepButton>
           <span className={styles.stepValue}>
             {level === null ? '—' : t.gear.levelValue(level)}
           </span>
-          <button
-            type="button"
-            aria-label={t.gear.raiseLevelOf(label)}
+          <StepButton
+            label={t.gear.raiseLevelOf(label)}
             disabled={level === null || level >= max}
             className={styles.step}
-            onClick={() => {
+            onStep={() => {
               if (level !== null) onLevel(level + 1)
             }}
           >
             <PlusIcon size={14} />
-          </button>
+          </StepButton>
         </span>
       )}
     </div>

@@ -52,6 +52,11 @@ button {
   border: 0;
   background: none;
   cursor: pointer;
+  /* Clicked fast or held, a button selects no text, its own or what lies beside it; a quick double
+   * tap does not zoom. */
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 a {

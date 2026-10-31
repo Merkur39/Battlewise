@@ -1,6 +1,7 @@
 import { useId, useState } from 'react'
 import { MinusIcon, PlusIcon } from './icons'
 import styles from './NumberField.module.css'
+import { StepButton } from './StepButton'
 
 interface NumberFieldProps {
   readonly label: string
@@ -43,17 +44,16 @@ export function NumberField({
         {label}
       </label>
       <div className={`${styles.stepper ?? ''} ${compact ? (styles.compact ?? '') : ''}`}>
-        <button
-          type="button"
-          aria-label={lowerLabel}
+        <StepButton
+          label={lowerLabel}
           disabled={value <= min}
           className={styles.step}
-          onClick={() => {
+          onStep={() => {
             set(value - 1)
           }}
         >
           <MinusIcon size={18} />
-        </button>
+        </StepButton>
         <input
           id={id}
           type="text"
@@ -77,17 +77,16 @@ export function NumberField({
             }
           }}
         />
-        <button
-          type="button"
-          aria-label={raiseLabel}
+        <StepButton
+          label={raiseLabel}
           disabled={value >= max}
           className={styles.step}
-          onClick={() => {
+          onStep={() => {
             set(value + 1)
           }}
         >
           <PlusIcon size={18} />
-        </button>
+        </StepButton>
       </div>
     </div>
   )
