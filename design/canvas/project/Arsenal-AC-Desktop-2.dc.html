@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Arsenal — plastrons</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+@keyframes sheet-in{from{transform:translateY(100%)}}
+@keyframes sheet-out{to{transform:translateY(100%)}}
+@keyframes shade-in{from{opacity:0}}
+@keyframes shade-out{to{opacity:0}}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:#2C383D transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2C383D;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#7D8B91}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+a{color:#8EBDE3}a:hover{color:#B5D4F0}
+input{font:inherit;color:inherit}
+input::placeholder{color:#7D8B91}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+mark{background:transparent;color:#8EBDE3;font-weight:500}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; box-sizing: border-box; display: flex; background: #0D1214; color: #E2E8E8; font-family: 'IBM Plex Sans', system-ui, sans-serif; overflow: hidden">
+  <nav aria-label="Navigation principale" style="flex: 0 0 248px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding: 20px 14px; border-right: 1px solid #2C383D">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 10px; height: 40px">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#8EBDE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+      <span style="font-size: 16px; font-weight: 500">Foelore</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="Desktop-Bestiaire.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #97A5AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="10" r="2"></circle><circle cx="12" cy="6.5" r="2"></circle><circle cx="17.5" cy="10" r="2"></circle><path d="M8 18c0-3 1.8-5 4-5s4 2 4 5c0 1.7-1.8 2.5-4 2.5S8 19.7 8 18z"></path></svg>Bestiaire</a>
+      <a href="Desktop-Combat.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #97A5AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Simulation</a>
+      <a href="Desktop-Arsenal.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; background: #1D3344; color: #8EBDE3"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4H20v5.5L9 20.5 3.5 15 14.5 4z"></path><path d="M6 13l5 5"></path></svg>Arsenal</a>
+      <a href="Desktop-Memo.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; text-decoration: none; color: #97A5AA"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2V5z"></path><path d="M5 20a2 2 0 0 0 2 1h12v-3"></path></svg>Mémo</a>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="padding: 0 4px; font-size: 11px; letter-spacing: 0.08em; color: #97A5AA">TON CONTEXTE</span>
+      <a href="Desktop-Equipement.dc.html" aria-label="Ton équipement : bouclier en argent niveau 3, compétence Blocage 25" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #2C383D; border-radius: 6px; color: #E2E8E8; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8EBDE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Argent N3</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">VD 81 · BLOCAGE 25</span></span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7D8B91" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="Desktop-Monde.dc.html" aria-label="Ton monde : combat normal, 1 joueur" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #2C383D; border-radius: 6px; color: #E2E8E8; text-decoration: none">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8EBDE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"></path></svg>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Normal</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #97A5AA">1 JOUEUR · ×1</span></span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7D8B91" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      </a>
+      <a href="Desktop-Reglages.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 6px; font-size: 15px; color: #97A5AA; text-decoration: none"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; height: 100%; box-sizing: border-box; padding: 28px 32px 32px; display: flex; gap: 28px">
+    <nav aria-label="Catégories de l'Arsenal" style="flex: 0 0 196px; display: flex; flex-direction: column; gap: 16px; padding-top: 2px">
+      <a href="#" aria-label="Rechercher dans tout l'Arsenal" style="flex: none; display: flex; align-items: center; gap: 8px; height: 40px; box-sizing: border-box; border: 1px solid #2C383D; border-radius: 4px; padding: 0 12px; font-size: 14px; color: #7D8B91; text-decoration: none; white-space: nowrap; overflow: hidden"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7D8B91" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" style="flex: none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Rechercher partout</a>
+      <div role="group" aria-label="En main" style="display: flex; flex-direction: column">
+        <span style="padding: 0 10px 4px; font-size: 10px; letter-spacing: 0.08em; color: #7D8B91">EN MAIN</span>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Boucliers</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">19</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Armes</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">149</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Autres</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">5</span></a>
+      </div>
+      <div role="group" aria-label="Pièces d'armures" style="display: flex; flex-direction: column">
+        <span style="padding: 0 10px 4px; font-size: 10px; letter-spacing: 0.08em; color: #7D8B91">PIÈCES D'ARMURES</span>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Casques</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">40</span></a>
+        <a href="#" aria-current="true" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; background: #1D3344; color: #8EBDE3"><span style="flex: 1">Plastrons</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8EBDE3">42</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Jambières</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">20</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Capes</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">11</span></a>
+      </div>
+      <div role="group" aria-label="Ce que tu emportes" style="display: flex; flex-direction: column">
+        <span style="padding: 0 10px 4px; font-size: 10px; letter-spacing: 0.08em; color: #7D8B91">CE QUE TU EMPORTES</span>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Pouvoirs</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">5</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Bibelots</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">4</span></a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; font-size: 14px; text-decoration: none; color: #E2E8E8"><span style="flex: 1">Boissons</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7D8B91">4</span></a>
+      </div>
+    </nav>
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+    <header style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 26px; font-weight: 500">Arsenal</h1>
+      <p style="margin: 0; font-size: 15px; color: #97A5AA">Au niveau 1&nbsp;; touche-en une pour choisir son niveau dans Ton équipement.</p>
+    </header>
+    
+    <div role="table" aria-label="Plastrons" style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid #2C383D; border-radius: 6px; overflow: hidden">
+        <div role="row" style="display: grid; gap: 16px; align-items: center; padding: 12px 20px; background: #151C1F; border-bottom: 1px solid #2C383D; white-space: nowrap; font-size: 11px; letter-spacing: 0.08em; color: #97A5AA; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+          <span role="columnheader">PLASTRON</span><span role="columnheader" style="text-align: right">ARMURE ↓</span><span role="columnheader" style="text-align: right">PAR NIVEAU</span><span role="columnheader">RÉSISTANCES ET FAIBLESSES</span><span role="columnheader">ENSEMBLE</span><span role="columnheader"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Action</span></span>
+        </div>
+        <div style="flex: 1; min-height: 0; overflow-y: auto">
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px; background: #1D3344">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Armure d'écailles de fer</span><span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 1px 5px; border-radius: 3px; border: 1px solid #8EBDE3; color: #8EBDE3">ÉQUIPÉ</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">14</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #8EBDE3"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>Équipé</span></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron du courage</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">44</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg>Glace · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron du courage" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron en flametal</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">38</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron en flametal" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron de cuir de l'Avant-garde</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">34</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg>Glace · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Avant-garde <span style="color: #7D8B91">· 3 pièces</span><span style="display: block; font-size: 12px; color: #97A5AA">Esquiver coûte 20 % d'endurance en moins</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron de cuir de l'Avant-garde" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron en carapace</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">32</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron en carapace" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron d'Ask</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">28</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron d'Ask" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Cuirasse rembourrée</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">26</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Cuirasse rembourrée" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe de l'orateur</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">22</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg>Glace · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe de l'orateur" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Plastron de loup</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">20</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg>Glace · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Plastron de loup" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe d'Embla</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">19</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe d'Embla" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Torse d'ours maudit</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">18</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Colère de l'ours maudit <span style="color: #7D8B91">· 3 pièces</span><span style="display: block; font-size: 12px; color: #97A5AA">Contondant, Coupant et Perforant ×1,25</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Torse d'ours maudit" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe d'Eitr tissé</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">16</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe d'Eitr tissé" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Veste en fourrure de lox</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">16</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Veste en fourrure de lox" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Manteau de Fenris</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">10</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"></path></svg>Glace · <span style="font-weight: 500">Résistant ×0,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Bénédiction de Fenris <span style="color: #7D8B91">· 3 pièces</span><span style="display: block; font-size: 12px; color: #97A5AA">Feu ×0,5</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Manteau de Fenris" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Cuirasse de racines</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">8</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><ul aria-label="Résistances et faiblesses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 14px; text-transform: uppercase"><li style="padding: 3px 7px; border: 1px solid #2C383D; border-radius: 3px; color: #97A5AA; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M20 4l-7 3 4 4zM15 9L4 20"></path></svg>Perforant · <span style="font-weight: 500">Résistant ×0,5</span></li><li style="padding: 3px 7px; border: 1px solid #97A5AA; border-radius: 3px; color: #E2E8E8; white-space: nowrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="12" height="12" style="vertical-align: -2px; margin-right: 5px"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 2 1.2 3 2.5 3.5C11 9 11 6 12 3z"></path></svg>Feu · <span style="font-weight: 500">Faible ×1,5</span></li></ul></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Cuirasse de racines" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Cuirasse en plaques de bronze</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">8</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Cuirasse en plaques de bronze" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Marque de l'ours</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">7</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4">Berserker <span style="color: #7D8B91">· 3 pièces</span><span style="display: block; font-size: 12px; color: #97A5AA">Contondant, Coupant et Perforant ×1,25</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Marque de l'ours" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique en cuir de troll</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">6</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique en cuir de troll" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique en cuir</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">2</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+2</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique en cuir" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe bleue avec châle</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe bleue avec châle" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe bleue avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe bleue avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe bleue simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe bleue simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe des moissons</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe des moissons" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe jaune avec châle</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe jaune avec châle" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe jaune avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe jaune avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe jaune simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe jaune simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe marron avec châle</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe marron avec châle" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe marron avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe marron avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe marron simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe marron simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Robe neutre simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Robe neutre simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique bleue avec cape</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique bleue avec cape" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique bleue avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique bleue avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique bleue simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique bleue simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique des moissons</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique des moissons" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique en haillons</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique en haillons" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique jaune avec cape</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique jaune avec cape" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique jaune avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique jaune avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique jaune simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique jaune simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique neutre simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique neutre simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique rouge avec cape</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique rouge avec cape" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique rouge avec perles</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique rouge avec perles" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+          <div role="row" style="display: grid; gap: 16px; align-items: center; min-height: 52px; padding: 10px 20px; box-sizing: border-box; border-bottom: 1px solid #1F2A2E; font-size: 15px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 2.2fr) minmax(0, 1.8fr) 110px">
+            <span role="cell" style="display: flex; align-items: center; gap: 10px; min-width: 0"><span>Tunique rouge simple</span></span>
+            <span role="cell" style="text-align: right; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500">1</span>
+            <span role="cell" style="text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 15px">+1</span>
+            <span role="cell"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="font-size: 13px; line-height: 1.4"><span style="color: #7D8B91">—</span></span>
+            <span role="cell" style="display: flex; justify-content: flex-end"><a href="#" aria-label="Équiper&nbsp;: Tunique rouge simple" style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid #2C383D; border-radius: 4px; font-size: 13px; color: #E2E8E8; text-decoration: none">Équiper</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
