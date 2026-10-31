@@ -16,6 +16,7 @@ import { createIssueStates } from './features/report/issues'
 import { createOutbox } from './features/report/outbox'
 import { postReport } from './features/report/send'
 import { IssueStatesContext, OutboxContext } from './features/report/useReport'
+import { selectOnlyOnText } from './ui/selection'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) {
@@ -24,6 +25,7 @@ if (!rootElement) {
 
 // Before the first render: the browser may offer its prompt as soon as the page loads.
 const installPrompt = listenForInstallPrompt(window)
+selectOnlyOnText(document)
 
 createRoot(rootElement).render(
   <StrictMode>

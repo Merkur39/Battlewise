@@ -19,6 +19,16 @@ Element.prototype.scrollIntoView = function () {
   // Nothing to scroll in jsdom.
 }
 
+// Testing Library moves fake timers on through Jest's API only (else it waits on a timer that never
+// fires): under that name, Vitest's.
+Object.assign(globalThis, {
+  jest: {
+    advanceTimersByTime: (ms: number) => {
+      vi.advanceTimersByTime(ms)
+    },
+  },
+})
+
 installMatchMedia()
 
 afterEach(() => {

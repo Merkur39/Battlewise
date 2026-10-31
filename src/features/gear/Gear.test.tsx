@@ -2,7 +2,13 @@ import { screen, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { MOCKUP_GEAR, MOCKUP_PIECES, openContext, renderWithStore } from '../../../test/utils'
+import {
+  holdDown,
+  MOCKUP_GEAR,
+  MOCKUP_PIECES,
+  openContext,
+  renderWithStore,
+} from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 // The mockups' gear, worn as pieces rather than typed: the same armor, 45.
@@ -109,6 +115,17 @@ describe('Your gear', () => {
     expect(within(dialog).getByRole('group', { name: 'Bloquer' })).toHaveTextContent('VD 90')
   })
 
+  it('keeps raising the max health while its button is held', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, fr)
+    const dialog = await openGear(user)
+
+    await holdDown(within(dialog).getByRole('button', { name: 'Plus de PV' }), 1000)
+
+    const health = within(dialog).getByRole('textbox', { name: 'PV max' })
+    expect(Number((health as HTMLInputElement).value)).toBeGreaterThan(MOCKUP_GEAR.maxHealth + 3)
+  })
+
   it('saves the gear on Valider: the chip follows', async () => {
     const user = userEvent.setup()
     const { store } = renderWithStore(<App />, fr)
@@ -154,6 +171,18 @@ describe('Your gear', () => {
     }
 
     expect(within(dialog).getByRole('group', { name: 'En main : niveau 10' })).toBeInTheDocument()
+  })
+
+  it('keeps raising the level while its button is held, up to the max', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<App />, fr)
+    const dialog = await openGear(user)
+    const raise = within(dialog).getByRole('button', { name: 'En main : niveau supérieur' })
+
+    await holdDown(raise, 2000)
+
+    expect(within(dialog).getByRole('group', { name: 'En main : niveau 10' })).toBeInTheDocument()
+    expect(raise).toBeDisabled()
   })
 
   describe('its armor pieces', () => {

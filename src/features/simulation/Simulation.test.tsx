@@ -2,7 +2,7 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '@/app/App'
-import { MOCKUP_GEAR, MOCKUP_PIECES, renderWithStore } from '../../../test/utils'
+import { holdDown, MOCKUP_GEAR, MOCKUP_PIECES, renderWithStore } from '../../../test/utils'
 import { setViewportWidth } from '../../../test/viewport'
 
 const slam = { fighter: 'Troll', attack: 'troll_groundslam' }
@@ -69,6 +69,18 @@ describe('Simulation', () => {
     expect(screen.getByRole('group', { name: 'Dégâts du coup' })).toHaveTextContent('130')
     expect(blocking()).toHaveTextContent('tu titubes')
     expect(screen.getByText('Pare-le : en bloquant, tu titubes')).toBeInTheDocument()
+  })
+
+  it('keeps raising the free value while its button is held', async () => {
+    const user = userEvent.setup()
+    window.history.replaceState(null, '', '#/simulation/Troll/troll_groundslam')
+    renderWithStore(<App />, { language: 'fr', gear: MOCKUP_GEAR })
+
+    await user.click(screen.getByRole('button', { name: 'Valeur libre' }))
+    await holdDown(screen.getByRole('button', { name: 'Monter de 5' }), 1000)
+
+    const value = Number(screen.getByRole('group', { name: 'Dégâts du coup' }).textContent)
+    expect(value).toBeGreaterThan(90 + 3 * 5)
   })
 
   it('says when the item cannot parry', () => {

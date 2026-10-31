@@ -19,6 +19,7 @@ import { ReportLink } from '@/features/report/ReportLink'
 import { formatNumber } from '@/i18n/format'
 import { useLanguage, useT } from '@/i18n/useT'
 import { BestiaryIcon, ChevronRightIcon, DodgeIcon, MinusIcon, PlusIcon } from '@/ui/icons'
+import { StepButton } from '@/ui/StepButton'
 import { verdictTone, type Tone } from '@/ui/tones'
 import { AdviceLine } from '@/ui/verdicts'
 import { findAttack, refOf, withRecent } from './model'
@@ -168,27 +169,25 @@ function Simulator({ found }: { readonly found: FoundAttack | null }) {
   ) : (
     <div className={styles.valueRow}>
       <div role="group" aria-label={t.simulation.value} className={styles.stepper}>
-        <button
-          type="button"
-          aria-label={t.simulation.lower}
+        <StepButton
+          label={t.simulation.lower}
           className={styles.stepButton}
-          onClick={() => {
+          onStep={() => {
             setValue((current) => Math.max(0, current - VALUE_STEP))
           }}
         >
           <MinusIcon />
-        </button>
+        </StepButton>
         <span className={styles.value}>{value}</span>
-        <button
-          type="button"
-          aria-label={t.simulation.raise}
+        <StepButton
+          label={t.simulation.raise}
           className={styles.stepButton}
-          onClick={() => {
+          onStep={() => {
             setValue((current) => current + VALUE_STEP)
           }}
         >
           <PlusIcon />
-        </button>
+        </StepButton>
       </div>
       <span className={styles.note}>{t.simulation.valueNote}</span>
     </div>
